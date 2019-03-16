@@ -1,0 +1,17 @@
+[Misc]
+ConstructionRefundRate=1.0
+UpgradeRefundRate=1.0
+FrostMoveSpeedDecrease=0.25
+TradingIncSmall=25
+TradingIncLarge=100
+FrostAttackSpeedDecrease=0.0
+CanDeactivateBladestorm=1
+CanDeactivateChemicalRage=1
+AttackNotifyDelay=1000000000.0
+AttackNotifyRange=1000000000.0
+CallForHelp=1000000000.0
+DrainTransfersMana=1
+DrainGivesBonusMana=1
+FoodCeiling=300
+UpkeepGoldTax=0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00
+
