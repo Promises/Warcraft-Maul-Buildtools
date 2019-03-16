@@ -2,4 +2,4 @@
 *.slk text eol=crlf
 
 *.j text eol=crlf
-
+/mapfiles/* text eol=crlf
