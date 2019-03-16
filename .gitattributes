@@ -1,0 +1,5 @@
+*.wts text eol=crlf
+*.slk text eol=crlf
+
+*.j text eol=crlf
+
