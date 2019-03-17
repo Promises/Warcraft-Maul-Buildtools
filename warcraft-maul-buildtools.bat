@@ -20,5 +20,5 @@ echo Compiling jass...
 
 echo Cleaning up...
 move temp\\out.w3x .
-rd /s temp
+rd /s /q temp
 echo Done!
