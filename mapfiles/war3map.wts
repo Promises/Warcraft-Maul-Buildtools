@@ -994,12 +994,6 @@ STRING 2518
 Allows the Goblin Sapper to strike up to 3 units at the same time.
 }
 
-STRING 2527
-// Items: I00J (Goblin War Room), Name (Name)
-{
-Goblin War Room
-}
-
 STRING 2557
 // Abilities: A019 (After Burn), Name (Name)
 {
@@ -3131,7 +3125,7 @@ Z
 }
 
 STRING 4673
-// Items: I00J (Goblin War Room), Hotkey (Hotkey)
+// Items: I00W (Hardcore Random), Hotkey (Hotkey)
 {
 X
 }
@@ -3155,7 +3149,7 @@ Z
 }
 
 STRING 4697
-// Items: I00W (Hardcore Random), Hotkey (Hotkey)
+// Items: I025 (High Elf Farm), Hotkey (Hotkey)
 {
 X
 }
@@ -3167,7 +3161,7 @@ Q
 }
 
 STRING 4742
-// Items: I025 (High Elf Farm), Hotkey (Hotkey)
+// Items: I00J (Goblins), Hotkey (Hotkey)
 {
 X
 }
@@ -7802,12 +7796,6 @@ STRING 7616
 Choose Night Elf Ancient [|cffffcc00X|r]
 }
 
-STRING 7617
-// Items: I00J (Goblin War Room), Tip (Tooltip - Basic)
-{
-Choose Goblin War Room [|cffffcc00X|r]
-}
-
 STRING 7623
 // Items: I00R (Ice Troll Hut), Tip (Tooltip - Basic)
 {
@@ -7857,13 +7845,13 @@ STRING 7712
 }
 
 STRING 7713
-// Items: I00J (Goblin War Room), Ubertip (Tooltip - Extended)
+// Items: I00M (Gnoll Republic), Ubertip (Tooltip - Extended)
 {
 |cFFFF8033Intermediate race|r
 }
 
 STRING 7714
-// Items: I00M (Gnoll Republic), Ubertip (Tooltip - Extended)
+// Items: I00Z (Galaxy), Ubertip (Tooltip - Extended)
 {
 |cFFFF8033Intermediate race|r
 }
@@ -7872,12 +7860,6 @@ STRING 7715
 // Items: I00U (Dwarven Mine), Ubertip (Tooltip - Extended)
 {
 |cFFFF4933Advanced race|r
-}
-
-STRING 7717
-// Items: I00Z (Galaxy), Ubertip (Tooltip - Extended)
-{
-|cFFFF8033Intermediate race|r
 }
 
 STRING 7731
@@ -12598,5 +12580,151 @@ STRING 9665
 // Buffs/Effects: B016 (Permanent Immolation), Bufftip (Tooltip)
 {
 Immolation
+}
+
+STRING 9666
+// Abilities: A0CV ([Goblin] Rocket Barrage), Name (Name)
+{
+[Goblin] Rocket Barrage
+}
+
+STRING 9667
+// Abilities: A0CV ([Goblin] Rocket Barrage), Tip (Tooltip - Normal)
+{
+Rocket Barrage
+}
+
+STRING 9668
+// Abilities: A0CV ([Goblin] Rocket Barrage), Ubertip (Tooltip - Normal - Extended)
+{
+Gives a 5% chance to fire a barrage of rockets when attacking. The rockets stun and deal 300 damage.
+}
+
+STRING 9669
+// Abilities: A0CV ([Goblin] Rocket Barrage), EditorSuffix (Editor Suffix)
+{
+(ICON ONLY)
+}
+
+STRING 9670
+// Abilities: A0CW ([Goblin] Mine Deploy), Name (Name)
+{
+[Goblin] Mine Deploy
+}
+
+STRING 9671
+// Abilities: A0CW ([Goblin] Mine Deploy), Tip (Tooltip - Normal)
+{
+Mine Deploy
+}
+
+STRING 9672
+// Abilities: A0CW ([Goblin] Mine Deploy), Ubertip (Tooltip - Normal - Extended)
+{
+When this unit has full mana, the next attack will spawn a land mine on top of the attacked unit.
+}
+
+STRING 9673
+// Abilities: A0CW ([Goblin] Mine Deploy), EditorSuffix (Editor Suffix)
+{
+(ICON ONLY)
+}
+
+STRING 9674
+// Abilities: A0CX ([Goblin] Mirror Image), Name (Name)
+{
+[Goblin] Mirror Image
+}
+
+STRING 9675
+// Abilities: A0CX ([Goblin] Mirror Image), Tip (Tooltip - Normal)
+{
+Mirror Image
+}
+
+STRING 9676
+// Abilities: A0CX ([Goblin] Mirror Image), Ubertip (Tooltip - Normal - Extended)
+{
+Gives a 8% chance to summon a mirror image on attack. Mirror Images pursue enemeis and deal 500-500 chaos damage.
+}
+
+STRING 9677
+// Abilities: A0CX ([Goblin] Mirror Image), EditorSuffix (Editor Suffix)
+{
+(ICON ONLY)
+}
+
+STRING 9678
+// Abilities: A0CY ([Goblin] Acid Bomb), Name (Name)
+{
+[Goblin] Acid Bomb
+}
+
+STRING 9679
+// Abilities: A0CY ([Goblin] Acid Bomb), Tip (Tooltip - Normal)
+{
+Acid Bomb
+}
+
+STRING 9680
+// Abilities: A0CY ([Goblin] Acid Bomb), Ubertip (Tooltip - Normal - Extended)
+{
+Hurls a flask of acid at a target.  The flask breaks upon impact, splashing a powerful acid on nearby hostile units.|n|nDecreases armor by 5; deals 100 damage per second.|nLasts 20 seconds.
+}
+
+STRING 9681
+// Abilities: A0CZ ([Goblin] Suicide Squad Attack!), Name (Name)
+{
+[Goblin] Suicide Squad Attack!
+}
+
+STRING 9682
+// Abilities: A0CZ ([Goblin] Suicide Squad Attack!), Tip (Tooltip - Normal)
+{
+Suicide Squad Attack!
+}
+
+STRING 9683
+// Abilities: A0CZ ([Goblin] Suicide Squad Attack!), Ubertip (Tooltip - Normal - Extended)
+{
+Do not run! We are your friends!|nDeals 350 damage in a 600 unit radius. 10 second cooldown.
+}
+
+STRING 9684
+// Abilities: A0D0 ([Goblin] Pocket Factory), Name (Name)
+{
+[Goblin] Pocket Factory
+}
+
+STRING 9685
+// Abilities: A0D0 ([Goblin] Pocket Factory), Ubertip (Tooltip - Normal - Extended)
+{
+One Mecha-Goblin spawns every nine seconds.
+}
+
+STRING 9686
+// Abilities: A0D0 ([Goblin] Pocket Factory), Tip (Tooltip - Normal)
+{
+Pocket Factory
+}
+
+STRING 9687
+// Items: I00J (Goblins), Name (Name)
+{
+Goblins
+}
+
+STRING 9688
+// Items: I00J (Goblins), Tip (Tooltip - Basic)
+{
+Choose Goblins [|cffffcc00X|r]
+}
+
+STRING 9689
+// Items: I00J (Goblins), Ubertip (Tooltip - Extended)
+{
+|cFFFF8033Intermediate race|r|n|cffffcc00Damage Types:|r Magic, Normal, Siege
+|cffffcc00Towers:|r 7
+|cffffcc00Traits:|r Explosions
 }
 

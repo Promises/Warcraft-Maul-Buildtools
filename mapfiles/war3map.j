@@ -360,6 +360,9 @@ boolean udg_DebugMode= false
 integer udg_IceTrollJoker= 0
 boolean udg_DmgEvRunning= false
 boolean udg_DmgEvQueued= false
+integer udg_GoblinBlademaster= 0
+integer udg_GoblinTinker= 0
+integer udg_GoblinMineLayer= 0
 
     // Generated
 trigger gg_trg_Unit_Indexer= null
@@ -367,6 +370,7 @@ trigger gg_trg_Damage_Engine_Config= null
 trigger gg_trg_Damage_Engine= null
 trigger gg_trg_WarcraftMaulLibrary= null
 trigger gg_trg_MapInit= null
+trigger gg_trg_SiphonEnergy= null
 trigger gg_trg_UnchargedRune= null
 trigger gg_trg_JuggleDetection= null
 trigger gg_trg_AntiBlockAndJuggle= null
@@ -391,6 +395,9 @@ trigger gg_trg_Transfuse= null
 trigger gg_trg_Infuse= null
 trigger gg_trg_Sacrifice= null
 trigger gg_trg_AlchemicalTransmutation= null
+trigger gg_trg_GoblinMineLayer= null
+trigger gg_trg_MirrorImageAttack= null
+trigger gg_trg_GoblinTinker= null
 trigger gg_trg_BattleRoar= null
 trigger gg_trg_DrunkenHaze= null
 trigger gg_trg_SacrificeDamage= null
@@ -434,7 +441,6 @@ trigger gg_trg_WalkItOff= null
 trigger gg_trg_DivineShield= null
 trigger gg_trg_CrippleAura= null
 trigger gg_trg_VampiricAura= null
-destructable gg_dest_B000_0160= null
 trigger gg_trg_Remove_Spiders= null
 trigger gg_trg_Disable_Tower_Create_UG= null
 trigger gg_trg_Disable_Towers_Command= null
@@ -456,30 +462,12 @@ trigger gg_trg_Void_Fragment_Construction= null
 trigger gg_trg_Void_Fragment_Ability= null
 trigger gg_trg_Void_Fragment_Tick= null
 trigger gg_trg_Void_Fragment_Spend= null
-trigger gg_trg_SiphonEnergy= null
-
-
-//JASSHelper struct globals:
-
-
-
-//JASSHelper struct globals:
-
-
-
-//JASSHelper struct globals:
-
+destructable gg_dest_B000_0160= null
 
 
 //JASSHelper struct globals:
 
 endglobals
-
-
-
-
-
-
 
 
 //library MapInit:
@@ -566,7 +554,7 @@ endfunction
 function InitializeTowerTierArrays takes nothing returns nothing
 
 	// TIER ONE 3 - 15
-	set udg_TierOneTowers[0]='hC85' // Black Dragon Whelp
+	set udg_TierOneTowers[0]='h00Z' // Dragonkin
 	set udg_TierOneTowers[1]='h03W' // Felguard
 	set udg_TierOneTowers[2]='hC66' // Tower (5)
 	set udg_TierOneTowers[3]='hC21' // Ghast
@@ -588,7 +576,7 @@ function InitializeTowerTierArrays takes nothing returns nothing
 	set udg_TierOneTowers[19]='n04K' // Mild-Mannered Chris (10)
 	set udg_TierOneTowers[20]='n05H' // Undead Dwarf (5)
 	set udg_TierOneTowers[21]='h02H' // Marine (10)
-	set udg_TierOneTowers[22]='h01P' // Minature Mecha Goblin (10)
+	set udg_TierOneTowers[22]='h011' // Goblin PocketFactory (10)
 	set udg_TierOneTowers[23]='h01Z' // Spirit Wolf (8)
 	set udg_TierOneTowers[24]='e00J' // Star Shooter (7)
 	set udg_TierOneTowers[25]='h03D' // [Draenei] - Draenei Hut (5)
@@ -603,7 +591,7 @@ function InitializeTowerTierArrays takes nothing returns nothing
 	set udg_TierOneSize=32
 
 	// TIER TWO 16 - 99
-	set udg_TierTwoTowers[0]='hC87' // Blue Dragon Whelp
+	set udg_TierTwoTowers[0]='h010' // Dragon Egg
 	set udg_TierTwoTowers[1]='hC27' // Crypt Fiend
 	set udg_TierTwoTowers[2]='o004' // Chaos Raider (40)
 	set udg_TierTwoTowers[3]='oC18' // Gargoyle (40)
@@ -617,38 +605,36 @@ function InitializeTowerTierArrays takes nothing returns nothing
 	set udg_TierTwoTowers[11]='n02U' // Sorceress (20)
 	set udg_TierTwoTowers[12]='n048' // Zombie (40)
 	set udg_TierTwoTowers[13]='h02I' // Fel Clown (40)
-	set udg_TierTwoTowers[14]='h01Q' // Goblin Sapper (40)
-	set udg_TierTwoTowers[15]='h020' // Water Elemental (40)
-	set udg_TierTwoTowers[16]='h03U' // Felhound
-	set udg_TierTwoTowers[17]='h00C' // Faerie Dragon (80)
-	set udg_TierTwoTowers[18]='oC56' // Meat Wagon (80)
-	set udg_TierTwoTowers[19]='oC58' // Shaman (95)
-	set udg_TierTwoTowers[20]='h01E' // Gnoll Warden (60)
-	set udg_TierTwoTowers[21]='n056' // Cow Catapult (Sheep) (60)
-	set udg_TierTwoTowers[22]='n00M' // Den (60)
-	set udg_TierTwoTowers[23]='n04A' // Abomination (80)
-	set udg_TierTwoTowers[24]='n05J' // Dwarven Hunter (50)
-	set udg_TierTwoTowers[25]='n03E' // Forest Troll Berserker (50)
-	set udg_TierTwoTowers[26]='n02B' // Gnoll Brute (60)
-	set udg_TierTwoTowers[27]='n04M' // Lord D.O.T (80)
-	set udg_TierTwoTowers[28]='n05K' // Mountain Dwarf (90)
-	set udg_TierTwoTowers[29]='n01T' // Stag (50)
-	set udg_TierTwoTowers[30]='n04V' // The B3ast (80)
-	set udg_TierTwoTowers[31]='e00K' // Moon Dancer (30)
-	set udg_TierTwoTowers[32]='h04H' // [Draenei] - Salamander Hatchling (50)
-	set udg_TierTwoTowers[33]='n010' // Corrupted Ancient of Lore (16)
-	set udg_TierTwoTowers[34]='h03I' // [Workers Union] - Undead Acolyte (75)
-	set udg_TierTwoTowers[35]='n02V' // Merchant (16)
-	set udg_TierTwoTowers[36]='n02W' // Arcane Infuser (28)
-	set udg_TierTwoTowers[37]='n007' // Elemental (24)
-	set udg_TierTwoTowers[38]='n012' // Merchant (32)
-	set udg_TierTwoTowers[39]='hC80' // [Night Elves] - Huntress (75)
-	set udg_TierTwoTowers[40]='h04R' // [Cavernous Creatures] - Small Cavernous Growth (50)
-	set udg_TierTwoTowers[41]='h041' // [Cavernous Creatures] - Cavern Frog (80)
-	set udg_TierTwoTowers[42]='oC19' // [Orc Stronghold] - Headhunter (50)
-	set udg_TierTwoTowers[43]='n00G' // Ice Troll Berserker (50)
+	set udg_TierTwoTowers[14]='h020' // Water Elemental (40)
+	set udg_TierTwoTowers[15]='h03U' // Felhound
+	set udg_TierTwoTowers[16]='oC56' // Meat Wagon (80)
+	set udg_TierTwoTowers[17]='oC58' // Shaman (95)
+	set udg_TierTwoTowers[18]='h01E' // Gnoll Warden (60)
+	set udg_TierTwoTowers[19]='n056' // Cow Catapult (Sheep) (60)
+	set udg_TierTwoTowers[20]='n00M' // Den (60)
+	set udg_TierTwoTowers[21]='n04A' // Abomination (80)
+	set udg_TierTwoTowers[22]='n05J' // Dwarven Hunter (50)
+	set udg_TierTwoTowers[23]='n03E' // Forest Troll Berserker (50)
+	set udg_TierTwoTowers[24]='n02B' // Gnoll Brute (60)
+	set udg_TierTwoTowers[25]='n04M' // Lord D.O.T (80)
+	set udg_TierTwoTowers[26]='n05K' // Mountain Dwarf (90)
+	set udg_TierTwoTowers[27]='n01T' // Stag (50)
+	set udg_TierTwoTowers[28]='n04V' // The B3ast (80)
+	set udg_TierTwoTowers[29]='e00K' // Moon Dancer (30)
+	set udg_TierTwoTowers[30]='h04H' // [Draenei] - Salamander Hatchling (50)
+	set udg_TierTwoTowers[31]='n010' // Corrupted Ancient of Lore (16)
+	set udg_TierTwoTowers[32]='h03I' // [Workers Union] - Undead Acolyte (75)
+	set udg_TierTwoTowers[33]='n02V' // Merchant (16)
+	set udg_TierTwoTowers[34]='n02W' // Arcane Infuser (28)
+	set udg_TierTwoTowers[35]='n007' // Elemental (24)
+	set udg_TierTwoTowers[36]='n012' // Merchant (32)
+	set udg_TierTwoTowers[37]='hC80' // [Night Elves] - Huntress (75)
+	set udg_TierTwoTowers[38]='h04R' // [Cavernous Creatures] - Small Cavernous Growth (50)
+	set udg_TierTwoTowers[39]='h041' // [Cavernous Creatures] - Cavern Frog (80)
+	set udg_TierTwoTowers[40]='oC19' // [Orc Stronghold] - Headhunter (50)
+	set udg_TierTwoTowers[41]='n00G' // Ice Troll Berserker (50)
 
-	set udg_TierTwoSize=43
+	set udg_TierTwoSize=41
 
 	// TIER THREE 100 - 149
 	set udg_TierThreeTowers[0]='hC53' // Ancient Protector
@@ -662,13 +648,14 @@ function InitializeTowerTierArrays takes nothing returns nothing
 	set udg_TierThreeTowers[8]='n04B' // Necromancer (120)
 	set udg_TierThreeTowers[9]='n057' // Witch Hunter (Peasant) (100)
 	set udg_TierThreeTowers[10]='h02A' // Orc Firebat (100)
-	set udg_TierThreeTowers[11]='h01R' // Goblin Bomber (100)
+	set udg_TierThreeTowers[11]='o01R' // Goblin MineLayer (150)
 	set udg_TierThreeTowers[12]='hC08' // Knight (120)
 	set udg_TierThreeTowers[13]='e00L' // Druid (100)
 	set udg_TierThreeTowers[14]='h04F' // [Draenei] - Draenei Seer (100)
 	set udg_TierThreeTowers[15]='n00H' // Ice Troll Trapper (120)
+	set udg_TierThreeTowers[16]='o01M' // Goblin Sapper (100)
 
-	set udg_TierThreeSize=15
+	set udg_TierThreeSize=16
 
 	// TIER FOUR 150 - 299
 	set udg_TierFourTowers[0]='hC89' // Adult Green Dragon (170)
@@ -708,19 +695,19 @@ function InitializeTowerTierArrays takes nothing returns nothing
 	set udg_TierFourTowers[34]='n04N' // Sir C.R.U.S.T.Y. (200)
 	set udg_TierFourTowers[35]='n059' // Tim the Enchanter (260)
 	set udg_TierFourTowers[36]='h02J' // Admiral Proudmoore (200)
-	set udg_TierFourTowers[37]='h03O' // Goblin's Ogre (275)
-	set udg_TierFourTowers[38]='h026' // Lava Spawn (250)
-	set udg_TierFourTowers[39]='e00O' // Night Star (200)
-	set udg_TierFourTowers[40]='h02R' // [Draenei] - Draenei Demolisher (200)
-	set udg_TierFourTowers[41]='n00U' // [Demon] - Summoning Shrine (225)
-	set udg_TierFourTowers[42]='h03F' // [Workers Union] - Human Peasant (200)
-	set udg_TierFourTowers[43]='h02F' // [Void Cult] - Void Priest (200)
-	set udg_TierFourTowers[44]='hC82' // [Night Elves] - Ancient Protector (150)
-	set udg_TierFourTowers[45]='hC86' // [Night Elves] - Chimaera Roost (250)
-	set udg_TierFourTowers[46]='h04M' // [Cavernous Creatures] - Cavern Hermit (200)
-	set udg_TierFourTowers[47]='h022' // Spirit Bear (150)
-	set udg_TierFourTowers[48]='o00C' // [High Elven] - High Elf Captain (200)
-	set udg_TierFourTowers[49]='n018' // Ice Troll Priest (200)
+	set udg_TierFourTowers[37]='h026' // Lava Spawn (250)
+	set udg_TierFourTowers[38]='e00O' // Night Star (200)
+	set udg_TierFourTowers[39]='h02R' // [Draenei] - Draenei Demolisher (200)
+	set udg_TierFourTowers[40]='n00U' // [Demon] - Summoning Shrine (225)
+	set udg_TierFourTowers[41]='h03F' // [Workers Union] - Human Peasant (200)
+	set udg_TierFourTowers[42]='h02F' // [Void Cult] - Void Priest (200)
+	set udg_TierFourTowers[43]='hC82' // [Night Elves] - Ancient Protector (150)
+	set udg_TierFourTowers[44]='hC86' // [Night Elves] - Chimaera Roost (250)
+	set udg_TierFourTowers[45]='h04M' // [Cavernous Creatures] - Cavern Hermit (200)
+	set udg_TierFourTowers[46]='h022' // Spirit Bear (150)
+	set udg_TierFourTowers[47]='o00C' // [High Elven] - High Elf Captain (200)
+	set udg_TierFourTowers[48]='n018' // Ice Troll Priest (200)
+	set udg_TierFourTowers[49]='o01N' // Goblin Shredder (225)
 
 	set udg_TierFourSize=49
 
@@ -746,13 +733,12 @@ function InitializeTowerTierArrays takes nothing returns nothing
 	set udg_TierFiveTowers[18]='n01W' // Penguin (300)
 	set udg_TierFiveTowers[19]='h02K' // Forgotten One (300)
 	set udg_TierFiveTowers[20]='h02L' // Hydralisk (350)
-	set udg_TierFiveTowers[21]='h01W' // Decepticon Goblin Autobot (375)
-	set udg_TierFiveTowers[22]='e00P' // Star Chaser (350)
-	set udg_TierFiveTowers[23]='h04G' // [Draenei] - Draenei Spiritualist (350)
-	set udg_TierFiveTowers[24]='h04N' // [Cavernous Creatures] - Cavern Turtle (300)
-	set udg_TierFiveTowers[25]='n019' // Ice Troll High Priest (320)
+	set udg_TierFiveTowers[21]='e00P' // Star Chaser (350)
+	set udg_TierFiveTowers[22]='h04G' // [Draenei] - Draenei Spiritualist (350)
+	set udg_TierFiveTowers[23]='h04N' // [Cavernous Creatures] - Cavern Turtle (300)
+	set udg_TierFiveTowers[24]='n019' // Ice Troll High Priest (320)
 
-	set udg_TierFiveSize=25
+	set udg_TierFiveSize=24
 
 	// TIER SIX 400 - 499
 	set udg_TierSixTowers[0]='hC32' // Frost Wyrm (400)
@@ -773,8 +759,9 @@ function InitializeTowerTierArrays takes nothing returns nothing
 	set udg_TierSixTowers[15]='h00B' // [Night Elves] - Ancient of Wind (400)
 	set udg_TierSixTowers[16]='h04Q' // [Cavernous Creatures] - Cavern Druid (400)
 	set udg_TierSixTowers[17]='n01A' // Ice Troll Joker (400)
+	set udg_TierSixTowers[18]='o01O' // [Goblins] Alchemist (400)
 
-	set udg_TierSixSize=17
+	set udg_TierSixSize=18
 
 	// TIER SEVEN 500 - 699
 	set udg_TierSevenTowers[0]='h00F' // Dreadlord
@@ -800,21 +787,20 @@ function InitializeTowerTierArrays takes nothing returns nothing
 	set udg_TierSevenTowers[20]='n05C' // Sir Galahad the Pure (500)
 	set udg_TierSevenTowers[21]='n020' // Snow Owl (650)
 	set udg_TierSevenTowers[22]='n04G' // Varimathras (600)
-	set udg_TierSevenTowers[23]='h02M' // Orc Kart (500)
-	set udg_TierSevenTowers[24]='h02N' // Undead Kart (650)
-	set udg_TierSevenTowers[25]='h01Y' // Goblin Inferno Silo (650)
-	set udg_TierSevenTowers[26]='h01X' // Goblin Tesla Coil (500)
-	set udg_TierSevenTowers[27]='h028' // Skeletal Mage (500)
-	set udg_TierSevenTowers[28]='h029' // Spirit Hawk (600)
-	set udg_TierSevenTowers[29]='e00R' // Celestial Mist (600)
-	set udg_TierSevenTowers[30]='h04I' // [Draenei] - Salamander Lord (500)
-	set udg_TierSevenTowers[31]='h01M' // [Void Cult] - Void Fissure (500)
-	set udg_TierSevenTowers[32]='h03H' // [Workers Union] - Night Elf Wisp (600)
-	set udg_TierSevenTowers[33]='h00G' // [Night Elves] - Warden (550)
-	set udg_TierSevenTowers[34]='h04O' // [Cavernous Creatures] - Cavern Revenant (600)
-	set udg_TierSevenTowers[35]='n01B' // Ice Troll King (500)
+	set udg_TierSevenTowers[23]='o01P' // Goblin BladeMaster (600)
+	set udg_TierSevenTowers[24]='h01Y' // Goblin Inferno Silo (650)
+	set udg_TierSevenTowers[25]='h01X' // Goblin Tesla Coil (500)
+	set udg_TierSevenTowers[26]='h028' // Skeletal Mage (500)
+	set udg_TierSevenTowers[27]='h029' // Spirit Hawk (600)
+	set udg_TierSevenTowers[28]='e00R' // Celestial Mist (600)
+	set udg_TierSevenTowers[29]='h04I' // [Draenei] - Salamander Lord (500)
+	set udg_TierSevenTowers[30]='h01M' // [Void Cult] - Void Fissure (500)
+	set udg_TierSevenTowers[31]='h03H' // [Workers Union] - Night Elf Wisp (600)
+	set udg_TierSevenTowers[32]='h00G' // [Night Elves] - Warden (550)
+	set udg_TierSevenTowers[33]='h04O' // [Cavernous Creatures] - Cavern Revenant (600)
+	set udg_TierSevenTowers[34]='n01B' // Ice Troll King (500)
 
-	set udg_TierSevenSize=35
+	set udg_TierSevenSize=34
 
 	// TIER EIGHT 700 - 899
 	set udg_TierEightTowers[0]='h00P' // Queen Alexstrasza
@@ -861,7 +847,7 @@ function InitializeTowerTierArrays takes nothing returns nothing
 	set udg_TierNineTowers[16]='h02P' // Diablo Kart (1000)
 	set udg_TierNineTowers[17]='h02Q' // Iron As In Arthas (1200)
 	set udg_TierNineTowers[18]='h02D' // Avatar of Vengeance (1000)
-	set udg_TierNineTowers[19]='h01K' // Goblin Tinker (900)
+	set udg_TierNineTowers[19]='o01S' // Goblin Tinker (1100)
 	set udg_TierNineTowers[20]='h02C' // Quilbeast (900)
 	set udg_TierNineTowers[21]='e00T' // The Creator (1000)
 	set udg_TierNineTowers[22]='o001' // Giant King (999)
@@ -1643,12 +1629,12 @@ function MapInit_InitializeVariables takes nothing returns nothing
 	set udg_RaceArray[11]='e007' // The Summons
 	set udg_RaceArray[12]='n00J' // Arachnid Hive
 	set udg_RaceArray[13]='o017' // Dranei Haven
-	set udg_RaceArray[14]='uC84' // Dragon Roost
+	set udg_RaceArray[14]='u00B' // Dragons
 	set udg_RaceArray[15]='e00F' // Night Elf Ancient
 	set udg_RaceArray[16]='e005' // Shrine of Ultron
 	set udg_RaceArray[17]='e002' // Tavern
 	set udg_RaceArray[18]='e003' // Corrupted Night Elves
-	set udg_RaceArray[19]='e006' // Goblin War Room
+	set udg_RaceArray[19]='e005' // Goblins
 	set udg_RaceArray[20]='n03M' // Hero's Altar
 	set udg_RaceArray[21]='e00D' // Caerbannog
 	set udg_RaceArray[22]='n01V' // Critteres UNITE
@@ -1681,12 +1667,12 @@ function MapInit_InitializeVariables takes nothing returns nothing
 	set udg_RaceNameArray[11]="The Summons"
 	set udg_RaceNameArray[12]="Arachnid Hive"
 	set udg_RaceNameArray[13]="Draenei Haven"
-	set udg_RaceNameArray[14]="Dragon Roost"
+	set udg_RaceNameArray[14]="Dragons"
 	set udg_RaceNameArray[15]="Night Elf Ancient"
 	set udg_RaceNameArray[16]="Shrine of Ultron"
 	set udg_RaceNameArray[17]="Tavern"
 	set udg_RaceNameArray[18]="Corrupted Night Elves"
-	set udg_RaceNameArray[19]="Goblin War Room"
+	set udg_RaceNameArray[19]="Goblins"
 	set udg_RaceNameArray[20]="Hero's Altar"
 	set udg_RaceNameArray[21]="Caerbannog"
 	set udg_RaceNameArray[22]="Critters UNITE"
@@ -2105,6 +2091,21 @@ endfunction
 			if udg_IceTrollJoker == 0 then
 				call DisableTrigger(gg_trg_IceTrollJoker)
 			endif
+		elseif ( GetUnitTypeId(u) == 'o01P' ) then
+			set udg_GoblinBlademaster=udg_GoblinBlademaster - 1
+			if udg_GoblinBlademaster == 0 then
+				call DisableTrigger(gg_trg_MirrorImageAttack)
+			endif
+		elseif ( GetUnitTypeId(u) == 'o01R' ) then
+			set udg_GoblinMineLayer=udg_GoblinMineLayer - 1
+			if udg_GoblinMineLayer == 0 then
+				call DisableTrigger(gg_trg_GoblinMineLayer)
+			endif
+		elseif ( GetUnitTypeId(u) == 'o01S' ) then
+			set udg_GoblinTinker=udg_GoblinTinker - 1
+			if udg_GoblinTinker == 0 then
+				call DisableTrigger(gg_trg_GoblinTinker)
+			endif
 		endif
 
 		call FlushChildHashtableBJ(GetHandleIdBJ(u), udg_PlayerLeavesTable)
@@ -2121,7 +2122,7 @@ endfunction
 // 
 //   Warcraft III map script
 //   Generated by the Warcraft III World Editor
-//   Date: Tue Mar 12 18:54:32 2019
+//   Date: Sat Apr  6 17:54:27 2019
 //   Map Author: runi95 & Promises
 // 
 //===========================================================================
@@ -2669,6 +2670,9 @@ function InitGlobals takes nothing returns nothing
     set udg_IceTrollJoker=0
     set udg_DmgEvRunning=false
     set udg_DmgEvQueued=false
+    set udg_GoblinBlademaster=0
+    set udg_GoblinTinker=0
+    set udg_GoblinMineLayer=0
 endfunction
 
 //***************************************************************************
@@ -2682,6 +2686,40 @@ function CreateAllDestructables takes nothing returns nothing
     local trigger t
     local real life
     set gg_dest_B000_0160=CreateDestructable('B000', 3520.0, - 5312.0, 0.000, 0.900, 0)
+endfunction
+
+//***************************************************************************
+//*
+//*  Unit Creation
+//*
+//***************************************************************************
+
+//===========================================================================
+function CreateBuildingsForPlayer0 takes nothing returns nothing
+    local player p= Player(0)
+    local unit u
+    local integer unitID
+    local trigger t
+    local real life
+
+    set u=CreateUnit(p, 'hwtw', 1856.0, 4032.0, 270.000)
+    set u=CreateUnit(p, 'hwtw', 1856.0, 4160.0, 270.000)
+    set u=CreateUnit(p, 'hwtw', 1856.0, 4288.0, 270.000)
+endfunction
+
+//===========================================================================
+function CreatePlayerBuildings takes nothing returns nothing
+    call CreateBuildingsForPlayer0()
+endfunction
+
+//===========================================================================
+function CreatePlayerUnits takes nothing returns nothing
+endfunction
+
+//===========================================================================
+function CreateAllUnits takes nothing returns nothing
+    call CreatePlayerBuildings()
+    call CreatePlayerUnits()
 endfunction
 
 //***************************************************************************
@@ -3205,6 +3243,55 @@ endfunction //==================================================================
 //===========================================================================
 
 //===========================================================================
+// Trigger: SiphonEnergy
+//===========================================================================
+function Trig_SiphonEnergy_Conditions takes nothing returns boolean
+	return GetSpellAbilityId() == 'A0CT'
+endfunction
+
+function CheckForCombination takes integer trigType,integer targType,integer typeOne,integer typeTwo returns boolean
+	if GetBooleanOr(trigType == typeOne, targType == typeOne) then
+		if GetBooleanOr(trigType == typeTwo, targType == typeTwo) then
+			return true
+		endif
+	endif
+
+	return false
+endfunction
+
+function Trig_SiphonEnergy_Actions takes nothing returns nothing
+ local unit trig= GetTriggerUnit()
+ local unit targ= GetSpellTargetUnit()
+ local integer trigType= GetUnitTypeId(trig)
+ local integer targType= GetUnitTypeId(targ)
+
+	if CheckForCombination(trigType , targType , 'n025' , 'n024') then // Life + Death
+		call ReplaceUnitBJ(trig, 'n026', bj_UNIT_STATE_METHOD_DEFAULTS)
+		call ReplaceUnitBJ(targ, 'n027', bj_UNIT_STATE_METHOD_DEFAULTS)
+	elseif CheckForCombination(trigType , targType , 'n01S' , 'n024') then // Fire + Death
+		call ReplaceUnitBJ(trig, 'n028', bj_UNIT_STATE_METHOD_DEFAULTS)
+		call ReplaceUnitBJ(targ, 'n027', bj_UNIT_STATE_METHOD_DEFAULTS)
+	elseif CheckForCombination(trigType , targType , 'n01R' , 'n024') then // Water + Death
+		call ReplaceUnitBJ(trig, 'n030', bj_UNIT_STATE_METHOD_DEFAULTS)
+		call ReplaceUnitBJ(targ, 'n027', bj_UNIT_STATE_METHOD_DEFAULTS)
+	elseif CheckForCombination(trigType , targType , 'n022' , 'n024') then // Water + Death
+		call ReplaceUnitBJ(trig, 'u00C', bj_UNIT_STATE_METHOD_DEFAULTS)
+		call ReplaceUnitBJ(targ, 'n027', bj_UNIT_STATE_METHOD_DEFAULTS)
+	endif
+
+	set trig=null
+	set targ=null
+endfunction
+
+//===========================================================================
+function InitTrig_SiphonEnergy takes nothing returns nothing
+    set gg_trg_SiphonEnergy=CreateTrigger()
+    call TriggerRegisterAnyUnitEventBJ(gg_trg_SiphonEnergy, EVENT_PLAYER_UNIT_SPELL_EFFECT)
+    call TriggerAddCondition(gg_trg_SiphonEnergy, Condition(function Trig_SiphonEnergy_Conditions))
+    call TriggerAddAction(gg_trg_SiphonEnergy, function Trig_SiphonEnergy_Actions)
+endfunction
+
+//===========================================================================
 // Trigger: UnchargedRune
 //===========================================================================
 function Trig_UnchargedRune_Conditions takes nothing returns boolean
@@ -3297,7 +3384,7 @@ function GetUnitsInRangeFilter takes nothing returns boolean
 		return false
 	endif
 
-	if ( ( IsUnitInGroup(GetFilterUnit(), udg_Antiblockcheckgroup) ) ) then // INLINED!!
+	if ( FilteredUnitIsInGroup() ) then
 		call CheckHashtable()
 
 		return false
@@ -3427,11 +3514,11 @@ function ThreeSidesOfCircleOne takes nothing returns boolean
 endfunction
 
 function ThreeSidesOfAnyCircle takes nothing returns boolean
-	if ( ( ( udg_PlayerLimitCircleOne + udg_PlayerLimitCircleTwo + udg_PlayerLimitCircleThree + udg_PlayerLimitCircleFour ) > 2 ) ) then // INLINED!!
+	if ( ThreeSidesOfCircleOne() ) then
 		return true
 	endif
 
-	if ( ( ( udg_PlayerLimitCircleOne + udg_PlayerLimitCircleFive + udg_PlayerLimitCircleSix + udg_PlayerLimitCircleSeven ) > 2 ) ) then // INLINED!!
+	if ( ThreeSidesOfCircleTwo() ) then
 		return true
 	endif
 
@@ -3499,7 +3586,7 @@ function CheckCrossSectionEleven takes nothing returns boolean
 		return false
 	endif
 
-	if ( not ( udg_PlayerLimitOne + udg_PlayerLimitTwo + udg_PlayerLimitThree + udg_PlayerLimitFour + udg_PlayerLimitFive + udg_PlayerLimitSix > 1 ) ) then // INLINED!!
+	if ( not TwoSidesConnected() ) then
 		return false
 	endif
 
@@ -4352,7 +4439,7 @@ function VoteTimerExpired takes nothing returns nothing
 		set udg_TotalLives=1
 		call MultiboardSetItemValueBJ(udg_Scoreboard, 2, 4, I2S(udg_TotalLives))
 		call SetWaterBaseColorBJ(100, 20.00, 20.00, 0)
-		call ReplaceTerrainTypeId('Irbk' , 'Dlvc' , - 5888.0 , 5888.0 , - 5888.0 , 5888.0) // INLINED!!
+		call ReplaceRunedBricksWithLava()
 	endif
 	
 	call MultiboardSetItemValueBJ(udg_Scoreboard, 2, 3, I2S(R2I(udg_Difficulty)) + "% (" + udg_DifficultyStrings[diffIndex] + ")")
@@ -4500,7 +4587,7 @@ function HasteEnteringUnit takes nothing returns nothing
 endfunction
 
 function PlayerRestrictionActions takes integer playerid returns nothing
-	if ( WarcraftMaulLibrary_IsCreep(GetEnteringUnit()) ) then // INLINED!!
+	if WarcraftMaulLibrary_EnteringUnitIsCreep() then
 		if ( udg_IsSpawnOpen[playerid] == 0 ) then
 			if not ( UnitHasBuffBJ(GetEnteringUnit(), 'Bblo') ) then
 				call HasteEnteringUnit()
@@ -4558,7 +4645,7 @@ function Player8RestrictionAction takes nothing returns nothing
 endfunction
 
 function Player9RestrictionAction takes nothing returns nothing
-	if ( ( WarcraftMaulLibrary_IsCreep(GetEnteringUnit()) ) ) then // INLINED!!
+	if ( WarcraftMaulLibrary_EnteringUnitIsCreep() ) then
 		call UnitRemoveBuffBJ('Bblo', GetEnteringUnit())
 	elseif ( IsUnitType(GetEnteringUnit(), UNIT_TYPE_SUMMONED) ) then
 		if ( GetOwningPlayer(GetEnteringUnit()) != Player(8) ) then
@@ -4592,7 +4679,7 @@ function Player13RestrictionAction takes nothing returns nothing
 endfunction
 
 function EnteringUnitIsCreepAndHasNoCheckpoint takes nothing returns boolean
-	if not ( ( WarcraftMaulLibrary_IsCreep(GetEnteringUnit()) ) ) then // INLINED!!
+	if not ( WarcraftMaulLibrary_EnteringUnitIsCreep() ) then
 		return false
 	endif
 
@@ -5309,7 +5396,7 @@ function PinkSpawnAction takes nothing returns nothing
 endfunction
 
 function YellowCheckpointCondition takes nothing returns boolean
-	if ( ( WarcraftMaulLibrary_IsCreep(GetEnteringUnit()) ) ) then // INLINED!!
+	if ( WarcraftMaulLibrary_EnteringUnitIsCreep() ) then
 		if ( LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 11 ) then
 			return true
 		endif
@@ -5330,7 +5417,7 @@ function YellowCheckpointAction takes nothing returns nothing
 endfunction
 
 function Yellow2CheckpointCondition takes nothing returns boolean
-	if ( ( WarcraftMaulLibrary_IsCreep(GetEnteringUnit()) ) ) then // INLINED!!
+	if ( WarcraftMaulLibrary_EnteringUnitIsCreep() ) then
 		if ( LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 13 ) then
 			return true
 		endif
@@ -5353,7 +5440,7 @@ function Yellow2CheckpointAction takes nothing returns nothing
 endfunction
 
 function YellowTeleportCondition takes nothing returns boolean
-	if ( not ( ( WarcraftMaulLibrary_IsCreep(GetEnteringUnit()) ) ) ) then // INLINED!!
+	if ( not ( WarcraftMaulLibrary_EnteringUnitIsCreep() ) ) then
 		return false
 	endif
 
@@ -5369,7 +5456,7 @@ function YellowTeleportCondition takes nothing returns boolean
 endfunction
 
 function LightblueTeleportCondition takes nothing returns boolean
-	if ( not ( ( WarcraftMaulLibrary_IsCreep(GetEnteringUnit()) ) ) ) then // INLINED!!
+	if ( not ( WarcraftMaulLibrary_EnteringUnitIsCreep() ) ) then
 		return false
 	endif
 	if ( not ( LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 46 ) ) then
@@ -5379,7 +5466,7 @@ function LightblueTeleportCondition takes nothing returns boolean
 endfunction
 
 function DarkgreenTeleportCondition takes nothing returns boolean
-	if ( not ( ( WarcraftMaulLibrary_IsCreep(GetEnteringUnit()) ) ) ) then // INLINED!!
+	if ( not ( WarcraftMaulLibrary_EnteringUnitIsCreep() ) ) then
 		return false
 	endif
 	if ( not ( LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 48 ) ) then
@@ -5389,7 +5476,7 @@ function DarkgreenTeleportCondition takes nothing returns boolean
 endfunction
 
 function RedTeleportCondition takes nothing returns boolean
-	if ( not ( ( WarcraftMaulLibrary_IsCreep(GetEnteringUnit()) ) ) ) then // INLINED!!
+	if ( not ( WarcraftMaulLibrary_EnteringUnitIsCreep() ) ) then
 		return false
 	endif
 	if ( not ( LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 36 ) ) then
@@ -5431,9 +5518,9 @@ endfunction
 
 function YellowTeleportAction takes nothing returns nothing
 	if ( LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 43 ) then
-		call TeleportEnteringUnit(44 , 90.00) // INLINED!!
+		call YellowLeftTeleportAction()
 	else
-		call TeleportEnteringUnit(45 , 90.00) // INLINED!!
+		call YellowRightTeleportAction()
 	endif
 endfunction
 
@@ -5450,7 +5537,7 @@ function PurpleTeleportAction takes nothing returns nothing
 endfunction
 
 function RedCheckpointCondition takes nothing returns boolean
-	if not ( ( WarcraftMaulLibrary_IsCreep(GetEnteringUnit()) ) ) then // INLINED!!
+	if not ( WarcraftMaulLibrary_EnteringUnitIsCreep() ) then
 		return false
 	endif
 	if not ( LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 1 ) then
@@ -5477,7 +5564,7 @@ function RedCheckpointAction takes nothing returns nothing
 endfunction
 
 function Red2CheckpointCondition takes nothing returns boolean
-	if ( not ( ( WarcraftMaulLibrary_IsCreep(GetEnteringUnit()) ) ) ) then // INLINED!!
+	if ( not ( WarcraftMaulLibrary_EnteringUnitIsCreep() ) ) then
 		return false
 	endif
 	if ( not ( LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 2 ) ) then
@@ -5491,7 +5578,7 @@ function Red2CheckpointAction takes nothing returns nothing
 endfunction
 
 function TealTeleportCondition takes nothing returns boolean
-	if not ( ( WarcraftMaulLibrary_IsCreep(GetEnteringUnit()) ) ) then // INLINED!!
+	if not ( WarcraftMaulLibrary_EnteringUnitIsCreep() ) then
 		return false
 	endif
 
@@ -5503,7 +5590,7 @@ function TealTeleportCondition takes nothing returns boolean
 endfunction
 
 function PurpleTeleportCondition takes nothing returns boolean
-	if ( not ( ( WarcraftMaulLibrary_IsCreep(GetEnteringUnit()) ) ) ) then // INLINED!!
+	if ( not ( WarcraftMaulLibrary_EnteringUnitIsCreep() ) ) then
 		return false
 	endif
 	if ( not ( LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 41 ) ) then
@@ -5513,7 +5600,7 @@ function PurpleTeleportCondition takes nothing returns boolean
 endfunction
 
 function OrangeTeleportCondition takes nothing returns boolean
-	if ( not ( ( WarcraftMaulLibrary_IsCreep(GetEnteringUnit()) ) ) ) then // INLINED!!
+	if ( not ( WarcraftMaulLibrary_EnteringUnitIsCreep() ) ) then
 		return false
 	endif
 	if ( not ( LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 37 ) ) then
@@ -5523,7 +5610,7 @@ function OrangeTeleportCondition takes nothing returns boolean
 endfunction
 
 function OrangeCheckpointCondition takes nothing returns boolean
-	if ( not ( ( WarcraftMaulLibrary_IsCreep(GetEnteringUnit()) ) ) ) then // INLINED!!
+	if ( not ( WarcraftMaulLibrary_EnteringUnitIsCreep() ) ) then
 		return false
 	endif
 	if ( not ( LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 15 ) ) then
@@ -5537,7 +5624,7 @@ function OrangeCheckpointAction takes nothing returns nothing
 endfunction
 
 function Orange2CheckpointCondition takes nothing returns boolean
-	if ( not ( ( WarcraftMaulLibrary_IsCreep(GetEnteringUnit()) ) ) ) then // INLINED!!
+	if ( not ( WarcraftMaulLibrary_EnteringUnitIsCreep() ) ) then
 		return false
 	endif
 	if ( not ( LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 16 ) ) then
@@ -5551,7 +5638,7 @@ function Orange2CheckpointAction takes nothing returns nothing
 endfunction
 
 function BlueCheckpointCondition takes nothing returns boolean
-	if ( ( WarcraftMaulLibrary_IsCreep(GetEnteringUnit()) ) ) then // INLINED!!
+	if ( WarcraftMaulLibrary_EnteringUnitIsCreep() ) then
 		if ( LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 3 ) then
 			return true
 		endif
@@ -5572,7 +5659,7 @@ function BlueCheckpointAction takes nothing returns nothing
 endfunction
 
 function Blue2CheckpointCondition takes nothing returns boolean
-	if ( ( WarcraftMaulLibrary_IsCreep(GetEnteringUnit()) ) ) then // INLINED!!
+	if ( WarcraftMaulLibrary_EnteringUnitIsCreep() ) then
 		if ( LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 5 ) then
 			return true
 		endif
@@ -5593,7 +5680,7 @@ function Blue2CheckpointAction takes nothing returns nothing
 endfunction
 
 function TealCheckpointCondition takes nothing returns boolean
-	if ( not ( ( WarcraftMaulLibrary_IsCreep(GetEnteringUnit()) ) ) ) then // INLINED!!
+	if ( not ( WarcraftMaulLibrary_EnteringUnitIsCreep() ) ) then
 		return false
 	endif
 	if ( not ( LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 7 ) ) then
@@ -5607,7 +5694,7 @@ function TealCheckpointAction takes nothing returns nothing
 endfunction
 
 function Teal2CheckpointCondition takes nothing returns boolean
-	if ( not ( ( WarcraftMaulLibrary_IsCreep(GetEnteringUnit()) ) ) ) then // INLINED!!
+	if ( not ( WarcraftMaulLibrary_EnteringUnitIsCreep() ) ) then
 		return false
 	endif
 	if ( not ( LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 8 ) ) then
@@ -5638,7 +5725,7 @@ function PurpleTeleportDestAction takes nothing returns nothing
 endfunction
 
 function GreenCheckpointCondition takes nothing returns boolean
-	if ( not ( ( WarcraftMaulLibrary_IsCreep(GetEnteringUnit()) ) ) ) then // INLINED!!
+	if ( not ( WarcraftMaulLibrary_EnteringUnitIsCreep() ) ) then
 		return false
 	endif
 	if ( not ( LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 17 ) ) then
@@ -5676,7 +5763,7 @@ function GreenCheckpointAction takes nothing returns nothing
 endfunction
 
 function TealTeleportDestCondition takes nothing returns boolean
-	if ( not ( ( WarcraftMaulLibrary_IsCreep(GetEnteringUnit()) ) ) ) then // INLINED!!
+	if ( not ( WarcraftMaulLibrary_EnteringUnitIsCreep() ) ) then
 		return false
 	endif
 	if ( not ( LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 40 ) ) then
@@ -5686,7 +5773,7 @@ function TealTeleportDestCondition takes nothing returns boolean
 endfunction
 
 function PurpleTeleportDestCondition takes nothing returns boolean
-	if ( not ( ( WarcraftMaulLibrary_IsCreep(GetEnteringUnit()) ) ) ) then // INLINED!!
+	if ( not ( WarcraftMaulLibrary_EnteringUnitIsCreep() ) ) then
 		return false
 	endif
 	if ( not ( LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 42 ) ) then
@@ -5696,7 +5783,7 @@ function PurpleTeleportDestCondition takes nothing returns boolean
 endfunction
 
 function OrangeTeleportDestCondition takes nothing returns boolean
-	if ( not ( ( WarcraftMaulLibrary_IsCreep(GetEnteringUnit()) ) ) ) then // INLINED!!
+	if ( not ( WarcraftMaulLibrary_EnteringUnitIsCreep() ) ) then
 		return false
 	endif
 	if ( not ( LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 38 ) ) then
@@ -5706,7 +5793,7 @@ function OrangeTeleportDestCondition takes nothing returns boolean
 endfunction
 
 function LightblueTeleportDestCondition takes nothing returns boolean
-	if ( not ( ( WarcraftMaulLibrary_IsCreep(GetEnteringUnit()) ) ) ) then // INLINED!!
+	if ( not ( WarcraftMaulLibrary_EnteringUnitIsCreep() ) ) then
 		return false
 	endif
 	if ( not ( LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 47 ) ) then
@@ -5716,7 +5803,7 @@ function LightblueTeleportDestCondition takes nothing returns boolean
 endfunction
 
 function DarkgreenTeleportDestCondition takes nothing returns boolean
-	if ( not ( ( WarcraftMaulLibrary_IsCreep(GetEnteringUnit()) ) ) ) then // INLINED!!
+	if ( not ( WarcraftMaulLibrary_EnteringUnitIsCreep() ) ) then
 		return false
 	endif
 	if ( not ( LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 49 ) ) then
@@ -5726,7 +5813,7 @@ function DarkgreenTeleportDestCondition takes nothing returns boolean
 endfunction
 
 function YellowTeleportDestCondition takes nothing returns boolean
-	if ( not ( ( WarcraftMaulLibrary_IsCreep(GetEnteringUnit()) ) ) ) then // INLINED!!
+	if ( not ( WarcraftMaulLibrary_EnteringUnitIsCreep() ) ) then
 		return false
 	endif
 	if ( not ( LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 44 ) ) then
@@ -5736,7 +5823,7 @@ function YellowTeleportDestCondition takes nothing returns boolean
 endfunction
 
 function Yellow2TeleportDestCondition takes nothing returns boolean
-	if ( not ( ( WarcraftMaulLibrary_IsCreep(GetEnteringUnit()) ) ) ) then // INLINED!!
+	if ( not ( WarcraftMaulLibrary_EnteringUnitIsCreep() ) ) then
 		return false
 	endif
 	if ( not ( LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 45 ) ) then
@@ -5746,7 +5833,7 @@ function Yellow2TeleportDestCondition takes nothing returns boolean
 endfunction
 
 function RedTeleportDestCondition takes nothing returns boolean
-	if ( not ( ( WarcraftMaulLibrary_IsCreep(GetEnteringUnit()) ) ) ) then // INLINED!!
+	if ( not ( WarcraftMaulLibrary_EnteringUnitIsCreep() ) ) then
 		return false
 	endif
 	if ( not ( LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 35 ) ) then
@@ -5756,7 +5843,7 @@ function RedTeleportDestCondition takes nothing returns boolean
 endfunction
 
 function GreyTeleportCondition takes nothing returns boolean
-	if ( not ( ( WarcraftMaulLibrary_IsCreep(GetEnteringUnit()) ) ) ) then // INLINED!!
+	if ( not ( WarcraftMaulLibrary_EnteringUnitIsCreep() ) ) then
 		return false
 	endif
 	if ( not ( LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 34 ) ) then
@@ -5766,7 +5853,7 @@ function GreyTeleportCondition takes nothing returns boolean
 endfunction
 
 function GreenTeleportCondition takes nothing returns boolean
-	if ( not ( ( WarcraftMaulLibrary_IsCreep(GetEnteringUnit()) ) ) ) then // INLINED!!
+	if ( not ( WarcraftMaulLibrary_EnteringUnitIsCreep() ) ) then
 		return false
 	endif
 	if ( not ( LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 32 ) ) then
@@ -5776,7 +5863,7 @@ function GreenTeleportCondition takes nothing returns boolean
 endfunction
 
 function Green2CheckpointCondition takes nothing returns boolean
-	if ( not ( ( WarcraftMaulLibrary_IsCreep(GetEnteringUnit()) ) ) ) then // INLINED!!
+	if ( not ( WarcraftMaulLibrary_EnteringUnitIsCreep() ) ) then
 		return false
 	endif
 	if ( not ( LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 18 ) ) then
@@ -5794,7 +5881,7 @@ function Green2CheckpointAction takes nothing returns nothing
 endfunction
 
 function BrownCheckpointCondition takes nothing returns boolean
-	if ( not ( ( WarcraftMaulLibrary_IsCreep(GetEnteringUnit()) ) ) ) then // INLINED!!
+	if ( not ( WarcraftMaulLibrary_EnteringUnitIsCreep() ) ) then
 		return false
 	endif
 	if ( not ( LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 27 ) ) then
@@ -5808,7 +5895,7 @@ function BrownCheckpointAction takes nothing returns nothing
 endfunction
 
 function Brown2CheckpointCondition takes nothing returns boolean
-	if ( not ( ( WarcraftMaulLibrary_IsCreep(GetEnteringUnit()) ) ) ) then // INLINED!!
+	if ( not ( WarcraftMaulLibrary_EnteringUnitIsCreep() ) ) then
 		return false
 	endif
 	if ( not ( LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 28 ) ) then
@@ -5822,7 +5909,7 @@ function Brown2CheckpointAction takes nothing returns nothing
 endfunction
 
 function MaroonCheckpointCondition takes nothing returns boolean
-	if ( not ( ( WarcraftMaulLibrary_IsCreep(GetEnteringUnit()) ) ) ) then // INLINED!!
+	if ( not ( WarcraftMaulLibrary_EnteringUnitIsCreep() ) ) then
 		return false
 	endif
 	if ( not ( LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 29 ) ) then
@@ -5836,7 +5923,7 @@ function MaroonCheckpointAction takes nothing returns nothing
 endfunction
 
 function Maroon2CheckpointCondition takes nothing returns boolean
-	if ( not ( ( WarcraftMaulLibrary_IsCreep(GetEnteringUnit()) ) ) ) then // INLINED!!
+	if ( not ( WarcraftMaulLibrary_EnteringUnitIsCreep() ) ) then
 		return false
 	endif
 	if ( not ( LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 30 ) ) then
@@ -5850,7 +5937,7 @@ function Maroon2CheckpointAction takes nothing returns nothing
 endfunction
 
 function PurpleCheckpointCondition takes nothing returns boolean
-	if not ( ( WarcraftMaulLibrary_IsCreep(GetEnteringUnit()) ) ) then // INLINED!!
+	if not ( WarcraftMaulLibrary_EnteringUnitIsCreep() ) then
 		return false
 	endif
 
@@ -5866,7 +5953,7 @@ function PurpleCheckpointAction takes nothing returns nothing
 endfunction
 
 function Purple2CheckpointCondition takes nothing returns boolean
-	if not ( ( WarcraftMaulLibrary_IsCreep(GetEnteringUnit()) ) ) then // INLINED!!
+	if not ( WarcraftMaulLibrary_EnteringUnitIsCreep() ) then
 		return false
 	endif
 
@@ -5882,7 +5969,7 @@ function Purple2CheckpointAction takes nothing returns nothing
 endfunction
 
 function Darkgreen2CheckpointCondition takes nothing returns boolean
-	if not ( ( WarcraftMaulLibrary_IsCreep(GetEnteringUnit()) ) ) then // INLINED!!
+	if not ( WarcraftMaulLibrary_EnteringUnitIsCreep() ) then
 		return false
 	endif
 
@@ -5898,7 +5985,7 @@ function Darkgreen2CheckpointAction takes nothing returns nothing
 endfunction
 
 function GreyCheckpointCondition takes nothing returns boolean
-	if not ( ( WarcraftMaulLibrary_IsCreep(GetEnteringUnit()) ) ) then // INLINED!!
+	if not ( WarcraftMaulLibrary_EnteringUnitIsCreep() ) then
 		return false
 	endif
 	if not ( LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 21 ) then
@@ -5912,7 +5999,7 @@ function GreyCheckpointAction takes nothing returns nothing
 endfunction
 
 function Grey2CheckpointCondition takes nothing returns boolean
-	if not ( ( WarcraftMaulLibrary_IsCreep(GetEnteringUnit()) ) ) then // INLINED!!
+	if not ( WarcraftMaulLibrary_EnteringUnitIsCreep() ) then
 		return false
 	endif
 	if not ( LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 22 ) then
@@ -5926,7 +6013,7 @@ function Grey2CheckpointAction takes nothing returns nothing
 endfunction
 
 function LightblueCheckpointCondition takes nothing returns boolean
-	if not ( ( WarcraftMaulLibrary_IsCreep(GetEnteringUnit()) ) ) then // INLINED!!
+	if not ( WarcraftMaulLibrary_EnteringUnitIsCreep() ) then
 		return false
 	endif
 	if not ( LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 23 ) then
@@ -5940,7 +6027,7 @@ function LightblueCheckpointAction takes nothing returns nothing
 endfunction
 
 function Lightblue2CheckpointCondition takes nothing returns boolean
-	if not ( ( WarcraftMaulLibrary_IsCreep(GetEnteringUnit()) ) ) then // INLINED!!
+	if not ( WarcraftMaulLibrary_EnteringUnitIsCreep() ) then
 		return false
 	endif
 	if not ( LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 24 ) then
@@ -5954,7 +6041,7 @@ function Lightblue2CheckpointAction takes nothing returns nothing
 endfunction
 
 function DarkgreenCheckpointCondition takes nothing returns boolean
-	if not ( ( WarcraftMaulLibrary_IsCreep(GetEnteringUnit()) ) ) then // INLINED!!
+	if not ( WarcraftMaulLibrary_EnteringUnitIsCreep() ) then
 		return false
 	endif
 	if not ( LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 25 ) then
@@ -5968,7 +6055,7 @@ function DarkgreenCheckpointAction takes nothing returns nothing
 endfunction
 
 function PinkCheckpointCondition takes nothing returns boolean
-	if ( not ( ( WarcraftMaulLibrary_IsCreep(GetEnteringUnit()) ) ) ) then // INLINED!!
+	if ( not ( WarcraftMaulLibrary_EnteringUnitIsCreep() ) ) then
 		return false
 	endif
 	if ( not ( LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 19 ) ) then
@@ -5982,7 +6069,7 @@ function PinkCheckpointAction takes nothing returns nothing
 endfunction
 
 function PinkTeleportCondition takes nothing returns boolean
-	if ( not ( ( WarcraftMaulLibrary_IsCreep(GetEnteringUnit()) ) ) ) then // INLINED!!
+	if ( not ( WarcraftMaulLibrary_EnteringUnitIsCreep() ) ) then
 		return false
 	endif
 	if ( not ( LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 33 ) ) then
@@ -5992,7 +6079,7 @@ function PinkTeleportCondition takes nothing returns boolean
 endfunction
 
 function Pink2CheckpointCondition takes nothing returns boolean
-	if ( not ( ( WarcraftMaulLibrary_IsCreep(GetEnteringUnit()) ) ) ) then // INLINED!!
+	if ( not ( WarcraftMaulLibrary_EnteringUnitIsCreep() ) ) then
 		return false
 	endif
 	if ( not ( LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 20 ) ) then
@@ -6735,7 +6822,7 @@ function MoveEnumUnitBackToHisOwnSpawn takes nothing returns nothing
 endfunction
 
 function ChangeOwnershipOfDeniedPlayerTower takes nothing returns nothing
-	if ( udg_PlayerRestrictions[13 * GetPlayerId(GetTriggerPlayer()) + GetPlayerId(GetOwningPlayer(GetEnumUnit()))] ) then // INLINED!!
+	if IsPickedUnitOwnedByDeniedPlayer() then
 		if IsUnitType(GetEnumUnit(), UNIT_TYPE_STRUCTURE) then
 			if not ( IsUnitType(GetEnumUnit(), UNIT_TYPE_TOWNHALL) ) then
 				call SetUnitOwner(GetEnumUnit(), GetTriggerPlayer(), true)
@@ -6747,7 +6834,7 @@ function ChangeOwnershipOfDeniedPlayerTower takes nothing returns nothing
 endfunction
 
 function SellDeniedPlayerTower takes nothing returns nothing
-	if ( udg_PlayerRestrictions[13 * GetPlayerId(GetTriggerPlayer()) + GetPlayerId(GetOwningPlayer(GetEnumUnit()))] ) then // INLINED!!
+	if IsPickedUnitOwnedByDeniedPlayer() then
 		if IsUnitType(GetEnumUnit(), UNIT_TYPE_STRUCTURE) then
 			if not ( IsUnitType(GetEnumUnit(), UNIT_TYPE_TOWNHALL) ) then
 				call SellATower()
@@ -6777,7 +6864,7 @@ function DenyAllPlayers takes nothing returns nothing
 	loop
 		exitwhen i > 12
 		if ( i != GetPlayerId(GetTriggerPlayer()) ) then
-			set udg_PlayerRestrictions[13 * ( GetPlayerId(GetTriggerPlayer()) ) + ( i )]=( true ) // INLINED!!
+			call ChangeRestrictionOfPlayer(GetPlayerId(GetTriggerPlayer()) , i , true)
 		endif
 		set i=i + 1
 	endloop
@@ -6790,7 +6877,7 @@ function AllowAllPlayers takes nothing returns nothing
 	loop
 		exitwhen i > 12
 		if ( i != GetPlayerId(GetTriggerPlayer()) ) then
-			set udg_PlayerRestrictions[13 * ( GetPlayerId(GetTriggerPlayer()) ) + ( i )]=( false ) // INLINED!!
+			call ChangeRestrictionOfPlayer(GetPlayerId(GetTriggerPlayer()) , i , false)
 		endif
 		set i=i + 1
 	endloop
@@ -6801,7 +6888,7 @@ function AllowSpecificPlayer takes nothing returns nothing
  local integer playerid= GetPlayerIdFromColorName(colorname)
 	if ( playerid > - 1 ) then
 		if ( playerid != GetPlayerId(GetTriggerPlayer()) ) then
-			set udg_PlayerRestrictions[13 * ( GetPlayerId(GetTriggerPlayer()) ) + ( playerid )]=( false ) // INLINED!!
+			call ChangeRestrictionOfPlayer(GetPlayerId(GetTriggerPlayer()) , playerid , false)
 			call DisplayTimedTextToPlayer(GetTriggerPlayer(), 0, 0, 5, udg_PlayerColorCodes[playerid] + GetPlayerName(Player(playerid)) + "|r is now |cFF00FF00allowed|r to build in your spawn!")
 		else
 			call DisplayTimedTextToPlayer(GetTriggerPlayer(), 0, 0, 5, "You are already allowed to to build in this spawn")
@@ -6816,7 +6903,7 @@ function DenySpecificPlayer takes nothing returns nothing
  local integer playerid= GetPlayerIdFromColorName(colorname)
 	if ( playerid > - 1 ) then
 		if ( playerid != GetPlayerId(GetTriggerPlayer()) ) then
-			set udg_PlayerRestrictions[13 * ( GetPlayerId(GetTriggerPlayer()) ) + ( playerid )]=( true ) // INLINED!!
+			call ChangeRestrictionOfPlayer(GetPlayerId(GetTriggerPlayer()) , playerid , true)
 			call DisplayTimedTextToPlayer(GetTriggerPlayer(), 0, 0, 5, udg_PlayerColorCodes[playerid] + GetPlayerName(Player(playerid)) + "|r is now |cFFFF0000denied|r access to your spawn!")
 			call ChangeOwnershipOfAllDeniedAccessTowers(GetPlayerId(GetTriggerPlayer()))
 		else
@@ -7030,7 +7117,7 @@ function GetArrayIdFromItemSoldId takes nothing returns integer
 		return 12
 	elseif ( GetItemTypeId(GetSoldItem()) == 'I00D' ) then // Dranei Haven
 		return 13
-	elseif ( GetItemTypeId(GetSoldItem()) == 'I00E' ) then // Dragon Roost
+	elseif ( GetItemTypeId(GetSoldItem()) == 'I026' ) then // Dragons
 		return 14
 	elseif ( GetItemTypeId(GetSoldItem()) == 'I00F' ) then // Night Elf
 		return 15
@@ -7038,8 +7125,8 @@ function GetArrayIdFromItemSoldId takes nothing returns integer
 		return 17
 	elseif ( GetItemTypeId(GetSoldItem()) == 'I00I' ) then // Corrupted Night Elves
 		return 18
-	// elseif(GetItemTypeId(GetSoldItem()) == 'I00J')then // Goblin War Room
-	//	return 19
+	elseif ( GetItemTypeId(GetSoldItem()) == 'I00J' ) then // Goblins
+		return 19
 	elseif ( GetItemTypeId(GetSoldItem()) == 'I000' ) then // Caerbannog
 		return 21
 	elseif ( GetItemTypeId(GetSoldItem()) == 'I00L' ) then // Critters UNITE
@@ -7634,7 +7721,7 @@ function RemoveDeadCreeps takes nothing returns nothing
 	endif
 
 	if ( GetUnitAbilityLevel(GetKillingUnit(), 'A067') > 0 ) then
-		call BlzSetUnitBaseDamage(GetKillingUnitBJ(), ( BlzGetUnitBaseDamage(GetKillingUnitBJ(), 1) + 1 ), 1) // INLINED!!
+		call DevourEnemy()
 	endif
 	if ( GetUnitAbilityLevel(GetKillingUnit(), 'A02T') > 0 ) then
 		call RockGiantKill()
@@ -7793,6 +7880,16 @@ function GenericTowerAttackTrigger takes nothing returns nothing
 		call IssueTargetOrderBJ(GetAttacker(), "slow", GetAttackedUnitBJ())
 	elseif ( GetUnitTypeId(GetAttacker()) == 'n03I' ) then // Forest Troll High Priest
 		call CastSpellOnAttackedUnitLocation("monsoon")
+	elseif ( GetUnitTypeId(GetAttacker()) == 'o01M' ) then // Goblin Sapper
+		call IssueImmediateOrderBJ(GetAttacker(), "stomp")
+	elseif ( GetUnitTypeId(GetAttacker()) == 'o01O' ) then // Alchemist
+		call IssueTargetOrderBJ(GetAttacker(), "acidbomb", GetAttackedUnitBJ())
+	elseif ( GetUnitTypeId(GetAttacker()) == 'o00M' ) then // Bronze Dragon Whelp
+		call IssueTargetOrderBJ(GetAttacker(), "slow", GetAttackedUnitBJ())
+	elseif ( GetUnitTypeId(GetAttacker()) == 'o01F' ) then // Bronze Drake
+		call IssueTargetOrderBJ(GetAttacker(), "slow", GetAttackedUnitBJ())
+	elseif ( GetUnitTypeId(GetAttacker()) == 'o01K' ) then // Bronze Dragon
+		call IssueTargetOrderBJ(GetAttacker(), "slow", GetAttackedUnitBJ())
 	endif
 endfunction
 
@@ -8065,6 +8162,21 @@ function ContructionFinishedActions takes nothing returns nothing
 			call EnableTrigger(gg_trg_IceTrollJoker)
 		endif
 		set udg_IceTrollJoker=udg_IceTrollJoker + 1
+	elseif ( GetUnitTypeId(GetTriggerUnit()) == 'o01P' ) then
+		if udg_GoblinBlademaster == 0 then
+			call EnableTrigger(gg_trg_MirrorImageAttack)
+		endif
+		set udg_GoblinBlademaster=udg_GoblinBlademaster + 1
+	elseif ( GetUnitTypeId(GetTriggerUnit()) == 'o01R' ) then
+		if udg_GoblinMineLayer == 0 then
+			call EnableTrigger(gg_trg_GoblinMineLayer)
+		endif
+		set udg_GoblinMineLayer=udg_GoblinMineLayer + 1
+	elseif ( GetUnitTypeId(GetTriggerUnit()) == 'o01S' ) then
+		if udg_GoblinTinker == 0 then
+			call EnableTrigger(gg_trg_GoblinTinker)
+		endif
+		set udg_GoblinTinker=udg_GoblinTinker + 1
 	endif
 	if ( GetUnitAbilityLevel(GetTriggerUnit(), 'A031') > 0 ) then
 		call WarcraftMaulLibrary_AddToTickArray(GetTriggerUnit())
@@ -8626,7 +8738,7 @@ function TickTower takes nothing returns nothing
 	if ( GetUnitAbilityLevel(GetEnumUnit(), 'A09M') > 0 ) then
 		if LoadIntegerBJ(0, GetHandleIdBJ(GetEnumUnit()), udg_TowerTickTable) > 9 then
 			call SaveIntegerBJ(0, 0, GetHandleIdBJ(GetEnumUnit()), udg_TowerTickTable)
-			call BlzSetUnitBaseDamage(GetEnumUnit(), 14 + IMinBJ(30, R2I(0.10 * udg_VoidFragmentTotal[GetConvertedPlayerId(GetOwningPlayer(GetEnumUnit()))])), 1) // INLINED!!
+			call CultActivity()
 		else
 			call SaveIntegerBJ(LoadIntegerBJ(0, GetHandleIdBJ(GetEnumUnit()), udg_TowerTickTable) + 1, 0, GetHandleIdBJ(GetEnumUnit()), udg_TowerTickTable)
 		endif
@@ -8964,6 +9076,92 @@ function InitTrig_AlchemicalTransmutation takes nothing returns nothing
     call TriggerAddAction(gg_trg_AlchemicalTransmutation, function Trig_AlchemicalTransmutation_Actions)
 endfunction
 
+//===========================================================================
+// Trigger: GoblinMineLayer
+//===========================================================================
+function Trig_GoblinMineLayer_Conditions takes nothing returns boolean
+	if not ( GetUnitTypeId(udg_DamageEventSource) == 'o01R' ) then
+		return false
+	endif
+
+	if not ( GetUnitStateSwap(UNIT_STATE_MANA, udg_DamageEventSource) >= 15.00 ) then
+		return false
+	endif
+
+	return true
+endfunction
+
+function Trig_GoblinMineLayer_Actions takes nothing returns nothing
+ local unit mine=CreateUnit(GetOwningPlayer(udg_DamageEventSource), 'h013', GetUnitX(udg_DamageEventTarget), GetUnitY(udg_DamageEventTarget), bj_UNIT_FACING)
+	call SetUnitManaBJ(udg_DamageEventSource, ( GetUnitStateSwap(UNIT_STATE_MANA, udg_DamageEventSource) - 15.00 ))
+	call UnitApplyTimedLifeBJ(2.00, 'BTLF', mine)
+endfunction
+
+//===========================================================================
+function InitTrig_GoblinMineLayer takes nothing returns nothing
+    set gg_trg_GoblinMineLayer=CreateTrigger()
+    call TriggerRegisterVariableEvent(gg_trg_GoblinMineLayer, "udg_DamageEvent", EQUAL, 1.00)
+    call TriggerAddCondition(gg_trg_GoblinMineLayer, Condition(function Trig_GoblinMineLayer_Conditions))
+    call TriggerAddAction(gg_trg_GoblinMineLayer, function Trig_GoblinMineLayer_Actions)
+endfunction//===========================================================================
+// Trigger: MirrorImageAttack
+//===========================================================================
+function Trig_MirrorImageAttack_Conditions takes nothing returns boolean
+	if not ( GetUnitTypeId(udg_DamageEventSource) == 'o01P' ) then
+		return false
+	endif
+
+	if ( GetRandomInt(1, 100) > 8 ) then
+		return false
+	endif
+
+	return true
+endfunction
+
+function Trig_MirrorImageAttack_Actions takes nothing returns nothing
+ local unit dummy=CreateUnit(GetOwningPlayer(udg_DamageEventSource), 'u008', GetUnitX(udg_DamageEventSource), GetUnitY(udg_DamageEventSource), bj_UNIT_FACING)
+	call UnitAddAbilityBJ('A0D8', dummy) // MirrorImage
+	call IssueImmediateOrderBJ(dummy, "spiritwolf")
+	call UnitApplyTimedLifeBJ(10.00, 'BTLF', dummy)
+	set dummy=null
+endfunction
+
+//===========================================================================
+function InitTrig_MirrorImageAttack takes nothing returns nothing
+    set gg_trg_MirrorImageAttack=CreateTrigger()
+    call TriggerRegisterVariableEvent(gg_trg_MirrorImageAttack, "udg_DamageEvent", EQUAL, 1.00)
+    call TriggerAddCondition(gg_trg_MirrorImageAttack, Condition(function Trig_MirrorImageAttack_Conditions))
+    call TriggerAddAction(gg_trg_MirrorImageAttack, function Trig_MirrorImageAttack_Actions)
+endfunction//===========================================================================
+// Trigger: GoblinTinker
+//===========================================================================
+function Trig_GoblinTinker_Conditions takes nothing returns boolean
+	if not ( GetUnitTypeId(udg_DamageEventSource) == 'o01S' ) then
+		return false
+	endif
+
+	if ( GetRandomInt(1, 100) > 5 ) then
+		return false
+	endif
+
+	return true
+endfunction
+
+function Trig_GoblinTinker_Actions takes nothing returns nothing
+ local unit dummy=CreateUnit(GetOwningPlayer(udg_DamageEventSource), 'u008', GetUnitX(udg_DamageEventSource), GetUnitY(udg_DamageEventSource), bj_UNIT_FACING)
+	call UnitAddAbilityBJ('A0B9', dummy) // ClusterRockets
+	call IssuePointOrder(dummy, "clusterrockets", GetUnitX(udg_DamageEventTarget), GetUnitY(udg_DamageEventTarget))
+	call UnitApplyTimedLifeBJ(3.00, 'BTLF', dummy)
+	set dummy=null
+endfunction
+
+//===========================================================================
+function InitTrig_GoblinTinker takes nothing returns nothing
+    set gg_trg_GoblinTinker=CreateTrigger()
+    call TriggerRegisterVariableEvent(gg_trg_GoblinTinker, "udg_DamageEvent", EQUAL, 1.00)
+    call TriggerAddCondition(gg_trg_GoblinTinker, Condition(function Trig_GoblinTinker_Conditions))
+    call TriggerAddAction(gg_trg_GoblinTinker, function Trig_GoblinTinker_Actions)
+endfunction
 //===========================================================================
 // Trigger: BattleRoar
 //===========================================================================
@@ -9464,7 +9662,7 @@ endfunction
 function AncientNetherDragonAttackGroup takes nothing returns nothing
 	if ( WyvernAttackGroupCondition() ) then
 		call SetUnitLifeBJ(GetEnumUnit(), GetUnitStateSwap(UNIT_STATE_LIFE, GetEnumUnit()) - 550)
-		call DestroyEffect(AddSpecialEffect("Abilities\\Spells\\Undead\\DarkRitual\\DarkRitualCaster.mdl", GetUnitX(GetEnumUnit()), GetUnitY(GetEnumUnit()))) // INLINED!!
+		call EnumUnitLocationSpecialEffect()
 	endif
 endfunction
 
@@ -11217,58 +11415,13 @@ function InitTrig_Void_Fragment_Spend takes nothing returns nothing
 endfunction
 
 //===========================================================================
-// Trigger: SiphonEnergy
-//===========================================================================
-function Trig_SiphonEnergy_Conditions takes nothing returns boolean
-	return GetSpellAbilityId() == 'A0CT'
-endfunction
-
-function CheckForCombination takes integer trigType,integer targType,integer typeOne,integer typeTwo returns boolean
-	if GetBooleanOr(trigType == typeOne, targType == typeOne) then
-		if GetBooleanOr(trigType == typeTwo, targType == typeTwo) then
-			return true
-		endif
-	endif
-
-	return false
-endfunction
-
-function Trig_SiphonEnergy_Actions takes nothing returns nothing
- local unit trig= GetTriggerUnit()
- local unit targ= GetSpellTargetUnit()
- local integer trigType= GetUnitTypeId(trig)
- local integer targType= GetUnitTypeId(targ)
-
-	if CheckForCombination(trigType , targType , 'n025' , 'n024') then // Life + Death
-		call ReplaceUnitBJ(trig, 'n026', bj_UNIT_STATE_METHOD_DEFAULTS)
-		call ReplaceUnitBJ(targ, 'n027', bj_UNIT_STATE_METHOD_DEFAULTS)
-	elseif CheckForCombination(trigType , targType , 'n01S' , 'n024') then // Fire + Death
-		call ReplaceUnitBJ(trig, 'n028', bj_UNIT_STATE_METHOD_DEFAULTS)
-		call ReplaceUnitBJ(targ, 'n027', bj_UNIT_STATE_METHOD_DEFAULTS)
-	elseif CheckForCombination(trigType , targType , 'n01R' , 'n024') then // Water + Death
-		call ReplaceUnitBJ(trig, 'n030', bj_UNIT_STATE_METHOD_DEFAULTS)
-		call ReplaceUnitBJ(targ, 'n027', bj_UNIT_STATE_METHOD_DEFAULTS)
-	endif
-
-	set trig=null
-	set targ=null
-endfunction
-
-//===========================================================================
-function InitTrig_SiphonEnergy takes nothing returns nothing
-    set gg_trg_SiphonEnergy=CreateTrigger()
-    call TriggerRegisterAnyUnitEventBJ(gg_trg_SiphonEnergy, EVENT_PLAYER_UNIT_SPELL_EFFECT)
-    call TriggerAddCondition(gg_trg_SiphonEnergy, Condition(function Trig_SiphonEnergy_Conditions))
-    call TriggerAddAction(gg_trg_SiphonEnergy, function Trig_SiphonEnergy_Actions)
-endfunction
-
-//===========================================================================
 function InitCustomTriggers takes nothing returns nothing
     call InitTrig_Unit_Indexer()
     call InitTrig_Damage_Engine_Config()
     call InitTrig_Damage_Engine()
     //Function not found: call InitTrig_WarcraftMaulLibrary()
     //Function not found: call InitTrig_MapInit()
+    call InitTrig_SiphonEnergy()
     call InitTrig_UnchargedRune()
     call InitTrig_AntiBlockAndJuggle()
     call InitTrig_DifficultyVoteSystem()
@@ -11292,6 +11445,9 @@ function InitCustomTriggers takes nothing returns nothing
     call InitTrig_Infuse()
     call InitTrig_Sacrifice()
     call InitTrig_AlchemicalTransmutation()
+    call InitTrig_GoblinMineLayer()
+    call InitTrig_MirrorImageAttack()
+    call InitTrig_GoblinTinker()
     call InitTrig_BattleRoar()
     call InitTrig_DrunkenHaze()
     call InitTrig_SacrificeDamage()
@@ -11355,7 +11511,6 @@ function InitCustomTriggers takes nothing returns nothing
     call InitTrig_Void_Fragment_Ability()
     call InitTrig_Void_Fragment_Tick()
     call InitTrig_Void_Fragment_Spend()
-    call InitTrig_SiphonEnergy()
 endfunction
 
 //===========================================================================
@@ -11496,10 +11651,10 @@ function InitTechTree takes nothing returns nothing
     call InitTechTree_Player3()
     call InitTechTree_Player4()
     call InitTechTree_Player5()
-    call SetPlayerTechMaxAllowed(Player(6), 'ostr', 0) // INLINED!!
-    call SetPlayerTechMaxAllowed(Player(7), 'ostr', 0) // INLINED!!
-    call SetPlayerTechMaxAllowed(Player(8), 'ostr', 0) // INLINED!!
-    call SetPlayerTechMaxAllowed(Player(11), 'ostr', 0) // INLINED!!
+    call InitTechTree_Player6()
+    call InitTechTree_Player7()
+    call InitTechTree_Player8()
+    call InitTechTree_Player11()
 endfunction
 
 //***************************************************************************
@@ -12063,13 +12218,8 @@ function main takes nothing returns nothing
     call InitUpgrades()
     call InitTechTree()
     call CreateAllDestructables()
+    call CreateAllUnits()
     call InitBlizzard()
-
-
-
-
-
-
 
 
     call InitGlobals()
@@ -12111,21 +12261,6 @@ function config takes nothing returns nothing
     call InitCustomTeams()
     call InitAllyPriorities()
 endfunction
-
-
-
-
-//Struct method generated initializers/callers:
-
-
-
-
-//Struct method generated initializers/callers:
-
-
-
-
-//Struct method generated initializers/callers:
 
 
 
