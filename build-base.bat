@@ -18,18 +18,7 @@ set blizzard=%jasshelperdir%\\Blizzard.j
 echo Compiling jass...
 %toolsdir%\\JassHelper\\clijasshelper.exe %common% %blizzard% %tempdir%\\out.w3x
 
-echo Adding patched jass and rebuilding...
-%toolsdir%\\MPQEditor.exe extract %tempdir%\\out.w3x war3map.j temp
-%toolsdir%\\sed.exe -i "1s/^/\/\/! import \"scripts\/imports.j\"\n/" temp/war3map.j 
-
-echo Recompiling jass...
-%toolsdir%\\JassHelper\\clijasshelper.exe %common% %blizzard% %tempdir%\\war3map.j %tempdir%\\out.w3x
-
-echo Extracting from out.w3x...
-%toolsdir%\\MPQEditor.exe extract %tempdir%\\out.w3x war3map.j temp
-
 echo Cleaning up...
-move temp\\out.w3x .
-move temp\\war3map.j lastrig.j
+move temp\\out.w3x base.w3x
 rd /s /q temp
 echo Done!
