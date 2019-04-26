@@ -51,7 +51,7 @@ function GetArrayIdFromItemSoldId takes nothing returns integer
 		return 27
 	elseif(GetItemTypeId(GetSoldItem()) == 'I00R')then // Ice Troll Hut
 		return 28
-	elseif(GetItemTypeId(GetSoldItem()) == 'I00T')then // Temple Of The Damned
+	elseif(GetItemTypeId(GetSoldItem()) == 'I00T')then // Forsaken
 		return 30
 	elseif(GetItemTypeId(GetSoldItem()) == 'I00U')then // Dwarven Mine
 		return 31
