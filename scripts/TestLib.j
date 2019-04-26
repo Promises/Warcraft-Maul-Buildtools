@@ -1,8 +1,10 @@
-library TestLib
+library TestLib requires Utility
 
 
 
     private function setUpHybrid takes nothing returns nothing
+         call Utility_DisplayMessageToAllPlayers("Welcome to Warcraft Maul Reimagined")
+         call Utility_DisplayMessageToAllPlayers("This is build: 53, built Apr 18 2019.")
          //========== TIER: One
          set udg_TierOneTowers[0] = 'h00Z' // [Dragons]Dragonkin
          set udg_TierOneTowers[1] = 'h011' // [Goblins] Pocket Factory

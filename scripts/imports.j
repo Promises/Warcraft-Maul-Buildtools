@@ -1,10 +1,11 @@
 // Imports start
-//! import "Utility.j"
-//! import "TestLib.j"
-//! import "Quests.j"
+//! import vjass "Utility.j"
+//! import vjass "Quests.j"
+//! import vjass "TestLib.j"
+
 
 
 // Imports end
 
 // needs to be at the bottom
-//! import "main.j"
+//! import vjass "main.j"
