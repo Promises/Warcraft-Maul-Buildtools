@@ -1,5 +1,15 @@
 #!/bin/bash
 
+currentWINEdir="Z:\\$(pwd | sed 's#/#\\#g'  )"
+toolsDir="$currentWINEdir\\BuildFiles"
+mapfilesdir=$currentWINEdir//mapfiles
+tempdir=$currentWINEdir\\temp
+
+
+jasshelperdir=$toolsDir\\JassHelper
+common=$jasshelperdir\\common.j
+blizzard=$jasshelperdir\\Blizzard.j
+
 echo "Recompiling jass.."
 WINEDEBUG=-all wine "$toolsDir\\JassHelper\\clijasshelper.exe" "$common" "$blizzard" "$tempdir\\war3map.j" "$tempdir\\out.w3x"
 
