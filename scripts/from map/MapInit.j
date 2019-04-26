@@ -1213,7 +1213,7 @@ public function InitializeVariables takes nothing returns nothing
 	set udg_RaceArray[27]='n046' // Forest Troll Hut
 	set udg_RaceArray[28]='n014' // Ice Troll Hut
 	set udg_RaceArray[29]='n03W' // Dark Troll Hut
-	set udg_RaceArray[30]='n04I' // Temple Of The Damned
+	set udg_RaceArray[30]='n04I' // Forsaken
 	set udg_RaceArray[31]='e00H' // Dwarven Mine
 	set udg_RaceArray[32]='e00G' // Galaxy
 	set udg_RaceArray[33]='h02T' // Void
@@ -1251,7 +1251,7 @@ public function InitializeVariables takes nothing returns nothing
 	set udg_RaceNameArray[27] = "Forest Troll Hut"
 	set udg_RaceNameArray[28] = "Ice Troll Hut"
 	set udg_RaceNameArray[29] = "Dark Troll Hut"
-	set udg_RaceNameArray[30] = "Temple of the Damned"
+	set udg_RaceNameArray[30] = "The Forsaken"
 	set udg_RaceNameArray[31] = "Dwarven Mine"
 	set udg_RaceNameArray[32] = "Galaxy"
 	set udg_RaceNameArray[33] = "Void Cult"
