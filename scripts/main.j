@@ -9,7 +9,6 @@
     call InitUpgrades()
     call InitTechTree()
     call CreateAllDestructables()
-    call CreateAllUnits()
     call InitBlizzard()
 
     //! dovjassinit
