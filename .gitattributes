@@ -3,3 +3,4 @@
 
 *.j text eol=crlf
 ./mapfiles/* text eol=crlf
+./scripts/* text eol=lf

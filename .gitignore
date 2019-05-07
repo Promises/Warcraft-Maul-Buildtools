@@ -5,3 +5,7 @@ out.w3x
 lastrig.j
 /base.w3x
 .DS_Store
+.idea
+units.json
+scripts/Quests.j
+scripts/TestLib.j
