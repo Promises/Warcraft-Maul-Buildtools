@@ -28,6 +28,7 @@ def get_all_quests():
     quest_list = list()
     files = os.listdir('scripts/Quests')
     files = [file for file in files if '.md' in file]
+    files = sorted(files)
     for f in files:
         with open(os.path.join('scripts/Quests', f)) as file:
             lines = file.read().splitlines()
@@ -87,7 +88,7 @@ def get_all_quests():
 
 
 def create_quest(title, icon, type, body, number, quest_list):
-    s = '/n'
+    s = '\\n'
     if len(s.join(body)) >= 1100:
         q_a, q_b = split_quest(body)
         number[0] += 1
