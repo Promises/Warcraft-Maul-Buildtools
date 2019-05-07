@@ -89,7 +89,7 @@ def get_all_quests():
 
 def create_quest(title, icon, type, body, number, quest_list):
     s = '\\n'
-    if len(s.join(body)) >= 1100:
+    if len(s.join(body)) >= 1000:
         q_a, q_b = split_quest(body)
         number[0] += 1
         create_quest(title, icon, type, q_a, number, quest_list)
@@ -103,13 +103,14 @@ def create_quest(title, icon, type, body, number, quest_list):
 
 
 def split_quest(quest_body):
+
     indices = [i for i, x in enumerate(quest_body) if x.find('Updates') != -1]
-    if len(indices) > 1:
+    if len(indices) >= 2:
         q_a = quest_body[indices[0]:indices[1]]
         q_b = quest_body[indices[1]:]
         return q_a, q_b
     else:
-        half = len(quest_body)
+        half = int(len(quest_body) / 2)
         q_a = quest_body[0:half]
         q_b = [q_a[0]]
         q_b = q_b + quest_body[half:]
