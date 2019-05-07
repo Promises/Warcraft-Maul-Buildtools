@@ -146,7 +146,7 @@ def main():
 
     builders = dict()
 
-    weeiz = ['e00I', 'e001']
+    weeiz = ['e00I']
 
     numbers = ['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight',
                'Nine']
