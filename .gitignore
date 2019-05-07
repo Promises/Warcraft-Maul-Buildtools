@@ -7,5 +7,5 @@ lastrig.j
 .DS_Store
 .idea
 units.json
-./scripts/Quests.j
-./scripts/TestLib.j
+scripts/Quests.j
+scripts/TestLib.j
