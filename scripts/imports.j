@@ -9,4 +9,3 @@
 
 // needs to be at the bottom
 //! import vjass "main.j"
-//! import vjass "config.j"

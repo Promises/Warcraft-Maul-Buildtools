@@ -140,14 +140,8 @@ def get_buildnum_with_date(spacer):
                               buildnum, x.strftime("%b %d %Y")))
 
 
-    config = list()
 
-    with open('scripts/config.j') as f:
-        config = f.read().splitlines()
-    config[1] = '    call SetMapName("TestMap WcMaul Reimagined '+buildnum+'")'
-    with open('scripts/config.j', 'w') as f:
-        for item in config:
-            f.write("%s\n" % item)
+
     return generated_list
 
 
