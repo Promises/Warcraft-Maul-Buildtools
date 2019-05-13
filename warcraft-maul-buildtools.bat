@@ -23,7 +23,7 @@ echo Adding patched jass and rebuilding...
 %toolsdir%\\sed.exe -i "1s/^/\/\/! import \"scripts\/imports.j\"\n/" temp/war3map.j 
 
 %toolsdir%\\Warcraft-Maul-Race-Parser mapfiles/Units/ units.json
-python3 GenerateHybrid.py
+py -3 GenerateHybrid.py
 
 echo Recompiling jass...
 %toolsdir%\\JassHelper\\clijasshelper.exe %common% %blizzard% %tempdir%\\war3map.j %tempdir%\\out.w3x
