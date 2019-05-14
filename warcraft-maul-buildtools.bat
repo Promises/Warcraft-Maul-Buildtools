@@ -1,13 +1,12 @@
 @echo off
 
 echo Starting build
-set toolsdir=%cd%\\BuildFiles
-set mapfilesdir=%cd%\\mapfiles
-
+set toolsdir=BuildFiles
+set mapfilesdir=mapfiles
 echo Creating temp map...
 md temp
 copy "BuildFiles\\base.w3x" "temp\\out.w3x"
-set tempdir=%cd%\\temp
+set tempdir=temp
 
 echo Adding files to map...
 %toolsdir%\\MPQEditor.exe add %tempdir%\\out.w3x %mapfilesdir%\\* /c /auto /r
@@ -36,3 +35,4 @@ move temp\\out.w3x .
 move temp\\war3map.j lastrig.j
 rd /s /q temp
 echo Done!
+pause
