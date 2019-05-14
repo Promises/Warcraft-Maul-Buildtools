@@ -1,5 +1,6 @@
-trigger gg_trg_Voids_Fragment_Tick= null
-
+globals
+	trigger gg_trg_Voids_Fragment_Tick= null
+endglobals
 
 library Utility
 	public function DisplayMessageToPlayer takes string msg, integer playerid returns nothing
