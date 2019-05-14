@@ -1,7 +1,10 @@
 //===========================================================================
 // Trigger: Quests
 //===========================================================================
-function InitializeQuests takes nothing returns nothing
+library QuestLib initializer Init
+
+
+private function InitializeQuests takes nothing returns nothing
 
 	{{GENERATE}}
 
@@ -12,8 +15,18 @@ function InitializeQuests takes nothing returns nothing
 endfunction
 
 //===========================================================================
-function InitTrig_Quests takes nothing returns nothing
+private function InitTrig_Quests takes nothing returns nothing
 	set udg_trigger46=CreateTrigger()
 	call TriggerRegisterTimerEventSingle(udg_trigger46, 1.00)
 	call TriggerAddAction(udg_trigger46, function InitializeQuests)
 endfunction
+
+private function Init takes nothing returns nothing
+    // This will be executed in map initialization, or near it :P
+	call InitializeQuests()
+endfunction
+
+
+endlibrary
+
+

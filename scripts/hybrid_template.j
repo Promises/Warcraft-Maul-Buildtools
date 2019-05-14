@@ -1,4 +1,4 @@
-library TestLib requires Utility
+library TestLib initializer Init requires Utility
 
 
 
