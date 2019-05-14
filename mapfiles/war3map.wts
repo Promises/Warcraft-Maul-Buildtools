@@ -383,9 +383,9 @@ X
 }
 
 STRING 64
-// Items: I024 (The Elementalists), Ubertip (Tooltip - Extended)
+// Buffs/Effects: B02O ([The Unique] Darkness (Buff)), EditorName (Name (Editor Only))
 {
-|cFFFF4933Advanced race|r|n|cffffcc00Damage Types:|r None|n|cffffcc00Towers:|r 1|n|cffffcc00Traits:|r Has one tower that turns into different elements that can then be combined to create new towers.
+[The Unique] Darkness (Buff)
 }
 
 STRING 65
@@ -416,40 +416,1295 @@ STRING 69
 Information
 }
 
-STRING 101
-// Items: I00C (Arachnid Hive [Geno]), Hotkey (Hotkey)
+STRING 70
+// Buffs/Effects: B02O ([The Unique] Darkness (Buff)), Bufftip (Tooltip)
 {
-D
+Darkness
 }
 
-STRING 113
-// Items: I005 (Outland), Hotkey (Hotkey)
+STRING 71
+// Buffs/Effects: B02O ([The Unique] Darkness (Buff)), Buffubertip (Tooltip - Extended)
 {
-A
+This unit only sees darkness; it takes extra damage and will explode on death.
 }
 
-STRING 124
-// Items: I00R (Ice Troll Hut), Hotkey (Hotkey)
+STRING 73
+// Items: I000 (Caerbannog), Name (Name)
 {
-C
+Caerbannog
 }
 
-STRING 178
+STRING 74
+// Items: I00Q (Cavernous Creatures [Geno]), Hotkey (Hotkey)
+{
+F
+}
+
+STRING 75
 // Items: I001 (Demon Portal [Geno]), Hotkey (Hotkey)
 {
 R
 }
 
-STRING 271
-// Items: I00S (High Elves), Hotkey (Hotkey)
+STRING 76
+// Items: I002 (Undead Necropolis), Name (Name)
+{
+Undead Necropolis
+}
+
+STRING 77
+// Items: I003 (Aviaries), Name (Name)
+{
+Aviaries
+}
+
+STRING 78
+// Items: I005 (Outland), Hotkey (Hotkey)
+{
+A
+}
+
+STRING 79
+// Items: I006 (Human Town Hall), Name (Name)
+{
+Human Town Hall
+}
+
+STRING 80
+// Items: I002 (Undead Necropolis), Hotkey (Hotkey)
+{
+Q
+}
+
+STRING 81
+// Items: I009 (Giants), Name (Name)
+{
+Giants
+}
+
+STRING 82
+// Items: I009 (Giants), Hotkey (Hotkey)
+{
+R
+}
+
+STRING 83
+// Items: I00D (Draenei Haven [Geno]), Hotkey (Hotkey)
+{
+S
+}
+
+STRING 84
+// Items: I00C (Arachnid Hive [Geno]), Hotkey (Hotkey)
+{
+D
+}
+
+STRING 85
+// Items: I00U (Dwarven Mine), Hotkey (Hotkey)
+{
+S
+}
+
+STRING 86
+// Items: I00G (Shrine of Ultron [DISABLED]), Hotkey (Hotkey)
+{
+D
+}
+
+STRING 87
+// Items: I00H (Tavern), Name (Name)
+{
+Tavern
+}
+
+STRING 88
+// Items: I00H (Tavern), Hotkey (Hotkey)
+{
+A
+}
+
+STRING 89
+// Items: I00I (Corrupted Night Elves), Name (Name)
+{
+Corrupted Night Elves
+}
+
+STRING 90
+// Items: I00K (Hero's Altar [DISABLED]), Hotkey (Hotkey)
+{
+E
+}
+
+STRING 91
+// Items: I00L (Critters [Geno]), Hotkey (Hotkey)
+{
+D
+}
+
+STRING 92
+// Items: I00M (Gnoll Republic), Name (Name)
+{
+Gnoll Republic
+}
+
+STRING 93
+// Items: I00N (Angel's Gateway), Name (Name)
+{
+Angel's Gateway
+}
+
+STRING 94
+// Items: I00N (Angel's Gateway), Hotkey (Hotkey)
+{
+R
+}
+
+STRING 95
+// Items: I00O (Forest Troll Hut), Name (Name)
+{
+Forest Troll Hut
+}
+
+STRING 96
+// Items: I00O (Forest Troll Hut), Hotkey (Hotkey)
+{
+E
+}
+
+STRING 97
+// Items: I00P (Alliance of Blades), Name (Name)
+{
+Alliance of Blades
+}
+
+STRING 98
+// Items: I006 (Human Town Hall), Hotkey (Hotkey)
+{
+Q
+}
+
+STRING 99
+// Items: I00E (Dragons), Hotkey (Hotkey)
+{
+F
+}
+
+STRING 100
+// Items: I00R (Ice Troll Hut), Name (Name)
+{
+Ice Troll Hut
+}
+
+STRING 101
+// Abilities: A07L ( Allow 07 - Green), Hotkey (Hotkey - Normal)
+{
+D
+}
+
+STRING 102
+// Items: I00R (Ice Troll Hut), Hotkey (Hotkey)
+{
+C
+}
+
+STRING 103
+// Items: I00S (High Elves [DISABLED]), Hotkey (Hotkey)
 {
 W
 }
 
-STRING 278
+STRING 104
+// Items: I00T (The Forsaken), Hotkey (Hotkey)
+{
+W
+}
+
+STRING 105
+// Items: I00U (Dwarven Mine), Name (Name)
+{
+Dwarven Mine
+}
+
+STRING 106
+// Abilities: A07J ( Allow 06 - Orange), Hotkey (Hotkey - Normal)
+{
+S
+}
+
+STRING 107
+// Items: I00W (Hardcore Random), Hotkey (Hotkey)
+{
+X
+}
+
+STRING 108
+// Items: I00Z (Galaxy), Name (Name)
+{
+Galaxy
+}
+
+STRING 109
+// Items: I00Z (Galaxy), Hotkey (Hotkey)
+{
+W
+}
+
+STRING 110
+// Items: I01A (Workers Union [Geno]), Hotkey (Hotkey)
+{
+A
+}
+
+STRING 111
+// Items: I025 (High Elf Farm), Hotkey (Hotkey)
+{
+X
+}
+
+STRING 112
+// Items: I00J (Goblins), Hotkey (Hotkey)
+{
+X
+}
+
+STRING 113
+// Items: I027 (Uniques [Geno]), Hotkey (Hotkey)
+{
+A
+}
+
+STRING 114
+// Abilities: A07K ( Allow 08 - Pink), Hotkey (Hotkey - Normal)
+{
+F
+}
+
+STRING 115
+// Items: I00P (Alliance of Blades), Hotkey (Hotkey)
+{
+Q
+}
+
+STRING 116
+// Items: I024 (The Elementalists), Hotkey (Hotkey)
+{
+E
+}
+
+STRING 117
+// Abilities: A001 (Blood Aura), EditorSuffix (Editor Suffix)
+{
+Chaos Pool
+}
+
+STRING 118
+// Abilities: A002 (Forked Lightning ), EditorSuffix (Editor Suffix)
+{
+Lady Vashj
+}
+
+STRING 119
+// Abilities: A004 (Bloodlust), EditorSuffix (Editor Suffix)
+{
+Chaos Warlock
+}
+
+STRING 120
+// Abilities: A007 (Crushing Wave), EditorSuffix (Editor Suffix)
+{
+Royal Guard
+}
+
+STRING 122
+// Abilities: A00A (Storm Hammers), EditorSuffix (Editor Suffix)
+{
+Gryphon Rider
+}
+
+STRING 123
+// Abilities: A00B (Ensnare), EditorSuffix (Editor Suffix)
+{
+Chaos Raider
+}
+
+STRING 124
+// Abilities: A07M ( Allow 11 - Dark Green), Hotkey (Hotkey - Normal)
+{
+C
+}
+
+STRING 125
+// Abilities: A00E (Teleport), Name (Name)
+{
+Teleport
+}
+
+STRING 127
+// Abilities: A00G (Slam), EditorSuffix (Editor Suffix)
+{
+Sea Giant
+}
+
+STRING 128
+// Abilities: A00H (Unholy Fire), EditorSuffix (Editor Suffix)
+{
+Chaos Shrine
+}
+
+STRING 129
+// Abilities: A00K (Command Aura), EditorSuffix (Editor Suffix)
+{
+Chaos Kodo Beast
+}
+
+STRING 130
+// Abilities: A00L (Bladestorm), EditorSuffix (Editor Suffix)
+{
+Blademaster
+}
+
+STRING 131
+// Abilities: A00O (Inventory), EditorSuffix (Editor Suffix)
+{
+ (1)
+}
+
+STRING 132
+// Abilities: A00P (Cripple), EditorSuffix (Editor Suffix)
+{
+Super Slowing Demon
+}
+
+STRING 133
+// Abilities: A01C (Goblin Mecha Transformation), Hotkey (Hotkey - Normal)
+{
+L
+}
+
+STRING 134
+// Abilities: A01G (Gods Plague), Hotkey (Hotkey - Normal)
+{
+G
+}
+
+STRING 135
+// Abilities: A025 (Starfall), Hotkey (Hotkey - Normal)
+{
+X
+}
+
+STRING 136
+// Items: I00I (Corrupted Night Elves), Hotkey (Hotkey)
+{
+Z
+}
+
+STRING 137
+// Items: I00M (Gnoll Republic), Hotkey (Hotkey)
+{
+Z
+}
+
+STRING 138
+// Items: I026 (Shrine of Buffs), Hotkey (Hotkey)
+{
+Q
+}
+
+STRING 139
+// Items: I00V (Random), Hotkey (Hotkey)
+{
+Z
+}
+
+STRING 140
+// Abilities: A006 (Cold Fury), Hotkey (Hotkey - Normal)
+{
+Z
+}
+
+STRING 141
+// Abilities: A04W (Artifact Curse), EditorSuffix (Editor Suffix)
+{
+ (Unholy Aura)
+}
+
+STRING 142
+// Abilities: A03V (Assertiveness Training), Hotkey (Hotkey - Normal)
+{
+Q
+}
+
+STRING 143
+// Abilities: A07C (Summon Companion), EditorSuffix (Editor Suffix)
+{
+ (Sir Galahad the Pure)
+}
+
+STRING 144
+// Abilities: A07E ( Allow 03 - Teal), Hotkey (Hotkey - Normal)
+{
+E
+}
+
+STRING 145
+// Abilities: A07F ( Allow 05 - Yellow), Hotkey (Hotkey - Normal)
+{
+A
+}
+
+STRING 146
+// Abilities: A00F (Entangle), Hotkey (Hotkey - Normal)
+{
+Z
+}
+
+STRING 147
+// Abilities: A07I ( Allow 04 - Purple), Hotkey (Hotkey - Normal)
+{
+R
+}
+
+STRING 148
+// Abilities: A07V ( Deny 06 - Orange), Hotkey (Hotkey - Normal)
+{
+S
+}
+
+STRING 149
+// Abilities: A07X ( Deny 08 - Pink), Hotkey (Hotkey - Normal)
+{
+F
+}
+
+STRING 150
+// Abilities: A07W ( Deny 07 - Green), Hotkey (Hotkey - Normal)
+{
+D
+}
+
+STRING 151
+// Abilities: A080 ( Deny 11 - Dark Green), Hotkey (Hotkey - Normal)
+{
+C
+}
+
+STRING 152
+// Abilities: A078 (Dazzle), Hotkey (Hotkey - Normal)
+{
+Q
+}
+
+STRING 153
+// Abilities: A07O ( Allow 10 - Light Blue), Hotkey (Hotkey - Normal)
+{
+X
+}
+
+STRING 154
+// Abilities: A07N ( Allow 01 - Red), Hotkey (Hotkey - Normal)
+{
+Q
+}
+
+STRING 155
+// Abilities: A07Q ( Allow 02 - Blue), Hotkey (Hotkey - Normal)
+{
+W
+}
+
+STRING 156
+// Abilities: A07R ( Deny 02 - Blue), Hotkey (Hotkey - Normal)
+{
+W
+}
+
+STRING 157
+// Abilities: A07S ( Deny 03 - Teal), Hotkey (Hotkey - Normal)
+{
+E
+}
+
+STRING 158
+// Abilities: A07T ( Deny 04 - Purple), Hotkey (Hotkey - Normal)
+{
+R
+}
+
+STRING 159
+// Abilities: A07U ( Deny 05 - Yellow), Hotkey (Hotkey - Normal)
+{
+A
+}
+
+STRING 163
+// Abilities: A015 (Poison Arrows), Hotkey (Hotkey - Normal)
+{
+Z
+}
+
+STRING 164
+// Abilities: A07Z ( Deny 10 - Light Blue), Hotkey (Hotkey - Normal)
+{
+X
+}
+
+STRING 165
+// Abilities: A0AZ ([Orc Stronghold] Summon Hawk), Researchhotkey (Hotkey - Learn)
+{
+C
+}
+
+STRING 166
+// Abilities: A015 (Poison Arrows), Unhotkey (Hotkey - Turn Off)
+{
+Z
+}
+
+STRING 167
+// Abilities: A026 (Chain Lightning), Hotkey (Hotkey - Normal)
+{
+Z
+}
+
+STRING 168
+// Abilities: A03A (Transfuse), Hotkey (Hotkey - Normal)
+{
+Z
+}
+
+STRING 169
+// Abilities: A03F (Weak Enchantment), Hotkey (Hotkey - Normal)
+{
+Z
+}
+
+STRING 170
+// Abilities: A07P ( Deny 01 - Red), Hotkey (Hotkey - Normal)
+{
+Q
+}
+
+STRING 171
+// Abilities: A09Z ([Workers Union] Angry, Angry Workers), Unhotkey (Hotkey - Turn Off)
+{
+Q
+}
+
+STRING 172
+// Abilities: A0A7 (Infuse), Hotkey (Hotkey - Normal)
+{
+X
+}
+
+STRING 173
+// Abilities: A03L (Starfall), Hotkey (Hotkey - Normal)
+{
+Z
+}
+
+STRING 174
+// Abilities: A03P (Monsoon), Hotkey (Hotkey - Normal)
+{
+Z
+}
+
+STRING 175
+// Abilities: A0AX ([Orc Stronghold] Summon Huffer), Hotkey (Hotkey - Normal)
+{
+X
+}
+
+STRING 176
+// Abilities: A0AZ ([Orc Stronghold] Summon Hawk), Hotkey (Hotkey - Normal)
+{
+C
+}
+
+STRING 177
+// Abilities: A0BK ([Void Cult] Summon Void Monstrosity), Hotkey (Hotkey - Normal)
+{
+C
+}
+
+STRING 179
+// Abilities: A03R (Berserk), Hotkey (Hotkey - Normal)
+{
+Z
+}
+
+STRING 180
+// Abilities: A0BB ([Void Cult] Summon Void Being), Ubertip (Tooltip - Normal - Extended)
+{
+|cffffcc00Void Fragment Cost:|r 100
+|cffffcc00Health:|r 600
+|cffffcc00Attack:|r Chaos
+|cffffcc00Cooldown:|r 1.00
+|cffffcc00Damage:|r 100 - 200
+|cffffcc00Range:|r 800
+|cffffcc00Ability:|r Splash; the area of effect is 250
+|cffffcc00Ability (2):|r Void Siphon; this tower restores 5 health for each enemy damaged by its attack
+|cffffcc00Ability (3):|r Void Decay; this unit is slowing decaying back into the void it will lose 20 health per second as long as its alive
+}
+
+STRING 181
+// Abilities: A0BJ ([Void Cult] Summon Void Beast), Ubertip (Tooltip - Normal - Extended)
+{
+|cffffcc00Void Fragment Cost:|r 400
+|cffffcc00Health:|r 1000
+|cffffcc00Attack:|r Chaos
+|cffffcc00Cooldown:|r 0.25
+|cffffcc00Damage:|r 400 - 600
+|cffffcc00Range:|r Melee (ground only)
+|cffffcc00Ability:|r Void Smash; 60% to deal 300 damage in a 200 area of effect
+|cffffcc00Ability (2):|r Void Decay; this unit is slowing decaying back into the void it will lose 40 health per second as long as its alive
+}
+
+STRING 182
+// Abilities: A0BJ ([Void Cult] Summon Void Beast), Hotkey (Hotkey - Normal)
+{
+X
+}
+
+STRING 183
+// Abilities: A0BK ([Void Cult] Summon Void Monstrosity), Ubertip (Tooltip - Normal - Extended)
+{
+|cffffcc00Void Fragment Cost:|r 800
+|cffffcc00Health:|r 1500
+|cffffcc00Attack:|r Chaos
+|cffffcc00Cooldown:|r 2.00
+|cffffcc00Damage:|r 2000
+|cffffcc00Range:|r 1000
+|cffffcc00Ability:|r Splash; the area of effect is 300
+|cffffcc00Ability (2):|r Void Decay; this unit is slowing decaying back into the void it will lose 60 health per second as long as its alive
+}
+
+STRING 185
 // Items: I00X (Hybrid Random), Hotkey (Hotkey)
 {
 V
+}
+
+STRING 186
+// Abilities: A0BL ([Void Cult] Summon Void Lord), Ubertip (Tooltip - Normal - Extended)
+{
+|cffffcc00Void Fragment Cost:|r 1200
+|cffffcc00Health:|r 3000
+|cffffcc00Attack:|r Chaos
+|cffffcc00Cooldown:|r 0.75
+|cffffcc00Damage:|r 500
+|cffffcc00Range:|r 1000
+|cffffcc00Ability:|r Splash; the area of effect is 400
+|cffffcc00Ability (2):|r Consume Soul; consume the soul of a void worshipper, increasing damage by 250. Replaces consumed worshipper with a Husk that can not be sold
+|cffffcc00Ability (3):|r  Void Aura; increases life regen of all void fragment costing towers by 300%
+|cffffcc00Ability (4):|r Void Decay; this unit is slowing decaying back into the void it will lose 100 health per second as long as its alive
+}
+
+STRING 187
+// Abilities: S000 (Fear Aura), EditorSuffix (Editor Suffix)
+{
+Grom Hellscream
+}
+
+STRING 188
+// Abilities: A04C (Drunken Haze), Hotkey (Hotkey - Normal)
+{
+Z
+}
+
+STRING 189
+// Abilities: A04D (Breath of Fire), Hotkey (Hotkey - Normal)
+{
+Z
+}
+
+STRING 190
+// Abilities: A07H ( Allow 09 - Grey), Hotkey (Hotkey - Normal)
+{
+Z
+}
+
+STRING 191
+// Abilities: A07Y ( Deny 09 - Grey), Hotkey (Hotkey - Normal)
+{
+Z
+}
+
+STRING 192
+// Abilities: A08L (Destiny Bond), Hotkey (Hotkey - Normal)
+{
+Z
+}
+
+STRING 193
+// Abilities: A095 ([Void Cult] Void Restoration), Hotkey (Hotkey - Normal)
+{
+Z
+}
+
+STRING 194
+// Abilities: A09E ([Void Cult] Consume Soul), Hotkey (Hotkey - Normal)
+{
+Z
+}
+
+STRING 195
+// Abilities: A09O ([Void Cult] Void Energies), Hotkey (Hotkey - Normal)
+{
+Z
+}
+
+STRING 196
+// Abilities: A0C7 ([Cavernous Creatures] Transfer Mana), Hotkey (Hotkey - Normal)
+{
+X
+}
+
+STRING 197
+// Abilities: A0C8 ([Cavernous Creatures] Transfer Mana), Hotkey (Hotkey - Normal)
+{
+X
+}
+
+STRING 198
+// Abilities: A0C9 ([Cavernous Creatures] Transfer Mana), Hotkey (Hotkey - Normal)
+{
+X
+}
+
+STRING 199
+// Abilities: A0AJ (Sacrifice), Hotkey (Hotkey - Normal)
+{
+Z
+}
+
+STRING 200
+// Abilities: A0AW ([Orc Stronghold] Summon Misha), Hotkey (Hotkey - Normal)
+{
+Z
+}
+
+STRING 201
+// Abilities: A0BB ([Void Cult] Summon Void Being), Hotkey (Hotkey - Normal)
+{
+Z
+}
+
+STRING 202
+// Abilities: A0CV ([Goblin] Rocket Barrage), EditorSuffix (Editor Suffix)
+{
+(ICON ONLY)
+}
+
+STRING 203
+// Abilities: A0CY ([Goblin] Acid Bomb), Name (Name)
+{
+[Goblin] Acid Bomb
+}
+
+STRING 204
+// Abilities: A0D1 (Armor Shift), Name (Name)
+{
+Armor Shift
+}
+
+STRING 205
+// Abilities: S00B (Fierce Inspiration), EditorSuffix (Editor Suffix)
+{
+Red Drake
+}
+
+STRING 206
+// Abilities: S00B (Fierce Inspiration), Ubertip (Tooltip - Normal - Extended)
+{
+Increases nearby friendly units' attack rate by 5%.
+}
+
+STRING 207
+// Abilities: S00B (Fierce Inspiration), Name (Name)
+{
+Fierce Inspiration
+}
+
+STRING 208
+// Abilities: S00B (Fierce Inspiration), Tip (Tooltip - Normal)
+{
+Fierce Inspiration
+}
+
+STRING 209
+// Abilities: A0D2 (Inspiring Aura), EditorSuffix (Editor Suffix)
+{
+Red Dragon
+}
+
+STRING 210
+// Abilities: S00C (Fierce Inspiration), Ubertip (Tooltip - Normal - Extended)
+{
+Increases nearby friendly units' attack rate by 10%.
+}
+
+STRING 211
+// Abilities: S00C (Fierce Inspiration), Name (Name)
+{
+Fierce Inspiration
+}
+
+STRING 212
+// Abilities: A0D2 (Inspiring Aura), Name (Name)
+{
+Inspiring Aura
+}
+
+STRING 213
+// Abilities: A0D3 (Inspiring Aura), EditorSuffix (Editor Suffix)
+{
+Red Drake
+}
+
+STRING 214
+// Abilities: A0D3 (Inspiring Aura), Ubertip (Tooltip - Normal - Extended)
+{
+Gives 10% extra damage to the attacks of nearby friendly units.
+}
+
+STRING 215
+// Abilities: A0D2 (Inspiring Aura), Tip (Tooltip - Normal)
+{
+Inspiring Aura
+}
+
+STRING 216
+// Abilities: A0D4 (Time-Lock), EditorSuffix (Editor Suffix)
+{
+Bronze Drake
+}
+
+STRING 217
+// Abilities: A0D4 (Time-Lock), Name (Name)
+{
+Time-Lock
+}
+
+STRING 218
+// Abilities: A0D8 (Poison Dart), Ubertip (Tooltip - Normal - Extended)
+{
+Deals 10 poison damage per second. Lasts 10 seconds.
+}
+
+STRING 219
+// Abilities: A0D3 (Inspiring Aura), Name (Name)
+{
+Inspiring Aura
+}
+
+STRING 220
+// Abilities: A0D9 (Inspiring Aura), EditorSuffix (Editor Suffix)
+{
+Red Dragon Whelp
+}
+
+STRING 221
+// Abilities: A0D3 (Inspiring Aura), Tip (Tooltip - Normal)
+{
+Inspiring Aura
+}
+
+STRING 222
+// Abilities: A0BT ([Night Elf] Chimaera Transform), Unhotkey (Hotkey - Turn Off)
+{
+Z
+}
+
+STRING 223
+// Abilities: A0BT ([Night Elf] Chimaera Transform), Hotkey (Hotkey - Normal)
+{
+Z
+}
+
+STRING 224
+// Abilities: A0BD ([Night Elf] Chimaera Transform), Unhotkey (Hotkey - Turn Off)
+{
+Z
+}
+
+STRING 225
+// Abilities: A0E8 (Disease Cloud), Tip (Tooltip - Normal)
+{
+Disease Cloud
+}
+
+STRING 226
+// Abilities: A0EB (Move), Hotkey (Hotkey - Normal)
+{
+X
+}
+
+STRING 228
+// Abilities: A01J (Artifact Curse), Name (Name)
+{
+Artifact Curse
+}
+
+STRING 229
+// Abilities: A0EK ([Uniques] Oceanmaster), Tip (Tooltip - Normal)
+{
+Oceanmaster
+}
+
+STRING 230
+// Buffs/Effects: B02P ([The Unique] Oceanmaster), EditorName (Name (Editor Only))
+{
+[The Unique] Oceanmaster
+}
+
+STRING 231
+// Buffs/Effects: B02P ([The Unique] Oceanmaster), Buffubertip (Tooltip - Extended)
+{
+An Oceanmaster is nearby
+}
+
+STRING 232
+// Abilities: A0BD ([Night Elf] Chimaera Transform), Hotkey (Hotkey - Normal)
+{
+Z
+}
+
+STRING 233
+// Upgrades: R001 (Cloud), Hotkey (Hotkey)
+{
+X
+}
+
+STRING 234
+// Items: I019 (Void Altar [Geno]), Hotkey (Hotkey)
+{
+V
+}
+
+STRING 235
+// Abilities: A0EE ([Uniques] Acid Bomb), Name (Name)
+{
+[Uniques] Acid Bomb
+}
+
+STRING 236
+// Abilities: A0EF ([Uniques] Bonk), Tip (Tooltip - Normal)
+{
+Bonk
+}
+
+STRING 237
+// Abilities: A0EF ([Uniques] Bonk), Ubertip (Tooltip - Normal - Extended)
+{
+Sammy has a 5% chance to smack the enemy on the head with his shovel, stunning them for up to 2 seconds.
+}
+
+STRING 238
+// Abilities: A0EF ([Uniques] Bonk), Name (Name)
+{
+[Uniques] Bonk
+}
+
+STRING 239
+// Abilities: A0EG ([Uniques] Darkness), Name (Name)
+{
+[Uniques] Darkness
+}
+
+STRING 240
+// Abilities: A0EG ([Uniques] Darkness), EditorSuffix (Editor Suffix)
+{
+(Target)
+}
+
+STRING 241
+// Abilities: A0EH ([Uniques] Hydralisk Damage), Name (Name)
+{
+[Uniques] Hydralisk Damage
+}
+
+STRING 242
+// Abilities: A0EI ([Uniques] Hydralisk Speed), Name (Name)
+{
+[Uniques] Hydralisk Speed
+}
+
+STRING 243
+// Abilities: A0EJ ([Uniques] Marine Force), Name (Name)
+{
+[Uniques] Marine Force
+}
+
+STRING 244
+// Abilities: A0EJ ([Uniques] Marine Force), Tip (Tooltip - Normal)
+{
+Marine Force
+}
+
+STRING 245
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 246
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 247
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 248
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 249
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 250
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 251
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 252
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 253
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 254
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 255
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 256
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 257
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 258
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 259
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 260
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 261
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 262
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 263
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 264
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 265
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 266
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 267
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 268
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 269
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 270
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 272
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 273
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 274
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 275
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 276
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 277
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 278
+// Abilities: A0B0 (Alchemical Transmutation), Hotkey (Hotkey - Normal)
+{
+V
+}
+
+STRING 279
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 280
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 281
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 282
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 283
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 284
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 285
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 286
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 287
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 288
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 289
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
 }
 
 STRING 290
@@ -458,208 +1713,292 @@ STRING 290
 Sell
 }
 
-STRING 407
-// Abilities: A01C (Goblin Mecha Transformation), Hotkey (Hotkey - Normal)
+STRING 291
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
 {
-L
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 292
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 293
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 294
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 295
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 296
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 297
+// Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 1 for each Marine tower owned.
+}
+
+STRING 298
+// Abilities: A0EK ([Uniques] Oceanmaster), Name (Name)
+{
+[Uniques] Oceanmaster
+}
+
+STRING 299
+// Abilities: A0EK ([Uniques] Oceanmaster), Ubertip (Tooltip - Normal - Extended)
+{
+Sea Elemental Circle
+}
+
+STRING 300
+// Buffs/Effects: B02P ([The Unique] Oceanmaster), Bufftip (Tooltip)
+{
+Oceanmaster
+}
+
+STRING 301
+// Abilities: A0EL ([Uniques] Pointy Bits), Tip (Tooltip - Normal)
+{
+Pointy Bits
+}
+
+STRING 302
+// Abilities: A0EL ([Uniques] Pointy Bits), Name (Name)
+{
+[Uniques] Pointy Bits
+}
+
+STRING 303
+// Abilities: A0EL ([Uniques] Pointy Bits), Ubertip (Tooltip - Normal - Extended)
+{
+Can attack 4 enemys at once.
+}
+
+STRING 304
+// Abilities: A0EM ([Uniques] Slow Poison), Name (Name)
+{
+[Uniques] Slow Poison
+}
+
+STRING 305
+// Abilities: A0EN ([Uniques] The Darkness), Name (Name)
+{
+[Uniques] The Darkness
+}
+
+STRING 306
+// Abilities: A0EN ([Uniques] The Darkness), Tip (Tooltip - Normal)
+{
+The Darkness
+}
+
+STRING 307
+// Abilities: A0EN ([Uniques] The Darkness), Ubertip (Tooltip - Normal - Extended)
+{
+Can attack 10 enemies at once, attacks increase damage taken by the target by 25%.
+}
+
+STRING 308
+// Abilities: A01Z ([Uniques] Heavy), Name (Name)
+{
+[Uniques] Heavy
+}
+
+STRING 309
+// Abilities: A01Z ([Uniques] Heavy), Tip (Tooltip - Normal)
+{
+Heavy
+}
+
+STRING 310
+// Abilities: A01Z ([Uniques] Heavy), Ubertip (Tooltip - Normal - Extended)
+{
+Increases attack speed by 30%
+}
+
+STRING 311
+// Abilities: A020 ([Uniques] Metal), Tip (Tooltip - Normal)
+{
+Metal
+}
+
+STRING 312
+// Abilities: A020 ([Uniques] Metal), Name (Name)
+{
+[Uniques] Metal
+}
+
+STRING 313
+// Abilities: A020 ([Uniques] Metal), Ubertip (Tooltip - Normal - Extended)
+{
+Increases damage by 30%
+}
+
+STRING 315
+// Items: I027 (Uniques [Geno]), Name (Name)
+{
+Uniques [Geno]
+}
+
+STRING 316
+// Items: I027 (Uniques [Geno]), Tip (Tooltip - Basic)
+{
+Choose Uniques [|cffffcc00A|r]
+}
+
+STRING 319
+// Items: I002 (Undead Necropolis), Ubertip (Tooltip - Extended)
+{
+|cFFFF8033Intermediate|r
+}
+
+STRING 320
+// Items: I003 (Aviaries), Ubertip (Tooltip - Extended)
+{
+|cFFFF8033Intermediate|r
+}
+
+STRING 321
+// Items: I005 (Outland), Ubertip (Tooltip - Extended)
+{
+|cFF00FF00Beginner|r|n|cffffcc00Damage Types:|r Magic, Chaos
+|cffffcc00Towers:|r 8
+}
+
+STRING 322
+// Items: I000 (Caerbannog), Ubertip (Tooltip - Extended)
+{
+|cFF00FF00Beginner|r
+}
+
+STRING 323
+// Items: I006 (Human Town Hall), Ubertip (Tooltip - Extended)
+{
+|cFF00FF00Beginner|r
+}
+
+STRING 324
+// Items: I007 (Orc Stronghold [Geno]), Ubertip (Tooltip - Extended)
+{
+|cFF00FF00Beginner|r
+}
+
+STRING 325
+// Items: I00H (Tavern), Ubertip (Tooltip - Extended)
+{
+|cFFFF8033Intermediate|r
+}
+
+STRING 326
+// Items: I009 (Giants), Ubertip (Tooltip - Extended)
+{
+|cFF00FF00Beginner|r
+}
+
+STRING 327
+// Items: I00M (Gnoll Republic), Ubertip (Tooltip - Extended)
+{
+|cFFFF8033Intermediate|r
+}
+
+STRING 328
+// Items: I00N (Angel's Gateway), Ubertip (Tooltip - Extended)
+{
+|cFFFF4933Advanced|r
+}
+
+STRING 329
+// Items: I00I (Corrupted Night Elves), Ubertip (Tooltip - Extended)
+{
+|cFF00FF00Beginner|r
+}
+
+STRING 330
+// Items: I00S (High Elves [DISABLED]), Name (Name)
+{
+High Elves [DISABLED]
+}
+
+STRING 331
+// Items: I00T (The Forsaken), Ubertip (Tooltip - Extended)
+{
+|cFFFF4933Advanced|r|n|cffffcc00Damage Types:|r Normal, Magic, Pierce, Siege, Chaos
+|cffffcc00Towers:|r 8|n|cffffcc00Traits:|r Manual Cast Spells, Micro Summoned Units
+}
+
+STRING 332
+// Items: I00U (Dwarven Mine), Ubertip (Tooltip - Extended)
+{
+|cFFFF4933Advanced|r
+}
+
+STRING 333
+// Items: I00Z (Galaxy), Ubertip (Tooltip - Extended)
+{
+|cFFFF8033Intermediate|r
+}
+
+STRING 334
+// Items: I00O (Forest Troll Hut), Ubertip (Tooltip - Extended)
+{
+|cFF00FF00Beginner|r
+}
+
+STRING 335
+// Items: I00J (Goblins), Ubertip (Tooltip - Extended)
+{
+|cFFFF8033Intermediate|r|n|cffffcc00Damage Types:|r Magic, Normal, Siege
+|cffffcc00Towers:|r 7
+|cffffcc00Traits:|r Explosions
+}
+
+STRING 336
+// Items: I026 (Shrine of Buffs), Ubertip (Tooltip - Extended)
+{
+|c00FF0000Secondary Race|r
+}
+
+STRING 337
+// Items: I024 (The Elementalists), Ubertip (Tooltip - Extended)
+{
+|cFFFF4933Advanced|r|n|cffffcc00Damage Types:|r None|n|cffffcc00Towers:|r 1|n|cffffcc00Traits:|r Has one tower that turns into different elements that can then be combined to create new towers.
+}
+
+STRING 338
+// Items: I027 (Uniques [Geno]), Ubertip (Tooltip - Extended)
+{
+|cFFFF8033Intermediate|r
+|cffffcc00Damage Types:|r Piercing, Chaos, Siege, Magic, Hero
+|cffffcc00Towers:|r 8
 }
 
 STRING 427
-// Items: I00I (Corrupted Night Elves), Hotkey (Hotkey)
+// Abilities: A0BU ([Night Elf] Chimaera Transform), Unhotkey (Hotkey - Turn Off)
 {
 Z
-}
-
-STRING 463
-// Abilities: A01G (Gods Plague), Hotkey (Hotkey - Normal)
-{
-G
-}
-
-STRING 801
-// Items: I003 (Aviaries), Name (Name)
-{
-Aviaries
-}
-
-STRING 825
-// Items: I002 (Undead Necropolis), Name (Name)
-{
-Undead Necropolis
-}
-
-STRING 939
-// Abilities: A00L (Bladestorm), EditorSuffix (Editor Suffix)
-{
-Blademaster
-}
-
-STRING 1001
-// Items: I00H (Tavern), Hotkey (Hotkey)
-{
-A
-}
-
-STRING 1004
-// Items: I00D (Draenei Haven [Geno]), Hotkey (Hotkey)
-{
-S
-}
-
-STRING 1007
-// Items: I01A (Workers Union [Geno]), Hotkey (Hotkey)
-{
-A
-}
-
-STRING 1009
-// Items: I00U (Dwarven Mine), Hotkey (Hotkey)
-{
-S
-}
-
-STRING 1011
-// Abilities: A07J ( Allow 06 - Orange), Hotkey (Hotkey - Normal)
-{
-S
-}
-
-STRING 1012
-// Items: I00G (Shrine of Ultron [DISABLED]), Hotkey (Hotkey)
-{
-D
-}
-
-STRING 1013
-// Abilities: A07F ( Allow 05 - Yellow), Hotkey (Hotkey - Normal)
-{
-A
-}
-
-STRING 1015
-// Abilities: A07V ( Deny 06 - Orange), Hotkey (Hotkey - Normal)
-{
-S
-}
-
-STRING 1018
-// Items: I00Q (Cavernous Creatures [Geno]), Hotkey (Hotkey)
-{
-F
-}
-
-STRING 1020
-// Items: I00E (Dragons), Hotkey (Hotkey)
-{
-F
-}
-
-STRING 1021
-// Abilities: A07M ( Allow 11 - Dark Green), Hotkey (Hotkey - Normal)
-{
-C
-}
-
-STRING 1022
-// Abilities: A07U ( Deny 05 - Yellow), Hotkey (Hotkey - Normal)
-{
-A
-}
-
-STRING 1025
-// Abilities: A07K ( Allow 08 - Pink), Hotkey (Hotkey - Normal)
-{
-F
-}
-
-STRING 1027
-// Abilities: A080 ( Deny 11 - Dark Green), Hotkey (Hotkey - Normal)
-{
-C
-}
-
-STRING 1028
-// Items: I00T (The Forsaken), Hotkey (Hotkey)
-{
-W
-}
-
-STRING 1032
-// Abilities: A07X ( Deny 08 - Pink), Hotkey (Hotkey - Normal)
-{
-F
-}
-
-STRING 1034
-// Items: I00Z (Galaxy), Hotkey (Hotkey)
-{
-W
-}
-
-STRING 1036
-// Items: I00L (Critters [Geno]), Hotkey (Hotkey)
-{
-D
-}
-
-STRING 1037
-// Abilities: A07L ( Allow 07 - Green), Hotkey (Hotkey - Normal)
-{
-D
-}
-
-STRING 1041
-// Items: I009 (Giants), Hotkey (Hotkey)
-{
-R
 }
 
 STRING 1085
 // Abilities: A00N (Starfall), EditorSuffix (Editor Suffix)
 {
 Tyrande
-}
-
-STRING 1149
-// Abilities: A00P (Cripple), EditorSuffix (Editor Suffix)
-{
-Super Slowing Demon
-}
-
-STRING 1174
-// Abilities: A00A (Storm Hammers), EditorSuffix (Editor Suffix)
-{
-Gryphon Rider
-}
-
-STRING 1222
-// Abilities: A002 (Forked Lightning ), EditorSuffix (Editor Suffix)
-{
-Lady Vashj
-}
-
-STRING 1293
-// Items: I006 (Human Town Hall), Name (Name)
-{
-Human Town Hall
-}
-
-STRING 1368
-// Abilities: A07Q ( Allow 02 - Blue), Hotkey (Hotkey - Normal)
-{
-W
-}
-
-STRING 1388
-// Abilities: A0AZ ([Orc Stronghold] Summon Hawk), Researchhotkey (Hotkey - Learn)
-{
-C
-}
-
-STRING 1392
-// Abilities: A07R ( Deny 02 - Blue), Hotkey (Hotkey - Normal)
-{
-W
 }
 
 STRING 1397
@@ -675,87 +2014,21 @@ Remove
 }
 
 STRING 1409
-// Items: I019 (Void Altar [Geno]), Hotkey (Hotkey)
+// Abilities: A0BL ([Void Cult] Summon Void Lord), Hotkey (Hotkey - Normal)
 {
 V
 }
 
-STRING 1420
-// Abilities: A00B (Ensnare), EditorSuffix (Editor Suffix)
-{
-Chaos Raider
-}
-
-STRING 1424
-// Abilities: A004 (Bloodlust), EditorSuffix (Editor Suffix)
-{
-Chaos Warlock
-}
-
-STRING 1428
-// Abilities: A00K (Command Aura), EditorSuffix (Editor Suffix)
-{
-Chaos Kodo Beast
-}
-
-STRING 1436
-// Abilities: S000 (Fear Aura), EditorSuffix (Editor Suffix)
-{
-Grom Hellscream
-}
-
 STRING 1511
-// Items: I00M (Gnoll Republic), Hotkey (Hotkey)
+// Abilities: A0BU ([Night Elf] Chimaera Transform), Hotkey (Hotkey - Normal)
 {
 Z
 }
 
 STRING 1515
-// Items: I00V (Random), Hotkey (Hotkey)
+// Abilities: A0BV ([Night Elf] Chimaera Transform), Unhotkey (Hotkey - Turn Off)
 {
 Z
-}
-
-STRING 1525
-// Abilities: A07W ( Deny 07 - Green), Hotkey (Hotkey - Normal)
-{
-D
-}
-
-STRING 1532
-// Abilities: A0AZ ([Orc Stronghold] Summon Hawk), Hotkey (Hotkey - Normal)
-{
-C
-}
-
-STRING 1535
-// Abilities: A0BK ([Void Cult] Summon Void Monstrosity), Hotkey (Hotkey - Normal)
-{
-C
-}
-
-STRING 1555
-// Abilities: A007 (Crushing Wave), EditorSuffix (Editor Suffix)
-{
-Royal Guard
-}
-
-STRING 1565
-// Abilities: A00G (Slam), EditorSuffix (Editor Suffix)
-{
-Sea Giant
-}
-
-STRING 1581
-// Abilities: A00H (Unholy Fire), EditorSuffix (Editor Suffix)
-{
-Chaos Shrine
-}
-
-STRING 1585
-// Abilities: A001 (Blood Aura), EditorSuffix (Editor Suffix)
-{
-Chaos Pool
 }
 
 STRING 1617
@@ -843,7 +2116,7 @@ Ensnare
 }
 
 STRING 1689
-// Abilities: A00E (Teleport), Name (Name)
+// Abilities: A00E (Teleport), Tip (Tooltip - Normal)
 {
 Teleport
 }
@@ -852,12 +2125,6 @@ STRING 1690
 // Abilities: A00E (Teleport), Ubertip (Tooltip - Normal - Extended)
 {
 Teleports this unit anywhere on the map.  Has a 10 second cooldown!
-}
-
-STRING 1691
-// Abilities: A00E (Teleport), Tip (Tooltip - Normal)
-{
-Teleport
 }
 
 STRING 1695
@@ -1088,12 +2355,6 @@ STRING 1943
 Rusty's Roid Rage
 }
 
-STRING 1946
-// Items: I00N (Angel's Gateway), Hotkey (Hotkey)
-{
-R
-}
-
 STRING 1965
 // Abilities: A00S (Poops Backdoor Rectal Ravager), Name (Name)
 {
@@ -1160,12 +2421,6 @@ STRING 2007
 Giving Jake PHENOMENAL damage however, as a price, Jake has a long cool down and short range. ( 7.35 cooldown )
 }
 
-STRING 2014
-// Items: I00H (Tavern), Name (Name)
-{
-Tavern
-}
-
 STRING 2077
 // Abilities: A005 (Aura of Doom), Name (Name)
 {
@@ -1176,12 +2431,6 @@ STRING 2079
 // Abilities: A00Z (Crippling Fear), Name (Name)
 {
 Crippling Fear
-}
-
-STRING 2091
-// Items: I00K (Hero's Altar [DISABLED]), Hotkey (Hotkey)
-{
-E
 }
 
 STRING 2097
@@ -1196,18 +2445,6 @@ STRING 2098
 Breathes a cone of frost at enemy units that deals 600 initial damage, and 10 damage per second over 10 seconds.
 }
 
-STRING 2126
-// Abilities: A07I ( Allow 04 - Purple), Hotkey (Hotkey - Normal)
-{
-R
-}
-
-STRING 2138
-// Items: I00I (Corrupted Night Elves), Name (Name)
-{
-Corrupted Night Elves
-}
-
 STRING 2147
 // Abilities: A08I (Corruption), Name (Name)
 {
@@ -1218,12 +2455,6 @@ STRING 2148
 // Abilities: A08I (Corruption), Tip (Tooltip - Normal)
 {
 Corruption
-}
-
-STRING 2153
-// Items: I00O (Forest Troll Hut), Hotkey (Hotkey)
-{
-E
 }
 
 STRING 2160
@@ -1238,12 +2469,6 @@ STRING 2161
 This unit is infected with Corruption, and will take damage over time.
 }
 
-STRING 2222
-// Items: I024 (The Elementalists), Hotkey (Hotkey)
-{
-E
-}
-
 STRING 2224
 // Buffs/Effects: B007 (), Bufftip (Tooltip)
 {
@@ -1254,12 +2479,6 @@ STRING 2227
 // Buffs/Effects: B007 (), Buffubertip (Tooltip - Extended)
 {
 This unit has been hit by a Corruption Bomb and will take small damgae as well as have its speed reduced by .10 and armor by 3.
-}
-
-STRING 2229
-// Abilities: A07E ( Allow 03 - Teal), Hotkey (Hotkey - Normal)
-{
-E
 }
 
 STRING 2250
@@ -1278,12 +2497,6 @@ STRING 2253
 // Abilities: A013 (Corrupted Blades), Ubertip (Tooltip - Normal - Extended)
 {
 The Corrupted Warden is able to strike up to 9 enemies at a time with her blades
-}
-
-STRING 2415
-// Abilities: A07S ( Deny 03 - Teal), Hotkey (Hotkey - Normal)
-{
-E
 }
 
 STRING 2416
@@ -1551,7 +2764,7 @@ This unit is caught in Decay; it will take damage over time.
 }
 
 STRING 2776
-// Items: I002 (Undead Necropolis), Hotkey (Hotkey)
+// Abilities: A09Z ([Workers Union] Angry, Angry Workers), Hotkey (Hotkey - Normal)
 {
 Q
 }
@@ -1566,12 +2779,6 @@ STRING 2824
 // Abilities: A017 (Silvers's STARoids), Ubertip (Tooltip - Normal - Extended)
 {
 Silver's STARoids deal 500 dmg to up to 15 targets
-}
-
-STRING 2898
-// Abilities: A07T ( Deny 04 - Purple), Hotkey (Hotkey - Normal)
-{
-R
 }
 
 STRING 2904
@@ -1761,63 +2968,27 @@ Shockwave
 }
 
 STRING 3084
-// Abilities: A01Z (Heavy Metal), Name (Name)
+// Buffs/Effects: B00L (), Bufftip (Tooltip)
 {
 Heavy Metal
 }
 
 STRING 3085
-// Abilities: A01Z (Heavy Metal), Tip (Tooltip - Normal)
-{
-Heavy Metal
-}
-
-STRING 3086
-// Abilities: A01Z (Heavy Metal), Ubertip (Tooltip - Normal - Extended)
-{
-Increases nearby friendly units' damage and attack speed
-}
-
-STRING 3087
-// Abilities: A020 (Heavy Metal), Tip (Tooltip - Normal)
+// Buffs/Effects: B00M (), Bufftip (Tooltip)
 {
 Heavy Metal
 }
 
 STRING 3088
-// Abilities: A020 (Heavy Metal), EditorSuffix (Editor Suffix)
+// Buffs/Effects: B00M (), EditorSuffix (Editor Suffix)
 {
 (2)
-}
-
-STRING 3089
-// Abilities: A020 (Heavy Metal), Name (Name)
-{
-Heavy Metal
-}
-
-STRING 3090
-// Buffs/Effects: B00L (), Bufftip (Tooltip)
-{
-Heavy Metal
 }
 
 STRING 3091
 // Buffs/Effects: B00L (), Buffubertip (Tooltip - Extended)
 {
 This unit is under the effects of Heavy Metal, and has Increased attack speed and damage.
-}
-
-STRING 3092
-// Buffs/Effects: B00M (), Bufftip (Tooltip)
-{
-Heavy Metal
-}
-
-STRING 3093
-// Buffs/Effects: B00M (), EditorSuffix (Editor Suffix)
-{
-(2)
 }
 
 STRING 3099
@@ -2180,18 +3351,6 @@ STRING 3569
 This poisons in a wide area of range doing 2 dmg/sec for 100 seconds and slowing by .50
 }
 
-STRING 3593
-// Items: I00M (Gnoll Republic), Name (Name)
-{
-Gnoll Republic
-}
-
-STRING 3618
-// Items: I00N (Angel's Gateway), Name (Name)
-{
-Angel's Gateway
-}
-
 STRING 3640
 // Abilities: A039 (Critical!!), Name (Name)
 {
@@ -2274,12 +3433,6 @@ STRING 3884
 // Abilities: A03X (Spirit Swords), Tip (Tooltip - Normal)
 {
 Spirit Swords
-}
-
-STRING 3892
-// Items: I00O (Forest Troll Hut), Name (Name)
-{
-Forest Troll Hut
 }
 
 STRING 3895
@@ -3422,40 +4575,16 @@ STRING 4428
 BrandTheOne, hunts people to go to hell for the above.  Earns slight money for every banishment.
 }
 
-STRING 4472
-// Items: I006 (Human Town Hall), Hotkey (Hotkey)
-{
-Q
-}
-
-STRING 4473
-// Items: I00P (Alliance of Blades), Hotkey (Hotkey)
-{
-Q
-}
-
 STRING 4478
-// Abilities: A006 (Cold Fury), Hotkey (Hotkey - Normal)
+// Abilities: A0BV ([Night Elf] Chimaera Transform), Hotkey (Hotkey - Normal)
 {
 Z
-}
-
-STRING 4569
-// Items: I00W (Hardcore Random), Hotkey (Hotkey)
-{
-X
 }
 
 STRING 4571
-// Abilities: A00F (Entangle), Hotkey (Hotkey - Normal)
+// Abilities: A0CA ([Cavernous Creatures] Resurrect), Hotkey (Hotkey - Normal)
 {
 Z
-}
-
-STRING 4575
-// Items: I026 (Shrine of Buffs), Hotkey (Hotkey)
-{
-Q
 }
 
 STRING 4611
@@ -3482,28 +4611,10 @@ STRING 4619
  
 }
 
-STRING 4658
-// Abilities: A03V (Assertiveness Training), Hotkey (Hotkey - Normal)
-{
-Q
-}
-
 STRING 4670
-// Abilities: A015 (Poison Arrows), Hotkey (Hotkey - Normal)
+// Abilities: A0CE ([Cavernous Creatures] Exponential Growth), Hotkey (Hotkey - Normal)
 {
 Z
-}
-
-STRING 4673
-// Items: I025 (High Elf Farm), Hotkey (Hotkey)
-{
-X
-}
-
-STRING 4681
-// Abilities: A078 (Dazzle), Hotkey (Hotkey - Normal)
-{
-Q
 }
 
 STRING 4682
@@ -3513,33 +4624,9 @@ Choose Angel's Gateway [|cffffcc00R|r]
 }
 
 STRING 4694
-// Abilities: A015 (Poison Arrows), Unhotkey (Hotkey - Turn Off)
+// Abilities: A0CT (Siphon Energy), Hotkey (Hotkey - Normal)
 {
 Z
-}
-
-STRING 4697
-// Items: I00J (Goblins), Hotkey (Hotkey)
-{
-X
-}
-
-STRING 4740
-// Abilities: A07N ( Allow 01 - Red), Hotkey (Hotkey - Normal)
-{
-Q
-}
-
-STRING 4742
-// Abilities: A025 (Starfall), Hotkey (Hotkey - Normal)
-{
-X
-}
-
-STRING 4828
-// Abilities: A07O ( Allow 10 - Light Blue), Hotkey (Hotkey - Normal)
-{
-X
 }
 
 STRING 4842
@@ -3558,12 +4645,6 @@ STRING 4995
 // Abilities: A07N ( Allow 01 - Red), Name (Name)
 {
  Allow 01 - Red
-}
-
-STRING 4996
-// Abilities: A07P ( Deny 01 - Red), Hotkey (Hotkey - Normal)
-{
-Q
 }
 
 STRING 4997
@@ -3615,7 +4696,7 @@ STRING 5008
 }
 
 STRING 5009
-// Abilities: A026 (Chain Lightning), Hotkey (Hotkey - Normal)
+// Abilities: A0DV (Awaken), Hotkey (Hotkey - Normal)
 {
 Z
 }
@@ -3624,12 +4705,6 @@ STRING 5010
 // Abilities: A07O ( Allow 10 - Light Blue), Name (Name)
 {
  Allow 10 - Light Blue
-}
-
-STRING 5011
-// Abilities: A07Z ( Deny 10 - Light Blue), Hotkey (Hotkey - Normal)
-{
-X
 }
 
 STRING 5012
@@ -3642,12 +4717,6 @@ STRING 5014
 // Abilities: A07P ( Deny 01 - Red), Name (Name)
 {
  Deny 01 - Red
-}
-
-STRING 5015
-// Abilities: A09Z ([Workers Union] Angry, Angry Workers), Unhotkey (Hotkey - Turn Off)
-{
-Q
 }
 
 STRING 5016
@@ -3992,12 +5061,6 @@ STRING 5109
 Immolation
 }
 
-STRING 5147
-// Items: I000 (Caerbannog), Name (Name)
-{
-Caerbannog
-}
-
 STRING 5163
 // Abilities: A065 (Taunt), Name (Name)
 {
@@ -4104,12 +5167,6 @@ STRING 5198
 // Abilities: A07B (A vicious streak a mile wide!), Ubertip (Tooltip - Normal - Extended)
 {
 The creature strikes with such force that 50% of their damage strikes through to enemies near the primary attacked unit.
-}
-
-STRING 5225
-// Abilities: A07C (Summon Companion), EditorSuffix (Editor Suffix)
-{
- (Sir Galahad the Pure)
 }
 
 STRING 5226
@@ -4362,12 +5419,6 @@ STRING 5282
 This unit loves to stand in the way of people, his path blocking abilities are so strong that any enemies within his range will have their movement speed reduced by 25%. (He's sadly not tall enough to block air units)
 }
 
-STRING 5293
-// Abilities: A0A7 (Infuse), Hotkey (Hotkey - Normal)
-{
-X
-}
-
 STRING 5294
 // Abilities: A087 (Leader), Name (Name)
 {
@@ -4399,7 +5450,7 @@ This unit has a leader in sight; his attack damage has been increased.
 }
 
 STRING 5309
-// Abilities: A03A (Transfuse), Hotkey (Hotkey - Normal)
+// Abilities: A0E3 (Drink), Hotkey (Hotkey - Normal)
 {
 Z
 }
@@ -4414,12 +5465,6 @@ STRING 5339
 // Abilities: A076 (Remove), Ubertip (Tooltip - Normal - Extended)
 {
 Removes the worker to free up food supply
-}
-
-STRING 5347
-// Items: I00U (Dwarven Mine), Name (Name)
-{
-Dwarven Mine
 }
 
 STRING 5360
@@ -4538,12 +5583,6 @@ STRING 5419
 This unit has been dazzled.
 }
 
-STRING 5434
-// Abilities: A0AX ([Orc Stronghold] Summon Huffer), Hotkey (Hotkey - Normal)
-{
-X
-}
-
 STRING 5435
 // Abilities: A08D (Cleave), Name (Name)
 {
@@ -4604,7 +5643,7 @@ Random
 }
 
 STRING 5458
-// Abilities: A03F (Weak Enchantment), Hotkey (Hotkey - Normal)
+// Abilities: A0E6 (Upgrade to Undead - Level 2), Hotkey (Hotkey - Normal)
 {
 Z
 }
@@ -4698,7 +5737,7 @@ Destiny Bond
 }
 
 STRING 5557
-// Abilities: A03L (Starfall), Hotkey (Hotkey - Normal)
+// Upgrades: R000 (Cloud), Hotkey (Hotkey)
 {
 Z
 }
@@ -4791,18 +5830,6 @@ STRING 5593
 // Abilities: A08S (Sacrifice), Tip (Tooltip - Normal)
 {
 Sacrifice
-}
-
-STRING 5600
-// Abilities: A03P (Monsoon), Hotkey (Hotkey - Normal)
-{
-Z
-}
-
-STRING 5611
-// Abilities: A0BJ ([Void Cult] Summon Void Beast), Hotkey (Hotkey - Normal)
-{
-X
 }
 
 STRING 5612
@@ -4937,12 +5964,6 @@ STRING 5675
 Breath of Fire [|cffffcc00Z|r]
 }
 
-STRING 5676
-// Abilities: A03R (Berserk), Hotkey (Hotkey - Normal)
-{
-Z
-}
-
 STRING 5677
 // Abilities: A00W (Battle Roar), Ubertip (Tooltip - Normal - Extended)
 {
@@ -4979,12 +6000,6 @@ STRING 5691
  (Earth Pandaren)
 }
 
-STRING 5692
-// Abilities: A04C (Drunken Haze), Hotkey (Hotkey - Normal)
-{
-Z
-}
-
 STRING 5693
 // Abilities: A04C (Drunken Haze), Tip (Tooltip - Normal)
 {
@@ -4995,18 +6010,6 @@ STRING 5710
 // Abilities: A04D (Breath of Fire), EditorSuffix (Editor Suffix)
 {
  (Fire Pandaren)
-}
-
-STRING 5719
-// Abilities: A0C7 ([Cavernous Creatures] Transfer Mana), Hotkey (Hotkey - Normal)
-{
-X
-}
-
-STRING 5720
-// Abilities: A04D (Breath of Fire), Hotkey (Hotkey - Normal)
-{
-Z
 }
 
 STRING 5723
@@ -5069,30 +6072,6 @@ STRING 5770
 Attacks will bounce and hit additional targets. Can hit up to 3 different targets.
 }
 
-STRING 5777
-// Abilities: A0C8 ([Cavernous Creatures] Transfer Mana), Hotkey (Hotkey - Normal)
-{
-X
-}
-
-STRING 5778
-// Abilities: A0C9 ([Cavernous Creatures] Transfer Mana), Hotkey (Hotkey - Normal)
-{
-X
-}
-
-STRING 5779
-// Abilities: A07H ( Allow 09 - Grey), Hotkey (Hotkey - Normal)
-{
-Z
-}
-
-STRING 5780
-// Abilities: A07Y ( Deny 09 - Grey), Hotkey (Hotkey - Normal)
-{
-Z
-}
-
 STRING 5781
 // Buffs/Effects: B017 (), Bufftip (Tooltip)
 {
@@ -5103,18 +6082,6 @@ STRING 5782
 // Abilities: A08X (Frost Attack), Ubertip (Tooltip - Normal - Extended)
 {
 Slows attacked units movement speed by 25% for 10 seconds.
-}
-
-STRING 5791
-// Abilities: A0EB (Move), Hotkey (Hotkey - Normal)
-{
-X
-}
-
-STRING 5792
-// Abilities: A08L (Destiny Bond), Hotkey (Hotkey - Normal)
-{
-Z
 }
 
 STRING 5793
@@ -5141,12 +6108,6 @@ STRING 5805
  (Phoenix Egg)
 }
 
-STRING 5814
-// Abilities: A095 ([Void Cult] Void Restoration), Hotkey (Hotkey - Normal)
-{
-Z
-}
-
 STRING 5820
 // Abilities: A00V (Permanent Immolation), Ubertip (Tooltip - Normal - Extended)
 {
@@ -5163,12 +6124,6 @@ STRING 5823
 // Buffs/Effects: B016 (Permanent Immolation), EditorSuffix (Editor Suffix)
 {
  (Phoenix Egg)
-}
-
-STRING 5832
-// Abilities: A09E ([Void Cult] Consume Soul), Hotkey (Hotkey - Normal)
-{
-Z
 }
 
 STRING 5833
@@ -5195,12 +6150,6 @@ STRING 5836
  (Flame Tower)
 }
 
-STRING 5837
-// Upgrades: R001 (Cloud), Hotkey (Hotkey)
-{
-X
-}
-
 STRING 5840
 // Abilities: A006 (Cold Fury), Name (Name)
 {
@@ -5213,12 +6162,6 @@ STRING 5844
 Every 0.30th second a stream of ice cold frost shoots out from within the Lich and hits a random enemy within an area of 1000. The stream of frost first deals 2 initial damage and then 100 frost damage per second for 3 seconds afterwards. (Frost Burn can't kill enemies, but leaves them at 1 hp)
 }
 
-STRING 5867
-// Abilities: A09O ([Void Cult] Void Energies), Hotkey (Hotkey - Normal)
-{
-Z
-}
-
 STRING 5884
 // Abilities: A026 (Chain Lightning), EditorSuffix (Editor Suffix)
 {
@@ -5229,12 +6172,6 @@ STRING 5885
 // Abilities: A026 (Chain Lightning), Tip (Tooltip - Normal)
 {
 Chain Lightning [|cffffcc00Z|r]
-}
-
-STRING 5886
-// Abilities: A0AJ (Sacrifice), Hotkey (Hotkey - Normal)
-{
-Z
 }
 
 STRING 5887
@@ -5309,18 +6246,6 @@ STRING 5969
 Breathes a cone of fire at enemy units, dealing 100 initial damage. Units that have Drunken Haze on them will ignite and burn for 300 damage per second over 20 seconds. (375 range / 3sec cooldown))
 }
 
-STRING 5970
-// Abilities: A00O (Inventory), EditorSuffix (Editor Suffix)
-{
- (1)
-}
-
-STRING 6038
-// Items: I00P (Alliance of Blades), Name (Name)
-{
-Alliance of Blades
-}
-
 STRING 6116
 // Items: I00X (Hybrid Random), Tip (Tooltip - Basic)
 {
@@ -5382,13 +6307,13 @@ Pick up Hidden Artifact
 }
 
 STRING 6166
-// Abilities: A01J (Artifact Curse), Name (Name)
+// Abilities: A04W (Artifact Curse), Name (Name)
 {
 Artifact Curse
 }
 
 STRING 6167
-// Abilities: A04W (Artifact Curse), Name (Name)
+// Abilities: A064 (Artifact Curse), Name (Name)
 {
 Artifact Curse
 }
@@ -5399,14 +6324,8 @@ STRING 6168
 This unit is Cursed; its attack speed and damage has been reduced.
 }
 
-STRING 6169
-// Abilities: A04W (Artifact Curse), EditorSuffix (Editor Suffix)
-{
- (Unholy Aura)
-}
-
 STRING 6170
-// Abilities: A064 (Artifact Curse), Name (Name)
+// Buffs/Effects: B019 (), Bufftip (Tooltip)
 {
 Artifact Curse
 }
@@ -5418,12 +6337,6 @@ Cursed Artifact
 }
 
 STRING 6174
-// Buffs/Effects: B019 (), Bufftip (Tooltip)
-{
-Artifact Curse
-}
-
-STRING 6175
 // Buffs/Effects: B01A (Artifact Curse (Unholy Aura)), Bufftip (Tooltip)
 {
 Artifact Curse
@@ -5453,22 +6366,10 @@ STRING 6180
 BEWARE: This artifact is cursed and will hurt anyone and everyone that picks it up!
 }
 
-STRING 6204
-// Abilities: A0AW ([Orc Stronghold] Summon Misha), Hotkey (Hotkey - Normal)
-{
-Z
-}
-
 STRING 6221
 // Abilities: A00H (Unholy Fire), Ubertip (Tooltip - Normal - Extended)
 {
 Increases a target friendly unit's damage by 20%. |nLasts 10 seconds.
-}
-
-STRING 6240
-// Abilities: A0BB ([Void Cult] Summon Void Being), Hotkey (Hotkey - Normal)
-{
-Z
 }
 
 STRING 6256
@@ -5493,12 +6394,6 @@ STRING 6261
 // Abilities: A066 (Toxic Charm), Name (Name)
 {
 Toxic Charm
-}
-
-STRING 6265
-// Abilities: A0BT ([Night Elf] Chimaera Transform), Unhotkey (Hotkey - Turn Off)
-{
-Z
 }
 
 STRING 6270
@@ -5705,12 +6600,6 @@ STRING 6341
 Entangling Roots - [|cffffcc00Z|r]
 }
 
-STRING 6342
-// Abilities: A0BT ([Night Elf] Chimaera Transform), Hotkey (Hotkey - Normal)
-{
-Z
-}
-
 STRING 6343
 // Abilities: A006 (Cold Fury), Tip (Tooltip - Normal)
 {
@@ -5721,12 +6610,6 @@ STRING 6344
 // Abilities: A006 (Cold Fury), Ubertip (Tooltip - Normal - Extended)
 {
 Calls down cold fury, doing 180 damage a wave for 2 waves.
-}
-
-STRING 6345
-// Abilities: A0BD ([Night Elf] Chimaera Transform), Unhotkey (Hotkey - Turn Off)
-{
-Z
 }
 
 STRING 6351
@@ -5813,18 +6696,6 @@ STRING 6400
 Every 10th attack sends a wave of stars falling down from the sky dealing 100 damage on every enemy unit it hits.
 }
 
-STRING 6411
-// Abilities: A0BD ([Night Elf] Chimaera Transform), Hotkey (Hotkey - Normal)
-{
-Z
-}
-
-STRING 6424
-// Abilities: A0BU ([Night Elf] Chimaera Transform), Unhotkey (Hotkey - Turn Off)
-{
-Z
-}
-
 STRING 6435
 // Abilities: A02O (Starburn), Name (Name)
 {
@@ -5847,12 +6718,6 @@ STRING 6443
 // Abilities: A025 (Starfall), EditorSuffix (Editor Suffix)
 {
  (Star Chaser)
-}
-
-STRING 6455
-// Abilities: A0BU ([Night Elf] Chimaera Transform), Hotkey (Hotkey - Normal)
-{
-Z
 }
 
 STRING 6456
@@ -5891,22 +6756,10 @@ STRING 6464
 This unit is under the effects of Moonstorm; it has a chance to be struck by lightning.
 }
 
-STRING 6480
-// Abilities: A0BV ([Night Elf] Chimaera Transform), Unhotkey (Hotkey - Turn Off)
-{
-Z
-}
-
 STRING 6490
 // Buffs/Effects: B01E (), Bufftip (Tooltip)
 {
 Moonstorm
-}
-
-STRING 6493
-// Items: I00Z (Galaxy), Name (Name)
-{
-Galaxy
 }
 
 STRING 6497
@@ -6144,12 +6997,6 @@ STRING 6561
 // Abilities: A01E (Divine Shield), Name (Name)
 {
 Divine Shield
-}
-
-STRING 6570
-// Abilities: A0BV ([Night Elf] Chimaera Transform), Hotkey (Hotkey - Normal)
-{
-Z
 }
 
 STRING 6571
@@ -6860,12 +7707,6 @@ STRING 6829
 Berserk [|cffffcc00Z|r]
 }
 
-STRING 6830
-// Abilities: A0CA ([Cavernous Creatures] Resurrect), Hotkey (Hotkey - Normal)
-{
-Z
-}
-
 STRING 6831
 // Abilities: A03R (Berserk), Ubertip (Tooltip - Normal - Extended)
 {
@@ -6894,12 +7735,6 @@ STRING 6835
 // Abilities: A03O (Frost Nova), EditorSuffix (Editor Suffix)
 {
  (Icon)
-}
-
-STRING 6843
-// Abilities: A0CE ([Cavernous Creatures] Exponential Growth), Hotkey (Hotkey - Normal)
-{
-Z
 }
 
 STRING 6844
@@ -7614,12 +8449,6 @@ STRING 7378
 Water Spray
 }
 
-STRING 7385
-// Abilities: A0CT (Siphon Energy), Hotkey (Hotkey - Normal)
-{
-Z
-}
-
 STRING 7397
 // Abilities: A01O ([Summons] Natures Decay), Tip (Tooltip - Normal)
 {
@@ -7675,7 +8504,7 @@ STRING 7406
 }
 
 STRING 7418
-// Abilities: A0B0 (Alchemical Transmutation), Hotkey (Hotkey - Normal)
+// Upgrades: R002 (Cloud), Hotkey (Hotkey)
 {
 V
 }
@@ -7732,12 +8561,6 @@ STRING 7465
 // Abilities: A004 (Bloodlust), Ubertip (Tooltip - Normal - Extended)
 {
 Increases a friendly unit's attack rate by 40%. |nLasts 15 seconds.
-}
-
-STRING 7481
-// Abilities: A0DV (Awaken), Hotkey (Hotkey - Normal)
-{
-Z
 }
 
 STRING 7485
@@ -7798,12 +8621,6 @@ STRING 7497
 // Abilities: A08E (Thorns), Tip (Tooltip - Normal)
 {
 Thorns
-}
-
-STRING 7498
-// Abilities: A0E3 (Drink), Hotkey (Hotkey - Normal)
-{
-Z
 }
 
 STRING 7499
@@ -7968,12 +8785,6 @@ STRING 7545
 Provides Corrupted Shandris with the Poison Arrows ability, which deals bonus damage and heavily slows attacked enemy units.
 }
 
-STRING 7546
-// Abilities: A0BL ([Void Cult] Summon Void Lord), Hotkey (Hotkey - Normal)
-{
-V
-}
-
 STRING 7547
 // Upgrades: R003 (Cloud), Name (Name)
 {
@@ -8010,12 +8821,6 @@ STRING 7561
 Choose Caerbannog [|cffffcc00F|r]
 }
 
-STRING 7562
-// Items: I000 (Caerbannog), Ubertip (Tooltip - Extended)
-{
-|cFF00FF00Beginner race|r
-}
-
 STRING 7563
 // Items: I001 (Demon Portal [Geno]), Tip (Tooltip - Basic)
 {
@@ -8028,28 +8833,10 @@ STRING 7565
 Choose Undead Necropolis [|cffffcc00Q|r]
 }
 
-STRING 7570
-// Items: I006 (Human Town Hall), Ubertip (Tooltip - Extended)
-{
-|cFF00FF00Beginner race|r
-}
-
 STRING 7571
 // Items: I006 (Human Town Hall), Tip (Tooltip - Basic)
 {
 Choose Human Town Hall [|cffffcc00Q|r]
-}
-
-STRING 7572
-// Items: I009 (Giants), Ubertip (Tooltip - Extended)
-{
-|cFF00FF00Beginner race|r
-}
-
-STRING 7575
-// Items: I009 (Giants), Name (Name)
-{
-Giants
 }
 
 STRING 7576
@@ -8058,34 +8845,16 @@ STRING 7576
 Choose Giants [|cffffcc00R|r]
 }
 
-STRING 7577
-// Items: I00I (Corrupted Night Elves), Ubertip (Tooltip - Extended)
-{
-|cFF00FF00Beginner race|r
-}
-
 STRING 7578
 // Items: I00B (The Summons [Geno]), Tip (Tooltip - Basic)
 {
 Choose The Summons [|cffffcc00S|r]
 }
 
-STRING 7580
-// Items: I00O (Forest Troll Hut), Ubertip (Tooltip - Extended)
-{
-|cFF00FF00Beginner race|r
-}
-
 STRING 7581
 // Items: I00D (Draenei Haven [Geno]), Tip (Tooltip - Basic)
 {
 Choose Draenei Haven [|cffffcc00S|r]
-}
-
-STRING 7582
-// Items: I025 (High Elf Farm), Ubertip (Tooltip - Extended)
-{
-|cFF00FF00Beginner race|r
 }
 
 STRING 7585
@@ -8164,48 +8933,6 @@ STRING 7678
 // Abilities: A06V ([Demon] Howl of Terror), Ubertip (Tooltip - Normal - Extended)
 {
 Emits a terrifying howl that reduces nearby enemy units' armour by 10.
-}
-
-STRING 7707
-// Items: I002 (Undead Necropolis), Ubertip (Tooltip - Extended)
-{
-|cFFFF8033Intermediate race|r
-}
-
-STRING 7708
-// Items: I003 (Aviaries), Ubertip (Tooltip - Extended)
-{
-|cFFFF8033Intermediate race|r
-}
-
-STRING 7709
-// Items: I00H (Tavern), Ubertip (Tooltip - Extended)
-{
-|cFFFF8033Intermediate race|r
-}
-
-STRING 7710
-// Items: I00M (Gnoll Republic), Ubertip (Tooltip - Extended)
-{
-|cFFFF8033Intermediate race|r
-}
-
-STRING 7711
-// Items: I00N (Angel's Gateway), Ubertip (Tooltip - Extended)
-{
-|cFFFF4933Advanced race|r
-}
-
-STRING 7712
-// Items: I00U (Dwarven Mine), Ubertip (Tooltip - Extended)
-{
-|cFFFF4933Advanced race|r
-}
-
-STRING 7713
-// Items: I00Z (Galaxy), Ubertip (Tooltip - Extended)
-{
-|cFFFF8033Intermediate race|r
 }
 
 STRING 7731
@@ -8642,19 +9369,6 @@ STRING 7913
 [Void Fissure]
 }
 
-STRING 7918
-// Abilities: A0BK ([Void Cult] Summon Void Monstrosity), Ubertip (Tooltip - Normal - Extended)
-{
-|cffffcc00Void Fragment Cost:|r 800
-|cffffcc00Health:|r 1500
-|cffffcc00Attack:|r Chaos
-|cffffcc00Cooldown:|r 2.00
-|cffffcc00Damage:|r 2000
-|cffffcc00Range:|r 1000
-|cffffcc00Ability:|r Splash; the area of effect is 300
-|cffffcc00Ability (2):|r Void Decay; this unit is slowing decaying back into the void it will lose 60 health per second as long as its alive
-}
-
 STRING 7924
 {
 +10
@@ -8729,12 +9443,6 @@ STRING 7949
 // Abilities: A09M ([Void Cult] Cult Activity), EditorSuffix (Editor Suffix)
 {
 (Void Worshipper - Dummy Icon)
-}
-
-STRING 7952
-// Upgrades: R002 (Cloud), Hotkey (Hotkey)
-{
-V
 }
 
 STRING 7953
@@ -8971,19 +9679,6 @@ STRING 8050
 Restores 200 health to targeted void fragment costing tower, generating 10 void fragments,
 
 The mana on your builder is used to track how many void fragments you have.
-}
-
-STRING 8051
-// Abilities: A0BJ ([Void Cult] Summon Void Beast), Ubertip (Tooltip - Normal - Extended)
-{
-|cffffcc00Void Fragment Cost:|r 400
-|cffffcc00Health:|r 1000
-|cffffcc00Attack:|r Chaos
-|cffffcc00Cooldown:|r 0.25
-|cffffcc00Damage:|r 400 - 600
-|cffffcc00Range:|r Melee (ground only)
-|cffffcc00Ability:|r Void Smash; 60% to deal 300 damage in a 200 area of effect
-|cffffcc00Ability (2):|r Void Decay; this unit is slowing decaying back into the void it will lose 40 health per second as long as its alive
 }
 
 STRING 8053
@@ -9697,21 +10392,6 @@ STRING 8292
 (Nerubian Behemoth - Dummy Icon)
 }
 
-STRING 8294
-// Abilities: A0BL ([Void Cult] Summon Void Lord), Ubertip (Tooltip - Normal - Extended)
-{
-|cffffcc00Void Fragment Cost:|r 1200
-|cffffcc00Health:|r 3000
-|cffffcc00Attack:|r Chaos
-|cffffcc00Cooldown:|r 0.75
-|cffffcc00Damage:|r 500
-|cffffcc00Range:|r 1000
-|cffffcc00Ability:|r Splash; the area of effect is 400
-|cffffcc00Ability (2):|r Consume Soul; consume the soul of a void worshipper, increasing damage by 250. Replaces consumed worshipper with a Husk that can not be sold
-|cffffcc00Ability (3):|r  Void Aura; increases life regen of all void fragment costing towers by 300%
-|cffffcc00Ability (4):|r Void Decay; this unit is slowing decaying back into the void it will lose 100 health per second as long as its alive
-}
-
 STRING 8296
 // Abilities: A094 ([Void Cult] Void Aura), Ubertip (Tooltip - Normal - Extended)
 {
@@ -9938,20 +10618,6 @@ STRING 8451
 // Abilities: A06K ([Draenei] War Stomp), Ubertip (Tooltip - Normal - Extended)
 {
 Slams the ground, stunning enemy units for 3 seconds.
-}
-
-STRING 8455
-// Abilities: A0BB ([Void Cult] Summon Void Being), Ubertip (Tooltip - Normal - Extended)
-{
-|cffffcc00Void Fragment Cost:|r 100
-|cffffcc00Health:|r 600
-|cffffcc00Attack:|r Chaos
-|cffffcc00Cooldown:|r 1.00
-|cffffcc00Damage:|r 100 - 200
-|cffffcc00Range:|r 800
-|cffffcc00Ability:|r Splash; the area of effect is 250
-|cffffcc00Ability (2):|r Void Siphon; this tower restores 5 health for each enemy damaged by its attack
-|cffffcc00Ability (3):|r Void Decay; this unit is slowing decaying back into the void it will lose 20 health per second as long as its alive
 }
 
 STRING 8456
@@ -12423,13 +13089,13 @@ STRING 9365
 }
 
 STRING 9367
-// Items: I007 (Orc Stronghold [Geno]), Ubertip (Tooltip - Extended)
+// Items: I025 (High Elf Farm), Ubertip (Tooltip - Extended)
 {
 |cFF00FF00Beginner|r
 }
 
 STRING 9368
-// Items: I00S (High Elves), Ubertip (Tooltip - Extended)
+// Items: I00S (High Elves [DISABLED]), Ubertip (Tooltip - Extended)
 {
 |cFFFF4933Advanced race|r
 |cFFFF0000DISABLED|r
@@ -12762,12 +13428,6 @@ STRING 9512
 Ice Troll Joker Effect
 }
 
-STRING 9513
-// Items: I00R (Ice Troll Hut), Name (Name)
-{
-Ice Troll Hut
-}
-
 STRING 9514
 // Items: I00R (Ice Troll Hut), Ubertip (Tooltip - Extended)
 {
@@ -12777,14 +13437,8 @@ STRING 9514
 |cffffcc00Traits:|r Creep Weaking Abilities
 }
 
-STRING 9548
-// Items: I00S (High Elves), Name (Name)
-{
-High Elves
-}
-
 STRING 9549
-// Items: I00S (High Elves), Tip (Tooltip - Basic)
+// Items: I00S (High Elves [DISABLED]), Tip (Tooltip - Basic)
 {
 Choose High Elves [|cffffcc00W|r]
 }
@@ -12845,12 +13499,6 @@ STRING 9658
 Siphons the energy out of another level 1 rune. The target rune is turned to solid rock and this rune will become a fusion between the target and itself.
 }
 
-STRING 9659
-// Abilities: A0E6 (Upgrade to Undead - Level 2), Hotkey (Hotkey - Normal)
-{
-Z
-}
-
 STRING 9660
 // Abilities: A0CU (Electric), Name (Name)
 {
@@ -12906,7 +13554,7 @@ Gives a 5% chance to fire a barrage of rockets when attacking. The rockets stun 
 }
 
 STRING 9669
-// Abilities: A0CV ([Goblin] Rocket Barrage), EditorSuffix (Editor Suffix)
+// Abilities: A0CW ([Goblin] Mine Deploy), EditorSuffix (Editor Suffix)
 {
 (ICON ONLY)
 }
@@ -12930,7 +13578,7 @@ When this unit has full mana, the next attack will spawn a land mine on top of t
 }
 
 STRING 9673
-// Abilities: A0CW ([Goblin] Mine Deploy), EditorSuffix (Editor Suffix)
+// Abilities: A0CX ([Goblin] Mirror Image), EditorSuffix (Editor Suffix)
 {
 (ICON ONLY)
 }
@@ -12951,18 +13599,6 @@ STRING 9676
 // Abilities: A0CX ([Goblin] Mirror Image), Ubertip (Tooltip - Normal - Extended)
 {
 Gives a 8% chance to summon a mirror image on attack. Mirror Images pursue enemeis and deal 500-500 chaos damage.
-}
-
-STRING 9677
-// Abilities: A0CX ([Goblin] Mirror Image), EditorSuffix (Editor Suffix)
-{
-(ICON ONLY)
-}
-
-STRING 9678
-// Abilities: A0CY ([Goblin] Acid Bomb), Name (Name)
-{
-[Goblin] Acid Bomb
 }
 
 STRING 9679
@@ -13019,14 +13655,6 @@ STRING 9688
 Choose Goblins [|cffffcc00X|r]
 }
 
-STRING 9689
-// Items: I00J (Goblins), Ubertip (Tooltip - Extended)
-{
-|cFFFF8033Intermediate race|r|n|cffffcc00Damage Types:|r Magic, Normal, Siege
-|cffffcc00Towers:|r 7
-|cffffcc00Traits:|r Explosions
-}
-
 STRING 9690
 // Items: I00E (Dragons), Name (Name)
 {
@@ -13047,20 +13675,14 @@ STRING 9692
 |cffffcc00Traits:|r 2 Buildable Towers, Upgradeable Towers, Extreme Adaptibility
 }
 
-STRING 9693
-// Abilities: A0D1 (Armor Shift), Name (Name)
-{
-Armor Shift
-}
-
 STRING 9694
-// Abilities: A0D2 (Inspiring Aura), Name (Name)
+// Abilities: A0D9 (Inspiring Aura), Name (Name)
 {
 Inspiring Aura
 }
 
 STRING 9695
-// Abilities: A0D2 (Inspiring Aura), EditorSuffix (Editor Suffix)
+// Abilities: S00C (Fierce Inspiration), EditorSuffix (Editor Suffix)
 {
 Red Dragon
 }
@@ -13072,96 +13694,18 @@ Gives 15% extra damage to the attacks of nearby friendly units.
 }
 
 STRING 9697
-// Abilities: A0D2 (Inspiring Aura), Tip (Tooltip - Normal)
+// Abilities: A0D9 (Inspiring Aura), Tip (Tooltip - Normal)
 {
 Inspiring Aura
 }
 
 STRING 9698
-// Abilities: S00B (Fierce Inspiration), Name (Name)
-{
-Fierce Inspiration
-}
-
-STRING 9699
-// Abilities: S00B (Fierce Inspiration), EditorSuffix (Editor Suffix)
-{
-Red Drake
-}
-
-STRING 9700
-// Abilities: S00B (Fierce Inspiration), Ubertip (Tooltip - Normal - Extended)
-{
-Increases nearby friendly units' attack rate by 5%.
-}
-
-STRING 9701
-// Abilities: S00B (Fierce Inspiration), Tip (Tooltip - Normal)
-{
-Fierce Inspiration
-}
-
-STRING 9702
-// Abilities: S00C (Fierce Inspiration), Name (Name)
-{
-Fierce Inspiration
-}
-
-STRING 9703
-// Abilities: S00C (Fierce Inspiration), EditorSuffix (Editor Suffix)
-{
-Red Dragon
-}
-
-STRING 9704
-// Abilities: S00C (Fierce Inspiration), Ubertip (Tooltip - Normal - Extended)
-{
-Increases nearby friendly units' attack rate by 10%.
-}
-
-STRING 9705
 // Abilities: S00C (Fierce Inspiration), Tip (Tooltip - Normal)
 {
 Fierce Inspiration
 }
 
-STRING 9706
-// Abilities: A0D3 (Inspiring Aura), Name (Name)
-{
-Inspiring Aura
-}
-
-STRING 9707
-// Abilities: A0D3 (Inspiring Aura), EditorSuffix (Editor Suffix)
-{
-Red Drake
-}
-
-STRING 9708
-// Abilities: A0D3 (Inspiring Aura), Ubertip (Tooltip - Normal - Extended)
-{
-Gives 10% extra damage to the attacks of nearby friendly units.
-}
-
-STRING 9709
-// Abilities: A0D3 (Inspiring Aura), Tip (Tooltip - Normal)
-{
-Inspiring Aura
-}
-
 STRING 9710
-// Abilities: A0D4 (Time-Lock), Name (Name)
-{
-Time-Lock
-}
-
-STRING 9711
-// Abilities: A0D4 (Time-Lock), EditorSuffix (Editor Suffix)
-{
-Bronze Drake
-}
-
-STRING 9712
 // Abilities: A0D4 (Time-Lock), Tip (Tooltip - Normal)
 {
 Time-Lock
@@ -13227,40 +13771,16 @@ STRING 9725
 Green Dragon Whelp
 }
 
-STRING 9726
-// Abilities: A0D8 (Poison Dart), Ubertip (Tooltip - Normal - Extended)
-{
-Deals 10 poison damage per second. Lasts 10 seconds.
-}
-
 STRING 9727
 // Abilities: A0D8 (Poison Dart), Tip (Tooltip - Normal)
 {
 Poison Dart
 }
 
-STRING 9728
-// Abilities: A0D9 (Inspiring Aura), Name (Name)
-{
-Inspiring Aura
-}
-
-STRING 9729
-// Abilities: A0D9 (Inspiring Aura), EditorSuffix (Editor Suffix)
-{
-Red Dragon Whelp
-}
-
 STRING 9730
 // Abilities: A0D9 (Inspiring Aura), Ubertip (Tooltip - Normal - Extended)
 {
 Gives 5% extra damage to the attacks of nearby friendly units.
-}
-
-STRING 9731
-// Abilities: A0D9 (Inspiring Aura), Tip (Tooltip - Normal)
-{
-Inspiring Aura
 }
 
 STRING 9732
@@ -13353,13 +13873,6 @@ STRING 9922
 // Items: I00T (The Forsaken), Name (Name)
 {
 The Forsaken
-}
-
-STRING 9924
-// Items: I00T (The Forsaken), Ubertip (Tooltip - Extended)
-{
-|cFFFF4933Advanced race|r|n|cffffcc00Damage Types:|r Normal, Magic, Pierce, Siege, Chaos
-|cffffcc00Towers:|r 8|n|cffffcc00Traits:|r Manual Cast Spells, Micro Summoned Units
 }
 
 STRING 9925
@@ -13608,18 +14121,6 @@ STRING 9965
 Choose Shrine of Buffs [|cffffcc00Q|r]
 }
 
-STRING 9966
-// Items: I026 (Shrine of Buffs), Ubertip (Tooltip - Extended)
-{
-|c00FF0000Secondary race|r
-}
-
-STRING 9967
-// Abilities: A09Z ([Workers Union] Angry, Angry Workers), Hotkey (Hotkey - Normal)
-{
-Q
-}
-
 STRING 9975
 // Items: I005 (Outland), Name (Name)
 {
@@ -13630,13 +14131,6 @@ STRING 9976
 // Items: I005 (Outland), Tip (Tooltip - Basic)
 {
 Choose Outland [|cffffcc00A|r]
-}
-
-STRING 9978
-// Items: I005 (Outland), Ubertip (Tooltip - Extended)
-{
-|cFF00FF00Beginner race|r|n|cffffcc00Damage Types:|r Magic, Chaos
-|cffffcc00Towers:|r 8
 }
 
 STRING 9979
@@ -13731,21 +14225,9 @@ A large egg that burns as bright at the sun, nobody dears approach it as it is r
 |cffffcc00Morphing:|r Phoenix (takes 15 seconds)
 }
 
-STRING 9997
-// Upgrades: R000 (Cloud), Hotkey (Hotkey)
-{
-Z
-}
-
 STRING 9998
 // Abilities: A0DV (Awaken), Tip (Tooltip - Normal)
 {
 Awaken Phoenix Egg [|cffffcc00Z|r]
-}
-
-STRING 9999
-// Abilities: A0E8 (Disease Cloud), Tip (Tooltip - Normal)
-{
-Disease Cloud
 }
 
