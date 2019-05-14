@@ -14,18 +14,10 @@ private function InitializeQuests takes nothing returns nothing
 	call CreateQuestBJ(bj_QUESTTYPE_OPT_DISCOVERED, "Armor types", "Unarmored takes 150% damage from piercing attacks and 150% damage from siege\nLight takes 200% from piercing and 125% from magic attacks\nMedium takes 150% damage from normal, 75% from piercing, 75% from magic and 50% from siege\nHeavy armor takes 200% damage from magic attacks\nFortified takes 70% from normal, 35% from piercing, 35% from magic, 150% from siege and 50% from hero\n\nAnything unmentioned deals the standard 100% damage", "ReplaceableTextures\\CommandButtons\\BTNHumanArmorUpOne.blp")
 endfunction
 
-//===========================================================================
-private function InitTrig_Quests takes nothing returns nothing
-	set udg_trigger46=CreateTrigger()
-	call TriggerRegisterTimerEventSingle(udg_trigger46, 1.00)
-	call TriggerAddAction(udg_trigger46, function InitializeQuests)
-endfunction
-
 private function Init takes nothing returns nothing
     // This will be executed in map initialization, or near it :P
 	call InitializeQuests()
 endfunction
-
 
 endlibrary
 
