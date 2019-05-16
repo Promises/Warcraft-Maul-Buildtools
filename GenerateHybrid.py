@@ -183,7 +183,7 @@ def main():
         for tower in builders[i]["Builds"]:
             hybrid_towers[tower["UnitFunc"]["UnitId"]] = tower
         # print(i)
-
+    print(len(hybrid_towers))
     for tier in range(0, len(tier_limits)):
         towers = list()
         if tier + 1 is len(tier_limits):

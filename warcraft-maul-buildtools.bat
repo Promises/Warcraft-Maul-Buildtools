@@ -15,7 +15,7 @@ set common=%jasshelperdir%\\common.j
 set blizzard=%jasshelperdir%\\Blizzard.j
 
 echo Compiling jass...
-%toolsdir%\\JassHelper\\clijasshelper.exe %common% %blizzard% %tempdir%\\out.w3x
+REM %toolsdir%\\JassHelper\\clijasshelper.exe %common% %blizzard% %tempdir%\\out.w3x
 
 echo Adding patched jass and rebuilding...
 %toolsdir%\\MPQEditor.exe extract %tempdir%\\out.w3x war3map.j temp
@@ -25,7 +25,7 @@ echo Adding patched jass and rebuilding...
 py -3 GenerateHybrid.py
 
 echo Recompiling jass...
-%toolsdir%\\JassHelper\\clijasshelper.exe %common% %blizzard% %tempdir%\\war3map.j %tempdir%\\out.w3x
+%toolsdir%\\JassHelper\\jasshelper.exe %common% %blizzard% %tempdir%\\war3map.j %tempdir%\\out.w3x
 
 echo Extracting from out.w3x...
 %toolsdir%\\MPQEditor.exe extract %tempdir%\\out.w3x war3map.j temp

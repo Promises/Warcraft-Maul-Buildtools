@@ -15,7 +15,7 @@ common=$jasshelperdir\\common.j
 blizzard=$jasshelperdir\\Blizzard.j
 echo "Compiling jass.."
 
-WINEDEBUG=-all wine "$toolsDir\\JassHelper\\clijasshelper.exe" "$common" "$blizzard" "$tempdir\\out.w3x"
+# WINEDEBUG=-all wine "$toolsDir\\JassHelper\\clijasshelper.exe" "$common" "$blizzard" "$tempdir\\out.w3x"
 echo "Adding patched jass and rebuilding.."
 
 WINEDEBUG=-all wine "$toolsDir\\MPQEditor.exe" "extract" "$tempdir\\out.w3x" "war3map.j" "temp"
