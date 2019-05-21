@@ -423,9 +423,15 @@ Darkness
 }
 
 STRING 71
-// Buffs/Effects: B02O ([The Unique] Darkness (Buff)), Buffubertip (Tooltip - Extended)
+// Items: I022 (Wolven Fury), Ubertip (Tooltip - Extended)
 {
-This unit only sees darkness; it takes extra damage and will explode on death.
+Increases the attack damage of targeted tower by 3%, this can be applied up to 10 times.
+}
+
+STRING 72
+// Items: I028 (Wood Stick), Name (Name)
+{
+Wood Stick
 }
 
 STRING 73
@@ -716,6 +722,12 @@ STRING 120
 Royal Guard
 }
 
+STRING 121
+// Items: I028 (Wood Stick), Ubertip (Tooltip - Extended)
+{
+Restores 1 mana
+}
+
 STRING 122
 // Abilities: A00A (Storm Hammers), EditorSuffix (Editor Suffix)
 {
@@ -738,6 +750,12 @@ STRING 125
 // Abilities: A00E (Teleport), Name (Name)
 {
 Teleport
+}
+
+STRING 126
+// Items: I028 (Wood Stick), Description (Description)
+{
+Its a Stick; Restores 1 Mana
 }
 
 STRING 127
@@ -938,6 +956,24 @@ STRING 159
 A
 }
 
+STRING 160
+// Items: I02A (Gold Coin), Name (Name)
+{
+Gold Coin
+}
+
+STRING 161
+// Items: I02A (Gold Coin), Ubertip (Tooltip - Extended)
+{
+Restores 2 mana
+}
+
+STRING 162
+// Items: I02A (Gold Coin), Description (Description)
+{
+Its so, so shiny; Restores 2 Mana.
+}
+
 STRING 163
 // Abilities: A015 (Poison Arrows), Hotkey (Hotkey - Normal)
 {
@@ -1028,6 +1064,12 @@ STRING 177
 C
 }
 
+STRING 178
+// Items: I02B (Free Lootchest), Name (Name)
+{
+Free Lootchest
+}
+
 STRING 179
 // Abilities: A03R (Berserk), Hotkey (Hotkey - Normal)
 {
@@ -1078,6 +1120,12 @@ STRING 183
 |cffffcc00Range:|r 1000
 |cffffcc00Ability:|r Splash; the area of effect is 300
 |cffffcc00Ability (2):|r Void Decay; this unit is slowing decaying back into the void it will lose 60 health per second as long as its alive
+}
+
+STRING 184
+// Items: I02B (Free Lootchest), Description (Description)
+{
+0% chance of random tower; generates some free loot.
 }
 
 STRING 185
@@ -1341,6 +1389,12 @@ STRING 226
 X
 }
 
+STRING 227
+// Items: I02B (Free Lootchest), Ubertip (Tooltip - Extended)
+{
+Generates some freeloot, equivalent to a Tier 6 Lootbox
+}
+
 STRING 228
 // Abilities: A01J (Artifact Curse), Name (Name)
 {
@@ -1599,6 +1653,12 @@ STRING 270
 Increases damage by 1 for each Marine tower owned.
 }
 
+STRING 271
+// Items: I029 (Free Tower), Name (Name)
+{
+Free Tower
+}
+
 STRING 272
 // Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
 {
@@ -1810,9 +1870,9 @@ The Darkness
 }
 
 STRING 307
-// Abilities: A0EN ([Uniques] The Darkness), Ubertip (Tooltip - Normal - Extended)
+// Items: I029 (Free Tower), Ubertip (Tooltip - Extended)
 {
-Can attack 10 enemies at once, attacks increase damage taken by the target by 25%.
+Creates a free "Premium" Tower at target location
 }
 
 STRING 308
@@ -1851,6 +1911,12 @@ STRING 313
 Increases damage by 30%
 }
 
+STRING 314
+// Items: I029 (Free Tower), Description (Description)
+{
+"Premium" I call bullshit.
+}
+
 STRING 315
 // Items: I027 (Uniques [Geno]), Name (Name)
 {
@@ -1861,6 +1927,18 @@ STRING 316
 // Items: I027 (Uniques [Geno]), Tip (Tooltip - Basic)
 {
 Choose Uniques [|cffffcc00A|r]
+}
+
+STRING 317
+// Items: I02C (MaulKoinz), Name (Name)
+{
+MaulKoinz
+}
+
+STRING 318
+// Items: I02C (MaulKoinz), Ubertip (Tooltip - Extended)
+{
+Restores 6 mana
 }
 
 STRING 319
@@ -1987,6 +2065,228 @@ STRING 338
 |cFFFF8033Intermediate|r
 |cffffcc00Damage Types:|r Piercing, Chaos, Siege, Magic, Hero
 |cffffcc00Towers:|r 8
+}
+
+STRING 339
+// Items: I02C (MaulKoinz), Description (Description)
+{
+Premium Currency; Restores 6 Mana.
+}
+
+STRING 340
+// Items: I02D (Rocks), Name (Name)
+{
+Rocks
+}
+
+STRING 341
+// Items: I02D (Rocks), Description (Description)
+{
+Is it a pet?; Can be turned into random loot.
+}
+
+STRING 342
+// Items: I02D (Rocks), Ubertip (Tooltip - Extended)
+{
+Rocks can be turned into several things, including Wood Sticks, Gold Coins, Free Towers and more Rocks.
+}
+
+STRING 343
+// Abilities: A0EO (Loot Boxers Mana +1), Name (Name)
+{
+Loot Boxers Mana +1
+}
+
+STRING 344
+// Abilities: A0EP (Loot Boxers Mana +6), Name (Name)
+{
+Loot Boxers Mana +6
+}
+
+STRING 345
+// Abilities: A0EQ (Loot Boxers Mana +2), Name (Name)
+{
+Loot Boxers Mana +2
+}
+
+STRING 346
+// Abilities: A0ER (Loot Boxers Rock), Name (Name)
+{
+Loot Boxers Rock
+}
+
+STRING 347
+// Abilities: A0ES (Loot Boxers Loot Chest), Name (Name)
+{
+Loot Boxers Loot Chest
+}
+
+STRING 348
+// Abilities: A0ET (Loot Boxers Free Tower), Name (Name)
+{
+Loot Boxers Free Tower
+}
+
+STRING 349
+// Abilities: A0EU ([Workers Union] Frost Attack), Name (Name)
+{
+[Workers Union] Frost Attack
+}
+
+STRING 350
+// Abilities: A0EU ([Workers Union] Frost Attack), Ubertip (Tooltip - Normal - Extended)
+{
+Slows air units by 25% for 5 seconds.
+}
+
+STRING 351
+// Buffs/Effects: B02O ([The Unique] Darkness (Buff)), Buffubertip (Tooltip - Extended)
+{
+This unit only sees darkness; it takes extra damage.
+}
+
+STRING 352
+// Items: I023 (Feline Swiftness), Ubertip (Tooltip - Extended)
+{
+Increases the attack speed of targeted tower by 5%, this can be applied up to 10 times.
+}
+
+STRING 353
+// Items: I012 (|cff9d9d9dWeak Spear|r - (|c996d6d6dLevel 1|r)), Ubertip (Tooltip - Extended)
+{
+Increases attack damage by 3%.
+}
+
+STRING 354
+// Abilities: A0C4 ([Night Elf] Wolven Fury), Ubertip (Tooltip - Normal - Extended)
+{
+Increases attack damage by 6%.
+}
+
+STRING 355
+// Abilities: A0C4 ([Night Elf] Wolven Fury), Ubertip (Tooltip - Normal - Extended)
+{
+Increases attack damage by 9'%.
+}
+
+STRING 356
+// Abilities: A0C4 ([Night Elf] Wolven Fury), Ubertip (Tooltip - Normal - Extended)
+{
+Increases attack damage by 12%.
+}
+
+STRING 357
+// Abilities: A0C4 ([Night Elf] Wolven Fury), Ubertip (Tooltip - Normal - Extended)
+{
+Increases attack damage by 15%.
+}
+
+STRING 358
+// Abilities: A0C4 ([Night Elf] Wolven Fury), Ubertip (Tooltip - Normal - Extended)
+{
+Increases attack damage by 18%.
+}
+
+STRING 359
+// Abilities: A0C4 ([Night Elf] Wolven Fury), Ubertip (Tooltip - Normal - Extended)
+{
+Increases attack damage by 21%.
+}
+
+STRING 360
+// Abilities: A0C4 ([Night Elf] Wolven Fury), Ubertip (Tooltip - Normal - Extended)
+{
+Increases attack damage by 24%.
+}
+
+STRING 361
+// Abilities: A0C4 ([Night Elf] Wolven Fury), Ubertip (Tooltip - Normal - Extended)
+{
+Increases attack damage by 27%.
+}
+
+STRING 362
+// Abilities: A0C4 ([Night Elf] Wolven Fury), Ubertip (Tooltip - Normal - Extended)
+{
+Increases attack damage by 30%.
+}
+
+STRING 363
+// Abilities: S007 ([Night Elf] Feline Swiftness), Ubertip (Tooltip - Normal - Extended)
+{
+Increases attack speed by 5%.
+}
+
+STRING 364
+// Abilities: S007 ([Night Elf] Feline Swiftness), Ubertip (Tooltip - Normal - Extended)
+{
+Increases attack speed by 15%.
+}
+
+STRING 365
+// Abilities: S007 ([Night Elf] Feline Swiftness), Ubertip (Tooltip - Normal - Extended)
+{
+Increases attack speed by 25%.
+}
+
+STRING 366
+// Abilities: S007 ([Night Elf] Feline Swiftness), Ubertip (Tooltip - Normal - Extended)
+{
+Increases attack speed by 35%.
+}
+
+STRING 367
+// Abilities: S007 ([Night Elf] Feline Swiftness), Ubertip (Tooltip - Normal - Extended)
+{
+Increases attack speed by 45%.
+}
+
+STRING 368
+// Abilities: A0EV (Rain of Arrows), Tip (Tooltip - Normal)
+{
+Rain of Arrows
+}
+
+STRING 369
+// Abilities: A0EV (Rain of Arrows), Ubertip (Tooltip - Normal - Extended)
+{
+Sylvanus will shoot arrows faster than any man, allowing up to 15 enemies to be hit.
+}
+
+STRING 370
+// Abilities: A0EV (Rain of Arrows), Name (Name)
+{
+Rain of Arrows
+}
+
+STRING 371
+// Abilities: A0EV (Rain of Arrows), EditorSuffix (Editor Suffix)
+{
+ (H E Sylvanus)
+}
+
+STRING 372
+// Abilities: A0EW (Rain of Arrows), Name (Name)
+{
+Rain of Arrows
+}
+
+STRING 373
+// Abilities: A0EW (Rain of Arrows), EditorSuffix (Editor Suffix)
+{
+ (H E Sylvanus)
+}
+
+STRING 374
+// Abilities: A0EW (Rain of Arrows), Ubertip (Tooltip - Normal - Extended)
+{
+Sylvanus will shoot arrows faster than any man, allowing up to 15 enemies to be hit.
+}
+
+STRING 375
+// Abilities: A0EW (Rain of Arrows), Tip (Tooltip - Normal)
+{
+Rain of Arrows
 }
 
 STRING 427
@@ -7814,7 +8114,7 @@ Gives a 50% chance to deal 6% more damage.
 }
 
 STRING 6934
-// Items: I012 (|cff9d9d9dWeak Spear|r - (|c996d6d6dLevel 1|r)), Ubertip (Tooltip - Extended)
+// Abilities: A0C4 ([Night Elf] Wolven Fury), Ubertip (Tooltip - Normal - Extended)
 {
 Increases attack damage by 3%.
 }
@@ -12261,63 +12561,15 @@ Wolven Fury - Level 10
 }
 
 STRING 9078
-// Abilities: A0C4 ([Night Elf] Wolven Fury), Ubertip (Tooltip - Normal - Extended)
+// Abilities: A0BX ([Night Elf] Natures Blessing), Ubertip (Tooltip - Normal - Extended)
 {
 Increases attack damage by 40.
 }
 
 STRING 9079
-// Abilities: A0C4 ([Night Elf] Wolven Fury), Ubertip (Tooltip - Normal - Extended)
+// Abilities: A0BX ([Night Elf] Natures Blessing), Ubertip (Tooltip - Normal - Extended)
 {
 Increases attack damage by 80.
-}
-
-STRING 9080
-// Abilities: A0C4 ([Night Elf] Wolven Fury), Ubertip (Tooltip - Normal - Extended)
-{
-Increases attack damage by 120.
-}
-
-STRING 9081
-// Abilities: A0C4 ([Night Elf] Wolven Fury), Ubertip (Tooltip - Normal - Extended)
-{
-Increases attack damage by 160.
-}
-
-STRING 9082
-// Abilities: A0C4 ([Night Elf] Wolven Fury), Ubertip (Tooltip - Normal - Extended)
-{
-Increases attack damage by 200.
-}
-
-STRING 9083
-// Abilities: A0C4 ([Night Elf] Wolven Fury), Ubertip (Tooltip - Normal - Extended)
-{
-Increases attack damage by 240.
-}
-
-STRING 9084
-// Abilities: A0C4 ([Night Elf] Wolven Fury), Ubertip (Tooltip - Normal - Extended)
-{
-Increases attack damage by 280.
-}
-
-STRING 9085
-// Abilities: A0C4 ([Night Elf] Wolven Fury), Ubertip (Tooltip - Normal - Extended)
-{
-Increases attack damage by 320.
-}
-
-STRING 9086
-// Abilities: A0C4 ([Night Elf] Wolven Fury), Ubertip (Tooltip - Normal - Extended)
-{
-Increases attack damage by 360.
-}
-
-STRING 9087
-// Abilities: A0C4 ([Night Elf] Wolven Fury), Ubertip (Tooltip - Normal - Extended)
-{
-Increases attack damage by 400.
 }
 
 STRING 9088
@@ -12410,36 +12662,6 @@ STRING 9102
 Increases attack speed by 50%.
 }
 
-STRING 9103
-// Abilities: S007 ([Night Elf] Feline Swiftness), Ubertip (Tooltip - Normal - Extended)
-{
-Increases attack speed by 60%.
-}
-
-STRING 9104
-// Abilities: S007 ([Night Elf] Feline Swiftness), Ubertip (Tooltip - Normal - Extended)
-{
-Increases attack speed by 70%.
-}
-
-STRING 9105
-// Abilities: S007 ([Night Elf] Feline Swiftness), Ubertip (Tooltip - Normal - Extended)
-{
-Increases attack speed by 80%.
-}
-
-STRING 9106
-// Abilities: S007 ([Night Elf] Feline Swiftness), Ubertip (Tooltip - Normal - Extended)
-{
-Increases attack speed by 90%.
-}
-
-STRING 9107
-// Abilities: S007 ([Night Elf] Feline Swiftness), Ubertip (Tooltip - Normal - Extended)
-{
-Increases attack speed by 100%.
-}
-
 STRING 9108
 // Abilities: S009 ([Night Elf] Natures Blessing), Ubertip (Tooltip - Normal - Extended)
 {
@@ -12506,22 +12728,10 @@ STRING 9118
 Increases attack damage by 20.
 }
 
-STRING 9119
-// Abilities: A0BX ([Night Elf] Natures Blessing), Ubertip (Tooltip - Normal - Extended)
-{
-Increases attack damage by 40.
-}
-
 STRING 9120
 // Abilities: A0BX ([Night Elf] Natures Blessing), Ubertip (Tooltip - Normal - Extended)
 {
 Increases attack damage by 60.
-}
-
-STRING 9121
-// Abilities: A0BX ([Night Elf] Natures Blessing), Ubertip (Tooltip - Normal - Extended)
-{
-Increases attack damage by 80.
 }
 
 STRING 9122
@@ -12534,18 +12744,6 @@ STRING 9123
 // Items: I021 (Natures Blessing), Ubertip (Tooltip - Extended)
 {
 Increases damage of targeted tower by 20 and increases the attack speed by 5%, this can be applied up to 5 times.
-}
-
-STRING 9124
-// Items: I022 (Wolven Fury), Ubertip (Tooltip - Extended)
-{
-Increases the attack damage of targeted tower by 40, this can be applied up to 10 times.
-}
-
-STRING 9125
-// Items: I023 (Feline Swiftness), Ubertip (Tooltip - Extended)
-{
-Increases the attack speed of targeted tower by 10%, this can be applied up to 10 times.
 }
 
 STRING 9127
@@ -14229,5 +14427,11 @@ STRING 9998
 // Abilities: A0DV (Awaken), Tip (Tooltip - Normal)
 {
 Awaken Phoenix Egg [|cffffcc00Z|r]
+}
+
+STRING 9999
+// Abilities: A0EN ([Uniques] The Darkness), Ubertip (Tooltip - Normal - Extended)
+{
+Can attack 5 enemies at once, attacks increase damage taken by the target by 25%.
 }
 
