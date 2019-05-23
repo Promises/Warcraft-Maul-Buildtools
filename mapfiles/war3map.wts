@@ -1360,19 +1360,19 @@ Inspiring Aura
 }
 
 STRING 222
-// Abilities: A0BT ([Night Elf] Chimaera Transform), Unhotkey (Hotkey - Turn Off)
+// Abilities: A0BF ([Void Cult] Pay the Toll), Hotkey (Hotkey - Normal)
 {
 Z
 }
 
 STRING 223
-// Abilities: A0BT ([Night Elf] Chimaera Transform), Hotkey (Hotkey - Normal)
+// Abilities: A0BT ([Night Elf] Chimaera Transform), Unhotkey (Hotkey - Turn Off)
 {
 Z
 }
 
 STRING 224
-// Abilities: A0BD ([Night Elf] Chimaera Transform), Unhotkey (Hotkey - Turn Off)
+// Abilities: A0BT ([Night Elf] Chimaera Transform), Hotkey (Hotkey - Normal)
 {
 Z
 }
@@ -1420,7 +1420,7 @@ An Oceanmaster is nearby
 }
 
 STRING 232
-// Abilities: A0BD ([Night Elf] Chimaera Transform), Hotkey (Hotkey - Normal)
+// Abilities: A0BD ([Night Elf] Chimaera Transform), Unhotkey (Hotkey - Turn Off)
 {
 Z
 }
@@ -2074,19 +2074,19 @@ Premium Currency; Restores 6 Mana.
 }
 
 STRING 340
-// Items: I02D (Rocks), Name (Name)
+// Items: I02F (Rocks), Name (Name)
 {
 Rocks
 }
 
 STRING 341
-// Items: I02D (Rocks), Description (Description)
+// Items: I02F (Rocks), Description (Description)
 {
 Is it a pet?; Can be turned into random loot.
 }
 
 STRING 342
-// Items: I02D (Rocks), Ubertip (Tooltip - Extended)
+// Items: I02F (Rocks), Ubertip (Tooltip - Extended)
 {
 Rocks can be turned into several things, including Wood Sticks, Gold Coins, Free Towers and more Rocks.
 }
@@ -2358,8 +2358,38 @@ STRING 386
 |cffffcc00Traits:|r Mazing Tower, Huge Splash Damage
 }
 
+STRING 387
+// Abilities: A0CE ([Cavernous Creatures] Exponential Growth), Ubertip (Tooltip - Normal - Extended)
+{
+Transforms the Cavern Frog into a Mutated Frog.
+
+|cffffcc00Attack:|r Magic
+|cffffcc00Cooldown:|r 0.75
+|cffffcc00Damage:|r 200
+|cffffcc00Range:|r 600
+|cffffcc00Ability:|r Splash; the area of effect is 120
+}
+
+STRING 388
+// Abilities: A0BF ([Void Cult] Pay the Toll), Name (Name)
+{
+[Void Cult] Pay the Toll
+}
+
+STRING 389
+// Abilities: A0BF ([Void Cult] Pay the Toll), Tip (Tooltip - Normal)
+{
+Pay the Toll [|cffffcc00Z|r]
+}
+
+STRING 390
+// Abilities: A0BF ([Void Cult] Pay the Toll), Ubertip (Tooltip - Normal - Extended)
+{
+Pay 50 gold to remove this unit.
+}
+
 STRING 391
-// Abilities: A0BU ([Night Elf] Chimaera Transform), Unhotkey (Hotkey - Turn Off)
+// Abilities: A0BD ([Night Elf] Chimaera Transform), Hotkey (Hotkey - Normal)
 {
 Z
 }
@@ -2443,6 +2473,12 @@ STRING 400
 20% Lootchest
 15% Wood
 5% Coin
+}
+
+STRING 401
+// Abilities: A0BU ([Night Elf] Chimaera Transform), Unhotkey (Hotkey - Turn Off)
+{
+Z
 }
 
 STRING 427
@@ -11685,12 +11721,6 @@ STRING 8758
 [Extra] Channel
 }
 
-STRING 8759
-// Abilities: A0BF ([Extra] Channel), Name (Name)
-{
-[Extra] Channel
-}
-
 STRING 8767
 // Abilities: A0B1 ([Night Elf] Natures Nourishment), Tip (Tooltip - Normal)
 {
@@ -13344,18 +13374,6 @@ STRING 9345
 // Abilities: A0BE ([Human] Death Strike), Ubertip (Tooltip - Normal - Extended)
 {
 Gives a 20% chance to do 5 times total damage on an attack.
-}
-
-STRING 9347
-// Abilities: A0CE ([Cavernous Creatures] Exponential Growth), Ubertip (Tooltip - Normal - Extended)
-{
-Transforms the Cavern Frog into a Mutated Frog.
-
-|cffffcc00Attack:|r Magic
-|cffffcc00Cooldown:|r 0.75
-|cffffcc00Damage:|r 300
-|cffffcc00Range:|r 600
-|cffffcc00Ability:|r Splash; the area of effect is 120
 }
 
 STRING 9351
