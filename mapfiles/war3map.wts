@@ -2289,8 +2289,164 @@ STRING 375
 Rain of Arrows
 }
 
-STRING 427
+STRING 376
+// Abilities: A0EX ([Loot Boxers] Open Lootbox), Name (Name)
+{
+[Loot Boxers] Open Lootbox
+}
+
+STRING 377
+// Abilities: A0EX ([Loot Boxers] Open Lootbox), Tip (Tooltip - Normal)
+{
+Open Lootbox [|cffffcc00Z|r]
+}
+
+STRING 378
+// Abilities: A0EX ([Loot Boxers] Open Lootbox), Tip (Tooltip - Normal)
+{
+Open Lootbox [|cffffcc00Z|r]
+}
+
+STRING 379
+// Abilities: A0EX ([Loot Boxers] Open Lootbox), Tip (Tooltip - Normal)
+{
+Open Lootbox [|cffffcc00Z|r]
+}
+
+STRING 380
+// Abilities: A0EX ([Loot Boxers] Open Lootbox), Tip (Tooltip - Normal)
+{
+Open Lootbox [|cffffcc00Z|r]
+}
+
+STRING 381
+// Abilities: A0EX ([Loot Boxers] Open Lootbox), Tip (Tooltip - Normal)
+{
+Open Lootbox [|cffffcc00Z|r]
+}
+
+STRING 382
+// Abilities: A0EX ([Loot Boxers] Open Lootbox), Tip (Tooltip - Normal)
+{
+Open Lootbox [|cffffcc00Z|r]
+}
+
+STRING 383
+// Abilities: A0EX ([Loot Boxers] Open Lootbox), Tip (Tooltip - Normal)
+{
+Open Lootbox [|cffffcc00Z|r]
+}
+
+STRING 384
+// Abilities: A0EX ([Loot Boxers] Open Lootbox), Tip (Tooltip - Normal)
+{
+Open Lootbox [|cffffcc00Z|r]
+}
+
+STRING 385
+// Abilities: A0EX ([Loot Boxers] Open Lootbox), Tip (Tooltip - Normal)
+{
+Open Lootbox [|cffffcc00Z|r]
+}
+
+STRING 386
+// Items: I00L (Critters [Geno]), Ubertip (Tooltip - Extended)
+{
+|cFF00FF00Beginner|r
+|cffffcc00Damage Type:|r Chaos, Magic
+|cffffcc00Towers:|r 8
+|cffffcc00Traits:|r Mazing Tower, Huge Splash Damage
+}
+
+STRING 391
 // Abilities: A0BU ([Night Elf] Chimaera Transform), Unhotkey (Hotkey - Turn Off)
+{
+Z
+}
+
+STRING 392
+// Abilities: A0EX ([Loot Boxers] Open Lootbox), Ubertip (Tooltip - Normal - Extended)
+{
+95% Rocks
+4% "Premium" Tower
+1% Lootchest
+}
+
+STRING 393
+// Abilities: A0EX ([Loot Boxers] Open Lootbox), Ubertip (Tooltip - Normal - Extended)
+{
+90% Rocks
+6% "Premium" Tower
+4% Lootchest
+}
+
+STRING 394
+// Abilities: A0EX ([Loot Boxers] Open Lootbox), Ubertip (Tooltip - Normal - Extended)
+{
+85% Rocks
+10% "Premium" Tower
+5% Lootchest
+}
+
+STRING 395
+// Abilities: A0EX ([Loot Boxers] Open Lootbox), Ubertip (Tooltip - Normal - Extended)
+{
+80% Rocks
+10% "Premium" Tower
+8% Lootchest
+2% Stick
+}
+
+STRING 396
+// Abilities: A0EX ([Loot Boxers] Open Lootbox), Ubertip (Tooltip - Normal - Extended)
+{
+70% Rocks
+15% "Premium" Tower
+10% Lootchest
+5% Stick
+}
+
+STRING 397
+// Abilities: A0EX ([Loot Boxers] Open Lootbox), Ubertip (Tooltip - Normal - Extended)
+{
+30% Rocks
+30% Stick
+20% Coin
+10% Lootchest
+10% MaulKoinz
+}
+
+STRING 398
+// Abilities: A0EX ([Loot Boxers] Open Lootbox), Ubertip (Tooltip - Normal - Extended)
+{
+40% Rocks
+25% Stick
+15% Coin
+12% Lootchest
+8% MaulKoinz
+}
+
+STRING 399
+// Abilities: A0EX ([Loot Boxers] Open Lootbox), Ubertip (Tooltip - Normal - Extended)
+{
+50% Rocks
+20% Stick
+15% Lootchest
+10% Coin
+5% MaulKoinz
+}
+
+STRING 400
+// Abilities: A0EX ([Loot Boxers] Open Lootbox), Ubertip (Tooltip - Normal - Extended)
+{
+60% Rocks
+20% Lootchest
+15% Wood
+5% Coin
+}
+
+STRING 427
+// Abilities: A0BU ([Night Elf] Chimaera Transform), Hotkey (Hotkey - Normal)
 {
 Z
 }
@@ -2320,13 +2476,13 @@ V
 }
 
 STRING 1511
-// Abilities: A0BU ([Night Elf] Chimaera Transform), Hotkey (Hotkey - Normal)
+// Abilities: A0BV ([Night Elf] Chimaera Transform), Unhotkey (Hotkey - Turn Off)
 {
 Z
 }
 
 STRING 1515
-// Abilities: A0BV ([Night Elf] Chimaera Transform), Unhotkey (Hotkey - Turn Off)
+// Abilities: A0BV ([Night Elf] Chimaera Transform), Hotkey (Hotkey - Normal)
 {
 Z
 }
@@ -4876,13 +5032,13 @@ BrandTheOne, hunts people to go to hell for the above.  Earns slight money for e
 }
 
 STRING 4478
-// Abilities: A0BV ([Night Elf] Chimaera Transform), Hotkey (Hotkey - Normal)
+// Abilities: A0CA ([Cavernous Creatures] Resurrect), Hotkey (Hotkey - Normal)
 {
 Z
 }
 
 STRING 4571
-// Abilities: A0CA ([Cavernous Creatures] Resurrect), Hotkey (Hotkey - Normal)
+// Abilities: A0CE ([Cavernous Creatures] Exponential Growth), Hotkey (Hotkey - Normal)
 {
 Z
 }
@@ -4912,7 +5068,7 @@ STRING 4619
 }
 
 STRING 4670
-// Abilities: A0CE ([Cavernous Creatures] Exponential Growth), Hotkey (Hotkey - Normal)
+// Abilities: A0CT (Siphon Energy), Hotkey (Hotkey - Normal)
 {
 Z
 }
@@ -4924,7 +5080,7 @@ Choose Angel's Gateway [|cffffcc00R|r]
 }
 
 STRING 4694
-// Abilities: A0CT (Siphon Energy), Hotkey (Hotkey - Normal)
+// Abilities: A0DV (Awaken), Hotkey (Hotkey - Normal)
 {
 Z
 }
@@ -4996,7 +5152,7 @@ STRING 5008
 }
 
 STRING 5009
-// Abilities: A0DV (Awaken), Hotkey (Hotkey - Normal)
+// Abilities: A0E3 (Drink), Hotkey (Hotkey - Normal)
 {
 Z
 }
@@ -5750,7 +5906,7 @@ This unit has a leader in sight; his attack damage has been increased.
 }
 
 STRING 5309
-// Abilities: A0E3 (Drink), Hotkey (Hotkey - Normal)
+// Abilities: A0E6 (Upgrade to Undead - Level 2), Hotkey (Hotkey - Normal)
 {
 Z
 }
@@ -5943,7 +6099,7 @@ Random
 }
 
 STRING 5458
-// Abilities: A0E6 (Upgrade to Undead - Level 2), Hotkey (Hotkey - Normal)
+// Abilities: A0EX ([Loot Boxers] Open Lootbox), Hotkey (Hotkey - Normal)
 {
 Z
 }
@@ -12780,15 +12936,6 @@ STRING 9137
 // Items: I003 (Aviaries), Tip (Tooltip - Basic)
 {
 Choose Aviaries [|cffffcc00E|r]
-}
-
-STRING 9138
-// Items: I00L (Critters [Geno]), Ubertip (Tooltip - Extended)
-{
-|cFF00FF00Beginner|r
-|cffffcc00Damage Type:|r Chaos
-|cffffcc00Towers:|r 8
-|cffffcc00Traits:|r Mazing Tower, Huge Splash Damage
 }
 
 STRING 9139
