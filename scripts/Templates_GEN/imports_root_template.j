@@ -1,8 +1,6 @@
 // Imports start
-//! import vjass "Utility.j"
-//! import vjass "Quests.j"
-//! import vjass "TestLib.j"
 
+{{GENERATE}}
 
 
 // Imports end

@@ -8,4 +8,6 @@ lastrig.j
 .idea
 units.json
 scripts/Quests.j
+scripts/HybridRandom.j
 scripts/TestLib.j
+imports.j

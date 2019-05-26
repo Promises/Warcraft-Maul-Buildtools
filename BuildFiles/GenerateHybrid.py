@@ -22,15 +22,82 @@ class Quest:
                 self.stype, self.title, self.body, self.icon)
 
 
+def create_all_imports():
+    base_path='scripts'
+    folders = []
+    for r, d, f in os.walk(base_path):
+        for folder in d:
+            exists = os.path.isfile(os.path.join(r, folder, 'ignore_import.j'))
+            if not exists:
+                folders.append(os.path.join(r, folder))
+
+
+    template = list()
+
+    with open('scripts/Templates_GEN/imports_template.j') as f:
+        template = f.read().splitlines()
+
+
+    stripped_list = list(map(str.strip, template))
+    pivot = stripped_list.index("{{GENERATE}}")
+
+
+    for folder in folders:
+        filelist = os.listdir(folder)
+        to_be_imported = list()
+
+        for file in filelist:
+
+            if file[len(file)-2:] == '.j' and file != 'imports.j':
+
+                to_be_imported.append('//! import vjass \"'+file+'"')
+
+        folder_imports = template[0:pivot - 1]
+        folder_imports += to_be_imported
+        folder_imports += template[pivot + 1:]
+
+        with open(os.path.join(folder, 'imports.j'), 'w') as f:
+            for item in folder_imports:
+                f.write("%s\n" % item)
+    
+    with open('scripts/Templates_GEN/imports_root_template.j') as f:
+        template = f.read().splitlines()
+
+
+    stripped_list = list(map(str.strip, template))
+    pivot = stripped_list.index("{{GENERATE}}")
+
+    to_be_imported = list()
+
+    for folder in folders:
+        to_be_imported.append('//! import vjass \"'+folder.replace(base_path+'/','')+'/imports.j"')
+
+    filelist = os.listdir(base_path)
+
+    for file in filelist:
+
+        if file[len(file) - 2:] == '.j' and file != 'imports.j' and file != 'main.j':
+            to_be_imported.append('//! import vjass \"' + file + '"')
+
+    folder_imports = template[0:pivot - 1]
+    folder_imports += to_be_imported
+    folder_imports += template[pivot + 1:]
+
+    with open(os.path.join(base_path, 'imports.j'), 'w') as f:
+        for item in folder_imports:
+            f.write("%s\n" % item)
+
+
+
 
 
 def get_all_quests():
     quest_list = list()
-    files = os.listdir('scripts/Quests')
+    files = os.listdir('Quests')
     files = [file for file in files if '.md' in file]
     files = sorted(files)
     for f in files:
-        with open(os.path.join('scripts/Quests', f)) as file:
+        with open(os.path.join('Quests', f)) as file:
             lines = file.read().splitlines()
             header = list()
             body = list()
@@ -64,7 +131,7 @@ def get_all_quests():
 
     template = list()
 
-    with open('scripts/quests_template.j') as f:
+    with open('scripts/Templates_GEN/quests_template.j') as f:
         template = f.read().splitlines()
 
     stripped_list = list(map(str.strip, template))
@@ -160,7 +227,7 @@ def main():
     tier_towers = list()
     template = list()
 
-    with open('scripts/hybrid_template.j') as f:
+    with open('scripts/Templates_GEN/hybrid_template.j') as f:
         template = f.read().splitlines()
 
     stripped_list = list(map(str.strip, template))
@@ -220,12 +287,14 @@ def main():
     generated_library += generated_hybrid_list
     generated_library += template[pivot + 1:]
 
-    with open('scripts/TestLib.j', 'w') as f:
+    with open('scripts/Races/HybridRandom.j', 'w') as f:
         for item in generated_library:
             f.write("%s\n" % item)
 
     # print(data[0]["Builds"])
     get_all_quests()
+
+    create_all_imports()
 
 
 if __name__ == "__main__":

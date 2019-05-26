@@ -15,15 +15,15 @@ common=$jasshelperdir\\common.j
 blizzard=$jasshelperdir\\Blizzard.j
 echo "Compiling jass.."
 
-WINEDEBUG=-all wine "$toolsDir\\JassHelper\\clijasshelper.exe" "$common" "$blizzard" "$tempdir\\out.w3x"
+WINEDEBUG=-all wine "$toolsDir\\JassHelper\\jasshelper.exe" "$common" "$blizzard" "$tempdir\\out.w3x"
 echo "Adding patched jass and rebuilding.."
 
 WINEDEBUG=-all wine "$toolsDir\\MPQEditor.exe" "extract" "$tempdir\\out.w3x" "war3map.j" "temp"
-sed -i '' '1s/^/\/\/! import \"scripts\/imports.j\"\n/' "temp/war3map.j"
+sed -i '1s/^/\/\/! import \"scripts\/imports.j\"\n/' "temp/war3map.j" 
 
-python3 GenerateHybrid.py
+python3 BuildFiles/GenerateHybrid.py
 echo "Recompiling jass.."
-WINEDEBUG=-all wine "$toolsDir\\JassHelper\\clijasshelper.exe" "$common" "$blizzard" "$tempdir\\war3map.j" "$tempdir\\out.w3x"
+WINEDEBUG=-all wine "$toolsDir\\JassHelper\\jasshelper.exe" "$common" "$blizzard" "$tempdir\\war3map.j" "$tempdir\\out.w3x"
 
 
 echo "Cleaning up.."
