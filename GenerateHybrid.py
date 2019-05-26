@@ -26,11 +26,11 @@ class Quest:
 
 def get_all_quests():
     quest_list = list()
-    files = os.listdir('scripts/Quests')
+    files = os.listdir('Quests')
     files = [file for file in files if '.md' in file]
     files = sorted(files)
     for f in files:
-        with open(os.path.join('scripts/Quests', f)) as file:
+        with open(os.path.join('Quests', f)) as file:
             lines = file.read().splitlines()
             header = list()
             body = list()
@@ -64,7 +64,7 @@ def get_all_quests():
 
     template = list()
 
-    with open('scripts/quests_template.j') as f:
+    with open('scripts/Templates_GEN/quests_template.j') as f:
         template = f.read().splitlines()
 
     stripped_list = list(map(str.strip, template))
@@ -160,7 +160,7 @@ def main():
     tier_towers = list()
     template = list()
 
-    with open('scripts/hybrid_template.j') as f:
+    with open('scripts/Templates_GEN/hybrid_template.j') as f:
         template = f.read().splitlines()
 
     stripped_list = list(map(str.strip, template))
@@ -220,7 +220,7 @@ def main():
     generated_library += generated_hybrid_list
     generated_library += template[pivot + 1:]
 
-    with open('scripts/TestLib.j', 'w') as f:
+    with open('scripts/HybridRandom.j', 'w') as f:
         for item in generated_library:
             f.write("%s\n" % item)
 

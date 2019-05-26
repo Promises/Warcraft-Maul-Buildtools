@@ -14,7 +14,8 @@
 
 
     call InitGlobals()
-
+    set udg_RaceSelectionEnabled = false
+    
     //! dovjassinit
 
     call InitCustomTriggers()
