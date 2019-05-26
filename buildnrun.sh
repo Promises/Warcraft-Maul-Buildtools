@@ -1,3 +1,3 @@
 #!/bin/bash
 sh unixbuild.sh
-sh macrun.sh
+sh BuildFiles/Scripts/macrun.sh
