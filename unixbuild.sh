@@ -1,7 +1,7 @@
-sh bb1.sh
+sh BuildBot1.sh
 Warcraft-Maul-Race-Parser mapfiles/Units/ units.json
-python3 GenerateHybrid.py
-sh bb2.sh
+python3 BuildFiles/GenerateHybrid.py
+sh BuildBot2.sh
 
 
 dd conv=notrunc bs=512 count=1 of=out.w3x if=BuildFiles/header.bin
