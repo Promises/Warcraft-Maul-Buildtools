@@ -110,9 +110,12 @@ library StaticDefinitions initializer InitStatics
         set udg_RaceArray[30]='n04I' // Temple Of The Damned
         set udg_RaceArray[31]='e00H' // Dwarven Mine
         set udg_RaceArray[32]='e00G' // Galaxy
-        set udg_RaceArray[33]='u01B' // Shrine of Buffs
+        set udg_RaceArray[33]='h03L' // Workers Union
+        set udg_RaceArray[34]='u043' // Loot Boxer
+
+        set udg_RaceArray[35]='u01B' // Shrine of Buffs
         
-        set udg_RacesCount=32
+        set udg_RacesCount=34
 
         set udg_RaceNameArray[0]="Workers Union"
         set udg_RaceNameArray[1]="Demon Portal"
@@ -147,7 +150,10 @@ library StaticDefinitions initializer InitStatics
         set udg_RaceNameArray[30]="The Forsaken"
         set udg_RaceNameArray[31]="Dwarven Mine"
         set udg_RaceNameArray[32]="Galaxy"
-        set udg_RaceNameArray[33]="Shrine of Buffs"
+        set udg_RaceNameArray[33]="Workers Union"
+        set udg_RaceNameArray[34]="Loot Boxer"
+
+        set udg_RaceNameArray[35]="Shrine of Buffs"
     endfunction
 
 endlibrary
