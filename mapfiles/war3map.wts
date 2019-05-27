@@ -849,7 +849,7 @@ STRING 141
 }
 
 STRING 142
-// Abilities: A03V (Assertiveness Training), Hotkey (Hotkey - Normal)
+// Items: I02D (Loot Boxers [Geno]), Hotkey (Hotkey)
 {
 Q
 }
@@ -909,7 +909,7 @@ C
 }
 
 STRING 152
-// Abilities: A078 (Dazzle), Hotkey (Hotkey - Normal)
+// Abilities: A03V (Assertiveness Training), Hotkey (Hotkey - Normal)
 {
 Q
 }
@@ -921,7 +921,7 @@ X
 }
 
 STRING 154
-// Abilities: A07N ( Allow 01 - Red), Hotkey (Hotkey - Normal)
+// Abilities: A078 (Dazzle), Hotkey (Hotkey - Normal)
 {
 Q
 }
@@ -1017,13 +1017,13 @@ Z
 }
 
 STRING 170
-// Abilities: A07P ( Deny 01 - Red), Hotkey (Hotkey - Normal)
+// Abilities: A07N ( Allow 01 - Red), Hotkey (Hotkey - Normal)
 {
 Q
 }
 
 STRING 171
-// Abilities: A09Z ([Workers Union] Angry, Angry Workers), Unhotkey (Hotkey - Turn Off)
+// Abilities: A07P ( Deny 01 - Red), Hotkey (Hotkey - Normal)
 {
 Q
 }
@@ -2481,6 +2481,33 @@ STRING 401
 Z
 }
 
+STRING 402
+// Items: I02D (Loot Boxers [Geno]), Name (Name)
+{
+Loot Boxers [Geno]
+}
+
+STRING 403
+// Items: I02D (Loot Boxers [Geno]), Tip (Tooltip - Basic)
+{
+Choose Loot Boxers [|cffffcc00Q|r]
+}
+
+STRING 404
+// Items: I02D (Loot Boxers [Geno]), Ubertip (Tooltip - Extended)
+{
+|cFFFF4933Advanced|r
+|cffffcc00Damage Types:|r Random
+|cffffcc00Towers:|r 9
+|cffffcc00Traits:|r Lootboxes, Random Towers
+}
+
+STRING 405
+// Abilities: A09Z ([Workers Union] Angry, Angry Workers), Hotkey (Hotkey - Normal)
+{
+Q
+}
+
 STRING 427
 // Abilities: A0BU ([Night Elf] Chimaera Transform), Hotkey (Hotkey - Normal)
 {
@@ -3256,7 +3283,7 @@ This unit is caught in Decay; it will take damage over time.
 }
 
 STRING 2776
-// Abilities: A09Z ([Workers Union] Angry, Angry Workers), Hotkey (Hotkey - Normal)
+// Abilities: A09Z ([Workers Union] Angry, Angry Workers), Unhotkey (Hotkey - Turn Off)
 {
 Q
 }

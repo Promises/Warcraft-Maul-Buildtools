@@ -4,7 +4,7 @@ library TestLib initializer Init requires Utility
 
     private function setUpHybrid takes nothing returns nothing
          call Utility_DisplayMessageToAllPlayers("Welcome to Warcraft Maul Reimagined")
-         call Utility_DisplayMessageToAllPlayers("This is build: NaN, built May 26 2019.")
+         call Utility_DisplayMessageToAllPlayers("This is build: NaN, built May 27 2019.")
          //========== TIER: One
          set udg_TierOneTowers[0] = 'u00C' // [Forsaken] - Tombstone
          set udg_TierOneTowers[1] = 'h00Z' // [Dragons] - Dragonkin
