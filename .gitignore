@@ -9,5 +9,6 @@ lastrig.j
 units.json
 scripts/Quests.j
 scripts/HybridRandom.j
+scripts/Races/HybridRandom.j
 scripts/TestLib.j
 imports.j

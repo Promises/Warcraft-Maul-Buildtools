@@ -6,7 +6,7 @@ library RaceSelection initializer InitRaceTrigger requires Utility
 
     private function GetArrayIdFromItemSoldId takes nothing returns integer
         if ( GetItemTypeId(GetSoldItem()) == 'I01A' ) then // Worker's Union
-            return 0
+            return 33
         elseif ( GetItemTypeId(GetSoldItem()) == 'I001' ) then // Demon Portal
             return 1
         elseif ( GetItemTypeId(GetSoldItem()) == 'I002' ) then // Undead Necropolis
@@ -67,8 +67,11 @@ library RaceSelection initializer InitRaceTrigger requires Utility
             return 31
         elseif ( GetItemTypeId(GetSoldItem()) == 'I00Z' ) then // Galaxy
             return 32
+        elseif ( GetItemTypeId(GetSoldItem()) == 'I02D' ) then // Loot boxer
+            return 34
         elseif ( GetItemTypeId(GetSoldItem()) == 'I026' ) then // Shrine of Buffs
-            return 33
+            return 35
+
         endif
         
         return - 1
@@ -84,6 +87,8 @@ library RaceSelection initializer InitRaceTrigger requires Utility
             call UnitAddItemByIdSwapped( 'I01Z', udg_VoidCultBuilder[GetConvertedPlayerId(GetOwningPlayer(GetBuyingUnit()))] )
             call UnitAddItemByIdSwapped( 'I020', udg_VoidCultBuilder[GetConvertedPlayerId(GetOwningPlayer(GetBuyingUnit()))] )
             call UnitAddItemByIdSwapped( 'I01X', udg_VoidCultBuilder[GetConvertedPlayerId(GetOwningPlayer(GetBuyingUnit()))] )
+        elseif(id == 'u043') then // Loot Boxer
+            set udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetLastCreatedUnit()))] = CreateUnit(GetOwningPlayer(GetBuyingUnit()), id, x, y, bj_UNIT_FACING)
         else
             call CreateUnit(GetOwningPlayer(GetBuyingUnit()), id, x, y, bj_UNIT_FACING)
         endif
@@ -97,7 +102,9 @@ library RaceSelection initializer InitRaceTrigger requires Utility
         if(indx == 29)then
             return true
         endif
-
+        if(indx == 34)then
+            return true
+        endif
         return false
     endfunction
 
