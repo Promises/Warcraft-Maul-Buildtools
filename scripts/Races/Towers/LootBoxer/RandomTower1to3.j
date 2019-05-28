@@ -1,4 +1,4 @@
-library RandomTower1to3 initializer Init
+library RandomTower1to3 initializer Init requires Construction
 
     globals
         private trigger gg_trg_Random_Tower_1_to_3 = null
@@ -91,7 +91,7 @@ endfunction
 private function Trig_Random_Tower_1_to_3_Actions takes nothing returns nothing
     // Tier 1 Towers
     if ( Trig_Random_Tower_1_to_3_Func002C() ) then
-        call ReplaceUnitBJ(GetConstructedStructure(), udg_TierOneTowers[GetRandomInt(0, udg_TierOneSize)], bj_UNIT_STATE_METHOD_DEFAULTS)
+        call Construction_setupTowerTriggers(ReplaceUnitBJ(GetConstructedStructure(), udg_TierOneTowers[GetRandomInt(0, udg_TierOneSize)], bj_UNIT_STATE_METHOD_DEFAULTS))
         set udg_LootBoxChance[GetConvertedPlayerId(GetOwningPlayer(GetConstructedStructure()))] = GetRandomInt(1, 100)
         if ( Trig_Random_Tower_1_to_3_Func002Func003C() ) then
             call UnitAddItemByIdSwapped( 'I02F', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetConstructedStructure()))] )
@@ -109,7 +109,7 @@ private function Trig_Random_Tower_1_to_3_Actions takes nothing returns nothing
     endif
     // Tier 2 Towers
     if ( Trig_Random_Tower_1_to_3_Func004C() ) then
-        call ReplaceUnitBJ(GetConstructedStructure(), udg_TierTwoTowers[GetRandomInt(0, udg_TierTwoSize)], bj_UNIT_STATE_METHOD_DEFAULTS)
+        call Construction_setupTowerTriggers(ReplaceUnitBJ(GetConstructedStructure(), udg_TierTwoTowers[GetRandomInt(0, udg_TierTwoSize)], bj_UNIT_STATE_METHOD_DEFAULTS))
         set udg_LootBoxChance[GetConvertedPlayerId(GetOwningPlayer(GetConstructedStructure()))] = GetRandomInt(1, 100)
         if ( Trig_Random_Tower_1_to_3_Func004Func003C() ) then
             call UnitAddItemByIdSwapped( 'I02F', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetConstructedStructure()))] )
@@ -127,7 +127,7 @@ private function Trig_Random_Tower_1_to_3_Actions takes nothing returns nothing
     endif
     // Tier 3 Towers
     if ( Trig_Random_Tower_1_to_3_Func006C() ) then
-        call ReplaceUnitBJ(GetConstructedStructure(), udg_TierThreeTowers[GetRandomInt(0, udg_TierThreeSize)], bj_UNIT_STATE_METHOD_DEFAULTS)
+        call Construction_setupTowerTriggers(ReplaceUnitBJ(GetConstructedStructure(), udg_TierThreeTowers[GetRandomInt(0, udg_TierThreeSize)], bj_UNIT_STATE_METHOD_DEFAULTS))
         set udg_LootBoxChance[GetConvertedPlayerId(GetOwningPlayer(GetConstructedStructure()))] = GetRandomInt(1, 100)
         if ( Trig_Random_Tower_1_to_3_Func006Func003C() ) then
             call UnitAddItemByIdSwapped( 'I02F', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetConstructedStructure()))] )

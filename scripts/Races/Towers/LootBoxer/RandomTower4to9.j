@@ -1,4 +1,4 @@
-library RandomTower4to9 initializer Init
+library RandomTower4to9 initializer Init requires Construction
 
     globals
         private trigger gg_trg_Random_Towers_4_to_9 = null
@@ -245,7 +245,7 @@ endfunction
 private function Trig_Random_Towers_4_to_9_Actions takes nothing returns nothing
     // Tier 4 Towers
     if ( Trig_Random_Towers_4_to_9_Func002C() ) then
-        call ReplaceUnitBJ(GetSpellAbilityUnit(), udg_TierFourTowers[GetRandomInt(0, udg_TierFourSize)], bj_UNIT_STATE_METHOD_DEFAULTS)
+        call Construction_setupTowerTriggers(ReplaceUnitBJ(GetSpellAbilityUnit(), udg_TierFourTowers[GetRandomInt(0, udg_TierFourSize)], bj_UNIT_STATE_METHOD_DEFAULTS))
         set udg_LootBoxChance[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] = GetRandomInt(1, 100)
         if ( Trig_Random_Towers_4_to_9_Func002Func003C() ) then
             call UnitAddItemByIdSwapped( 'I02F', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
@@ -268,7 +268,7 @@ private function Trig_Random_Towers_4_to_9_Actions takes nothing returns nothing
     endif
     // Tier 5 Towers
     if ( Trig_Random_Towers_4_to_9_Func004C() ) then
-        call ReplaceUnitBJ(GetSpellAbilityUnit(), udg_TierFiveTowers[GetRandomInt(0, udg_TierFiveSize)], bj_UNIT_STATE_METHOD_DEFAULTS)
+        call Construction_setupTowerTriggers(ReplaceUnitBJ(GetSpellAbilityUnit(), udg_TierFiveTowers[GetRandomInt(0, udg_TierFiveSize)], bj_UNIT_STATE_METHOD_DEFAULTS))
         set udg_LootBoxChance[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] = GetRandomInt(1, 100)
         if ( Trig_Random_Towers_4_to_9_Func004Func003C() ) then
             call UnitAddItemByIdSwapped( 'I02F', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
@@ -291,7 +291,7 @@ private function Trig_Random_Towers_4_to_9_Actions takes nothing returns nothing
     endif
     // Tier 6 Towers
     if ( Trig_Random_Towers_4_to_9_Func006C() ) then
-        call ReplaceUnitBJ(GetSpellAbilityUnit(), udg_TierSixTowers[GetRandomInt(0, udg_TierSixSize)], bj_UNIT_STATE_METHOD_DEFAULTS)
+        call Construction_setupTowerTriggers(ReplaceUnitBJ(GetSpellAbilityUnit(), udg_TierSixTowers[GetRandomInt(0, udg_TierSixSize)], bj_UNIT_STATE_METHOD_DEFAULTS))
         set udg_LootBoxChance[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] = GetRandomInt(1, 100)
         if ( Trig_Random_Towers_4_to_9_Func006Func003C() ) then
             call UnitAddItemByIdSwapped( 'I02F', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
@@ -314,7 +314,7 @@ private function Trig_Random_Towers_4_to_9_Actions takes nothing returns nothing
     endif
     // Tier 7 Towers
     if ( Trig_Random_Towers_4_to_9_Func008C() ) then
-        call ReplaceUnitBJ(GetSpellAbilityUnit(), udg_TierSevenTowers[GetRandomInt(0, udg_TierSevenSize)], bj_UNIT_STATE_METHOD_DEFAULTS)
+        call Construction_setupTowerTriggers(ReplaceUnitBJ(GetSpellAbilityUnit(), udg_TierSevenTowers[GetRandomInt(0, udg_TierSevenSize)], bj_UNIT_STATE_METHOD_DEFAULTS))
         set udg_LootBoxChance[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] = GetRandomInt(1, 100)
         if ( Trig_Random_Towers_4_to_9_Func008Func003C() ) then
             call UnitAddItemByIdSwapped( 'I02F', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
@@ -341,7 +341,7 @@ private function Trig_Random_Towers_4_to_9_Actions takes nothing returns nothing
     endif
     // Tier 8 Towers
     if ( Trig_Random_Towers_4_to_9_Func010C() ) then
-        call ReplaceUnitBJ(GetSpellAbilityUnit(), udg_TierEightTowers[GetRandomInt(0, udg_TierEightSize)], bj_UNIT_STATE_METHOD_DEFAULTS)
+        call Construction_setupTowerTriggers(ReplaceUnitBJ(GetSpellAbilityUnit(), udg_TierEightTowers[GetRandomInt(0, udg_TierEightSize)], bj_UNIT_STATE_METHOD_DEFAULTS))
         set udg_LootBoxChance[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] = GetRandomInt(1, 100)
         if ( Trig_Random_Towers_4_to_9_Func010Func003C() ) then
             call UnitAddItemByIdSwapped( 'I02F', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
@@ -368,7 +368,7 @@ private function Trig_Random_Towers_4_to_9_Actions takes nothing returns nothing
     endif
     // Tier 9 Towers
     if ( Trig_Random_Towers_4_to_9_Func012C() ) then
-        call ReplaceUnitBJ(GetSpellAbilityUnit(), udg_TierNineTowers[GetRandomInt(0, udg_TierNineSize)], bj_UNIT_STATE_METHOD_DEFAULTS)
+        call Construction_setupTowerTriggers(ReplaceUnitBJ(GetSpellAbilityUnit(), udg_TierNineTowers[GetRandomInt(0, udg_TierNineSize)], bj_UNIT_STATE_METHOD_DEFAULTS))
         set udg_LootBoxChance[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] = GetRandomInt(1, 100)
         if ( Trig_Random_Towers_4_to_9_Func012Func003C() ) then
             call UnitAddItemByIdSwapped( 'I02F', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
