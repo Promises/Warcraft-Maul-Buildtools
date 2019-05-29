@@ -1,6 +1,5 @@
 library CorruptedIllidan initializer Init
-
-	function Trig_CorruptedIllidan_Conditions takes nothing returns boolean
+	private  function Trig_CorruptedIllidan_Conditions takes nothing returns boolean
 		if not udg_IsDamageSpell then
 			return false
 		endif
@@ -12,7 +11,7 @@ library CorruptedIllidan initializer Init
 		return true
 	endfunction
 
-	function Trig_CorruptedIllidan_Actions takes nothing returns nothing
+	private  function Trig_CorruptedIllidan_Actions takes nothing returns nothing
 		local unit u = CreateUnit(GetOwningPlayer(udg_DamageEventSource), 'u008', GetUnitX(udg_DamageEventSource), GetUnitY(udg_DamageEventSource), bj_UNIT_FACING)
 		call UnitApplyTimedLifeBJ(3.00, 'BTLF', u)
 		call UnitAddAbilityBJ('A0BZ', u)
@@ -22,7 +21,7 @@ library CorruptedIllidan initializer Init
 	endfunction
 
 	//===========================================================================
-	function Init takes nothing returns nothing
+	private  function Init takes nothing returns nothing
 		set gg_trg_CorruptedIllidan = CreateTrigger()
 		call TriggerRegisterVariableEvent(gg_trg_CorruptedIllidan, "udg_DamageEvent", EQUAL, 1.00)
 		call TriggerAddCondition(gg_trg_CorruptedIllidan, Condition( function Trig_CorruptedIllidan_Conditions))
