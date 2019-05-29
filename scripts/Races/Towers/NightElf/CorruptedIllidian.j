@@ -22,7 +22,7 @@ library CorruptedIllidan initializer Init
 	endfunction
 
 	//===========================================================================
-	function InitTrig_CorruptedIllidan takes nothing returns nothing
+	function Init takes nothing returns nothing
 		set gg_trg_CorruptedIllidan = CreateTrigger()
 		call TriggerRegisterVariableEvent(gg_trg_CorruptedIllidan, "udg_DamageEvent", EQUAL, 1.00)
 		call TriggerAddCondition(gg_trg_CorruptedIllidan, Condition( function Trig_CorruptedIllidan_Conditions))
