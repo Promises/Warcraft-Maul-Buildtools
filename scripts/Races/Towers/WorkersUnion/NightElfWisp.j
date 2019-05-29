@@ -15,7 +15,7 @@ library NightElfWisp initializer Init
     endfunction
 
     private function Trig_WorkersUnionNightElfWisp_Actions takes nothing returns nothing
-        call BlzSetUnitBaseDamage(udg_DamageEventSource, BlzGetUnitBaseDamage(udg_DamageEventSource, 1) + 40, 1)
+        call BlzSetUnitBaseDamage(udg_DamageEventSource, BlzGetUnitBaseDamage(udg_DamageEventSource, 0) + 40, 0)
     endfunction
 
     //===========================================================================

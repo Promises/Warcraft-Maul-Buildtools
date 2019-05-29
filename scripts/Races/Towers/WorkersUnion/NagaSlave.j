@@ -8,7 +8,7 @@ library NagaSlave initializer Init
     endfunction
 
     private function Trig_WorkersUnionNagaSlave_Actions takes nothing returns nothing
-        call BlzSetUnitBaseDamage(udg_DamageEventSource, BlzGetUnitBaseDamage(udg_DamageEventSource, 1) + 20, 1)
+        call BlzSetUnitBaseDamage(udg_DamageEventSource, BlzGetUnitBaseDamage(udg_DamageEventSource, 0) + 20, 0)
 
         set udg_WorkerSlaveSpell=GetRandomInt(1, 4)
         if ( udg_WorkerSlaveSpell == 1 ) then

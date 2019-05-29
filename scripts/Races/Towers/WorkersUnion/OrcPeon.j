@@ -8,7 +8,7 @@ library OrcPeon initializer Init
     endfunction
 
     private function Trig_WorkersUnionOrcPeon_Actions takes nothing returns nothing
-        call BlzSetUnitBaseDamage(udg_DamageEventSource, BlzGetUnitBaseDamage(udg_DamageEventSource, 1) + 1, 1)
+        call BlzSetUnitBaseDamage(udg_DamageEventSource, BlzGetUnitBaseDamage(udg_DamageEventSource, 0) + 1, 0)
     endfunction
 
     //===========================================================================
