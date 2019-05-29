@@ -12,7 +12,7 @@ private function Trig_Rock_Converting_Conditions takes nothing returns boolean
 endfunction
 
 private function Trig_Rock_Converting_Func001C takes nothing returns boolean
-    if ( not ( GetItemCharges(GetManipulatedItem()) >= 10 ) ) then
+    if ( not ( GetItemCharges(GetManipulatedItem()) <= 8 ) ) then
         return false
     endif
     return true
@@ -20,10 +20,10 @@ endfunction
 
 private function Trig_Rock_Converting_Actions takes nothing returns nothing
     if ( Trig_Rock_Converting_Func001C() ) then
-        call UnitAddItemByIdSwapped( 'I02B', GetManipulatingUnit() )
-        call SetItemCharges( GetManipulatedItem(), ( GetItemCharges(GetManipulatedItem()) - 9 ) )
-    else
         call SetItemCharges( GetManipulatedItem(), ( GetItemCharges(GetManipulatedItem()) + 1 ) )
+    else
+        call SetItemCharges( GetManipulatedItem(), ( GetItemCharges(GetManipulatedItem()) - 9 ) )
+        call UnitAddItemByIdSwapped( 'I02B', GetManipulatingUnit() )
     endif
 endfunction
 
