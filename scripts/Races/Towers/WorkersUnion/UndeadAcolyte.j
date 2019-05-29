@@ -16,7 +16,7 @@ library UndeadAcolyte initializer Init
     endfunction
 
     private function Trig_WorkersUnionUndeadAcolyte_Actions takes nothing returns nothing
-        call BlzSetUnitBaseDamage(udg_DamageEventSource, BlzGetUnitBaseDamage(udg_DamageEventSource, 1) + 5, 1)
+        call BlzSetUnitBaseDamage(udg_DamageEventSource, BlzGetUnitBaseDamage(udg_DamageEventSource, 0) + 5, 0)
     endfunction
 
     //===========================================================================
