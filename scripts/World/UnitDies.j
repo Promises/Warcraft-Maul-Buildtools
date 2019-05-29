@@ -28,7 +28,7 @@ library UnitDies initializer SetupEvents requires SharedWorld
     endfunction
 
     private function DevourEnemy takes nothing returns nothing
-        call BlzSetUnitBaseDamage(GetKillingUnitBJ(), (BlzGetUnitBaseDamage(GetKillingUnitBJ(), 1) + 1), 1)
+        call BlzSetUnitBaseDamage(GetKillingUnitBJ(), (BlzGetUnitBaseDamage(GetKillingUnitBJ(), 0) + 1), 0)
     endfunction
 
     private function RockGiantKill takes nothing returns nothing

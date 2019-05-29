@@ -2242,51 +2242,27 @@ Increases attack speed by 45%.
 }
 
 STRING 368
-// Abilities: A0EV (Rain of Arrows), Tip (Tooltip - Normal)
-{
-Rain of Arrows
-}
-
-STRING 369
-// Abilities: A0EV (Rain of Arrows), Ubertip (Tooltip - Normal - Extended)
-{
-Sylvanus will shoot arrows faster than any man, allowing up to 15 enemies to be hit.
-}
-
-STRING 370
-// Abilities: A0EV (Rain of Arrows), Name (Name)
-{
-Rain of Arrows
-}
-
-STRING 371
-// Abilities: A0EV (Rain of Arrows), EditorSuffix (Editor Suffix)
-{
- (H E Sylvanus)
-}
-
-STRING 372
 // Abilities: A0EW (Rain of Arrows), Name (Name)
 {
 Rain of Arrows
 }
 
-STRING 373
-// Abilities: A0EW (Rain of Arrows), EditorSuffix (Editor Suffix)
-{
- (H E Sylvanus)
-}
-
-STRING 374
+STRING 369
 // Abilities: A0EW (Rain of Arrows), Ubertip (Tooltip - Normal - Extended)
 {
 Sylvanus will shoot arrows faster than any man, allowing up to 15 enemies to be hit.
 }
 
-STRING 375
+STRING 370
 // Abilities: A0EW (Rain of Arrows), Tip (Tooltip - Normal)
 {
 Rain of Arrows
+}
+
+STRING 371
+// Abilities: A0EW (Rain of Arrows), EditorSuffix (Editor Suffix)
+{
+ (H E Sylvanus)
 }
 
 STRING 376
@@ -2503,9 +2479,33 @@ STRING 404
 }
 
 STRING 405
-// Abilities: A09Z ([Workers Union] Angry, Angry Workers), Hotkey (Hotkey - Normal)
+// Abilities: A09Z ([Workers Union] Angry, Angry Workers), Unhotkey (Hotkey - Turn Off)
 {
 Q
+}
+
+STRING 406
+// Abilities: A0EV (Shooting Webs), Name (Name)
+{
+Shooting Webs
+}
+
+STRING 407
+// Abilities: A0EV (Shooting Webs), EditorSuffix (Editor Suffix)
+{
+ (Spider aa)
+}
+
+STRING 408
+// Abilities: A0EV (Shooting Webs), Tip (Tooltip - Normal)
+{
+Shooting Webs
+}
+
+STRING 409
+// Abilities: A0EV (Shooting Webs), Ubertip (Tooltip - Normal - Extended)
+{
+The acid spitting spider was shot by a radioactive bullet, making him able to shoot webs.
 }
 
 STRING 427
@@ -3283,7 +3283,7 @@ This unit is caught in Decay; it will take damage over time.
 }
 
 STRING 2776
-// Abilities: A09Z ([Workers Union] Angry, Angry Workers), Unhotkey (Hotkey - Turn Off)
+// Abilities: A09Z ([Workers Union] Angry, Angry Workers), Hotkey (Hotkey - Normal)
 {
 Q
 }
