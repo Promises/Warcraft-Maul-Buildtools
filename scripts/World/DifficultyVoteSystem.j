@@ -313,7 +313,7 @@ library DifficultyVoteSystem initializer Init
 		
 		call DisableTriggers()
 		call InitializeVoteTimer()
-	endfunction
+	endfunctio
 
 	private function Init takes nothing returns nothing
 		set udg_InitializeVotesTrigger=CreateTrigger()
