@@ -211,20 +211,21 @@ library Construction initializer Init requires SharedWorld
                 call EnableTrigger(gg_trg_Warden)
             endif
             set udg_Warden=udg_Warden + 1
-        elseif ( GetUnitTypeId(tower) == 'eC83' ) then
+        elseif ( GetUnitTypeId(tower) == 'h00S' ) then
             if udg_Illidan == 0 then
                 call EnableTrigger(gg_trg_DemonicIllidan)
             endif
             set udg_Illidan=udg_Illidan + 1
-        elseif ( GetUnitTypeId(tower) == 'h00S' ) then
+            set udg_CorruptedIllidan=udg_CorruptedIllidan - 1
+            if udg_CorruptedIllidan == 0 then
+                call DisableTrigger(gg_trg_CorruptedIllidan)
+            endif
+        elseif ( GetUnitTypeId(tower) == 'eC83' ) then
             if udg_CorruptedIllidan == 0 then
                 call EnableTrigger(gg_trg_CorruptedIllidan)
             endif
             set udg_CorruptedIllidan=udg_CorruptedIllidan + 1
-            set udg_Illidan=udg_Illidan - 1
-            if udg_Illidan == 0 then
-                call DisableTrigger(gg_trg_CorruptedIllidan)
-            endif
+
         elseif ( GetUnitTypeId(tower) == 'h04M' ) then
             if udg_CavernHermit == 0 then
                 call EnableTrigger(gg_trg_CavernHermit)

@@ -155,5 +155,4 @@ library StaticDefinitions initializer InitStatics
 
         set udg_RaceNameArray[35]="Shrine of Buffs"
     endfunction
-
 endlibrary
