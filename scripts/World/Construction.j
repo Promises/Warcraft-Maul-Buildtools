@@ -131,11 +131,6 @@ library Construction initializer Init requires SharedWorld
                 call EnableTrigger(gg_trg_Wyvern)
             endif
             set udg_Wyvern=udg_Wyvern + 1
-        elseif ( GetUnitTypeId(tower) == 'hC55' ) then
-            if udg_Knight == 0 then
-                call EnableTrigger(gg_trg_Knight)
-            endif
-            set udg_Knight=udg_Knight + 1
         elseif ( GetUnitTypeId(tower) == 'h01J' ) then
             if udg_StormPandaren == 0 then
                 call EnableTrigger(gg_trg_DrunkenBrawler)
