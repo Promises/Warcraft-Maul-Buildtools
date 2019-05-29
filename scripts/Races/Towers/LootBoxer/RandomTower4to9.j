@@ -247,150 +247,150 @@ private function Trig_Random_Towers_4_to_9_Actions takes nothing returns nothing
     if ( Trig_Random_Towers_4_to_9_Func002C() ) then
         call Construction_setupTowerTriggers(ReplaceUnitBJ(GetSpellAbilityUnit(), udg_TierFourTowers[GetRandomInt(0, udg_TierFourSize)], bj_UNIT_STATE_METHOD_DEFAULTS))
         set udg_LootBoxChance[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] = GetRandomInt(1, 100)
-        // if ( Trig_Random_Towers_4_to_9_Func002Func003C() ) then
-        //     call UnitAddItemByIdSwapped( 'I02F', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
-        //     call SetItemCharges( GetLastCreatedItem(), GetRandomInt(1, 3) )
-        // else
-        //     if ( Trig_Random_Towers_4_to_9_Func002Func003Func003C() ) then
-        //         call UnitAddItemByIdSwapped( 'I029', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
-        //     else
-        //         if ( Trig_Random_Towers_4_to_9_Func002Func003Func003Func002C() ) then
-        //             call UnitAddItemByIdSwapped( 'I02B', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
-        //         else
-        //             if ( Trig_Random_Towers_4_to_9_Func002Func003Func003Func002Func002C() ) then
-        //                 call UnitAddItemByIdSwapped( 'I028', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
-        //             else
-        //             endif
-        //         endif
-        //     endif
-        // endif
+        if ( Trig_Random_Towers_4_to_9_Func002Func003C() ) then
+            call UnitAddItemByIdSwapped( 'I02F', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
+            call SetItemCharges( GetLastCreatedItem(), GetRandomInt(1, 3) )
+        else
+            if ( Trig_Random_Towers_4_to_9_Func002Func003Func003C() ) then
+                call UnitAddItemByIdSwapped( 'I029', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
+            else
+                if ( Trig_Random_Towers_4_to_9_Func002Func003Func003Func002C() ) then
+                    call UnitAddItemByIdSwapped( 'I02B', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
+                else
+                    if ( Trig_Random_Towers_4_to_9_Func002Func003Func003Func002Func002C() ) then
+                        call UnitAddItemByIdSwapped( 'I028', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
+                    else
+                    endif
+                endif
+            endif
+        endif
     else
     endif
     // Tier 5 Towers
     if ( Trig_Random_Towers_4_to_9_Func004C() ) then
         call Construction_setupTowerTriggers(ReplaceUnitBJ(GetSpellAbilityUnit(), udg_TierFiveTowers[GetRandomInt(0, udg_TierFiveSize)], bj_UNIT_STATE_METHOD_DEFAULTS))
         set udg_LootBoxChance[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] = GetRandomInt(1, 100)
-        // if ( Trig_Random_Towers_4_to_9_Func004Func003C() ) then
-        //     call UnitAddItemByIdSwapped( 'I02F', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
-        //     call SetItemCharges( GetLastCreatedItem(), GetRandomInt(1, 4) )
-        // else
-        //     if ( Trig_Random_Towers_4_to_9_Func004Func003Func003C() ) then
-        //         call UnitAddItemByIdSwapped( 'I029', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
-        //     else
-        //         if ( Trig_Random_Towers_4_to_9_Func004Func003Func003Func002C() ) then
-        //             call UnitAddItemByIdSwapped( 'I02B', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
-        //         else
-        //             if ( Trig_Random_Towers_4_to_9_Func004Func003Func003Func002Func002C() ) then
-        //                 call UnitAddItemByIdSwapped( 'I028', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
-        //             else
-        //             endif
-        //         endif
-        //     endif
-        // endif
+        if ( Trig_Random_Towers_4_to_9_Func004Func003C() ) then
+            call UnitAddItemByIdSwapped( 'I02F', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
+            call SetItemCharges( GetLastCreatedItem(), GetRandomInt(1, 4) )
+        else
+            if ( Trig_Random_Towers_4_to_9_Func004Func003Func003C() ) then
+                call UnitAddItemByIdSwapped( 'I029', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
+            else
+                if ( Trig_Random_Towers_4_to_9_Func004Func003Func003Func002C() ) then
+                    call UnitAddItemByIdSwapped( 'I02B', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
+                else
+                    if ( Trig_Random_Towers_4_to_9_Func004Func003Func003Func002Func002C() ) then
+                        call UnitAddItemByIdSwapped( 'I028', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
+                    else
+                    endif
+                endif
+            endif
+        endif
     else
     endif
     // Tier 6 Towers
     if ( Trig_Random_Towers_4_to_9_Func006C() ) then
         call Construction_setupTowerTriggers(ReplaceUnitBJ(GetSpellAbilityUnit(), udg_TierSixTowers[GetRandomInt(0, udg_TierSixSize)], bj_UNIT_STATE_METHOD_DEFAULTS))
         set udg_LootBoxChance[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] = GetRandomInt(1, 100)
-        // if ( Trig_Random_Towers_4_to_9_Func006Func003C() ) then
-        //     call UnitAddItemByIdSwapped( 'I02F', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
-        //     call SetItemCharges( GetLastCreatedItem(), GetRandomInt(1, 5) )
-        // else
-        //     if ( Trig_Random_Towers_4_to_9_Func006Func003Func003C() ) then
-        //         call UnitAddItemByIdSwapped( 'I02B', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
-        //     else
-        //         if ( Trig_Random_Towers_4_to_9_Func006Func003Func003Func002C() ) then
-        //             call UnitAddItemByIdSwapped( 'I028', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
-        //         else
-        //             if ( Trig_Random_Towers_4_to_9_Func006Func003Func003Func002Func002C() ) then
-        //                 call UnitAddItemByIdSwapped( 'I02A', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
-        //             else
-        //             endif
-        //         endif
-        //     endif
-        // endif
+        if ( Trig_Random_Towers_4_to_9_Func006Func003C() ) then
+            call UnitAddItemByIdSwapped( 'I02F', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
+            call SetItemCharges( GetLastCreatedItem(), GetRandomInt(1, 5) )
+        else
+            if ( Trig_Random_Towers_4_to_9_Func006Func003Func003C() ) then
+                call UnitAddItemByIdSwapped( 'I02B', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
+            else
+                if ( Trig_Random_Towers_4_to_9_Func006Func003Func003Func002C() ) then
+                    call UnitAddItemByIdSwapped( 'I028', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
+                else
+                    if ( Trig_Random_Towers_4_to_9_Func006Func003Func003Func002Func002C() ) then
+                        call UnitAddItemByIdSwapped( 'I02A', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
+                    else
+                    endif
+                endif
+            endif
+        endif
     else
     endif
     // Tier 7 Towers
     if ( Trig_Random_Towers_4_to_9_Func008C() ) then
         call Construction_setupTowerTriggers(ReplaceUnitBJ(GetSpellAbilityUnit(), udg_TierSevenTowers[GetRandomInt(0, udg_TierSevenSize)], bj_UNIT_STATE_METHOD_DEFAULTS))
         set udg_LootBoxChance[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] = GetRandomInt(1, 100)
-        // if ( Trig_Random_Towers_4_to_9_Func008Func003C() ) then
-        //     call UnitAddItemByIdSwapped( 'I02F', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
-        //     call SetItemCharges( GetLastCreatedItem(), GetRandomInt(2, 6) )
-        // else
-        //     if ( Trig_Random_Towers_4_to_9_Func008Func003Func003C() ) then
-        //         call UnitAddItemByIdSwapped( 'I028', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
-        //     else
-        //         if ( Trig_Random_Towers_4_to_9_Func008Func003Func003Func002C() ) then
-        //             call UnitAddItemByIdSwapped( 'I02B', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
-        //         else
-        //             if ( Trig_Random_Towers_4_to_9_Func008Func003Func003Func002Func002C() ) then
-        //                 call UnitAddItemByIdSwapped( 'I02A', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
-        //             else
-        //                 if ( Trig_Random_Towers_4_to_9_Func008Func003Func003Func002Func002Func002C() ) then
-        //                     call UnitAddItemByIdSwapped( 'I02C', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
-        //                 else
-        //                 endif
-        //             endif
-        //         endif
-        //     endif
-        // endif
+        if ( Trig_Random_Towers_4_to_9_Func008Func003C() ) then
+            call UnitAddItemByIdSwapped( 'I02F', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
+            call SetItemCharges( GetLastCreatedItem(), GetRandomInt(2, 6) )
+        else
+            if ( Trig_Random_Towers_4_to_9_Func008Func003Func003C() ) then
+                call UnitAddItemByIdSwapped( 'I028', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
+            else
+                if ( Trig_Random_Towers_4_to_9_Func008Func003Func003Func002C() ) then
+                    call UnitAddItemByIdSwapped( 'I02B', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
+                else
+                    if ( Trig_Random_Towers_4_to_9_Func008Func003Func003Func002Func002C() ) then
+                        call UnitAddItemByIdSwapped( 'I02A', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
+                    else
+                        if ( Trig_Random_Towers_4_to_9_Func008Func003Func003Func002Func002Func002C() ) then
+                            call UnitAddItemByIdSwapped( 'I02C', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
+                        else
+                        endif
+                    endif
+                endif
+            endif
+        endif
     else
     endif
     // Tier 8 Towers
     if ( Trig_Random_Towers_4_to_9_Func010C() ) then
         call Construction_setupTowerTriggers(ReplaceUnitBJ(GetSpellAbilityUnit(), udg_TierEightTowers[GetRandomInt(0, udg_TierEightSize)], bj_UNIT_STATE_METHOD_DEFAULTS))
         set udg_LootBoxChance[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] = GetRandomInt(1, 100)
-        // if ( Trig_Random_Towers_4_to_9_Func010Func003C() ) then
-        //     call UnitAddItemByIdSwapped( 'I02F', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
-        //     call SetItemCharges( GetLastCreatedItem(), GetRandomInt(3, 7) )
-        // else
-        //     if ( Trig_Random_Towers_4_to_9_Func010Func003Func003C() ) then
-        //         call UnitAddItemByIdSwapped( 'I028', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
-        //     else
-        //         if ( Trig_Random_Towers_4_to_9_Func010Func003Func003Func002C() ) then
-        //             call UnitAddItemByIdSwapped( 'I02A', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
-        //         else
-        //             if ( Trig_Random_Towers_4_to_9_Func010Func003Func003Func002Func002C() ) then
-        //                 call UnitAddItemByIdSwapped( 'I02B', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
-        //             else
-        //                 if ( Trig_Random_Towers_4_to_9_Func010Func003Func003Func002Func002Func002C() ) then
-        //                     call UnitAddItemByIdSwapped( 'I02C', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
-        //                 else
-        //                 endif
-        //             endif
-        //         endif
-        //     endif
-        // endif
+        if ( Trig_Random_Towers_4_to_9_Func010Func003C() ) then
+            call UnitAddItemByIdSwapped( 'I02F', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
+            call SetItemCharges( GetLastCreatedItem(), GetRandomInt(3, 7) )
+        else
+            if ( Trig_Random_Towers_4_to_9_Func010Func003Func003C() ) then
+                call UnitAddItemByIdSwapped( 'I028', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
+            else
+                if ( Trig_Random_Towers_4_to_9_Func010Func003Func003Func002C() ) then
+                    call UnitAddItemByIdSwapped( 'I02A', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
+                else
+                    if ( Trig_Random_Towers_4_to_9_Func010Func003Func003Func002Func002C() ) then
+                        call UnitAddItemByIdSwapped( 'I02B', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
+                    else
+                        if ( Trig_Random_Towers_4_to_9_Func010Func003Func003Func002Func002Func002C() ) then
+                            call UnitAddItemByIdSwapped( 'I02C', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
+                        else
+                        endif
+                    endif
+                endif
+            endif
+        endif
     else
     endif
     // Tier 9 Towers
     if ( Trig_Random_Towers_4_to_9_Func012C() ) then
         call Construction_setupTowerTriggers(ReplaceUnitBJ(GetSpellAbilityUnit(), udg_TierNineTowers[GetRandomInt(0, udg_TierNineSize)], bj_UNIT_STATE_METHOD_DEFAULTS))
         set udg_LootBoxChance[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] = GetRandomInt(1, 100)
-        // if ( Trig_Random_Towers_4_to_9_Func012Func003C() ) then
-        //     call UnitAddItemByIdSwapped( 'I02F', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
-        //     call SetItemCharges( GetLastCreatedItem(), GetRandomInt(4, 8) )
-        // else
-        //     if ( Trig_Random_Towers_4_to_9_Func012Func003Func003C() ) then
-        //         call UnitAddItemByIdSwapped( 'I028', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
-        //     else
-        //         if ( Trig_Random_Towers_4_to_9_Func012Func003Func003Func002C() ) then
-        //             call UnitAddItemByIdSwapped( 'I02A', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
-        //         else
-        //             if ( Trig_Random_Towers_4_to_9_Func012Func003Func003Func002Func002C() ) then
-        //                 call UnitAddItemByIdSwapped( 'I02B', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
-        //             else
-        //                 if ( Trig_Random_Towers_4_to_9_Func012Func003Func003Func002Func002Func002C() ) then
-        //                     call UnitAddItemByIdSwapped( 'I02C', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
-        //                 else
-        //                 endif
-        //             endif
-        //         endif
-        //     endif
-        // endif
+        if ( Trig_Random_Towers_4_to_9_Func012Func003C() ) then
+            call UnitAddItemByIdSwapped( 'I02F', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
+            call SetItemCharges( GetLastCreatedItem(), GetRandomInt(4, 8) )
+        else
+            if ( Trig_Random_Towers_4_to_9_Func012Func003Func003C() ) then
+                call UnitAddItemByIdSwapped( 'I028', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
+            else
+                if ( Trig_Random_Towers_4_to_9_Func012Func003Func003Func002C() ) then
+                    call UnitAddItemByIdSwapped( 'I02A', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
+                else
+                    if ( Trig_Random_Towers_4_to_9_Func012Func003Func003Func002Func002C() ) then
+                        call UnitAddItemByIdSwapped( 'I02B', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
+                    else
+                        if ( Trig_Random_Towers_4_to_9_Func012Func003Func003Func002Func002Func002C() ) then
+                            call UnitAddItemByIdSwapped( 'I02C', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetSpellAbilityUnit()))] )
+                        else
+                        endif
+                    endif
+                endif
+            endif
+        endif
     else
     endif
 endfunction
