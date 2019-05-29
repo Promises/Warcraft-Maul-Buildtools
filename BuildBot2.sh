@@ -12,7 +12,17 @@ blizzard=$jasshelperdir\\Blizzard.j
 
 echo "Recompiling jass.."
 WINEDEBUG=-all wine "$toolsDir\\JassHelper\\clijasshelper.exe" "$common" "$blizzard" "$tempdir\\war3map.j" "$tempdir\\out.w3x"
+## get status ##
+status=$?
+## take some decision ## 
+if [ $status -ne 0 ]; then
+    rm "temp/war3map.j"
+    rm "temp/out.w3x"
 
+    rmdir temp
+    echo "FAILED!" 
+    exit 1
+fi
 
 echo "Cleaning up.."
 rm "temp/war3map.j"
