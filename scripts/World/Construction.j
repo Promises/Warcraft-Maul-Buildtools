@@ -265,7 +265,10 @@ library Construction initializer Init requires SharedWorld
                 call EnableTrigger(gg_trg_Magtheridon)
             endif
             set udg_Magtheridon=udg_Magtheridon + 1
+        elseif ( GetUnitTypeId(tower) == 'hC86' ) then
+            call GroupAddUnitSimple(tower, udg_ChimaeraRoost)
         endif
+
         if ( GetUnitAbilityLevel(tower, 'A031') > 0 ) then
             call SharedWorld_AddToTickArray(tower)
         endif
@@ -278,6 +281,7 @@ library Construction initializer Init requires SharedWorld
         if ( GetUnitAbilityLevel(tower, 'A0DY') > 0 ) then
             call SharedWorld_AddToDeathInSpawnArray(tower)
         endif
+
 
 
         set tower = null
