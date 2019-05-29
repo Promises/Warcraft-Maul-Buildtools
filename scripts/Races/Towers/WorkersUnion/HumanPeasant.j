@@ -8,7 +8,7 @@ library HumanPeasant initializer Init
     endfunction
 
     private function Trig_WorkersUnionHumanPeasant_Actions takes nothing returns nothing
-        call BlzSetUnitBaseDamage(udg_DamageEventSource, BlzGetUnitBaseDamage(udg_DamageEventSource, 1) + 2, 1)
+        call BlzSetUnitBaseDamage(udg_DamageEventSource, BlzGetUnitBaseDamage(udg_DamageEventSource, 0) + 2, 0)
     endfunction
 
     //===========================================================================
