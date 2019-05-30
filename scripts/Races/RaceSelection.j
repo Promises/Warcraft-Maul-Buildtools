@@ -88,7 +88,7 @@ library RaceSelection initializer InitRaceTrigger requires Utility
             call UnitAddItemByIdSwapped( 'I020', udg_VoidCultBuilder[GetConvertedPlayerId(GetOwningPlayer(GetBuyingUnit()))] )
             call UnitAddItemByIdSwapped( 'I01X', udg_VoidCultBuilder[GetConvertedPlayerId(GetOwningPlayer(GetBuyingUnit()))] )
         elseif(id == 'u043') then // Loot Boxer
-            set udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetLastCreatedUnit()))] = CreateUnit(GetOwningPlayer(GetBuyingUnit()), id, x, y, bj_UNIT_FACING)
+            set udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetBuyingUnit()))] = CreateUnit(GetOwningPlayer(GetBuyingUnit()), id, x, y, bj_UNIT_FACING)
         else
             call CreateUnit(GetOwningPlayer(GetBuyingUnit()), id, x, y, bj_UNIT_FACING)
         endif
