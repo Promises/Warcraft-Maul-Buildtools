@@ -28,6 +28,12 @@ library Construction initializer Init requires SharedWorld
         endloop
     endfunction
 
+
+    public function Marine_Force_Increase takes nothing returns nothing
+        call SetUnitAbilityLevelSwapped('A0EJ', GetEnumUnit(), CountUnitsInGroup(udg_MarineGroups[GetConvertedPlayerId(GetOwningPlayer(GetTriggerUnit()))]))
+        call Utility_DisplayMessageToPlayer("Upping marine", 0)
+    endfunction
+
     private function InitializeCriticalStrikeGroupConditions takes nothing returns nothing
         if not IsUnitType(GetFilterUnit(), UNIT_TYPE_STRUCTURE) then
             return
@@ -263,6 +269,9 @@ library Construction initializer Init requires SharedWorld
             set udg_Magtheridon=udg_Magtheridon + 1
         elseif ( GetUnitTypeId(tower) == 'hC86' ) then
             call GroupAddUnitSimple(tower, udg_ChimaeraRoost)
+        elseif ( GetUnitTypeId(tower) == 'h02H' ) then
+            call GroupAddUnitSimple(tower, udg_MarineGroups[GetConvertedPlayerId(GetOwningPlayer(tower))])
+            call ForGroupBJ(udg_MarineGroups[GetConvertedPlayerId(GetOwningPlayer(tower))], function Marine_Force_Increase)
         endif
 
         if ( GetUnitAbilityLevel(tower, 'A031') > 0 ) then
