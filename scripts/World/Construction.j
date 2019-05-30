@@ -31,7 +31,6 @@ library Construction initializer Init requires SharedWorld
 
     public function Marine_Force_Increase takes nothing returns nothing
         call SetUnitAbilityLevelSwapped('A0EJ', GetEnumUnit(), CountUnitsInGroup(udg_MarineGroups[GetConvertedPlayerId(GetOwningPlayer(GetTriggerUnit()))]))
-        call Utility_DisplayMessageToPlayer("Upping marine", 0)
     endfunction
 
     private function InitializeCriticalStrikeGroupConditions takes nothing returns nothing
