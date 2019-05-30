@@ -93,55 +93,55 @@ private function Trig_Random_Tower_1_to_3_Actions takes nothing returns nothing
     if ( Trig_Random_Tower_1_to_3_Func002C() ) then
         call Construction_setupTowerTriggers(ReplaceUnitBJ(GetConstructedStructure(), udg_TierOneTowers[GetRandomInt(0, udg_TierOneSize)], bj_UNIT_STATE_METHOD_DEFAULTS))
         set udg_LootBoxChance[GetConvertedPlayerId(GetOwningPlayer(GetConstructedStructure()))] = GetRandomInt(1, 100)
-        // if ( Trig_Random_Tower_1_to_3_Func002Func003C() ) then
-        //     call UnitAddItemByIdSwapped( 'I02F', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetConstructedStructure()))] )
-        // else
-        //     if ( Trig_Random_Tower_1_to_3_Func002Func003Func002C() ) then
-        //         call UnitAddItemByIdSwapped( 'I029', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetConstructedStructure()))] )
-        //     else
-        //         if ( Trig_Random_Tower_1_to_3_Func002Func003Func002Func002C() ) then
-        //             call UnitAddItemByIdSwapped( 'I02B', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetConstructedStructure()))] )
-        //         else
-        //         endif
-        //     endif
-        // endif
+        if ( Trig_Random_Tower_1_to_3_Func002Func003C() ) then
+            call UnitAddItemByIdSwapped( 'I02F', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetConstructedStructure()))] )
+        else
+            if ( Trig_Random_Tower_1_to_3_Func002Func003Func002C() ) then
+                call UnitAddItemByIdSwapped( 'I029', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetConstructedStructure()))] )
+            else
+                if ( Trig_Random_Tower_1_to_3_Func002Func003Func002Func002C() ) then
+                    call UnitAddItemByIdSwapped( 'I02B', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetConstructedStructure()))] )
+                else
+                endif
+            endif
+        endif
     else
     endif
     // Tier 2 Towers
     if ( Trig_Random_Tower_1_to_3_Func004C() ) then
         call Construction_setupTowerTriggers(ReplaceUnitBJ(GetConstructedStructure(), udg_TierTwoTowers[GetRandomInt(0, udg_TierTwoSize)], bj_UNIT_STATE_METHOD_DEFAULTS))
         set udg_LootBoxChance[GetConvertedPlayerId(GetOwningPlayer(GetConstructedStructure()))] = GetRandomInt(1, 100)
-        // if ( Trig_Random_Tower_1_to_3_Func004Func003C() ) then
-        //     call UnitAddItemByIdSwapped( 'I02F', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetConstructedStructure()))] )
-        // else
-        //     if ( Trig_Random_Tower_1_to_3_Func004Func003Func002C() ) then
-        //         call UnitAddItemByIdSwapped( 'I029', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetConstructedStructure()))] )
-        //     else
-        //         if ( Trig_Random_Tower_1_to_3_Func004Func003Func002Func002C() ) then
-        //             call UnitAddItemByIdSwapped( 'I02B', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetConstructedStructure()))] )
-        //         else
-        //         endif
-        //     endif
-        // endif
+        if ( Trig_Random_Tower_1_to_3_Func004Func003C() ) then
+            call UnitAddItemByIdSwapped( 'I02F', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetConstructedStructure()))] )
+        else
+            if ( Trig_Random_Tower_1_to_3_Func004Func003Func002C() ) then
+                call UnitAddItemByIdSwapped( 'I029', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetConstructedStructure()))] )
+            else
+                if ( Trig_Random_Tower_1_to_3_Func004Func003Func002Func002C() ) then
+                    call UnitAddItemByIdSwapped( 'I02B', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetConstructedStructure()))] )
+                else
+                endif
+            endif
+        endif
     else
     endif
     // Tier 3 Towers
     if ( Trig_Random_Tower_1_to_3_Func006C() ) then
         call Construction_setupTowerTriggers(ReplaceUnitBJ(GetConstructedStructure(), udg_TierThreeTowers[GetRandomInt(0, udg_TierThreeSize)], bj_UNIT_STATE_METHOD_DEFAULTS))
         set udg_LootBoxChance[GetConvertedPlayerId(GetOwningPlayer(GetConstructedStructure()))] = GetRandomInt(1, 100)
-        // if ( Trig_Random_Tower_1_to_3_Func006Func003C() ) then
-        //     call UnitAddItemByIdSwapped( 'I02F', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetConstructedStructure()))] )
-        //     call SetItemCharges( GetLastCreatedItem(), GetRandomInt(1, 2) )
-        // else
-        //     if ( Trig_Random_Tower_1_to_3_Func006Func003Func003C() ) then
-        //         call UnitAddItemByIdSwapped( 'I029', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetConstructedStructure()))] )
-        //     else
-        //         if ( Trig_Random_Tower_1_to_3_Func006Func003Func003Func002C() ) then
-        //             call UnitAddItemByIdSwapped( 'I02B', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetConstructedStructure()))] )
-        //         else
-        //         endif
-        //     endif
-        // endif
+        if ( Trig_Random_Tower_1_to_3_Func006Func003C() ) then
+            call UnitAddItemByIdSwapped( 'I02F', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetConstructedStructure()))] )
+            call SetItemCharges( GetLastCreatedItem(), GetRandomInt(1, 2) )
+        else
+            if ( Trig_Random_Tower_1_to_3_Func006Func003Func003C() ) then
+                call UnitAddItemByIdSwapped( 'I029', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetConstructedStructure()))] )
+            else
+                if ( Trig_Random_Tower_1_to_3_Func006Func003Func003Func002C() ) then
+                    call UnitAddItemByIdSwapped( 'I02B', udg_LootBoxerUnit[GetConvertedPlayerId(GetOwningPlayer(GetConstructedStructure()))] )
+                else
+                endif
+            endif
+        endif
     else
     endif
 endfunction

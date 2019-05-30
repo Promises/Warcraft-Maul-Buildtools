@@ -722,12 +722,6 @@ STRING 120
 Royal Guard
 }
 
-STRING 121
-// Items: I028 (Wood Stick), Ubertip (Tooltip - Extended)
-{
-Restores 1 mana
-}
-
 STRING 122
 // Abilities: A00A (Storm Hammers), EditorSuffix (Editor Suffix)
 {
@@ -960,12 +954,6 @@ STRING 160
 // Items: I02A (Gold Coin), Name (Name)
 {
 Gold Coin
-}
-
-STRING 161
-// Items: I02A (Gold Coin), Ubertip (Tooltip - Extended)
-{
-Restores 2 mana
 }
 
 STRING 162
@@ -1935,12 +1923,6 @@ STRING 317
 MaulKoinz
 }
 
-STRING 318
-// Items: I02C (MaulKoinz), Ubertip (Tooltip - Extended)
-{
-Restores 6 mana
-}
-
 STRING 319
 // Items: I002 (Undead Necropolis), Ubertip (Tooltip - Extended)
 {
@@ -2263,6 +2245,24 @@ STRING 371
 // Abilities: A0EW (Rain of Arrows), EditorSuffix (Editor Suffix)
 {
  (H E Sylvanus)
+}
+
+STRING 372
+// Items: I028 (Wood Stick), Ubertip (Tooltip - Extended)
+{
+Restores 1 mana to a Lootboxer tower
+}
+
+STRING 373
+// Items: I02A (Gold Coin), Ubertip (Tooltip - Extended)
+{
+Restores 2 mana to a Lootboxer tower
+}
+
+STRING 374
+// Items: I02C (MaulKoinz), Ubertip (Tooltip - Extended)
+{
+Restores 6 mana to a Lootboxer tower
 }
 
 STRING 376
