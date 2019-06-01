@@ -8305,11 +8305,11 @@ C;X52;K"-"
 C;X53;K250
 C;X54;K"magic"
 C;X55;K"msplash"
-C;X56;K0.5
+C;X56;K0.2
 C;X57;K"-"
 C;X58;K1
 C;X59;K1
-C;X60;K249
+C;X60;K474
 C;X61;K"-"
 C;X62;K
 C;X63;K"-"
@@ -8451,7 +8451,7 @@ C;X52;K"-"
 C;X53;K"-"
 C;X54;K"magic"
 C;X55;K"msplash"
-C;X56;K0.75
+C;X56;K0.3
 C;X57;K"-"
 C;X58;K1
 C;X59;K1
