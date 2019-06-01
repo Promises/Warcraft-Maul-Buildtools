@@ -102,9 +102,6 @@ library RaceSelection initializer InitRaceTrigger requires Utility
         if(indx == 29)then
             return true
         endif
-        if(indx == 9)then
-            return true
-        endif
         if(indx == 34)then
             return true
         endif
