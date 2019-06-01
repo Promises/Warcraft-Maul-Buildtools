@@ -297,16 +297,9 @@ library RaceSelection initializer InitRaceTrigger requires Utility
         endif
     endfunction
 
-    private function OpenSpawnForPlayer takes integer i returns nothing
-        local integer l = StringHash(GetPlayerName(Player(i)))
-        if true then
-            set udg_IsSpawnOpen[i] = 1
-        endif
-    endfunction
-
     private function RaceSelectionActions takes nothing returns nothing
         local integer playerid = GetPlayerId(GetOwningPlayer(GetBuyingUnit()))
-        call OpenSpawnForPlayer(playerid)
+         set udg_IsSpawnOpen[playerid] = 1
         if (GetItemTypeId(GetSoldItem()) == 'I00W') then // Hardcore random
             if (udg_HasHybridRandomed[playerid]) then
                 call AdjustPlayerStateBJ( 1, GetOwningPlayer(GetBuyingUnit()), PLAYER_STATE_RESOURCE_LUMBER )
