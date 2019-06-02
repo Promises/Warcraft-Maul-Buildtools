@@ -1,4 +1,4 @@
-library Construction initializer Init requires SharedWorld
+library Construction initializer Init requires SharedWorld, ProudmooreOceanmaster
     globals
         private trigger udg_ConstructionTrigger = null
     endglobals
@@ -271,6 +271,8 @@ library Construction initializer Init requires SharedWorld
         elseif ( GetUnitTypeId(tower) == 'h02H' ) then
             call GroupAddUnitSimple(tower, udg_MarineGroups[GetConvertedPlayerId(GetOwningPlayer(tower))])
             call ForGroupBJ(udg_MarineGroups[GetConvertedPlayerId(GetOwningPlayer(tower))], function Marine_Force_Increase)
+        elseif ( GetUnitTypeId(tower) == 'h02J' ) then
+            call ProudmooreOceanmaster_Trig_Proudmoore_Oceanmaster_Actions(tower)
         endif
 
         if ( GetUnitAbilityLevel(tower, 'A031') > 0 ) then
@@ -287,7 +289,7 @@ library Construction initializer Init requires SharedWorld
         endif
 
 
-
+        call DisableTowers_Trig_Disable_Towers_Add_Actions(tower)
         set tower = null
     endfunction
 
