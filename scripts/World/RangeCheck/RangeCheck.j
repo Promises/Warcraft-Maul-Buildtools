@@ -1,4 +1,4 @@
-library RangeCheck initializer Init
+library RangeCheck /*initializer Init*/
     private function Trig_Range_Check_Func001Func001Func001C takes nothing returns boolean
         if ( not ( GetTriggerPlayer() == Player(0) ) ) then
             return false
@@ -202,6 +202,7 @@ library RangeCheck initializer Init
             loop
                 exitwhen bj_forLoopAIndex > bj_forLoopAIndexEnd
                 call CreateNUnitsAtLoc( 1, 'u04E', GetTriggerPlayer(), PolarProjectionBJ(GetPlayerStartLocationLoc(GetTriggerPlayer()), udg_Range[GetConvertedPlayerId(GetTriggerPlayer())], ( I2R(GetForLoopIndexA()) * ( 360.00 / 36.00 ) )), bj_UNIT_FACING )
+                call SetUnitPathing( GetLastCreatedUnit(), false )
                 if ( Trig_Range_Check_Func001Func002Func002C() ) then
                     set udg_RangeUnits1[GetForLoopIndexA()] = GetLastCreatedUnit()
                 else

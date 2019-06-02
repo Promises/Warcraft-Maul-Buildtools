@@ -1,4 +1,4 @@
-library RangeUnit initializer Init
+library RangeUnit /*initializer Init*/
     private function Trig_Range_Unit_Func001C takes nothing returns boolean
         if ( not ( udg_RangeOnOff[GetConvertedPlayerId(GetTriggerPlayer())] == 1 ) ) then
             return false

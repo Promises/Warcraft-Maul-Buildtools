@@ -1,4 +1,4 @@
-library RangeSet initializer Init
+library RangeSet /*initializer Init*/
     private function Trig_Range_Set_Conditions takes nothing returns boolean
         if ( not ( SubStringBJ(GetEventPlayerChatString(), 1, 7) == "-range " ) ) then
             return false
