@@ -159,7 +159,7 @@ public function InitializeVariables takes nothing returns nothing
 	local rect yellowrect2 = Rect(-32.00, -160.00, 32.00, -96.00)
 	local rect yellowInSpawnCheckpoint = Rect(-64, 1920, 64, 2016)
 	local rect yellowTeleport = Rect(-32.00, -928.00, 32.00, -864.00)
-
+    
 	// TEST
 	// RED
 	set udg_Redtestregions[0] = Rect(-4160.0, 5440.0, -1856.0, 5504.0) // Long top
