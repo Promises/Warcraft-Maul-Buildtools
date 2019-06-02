@@ -8,7 +8,7 @@ library RangeUnit initializer Init
 
     private function Trig_Range_Unit_Actions takes nothing returns nothing
         if ( Trig_Range_Unit_Func001C() ) then
-            set udg_Range[GetConvertedPlayerId(GetTriggerPlayer())] = GetUnitAcquireRange(GetTriggerUnit())
+            set udg_Range[GetConvertedPlayerId(GetTriggerPlayer())]  = BlzGetUnitWeaponRealField(GetTriggerUnit(), UNIT_WEAPON_RF_ATTACK_RANGE, 0)
         else
         endif
     endfunction
