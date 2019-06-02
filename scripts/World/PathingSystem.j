@@ -1887,7 +1887,7 @@ library PathingSystem initializer Init
 
         set udg_trigger04=CreateTrigger()
         call TriggerRegisterEnterRectSimple(udg_trigger04,udg_Checkpoints[1])
-        call TriggerAddCondition(udg_trigger04,Condition(function RedCheckpointCondition))s
+        call TriggerAddCondition(udg_trigger04,Condition(function RedCheckpointCondition))
         call TriggerAddAction(udg_trigger04,function RedCheckpointAction)
         set udg_trigger05=CreateTrigger()
         call TriggerRegisterEnterRectSimple(udg_trigger05,udg_Checkpoints[3])
