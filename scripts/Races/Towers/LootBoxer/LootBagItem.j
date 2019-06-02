@@ -11,29 +11,29 @@ private function Trig_Loot_Bag_Item_Conditions takes nothing returns boolean
     return true
 endfunction
 
-private function Trig_Loot_Bag_Item_Func002Func003Func002Func002C takes nothing returns boolean
+private function Trig_Loot_Bag_Item_1 takes nothing returns boolean
     if ( not ( udg_LootBoxChance[GetConvertedPlayerId(GetOwningPlayer(GetTriggerUnit()))] <= 100 ) ) then
         return false
     endif
     return true
 endfunction
 
-private function Trig_Loot_Bag_Item_Func002Func003Func002C takes nothing returns boolean
+private function Trig_Loot_Bag_Item_2 takes nothing returns boolean
     if ( not ( udg_LootBoxChance[GetConvertedPlayerId(GetOwningPlayer(GetTriggerUnit()))] <= 95 ) ) then
         return false
     endif
     return true
 endfunction
 
-private function Trig_Loot_Bag_Item_Func002Func003C takes nothing returns boolean
+private function Trig_Loot_Bag_Item_3 takes nothing returns boolean
     if ( not ( udg_LootBoxChance[GetConvertedPlayerId(GetOwningPlayer(GetTriggerUnit()))] <= 80 ) ) then
         return false
     endif
     return true
 endfunction
 
-private function Trig_Loot_Bag_Item_Func002C takes nothing returns boolean
-    if ( not ( udg_LootBoxChance[GetConvertedPlayerId(GetOwningPlayer(GetTriggerUnit()))] <= 60 ) ) then
+private function Trig_Loot_Bag_Item_4 takes nothing returns boolean
+    if ( not ( udg_LootBoxChance[GetConvertedPlayerId(GetOwningPlayer(GetTriggerUnit()))] <= 40 ) ) then
         return false
     endif
     return true
@@ -41,17 +41,16 @@ endfunction
 
 private function Trig_Loot_Bag_Item_Actions takes nothing returns nothing
     set udg_LootBoxChance[GetConvertedPlayerId(GetOwningPlayer(GetTriggerUnit()))] = GetRandomInt(1, 100)
-    if ( Trig_Loot_Bag_Item_Func002C() ) then
-        call UnitAddItemByIdSwapped( 'I02F', GetTriggerUnit() )
-        call SetItemCharges( GetLastCreatedItem(), GetRandomInt(1, 5) )
+    if ( Trig_Loot_Bag_Item_4() ) then
+        call UnitAddItemByIdSwapped( 'I029', GetTriggerUnit() )
     else
-        if ( Trig_Loot_Bag_Item_Func002Func003C() ) then
-            call UnitAddItemByIdSwapped( 'I02B', GetTriggerUnit() )
+        if ( Trig_Loot_Bag_Item_3() ) then
+            call UnitAddItemByIdSwapped( 'I02F', GetTriggerUnit() )
         else
-            if ( Trig_Loot_Bag_Item_Func002Func003Func002C() ) then
+            if ( Trig_Loot_Bag_Item_2() ) then
                 call UnitAddItemByIdSwapped( 'I028', GetTriggerUnit() )
             else
-                if ( Trig_Loot_Bag_Item_Func002Func003Func002Func002C() ) then
+                if ( Trig_Loot_Bag_Item_1() ) then
                     call UnitAddItemByIdSwapped( 'I02A', GetTriggerUnit() )
                 else
                 endif
