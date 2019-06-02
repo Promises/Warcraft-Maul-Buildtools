@@ -722,6 +722,12 @@ STRING 120
 Royal Guard
 }
 
+STRING 121
+// Items: I028 (Wood Stick), Ubertip (Tooltip - Extended)
+{
+Restores 1 mana to a Lootboxer tower, use on a tier 4 - 9 Lootboxer tower to restore mana.
+}
+
 STRING 122
 // Abilities: A00A (Storm Hammers), EditorSuffix (Editor Suffix)
 {
@@ -956,6 +962,12 @@ STRING 160
 Gold Coin
 }
 
+STRING 161
+// Items: I02A (Gold Coin), Ubertip (Tooltip - Extended)
+{
+Restores 2 mana to a Lootboxer tower, use on a tier 4 - 9 Lootboxer tower to restore mana.
+}
+
 STRING 162
 // Items: I02A (Gold Coin), Description (Description)
 {
@@ -1052,12 +1064,6 @@ STRING 177
 C
 }
 
-STRING 178
-// Items: I02B (Free Lootchest), Name (Name)
-{
-Free Lootchest
-}
-
 STRING 179
 // Abilities: A03R (Berserk), Hotkey (Hotkey - Normal)
 {
@@ -1111,7 +1117,7 @@ STRING 183
 }
 
 STRING 184
-// Items: I02B (Free Lootchest), Description (Description)
+// Items: I02B (Free Lootbag), Description (Description)
 {
 0% chance of random tower; generates some free loot.
 }
@@ -1377,12 +1383,6 @@ STRING 226
 X
 }
 
-STRING 227
-// Items: I02B (Free Lootchest), Ubertip (Tooltip - Extended)
-{
-Generates some freeloot, equivalent to a Tier 6 Lootbox
-}
-
 STRING 228
 // Abilities: A01J (Artifact Curse), Name (Name)
 {
@@ -1641,12 +1641,6 @@ STRING 270
 Increases damage by 1 for each Marine tower owned.
 }
 
-STRING 271
-// Items: I029 (Free Tower), Name (Name)
-{
-Free Tower
-}
-
 STRING 272
 // Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
 {
@@ -1858,7 +1852,7 @@ The Darkness
 }
 
 STRING 307
-// Items: I029 (Free Tower), Ubertip (Tooltip - Extended)
+// Items: I029 (Free "Premium" Tower), Ubertip (Tooltip - Extended)
 {
 Creates a free "Premium" Tower at target location
 }
@@ -1900,7 +1894,7 @@ Increases damage by 30%
 }
 
 STRING 314
-// Items: I029 (Free Tower), Description (Description)
+// Items: I029 (Free "Premium" Tower), Description (Description)
 {
 "Premium" I call bullshit.
 }
@@ -1921,6 +1915,12 @@ STRING 317
 // Items: I02C (MaulKoinz), Name (Name)
 {
 MaulKoinz
+}
+
+STRING 318
+// Items: I02B (Free Lootbag), Name (Name)
+{
+Free Lootbag
 }
 
 STRING 319
@@ -2065,12 +2065,6 @@ STRING 341
 // Items: I02F (Rocks), Description (Description)
 {
 Is it a pet?; Can be turned into random loot.
-}
-
-STRING 342
-// Items: I02F (Rocks), Ubertip (Tooltip - Extended)
-{
-Rocks can be turned into several things, including Wood Sticks, Gold Coins, Free Towers and more Rocks.
 }
 
 STRING 343
@@ -2247,22 +2241,12 @@ STRING 371
  (H E Sylvanus)
 }
 
-STRING 372
-// Items: I028 (Wood Stick), Ubertip (Tooltip - Extended)
+STRING 375
+// Items: I02B (Free Lootbag), Ubertip (Tooltip - Extended)
 {
-Restores 1 mana to a Lootboxer tower
-}
+Generates a single piece of loot.
 
-STRING 373
-// Items: I02A (Gold Coin), Ubertip (Tooltip - Extended)
-{
-Restores 2 mana to a Lootboxer tower
-}
-
-STRING 374
-// Items: I02C (MaulKoinz), Ubertip (Tooltip - Extended)
-{
-Restores 6 mana to a Lootboxer tower
+Equal chance of getting Rocks or a "Premium" Tower, small chance to get a Wood Stick or a Gold Coin.
 }
 
 STRING 376
@@ -2506,6 +2490,24 @@ STRING 409
 // Abilities: A0EV (Shooting Webs), Ubertip (Tooltip - Normal - Extended)
 {
 The acid spitting spider was shot by a radioactive bullet, making him able to shoot webs.
+}
+
+STRING 410
+// Items: I029 (Free "Premium" Tower), Name (Name)
+{
+Free "Premium" Tower
+}
+
+STRING 411
+// Items: I02C (MaulKoinz), Ubertip (Tooltip - Extended)
+{
+Restores 6 mana to a Lootboxer tower, use on a tier 4 - 9 Lootboxer tower to restore mana.
+}
+
+STRING 412
+// Items: I02F (Rocks), Ubertip (Tooltip - Extended)
+{
+Rocks can be used to generate a Free Loot Bag, which will randomly give you 1 of 4 items.
 }
 
 STRING 427
