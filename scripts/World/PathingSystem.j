@@ -1,4 +1,4 @@
-library PathingSystem initializer Init
+library PathingSystem initializer Init requires Utility, SharedWorld, MapInit
 
     private function MoveEnteringUnitBackToHisOwnSpawn takes nothing returns nothing
         local real x = GetRectCenterX(udg_PlayerRestrictionArea[GetPlayerId(GetOwningPlayer(GetEnteringUnit()))])
@@ -55,7 +55,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function PlayerRestrictionActions takes integer playerid returns nothing
-        if WarcraftMaulLibrary_EnteringUnitIsCreep() then
+        if SharedWorld_EnteringUnitIsCreep() then
             if (udg_IsSpawnOpen[playerid] == 0) then
                 if not(UnitHasBuffBJ(GetEnteringUnit(), 'Bblo')) then
                     call HasteEnteringUnit()
@@ -113,7 +113,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function Player9RestrictionAction takes nothing returns nothing
-        if(WarcraftMaulLibrary_EnteringUnitIsCreep())then
+        if(SharedWorld_EnteringUnitIsCreep())then
             call UnitRemoveBuffBJ('Bblo', GetEnteringUnit())
         elseif(IsUnitType(GetEnteringUnit(), UNIT_TYPE_SUMMONED))then
             if(GetOwningPlayer(GetEnteringUnit()) != Player(8)) then
@@ -147,7 +147,8 @@ library PathingSystem initializer Init
     endfunction
 
     private function CheckpointBetweenBlueAndYellowCondition takes nothing returns boolean
-        if WarcraftMaulLibrary_EnteringUnitIsCreep() then
+        if SharedWorld_EnteringUnitIsCreep() then
+
             if (LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 51) then
                 return true
             endif
@@ -161,7 +162,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function CheckpointBetweenBrownAndOrangeCondition takes nothing returns boolean
-        if WarcraftMaulLibrary_EnteringUnitIsCreep() then
+        if SharedWorld_EnteringUnitIsCreep() then
             if (LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 53) then
                 return true
             endif
@@ -171,7 +172,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function CheckpointBetweenMaroonAndPurpleCondition takes nothing returns boolean
-        if WarcraftMaulLibrary_EnteringUnitIsCreep() then
+        if SharedWorld_EnteringUnitIsCreep() then
             if (LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 54) then
                 return true
             endif
@@ -181,7 +182,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function EnteringUnitIsCreepAndHasNoCheckpoint takes nothing returns boolean
-        if not(WarcraftMaulLibrary_EnteringUnitIsCreep()) then
+        if not(SharedWorld_EnteringUnitIsCreep()) then
             return false
         endif
 
@@ -315,10 +316,10 @@ library PathingSystem initializer Init
 
             if i == 8 then
                 call AdjustPlayerStateBJ( 2 * udg_FinishWaveGoldReward, Player(i), PLAYER_STATE_RESOURCE_GOLD )
-                call WarcraftMaulLibrary_DisplayMessageToPlayer(msgGrey, i)
+                call Utility_DisplayMessageToPlayer(msgGrey, i)
             else
                 call AdjustPlayerStateBJ( udg_FinishWaveGoldReward, Player(i), PLAYER_STATE_RESOURCE_GOLD )
-                call WarcraftMaulLibrary_DisplayMessageToPlayer(msg, i)
+                call Utility_DisplayMessageToPlayer(msg, i)
             endif
 
             set i = i + 1
@@ -393,7 +394,7 @@ library PathingSystem initializer Init
 
     private function ReplaceEnumUnitAndAddToEndOfTurn takes integer uid returns nothing
         local unit replaced = ReplaceUnitBJ(GetEnumUnit(), uid, bj_UNIT_STATE_METHOD_DEFAULTS)
-        call WarcraftMaulLibrary_AddToEndOfTurnArray(replaced)
+        call SharedWorld_AddToEndOfTurnArray(replaced)
 
         set replaced = null
     endfunction
@@ -423,17 +424,17 @@ library PathingSystem initializer Init
             call SetUnitManaBJ(GetEnumUnit(), GetUnitStateSwap(UNIT_STATE_MANA, GetEnumUnit()) + 1.00)
         elseif (GetUnitTypeId(GetEnumUnit()) == 'u01F') then
             if (GetUnitStateSwap(UNIT_STATE_MANA, GetEnumUnit()) == 2) then
-                call WarcraftMaulLibrary_RemoveFromEndOfTurnArray(GetEnumUnit())
+                call SharedWorld_RemoveFromEndOfTurnArray(GetEnumUnit())
                 call ReplaceEnumUnitAndAddToEndOfTurn('u029')
             else
                 call SetUnitManaBJ(GetEnumUnit(), GetUnitStateSwap(UNIT_STATE_MANA, GetEnumUnit()) + 1.00)
             endif
         elseif (GetUnitTypeId(GetEnumUnit()) == 'u029') then
-            call WarcraftMaulLibrary_RemoveFromEndOfTurnArray(GetEnumUnit())
+            call SharedWorld_RemoveFromEndOfTurnArray(GetEnumUnit())
             call ReplaceEnumUnitAndAddToEndOfTurn('u01F')
         elseif (GetUnitTypeId(GetEnumUnit()) == 'u021') then
             if (GetUnitStateSwap(UNIT_STATE_MANA, GetEnumUnit()) == 5) then
-                call WarcraftMaulLibrary_RemoveFromEndOfTurnArray(GetEnumUnit())
+                call SharedWorld_RemoveFromEndOfTurnArray(GetEnumUnit())
                 call ReplaceEnumUnitAndAddToEndOfTurn('u036')
             else
                 call SetUnitManaBJ(GetEnumUnit(), GetUnitStateSwap(UNIT_STATE_MANA, GetEnumUnit()) + 1.00)
@@ -929,7 +930,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function YellowCheckpointCondition takes nothing returns boolean
-        if(WarcraftMaulLibrary_EnteringUnitIsCreep())then
+        if(SharedWorld_EnteringUnitIsCreep())then
             if(LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 11 )then
                 return true
             endif
@@ -942,6 +943,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function CheckpointBetweenBlueAndYellowAction takes nothing returns nothing
+
         if(LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 51)then
             call SpawnAction(11)
         else
@@ -966,7 +968,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function Yellow2CheckpointCondition takes nothing returns boolean
-        if(WarcraftMaulLibrary_EnteringUnitIsCreep())then
+        if(SharedWorld_EnteringUnitIsCreep())then
             if(LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 13 )then
                 return true
             endif
@@ -989,7 +991,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function YellowTeleportCondition takes nothing returns boolean
-        if(not(WarcraftMaulLibrary_EnteringUnitIsCreep()))then
+        if(not(SharedWorld_EnteringUnitIsCreep()))then
             return false
         endif
 
@@ -1005,7 +1007,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function LightblueTeleportCondition takes nothing returns boolean
-        if(not(WarcraftMaulLibrary_EnteringUnitIsCreep()))then
+        if(not(SharedWorld_EnteringUnitIsCreep()))then
             return false
         endif
         if(not(LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 46))then
@@ -1015,7 +1017,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function DarkgreenTeleportCondition takes nothing returns boolean
-        if(not(WarcraftMaulLibrary_EnteringUnitIsCreep()))then
+        if(not(SharedWorld_EnteringUnitIsCreep()))then
             return false
         endif
         if(not(LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 48))then
@@ -1025,7 +1027,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function RedTeleportCondition takes nothing returns boolean
-        if(not(WarcraftMaulLibrary_EnteringUnitIsCreep()))then
+        if(not(SharedWorld_EnteringUnitIsCreep()))then
             return false
         endif
         if(not (LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 36))then
@@ -1086,7 +1088,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function RedCheckpointCondition takes nothing returns boolean
-        if not(WarcraftMaulLibrary_EnteringUnitIsCreep()) then
+        if not(SharedWorld_EnteringUnitIsCreep()) then
             return false
         endif
         if not(LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 1 ) then
@@ -1113,7 +1115,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function Red2CheckpointCondition takes nothing returns boolean
-        if(not(WarcraftMaulLibrary_EnteringUnitIsCreep()))then
+        if(not(SharedWorld_EnteringUnitIsCreep()))then
             return false
         endif
         if(not(LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 2 ))then
@@ -1127,7 +1129,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function TealTeleportCondition takes nothing returns boolean
-        if not(WarcraftMaulLibrary_EnteringUnitIsCreep()) then
+        if not(SharedWorld_EnteringUnitIsCreep()) then
             return false
         endif
 
@@ -1139,7 +1141,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function PurpleTeleportCondition takes nothing returns boolean
-        if(not(WarcraftMaulLibrary_EnteringUnitIsCreep()))then
+        if(not(SharedWorld_EnteringUnitIsCreep()))then
             return false
         endif
         if(not(LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 41 ))then
@@ -1149,7 +1151,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function OrangeTeleportCondition takes nothing returns boolean
-        if(not(WarcraftMaulLibrary_EnteringUnitIsCreep()))then
+        if(not(SharedWorld_EnteringUnitIsCreep()))then
             return false
         endif
         if(not(LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 37 ))then
@@ -1159,7 +1161,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function OrangeCheckpointCondition takes nothing returns boolean
-        if(not(WarcraftMaulLibrary_EnteringUnitIsCreep()))then
+        if(not(SharedWorld_EnteringUnitIsCreep()))then
             return false
         endif
         if(not(LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 15 ))then
@@ -1173,7 +1175,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function Orange2CheckpointCondition takes nothing returns boolean
-        if(not(WarcraftMaulLibrary_EnteringUnitIsCreep()))then
+        if(not(SharedWorld_EnteringUnitIsCreep()))then
             return false
         endif
         if(not(LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 16 ))then
@@ -1187,7 +1189,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function BlueCheckpointCondition takes nothing returns boolean
-        if(WarcraftMaulLibrary_EnteringUnitIsCreep())then
+        if(SharedWorld_EnteringUnitIsCreep())then
             if(LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 3)then
                 return true
             endif
@@ -1208,7 +1210,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function Blue2CheckpointCondition takes nothing returns boolean
-        if(WarcraftMaulLibrary_EnteringUnitIsCreep())then
+        if(SharedWorld_EnteringUnitIsCreep())then
             if(LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 5)then
                 return true
             endif
@@ -1222,14 +1224,14 @@ library PathingSystem initializer Init
 
     private function Blue2CheckpointAction takes nothing returns nothing
         if(LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 5)then
-            call CheckpointAction(50)
-        else
             call CheckpointAction(51)
+        else
+            call CheckpointAction(52)
         endif
     endfunction
 
     private function TealCheckpointCondition takes nothing returns boolean
-        if(not(WarcraftMaulLibrary_EnteringUnitIsCreep()))then
+        if(not(SharedWorld_EnteringUnitIsCreep()))then
             return false
         endif
         if(not(LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 7 ))then
@@ -1243,7 +1245,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function Teal2CheckpointCondition takes nothing returns boolean
-        if(not(WarcraftMaulLibrary_EnteringUnitIsCreep()))then
+        if(not(SharedWorld_EnteringUnitIsCreep()))then
             return false
         endif
         if(not(LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 8 ))then
@@ -1274,7 +1276,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function GreenCheckpointCondition takes nothing returns boolean
-        if(not(WarcraftMaulLibrary_EnteringUnitIsCreep()))then
+        if(not(SharedWorld_EnteringUnitIsCreep()))then
             return false
         endif
         if(not(LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 17 ))then
@@ -1312,7 +1314,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function TealTeleportDestCondition takes nothing returns boolean
-        if(not(WarcraftMaulLibrary_EnteringUnitIsCreep()))then
+        if(not(SharedWorld_EnteringUnitIsCreep()))then
             return false
         endif
         if(not(LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 40 ))then
@@ -1322,7 +1324,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function PurpleTeleportDestCondition takes nothing returns boolean
-        if(not(WarcraftMaulLibrary_EnteringUnitIsCreep()))then
+        if(not(SharedWorld_EnteringUnitIsCreep()))then
             return false
         endif
         if(not(LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 42 ))then
@@ -1332,7 +1334,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function OrangeTeleportDestCondition takes nothing returns boolean
-        if(not(WarcraftMaulLibrary_EnteringUnitIsCreep()))then
+        if(not(SharedWorld_EnteringUnitIsCreep()))then
             return false
         endif
         if(not(LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 38 ))then
@@ -1342,7 +1344,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function LightblueTeleportDestCondition takes nothing returns boolean
-        if(not(WarcraftMaulLibrary_EnteringUnitIsCreep()))then
+        if(not(SharedWorld_EnteringUnitIsCreep()))then
             return false
         endif
         if(not(LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 47 ))then
@@ -1352,7 +1354,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function DarkgreenTeleportDestCondition takes nothing returns boolean
-        if(not(WarcraftMaulLibrary_EnteringUnitIsCreep()))then
+        if(not(SharedWorld_EnteringUnitIsCreep()))then
             return false
         endif
         if(not(LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 49 ))then
@@ -1362,7 +1364,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function YellowTeleportDestCondition takes nothing returns boolean
-        if(not(WarcraftMaulLibrary_EnteringUnitIsCreep()))then
+        if(not(SharedWorld_EnteringUnitIsCreep()))then
             return false
         endif
         if(not(LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 44 ))then
@@ -1372,7 +1374,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function Yellow2TeleportDestCondition takes nothing returns boolean
-        if(not(WarcraftMaulLibrary_EnteringUnitIsCreep()))then
+        if(not(SharedWorld_EnteringUnitIsCreep()))then
             return false
         endif
         if(not(LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 45 ))then
@@ -1382,7 +1384,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function RedTeleportDestCondition takes nothing returns boolean
-        if(not(WarcraftMaulLibrary_EnteringUnitIsCreep()))then
+        if(not(SharedWorld_EnteringUnitIsCreep()))then
             return false
         endif
         if(not(LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 35 ))then
@@ -1392,7 +1394,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function GreyTeleportCondition takes nothing returns boolean
-        if(not(WarcraftMaulLibrary_EnteringUnitIsCreep()))then
+        if(not(SharedWorld_EnteringUnitIsCreep()))then
             return false
         endif
         if(not(LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 34 ))then
@@ -1402,7 +1404,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function GreenTeleportCondition takes nothing returns boolean
-        if(not(WarcraftMaulLibrary_EnteringUnitIsCreep()))then
+        if(not(SharedWorld_EnteringUnitIsCreep()))then
             return false
         endif
         if(not(LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 32 ))then
@@ -1412,7 +1414,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function Green2CheckpointCondition takes nothing returns boolean
-        if(not(WarcraftMaulLibrary_EnteringUnitIsCreep()))then
+        if(not(SharedWorld_EnteringUnitIsCreep()))then
             return false
         endif
         if(not(LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 18 ))then
@@ -1430,7 +1432,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function BrownCheckpointCondition takes nothing returns boolean
-        if(not(WarcraftMaulLibrary_EnteringUnitIsCreep()))then
+        if(not(SharedWorld_EnteringUnitIsCreep()))then
             return false
         endif
         if(not(LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 27))then
@@ -1444,7 +1446,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function Brown2CheckpointCondition takes nothing returns boolean
-        if(not(WarcraftMaulLibrary_EnteringUnitIsCreep()))then
+        if(not(SharedWorld_EnteringUnitIsCreep()))then
             return false
         endif
         if(not(LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 28))then
@@ -1458,7 +1460,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function MaroonCheckpointCondition takes nothing returns boolean
-        if(not(WarcraftMaulLibrary_EnteringUnitIsCreep()))then
+        if(not(SharedWorld_EnteringUnitIsCreep()))then
             return false
         endif
         if(not(LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 29))then
@@ -1472,7 +1474,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function Maroon2CheckpointCondition takes nothing returns boolean
-        if(not(WarcraftMaulLibrary_EnteringUnitIsCreep()))then
+        if(not(SharedWorld_EnteringUnitIsCreep()))then
             return false
         endif
         if(not(LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 30))then
@@ -1486,7 +1488,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function PurpleCheckpointCondition takes nothing returns boolean
-        if not(WarcraftMaulLibrary_EnteringUnitIsCreep()) then
+        if not(SharedWorld_EnteringUnitIsCreep()) then
             return false
         endif
 
@@ -1502,7 +1504,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function Purple2CheckpointCondition takes nothing returns boolean
-        if not(WarcraftMaulLibrary_EnteringUnitIsCreep()) then
+        if not(SharedWorld_EnteringUnitIsCreep()) then
             return false
         endif
 
@@ -1518,7 +1520,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function Darkgreen2CheckpointCondition takes nothing returns boolean
-        if not(WarcraftMaulLibrary_EnteringUnitIsCreep()) then
+        if not(SharedWorld_EnteringUnitIsCreep()) then
             return false
         endif
 
@@ -1534,7 +1536,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function GreyCheckpointCondition takes nothing returns boolean
-        if not(WarcraftMaulLibrary_EnteringUnitIsCreep()) then
+        if not(SharedWorld_EnteringUnitIsCreep()) then
             return false
         endif
         if not(LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 21 ) then
@@ -1548,7 +1550,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function Grey2CheckpointCondition takes nothing returns boolean
-        if not(WarcraftMaulLibrary_EnteringUnitIsCreep()) then
+        if not(SharedWorld_EnteringUnitIsCreep()) then
             return false
         endif
         if not(LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 22 ) then
@@ -1562,7 +1564,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function LightblueCheckpointCondition takes nothing returns boolean
-        if not(WarcraftMaulLibrary_EnteringUnitIsCreep()) then
+        if not(SharedWorld_EnteringUnitIsCreep()) then
             return false
         endif
         if not(LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 23 ) then
@@ -1576,7 +1578,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function Lightblue2CheckpointCondition takes nothing returns boolean
-        if not(WarcraftMaulLibrary_EnteringUnitIsCreep()) then
+        if not(SharedWorld_EnteringUnitIsCreep()) then
             return false
         endif
         if not(LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 24 ) then
@@ -1590,7 +1592,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function DarkgreenCheckpointCondition takes nothing returns boolean
-        if not(WarcraftMaulLibrary_EnteringUnitIsCreep()) then
+        if not(SharedWorld_EnteringUnitIsCreep()) then
             return false
         endif
         if not(LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 25) then
@@ -1604,7 +1606,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function PinkCheckpointCondition takes nothing returns boolean
-        if(not(WarcraftMaulLibrary_EnteringUnitIsCreep()))then
+        if(not(SharedWorld_EnteringUnitIsCreep()))then
             return false
         endif
         if(not(LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 19))then
@@ -1618,7 +1620,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function PinkTeleportCondition takes nothing returns boolean
-        if(not(WarcraftMaulLibrary_EnteringUnitIsCreep()))then
+        if(not(SharedWorld_EnteringUnitIsCreep()))then
             return false
         endif
         if(not(LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 33))then
@@ -1628,7 +1630,7 @@ library PathingSystem initializer Init
     endfunction
 
     private function Pink2CheckpointCondition takes nothing returns boolean
-        if(not(WarcraftMaulLibrary_EnteringUnitIsCreep()))then
+        if(not(SharedWorld_EnteringUnitIsCreep()))then
             return false
         endif
         if(not(LoadIntegerBJ(GetHandleIdBJ(GetEnteringUnit()), 0, udg_UnitToCheckpointTable) == 20))then
@@ -2148,7 +2150,7 @@ library PathingSystem initializer Init
 
         set udg_trigger39=CreateTrigger()
         call TriggerRegisterEnterRectSimple( udg_trigger39, udg_Shipcheckpoint )
-        call TriggerAddCondition(udg_trigger39,Condition(function WarcraftMaulLibrary_EnteringUnitIsCreep))
+        call TriggerAddCondition(udg_trigger39,Condition(function SharedWorld_EnteringUnitIsCreep))
         call TriggerAddAction( udg_trigger39, function LoseALife )
         set udg_trigger40=CreateTrigger()
         call TriggerRegisterEnterRectSimple( udg_trigger40, udg_ShipDestination )

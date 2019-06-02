@@ -22,6 +22,32 @@ public function AddToTickArray takes unit u returns nothing
 		set u=null
 	endfunction
 
+	public function IsCreep takes unit u returns boolean
+		if ( GetOwningPlayer(u) == Player(13) ) then
+			set u=null
+			return true
+		endif
+		if ( GetOwningPlayer(u) == Player(14) ) then
+			set u=null
+			return true
+		endif
+		if ( GetOwningPlayer(u) == Player(15) ) then
+			set u=null
+			return true
+		endif
+		if ( GetOwningPlayer(u) == Player(16) ) then
+			set u=null
+			return true
+		endif
+
+		set u=null
+		return false
+	endfunction
+
+	public function EnteringUnitIsCreep takes nothing returns boolean
+		return IsCreep(GetEnteringUnit())
+	endfunction
+
  public function AddToDeathInSpawnArray takes unit u returns nothing
   local integer i= 0
 
