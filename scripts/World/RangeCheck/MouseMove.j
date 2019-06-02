@@ -1,4 +1,4 @@
-library MouseMoveRC initializer Init
+library MouseMoveRC /*initializer Init*/
     private function Trig_Mouse_Move_Func001C takes nothing returns boolean
         if ( not ( udg_RangeOnOff[GetConvertedPlayerId(GetTriggerPlayer())] == 1 ) ) then
             return false
