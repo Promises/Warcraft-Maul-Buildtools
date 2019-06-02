@@ -288,7 +288,6 @@ library Construction initializer Init requires SharedWorld, ProudmooreOceanmaste
             call SharedWorld_AddToDeathInSpawnArray(tower)
         endif
 
-
         call DisableTowers_Trig_Disable_Towers_Add_Actions(tower)
         set tower = null
     endfunction
