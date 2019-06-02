@@ -11,7 +11,7 @@ library RangeSet initializer Init
     endfunction
 
     //===========================================================================
-    private function InitTrig_Range_Set takes nothing returns nothing
+    private function Init takes nothing returns nothing
         set gg_trg_Range_Set = CreateTrigger(  )
         call TriggerRegisterPlayerChatEvent( gg_trg_Range_Set, Player(0), "-range", false )
         call TriggerRegisterPlayerChatEvent( gg_trg_Range_Set, Player(1), "-range", false )

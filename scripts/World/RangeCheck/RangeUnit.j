@@ -14,7 +14,7 @@ library RangeUnit initializer Init
     endfunction
 
     //===========================================================================
-    private function InitTrig_Range_Unit takes nothing returns nothing
+    private function Init takes nothing returns nothing
         set gg_trg_Range_Unit = CreateTrigger(  )
         call TriggerRegisterPlayerSelectionEventBJ( gg_trg_Range_Unit, Player(0), true )
         call TriggerRegisterPlayerSelectionEventBJ( gg_trg_Range_Unit, Player(1), true )
