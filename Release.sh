@@ -2,11 +2,11 @@
 
 
 if [ $# -eq 2 ]; then
-    LC_ALL=C sed -i "s/TestMap WCMaul Reimagined/WarCraft Maul: Reimagined $1/g" mapfiles/war3map.wts
+    LC_ALL=C sed -i "s/TestMap WCMaul Reimagined/WarCraft Maul\: Reimagined $2/g" mapfiles/war3map.wts
 
     sh BuildBot1.sh
     Warcraft-Maul-Race-Parser mapfiles/Units/ units.json
-    python3 BuildFiles/GenerateHybrid.py $0
+    python3 BuildFiles/GenerateHybrid.py $1
     sh BuildBot2.sh
     status=$?
     ## take some decision ## 
@@ -17,7 +17,7 @@ if [ $# -eq 2 ]; then
     dd conv=notrunc bs=512 count=1 of=out.w3x if=BuildFiles/header.bin
 
 
-    LC_ALL=C sed -i "s/PPPPPPPPPppXXXXXXXXXXXXPPPPPPPPPBBBWCMP/WarCraft Maul: Reimagined $1        /g" out.w3x
+    LC_ALL=C sed -i "s/PPPPPPPPPppXXXXXXXXXXXXPPPPPPPPPBBBWCMP/WarCraft Maul\: Reimagined $2        /g" out.w3x
 
 else
     echo "Usage: ./Release %Buildnumber% %Releasenumber%"
