@@ -6561,6 +6561,15 @@ BuildingSoundLabel=NagaConstructionLoop
 LoopingSoundFadeIn=512
 LoopingSoundFadeOut=512
 
+[u04E]
+Art=ReplaceableTextures\CommandButtons\BTNWisp.blp
+Specialart=Objects\Spawnmodels\Human\HumanLargeDeathExplode\HumanLargeDeathExplode.mdl
+Name=Range Check
+Hotkey=F
+Tip=
+Ubertip=
+Buttonpos=0,0
+
 [uC13]
 Art=ReplaceableTextures\CommandButtons\BTNMilitia.blp
 Name=[Builder] - Giant Worker
