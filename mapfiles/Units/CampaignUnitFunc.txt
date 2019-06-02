@@ -4405,7 +4405,7 @@ Attachmentanimprops=medium
 
 [nC50]
 Art=ReplaceableTextures\CommandButtons\BTNRevenant.blp
-Name=Satyr Hellcaller
+Name=Assassin
 Tip=Summon Infernal
 Ubertip="Heavy melee unit cloaked in demonic flames that damage nearby enemy ground units. Immune to magic. |n|n|cffffcc00Attacks land units.|r"
 EditorSuffix=lvl 24
