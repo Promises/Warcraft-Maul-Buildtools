@@ -289,7 +289,7 @@ library Construction initializer Init requires SharedWorld, ProudmooreOceanmaste
         endif
 
 
-
+        call DisableTowers_Trig_Disable_Towers_Add_Actions(tower)
         set tower = null
     endfunction
 
