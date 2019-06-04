@@ -1,5 +1,5 @@
 ID;PWXL;N;E
-B;X7;Y493;D0
+B;X7;Y492;D0
 C;X1;Y1;K"unitAbilID"
 C;X2;K"sortAbil"
 C;X3;K"comment(s)"
@@ -1969,10 +1969,6 @@ C;X5;K"Aeth,A02Z"
 C;X6;K
 C;X1;Y492;K"uC98"
 C;X4;K"_"
-C;X5;K"A00E,Avul,A02X,A0EB"
-C;X6;K
-C;X1;Y493;Ku04E
-C;X4;K_
 C;X5;K"Avul,Agho,Aloc"
 C;X6;K
 E

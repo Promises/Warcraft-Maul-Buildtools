@@ -44,8 +44,46 @@ library Utility
 		endloop
 	endfunction
 
+	public function DrawTempRectangle takes real x1, real y1, real x2, real y2 returns nothing
+		local integer i = 0
+		local integer j = 0
+		local string model = "Abilities\\Weapons\\SerpentWardMissile\\SerpentWardMissile.mdl"
+		set i = R2I(x1)
+		loop
+			exitwhen i > R2I(x2)
+				call DestroyEffect(AddSpecialEffect(model, I2R(i), y1))
+			set i = i + 16
+		endloop
+		set j = R2I(y1)
+		loop
+			exitwhen j > R2I(y2)
+				call DestroyEffect(AddSpecialEffect(model, x2, I2R(j)))
+			set j = j + 16
+		endloop
+		set i = R2I(x1)
+		loop
+			exitwhen i > R2I(x2)
+				call DestroyEffect(AddSpecialEffect(model, I2R(i), y2))
+			set i = i + 16
+		endloop
+		set j = R2I(y1)
+		loop
+			exitwhen j > R2I(y2)
+				call DestroyEffect(AddSpecialEffect(model, x1, I2R(j)))
+			set j = j + 16
+		endloop
+	endfunction
+	
+	
+
+
 	public function DrawRect takes rect rectangle returns nothing
 		call DrawRectangle(GetRectMinX(rectangle),GetRectMinY(rectangle),GetRectMaxX(rectangle),GetRectMaxY(rectangle))
+		set rectangle = null
+	endfunction
+
+	public function DrawTempRect takes rect rectangle returns nothing
+		call DrawTempRectangle(GetRectMinX(rectangle),GetRectMinY(rectangle),GetRectMaxX(rectangle),GetRectMaxY(rectangle))
 		set rectangle = null
 	endfunction
 

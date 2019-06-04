@@ -1111,6 +1111,8 @@ library PathingSystem initializer Init requires Utility, SharedWorld, MapInit
     endfunction
 
     private function RedCheckpointAction takes nothing returns nothing
+        // call Utility_DrawTempRect(udg_Checkpoints[1])
+
         call CheckpointAction(2)
     endfunction
 
