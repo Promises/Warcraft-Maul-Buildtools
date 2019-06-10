@@ -1,4 +1,26 @@
 library SharedWorld
+
+
+ 	public function AirWave takes nothing returns boolean
+        if ( udg_CreepLevel == 5 ) then
+            return true
+        endif
+        if ( udg_CreepLevel == 15 ) then
+            return true
+        endif
+        if ( udg_CreepLevel == 20 ) then
+            return true
+        endif
+        if ( udg_CreepLevel == 25 ) then
+            return true
+        endif
+        if ( udg_CreepLevel == 30 ) then
+            return true
+        endif
+        return false
+    endfunction
+
+
     public function RemoveFromTickArray takes unit u returns nothing
 		call FlushChildHashtableBJ(GetHandleIdBJ(u), udg_TowerTickTable)
 		call GroupRemoveUnitSimple(u, udg_TowerTickGroup)
@@ -10,17 +32,17 @@ library SharedWorld
 		set u=null
 	endfunction
 
-public function AddToTickArray takes unit u returns nothing
-		call SaveIntegerBJ(0, 0, GetHandleIdBJ(u), udg_TowerTickTable)
-		call GroupAddUnitSimple(u, udg_TowerTickGroup)
-		set u=null
-	endfunction
+	public function AddToTickArray takes unit u returns nothing
+			call SaveIntegerBJ(0, 0, GetHandleIdBJ(u), udg_TowerTickTable)
+			call GroupAddUnitSimple(u, udg_TowerTickGroup)
+			set u=null
+		endfunction
 
- public function AddToEndOfTurnArray takes unit u returns nothing
-		// call SaveIntegerBJ(0, 0, GetHandleIdBJ(u), udg_TowerEndOfTurnTable)
-		call GroupAddUnitSimple(u, udg_TowerEndOfTurnGroup)
-		set u=null
-	endfunction
+	public function AddToEndOfTurnArray takes unit u returns nothing
+			// call SaveIntegerBJ(0, 0, GetHandleIdBJ(u), udg_TowerEndOfTurnTable)
+			call GroupAddUnitSimple(u, udg_TowerEndOfTurnGroup)
+			set u=null
+		endfunction
 
 	public function IsCreep takes unit u returns boolean
 		if ( GetOwningPlayer(u) == Player(13) ) then
@@ -48,8 +70,8 @@ public function AddToTickArray takes unit u returns nothing
 		return IsCreep(GetEnteringUnit())
 	endfunction
 
- public function AddToDeathInSpawnArray takes unit u returns nothing
-  local integer i= 0
+ 	public function AddToDeathInSpawnArray takes unit u returns nothing
+  		local integer i= 0
 
 		loop
 		exitwhen i > 12

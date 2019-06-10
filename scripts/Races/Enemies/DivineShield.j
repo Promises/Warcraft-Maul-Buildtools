@@ -1,6 +1,11 @@
-library DivineShield initializer Init
+library DivineShield initializer Init requires SharedWorld
 
-    private  function Trig_DivineShield_Conditions takes nothing returns boolean
+   
+
+    private function Trig_DivineShield_Conditions takes nothing returns boolean
+        if (SharedWorld_AirWave()) then
+            return false
+        endif
         return GetUnitAbilityLevel(udg_DamageEventTarget, 'A01E') > 0
     endfunction
 

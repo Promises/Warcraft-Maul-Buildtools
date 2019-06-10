@@ -1,4 +1,4 @@
-library Construction initializer Init requires SharedWorld, ProudmooreOceanmaster
+library Construction initializer Init requires SharedWorld, ProudmooreOceanmaster, Utility
     globals
         private trigger udg_ConstructionTrigger = null
     endglobals

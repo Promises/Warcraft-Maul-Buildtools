@@ -619,6 +619,9 @@ public function InitializeVariables takes nothing returns nothing
 	set udg_Checkpoints[52] = yellowInSpawnCheckpoint
 	set udg_Checkpoints[53] = Rect(-4416.00, 384.00, -4288.00, 480.00)
 	set udg_Checkpoints[54] = Rect(4288.00, 384.00, 4416.00, 480.00)
+	// call Utility_DrawRect(bj_mapInitialPlayableArea)
+	// call Utility_DrawGrid()
+
 
 	// call MakeCheckpointsBuildable()
 	
