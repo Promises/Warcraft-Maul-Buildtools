@@ -24,6 +24,11 @@ library DisableTowers
             return true
         endif
 
+        if (GetUnitTypeId(tower) == 'n009') then
+            return true
+        endif
+        
+
         return false
     endfunction
 
