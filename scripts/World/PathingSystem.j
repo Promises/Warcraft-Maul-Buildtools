@@ -219,6 +219,10 @@ library PathingSystem initializer Init requires Utility, SharedWorld, MapInit
 
     private function LoseALife takes nothing returns nothing
         if(not(udg_HasGameEnded))then
+            if(udg_CreepLevel >= 36) then
+                call RemoveUnit(GetEnteringUnit())
+                return
+            endif
             if(GetUnitTypeId(GetEnteringUnit()) == 'uC72')then
                 set udg_TotalLives=0
                 call DisplayTextToForce( GetPlayersAll(), "Archimonde has boarded the ship! |cFFFF0000YOU LOSE!|r")
@@ -384,7 +388,7 @@ library PathingSystem initializer Init requires Utility, SharedWorld, MapInit
     endfunction
 
     private function BonusRoundsOver takes nothing returns nothing
-        call DisplayTextToForce( GetPlayersAll(), "|cFFF48C42That's all the bonus levels, well done!|r" )
+        call DisplayTextToForce( GetPlayersAll(), "|cFFF48C42That's all the bonus levels, see you next time!|r" )
         set udg_IsWaveInProgress = false
         set udg_GameEndTimer = 600
         set udg_HasGameEnded = true
