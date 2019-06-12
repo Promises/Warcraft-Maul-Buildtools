@@ -1,4 +1,5 @@
-library Commands initializer Init
+library Commands initializer Init requires SharedWorld 
+
     private function GetPlayerIdFromColorName takes string color returns integer
         if(color == "red")then
             return 0
@@ -54,7 +55,7 @@ library Commands initializer Init
 
     private function SellATower takes nothing returns nothing
         if(HasCorrectUnitUserData())then
-            call WarcraftMaulLibrary_SellTower(GetEnumUnit())
+            call SharedWorld_SellTower(GetEnumUnit())
         endif
     endfunction
 
@@ -477,14 +478,14 @@ library Commands initializer Init
     endfunction
     */
 
-    private function ShowMaze takes nothing returns nothing
+    private function ShowMaze takes real x, real y, real x2, real y2 returns nothing
         local string effectModel = ""
-        local real x = GetRectCenterX(udg_Checkpoints[11])
-        local real y = GetRectCenterY(udg_Checkpoints[11])
-        local real x2 = GetRectCenterX(udg_Checkpoints[13])
-        local real y2 = GetRectCenterY(udg_Checkpoints[13])
         local real towardsX2 = x2 - x
         local real towardsY2 = y2 - y
+        local real towardsX2Div9 = (towardsX2 / 9)
+        local real towardsX2Div18 = (towardsX2 / 18)
+        local real towardsY2Div9 = (towardsY2 / 9)
+        local real towardsY2Div18 = (towardsY2 / 18)
 
         if (GetTriggerPlayer() == GetLocalPlayer()) then
             // set effectModel = "Abilities\\Spells\\Undead\\AbsorbMana\\AbsorbManaBirthMissile.mdl"
@@ -492,48 +493,46 @@ library Commands initializer Init
             set effectModel = "ReplaceableTextures\\Splats\\SuggestedPlacementSplat.blp"
         endif
 
-        call DisplayTimedTextToPlayer(GetTriggerPlayer(), 0, 0, 5,"(towardsY2/9): " + R2S((towardsY2 / 9)))
-
         // Between Checkpoints
-        call OutlineBuilding(effectModel, x + (towardsX2 / 9), y + (towardsY2 / 9))
-        call OutlineBuilding(effectModel, x + 2 * (towardsX2 / 9), y + 2 * (towardsY2 / 9))
-        call OutlineBuilding(effectModel, x + 3 * (towardsX2 / 9), y + 3 * (towardsY2 / 9))
-        call OutlineBuilding(effectModel, x + 4 * (towardsX2 / 9), y + 4 * (towardsY2 / 9))
-        call OutlineBuilding(effectModel, x + 5 * (towardsX2 / 9), y + 5 * (towardsY2 / 9))
-        call OutlineBuilding(effectModel, x + 6 * (towardsX2 / 9), y + 6 * (towardsY2 / 9))
-        call OutlineBuilding(effectModel, x + 7 * (towardsX2 / 9), y + 7 * (towardsY2 / 9))
+        call OutlineBuilding(effectModel, x + towardsX2Div9, y + towardsY2Div9)
+        call OutlineBuilding(effectModel, x + 2 * towardsX2Div9, y + 2 * towardsY2Div9)
+        call OutlineBuilding(effectModel, x + 3 * towardsX2Div9, y + 3 * towardsY2Div9)
+        call OutlineBuilding(effectModel, x + 4 * towardsX2Div9, y + 4 * towardsY2Div9)
+        call OutlineBuilding(effectModel, x + 5 * towardsX2Div9, y + 5 * towardsY2Div9)
+        call OutlineBuilding(effectModel, x + 6 * towardsX2Div9, y + 6 * towardsY2Div9)
+        call OutlineBuilding(effectModel, x + 7 * towardsX2Div9, y + 7 * towardsY2Div9)
 
         // Around first checkpoint
-        call OutlineBuilding(effectModel, x + 128, y)
-        call OutlineBuilding(effectModel, x, y - (towardsY2 / 9))
-        call OutlineBuilding(effectModel, x - 128, y - (towardsY2 / 18))
-        call OutlineBuilding(effectModel, x - 192, y + (towardsY2 / 18))
+        call OutlineBuilding(effectModel, x - towardsY2Div9, y - towardsX2Div9)
+        call OutlineBuilding(effectModel, x - towardsX2Div9, y - towardsY2Div9)
+        call OutlineBuilding(effectModel, x + towardsY2Div9 - towardsX2Div18, y - towardsY2Div18 + towardsX2Div9)
+        call OutlineBuilding(effectModel, x + towardsY2Div9 + towardsY2Div18 + towardsX2Div18, y + towardsY2Div18 + towardsX2Div9 + towardsX2Div18)
 
         // Around second checkpoint
-        call OutlineBuilding(effectModel, x, y - 1024)
-        call OutlineBuilding(effectModel, x - 128, y - 1152)
-        call OutlineBuilding(effectModel, x, y - 1280)
-        call OutlineBuilding(effectModel, x + 128, y - 1216)
+        call OutlineBuilding(effectModel, x + 8 * towardsX2Div9, y + 8 * towardsY2Div9)
+        call OutlineBuilding(effectModel, x + towardsY2Div9 + 9 * towardsX2Div9, y + 9 * towardsY2Div9 + towardsX2Div9)
+        call OutlineBuilding(effectModel, x + 10 * towardsX2Div9, y + 10 * towardsY2Div9)
+        call OutlineBuilding(effectModel, x - towardsY2Div9 + 9 * towardsX2Div9 + towardsX2Div18, y + 9 * towardsY2Div9 + towardsY2Div18 - towardsX2Div9)
 
         // Left side
-        call OutlineBuilding(effectModel, x - 192, y + (towardsY2 / 18))
-        call OutlineBuilding(effectModel, x - 192, y + (towardsY2 / 18) + (towardsY2 / 9))
-        call OutlineBuilding(effectModel, x - 192, y + (towardsY2 / 18) + 2 * (towardsY2 / 9))
-        call OutlineBuilding(effectModel, x - 192, y + (towardsY2 / 18) + 3 * (towardsY2 / 9))
-        call OutlineBuilding(effectModel, x - 192, y + (towardsY2 / 18) + 4 * (towardsY2 / 9))
-        call OutlineBuilding(effectModel, x - 192, y + (towardsY2 / 18) + 5 * (towardsY2 / 9))
-        call OutlineBuilding(effectModel, x - 192, y + (towardsY2 / 18) + 6 * (towardsY2 / 9))
-        call OutlineBuilding(effectModel, x - 192, y + (towardsY2 / 18) + 7 * (towardsY2 / 9))
+        call OutlineBuilding(effectModel, x + towardsY2Div18 + towardsY2Div9 + towardsX2Div18, y + towardsY2Div18 + towardsX2Div18 + towardsX2Div9)
+        call OutlineBuilding(effectModel, x + towardsY2Div18 + towardsY2Div9 + towardsX2Div18 + towardsX2Div9, y + towardsY2Div18 + towardsY2Div9 + towardsX2Div18 + towardsX2Div9)
+        call OutlineBuilding(effectModel, x + towardsY2Div18 + towardsY2Div9 + towardsX2Div18 + 2 * towardsX2Div9, y + towardsY2Div18 + 2 * towardsY2Div9 + towardsX2Div18 + towardsX2Div9)
+        call OutlineBuilding(effectModel, x + towardsY2Div18 + towardsY2Div9 + towardsX2Div18 + 3 * towardsX2Div9, y + towardsY2Div18 + 3 * towardsY2Div9 + towardsX2Div18 + towardsX2Div9)
+        call OutlineBuilding(effectModel, x + towardsY2Div18 + towardsY2Div9 + towardsX2Div18 + 4 * towardsX2Div9, y + towardsY2Div18 + 4 * towardsY2Div9 + towardsX2Div18 + towardsX2Div9)
+        call OutlineBuilding(effectModel, x + towardsY2Div18 + towardsY2Div9 + towardsX2Div18 + 5 * towardsX2Div9, y + towardsY2Div18 + 5 * towardsY2Div9 + towardsX2Div18 + towardsX2Div9)
+        call OutlineBuilding(effectModel, x + towardsY2Div18 + towardsY2Div9 + towardsX2Div18 + 6 * towardsX2Div9, y + towardsY2Div18 + 6 * towardsY2Div9 + towardsX2Div18 + towardsX2Div9)
+        call OutlineBuilding(effectModel, x + towardsY2Div18 + towardsY2Div9 + towardsX2Div18 + 7 * towardsX2Div9, y + towardsY2Div18 + 7 * towardsY2Div9 + towardsX2Div18 + towardsX2Div9)
 
         // Right side
-        call OutlineBuilding(effectModel, x + 192, y + (towardsY2 / 18) + 8 * (towardsY2 / 9))
-        call OutlineBuilding(effectModel, x + 192, y + (towardsY2 / 18) + 7 * (towardsY2 / 9))
-        call OutlineBuilding(effectModel, x + 192, y + (towardsY2 / 18) + 6 * (towardsY2 / 9))
-        call OutlineBuilding(effectModel, x + 192, y + (towardsY2 / 18) + 5 * (towardsY2 / 9))
-        call OutlineBuilding(effectModel, x + 192, y + (towardsY2 / 18) + 4 * (towardsY2 / 9))
-        call OutlineBuilding(effectModel, x + 192, y + (towardsY2 / 18) + 3 * (towardsY2 / 9))
-        call OutlineBuilding(effectModel, x + 192, y + (towardsY2 / 18) + 2 * (towardsY2 / 9))
-        call OutlineBuilding(effectModel, x + 192, y + (towardsY2 / 18) + (towardsY2 / 9))
+        call OutlineBuilding(effectModel, x - towardsY2Div18 - towardsY2Div9 + towardsX2Div18 + 8 * towardsX2Div9, y + towardsY2Div18 + 8 * towardsY2Div9 - towardsX2Div18 - towardsX2Div9)
+        call OutlineBuilding(effectModel, x - towardsY2Div18 - towardsY2Div9 + towardsX2Div18 + 7 * towardsX2Div9, y + towardsY2Div18 + 7 * towardsY2Div9 - towardsX2Div18 - towardsX2Div9)
+        call OutlineBuilding(effectModel, x - towardsY2Div18 - towardsY2Div9 + towardsX2Div18 + 6 * towardsX2Div9, y + towardsY2Div18 + 6 * towardsY2Div9 - towardsX2Div18 - towardsX2Div9)
+        call OutlineBuilding(effectModel, x - towardsY2Div18 - towardsY2Div9 + towardsX2Div18 + 5 * towardsX2Div9, y + towardsY2Div18 + 5 * towardsY2Div9 - towardsX2Div18 - towardsX2Div9)
+        call OutlineBuilding(effectModel, x - towardsY2Div18 - towardsY2Div9 + towardsX2Div18 + 4 * towardsX2Div9, y + towardsY2Div18 + 4 * towardsY2Div9 - towardsX2Div18 - towardsX2Div9)
+        call OutlineBuilding(effectModel, x - towardsY2Div18 - towardsY2Div9 + towardsX2Div18 + 3 * towardsX2Div9, y + towardsY2Div18 + 3 * towardsY2Div9 - towardsX2Div18 - towardsX2Div9)
+        call OutlineBuilding(effectModel, x - towardsY2Div18 - towardsY2Div9 + towardsX2Div18 + 2 * towardsX2Div9, y + towardsY2Div18 + 2 * towardsY2Div9 - towardsX2Div18 - towardsX2Div9)
+        call OutlineBuilding(effectModel, x - towardsY2Div18 - towardsY2Div9 + towardsX2Div18 + towardsX2Div9, y + towardsY2Div18 + towardsY2Div9 - towardsX2Div18 - towardsX2Div9)
     endfunction
 
     private function PlayerChatCommandActions takes nothing returns nothing
@@ -638,7 +637,7 @@ library Commands initializer Init
                 set udg_CreepLevel = S2I(SubStringBJ(GetEventPlayerChatString(), 7, StringLength(GetEventPlayerChatString())))
             endif
         elseif(GetEventPlayerChatString()=="-maze")then
-            call ShowMaze()
+            call ShowMaze(GetRectCenterX(udg_Checkpoints[7]), GetRectCenterY(udg_Checkpoints[7]), GetRectCenterX(udg_Checkpoints[8]), GetRectCenterY(udg_Checkpoints[8]))
         elseif(GetEventPlayerChatString()=="-image")then
             call CreateImageEx("ReplaceableTextures\\Splats\\HumanUbersplat.blp", 128, 0.00, 0.00, 0.00, true)
         endif
