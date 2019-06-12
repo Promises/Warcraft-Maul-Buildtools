@@ -27,6 +27,11 @@ py -3 BuildFiles/GenerateHybrid.py
 echo Recompiling jass...
 %toolsdir%\\JassHelper\\jasshelper.exe %common% %blizzard% %tempdir%\\war3map.j %tempdir%\\out.w3x
 
+if %ERRORLEVEL% GEQ 1 (
+  rd /s /q temp
+  EXIT /B 1
+)
+
 echo Extracting from out.w3x...
 %toolsdir%\\MPQEditor.exe extract %tempdir%\\out.w3x war3map.j temp
 
@@ -35,4 +40,3 @@ move temp\\out.w3x .
 move temp\\war3map.j lastrig.j
 rd /s /q temp
 echo Done!
-pause

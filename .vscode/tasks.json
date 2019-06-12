@@ -22,7 +22,7 @@
             "label": "build-test",
             "type": "shell",
             "windows": {
-                "command": "cmd.exe /C Windows-Run-Map.bat"
+                "command": "cmd.exe /C Windows-Build-And-Run.bat"
             },
             "osx": {
                 "command": "./Unix-Build-And-Run.sh"
