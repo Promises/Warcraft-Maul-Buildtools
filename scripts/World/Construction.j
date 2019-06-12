@@ -59,8 +59,28 @@ library Construction initializer Init requires SharedWorld, ProudmooreOceanmaste
         set grp=null
     endfunction
 
+
+
+    private function displayForOnePlayer takes nothing returns nothing
+        local string effectmodel = ""
+        local integer i = 0
+        
+
+        if (GetTriggerPlayer() == GetLocalPlayer()) then
+            set effectmodel = "Doodads\\Cinematic\\DemonFootPrint\\DemonFootPrint0.mdl"
+        endif
+
+        call Utility_DisplayMessageToAllPlayers(effectmodel)
+        call Utility_DrawTempEffectRectangle(effectmodel,-64.00, 4032.00, 64.00, 4160.00)
+
+
+
+
+    endfunction
+
     public function setupTowerTriggers takes unit tower returns nothing
         call UnitRemoveAbilityBJ('ARal', tower)
+        call displayForOnePlayer()
 
         if ( GetUnitTypeId(tower) == 'n00A' ) then
             call AddElementalistAbilities()
