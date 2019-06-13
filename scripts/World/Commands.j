@@ -535,6 +535,15 @@ library Commands initializer Init requires SharedWorld
         call OutlineBuilding(effectModel, x - towardsY2Div18 - towardsY2Div9 + towardsX2Div18 + towardsX2Div9, y + towardsY2Div18 + towardsY2Div9 - towardsX2Div18 - towardsX2Div9)
     endfunction
 
+    private function ShowMazeAll takes nothing returns nothing
+        local integer i = 0
+        loop
+            exitwhen i > 13
+            call ShowMaze(GetRectCenterX(udg_Checkpoints[2 * i]), GetRectCenterY(udg_Checkpoints[2 * i]), GetRectCenterX(udg_Checkpoints[2 * i + 1]), GetRectCenterY(udg_Checkpoints[2 * i + 1]))
+            set i = i + 1
+        endloop
+    endfunction
+
     private function PlayerChatCommandActions takes nothing returns nothing
         local player p = GetTriggerPlayer()
         if(GetEventPlayerChatString()=="-air")then
@@ -637,7 +646,7 @@ library Commands initializer Init requires SharedWorld
                 set udg_CreepLevel = S2I(SubStringBJ(GetEventPlayerChatString(), 7, StringLength(GetEventPlayerChatString())))
             endif
         elseif(GetEventPlayerChatString()=="-maze")then
-            call ShowMaze(GetRectCenterX(udg_Checkpoints[7]), GetRectCenterY(udg_Checkpoints[7]), GetRectCenterX(udg_Checkpoints[8]), GetRectCenterY(udg_Checkpoints[8]))
+            call ShowMazeAll()
         elseif(GetEventPlayerChatString()=="-image")then
             call CreateImageEx("ReplaceableTextures\\Splats\\HumanUbersplat.blp", 128, 0.00, 0.00, 0.00, true)
         endif
