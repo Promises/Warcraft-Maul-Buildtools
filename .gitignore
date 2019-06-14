@@ -12,3 +12,5 @@ scripts/HybridRandom.j
 scripts/Races/HybridRandom.j
 scripts/TestLib.j
 imports.j
+src
+target
