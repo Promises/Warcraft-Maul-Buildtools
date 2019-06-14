@@ -4,13 +4,18 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "clean",
+            "type": "shell",
+            "windows": {
+                "command": "cmd.exe /C clean.bat"
+            },
+            "problemMatcher": []
+        },
+        {
             "label": "build",
             "type": "shell",
             "windows": {
-                "command": "cmd.exe /C Windows-Build.bat"
-            },
-            "osx": {
-                "command": "./Unix-Build.sh"
+                "command": "cmd.exe /C build.bat"
             },
             "group": {
                 "kind": "test",
@@ -22,10 +27,10 @@
             "label": "build-test",
             "type": "shell",
             "windows": {
-                "command": "cmd.exe /C Windows-Build-And-Run.bat"
+                "command": "cmd.exe /C build-test.bat"
             },
             "osx": {
-                "command": "./Unix-Build-And-Run.sh"
+                "command": "sh build-test.sh"
             },
             "group": {
                 "kind": "build",
