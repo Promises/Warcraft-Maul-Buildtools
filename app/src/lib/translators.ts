@@ -1,12 +1,60 @@
 class console {
     static log(input: string) {
-        BJDebugMsg(input)
+        BJDebugMsg(input);
     }
+}
+
+interface ColourToIndex {
+    [key: string]: number
 }
 
 class Util {
     static ColourString(colour: string, string: string): string {
-        return `|cFF${colour}${string}|r`
+        return `|cFF${colour}${string}|r`;
+    }
+
+    static COLOUR_IDS: ColourToIndex = {
+        'RED': 0,
+        'BLUE': 1,
+        'TEAL': 2,
+        'PURPLE': 3,
+        'YELLOW': 4,
+        'ORANGE': 5,
+        'GREEN,': 6,
+        'PINK': 7,
+        'GRAY': 8,
+        'LIGHT_BLUE': 9,
+        'DARK_GREEN': 10,
+        'BROWN': 11,
+        'MAROON': 12,
+        'NAVY': 13,
+        'TURQUOISE': 14,
+        'VOILET': 15,
+        'WHEAT': 16,
+        'PEACH': 17,
+        'MINT': 18,
+        'LEVANDER': 19,
+        'COAL': 20,
+        'SNOW': 21,
+        'EMERALD': 22,
+        'PEANUT': 23,
+    };
+
+    static ArraysToString(arr: string[]): string {
+        let output = '[';
+        for (let i = 0; i < arr.length; i++) {
+            if (i == arr.length - 1) {
+                output += `"${arr[i]}"`;
+                continue;
+            }
+            output += `"${arr[i]}", `;
+        }
+        output += ']';
+        return output;
+    }
+
+    static ParseInt(str: string): number {
+        return +str;
     }
 }
 
@@ -39,6 +87,7 @@ enum COLOUR {
     EMERALD,
     PEANUT
 }
+
 
 enum CREEP_TYPE {
     NORMAL,

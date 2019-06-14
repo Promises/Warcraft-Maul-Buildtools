@@ -35,4 +35,16 @@ export abstract class AbstractPlayer {
 
     }
 
+    setGold(amount: number) {
+        SetPlayerStateBJ(this.wcPlayer, PLAYER_STATE_RESOURCE_GOLD, amount);
+    }
+
+    setLumber(amount: number) {
+        SetPlayerStateBJ(this.wcPlayer, PLAYER_STATE_RESOURCE_LUMBER, amount);
+    }
+
+    setHandicap(percentage: number) {
+        SetPlayerHandicapBJ(this.wcPlayer,percentage)
+    }
+
 }

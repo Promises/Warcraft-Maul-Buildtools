@@ -3,6 +3,7 @@ import {enemies, InitializeStaticSounds, players} from "./GlobalSettings";
 import {Attacker} from "./Entity/Players/Attacker";
 import {WorldMap} from "./WorldMap"
 import {SpawnedCreeps} from "./Entity/SpawnedCreeps";
+import { Commands } from './Game/Commands';
 
 export class WarcraftMaul {
 
@@ -29,7 +30,7 @@ export class WarcraftMaul {
         for (let i = 0; i < 24; i++) {
             if (GetPlayerSlotState(Player(i)) == PLAYER_SLOT_STATE_PLAYING) {
                 if (GetPlayerController(Player(i)) == MAP_CONTROL_USER) {
-                    players.push(new Defender(i));
+                    players.set(i, new Defender(i));
                 }
             }
         }
@@ -53,7 +54,7 @@ export class WarcraftMaul {
 
         // Create the map
         this.worldMap = new WorldMap(this);
-
+        new Commands(this);
 
 
 

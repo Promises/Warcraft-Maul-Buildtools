@@ -7,7 +7,7 @@ export class PlayerSpawns {
 
     oneTrig: trigger | undefined;
     twoTrig: trigger| undefined;
-    worldMap: WorldMap
+    worldMap: WorldMap;
 
     constructor (worldMap: WorldMap){
         this.worldMap = worldMap;
@@ -52,20 +52,20 @@ export class PlayerSpawns {
 
 
     EnteringUnitIsCreepAndHasNoCheckpoint(): boolean {
-        // let creep = GetEnteringUnit();
-        // if (!this.isEnteringUnitCreep()) {
-        //     return false;
-        // }
-        //
-        // let spawnedCreeps = this.worldMap.spawnedCreeps;
-        // if (spawnedCreeps) {
-        //     let spawnedCreep = spawnedCreeps.unitMap.get(GetHandleIdBJ(GetEnteringUnit()));
-        //     if (spawnedCreep) {
-        //         if (spawnedCreep.hasCheckpoint) {
-        //             return false;
-        //         }
-        //     }
-        // }
+        let creep = GetEnteringUnit();
+        if (!this.isEnteringUnitCreep()) {
+            return false;
+        }
+
+        let spawnedCreeps = this.worldMap.spawnedCreeps;
+        if (spawnedCreeps) {
+            let spawnedCreep = spawnedCreeps.unitMap.get(GetHandleIdBJ(GetEnteringUnit()));
+            if (spawnedCreep) {
+                if (spawnedCreep.targetCheckpoint) {
+                    return false;
+                }
+            }
+        }
 
         return true;
     }
@@ -84,25 +84,30 @@ export class PlayerSpawns {
     }
 
     private SpawnAction(spawn: CheckPoint) {
+        if(spawn == this.spawnTwo){
+            if(!this.spawnTwo.next && this.spawnOne){
+                spawn = this.spawnOne;
+            }
+        }
         if(!spawn.next){
             return;
         }
-        // let spawnedCreeps = this.worldMap.spawnedCreeps;
-        // if (spawnedCreeps) {
-        //     let spawnedCreep = spawnedCreeps.unitMap.get(GetHandleIdBJ(GetEnteringUnit()));
-        //     if (spawnedCreep) {
-        //         if(spawn.next){
-        //             spawnedCreep.targetCheckpoint = spawn.next;
+        let spawnedCreeps = this.worldMap.spawnedCreeps;
+        if (spawnedCreeps) {
+            let spawnedCreep = spawnedCreeps.unitMap.get(GetHandleIdBJ(GetEnteringUnit()));
+            if (spawnedCreep) {
+                if(spawn.next){
+                    spawnedCreep.targetCheckpoint = spawn.next;
                     IssuePointOrder(GetEnteringUnit(), "move", GetRectCenterX(spawn.next.rectangle), GetRectCenterY(spawn.next.rectangle));
                     this.AddCreepAbilities();
-        //         }
-        //
-        //     }
-        // }
+                }
+
+            }
+        }
 
     }
 
     private AddCreepAbilities() {
-
+        //TODO: Implement Creep abilities
     }
 }

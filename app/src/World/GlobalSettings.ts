@@ -1,7 +1,7 @@
 import {Defender} from "./Entity/Players/Defender";
 import {Attacker} from "./Entity/Players/Attacker";
 
-export const players: Defender[] = [];
+export const players: Map<number, Defender> = new Map<number, Defender>();
 
 export const enemies: Attacker[] = [];
 

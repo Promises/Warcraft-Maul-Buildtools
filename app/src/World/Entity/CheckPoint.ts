@@ -1,6 +1,6 @@
 import { SpawnedCreeps } from './SpawnedCreeps';
 import { WorldMap } from '../WorldMap';
-import { SpawnedCreep } from './SpawnedCreep';
+import { Creep } from './Creep';
 import get = Reflect.get;
 
 export class CheckPoint {
@@ -28,18 +28,18 @@ export class CheckPoint {
     verifyTargetCheckpoint(): boolean {
         print("Unit Enters");
 
-        // if(!this.isEnteringUnitCreep){
-        //     return false;
-        // }
-        // let spawnedCreeps = this.worldMap.spawnedCreeps;
-        // if (spawnedCreeps) {
-        //     let spawnedCreep = spawnedCreeps.unitMap.get(GetHandleIdBJ(GetEnteringUnit()));
-        //     if (spawnedCreep) {
-        //         if (spawnedCreep.targetCheckpoint) {
-        //             return spawnedCreep.targetCheckpoint === this;
-        //         }
-        //     }
-        // }
+        if(!this.isEnteringUnitCreep){
+            return false;
+        }
+        let spawnedCreeps = this.worldMap.spawnedCreeps;
+        if (spawnedCreeps) {
+            let spawnedCreep = spawnedCreeps.unitMap.get(GetHandleIdBJ(GetEnteringUnit()));
+            if (spawnedCreep) {
+                if (spawnedCreep.targetCheckpoint) {
+                    return spawnedCreep.targetCheckpoint === this;
+                }
+            }
+        }
         return true;
     }
 
@@ -47,18 +47,18 @@ export class CheckPoint {
         if(!this.next){
             return;
         }
-        // let spawnedCreeps = this.worldMap.spawnedCreeps;
-        // if (spawnedCreeps) {
-        //     let spawnedCreep = spawnedCreeps.unitMap.get(GetHandleIdBJ(GetEnteringUnit()));
-        //     if (spawnedCreep) {
-        //         spawnedCreep.targetCheckpoint = this.next;
+        let spawnedCreeps = this.worldMap.spawnedCreeps;
+        if (spawnedCreeps) {
+            let creep = spawnedCreeps.unitMap.get(GetHandleIdBJ(GetEnteringUnit()));
+            if (creep) {
+                creep.targetCheckpoint = this.next;
                 IssuePointOrder(GetEnteringUnit(), "move", GetRectCenterX(this.next.rectangle), GetRectCenterY(this.next.rectangle));
                 if(UnitHasBuffBJ(GetEnteringUnit(),FourCC('B028'))){
-                    // spawnedCreep.morningPerson();
+                    // TODO: creep.morningPerson();
                 }
-        //
-        //     }
-        // }
+
+            }
+        }
     }
 
 

@@ -1,6 +1,6 @@
 import { WarcraftMaul } from './WarcraftMaul';
 import { Ship } from './Entity/Ship';
-import { Creep } from './Entity/Creep';
+import { DummyCreep } from './Entity/DummyCreep';
 import { Race } from './Game/Race';
 import { PlayerSpawns } from './Entity/PlayerSpawns';
 import { SpawnedCreeps } from './Entity/SpawnedCreeps';
@@ -10,7 +10,7 @@ import { Teleporter } from './Entity/Teleporter';
 export class WorldMap {
     game: WarcraftMaul;
     worldCreatures: Map<String, unit> = new Map<String, unit>();
-    creeps: Creep[] = [];
+    dummyCreeps: DummyCreep[] = [];
     races: Race[] = [];
     spawnedCreeps: SpawnedCreeps | undefined;
 
@@ -30,7 +30,7 @@ export class WorldMap {
     private setupWorldCreatures() {
 
         // Ship at the bottom of the world
-        this.ship = new Ship(CreateUnit(Player(13), FourCC('n05G'), 63.0, -5343.5, 0.000));
+        this.ship = new Ship(CreateUnit(Player(13), FourCC('n05G'), 63.0, -5343.5, 0.000), this);
 
         this.createCreepWaves();
         this.createDummyCreeps();
@@ -96,42 +96,42 @@ export class WorldMap {
     }
 
     createCreepWaves() {
-        this.creeps.push(new Creep(1, 'u006', 'Wisp'));
-        this.creeps.push(new Creep(2, 'hC04', 'Clockwerk'));
-        this.creeps.push(new Creep(3, 'eC05', 'Acolyte'));
-        this.creeps.push(new Creep(4, 'hC16', 'Militia'));
-        this.creeps.push(new Creep(5, 'nC17', 'Wind Rider'));
-        this.creeps.push(new Creep(6, 'nC29', 'Tauren Mystic'));
-        this.creeps.push(new Creep(7, 'o01C', 'Grunt'));
-        this.creeps.push(new Creep(8, 'nC30', 'Makrura Snapper'));
-        this.creeps.push(new Creep(9, 'oC31', 'Mutant'));
-        this.creeps.push(new Creep(10, 'nC33', 'Mini-Tank'));
-        this.creeps.push(new Creep(11, 'n008', 'Enraged Yeti'));
-        this.creeps.push(new Creep(12, 'eC38', 'Faceless Brute'));
-        this.creeps.push(new Creep(13, 'nC39', 'Stampeding Reptile'));
-        this.creeps.push(new Creep(14, 'nC40', 'Nymph'));
-        this.creeps.push(new Creep(15, 'nC41', 'Matured Dragon'));
-        this.creeps.push(new Creep(16, 'nC42', 'Merfolk Champion'));
-        this.creeps.push(new Creep(17, 'uC43', 'Eternal Spirit'));
-        this.creeps.push(new Creep(18, 'hC44', 'Granite Golem'));
-        this.creeps.push(new Creep(19, 'uC45', 'Walking Corpse'));
-        this.creeps.push(new Creep(20, 'n004', 'Adult Dragon'));
-        this.creeps.push(new Creep(21, 'hC48', 'Bear'));
-        this.creeps.push(new Creep(22, 'oC47', 'Heavy Tank'));
-        this.creeps.push(new Creep(23, 'nC49', 'Big Game Hunter'));
-        this.creeps.push(new Creep(24, 'nC50', 'Water Spirit'));
-        this.creeps.push(new Creep(25, 'nC51', 'Ancient Dragon'));
-        this.creeps.push(new Creep(26, 'nC69', 'Steel Golem'));
-        this.creeps.push(new Creep(27, 'eC52', 'Demonic Minion'));
-        this.creeps.push(new Creep(28, 'oC70', 'Fire Spirit'));
-        this.creeps.push(new Creep(29, 'hC95', 'Demon Queen'));
-        this.creeps.push(new Creep(30, 'uC71', 'Nether Dragon'));
-        this.creeps.push(new Creep(31, 'hC76', 'Blood Golem'));
-        this.creeps.push(new Creep(32, 'h03Y', 'Big Bad Ogre'));
-        this.creeps.push(new Creep(33, 'h03Z', 'Snap Dragon'));
-        this.creeps.push(new Creep(34, 'h040', 'Zergling'));
-        this.creeps.push(new Creep(35, 'uC72', 'Archimonde'));
-        this.creeps.push(new Creep(36, 'hC79', 'CRAB OF DEATH'));
+        this.dummyCreeps.push(new DummyCreep(1, 'u006', 'Wisp'));
+        this.dummyCreeps.push(new DummyCreep(2, 'hC04', 'Clockwerk'));
+        this.dummyCreeps.push(new DummyCreep(3, 'eC05', 'Acolyte'));
+        this.dummyCreeps.push(new DummyCreep(4, 'hC16', 'Militia'));
+        this.dummyCreeps.push(new DummyCreep(5, 'nC17', 'Wind Rider'));
+        this.dummyCreeps.push(new DummyCreep(6, 'nC29', 'Tauren Mystic'));
+        this.dummyCreeps.push(new DummyCreep(7, 'o01C', 'Grunt'));
+        this.dummyCreeps.push(new DummyCreep(8, 'nC30', 'Makrura Snapper'));
+        this.dummyCreeps.push(new DummyCreep(9, 'oC31', 'Mutant'));
+        this.dummyCreeps.push(new DummyCreep(10, 'nC33', 'Mini-Tank'));
+        this.dummyCreeps.push(new DummyCreep(11, 'n008', 'Enraged Yeti'));
+        this.dummyCreeps.push(new DummyCreep(12, 'eC38', 'Faceless Brute'));
+        this.dummyCreeps.push(new DummyCreep(13, 'nC39', 'Stampeding Reptile'));
+        this.dummyCreeps.push(new DummyCreep(14, 'nC40', 'Nymph'));
+        this.dummyCreeps.push(new DummyCreep(15, 'nC41', 'Matured Dragon'));
+        this.dummyCreeps.push(new DummyCreep(16, 'nC42', 'Merfolk Champion'));
+        this.dummyCreeps.push(new DummyCreep(17, 'uC43', 'Eternal Spirit'));
+        this.dummyCreeps.push(new DummyCreep(18, 'hC44', 'Granite Golem'));
+        this.dummyCreeps.push(new DummyCreep(19, 'uC45', 'Walking Corpse'));
+        this.dummyCreeps.push(new DummyCreep(20, 'n004', 'Adult Dragon'));
+        this.dummyCreeps.push(new DummyCreep(21, 'hC48', 'Bear'));
+        this.dummyCreeps.push(new DummyCreep(22, 'oC47', 'Heavy Tank'));
+        this.dummyCreeps.push(new DummyCreep(23, 'nC49', 'Big Game Hunter'));
+        this.dummyCreeps.push(new DummyCreep(24, 'nC50', 'Water Spirit'));
+        this.dummyCreeps.push(new DummyCreep(25, 'nC51', 'Ancient Dragon'));
+        this.dummyCreeps.push(new DummyCreep(26, 'nC69', 'Steel Golem'));
+        this.dummyCreeps.push(new DummyCreep(27, 'eC52', 'Demonic Minion'));
+        this.dummyCreeps.push(new DummyCreep(28, 'oC70', 'Fire Spirit'));
+        this.dummyCreeps.push(new DummyCreep(29, 'hC95', 'Demon Queen'));
+        this.dummyCreeps.push(new DummyCreep(30, 'uC71', 'Nether Dragon'));
+        this.dummyCreeps.push(new DummyCreep(31, 'hC76', 'Blood Golem'));
+        this.dummyCreeps.push(new DummyCreep(32, 'h03Y', 'Big Bad Ogre'));
+        this.dummyCreeps.push(new DummyCreep(33, 'h03Z', 'Snap Dragon'));
+        this.dummyCreeps.push(new DummyCreep(34, 'h040', 'Zergling'));
+        this.dummyCreeps.push(new DummyCreep(35, 'uC72', 'Archimonde'));
+        this.dummyCreeps.push(new DummyCreep(36, 'hC79', 'CRAB OF DEATH'));
     }
 
     setupRaces() {
@@ -176,110 +176,180 @@ export class WorldMap {
         let RedSpawns = new PlayerSpawns(this);
         RedSpawns.spawnOne = new CheckPoint(Rect(-1792.0, 4736.0, -1472.0, 5056.0), this);
         RedSpawns.spawnTwo = new CheckPoint(Rect(-1792.0, 4416.0, -1472.0, 4736.0), this);
-        this.playerSpawns.push(RedSpawns);
-
-
         let RedCheckpoint = RedSpawns.spawnOne;
         RedCheckpoint = RedCheckpoint.next = new CheckPoint(Rect(-2464.00, 4704.00, -2400.00, 4768.00), this);
         RedCheckpoint = RedCheckpoint.next = new CheckPoint(Rect(-3616.00, 4704.00, -3552.00, 4768.00), this);
         RedCheckpoint = RedCheckpoint.next = new Teleporter(Rect(-4384.00, 4704.00, -4320.00, 4768.00), this, 270.00);
         RedCheckpoint = RedCheckpoint.next = new CheckPoint(Rect(-4384.00, 3392.00, -4320.00, 3456.00), this);
+        this.playerSpawns[COLOUR.RED] = RedSpawns;
 
 
         let BlueSpawns = new PlayerSpawns(this);
         BlueSpawns.spawnOne = new CheckPoint(Rect(-320.0, 4768.0, 0.0, 5088.0), this);
         BlueSpawns.spawnTwo = new CheckPoint(Rect(0.0, 4768.0, 320.0, 5088.0), this);
-        this.playerSpawns.push(BlueSpawns);
+
+        let BluePrimaryCheckpoint = BlueSpawns.spawnOne;
+        BluePrimaryCheckpoint = BluePrimaryCheckpoint.next = new CheckPoint(Rect(-64.00, 4032.00, 64.00, 4160.00), this);
+        BluePrimaryCheckpoint = BluePrimaryCheckpoint.next = new CheckPoint(Rect(-64.00, 2880.00, 64.00, 3008.00), this);
+        BluePrimaryCheckpoint = BluePrimaryCheckpoint.next = new CheckPoint(Rect(-64, 1920, 64, 2016), this);
+
+        let BlueSecondaryCheckpoint = BlueSpawns.spawnTwo;
+        BlueSecondaryCheckpoint = BlueSecondaryCheckpoint.next = new CheckPoint(Rect(-64.00, 4032.00, 64.00, 4160.00), this);
+        BlueSecondaryCheckpoint = BlueSecondaryCheckpoint.next = new CheckPoint(Rect(-64.00, 2880.00, 64.00, 3008.00), this);
+        BlueSecondaryCheckpoint = BlueSecondaryCheckpoint.next = new CheckPoint(Rect(-64, 1920, 64, 2016), this);
+        this.playerSpawns[COLOUR.BLUE] = BlueSpawns;
+
+
 
 
         let TealSpawns = new PlayerSpawns(this);
         TealSpawns.spawnOne = new CheckPoint(Rect(1472.0, 4768.0, 1792.0, 5088.0), this);
         TealSpawns.spawnTwo = new CheckPoint(Rect(1472.0, 4448.0, 1792.0, 4768.0), this);
-        this.playerSpawns.push(TealSpawns);
+        let TealCheckpoint = TealSpawns.spawnOne;
+        TealCheckpoint = TealCheckpoint.next = new CheckPoint(Rect(2400.00, 4704.00, 2464.00, 4768.00), this);
+        TealCheckpoint = TealCheckpoint.next = new CheckPoint(Rect(3552.00, 4704.00, 3616.00, 4768.00), this);
+        TealCheckpoint = TealCheckpoint.next = new Teleporter(Rect(4320.00, 4704.00, 4384.00, 4768.00), this, 270.00);
+        TealCheckpoint = TealCheckpoint.next = new CheckPoint(Rect(4320.00, 3392.00, 4384.00, 3456.00), this);
+        this.playerSpawns[COLOUR.BLUE] = TealSpawns;
+
 
 
         let PurpleSpawns = new PlayerSpawns(this);
         PurpleSpawns.spawnOne = new CheckPoint(Rect(4032.0, 128.0, 4352.0, 448.0), this);
         PurpleSpawns.spawnTwo = new CheckPoint(Rect(4352.0, 128.0, 4672.0, 448.0), this);
-        this.playerSpawns.push(PurpleSpawns);
-
+        let PurpleCheckpoint = PurpleSpawns.spawnOne;
+        PurpleCheckpoint = PurpleCheckpoint.next = new CheckPoint(Rect(4320.00, -544.00, 4384.00, -480.00), this);
+        PurpleCheckpoint = PurpleCheckpoint.next = new CheckPoint(Rect(4320.00, -1696.00, 4384.00, -1632.00), this);
+        PurpleCheckpoint = PurpleCheckpoint.next = new Teleporter(Rect(4320.00, -2464.00, 4384.00, -2400.00), this, 180.0);
+        PurpleCheckpoint = PurpleCheckpoint.next = new CheckPoint(Rect(4672.00, -3488.00, 4736.00, -3424.00), this);
+        this.playerSpawns[COLOUR.PURPLE] = PurpleSpawns;
 
         let YellowSpawns = new PlayerSpawns(this);
         YellowSpawns.spawnOne = new CheckPoint(Rect(-320.0, 1664.0, 0.0, 1984.0), this);
         YellowSpawns.spawnTwo = new CheckPoint(Rect(0.0, 1664.0, 320.0, 1984.0), this);
-        this.playerSpawns.push(YellowSpawns);
+
+        let YellowPrimaryCheckpoint = YellowSpawns.spawnOne;
+        YellowPrimaryCheckpoint = YellowPrimaryCheckpoint.next = new CheckPoint(Rect(-32.00, 992.00, 32.00, 1056.00), this);
+        YellowPrimaryCheckpoint = YellowPrimaryCheckpoint.next = new CheckPoint(Rect(-32.00, -160.00, 32.00, -96.00), this);
+        YellowPrimaryCheckpoint = YellowPrimaryCheckpoint.next = new Teleporter(Rect(-32.00, -928.00, 32.00, -864.00), this, 180.0);
+        YellowPrimaryCheckpoint = YellowPrimaryCheckpoint.next = new CheckPoint(Rect(-2208.00, -2144.00, -2144.00, -2080.00), this);
+
+        let YellowSecondaryCheckpoint = YellowSpawns.spawnTwo;
+        YellowSecondaryCheckpoint = YellowSecondaryCheckpoint.next = new CheckPoint(Rect(-32.00, 992.00, 32.00, 1056.00), this);
+        YellowSecondaryCheckpoint = YellowSecondaryCheckpoint.next = new CheckPoint(Rect(-32.00, -160.00, 32.00, -96.00), this);
+        YellowSecondaryCheckpoint = YellowSecondaryCheckpoint.next = new Teleporter(Rect(-32.00, -928.00, 32.00, -864.00), this, 180.0);
+        YellowSecondaryCheckpoint = YellowSecondaryCheckpoint.next = new CheckPoint(Rect(2144.00, -2144.00, 2208.00, -2080.00), this);
+
+        this.playerSpawns[COLOUR.YELLOW] = YellowSpawns;
 
 
         let OrangeSpawns = new PlayerSpawns(this);
         OrangeSpawns.spawnOne = new CheckPoint(Rect(-4672.0, 128.0, -4352.0, 448.0), this);
         OrangeSpawns.spawnTwo = new CheckPoint(Rect(-4352.0, 128.0, -4032.0, 448.0), this);
-        this.playerSpawns.push(OrangeSpawns);
         let OrangeCheckpoint = OrangeSpawns.spawnOne;
         OrangeCheckpoint = OrangeCheckpoint.next = new CheckPoint(Rect(-4384.00, -544.00, -4320.00, -480.00), this);
         OrangeCheckpoint = OrangeCheckpoint.next = new CheckPoint(Rect(-4384.00, -1696.00, -4320.00, -1632.00), this);
         OrangeCheckpoint = OrangeCheckpoint.next = new Teleporter(Rect(-4384.00, -2464.00, -4320.00, -2400.00), this, 0.0);
         OrangeCheckpoint = OrangeCheckpoint.next = new CheckPoint(Rect(-4768.00, -3488.00, -4704.00, -3424.00), this);
+        this.playerSpawns[COLOUR.ORANGE] = OrangeSpawns;
 
 
         let GreenSpawns = new PlayerSpawns(this);
         GreenSpawns.spawnOne = new CheckPoint(Rect(-4800.0, -3456.0, -4480.0, -3136.0), this);
         GreenSpawns.spawnTwo = new CheckPoint(Rect(-4800.0, -3776.0, -4480.0, -3456.0), this);
-        this.playerSpawns.push(GreenSpawns);
         let GreenCheckpoint = GreenSpawns.spawnOne;
         GreenCheckpoint = GreenCheckpoint.next = new CheckPoint(Rect(-3872.00, -3488.00, -3808.00, -3424.00), this);
         GreenCheckpoint = GreenCheckpoint.next = new CheckPoint(Rect(-2720.00, -3488.00, -2656.00, -3424.00), this);
         GreenCheckpoint = GreenCheckpoint.next = new Teleporter(Rect(-1952.00, -3488.00, -1888.00, -3424.00), this, 270);
+        this.playerSpawns[COLOUR.GREEN] = GreenSpawns;
 
 
         let PinkSpawns = new PlayerSpawns(this);
         PinkSpawns.spawnOne = new CheckPoint(Rect(4480.0, -3456.0, 4800.0, -3136.0), this);
         PinkSpawns.spawnTwo = new CheckPoint(Rect(4480.0, -3776.0, 4800.0, -3456.0), this);
-        this.playerSpawns.push(PinkSpawns);
+        let PinkCheckpoint = PinkSpawns.spawnOne;
+        PinkCheckpoint = PinkCheckpoint.next = new CheckPoint(Rect(3808.00, -3488.00, 3872.00, -3424.00), this);
+        PinkCheckpoint = PinkCheckpoint.next = new CheckPoint(Rect(2656.00, -3488.00, 2720.00, -3424.00), this);
+        PinkCheckpoint = PinkCheckpoint.next = new Teleporter(Rect(1888.00, -3488.00, 1952.00, -3424.00), this, 270);
+        this.playerSpawns[COLOUR.PINK] = PinkSpawns;
+
 
 
         let GreysSpawns = new PlayerSpawns(this);
         GreysSpawns.spawnOne = new CheckPoint(Rect(-160.0, -2464.0, 160.0, -2144.0), this);
-        this.playerSpawns.push(GreysSpawns);
         let GreysCheckpoint = GreysSpawns.spawnOne;
         GreysCheckpoint = GreysCheckpoint.next = new CheckPoint(Rect(-32.00, -3104.00, 32.00, -3040.00), this);
         GreysCheckpoint = GreysCheckpoint.next = new CheckPoint(Rect(-32.00, -4256.00, 32.00, -4192.00), this);
-        GreysCheckpoint = GreysCheckpoint.next = new CheckPoint(Rect(-768.00, -4992.00, 768.00, -4800.00), this);
+        GreysCheckpoint.next = this.ship != undefined ? this.ship.killzone: undefined;
+        this.playerSpawns[COLOUR.GRAY] = GreysSpawns;
 
 
-
-        let LightBlueSpawns = new PlayerSpawns(this);
-        LightBlueSpawns.spawnOne = new CheckPoint(Rect(-2496.0, -2240.0, -2176.0, -1920.0), this);
-        LightBlueSpawns.spawnTwo = new CheckPoint(Rect(-2176.0, -2240.0, -1856.0, -1920.0), this);
-        this.playerSpawns.push(LightBlueSpawns);
-
-
-        let DarkGreenSpawns = new PlayerSpawns(this);
-        DarkGreenSpawns.spawnOne = new CheckPoint(Rect(1856.0, -2240.0, 2176.0, -1920.0), this);
-        DarkGreenSpawns.spawnTwo = new CheckPoint(Rect(2176.0, -2240.0, 2496.0, -1920.0), this);
-        this.playerSpawns.push(DarkGreenSpawns);
 
 
         // brown
         let BrownSpawns = new PlayerSpawns(this);
         BrownSpawns.spawnOne = new CheckPoint(Rect(-4672.0, 3200.0, -4352.0, 3520.0), this);
         BrownSpawns.spawnTwo = new CheckPoint(Rect(-4352.0, 3200.0, -4032.0, 3520.0), this);
-        this.playerSpawns.push(BrownSpawns);
 
         let BrownCheckpoint = BrownSpawns.spawnOne;
         BrownCheckpoint = BrownCheckpoint.next = new CheckPoint(Rect(-4384.00, 2528.00, -4320.00, 2592.00), this);
         BrownCheckpoint = BrownCheckpoint.next = new CheckPoint(Rect(-4384.00, 1376.00, -4320.00, 1440.00), this);
+        this.playerSpawns[COLOUR.BROWN] = BrownSpawns;
 
 
         let MaroonsSpawns = new PlayerSpawns(this);
         MaroonsSpawns.spawnOne = new CheckPoint(Rect(4032.0, 3200.0, 4352.0, 3520.0), this);
         MaroonsSpawns.spawnTwo = new CheckPoint(Rect(4352.0, 3200.0, 4672.0, 3520.0), this);
-        this.playerSpawns.push(MaroonsSpawns);
+        let MaroonsCheckpoint = MaroonsSpawns.spawnOne;
+        MaroonsCheckpoint = MaroonsCheckpoint.next = new CheckPoint(Rect(4320.00, 2528.00, 4384.00, 2592.00), this);
+        MaroonsCheckpoint = MaroonsCheckpoint.next = new CheckPoint(Rect(4320.00, 1376.00, 4384.00, 1440.00), this);
+        this.playerSpawns[COLOUR.MAROON] = MaroonsSpawns;
 
 
-        // red
+        let LightBlueSpawns = new PlayerSpawns(this);
+        LightBlueSpawns.spawnOne = new CheckPoint(Rect(-2496.0, -2240.0, -2176.0, -1920.0), this);
+        LightBlueSpawns.spawnTwo = new CheckPoint(Rect(-2176.0, -2240.0, -1856.0, -1920.0), this);
+        let LightBlueCheckpoint = LightBlueSpawns.spawnOne;
+        LightBlueCheckpoint = LightBlueCheckpoint.next = new CheckPoint(Rect(-2208.00, -1312.00, -2144.00, -1248.00), this);
+        LightBlueCheckpoint = LightBlueCheckpoint.next = new CheckPoint(Rect(-2208.00, -160.00, -2144.00, -96.00), this);
+        LightBlueCheckpoint = LightBlueCheckpoint.next = new Teleporter(Rect(-2208.00, 608.00, -2144.00, 672.00), this, 270);
+        LightBlueCheckpoint = LightBlueCheckpoint.next = BrownCheckpoint;
+        this.playerSpawns[COLOUR.LIGHT_BLUE] = LightBlueSpawns;
+
+        let DarkGreenSpawns = new PlayerSpawns(this);
+        DarkGreenSpawns.spawnOne = new CheckPoint(Rect(1856.0, -2240.0, 2176.0, -1920.0), this);
+        DarkGreenSpawns.spawnTwo = new CheckPoint(Rect(2176.0, -2240.0, 2496.0, -1920.0), this);
+        let DarkGreenCheckpoint = DarkGreenSpawns.spawnOne;
+        DarkGreenCheckpoint = DarkGreenCheckpoint.next = new CheckPoint(Rect(2144.00, -1312.00, 2208.00, -1248.00), this);
+        DarkGreenCheckpoint = DarkGreenCheckpoint.next = new CheckPoint(Rect(2144.00, -160.00, 2208.00, -96.00), this);
+        DarkGreenCheckpoint = DarkGreenCheckpoint.next = new Teleporter(Rect(2144.00, 608.00, 2208.00, 672.00), this, 270);
+        DarkGreenCheckpoint = DarkGreenCheckpoint.next = MaroonsCheckpoint;
+        this.playerSpawns[COLOUR.DARK_GREEN] = DarkGreenSpawns;
+
+
+
+
+
         RedCheckpoint.next = BrownSpawns.spawnOne.next;
         BrownCheckpoint.next = OrangeSpawns.spawnOne.next;
         OrangeCheckpoint.next = GreenSpawns.spawnOne.next;
         GreenCheckpoint.next = GreysSpawns.spawnOne;
+
+
+        TealCheckpoint.next = MaroonsSpawns.spawnOne.next;
+        MaroonsCheckpoint.next =PurpleSpawns.spawnOne.next;
+        PurpleCheckpoint.next = PinkSpawns.spawnOne.next;
+        PinkCheckpoint.next = GreysSpawns.spawnOne;
+
+
+        BluePrimaryCheckpoint.next = YellowSpawns.spawnOne.next;
+        BlueSecondaryCheckpoint.next = YellowSpawns.spawnTwo.next;
+
+        YellowPrimaryCheckpoint.next = LightBlueSpawns.spawnOne.next;
+        YellowSecondaryCheckpoint.next = DarkGreenSpawns.spawnOne.next;
+        DarkGreenCheckpoint.next = PurpleSpawns.spawnOne.next;
+        LightBlueCheckpoint.next = OrangeSpawns.spawnOne.next;
+
+
     }
 }
