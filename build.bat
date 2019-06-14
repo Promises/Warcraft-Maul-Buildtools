@@ -21,7 +21,7 @@ set input=maps
 set output=target
 
 mkdir "%output%"
-copy "%input%%map%" "%output%%map%" > nul
+copy "%input%\%map%" "%output%\%map%" > nul
 
 @echo Exporting original map script ...
 "tools\MPQEditor\x64\MPQEditor.exe" extract "%output%\%map%" "war3map.lua" "%input%\map\"
