@@ -194,7 +194,6 @@ export class Commands {
                 break;
             case 'zoom':
             case 'cam':
-                print('Command not implemented yet');
                 if (GetLocalPlayer() == player.wcPlayer) {
                     let amount = Util.ParseInt(command[1]);
                     if (!amount) {
@@ -240,7 +239,7 @@ export class Commands {
     // private function EnumSpecialEffect takes nothing returns nothing
     // local real x = GetUnitX(GetEnumUnit())
     // local real y = GetUnitY(GetEnumUnit())
-    // call DestroyEffect(AddSpecialEffect("Abilities\\Spells\\Items\\ResourceItems\\ResourceEffectTarget.mdl", x, y))
+    // call DestroyEffect(AddSpecialEffect("Abilities/Spells/Items/ResourceItems/ResourceEffectTarget.mdl", x, y))
     // endfunction
     //
     // private function SellATower takes nothing returns nothing
@@ -678,9 +677,9 @@ export class Commands {
     // local real towardsY2Div18 = (towardsY2 / 18)
     //
     // if (GetTriggerPlayer() == GetLocalPlayer()) then
-    // // set effectModel = "Abilities\\Spells\\Undead\\AbsorbMana\\AbsorbManaBirthMissile.mdl"
-    // // set effectModel = "ReplaceableTextures\\Splats\\HumanUbersplat.blp"
-    // set effectModel = "ReplaceableTextures\\Splats\\SuggestedPlacementSplat.blp"
+    // // set effectModel = "Abilities/Spells/Undead/AbsorbMana/AbsorbManaBirthMissile.mdl"
+    // // set effectModel = "ReplaceableTextures/Splats/HumanUbersplat.blp"
+    // set effectModel = "ReplaceableTextures/Splats/SuggestedPlacementSplat.blp"
     // endif
     //
     // // Between Checkpoints

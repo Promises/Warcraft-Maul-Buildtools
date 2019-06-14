@@ -21,7 +21,7 @@ export class Teleporter extends CheckPoint{
         //         spawnedCreep.targetCheckpoint = this.next;
         SetUnitPosition(GetEnteringUnit(), x, y);
         SetUnitFacing(GetEnteringUnit(), this.facing);
-        DestroyEffect(AddSpecialEffect("Abilities\\Spells\\Human\\MassTeleport\\MassTeleportCaster.mdl", x, y));
+        DestroyEffect(AddSpecialEffect("Abilities/Spells/Human/MassTeleport/MassTeleportCaster.mdl", x, y));
         IssuePointOrder(GetEnteringUnit(), "move", GetRectCenterX(this.next.rectangle), GetRectCenterY(this.next.rectangle));
 
         //

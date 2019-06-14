@@ -50,7 +50,7 @@ export const COLOUR_CODES = [
 
 export class Sounds {
     public static loseALifeSound = CreateSound(
-        "Abilities\\Spells\\Other\\LoadUnload\\Loading.wav",
+        "Abilities/Spells/Other/LoadUnload/Loading.wav",
         false,
         false,
         true,
@@ -59,7 +59,7 @@ export class Sounds {
         "DefaultEAXON"
     );
     public static goldSound = CreateSound(
-        "Abilities\\Spells\\Items\\ResourceItems\\ReceiveGold.wav",
+        "Abilities/Spells/Items/ResourceItems/ReceiveGold.wav",
         false,
         true,
         true,
@@ -68,7 +68,7 @@ export class Sounds {
         "DefaultEAXON"
     );
     public static victorySound = CreateSound(
-        "Sound\\Music\\mp3Music\\PH1.mp3",
+        "Sound/Music/mp3Music/PH1.mp3",
         false,
         false,
         false,
@@ -77,7 +77,7 @@ export class Sounds {
         "DefaultEAXON"
     );
     public static defeatSound = CreateSound(
-        "Sound\\Music\\mp3Music\\TragicConfrontation.mp3",
+        "Sound/Music/mp3Music/TragicConfrontation.mp3",
         false,
         false,
         false,
@@ -85,7 +85,7 @@ export class Sounds {
         10,
         "DefaultEAXON"
     );
-    public static impossibleDifficultySound = CreateSound("Sound\\Music\\mp3Music\\PursuitTheme.mp3",
+    public static impossibleDifficultySound = CreateSound("Sound/Music/mp3Music/PursuitTheme.mp3",
         false,
         false,
         false,
