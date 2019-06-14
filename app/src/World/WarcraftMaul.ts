@@ -4,6 +4,7 @@ import {Attacker} from "./Entity/Players/Attacker";
 import {WorldMap} from "./WorldMap"
 import {SpawnedCreeps} from "./Entity/SpawnedCreeps";
 import { Commands } from './Game/Commands';
+import { GameRound } from './Game/GameRound';
 
 export class WarcraftMaul {
 
@@ -14,6 +15,11 @@ export class WarcraftMaul {
     stringtest: string;
     worldMap: WorldMap;
 
+
+    gameTime: number = 0;
+    gameEnded: boolean = false;
+    gameEndTimer: number = 600;
+
     constructor() {
         this.stringtest = `Hello player ${GetPlayerName(Player(0))}`;
 
@@ -23,7 +29,7 @@ export class WarcraftMaul {
             this.debugMode = true;
         }
         if(this.debugMode) {
-            this.waveTimer = 30;
+            this.waveTimer = 4;
         }
 
         // Set up all players
@@ -54,19 +60,27 @@ export class WarcraftMaul {
 
         // Create the map
         this.worldMap = new WorldMap(this);
-        new Commands(this);
+        let cmds = new Commands(this);
+        cmds.OpenAllSpawns();
 
 
 
-
+        new GameRound(this);
 
         // Spawn testing units when in debug mode
         if(this.debugMode) {
             CreateUnit(Player(COLOUR.RED), FourCC('e00B'), 0.00, 0.00, bj_UNIT_FACING);
+            CreateUnit(Player(COLOUR.RED), FourCC('hC07'), 0.00, 0.00, bj_UNIT_FACING);
         }
 
 
 
+    }
+
+    DefeatAllPlayers(){
+        for (let player of players.values()){
+            player.defeatPlayer();
+        }
     }
 
 

@@ -7,10 +7,12 @@ export class PlayerSpawns {
 
     oneTrig: trigger | undefined;
     twoTrig: trigger| undefined;
+    isOpen: boolean;
     worldMap: WorldMap;
 
     constructor (worldMap: WorldMap){
         this.worldMap = worldMap;
+        this.isOpen = false;
     }
 
 
@@ -31,9 +33,6 @@ export class PlayerSpawns {
     }
 
     get spawnTwo(): CheckPoint | undefined {
-        if(this._spawnTwo === undefined){
-            return this.spawnOne
-        }
         return this._spawnTwo;
     }
 
@@ -84,10 +83,8 @@ export class PlayerSpawns {
     }
 
     private SpawnAction(spawn: CheckPoint) {
-        if(spawn == this.spawnTwo){
-            if(!this.spawnTwo.next && this.spawnOne){
+        if(this.spawnOne && !spawn.next){
                 spawn = this.spawnOne;
-            }
         }
         if(!spawn.next){
             return;

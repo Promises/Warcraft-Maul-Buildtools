@@ -98,21 +98,18 @@ export class Commands {
                 // VoteYes()
                 break;
             case 'openall':
-                print('Command not implemented yet');
-                //TODO: implement command
                 if (this.game.debugMode) {
                     player.sendMessage('All spawns are not open!');
-                    // OpenAllSpawns()
+                    this.OpenAllSpawns()
 
                 }
                 break;
             case 'gold':
                 if (this.game.debugMode) {
-                    let amount = Util.ParsePositiveInt(command[1]);
+                    let amount = Util.ParseInt(command[1]);
                     if (!amount) {
                         player.sendMessage(Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Invalid Amount'));
                         return;
-
                     }
                     player.sendMessage(`Gold was set to |cFFFFCC00${amount}|r`);
                     player.setGold(amount);
@@ -751,5 +748,10 @@ export class Commands {
     //
 
 
-
+    OpenAllSpawns() {
+        // this.game.worldMap.playerSpawns[COLOUR.GRAY].isOpen = tr
+        for(let spawn of this.game.worldMap.playerSpawns){
+            spawn.isOpen = true;
+        }
+    }
 }

@@ -39,7 +39,6 @@ export class WorldMap {
 
 
         this.setupCheckpoint();
-        // Set up Teleporters
 
 
     }
@@ -48,50 +47,61 @@ export class WorldMap {
     createDummyCreeps() {
 
         // set up neutrals
-        const dummyWaves: unit[] = [];
+        const dummyCreeps: unit[] = [];
 
-        dummyWaves.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('u006'), 1664.0, 3072.0, 270.0));
-        dummyWaves.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('hC04'), 1792.0, 3072.0, 270.0));
-        dummyWaves.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('eC05'), 1920.0, 3072.0, 270.0));
-        dummyWaves.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('hC16'), 2048.0, 3072.0, 270.0));
-        dummyWaves.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('nC17'), 2176.0, 3072.0, 270.0));
-        dummyWaves.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('nC29'), 1664.0, 2944.0, 270.0));
-        dummyWaves.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('o01C'), 1792.0, 2944.0, 270.0));
-        dummyWaves.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('nC30'), 1920.0, 2944.0, 270.0));
-        dummyWaves.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('oC31'), 2048.0, 2944.0, 270.0));
-        dummyWaves.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('nC33'), 2176.0, 2944.0, 270.0));
-        dummyWaves.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('n008'), 1664.0, 2816.0, 270.0));
-        dummyWaves.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('eC38'), 1792.0, 2816.0, 270.0));
-        dummyWaves.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('nC39'), 1920.0, 2816.0, 270.0));
-        dummyWaves.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('nC40'), 2048.0, 2816.0, 270.0));
-        dummyWaves.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('nC41'), 2176.0, 2816.0, 270.0));
-        dummyWaves.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('nC42'), 1664.0, 2688.0, 270.0));
-        dummyWaves.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('uC43'), 1792.0, 2688.0, 270.0));
-        dummyWaves.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('hC44'), 1920.0, 2688.0, 270.0));
-        dummyWaves.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('uC45'), 2048.0, 2688.0, 270.0));
-        dummyWaves.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('n004'), 2176.0, 2688.0, 270.0));
-        dummyWaves.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('hC48'), 1664.0, 2560.0, 270.0));
-        dummyWaves.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('oC47'), 1792.0, 2560.0, 270.0));
-        dummyWaves.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('nC49'), 1920.0, 2560.0, 270.0));
-        dummyWaves.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('nC50'), 2048.0, 2560.0, 270.0));
-        dummyWaves.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('nC51'), 2176.0, 2560.0, 270.0));
-        dummyWaves.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('nC69'), 1664.0, 2432.0, 270.0));
-        dummyWaves.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('eC52'), 1792.0, 2432.0, 270.0));
-        dummyWaves.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('oC70'), 1920.0, 2432.0, 270.0));
-        dummyWaves.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('hC95'), 2048.0, 2432.0, 270.0));
-        dummyWaves.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('uC71'), 2176.0, 2432.0, 270.0));
-        dummyWaves.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('hC76'), 1664.0, 2304.0, 270.0));
-        dummyWaves.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('h03Y'), 1792.0, 2304.0, 270.0));
-        dummyWaves.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('h03Z'), 1920.0, 2304.0, 270.0));
-        dummyWaves.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('h040'), 2048.0, 2304.0, 270.0));
+        dummyCreeps.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('u006'), 1664.0, 3072.0, 270.0));
+        dummyCreeps.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('hC04'), 1792.0, 3072.0, 270.0));
+        dummyCreeps.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('eC05'), 1920.0, 3072.0, 270.0));
+        dummyCreeps.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('hC16'), 2048.0, 3072.0, 270.0));
+        dummyCreeps.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('nC17'), 2176.0, 3072.0, 270.0));
+        dummyCreeps.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('nC29'), 1664.0, 2944.0, 270.0));
+        dummyCreeps.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('o01C'), 1792.0, 2944.0, 270.0));
+        dummyCreeps.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('nC30'), 1920.0, 2944.0, 270.0));
+        dummyCreeps.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('oC31'), 2048.0, 2944.0, 270.0));
+        dummyCreeps.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('nC33'), 2176.0, 2944.0, 270.0));
+        dummyCreeps.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('n008'), 1664.0, 2816.0, 270.0));
+        dummyCreeps.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('eC38'), 1792.0, 2816.0, 270.0));
+        dummyCreeps.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('nC39'), 1920.0, 2816.0, 270.0));
+        dummyCreeps.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('nC40'), 2048.0, 2816.0, 270.0));
+        dummyCreeps.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('nC41'), 2176.0, 2816.0, 270.0));
+        dummyCreeps.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('nC42'), 1664.0, 2688.0, 270.0));
+        dummyCreeps.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('uC43'), 1792.0, 2688.0, 270.0));
+        dummyCreeps.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('hC44'), 1920.0, 2688.0, 270.0));
+        dummyCreeps.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('uC45'), 2048.0, 2688.0, 270.0));
+        dummyCreeps.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('n004'), 2176.0, 2688.0, 270.0));
+        dummyCreeps.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('hC48'), 1664.0, 2560.0, 270.0));
+        dummyCreeps.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('oC47'), 1792.0, 2560.0, 270.0));
+        dummyCreeps.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('nC49'), 1920.0, 2560.0, 270.0));
+        dummyCreeps.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('nC50'), 2048.0, 2560.0, 270.0));
+        dummyCreeps.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('nC51'), 2176.0, 2560.0, 270.0));
+        dummyCreeps.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('nC69'), 1664.0, 2432.0, 270.0));
+        dummyCreeps.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('eC52'), 1792.0, 2432.0, 270.0));
+        dummyCreeps.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('oC70'), 1920.0, 2432.0, 270.0));
+        dummyCreeps.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('hC95'), 2048.0, 2432.0, 270.0));
+        dummyCreeps.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('uC71'), 2176.0, 2432.0, 270.0));
+        dummyCreeps.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('hC76'), 1664.0, 2304.0, 270.0));
+        dummyCreeps.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('h03Y'), 1792.0, 2304.0, 270.0));
+        dummyCreeps.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('h03Z'), 1920.0, 2304.0, 270.0));
+        dummyCreeps.push(CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('h040'), 2048.0, 2304.0, 270.0));
 
-        for (let wave of dummyWaves) {
-            SetUnitInvulnerable(wave, true);
-            PauseUnit(wave, true);
+        for (let creep of dummyCreeps) {
+            SetUnitInvulnerable(creep, true);
+            PauseUnit(creep, true);
         }
 
         this.archimondeDummy = CreateUnit(Player(COLOUR.NAVY), FourCC('u000'), 4868.0, -4964.0, 240.0);
         PauseUnitBJ(true, this.archimondeDummy);
+
+
+        CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('n017'), 0.00, -970.00, bj_UNIT_FACING);
+        CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('n017'), -4400.00, 4737.00, bj_UNIT_FACING);
+        CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('n017'), 4400.00, 4737.00, bj_UNIT_FACING);
+        CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('n017'), -2176.00, 700.00, bj_UNIT_FACING);
+        CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('n017'), 2176.00, 700.00, bj_UNIT_FACING);
+        CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('n017'), -4400.00, -2500.00, bj_UNIT_FACING);
+        CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('n017'), 4400.00, -2500.00, bj_UNIT_FACING);
+        CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('n017'), 1950.00, -3500.00, bj_UNIT_FACING);
+        CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('n017'), -1950.00, -3500.00, bj_UNIT_FACING);
 
     }
 
@@ -200,8 +210,6 @@ export class WorldMap {
         this.playerSpawns[COLOUR.BLUE] = BlueSpawns;
 
 
-
-
         let TealSpawns = new PlayerSpawns(this);
         TealSpawns.spawnOne = new CheckPoint(Rect(1472.0, 4768.0, 1792.0, 5088.0), this);
         TealSpawns.spawnTwo = new CheckPoint(Rect(1472.0, 4448.0, 1792.0, 4768.0), this);
@@ -210,8 +218,7 @@ export class WorldMap {
         TealCheckpoint = TealCheckpoint.next = new CheckPoint(Rect(3552.00, 4704.00, 3616.00, 4768.00), this);
         TealCheckpoint = TealCheckpoint.next = new Teleporter(Rect(4320.00, 4704.00, 4384.00, 4768.00), this, 270.00);
         TealCheckpoint = TealCheckpoint.next = new CheckPoint(Rect(4320.00, 3392.00, 4384.00, 3456.00), this);
-        this.playerSpawns[COLOUR.BLUE] = TealSpawns;
-
+        this.playerSpawns[COLOUR.TEAL] = TealSpawns;
 
 
         let PurpleSpawns = new PlayerSpawns(this);
@@ -274,16 +281,13 @@ export class WorldMap {
         this.playerSpawns[COLOUR.PINK] = PinkSpawns;
 
 
-
         let GreysSpawns = new PlayerSpawns(this);
         GreysSpawns.spawnOne = new CheckPoint(Rect(-160.0, -2464.0, 160.0, -2144.0), this);
         let GreysCheckpoint = GreysSpawns.spawnOne;
         GreysCheckpoint = GreysCheckpoint.next = new CheckPoint(Rect(-32.00, -3104.00, 32.00, -3040.00), this);
         GreysCheckpoint = GreysCheckpoint.next = new CheckPoint(Rect(-32.00, -4256.00, 32.00, -4192.00), this);
-        GreysCheckpoint.next = this.ship != undefined ? this.ship.killzone: undefined;
+        GreysCheckpoint.next = this.ship != undefined ? this.ship.killzone : undefined;
         this.playerSpawns[COLOUR.GRAY] = GreysSpawns;
-
-
 
 
         // brown
@@ -294,6 +298,9 @@ export class WorldMap {
         let BrownCheckpoint = BrownSpawns.spawnOne;
         BrownCheckpoint = BrownCheckpoint.next = new CheckPoint(Rect(-4384.00, 2528.00, -4320.00, 2592.00), this);
         BrownCheckpoint = BrownCheckpoint.next = new CheckPoint(Rect(-4384.00, 1376.00, -4320.00, 1440.00), this);
+        BrownCheckpoint = BrownCheckpoint.next = new CheckPoint(Rect(-4416.00, 384.00, -4288.00, 480.00), this);
+
+
         this.playerSpawns[COLOUR.BROWN] = BrownSpawns;
 
 
@@ -303,6 +310,7 @@ export class WorldMap {
         let MaroonsCheckpoint = MaroonsSpawns.spawnOne;
         MaroonsCheckpoint = MaroonsCheckpoint.next = new CheckPoint(Rect(4320.00, 2528.00, 4384.00, 2592.00), this);
         MaroonsCheckpoint = MaroonsCheckpoint.next = new CheckPoint(Rect(4320.00, 1376.00, 4384.00, 1440.00), this);
+        MaroonsCheckpoint = MaroonsCheckpoint.next = new CheckPoint(Rect(4288.00, 384.00, 4416.00, 480.00), this);
         this.playerSpawns[COLOUR.MAROON] = MaroonsSpawns;
 
 
@@ -313,7 +321,8 @@ export class WorldMap {
         LightBlueCheckpoint = LightBlueCheckpoint.next = new CheckPoint(Rect(-2208.00, -1312.00, -2144.00, -1248.00), this);
         LightBlueCheckpoint = LightBlueCheckpoint.next = new CheckPoint(Rect(-2208.00, -160.00, -2144.00, -96.00), this);
         LightBlueCheckpoint = LightBlueCheckpoint.next = new Teleporter(Rect(-2208.00, 608.00, -2144.00, 672.00), this, 270);
-        LightBlueCheckpoint = LightBlueCheckpoint.next = BrownCheckpoint;
+        // @ts-ignore
+        // LightBlueCheckpoint = LightBlueCheckpoint.next = OrangeSpawns.spawnOne;
         this.playerSpawns[COLOUR.LIGHT_BLUE] = LightBlueSpawns;
 
         let DarkGreenSpawns = new PlayerSpawns(this);
@@ -323,11 +332,9 @@ export class WorldMap {
         DarkGreenCheckpoint = DarkGreenCheckpoint.next = new CheckPoint(Rect(2144.00, -1312.00, 2208.00, -1248.00), this);
         DarkGreenCheckpoint = DarkGreenCheckpoint.next = new CheckPoint(Rect(2144.00, -160.00, 2208.00, -96.00), this);
         DarkGreenCheckpoint = DarkGreenCheckpoint.next = new Teleporter(Rect(2144.00, 608.00, 2208.00, 672.00), this, 270);
-        DarkGreenCheckpoint = DarkGreenCheckpoint.next = MaroonsCheckpoint;
+        // @ts-ignore
+        // DarkGreenCheckpoint = DarkGreenCheckpoint.next = MaroonsCheckpoint;
         this.playerSpawns[COLOUR.DARK_GREEN] = DarkGreenSpawns;
-
-
-
 
 
         RedCheckpoint.next = BrownSpawns.spawnOne.next;
@@ -337,7 +344,7 @@ export class WorldMap {
 
 
         TealCheckpoint.next = MaroonsSpawns.spawnOne.next;
-        MaroonsCheckpoint.next =PurpleSpawns.spawnOne.next;
+        MaroonsCheckpoint.next = PurpleSpawns.spawnOne.next;
         PurpleCheckpoint.next = PinkSpawns.spawnOne.next;
         PinkCheckpoint.next = GreysSpawns.spawnOne;
 
@@ -347,9 +354,37 @@ export class WorldMap {
 
         YellowPrimaryCheckpoint.next = LightBlueSpawns.spawnOne.next;
         YellowSecondaryCheckpoint.next = DarkGreenSpawns.spawnOne.next;
-        DarkGreenCheckpoint.next = PurpleSpawns.spawnOne.next;
-        LightBlueCheckpoint.next = OrangeSpawns.spawnOne.next;
+        DarkGreenCheckpoint.next = MaroonsCheckpoint;
+        LightBlueCheckpoint.next = BrownCheckpoint;
+        this.drawRectangle(OrangeSpawns.spawnOne.rectangle);
+        this.drawRectangle(OrangeSpawns.spawnTwo.rectangle);
+
 
 
     }
+
+    drawRectangle(r: rect) {
+        let x1 = GetRectMinX(r);
+        let y1 = GetRectMinY(r);
+        let x2 = GetRectMaxX(r);
+        let y2 = GetRectMaxY(r);
+        let model = 'Doodads\\Cinematic\\DemonFootPrint\\DemonFootPrint0.mdl';
+
+
+        for (let i = x1; i < x2; i++) {
+            AddSpecialEffect(model, i, y1)
+        }
+        for (let j = y1; j < y2; j++) {
+            AddSpecialEffect(model, x2, j)
+        }
+        for (let i = x1; i < x2; i++) {
+            AddSpecialEffect(model, i, y2)
+        }
+        for (let j = y1; j < y2; j++) {
+            AddSpecialEffect(model, x1, j)
+        }
+    }
+
+
+
 }

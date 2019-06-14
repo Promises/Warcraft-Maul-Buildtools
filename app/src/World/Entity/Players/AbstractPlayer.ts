@@ -47,4 +47,8 @@ export abstract class AbstractPlayer {
         SetPlayerHandicapBJ(this.wcPlayer,percentage)
     }
 
+    defeatPlayer(){
+        CustomDefeatBJ(this.wcPlayer, "Defeat!")
+    }
+
 }

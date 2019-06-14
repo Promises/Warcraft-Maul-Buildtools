@@ -26,7 +26,6 @@ export class CheckPoint {
 
 
     verifyTargetCheckpoint(): boolean {
-        print("Unit Enters");
 
         if(!this.isEnteringUnitCreep){
             return false;
