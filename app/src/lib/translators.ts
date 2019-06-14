@@ -56,6 +56,13 @@ class Util {
     static ParseInt(str: string): number {
         return +str;
     }
+    static ParsePositiveInt(str: string): number {
+        let int: number = +str;
+        if(int < 0) {
+            return 0;
+        }
+        return +str;
+    }
 }
 
 

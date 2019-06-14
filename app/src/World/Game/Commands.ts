@@ -108,9 +108,11 @@ export class Commands {
                 break;
             case 'gold':
                 if (this.game.debugMode) {
-                    let amount = Util.ParseInt(command[1]);
+                    let amount = Util.ParsePositiveInt(command[1]);
                     if (!amount) {
                         player.sendMessage(Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Invalid Amount'));
+                        return;
+
                     }
                     player.sendMessage(`Gold was set to |cFFFFCC00${amount}|r`);
                     player.setGold(amount);
@@ -118,9 +120,11 @@ export class Commands {
                 break;
             case 'lumber':
                 if (this.game.debugMode) {
-                    let amount = Util.ParseInt(command[1]);
+                    let amount = Util.ParsePositiveInt(command[1]);
                     if (!amount) {
                         player.sendMessage(Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Invalid Amount'));
+                        return;
+
                     }
                     player.sendMessage(`Lumber was set to |cFF00C850${amount}|r`);
                     player.setLumber(amount);
@@ -133,6 +137,8 @@ export class Commands {
                     let amount = Util.ParseInt(command[1]);
                     if (!amount) {
                         player.sendMessage(Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Invalid Amount'));
+                        return;
+
                     }
                     // SET LIVES TO AMOUNT
                 }
@@ -148,9 +154,11 @@ export class Commands {
                 break;
             case 'diff':
                 if (this.game.debugMode) {
-                    let amount = Util.ParseInt(command[1]);
+                    let amount = Util.ParsePositiveInt(command[1]);
                     if (!amount) {
                         player.sendMessage(Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Invalid Amount'));
+                        return;
+
                     }
                     player.sendMessage(`Difficulty was set to ${amount}%`);
 
@@ -195,9 +203,11 @@ export class Commands {
             case 'zoom':
             case 'cam':
                 if (GetLocalPlayer() == player.wcPlayer) {
-                    let amount = Util.ParseInt(command[1]);
+                    let amount = Util.ParsePositiveInt(command[1]);
                     if (!amount) {
                         player.sendMessage(Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Invalid Amount'));
+                        return;
+
                     }
                     SetCameraField(CAMERA_FIELD_TARGET_DISTANCE, amount, 1);
                 }
@@ -206,9 +216,15 @@ export class Commands {
                 print('Command not implemented yet');
                 //TODO: implement command
                 if (this.game.debugMode) {
-                    let amount = Util.ParseInt(command[1]);
+                    let amount = Util.ParsePositiveInt(command[1]);
                     if (!amount) {
                         player.sendMessage(Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Invalid Amount'));
+                        return;
+
+                    }
+                    if(amount >= this.game.worldMap.waveCreeps.length){
+                        player.sendMessage(Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Invalid Amount'));
+                        return;
                     }
                     // SET WAVE
                 }

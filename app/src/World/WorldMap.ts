@@ -1,6 +1,6 @@
 import { WarcraftMaul } from './WarcraftMaul';
 import { Ship } from './Entity/Ship';
-import { DummyCreep } from './Entity/DummyCreep';
+import { WaveCreep } from './Entity/WaveCreep';
 import { Race } from './Game/Race';
 import { PlayerSpawns } from './Entity/PlayerSpawns';
 import { SpawnedCreeps } from './Entity/SpawnedCreeps';
@@ -10,7 +10,7 @@ import { Teleporter } from './Entity/Teleporter';
 export class WorldMap {
     game: WarcraftMaul;
     worldCreatures: Map<String, unit> = new Map<String, unit>();
-    dummyCreeps: DummyCreep[] = [];
+    waveCreeps: WaveCreep[] = [];
     races: Race[] = [];
     spawnedCreeps: SpawnedCreeps | undefined;
 
@@ -96,42 +96,42 @@ export class WorldMap {
     }
 
     createCreepWaves() {
-        this.dummyCreeps.push(new DummyCreep(1, 'u006', 'Wisp'));
-        this.dummyCreeps.push(new DummyCreep(2, 'hC04', 'Clockwerk'));
-        this.dummyCreeps.push(new DummyCreep(3, 'eC05', 'Acolyte'));
-        this.dummyCreeps.push(new DummyCreep(4, 'hC16', 'Militia'));
-        this.dummyCreeps.push(new DummyCreep(5, 'nC17', 'Wind Rider'));
-        this.dummyCreeps.push(new DummyCreep(6, 'nC29', 'Tauren Mystic'));
-        this.dummyCreeps.push(new DummyCreep(7, 'o01C', 'Grunt'));
-        this.dummyCreeps.push(new DummyCreep(8, 'nC30', 'Makrura Snapper'));
-        this.dummyCreeps.push(new DummyCreep(9, 'oC31', 'Mutant'));
-        this.dummyCreeps.push(new DummyCreep(10, 'nC33', 'Mini-Tank'));
-        this.dummyCreeps.push(new DummyCreep(11, 'n008', 'Enraged Yeti'));
-        this.dummyCreeps.push(new DummyCreep(12, 'eC38', 'Faceless Brute'));
-        this.dummyCreeps.push(new DummyCreep(13, 'nC39', 'Stampeding Reptile'));
-        this.dummyCreeps.push(new DummyCreep(14, 'nC40', 'Nymph'));
-        this.dummyCreeps.push(new DummyCreep(15, 'nC41', 'Matured Dragon'));
-        this.dummyCreeps.push(new DummyCreep(16, 'nC42', 'Merfolk Champion'));
-        this.dummyCreeps.push(new DummyCreep(17, 'uC43', 'Eternal Spirit'));
-        this.dummyCreeps.push(new DummyCreep(18, 'hC44', 'Granite Golem'));
-        this.dummyCreeps.push(new DummyCreep(19, 'uC45', 'Walking Corpse'));
-        this.dummyCreeps.push(new DummyCreep(20, 'n004', 'Adult Dragon'));
-        this.dummyCreeps.push(new DummyCreep(21, 'hC48', 'Bear'));
-        this.dummyCreeps.push(new DummyCreep(22, 'oC47', 'Heavy Tank'));
-        this.dummyCreeps.push(new DummyCreep(23, 'nC49', 'Big Game Hunter'));
-        this.dummyCreeps.push(new DummyCreep(24, 'nC50', 'Water Spirit'));
-        this.dummyCreeps.push(new DummyCreep(25, 'nC51', 'Ancient Dragon'));
-        this.dummyCreeps.push(new DummyCreep(26, 'nC69', 'Steel Golem'));
-        this.dummyCreeps.push(new DummyCreep(27, 'eC52', 'Demonic Minion'));
-        this.dummyCreeps.push(new DummyCreep(28, 'oC70', 'Fire Spirit'));
-        this.dummyCreeps.push(new DummyCreep(29, 'hC95', 'Demon Queen'));
-        this.dummyCreeps.push(new DummyCreep(30, 'uC71', 'Nether Dragon'));
-        this.dummyCreeps.push(new DummyCreep(31, 'hC76', 'Blood Golem'));
-        this.dummyCreeps.push(new DummyCreep(32, 'h03Y', 'Big Bad Ogre'));
-        this.dummyCreeps.push(new DummyCreep(33, 'h03Z', 'Snap Dragon'));
-        this.dummyCreeps.push(new DummyCreep(34, 'h040', 'Zergling'));
-        this.dummyCreeps.push(new DummyCreep(35, 'uC72', 'Archimonde'));
-        this.dummyCreeps.push(new DummyCreep(36, 'hC79', 'CRAB OF DEATH'));
+        this.waveCreeps.push(new WaveCreep(1, 'u006', 'Wisp'));
+        this.waveCreeps.push(new WaveCreep(2, 'hC04', 'Clockwerk'));
+        this.waveCreeps.push(new WaveCreep(3, 'eC05', 'Acolyte'));
+        this.waveCreeps.push(new WaveCreep(4, 'hC16', 'Militia'));
+        this.waveCreeps.push(new WaveCreep(5, 'nC17', 'Wind Rider'));
+        this.waveCreeps.push(new WaveCreep(6, 'nC29', 'Tauren Mystic'));
+        this.waveCreeps.push(new WaveCreep(7, 'o01C', 'Grunt'));
+        this.waveCreeps.push(new WaveCreep(8, 'nC30', 'Makrura Snapper'));
+        this.waveCreeps.push(new WaveCreep(9, 'oC31', 'Mutant'));
+        this.waveCreeps.push(new WaveCreep(10, 'nC33', 'Mini-Tank'));
+        this.waveCreeps.push(new WaveCreep(11, 'n008', 'Enraged Yeti'));
+        this.waveCreeps.push(new WaveCreep(12, 'eC38', 'Faceless Brute'));
+        this.waveCreeps.push(new WaveCreep(13, 'nC39', 'Stampeding Reptile'));
+        this.waveCreeps.push(new WaveCreep(14, 'nC40', 'Nymph'));
+        this.waveCreeps.push(new WaveCreep(15, 'nC41', 'Matured Dragon'));
+        this.waveCreeps.push(new WaveCreep(16, 'nC42', 'Merfolk Champion'));
+        this.waveCreeps.push(new WaveCreep(17, 'uC43', 'Eternal Spirit'));
+        this.waveCreeps.push(new WaveCreep(18, 'hC44', 'Granite Golem'));
+        this.waveCreeps.push(new WaveCreep(19, 'uC45', 'Walking Corpse'));
+        this.waveCreeps.push(new WaveCreep(20, 'n004', 'Adult Dragon'));
+        this.waveCreeps.push(new WaveCreep(21, 'hC48', 'Bear'));
+        this.waveCreeps.push(new WaveCreep(22, 'oC47', 'Heavy Tank'));
+        this.waveCreeps.push(new WaveCreep(23, 'nC49', 'Big Game Hunter'));
+        this.waveCreeps.push(new WaveCreep(24, 'nC50', 'Water Spirit'));
+        this.waveCreeps.push(new WaveCreep(25, 'nC51', 'Ancient Dragon'));
+        this.waveCreeps.push(new WaveCreep(26, 'nC69', 'Steel Golem'));
+        this.waveCreeps.push(new WaveCreep(27, 'eC52', 'Demonic Minion'));
+        this.waveCreeps.push(new WaveCreep(28, 'oC70', 'Fire Spirit'));
+        this.waveCreeps.push(new WaveCreep(29, 'hC95', 'Demon Queen'));
+        this.waveCreeps.push(new WaveCreep(30, 'uC71', 'Nether Dragon'));
+        this.waveCreeps.push(new WaveCreep(31, 'hC76', 'Blood Golem'));
+        this.waveCreeps.push(new WaveCreep(32, 'h03Y', 'Big Bad Ogre'));
+        this.waveCreeps.push(new WaveCreep(33, 'h03Z', 'Snap Dragon'));
+        this.waveCreeps.push(new WaveCreep(34, 'h040', 'Zergling'));
+        this.waveCreeps.push(new WaveCreep(35, 'uC72', 'Archimonde'));
+        this.waveCreeps.push(new WaveCreep(36, 'hC79', 'CRAB OF DEATH'));
     }
 
     setupRaces() {
