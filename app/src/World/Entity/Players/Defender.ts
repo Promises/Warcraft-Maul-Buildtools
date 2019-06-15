@@ -40,6 +40,7 @@ export class Defender extends AbstractPlayer {
         this.allowPlayerTower = CreateUnit(this.wcPlayer, FourCC('h03S'), allowTowerLoc.x, allowTowerLoc.y, 0.000);
 
 
+
     }
 
     hasRace(randomedRace: Race) {
@@ -51,6 +52,20 @@ export class Defender extends AbstractPlayer {
         return PLAYER_AREAS[this.id];
     }
 
+    getCenterX(){
+        let x1 = this.getArea()[0];
+        let x2 = this.getArea()[2];
+
+        return (x1 + x2)/2;
+    }
+
+    getCenterY(){
+        let y1 = this.getArea()[1];
+        let y2 = this.getArea()[3];
+
+        return (y1 + y2)/2;
+    }
+
     getVoidBuilder() {
         return this.voidBuilder;
     }
@@ -58,4 +73,6 @@ export class Defender extends AbstractPlayer {
     getLootBoxer() {
         return this.lootBoxer;
     }
+
+
 }

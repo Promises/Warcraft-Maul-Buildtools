@@ -361,33 +361,10 @@ export class WorldMap {
         YellowSecondaryCheckpoint.next = DarkGreenSpawns.spawnOne.next;
         DarkGreenCheckpoint.next = MaroonsCheckpoint;
         LightBlueCheckpoint.next = BrownCheckpoint;
-        this.drawRectangle(OrangeSpawns.spawnOne.rectangle);
-        this.drawRectangle(OrangeSpawns.spawnTwo.rectangle);
 
 
     }
 
-    drawRectangle(r: rect) {
-        let x1 = GetRectMinX(r);
-        let y1 = GetRectMinY(r);
-        let x2 = GetRectMaxX(r);
-        let y2 = GetRectMaxY(r);
-        let model = 'Doodads\\Cinematic\\DemonFootPrint\\DemonFootPrint0.mdl';
-
-
-        for (let i = x1; i < x2; i++) {
-            AddSpecialEffect(model, i, y1);
-        }
-        for (let j = y1; j < y2; j++) {
-            AddSpecialEffect(model, x2, j);
-        }
-        for (let i = x1; i < x2; i++) {
-            AddSpecialEffect(model, i, y2);
-        }
-        for (let j = y1; j < y2; j++) {
-            AddSpecialEffect(model, x1, j);
-        }
-    }
 
     HealEverythingOnMap() {
         let grp = GetUnitsInRectAll(GetPlayableMapRect());

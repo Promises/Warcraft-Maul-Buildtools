@@ -89,10 +89,11 @@ export class WarcraftMaul {
             CreateUnit(Player(COLOUR.RED), FourCC('e00B'), 0.00, 0.00, bj_UNIT_FACING);
             CreateUnit(Player(COLOUR.RED), FourCC('hC07'), 0.00, 0.00, bj_UNIT_FACING);
         }
+        //
+        // for (let quest of Quests){
+        //     print(quest.title)
+        // }
 
-        for (let quest of Quests){
-            print(quest.title)
-        }
 
 
 
@@ -150,6 +151,8 @@ export class WarcraftMaul {
 
         return "|cFF999999" + hrsStr + ":" + minsStr + ":" + secsStr + "|r";
     }
+
+
 
 
 
