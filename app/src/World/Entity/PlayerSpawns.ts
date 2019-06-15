@@ -1,12 +1,13 @@
 import { CheckPoint } from './CheckPoint';
 import { WorldMap } from '../WorldMap';
+import { Trigger } from '../../JassOverrides/Trigger';
 
 export class PlayerSpawns {
     private _spawnOne: CheckPoint | undefined;
     private _spawnTwo: CheckPoint | undefined;
 
-    oneTrig: trigger | undefined;
-    twoTrig: trigger| undefined;
+    oneTrig: Trigger | undefined;
+    twoTrig: Trigger| undefined;
     isOpen: boolean;
     worldMap: WorldMap;
 
@@ -24,10 +25,10 @@ export class PlayerSpawns {
     set spawnOne(value: CheckPoint | undefined) {
         this._spawnOne = value;
         if(this.spawnOne){
-            this.oneTrig = CreateTrigger();
-            TriggerRegisterEnterRectSimple(this.oneTrig, this.spawnOne.rectangle);
-            TriggerAddCondition(this.oneTrig, Condition(() => this.EnteringUnitIsCreepAndHasNoCheckpoint()));
-            TriggerAddAction(this.oneTrig, () => this.SpawnAction(<CheckPoint>this.spawnOne));
+            this.oneTrig = new Trigger();
+            this.oneTrig.RegisterEnterRectSimple(this.spawnOne.rectangle);
+            this.oneTrig.AddCondition(() => this.EnteringUnitIsCreepAndHasNoCheckpoint());
+            this.oneTrig.AddAction( () => this.SpawnAction(<CheckPoint>this.spawnOne));
         }
 
     }
@@ -39,10 +40,12 @@ export class PlayerSpawns {
     set spawnTwo(value: CheckPoint | undefined) {
         this._spawnTwo = value;
         if(this.spawnTwo) {
-            this.twoTrig = CreateTrigger();
-            TriggerRegisterEnterRectSimple(this.twoTrig, this.spawnTwo.rectangle);
-            TriggerAddCondition(this.twoTrig, Condition(() => this.EnteringUnitIsCreepAndHasNoCheckpoint()));
-            TriggerAddAction(this.twoTrig, () => this.SpawnAction(<CheckPoint>this.spawnTwo));
+
+            this.twoTrig = new Trigger();
+            this.twoTrig.RegisterEnterRectSimple(this.spawnTwo.rectangle);
+            this.twoTrig.AddCondition(() => this.EnteringUnitIsCreepAndHasNoCheckpoint());
+            this.twoTrig.AddAction( () => this.SpawnAction(<CheckPoint>this.spawnTwo));
+
         }
     }
 
@@ -52,6 +55,7 @@ export class PlayerSpawns {
 
     EnteringUnitIsCreepAndHasNoCheckpoint(): boolean {
         let creep = GetEnteringUnit();
+
         if (!this.isEnteringUnitCreep()) {
             return false;
         }

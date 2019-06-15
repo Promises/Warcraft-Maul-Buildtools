@@ -4,13 +4,18 @@ class console {
     }
 }
 
+
 interface ColourToIndex {
     [key: string]: number
 }
 
 class Util {
+
     static ColourString(colour: string, string: string): string {
         return `|cFF${colour}${string}|r`;
+    }
+    static randomInt(min: number, max: number): number{
+        return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
     static COLOUR_IDS: ColourToIndex = {
@@ -40,7 +45,7 @@ class Util {
         'PEANUT': 23,
     };
 
-    static ArraysToString(arr: string[]): string {
+    static ArraysToString(arr: any[]): string {
         let output = '[';
         for (let i = 0; i < arr.length; i++) {
             if (i == arr.length - 1) {
@@ -57,11 +62,11 @@ class Util {
         return +str;
     }
     static ParsePositiveInt(str: string): number {
-        let int: number = +str;
+        let int: number = Number(str);
         if(int < 0) {
             return 0;
         }
-        return +str;
+        return int;
     }
 }
 

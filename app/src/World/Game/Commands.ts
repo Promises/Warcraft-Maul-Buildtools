@@ -1,18 +1,19 @@
 import { WarcraftMaul } from '../WarcraftMaul';
 import { COLOUR_CODES, enemies, players } from '../GlobalSettings';
+import { Trigger } from '../../JassOverrides/Trigger';
 
 export class Commands {
 
-    commandTrigger: trigger;
+    commandTrigger: Trigger;
     game: WarcraftMaul;
 
     constructor(game: WarcraftMaul) {
         this.game = game;
-        this.commandTrigger = CreateTrigger();
+        this.commandTrigger = new Trigger();
         for (let player of players.values()) {
-            TriggerRegisterPlayerChatEvent(this.commandTrigger, player.wcPlayer, '-', false);
+            this.commandTrigger.RegisterPlayerChatEvent(player.wcPlayer, '-', false);
         }
-        TriggerAddAction(this.commandTrigger, () => this.handleCommand());
+        this.commandTrigger.AddAction(() => this.handleCommand());
     }
 
     private handleCommand() {
@@ -100,7 +101,7 @@ export class Commands {
             case 'openall':
                 if (this.game.debugMode) {
                     player.sendMessage('All spawns are not open!');
-                    this.OpenAllSpawns()
+                    this.OpenAllSpawns();
 
                 }
                 break;
@@ -210,8 +211,6 @@ export class Commands {
                 }
                 break;
             case 'wave':
-                print('Command not implemented yet');
-                //TODO: implement command
                 if (this.game.debugMode) {
                     let amount = Util.ParsePositiveInt(command[1]);
                     if (!amount) {
@@ -219,11 +218,12 @@ export class Commands {
                         return;
 
                     }
-                    if(amount >= this.game.worldMap.waveCreeps.length){
+                    if (amount >= this.game.worldMap.waveCreeps.length) {
                         player.sendMessage(Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Invalid Amount'));
                         return;
                     }
                     // SET WAVE
+                    this.game.gameRoundHandler.currentWave = amount;
                 }
                 break;
             case 'maze':
@@ -750,8 +750,15 @@ export class Commands {
 
     OpenAllSpawns() {
         // this.game.worldMap.playerSpawns[COLOUR.GRAY].isOpen = tr
-        for(let spawn of this.game.worldMap.playerSpawns){
+        for (let spawn of this.game.worldMap.playerSpawns) {
             spawn.isOpen = true;
         }
+    }
+
+    private FindThingForBossToDestroy() {
+        if (GetDestructableTypeId(GetEnumDestructable()) == FourCC('B000')) {
+            print('Found iiiittt');
+        }
+
     }
 }

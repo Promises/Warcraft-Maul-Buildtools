@@ -6,4 +6,3 @@ function FourCC(input: string): number {
 }
 
 
-

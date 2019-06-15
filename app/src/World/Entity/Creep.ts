@@ -14,6 +14,8 @@ export class Creep {
 
 
     printId() {
+
+
         print(GetUnitName(this.creep));
     }
 }

@@ -1,54 +1,42 @@
-import './lib/translators'
-import './World/GlobalSettings'
-import {WarcraftMaul} from "./World/WarcraftMaul";
-import { COLOUR_CODES } from './World/GlobalSettings';
+import { WarcraftMaul } from './World/WarcraftMaul';
+import './lib/translators';
+import { Trigger } from './JassOverrides/Trigger';
 
-function printError(err: any) {
-    print(`${Util.ColourString(COLOUR_CODES[COLOUR.RED],"ERROR: ")}${err}`);
-}
+BJDebugMsg('initialising');
 
-
-function Main(this:void) {
+function Main(this: void) {
     let maul = new WarcraftMaul();
-
-    print("Initialisation finished");
-
-
+    if(maul.debugMode){
+        print('Initialisation finished');
+    }
 
 
 }
+// BJDebugMsg('prexp call');
 
-
-let init = CreateTrigger();
-TriggerRegisterTimerEvent(init, 0.00, false);
-TriggerAddAction(init, () => {
-    xpcall(() => Main(), err => printError(err));
-
+xpcall(() => {
+    // print('initialising');
+    let init = new Trigger();
+    init.RegisterTimerEvent(0.00, false);
+    init.AddAction(() => Main());
+}, (err) => {
+    BJDebugMsg('Err: ' + err);
 });
 
 
 
 
-
-// let t = CreateTrigger()
-// TriggerRegisterTimerEvent(t, 0.00, false)
-// TriggerAddAction(t, () => {
-//     xpcall(() => { 
-//         BJDebugMsg("Hello, world arrow!")
-//     }, (err) => {
-//         BJDebugMsg("Err: " + err)
-//     });
-// });
-
+// let t = new Trigger()
+// TriggerRegisterTimerEvent(t.nativeTrigger, 0.00, false);
+// t.RegisterTimerEvent(0.00, false)
+// t.AddAction(
+//     () => BJDebugMsg("Hello, world arrow!")
+// );
 
 
 // function printHello(this: void) {
 //     BJDebugMsg("Hello, world function!");
 // }
-
-
-
-
 
 
 //

@@ -1,11 +1,13 @@
 import { WarcraftMaul } from './WarcraftMaul';
 import { Ship } from './Entity/Ship';
 import { WaveCreep } from './Entity/WaveCreep';
-import { Race } from './Game/Race';
+import { Race } from './Game/Races/Race';
 import { PlayerSpawns } from './Entity/PlayerSpawns';
 import { SpawnedCreeps } from './Entity/SpawnedCreeps';
 import { CheckPoint } from './Entity/CheckPoint';
 import { Teleporter } from './Entity/Teleporter';
+import { RaceVoid } from './Game/Races/RaceVoid';
+import { RaceLootBoxer } from './Game/Races/RaceLootBoxer';
 
 export class WorldMap {
     game: WarcraftMaul;
@@ -19,11 +21,13 @@ export class WorldMap {
 
 
     playerSpawns: PlayerSpawns[] = [];
+    disabledRaces: number = 0;
 
 
     constructor(game: WarcraftMaul) {
         this.game = game;
         this.setupWorldCreatures();
+
 
     }
 
@@ -145,40 +149,41 @@ export class WorldMap {
     }
 
     setupRaces() {
-        this.races.push(new Race('h03L', 'Workers Union'));
-        this.races.push(new Race('uC98', 'Demon Portal'));
-        this.races.push(new Race('oC22', 'Undead Necropolis'));
-        this.races.push(new Race('eC10', 'Aviaries'));
-        this.races.push(new Race('u002', 'High Elf Barracks'));
-        this.races.push(new Race('u001', 'Outland'));
-        this.races.push(new Race('hC07', 'Human Town Hall'));
-        this.races.push(new Race('nC03', 'Orc Stronghold'));
-        this.races.push(new Race('n03W', 'High Elf Farm'));
-        this.races.push(new Race('uC13', 'Giants Hall'));
-        this.races.push(new Race('e00A', 'The Unique'));
-        this.races.push(new Race('e007', 'The Summons'));
-        this.races.push(new Race('n00J', 'Arachnid Hive'));
-        this.races.push(new Race('o017', 'Draenei Haven'));
-        this.races.push(new Race('u00B', 'Dragons'));
-        this.races.push(new Race('e00F', 'Night Elf Ancient'));
-        this.races.push(new Race('e00W', 'Elementalists'));
-        this.races.push(new Race('e002', 'Tavern'));
-        this.races.push(new Race('e003', 'Corrupted Night Elves'));
-        this.races.push(new Race('e005', 'Goblins'));
-        this.races.push(new Race('n03M', 'Heros Altar'));
-        this.races.push(new Race('e00D', 'Caerbannog'));
-        this.races.push(new Race('n01V', 'Critters UNITE'));
-        this.races.push(new Race('n02A', 'Gnoll Republic'));
-        this.races.push(new Race('h02T', 'Void Cult'));
-        this.races.push(new Race('n02S', 'Alliance of Blades'));
-        this.races.push(new Race('n03C', 'Cavernous Creatures'));
-        this.races.push(new Race('n046', 'Forest Troll Hut'));
-        this.races.push(new Race('n014', 'Ice Troll Hut'));
-        this.races.push(new Race('n03W', 'Dark Troll Hut'));
-        this.races.push(new Race('n04I', 'The Forsaken'));
-        this.races.push(new Race('e00H', 'Dwarven Mine'));
-        this.races.push(new Race('e00G', 'Galaxy'));
-        this.races.push(new Race('u01B', 'Shrine of Buffs'));
+        this.races.push(new Race('h03L', 'Workers Union', 'I01A', this));
+        this.races.push(new Race('uC98', 'Demon Portal', 'I001', this));
+        this.races.push(new Race('oC22', 'Undead Necropolis', 'I002', this));
+        this.races.push(new Race('eC10', 'Aviaries', 'I003', this, false));
+        this.races.push(new Race('u002', 'High Elf Barracks', 'I004', this));
+        this.races.push(new Race('u001', 'Outland', 'I005', this));
+        this.races.push(new Race('hC07', 'Human Town Hall', 'I006', this));
+        this.races.push(new Race('nC03', 'Orc Stronghold', 'I007', this));
+        this.races.push(new Race('n03W', 'High Elf Farm', 'I025', this));
+        this.races.push(new Race('uC13', 'Giants Hall', 'I009', this));
+        this.races.push(new Race('e00A', 'The Unique', 'I027', this));
+        this.races.push(new Race('e007', 'The Summons', 'I00B', this));
+        this.races.push(new Race('n00J', 'Arachnid Hive', 'I00C', this));
+        this.races.push(new Race('o017', 'Draenei Haven', 'I00D', this));
+        this.races.push(new Race('u00B', 'Dragons', 'I00E', this));
+        this.races.push(new Race('e00F', 'Night Elf Ancient', 'I00F', this));
+        this.races.push(new Race('e00W', 'Elementalists', 'I024', this));
+        this.races.push(new Race('e002', 'Tavern', 'I00H', this));
+        this.races.push(new Race('e003', 'Corrupted Night Elves', 'I00I', this));
+        this.races.push(new Race('e005', 'Goblins', 'I00J', this));
+        this.races.push(new Race('n03M', 'Heros Altar', 'NULL', this, false));
+        this.races.push(new Race('e00D', 'Caerbannog', 'I000', this));
+        this.races.push(new Race('n01V', 'Critters UNITE', 'I00L', this));
+        this.races.push(new Race('n02A', 'Gnoll Republic', 'I00M', this));
+        this.races.push(new RaceVoid('h02T', 'Void Cult', 'I019',this));
+        this.races.push(new Race('n02S', 'Alliance of Blades', 'I00P', this));
+        this.races.push(new Race('n03C', 'Cavernous Creatures', 'I00Q', this));
+        this.races.push(new Race('n046', 'Forest Troll Hut', 'I00O', this));
+        this.races.push(new Race('n014', 'Ice Troll Hut', 'I00R', this));
+        this.races.push(new Race('n03W', 'Dark Troll Hut', 'NULL', this, false));
+        this.races.push(new Race('n04I', 'The Forsaken', 'I00T', this));
+        this.races.push(new Race('e00H', 'Dwarven Mine', 'I00U', this));
+        this.races.push(new Race('e00G', 'Galaxy', 'I00Z', this));
+        this.races.push(new RaceLootBoxer('u043', 'Loot Boxer', 'I02D',this));
+        this.races.push(new Race('u01B', 'Shrine of Buffs', 'I026', this));
     }
 
     private setupCheckpoint() {
@@ -360,7 +365,6 @@ export class WorldMap {
         this.drawRectangle(OrangeSpawns.spawnTwo.rectangle);
 
 
-
     }
 
     drawRectangle(r: rect) {
@@ -372,19 +376,49 @@ export class WorldMap {
 
 
         for (let i = x1; i < x2; i++) {
-            AddSpecialEffect(model, i, y1)
+            AddSpecialEffect(model, i, y1);
         }
         for (let j = y1; j < y2; j++) {
-            AddSpecialEffect(model, x2, j)
+            AddSpecialEffect(model, x2, j);
         }
         for (let i = x1; i < x2; i++) {
-            AddSpecialEffect(model, i, y2)
+            AddSpecialEffect(model, i, y2);
         }
         for (let j = y1; j < y2; j++) {
-            AddSpecialEffect(model, x1, j)
+            AddSpecialEffect(model, x1, j);
         }
     }
 
+    HealEverythingOnMap() {
+        let grp = GetUnitsInRectAll(GetPlayableMapRect());
+        ForGroupBJ(grp, () => {
+            SetUnitLifePercentBJ(GetEnumUnit(), 100);
+        });
+        DestroyGroup(grp);
+    }
 
 
+    ReplaceRunedBricksWithLava() {
+        this.ReplaceTerrainTypeId('Irbk', 'Dlvc', -5888.0, 5888.0, -5888.0, 5888.0);
+
+    }
+
+    private ReplaceTerrainTypeId(OldTerrain: string, NewTerrain: string, MinX: number, MaxX: number, MinY: number, MaxY: number) {
+
+        for (; MinY < MaxY; MinY++) {
+            if (GetTerrainType(MinX, MinY) == FourCC(OldTerrain)) {
+                SetTerrainType(MinX, MinY, FourCC(NewTerrain), -1, 1, 1);
+                if (GetRandomInt(0, 99) > 89) {
+                    AddSpecialEffect('Abilities\\Spells\\Human\\FlameStrike\\FlameStrikeEmbers.mdl', MinX, MinY);
+                }
+
+            }
+            if (MinX >= MaxX) {
+                MinY = MinY + 128.0;
+                MinX = -5888.0;
+            } else {
+                MinX = MinX + 128.0;
+            }
+        }
+    }
 }

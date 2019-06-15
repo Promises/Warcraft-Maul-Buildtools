@@ -2,24 +2,25 @@ import { SpawnedCreeps } from './SpawnedCreeps';
 import { WorldMap } from '../WorldMap';
 import { Creep } from './Creep';
 import get = Reflect.get;
+import { Trigger } from '../../JassOverrides/Trigger';
 
 export class CheckPoint {
     private _previous: CheckPoint | undefined;
     private _next: CheckPoint | undefined;
     rectangle: rect;
-    eventTrig: trigger;
+    eventTrig: Trigger;
     worldMap: WorldMap;
 
 
     constructor(rectangle: rect, worldMap: WorldMap) {
         this.rectangle = rectangle;
         this.worldMap = worldMap;
-        this.eventTrig = CreateTrigger();
+        this.eventTrig = new Trigger();
 
-        TriggerRegisterEnterRectSimple(this.eventTrig, rectangle);
+        this.eventTrig.RegisterEnterRectSimple(rectangle);
 
-        TriggerAddCondition(this.eventTrig, Condition(() => this.verifyTargetCheckpoint()));
-        TriggerAddAction(this.eventTrig, () => this.checkPointAction());
+        this.eventTrig.AddCondition(() => this.verifyTargetCheckpoint());
+        this.eventTrig.AddAction(() => this.checkPointAction());
 
 
     }
@@ -27,7 +28,7 @@ export class CheckPoint {
 
     verifyTargetCheckpoint(): boolean {
 
-        if(!this.isEnteringUnitCreep){
+        if (!this.isEnteringUnitCreep) {
             return false;
         }
         let spawnedCreeps = this.worldMap.spawnedCreeps;
@@ -42,8 +43,8 @@ export class CheckPoint {
         return true;
     }
 
-    checkPointAction(){
-        if(!this.next){
+    checkPointAction() {
+        if (!this.next) {
             return;
         }
         let spawnedCreeps = this.worldMap.spawnedCreeps;
@@ -51,15 +52,14 @@ export class CheckPoint {
             let creep = spawnedCreeps.unitMap.get(GetHandleIdBJ(GetEnteringUnit()));
             if (creep) {
                 creep.targetCheckpoint = this.next;
-                IssuePointOrder(GetEnteringUnit(), "move", GetRectCenterX(this.next.rectangle), GetRectCenterY(this.next.rectangle));
-                if(UnitHasBuffBJ(GetEnteringUnit(),FourCC('B028'))){
+                IssuePointOrder(GetEnteringUnit(), 'move', GetRectCenterX(this.next.rectangle), GetRectCenterY(this.next.rectangle));
+                if (UnitHasBuffBJ(GetEnteringUnit(), FourCC('B028'))) {
                     // TODO: creep.morningPerson();
                 }
 
             }
         }
     }
-
 
 
     get previous(): CheckPoint | undefined {
@@ -79,7 +79,6 @@ export class CheckPoint {
     }
 
 
-
     isEnteringUnitCreep() {
         let ownerID: COLOUR = GetPlayerId(GetOwningPlayer(GetEnteringUnit()));
         switch (ownerID) {
@@ -89,7 +88,7 @@ export class CheckPoint {
             case COLOUR.WHEAT:
                 return true;
             default:
-                return false
+                return false;
         }
     }
 

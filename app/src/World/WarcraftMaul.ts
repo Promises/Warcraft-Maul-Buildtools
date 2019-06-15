@@ -1,27 +1,42 @@
 import {Defender} from "./Entity/Players/Defender";
-import {enemies, InitializeStaticSounds, players} from "./GlobalSettings";
+import * as settings from './GlobalSettings';
 import {Attacker} from "./Entity/Players/Attacker";
 import {WorldMap} from "./WorldMap"
 import {SpawnedCreeps} from "./Entity/SpawnedCreeps";
 import { Commands } from './Game/Commands';
 import { GameRound } from './Game/GameRound';
+import { DifficultyVote } from './Game/DifficultyVote';
+import { RacePicking } from './Game/RacePicking';
+import { MultiBoard } from './Game/MultiBoard';
+import { COLOUR_CODES } from './GlobalSettings';
+import { Quests } from '../Generated/questsGEN';
 
 export class WarcraftMaul {
 
     debugMode: boolean = false;
 
-    waveTimer: number = 90;
+    waveTimer: number = settings.GAME_TIME_BEFORE_START;
 
-    stringtest: string;
     worldMap: WorldMap;
 
 
     gameTime: number = 0;
     gameEnded: boolean = false;
-    gameEndTimer: number = 600;
+    gameEndTimer: number = settings.GAME_END_TIME;
+
+    gameLives: number = settings.INITIAL_LIVES;
+    startLives: number = settings.INITIAL_LIVES;
+
+
+    gameRoundHandler: GameRound;
+    gameCommandHandler: Commands;
+    scoreBoard: MultiBoard | undefined;
+
+
 
     constructor() {
-        this.stringtest = `Hello player ${GetPlayerName(Player(0))}`;
+        let players = settings.players;
+        let enemies = settings.enemies;
 
 
         // Should we enable debug mode?
@@ -29,7 +44,7 @@ export class WarcraftMaul {
             this.debugMode = true;
         }
         if(this.debugMode) {
-            this.waveTimer = 4;
+            this.waveTimer = 15;
         }
 
         // Set up all players
@@ -37,6 +52,7 @@ export class WarcraftMaul {
             if (GetPlayerSlotState(Player(i)) == PLAYER_SLOT_STATE_PLAYING) {
                 if (GetPlayerController(Player(i)) == MAP_CONTROL_USER) {
                     players.set(i, new Defender(i));
+
                 }
             }
         }
@@ -56,16 +72,17 @@ export class WarcraftMaul {
         }
 
         //Initialise sounds
-        InitializeStaticSounds();
+        settings.InitializeStaticSounds();
 
         // Create the map
         this.worldMap = new WorldMap(this);
-        let cmds = new Commands(this);
-        cmds.OpenAllSpawns();
+        this.gameCommandHandler = new Commands(this);
+        // this.gameCommandHandler.OpenAllSpawns();
 
+        new DifficultyVote(this);
+        new RacePicking(this);
 
-
-        new GameRound(this);
+        this.gameRoundHandler = new GameRound(this);
 
         // Spawn testing units when in debug mode
         if(this.debugMode) {
@@ -73,16 +90,66 @@ export class WarcraftMaul {
             CreateUnit(Player(COLOUR.RED), FourCC('hC07'), 0.00, 0.00, bj_UNIT_FACING);
         }
 
+        for (let quest of Quests){
+            print(quest.title)
+        }
+
 
 
     }
 
     DefeatAllPlayers(){
-        for (let player of players.values()){
+        for (let player of settings.players.values()){
             player.defeatPlayer();
         }
     }
 
+
+
+    GameWin(){
+        if(this.gameLives > 0){
+            PlaySoundBJ(settings.Sounds.victorySound);
+            DisplayTimedTextToForce( GetPlayersAll(), 30, "|cFFF48C42YOU HAVE WON!|r" );
+            DisplayTimedTextToForce( GetPlayersAll(), 15, "You can either leave the game or stay for bonus rounds" );
+            this.GameWinEffects();
+        }
+    }
+
+
+    GameWinEffects() {
+        let timer1 = CreateTimer();
+        TimerStart(timer1, 0.10, true, () => this.SpamEffects());
+    }
+
+
+
+    SpamEffects() {
+        let x = GetRandomInt(0, 10000) - 5000;
+        let y = GetRandomInt(0, 10000) - 5000;
+        let loc = Location(x, y);
+        DestroyEffect(AddSpecialEffectLocBJ( loc, "Abilities\\Spells\\Human\\DispelMagic\\DispelMagicTarget.mdl" ));
+        RemoveLocation(loc)
+    }
+
+
+    PrettifyGameTime(time: number): string{
+
+        let secs = ModuloInteger(time, 60);
+        let mins = ModuloInteger(time / 60, 60);
+        let hrs = time / 3600;
+        let secsStr = secs+'';
+        let minsStr = mins+'';
+        let hrsStr = hrs+'';
+        if(mins < 10)
+            minsStr = "0" + minsStr;
+        if(hrs < 10)
+            hrsStr = "0" + hrsStr;
+
+        if(secs < 10)
+            secsStr = "0" + secsStr;
+
+        return "|cFF999999" + hrsStr + ":" + minsStr + ":" + secsStr + "|r";
+    }
 
 
 

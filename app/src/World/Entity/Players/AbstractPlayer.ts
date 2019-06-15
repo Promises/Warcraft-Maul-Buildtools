@@ -47,6 +47,14 @@ export abstract class AbstractPlayer {
         SetPlayerHandicapBJ(this.wcPlayer,percentage)
     }
 
+    giveLumber(amount: number) {
+        AdjustPlayerStateBJ(amount, this.wcPlayer, PLAYER_STATE_RESOURCE_LUMBER);
+    }
+
+    giveGold(amount: number) {
+        AdjustPlayerStateBJ(amount, this.wcPlayer, PLAYER_STATE_RESOURCE_GOLD);
+    }
+
     defeatPlayer(){
         CustomDefeatBJ(this.wcPlayer, "Defeat!")
     }

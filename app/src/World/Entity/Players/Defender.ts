@@ -1,12 +1,24 @@
-import {AbstractPlayer} from "./AbstractPlayer";
-import {ALLOW_PLAYER_TOWER_LOCATIONS} from "../../GlobalSettings";
+import { AbstractPlayer } from './AbstractPlayer';
+import { ALLOW_PLAYER_TOWER_LOCATIONS, PLAYER_AREAS } from '../../GlobalSettings';
+import { Race } from '../../Game/Races/Race';
 
-export class Defender extends AbstractPlayer{
-
+export class Defender extends AbstractPlayer {
+    scoreSlot = 0;
+    kills = 0;
     allowPlayerTower: unit | undefined;
+    hasHybridRandomed: boolean = false;
+    hasHardcoreRandomed: boolean = false;
+    hasNormalPicked: boolean = false;
+    races: Race[] = [];
+
+    repickCounter: number = 0;
+    voidBuilder: unit | undefined;
+    lootBoxer: unit | undefined;
+
     constructor(id: number) {
         super(id);
         this.setUpPlayerVariables();
+
 
     }
 
@@ -25,10 +37,25 @@ export class Defender extends AbstractPlayer{
         // Creat the allow player indicator tower
         const allowTowerLoc = ALLOW_PLAYER_TOWER_LOCATIONS[this.id];
         //
-        this.allowPlayerTower = CreateUnit(this.wcPlayer,FourCC('h03S'), allowTowerLoc.x, allowTowerLoc.y, 0.000);
-
+        this.allowPlayerTower = CreateUnit(this.wcPlayer, FourCC('h03S'), allowTowerLoc.x, allowTowerLoc.y, 0.000);
 
 
     }
 
+    hasRace(randomedRace: Race) {
+        return this.races.indexOf(randomedRace) != -1;
+    }
+
+
+    getArea() {
+        return PLAYER_AREAS[this.id];
+    }
+
+    getVoidBuilder() {
+        return this.voidBuilder;
+    }
+
+    getLootBoxer() {
+        return this.lootBoxer;
+    }
 }
