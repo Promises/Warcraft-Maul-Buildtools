@@ -1,11 +1,16 @@
 import { WarcraftMaul } from '../WarcraftMaul';
 import { COLOUR_CODES, enemies, players } from '../GlobalSettings';
 import { Trigger } from '../../JassOverrides/Trigger';
+import { Defender } from '../Entity/Players/Defender';
 
 export class Commands {
 
     commandTrigger: Trigger;
     game: WarcraftMaul;
+    private voteKickInProgress: boolean = false;
+    private voteAgainstPlayer: Defender | undefined;
+    private hasVotedToKick: boolean[] = [];
+    private voteKickTimer: timer = CreateTimer();
 
     constructor(game: WarcraftMaul) {
         this.game = game;
@@ -14,6 +19,9 @@ export class Commands {
             this.commandTrigger.RegisterPlayerChatEvent(player.wcPlayer, '-', false);
         }
         this.commandTrigger.AddAction(() => this.handleCommand());
+        for (let i = 0; i < 24; i++) {
+            this.hasVotedToKick[i] = false;
+        }
     }
 
     private handleCommand() {
@@ -75,14 +83,11 @@ export class Commands {
                     '|cFFFFCC00Morning Person:|r creeps heal for 0.5% times creep level of their max health every time they reach a checkpoint (not teleports)');
                 break;
             case 'repick':
-                print('Command not implemented yet');
-                //TODO: implement command
-
-                // if(RepickConditions()){
-                //     RepickActions();
-                // } else{
-                //     DisplayTimedTextToPlayer(GetTriggerPlayer(), 0, 0, 5,  "You can only repick before wave 1!" );
-                // }
+                if (this.RepickConditions(player)) {
+                    this.RepickActions(player);
+                } else {
+                    DisplayTimedTextToPlayer(GetTriggerPlayer(), 0, 0, 5, 'You can only repick before wave 1!');
+                }
                 break;
             case 'sa':
             case 'sellall':
@@ -96,7 +101,7 @@ export class Commands {
                 print('Command not implemented yet');
                 //TODO: implement command
 
-                // VoteYes()
+                this.VoteYes(player);
                 break;
             case 'openall':
                 if (this.game.debugMode) {
@@ -129,8 +134,6 @@ export class Commands {
                 }
                 break;
             case 'lives':
-                print('Command not implemented yet');
-                //TODO: implement command
                 if (this.game.debugMode) {
                     let amount = Util.ParseInt(command[1]);
                     if (!amount) {
@@ -138,15 +141,15 @@ export class Commands {
                         return;
 
                     }
-                    // SET LIVES TO AMOUNT
+                    this.game.gameLives = amount;
+                    this.game.startLives = amount;
+                    player.sendMessage('Lives were set to |cFFFFCC00' + amount + '|r');
                 }
                 break;
             case 'closeall':
-                print('Command not implemented yet');
-                //TODO: implement command
                 if (this.game.debugMode) {
                     player.sendMessage('All spawns are now closed!');
-                    // CloseAllSpawns()
+                    this.CloseAllSpawns();
 
                 }
                 break;
@@ -165,14 +168,33 @@ export class Commands {
                     }
                 }
                 break;
+            case 'kick':
             case 'votekick':
                 print('Command not implemented yet');
-                // VoteKick();
+                if (command[1]) {
+                    let receiver = this.getPlayerIdFromColourName(command[1]);
+                    const receivingPlayer = players.get(receiver);
+                    if (receivingPlayer) {
+                        this.VoteKick(player, receivingPlayer);
+                    } else {
+                        player.sendMessage('Player not available');
+                    }
+                }
                 break;
             case 'give':
             case 'send':
                 print('Command not implemented yet');
-                // GiveGold();
+                if (command[1] && command[2]) {
+                    let receiver = this.getPlayerIdFromColourName(command[1]);
+                    const receivingPlayer = players.get(receiver);
+
+                    let amount = Util.ParsePositiveInt(command[2]);
+                    if (!amount) {
+                        player.sendMessage(Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Invalid Amount'));
+                        return;
+                    }
+                    this.giveGoldToPlayer(receivingPlayer, player, amount);
+                }
                 break;
             case 'allow':
                 print('Command not implemented yet');
@@ -222,7 +244,8 @@ export class Commands {
                         player.sendMessage(Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Invalid Amount'));
                         return;
                     }
-                    // SET WAVE
+                    player.sendMessage(`Current wave was set to ${amount}`);
+
                     this.game.gameRoundHandler.currentWave = amount;
                 }
                 break;
@@ -242,523 +265,201 @@ export class Commands {
         return Util.COLOUR_IDS[color.toUpperCase()];
     }
 
-    // private function HasCorrectUnitUserData takes nothing returns boolean
-    // if(LoadIntegerBJ(0, GetHandleIdBJ(GetEnumUnit()), udg_PlayerLeavesTable) == GetConvertedPlayerId(GetTriggerPlayer()))then
-    // return true
-    // endif
-    // return false
-    // endfunction
-    //
-    // private function EnumSpecialEffect takes nothing returns nothing
-    // local real x = GetUnitX(GetEnumUnit())
-    // local real y = GetUnitY(GetEnumUnit())
-    // call DestroyEffect(AddSpecialEffect("Abilities/Spells/Items/ResourceItems/ResourceEffectTarget.mdl", x, y))
-    // endfunction
-    //
-    // private function SellATower takes nothing returns nothing
-    // if(HasCorrectUnitUserData())then
-    // call SharedWorld_SellTower(GetEnumUnit())
-    // endif
-    // endfunction
-    //
-    // private function SellAllActions takes nothing returns nothing
-    // local group grp = GetUnitsOfPlayerAll(GetTriggerPlayer())
-    // call ForGroupBJ(grp, function SellATower)
-    // call DestroyGroup(grp)
-    // endfunction
-    //
-    // private function RepickRemoveConditions takes nothing returns boolean
-    // if(GetUnitTypeId(GetEnumUnit()) == 'h03S')then
-    // return false
-    // endif
-    //
-    // if(GetUnitTypeId(GetEnumUnit()) == 'e00C')then
-    // return false
-    // endif
-    //
-    // return true
-    // endfunction
-    //
-    // private function RemoveTriggeringPlayerUnits takes nothing returns nothing
-    // if(GetOwningPlayer(GetEnumUnit()) == GetTriggerPlayer()) then
-    // if(RepickRemoveConditions())then
-    // call RemoveUnit(GetEnumUnit())
-    // endif
-    // endif
-    // endfunction
-    //
-    // private function RepickActions takes nothing returns nothing
-    // local integer playerid = GetPlayerId(GetTriggerPlayer())
-    // local group grp = GetUnitsInRectAll(GetPlayableMapRect())
-    // if playerid == 8 then
-    // if (GetPlayerState(Player(playerid), PLAYER_STATE_RESOURCE_GOLD) > 150) then
-    // call SetPlayerStateBJ(GetTriggerPlayer(), PLAYER_STATE_RESOURCE_GOLD, 150)
-    // endif
-    // else
-    // if (GetPlayerState(Player(playerid), PLAYER_STATE_RESOURCE_GOLD) > 100) then
-    // call SetPlayerStateBJ(GetTriggerPlayer(), PLAYER_STATE_RESOURCE_GOLD, 100)
-    // endif
-    // endif
-    // call SetPlayerStateBJ(GetTriggerPlayer(), PLAYER_STATE_RESOURCE_LUMBER, 1)
-    // call ForGroupBJ(grp, function RemoveTriggeringPlayerUnits)
-    // call DestroyGroup(grp)
-    // set grp=null
-    // endfunction
-    //
-    // private function RepickConditions takes nothing returns boolean
-    // if not(udg_CreepLevel==1) then
-    // return false
-    // endif
-    //
-    // if udg_IsWaveInProgress then
-    // return false
-    // endif
-    //
-    // if udg_HasHardcoreRandomed[GetPlayerId(GetTriggerPlayer())] then
-    // return false
-    // endif
-    //
-    // if udg_HasHybridRandomed[GetPlayerId(GetTriggerPlayer())] then
-    // return false
-    // endif
-    //
-    // return true
-    // endfunction
-    //
-    // private function CloseAllSpawns takes nothing returns nothing
-    // local integer i = 0
-    // loop
-    // exitwhen i > 12
-    // set udg_IsSpawnOpen[i] = 0
-    // set i = i + 1
-    // endloop
-    // endfunction
-    //
-    // private function OpenAllSpawns takes nothing returns nothing
-    // local integer i = 0
-    // loop
-    // exitwhen i > 12
-    // set udg_IsSpawnOpen[i] = 1
-    // set i = i + 1
-    // endloop
-    // endfunction
-    //
-    // private function ChangeUnitOwnership takes nothing returns nothing
-    // if(GetOwningPlayer(GetEnumUnit()) == GetTriggerPlayer())then
-    // if(IsUnitIdType(GetUnitTypeId(GetEnumUnit()), UNIT_TYPE_TOWNHALL) == false)then
-    // if(IsUnitType(GetEnumUnit(), UNIT_TYPE_STRUCTURE) == true )then
-    // call SetUnitOwner( GetEnumUnit(), Player(udg_UnitOwnershipInt), true )
-    // endif
-    // endif
-    // endif
-    // endfunction
-    //
-    // private function ChangeUnitOwnershipAction takes nothing returns nothing
-    // local group grp = GetUnitsSelectedAll(GetTriggerPlayer())
-    // call ForGroupBJ(grp, function ChangeUnitOwnership)
-    // call DestroyGroup(grp)
-    // set grp = null
-    // endfunction
-    //
-    // private function ChangeRestrictionOfPlayer takes integer pidtrig, integer pid, boolean flag returns nothing
-    // set udg_PlayerRestrictions[13 * pidtrig + pid] = flag
-    // endfunction
-    //
-    // private function IsPickedUnitOwnedByDeniedPlayer takes nothing returns boolean
-    // return udg_PlayerRestrictions[13 * GetPlayerId(GetTriggerPlayer()) + GetPlayerId(GetOwningPlayer(GetEnumUnit()))]
-    // endfunction
-    //
-    // private function MoveEnumUnitBackToHisOwnSpawn takes nothing returns nothing
-    // local real x = GetRectCenterX(udg_PlayerRestrictionArea[GetPlayerId(GetOwningPlayer(GetEnumUnit()))])
-    // local real y = GetRectCenterY(udg_PlayerRestrictionArea[GetPlayerId(GetOwningPlayer(GetEnumUnit()))])
-    // call SetUnitPosition(GetEnumUnit(), x, y)
-    // endfunction
-    //
-    // private function ChangeOwnershipOfDeniedPlayerTower takes nothing returns nothing
-    // if IsPickedUnitOwnedByDeniedPlayer() then
-    // if IsUnitType(GetEnumUnit(), UNIT_TYPE_STRUCTURE) then
-    // if not(IsUnitType(GetEnumUnit(), UNIT_TYPE_TOWNHALL)) then
-    // call SetUnitOwner(GetEnumUnit(), GetTriggerPlayer(), true)
-    // endif
-    // else
-    // call MoveEnumUnitBackToHisOwnSpawn()
-    // endif
-    // endif
-    // endfunction
-    //
-    // private function SellDeniedPlayerTower takes nothing returns nothing
-    // if IsPickedUnitOwnedByDeniedPlayer() then
-    // if IsUnitType(GetEnumUnit(), UNIT_TYPE_STRUCTURE) then
-    // if not(IsUnitType(GetEnumUnit(), UNIT_TYPE_TOWNHALL)) then
-    // call SellATower()
-    // endif
-    // else
-    // call MoveEnumUnitBackToHisOwnSpawn()
-    // endif
-    // endif
-    // endfunction
-    //
-    // private function SellAllDeniedAccessOwnersTowers takes integer pidtrig returns nothing
-    // local group grp = GetUnitsInRectAll(udg_PlayerRestrictionArea[pidtrig])
-    // call ForGroupBJ(grp, function SellDeniedPlayerTower)
-    // call DestroyGroup(grp)
-    // set grp=null
-    // endfunction
-    //
-    // private function ChangeOwnershipOfAllDeniedAccessTowers takes integer pidtrig returns nothing
-    // local group grp=GetUnitsInRectAll(udg_PlayerRestrictionArea[pidtrig])
-    // call ForGroupBJ(grp, function ChangeOwnershipOfDeniedPlayerTower)
-    // call DestroyGroup(grp)
-    // set grp=null
-    // endfunction
-    //
-    // private function DenyAllPlayers takes nothing returns nothing
-    // local integer i = 0
-    // loop
-    // exitwhen i > 12
-    // if(i != GetPlayerId(GetTriggerPlayer()))then
-    // call ChangeRestrictionOfPlayer(GetPlayerId(GetTriggerPlayer()), i, true)
-    // endif
-    // set i = i + 1
-    // endloop
-    //
-    // call ChangeOwnershipOfAllDeniedAccessTowers(GetPlayerId(GetTriggerPlayer()))
-    // endfunction
-    //
-    // private function AllowAllPlayers takes nothing returns nothing
-    // local integer i = 0
-    // loop
-    // exitwhen i > 12
-    // if (i != GetPlayerId(GetTriggerPlayer())) then
-    // call ChangeRestrictionOfPlayer(GetPlayerId(GetTriggerPlayer()), i, false)
-    // endif
-    // set i = i + 1
-    // endloop
-    // endfunction
-    //
-    // private function AllowSpecificPlayer takes nothing returns nothing
-    // local string colorname = SubStringBJ(GetEventPlayerChatString(), 8, StringLength(GetEventPlayerChatString()))
-    // local integer playerid = GetPlayerIdFromColorName(colorname)
-    // if (playerid > -1) then
-    // if (playerid != GetPlayerId(GetTriggerPlayer())) then
-    // call ChangeRestrictionOfPlayer(GetPlayerId(GetTriggerPlayer()), playerid, false)
-    // call DisplayTimedTextToPlayer(GetTriggerPlayer(), 0, 0, 5,udg_PlayerColorCodes[playerid] + GetPlayerName(Player(playerid)) + "|r is now |cFF00FF00allowed|r to build in your spawn!")
-    // else
-    // call DisplayTimedTextToPlayer(GetTriggerPlayer(), 0, 0, 5,"You are already allowed to to build in this spawn")
-    // endif
-    // else
-    // call DisplayTimedTextToPlayer(GetTriggerPlayer(), 0, 0, 5,"Please enter a valid color!")
-    // endif
-    // endfunction
-    //
-    // private function DenySpecificPlayer takes nothing returns nothing
-    // local string colorname = SubStringBJ(GetEventPlayerChatString(), 7, StringLength(GetEventPlayerChatString()))
-    // local integer playerid = GetPlayerIdFromColorName(colorname)
-    // if (playerid > -1) then
-    // if (playerid != GetPlayerId(GetTriggerPlayer())) then
-    // call ChangeRestrictionOfPlayer(GetPlayerId(GetTriggerPlayer()), playerid, true)
-    // call DisplayTimedTextToPlayer(GetTriggerPlayer(), 0, 0, 5,udg_PlayerColorCodes[playerid] + GetPlayerName(Player(playerid)) + "|r is now |cFFFF0000denied|r access to your spawn!")
-    // call ChangeOwnershipOfAllDeniedAccessTowers(GetPlayerId(GetTriggerPlayer()))
-    // else
-    // call DisplayTimedTextToPlayer(GetTriggerPlayer(), 0, 0, 5,"You can't deny yourself access!")
-    // endif
-    // else
-    // call DisplayTimedTextToPlayer(GetTriggerPlayer(), 0, 0, 5,"Please enter a valid color!")
-    // endif
-    // endfunction
-    //
-    // private function FindNextSpaceCharacter takes string txt, integer startIndex returns integer
-    // local integer index = startIndex
-    // local integer stringLength = StringLength(txt)
-    //
-    // loop
-    // exitwhen index > stringLength
-    // if SubStringBJ(txt, index, index) == " " then
-    // return index
-    // endif
-    // set index = index + 1
-    // endloop
-    // return -1
-    // endfunction
-    //
-    // private function GiveGoldToPlayer takes string chatStr, integer spaceCharacterIndex returns nothing
-    // local string colorname = SubStringBJ(chatStr, 7, spaceCharacterIndex - 1)
-    // local integer playerid = GetPlayerIdFromColorName(colorname)
-    // local integer goldAmount
-    // local string goldAmountStr
-    //
-    // if playerid == -1 then
-    // call DisplayTimedTextToPlayer(GetTriggerPlayer(), 0, 0, 5, "Invalid player color")
-    // return
-    // endif
-    //
-    // set goldAmount = S2I(SubStringBJ(chatStr, spaceCharacterIndex + 1, StringLength(chatStr)))
-    // set goldAmountStr = I2S(goldAmount)
-    //
-    // if goldAmount > 0 then
-    // if GetPlayerSlotState(Player(playerid)) == PLAYER_SLOT_STATE_PLAYING then
-    // if GetPlayerState(GetTriggerPlayer(), PLAYER_STATE_RESOURCE_GOLD) >= goldAmount then
-    // call SetPlayerStateBJ(GetTriggerPlayer(), PLAYER_STATE_RESOURCE_GOLD, GetPlayerState(GetTriggerPlayer(), PLAYER_STATE_RESOURCE_GOLD) - goldAmount)
-    // call SetPlayerStateBJ(Player(playerid ), PLAYER_STATE_RESOURCE_GOLD, GetPlayerState(Player(playerid), PLAYER_STATE_RESOURCE_GOLD) + goldAmount)
-    // call DisplayTimedTextToPlayer(GetTriggerPlayer(), 0, 0, 5, "You've sent |cFFFFCC00" + goldAmountStr + "|r gold to " + udg_PlayerColorCodes[playerid] + GetPlayerName(Player(playerid)) + "|r")
-    // call DisplayTimedTextToPlayer(Player(playerid), 0, 0, 5, "You've received |cFFFFCC00" + goldAmountStr + "|r gold from " + udg_PlayerColorCodes[GetPlayerId(GetTriggerPlayer())] + GetPlayerName(GetTriggerPlayer()) + "|r")
-    // else
-    // call DisplayTimedTextToPlayer(GetTriggerPlayer(), 0, 0, 5, "You do not have this much gold")
-    // endif
-    // else
-    // call DisplayTimedTextToPlayer(GetTriggerPlayer(), 0, 0, 5, "This player is not in-game")
-    // endif
-    // else
-    // call DisplayTimedTextToPlayer(GetTriggerPlayer(), 0, 0, 5, "You can't give this amount")
-    // endif
-    // endfunction
-    //
-    // private function GiveGold takes nothing returns nothing
-    // local string chatStr = GetEventPlayerChatString()
-    // local integer spaceCharacterIndex = FindNextSpaceCharacter(chatStr, 7)
-    // if spaceCharacterIndex > 0 then
-    // call GiveGoldToPlayer(chatStr, spaceCharacterIndex)
-    // else
-    // call DisplayTimedTextToPlayer(GetTriggerPlayer(), 0, 0, 5, "Invalid command")
-    // endif
-    // endfunction
-    //
-    // private function CountCurrentVotes takes nothing returns integer
-    // local integer i = 0
-    // local integer totalCount = 0
-    // loop
-    // exitwhen i > 13
-    // if (udg_HasVotedToKick[i]) then
-    // set totalCount = totalCount + 1
-    // endif
-    // set i = i + 1
-    // endloop
-    //
-    // return totalCount
-    // endfunction
-    //
-    // private function VotekickExpire takes nothing returns nothing
-    // local integer i = 0
-    // local integer totalCount = 0
-    //
-    // loop
-    // exitwhen i > 13
-    // if (udg_HasVotedToKick[i]) then
-    // set totalCount = totalCount + 1
-    // endif
-    // set udg_HasVotedToKick[i] = false
-    // set i = i + 1
-    // endloop
-    //
-    // call DisplayTextToForce(GetPlayersAll(), "Votekick for " + udg_PlayerColorCodes[udg_VotekickPlayerId] + GetPlayerName(Player(udg_VotekickPlayerId)) + "|r has ended with " + I2S(totalCount) + " votes")
-    //
-    // set udg_VotekickInProgress = false
-    // endfunction
-    //
-    // private function IsPickedUnitOwnedByKickedPlayer takes nothing returns boolean
-    // if not(GetPlayerId(GetOwningPlayer(GetEnumUnit())) == udg_VotekickPlayerId) then
-    // return false
-    // endif
-    //
-    // if not(GetUnitTypeId(GetEnumUnit()) != 'h03S') then
-    // return false
-    // endif
-    //
-    // return true
-    // endfunction
-    //
-    // private function RemoveKickedPlayerTowers takes nothing returns nothing
-    // if IsPickedUnitOwnedByKickedPlayer() then
-    // call RemoveUnit(GetEnumUnit())
-    // endif
-    // endfunction
-    //
-    // private function RemoveAllKickedPlayerTowers takes nothing returns nothing
-    // local group grp = GetUnitsInRectAll(GetPlayableMapRect())
-    // call ForGroupBJ(GetUnitsInRectAll(GetPlayableMapRect()),function RemoveKickedPlayerTowers)
-    // call DestroyGroup(grp)
-    // set grp=null
-    // endfunction
-    //
-    // private function CheckVotes takes nothing returns nothing
-    // local integer currentVotes = CountCurrentVotes()
-    // local integer requiredVotes = (udg_PlayerCount / 2) + 1
-    // local integer missingVotes = requiredVotes - currentVotes
-    // if (currentVotes >= requiredVotes) then
-    // set udg_IsSpawnOpen[udg_VotekickPlayerId] = 0
-    //
-    // // Remove all towers and units
-    // call RemoveAllKickedPlayerTowers()
-    //
-    // // Update scoreboard
-    // call MultiboardSetItemValueBJ(udg_Scoreboard, 1, 7 + udg_PlayerScorePosition[udg_VotekickPlayerId], udg_PlayerColorCodes[udg_VotekickPlayerId] + "<Kicked>|r")
-    //
-    // // Set new player count
-    // set udg_PlayerCount = udg_PlayerCount - 1
-    //
-    // call DisplayTextToForce(GetPlayersAll(), "Votekick for " + udg_PlayerColorCodes[udg_VotekickPlayerId] + GetPlayerName(Player(udg_VotekickPlayerId)) + "|r has succeeded!")
-    // call CustomDefeatBJ(Player(udg_VotekickPlayerId), "Kicked!")
-    // else
-    // call DisplayTextToForce(GetPlayersAll(), "You'll need " + I2S(missingVotes) + " more votes to kick")
-    // endif
-    // endfunction
-    //
-    // private function VoteYes takes nothing returns nothing
-    // local integer votingPlayerId = GetPlayerId(GetTriggerPlayer())
-    // if udg_VotekickInProgress then
-    // if not (udg_HasVotedToKick[votingPlayerId]) then
-    // if votingPlayerId != udg_VotekickPlayerId then
-    // set udg_HasVotedToKick[votingPlayerId] = true
-    // call CheckVotes()
-    // else
-    // call DisplayTimedTextToPlayer(GetTriggerPlayer(), 0, 0, 5,"You can't votekick yourself!")
-    // endif
-    // else
-    // call DisplayTimedTextToPlayer(GetTriggerPlayer(), 0, 0, 5, "You have already voted to kick this player")
-    // endif
-    // else
-    // call DisplayTimedTextToPlayer(GetTriggerPlayer(), 0, 0, 5, "There is no votekick in progress")
-    // endif
-    // endfunction
-    //
-    // private function Votekick takes nothing returns nothing
-    // local integer votingPlayerId = GetPlayerId(GetTriggerPlayer())
-    // local string chatStr = GetEventPlayerChatString()
-    // local string colorname = SubStringBJ(GetEventPlayerChatString(), 11, StringLength(GetEventPlayerChatString()))
-    // local integer playerid = GetPlayerIdFromColorName(colorname)
-    // if playerid != -1 then
-    // if GetPlayerSlotState(Player(playerid)) == PLAYER_SLOT_STATE_PLAYING then
-    // if not (udg_VotekickInProgress) then
-    // if votingPlayerId != playerid then
-    // call DisplayTextToForce(GetPlayersAll(), udg_PlayerColorCodes[votingPlayerId] + GetPlayerName(GetTriggerPlayer()) + "|r has started a votekick for " + udg_PlayerColorCodes[playerid] + GetPlayerName(Player(playerid)) + "|r (say -y to vote)")
-    // set udg_VotekickInProgress = true
-    // set udg_VotekickPlayerId = playerid
-    // set udg_HasVotedToKick[votingPlayerId] = true
-    // call TimerStart(udg_VotekickTimer, 30.00, false, function VotekickExpire)
-    // else
-    // call DisplayTimedTextToPlayer(GetTriggerPlayer(), 0, 0, 5,"You can't votekick yourself!")
-    // endif
-    // else
-    // call DisplayTimedTextToPlayer(GetTriggerPlayer(), 0, 0, 5,"Votekick already in progress")
-    // endif
-    // else
-    // call DisplayTimedTextToPlayer(GetTriggerPlayer(), 0, 0, 5,"This player is no longer in game!")
-    // endif
-    // else
-    // call DisplayTimedTextToPlayer(GetTriggerPlayer(), 0, 0, 5,"Please enter a valid color!")
-    // endif
-    // endfunction
-    //
-    // private function ZoomPlayerCamera takes string zoomval returns nothing
-    // call SetCameraFieldForPlayer( GetTriggerPlayer(), CAMERA_FIELD_ZOFFSET, S2I(zoomval), 0 )
-    // endfunction
-    //
-    // private function CreateImageEx takes string imagePath, real size, real x, real y, real z, boolean showImage returns image
-    // local image i = CreateImage(imagePath, size, size, 0, x - (size / 2), y - (size / 2), z, 0, 0, 0, 2)
-    // call SetImageRenderAlways(i, true)
-    // call ShowImage(i, showImage)
-    // return i
-    // endfunction
-    //
-    // private function OutlineBuilding takes string imagePath, real x, real y returns nothing
-    // call CreateImageEx(imagePath, 192, x, y, 0.00, true)
-    // endfunction
-    //
-    // /*
-    // private function OutlineBuilding takes string effectModel, real x, real y returns nothing
-    //     local integer i = 0
-    //     local integer maxIndex = 96
-    //     local real halfIndex = maxIndex / 2.00
-    //     loop
-    //         exitwhen i > maxIndex
-    //         call AddSpecialEffect(effectModel, x - halfIndex + i, y + halfIndex)
-    //         call AddSpecialEffect(effectModel, x + halfIndex, y + halfIndex - i)
-    //         call AddSpecialEffect(effectModel, x + halfIndex - i, y - halfIndex)
-    //         call AddSpecialEffect(effectModel, x - halfIndex, y - halfIndex + i)
-    //         set i = i + 32
-    //     endloop
-    // endfunction
-    // */
-    //
-    // private function ShowMaze takes real x, real y, real x2, real y2 returns nothing
-    // local string effectModel = ""
-    // local real towardsX2 = x2 - x
-    // local real towardsY2 = y2 - y
-    // local real towardsX2Div9 = (towardsX2 / 9)
-    // local real towardsX2Div18 = (towardsX2 / 18)
-    // local real towardsY2Div9 = (towardsY2 / 9)
-    // local real towardsY2Div18 = (towardsY2 / 18)
-    //
-    // if (GetTriggerPlayer() == GetLocalPlayer()) then
-    // // set effectModel = "Abilities/Spells/Undead/AbsorbMana/AbsorbManaBirthMissile.mdl"
-    // // set effectModel = "ReplaceableTextures/Splats/HumanUbersplat.blp"
-    // set effectModel = "ReplaceableTextures/Splats/SuggestedPlacementSplat.blp"
-    // endif
-    //
-    // // Between Checkpoints
-    // call OutlineBuilding(effectModel, x + towardsX2Div9, y + towardsY2Div9)
-    // call OutlineBuilding(effectModel, x + 2 * towardsX2Div9, y + 2 * towardsY2Div9)
-    // call OutlineBuilding(effectModel, x + 3 * towardsX2Div9, y + 3 * towardsY2Div9)
-    // call OutlineBuilding(effectModel, x + 4 * towardsX2Div9, y + 4 * towardsY2Div9)
-    // call OutlineBuilding(effectModel, x + 5 * towardsX2Div9, y + 5 * towardsY2Div9)
-    // call OutlineBuilding(effectModel, x + 6 * towardsX2Div9, y + 6 * towardsY2Div9)
-    // call OutlineBuilding(effectModel, x + 7 * towardsX2Div9, y + 7 * towardsY2Div9)
-    //
-    // // Around first checkpoint
-    // call OutlineBuilding(effectModel, x - towardsY2Div9, y - towardsX2Div9)
-    // call OutlineBuilding(effectModel, x - towardsX2Div9, y - towardsY2Div9)
-    // call OutlineBuilding(effectModel, x + towardsY2Div9 - towardsX2Div18, y - towardsY2Div18 + towardsX2Div9)
-    // call OutlineBuilding(effectModel, x + towardsY2Div9 + towardsY2Div18 + towardsX2Div18, y + towardsY2Div18 + towardsX2Div9 + towardsX2Div18)
-    //
-    // // Around second checkpoint
-    // call OutlineBuilding(effectModel, x + 8 * towardsX2Div9, y + 8 * towardsY2Div9)
-    // call OutlineBuilding(effectModel, x + towardsY2Div9 + 9 * towardsX2Div9, y + 9 * towardsY2Div9 + towardsX2Div9)
-    // call OutlineBuilding(effectModel, x + 10 * towardsX2Div9, y + 10 * towardsY2Div9)
-    // call OutlineBuilding(effectModel, x - towardsY2Div9 + 9 * towardsX2Div9 + towardsX2Div18, y + 9 * towardsY2Div9 + towardsY2Div18 - towardsX2Div9)
-    //
-    // // Left side
-    // call OutlineBuilding(effectModel, x + towardsY2Div18 + towardsY2Div9 + towardsX2Div18, y + towardsY2Div18 + towardsX2Div18 + towardsX2Div9)
-    // call OutlineBuilding(effectModel, x + towardsY2Div18 + towardsY2Div9 + towardsX2Div18 + towardsX2Div9, y + towardsY2Div18 + towardsY2Div9 + towardsX2Div18 + towardsX2Div9)
-    // call OutlineBuilding(effectModel, x + towardsY2Div18 + towardsY2Div9 + towardsX2Div18 + 2 * towardsX2Div9, y + towardsY2Div18 + 2 * towardsY2Div9 + towardsX2Div18 + towardsX2Div9)
-    // call OutlineBuilding(effectModel, x + towardsY2Div18 + towardsY2Div9 + towardsX2Div18 + 3 * towardsX2Div9, y + towardsY2Div18 + 3 * towardsY2Div9 + towardsX2Div18 + towardsX2Div9)
-    // call OutlineBuilding(effectModel, x + towardsY2Div18 + towardsY2Div9 + towardsX2Div18 + 4 * towardsX2Div9, y + towardsY2Div18 + 4 * towardsY2Div9 + towardsX2Div18 + towardsX2Div9)
-    // call OutlineBuilding(effectModel, x + towardsY2Div18 + towardsY2Div9 + towardsX2Div18 + 5 * towardsX2Div9, y + towardsY2Div18 + 5 * towardsY2Div9 + towardsX2Div18 + towardsX2Div9)
-    // call OutlineBuilding(effectModel, x + towardsY2Div18 + towardsY2Div9 + towardsX2Div18 + 6 * towardsX2Div9, y + towardsY2Div18 + 6 * towardsY2Div9 + towardsX2Div18 + towardsX2Div9)
-    // call OutlineBuilding(effectModel, x + towardsY2Div18 + towardsY2Div9 + towardsX2Div18 + 7 * towardsX2Div9, y + towardsY2Div18 + 7 * towardsY2Div9 + towardsX2Div18 + towardsX2Div9)
-    //
-    // // Right side
-    // call OutlineBuilding(effectModel, x - towardsY2Div18 - towardsY2Div9 + towardsX2Div18 + 8 * towardsX2Div9, y + towardsY2Div18 + 8 * towardsY2Div9 - towardsX2Div18 - towardsX2Div9)
-    // call OutlineBuilding(effectModel, x - towardsY2Div18 - towardsY2Div9 + towardsX2Div18 + 7 * towardsX2Div9, y + towardsY2Div18 + 7 * towardsY2Div9 - towardsX2Div18 - towardsX2Div9)
-    // call OutlineBuilding(effectModel, x - towardsY2Div18 - towardsY2Div9 + towardsX2Div18 + 6 * towardsX2Div9, y + towardsY2Div18 + 6 * towardsY2Div9 - towardsX2Div18 - towardsX2Div9)
-    // call OutlineBuilding(effectModel, x - towardsY2Div18 - towardsY2Div9 + towardsX2Div18 + 5 * towardsX2Div9, y + towardsY2Div18 + 5 * towardsY2Div9 - towardsX2Div18 - towardsX2Div9)
-    // call OutlineBuilding(effectModel, x - towardsY2Div18 - towardsY2Div9 + towardsX2Div18 + 4 * towardsX2Div9, y + towardsY2Div18 + 4 * towardsY2Div9 - towardsX2Div18 - towardsX2Div9)
-    // call OutlineBuilding(effectModel, x - towardsY2Div18 - towardsY2Div9 + towardsX2Div18 + 3 * towardsX2Div9, y + towardsY2Div18 + 3 * towardsY2Div9 - towardsX2Div18 - towardsX2Div9)
-    // call OutlineBuilding(effectModel, x - towardsY2Div18 - towardsY2Div9 + towardsX2Div18 + 2 * towardsX2Div9, y + towardsY2Div18 + 2 * towardsY2Div9 - towardsX2Div18 - towardsX2Div9)
-    // call OutlineBuilding(effectModel, x - towardsY2Div18 - towardsY2Div9 + towardsX2Div18 + towardsX2Div9, y + towardsY2Div18 + towardsY2Div9 - towardsX2Div18 - towardsX2Div9)
-    // endfunction
-    //
-    // private function ShowMazeAll takes nothing returns nothing
-    // local integer i = 0
-    // loop
-    // exitwhen i > 13
-    // call ShowMaze(GetRectCenterX(udg_Checkpoints[2 * i]), GetRectCenterY(udg_Checkpoints[2 * i]), GetRectCenterX(udg_Checkpoints[2 * i + 1]), GetRectCenterY(udg_Checkpoints[2 * i + 1]))
-    // set i = i + 1
-    // endloop
-    // endfunction
-    //
 
+    RepickActions(player: Defender) {
+        let grp = GetUnitsInRectAll(GetPlayableMapRect());
+        let maxgold = player.id == COLOUR.GRAY ? 150 : 100;
+        if (player.getGold() > maxgold) {
+            player.setGold(maxgold);
+        }
+        player.setLumber(1);
+        ForGroupBJ(grp, () => this.RemovePlayerUnits(player));
+        DestroyGroup(grp);
+
+
+    }
+
+    RepickConditions(player: Defender) {
+        if (!(this.game.gameRoundHandler.currentWave == 1)) {
+            return false;
+        }
+        if (this.game.gameRoundHandler.isWaveInProgress) {
+            return false;
+        }
+        if (player.hasHardcoreRandomed) {
+            return false;
+        }
+        if (player.hasHybridRandomed) {
+            return false;
+        }
+        return true;
+    }
+
+    RemovePlayerUnits(player: Defender) {
+        if (GetOwningPlayer(GetEnumUnit()) == player.wcPlayer) {
+            if (this.RepickRemoveConditions(GetEnumUnit())) {
+                RemoveUnit(GetEnumUnit());
+            }
+        }
+    }
+
+    private RepickRemoveConditions(Unit: unit) {
+        if (GetUnitTypeId(Unit) == FourCC('h03S')) {
+            return false;
+        }
+
+        if (GetUnitTypeId(Unit) == FourCC('e00C')) {
+            return false;
+        }
+
+        return true;
+    }
 
     OpenAllSpawns() {
-        // this.game.worldMap.playerSpawns[COLOUR.GRAY].isOpen = tr
         for (let spawn of this.game.worldMap.playerSpawns) {
             spawn.isOpen = true;
         }
     }
 
-    private FindThingForBossToDestroy() {
-        if (GetDestructableTypeId(GetEnumDestructable()) == FourCC('B000')) {
-            print('Found iiiittt');
+
+    CloseAllSpawns() {
+        for (let spawn of this.game.worldMap.playerSpawns) {
+            spawn.isOpen = false;
+        }
+    }
+
+
+    private giveGoldToPlayer(receivingPlayer: Defender | undefined, player: Defender, amount: number) {
+        if (receivingPlayer) {
+            if (player.getGold() >= amount) {
+                player.setGold(player.getGold() - amount);
+                receivingPlayer.setGold(receivingPlayer.getGold() + amount);
+                player.sendMessage(`You've sent ${Util.ColourString('FFCC00', '' + amount)} gold to ${receivingPlayer.getNameWithColour()}`);
+                receivingPlayer.sendMessage(`You've received ${Util.ColourString('FFCC00', '' + amount)} gold from ${player.getNameWithColour()}`);
+
+            } else {
+                player.sendMessage('You do not have this much gold');
+            }
+        } else {
+            player.sendMessage(Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Invalid Receiver'));
+        }
+    }
+
+    private VoteKick(player: Defender, receivingPlayer: Defender) {
+
+        if (!this.voteKickInProgress) {
+            if (player != receivingPlayer) {
+                DisplayTextToForce(GetPlayersAll(), `${player.getNameWithColour()} has started a votekick for ${receivingPlayer.getNameWithColour()} (say -y to vote)`);
+                this.voteKickInProgress = true;
+                this.voteAgainstPlayer = receivingPlayer;
+                this.hasVotedToKick[player.id] = true;
+            } else {
+                player.sendMessage('You idiot, you cannot stomp your own ass with the front of your own foot.');
+                TimerStart(this.voteKickTimer, 30.00, false, () => this.VotekickExpire());
+            }
+        } else {
+            player.sendMessage('There is already a votekick in progress');
         }
 
+    }
+
+    private VotekickExpire() {
+        let count = this.CountCurrentVotes();
+        if (this.voteAgainstPlayer) {
+            DisplayTextToForce(GetPlayersAll(), `Votekick for ${this.voteAgainstPlayer.getNameWithColour()} has ended with ${count} votes`);
+        }
+        this.voteKickInProgress = false;
+
+
+    }
+
+    private VoteYes(player: Defender) {
+        if (this.voteKickInProgress) {
+            if (!this.hasVotedToKick[player.id]) {
+                if (!(this.voteAgainstPlayer == player)) {
+                    this.hasVotedToKick[player.id] = true;
+                    this.CheckVotes();
+                } else {
+                    player.sendMessage('You can not kick yourself');
+
+                }
+            } else {
+                player.sendMessage('You have already voted to kick this player');
+            }
+        } else {
+            player.sendMessage('There is no votekick in progress');
+        }
+    }
+
+    private CheckVotes() {
+        let currentVotes = this.CountCurrentVotes();
+        let neededVotes = (players.size / 2) + 1;
+        let missingVotes = neededVotes - currentVotes;
+
+
+        if (currentVotes >= neededVotes) {
+            if (this.voteAgainstPlayer) {
+                this.game.worldMap.playerSpawns[this.voteAgainstPlayer.id].isOpen = true;
+
+
+                this.RemoveAllKickedPlayerTowers();
+                if (this.game.scoreBoard) {
+                    MultiboardSetItemValueBJ(this.game.scoreBoard.board, 1, 7 + this.voteAgainstPlayer.scoreSlot,
+                        Util.ColourString(this.voteAgainstPlayer.getColourCode(), '<Kicked>'));
+                }
+                players.delete(this.voteAgainstPlayer.id);
+
+
+                DisplayTextToForce(GetPlayersAll(), `Votekick for ${this.voteAgainstPlayer.getNameWithColour()} has succeeded!`);
+                CustomDefeatBJ(this.voteAgainstPlayer.wcPlayer, 'Kicked!');
+
+                DestroyTimer(this.voteKickTimer);
+                this.voteKickInProgress = false
+
+            }
+        } else {
+            DisplayTextToForce(GetPlayersAll(), 'You\'ll need ' + missingVotes + ' more votes to kick');
+        }
+    }
+
+    private CountCurrentVotes(): number {
+        let count = 0;
+        for (let i = 0; i < this.hasVotedToKick.length; i++) {
+            if (this.hasVotedToKick) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    private RemoveAllKickedPlayerTowers() {
+
+        let grp = GetUnitsInRectAll(GetPlayableMapRect());
+
+        ForGroupBJ(GetUnitsInRectAll(GetPlayableMapRect()), () => this.RemoveKickedPlayerTowers());
+        DestroyGroup(grp);
+
+    }
+
+    private RemoveKickedPlayerTowers() {
+        if (this.IsPickedUnitOwnedByKickedPlayer()) {
+            RemoveUnit(GetEnumUnit());
+        }
+    }
+
+    private IsPickedUnitOwnedByKickedPlayer() {
+        if (!this.voteAgainstPlayer) {
+            return false;
+        }
+        if (!(GetPlayerId(GetOwningPlayer(GetEnumUnit())) == this.voteAgainstPlayer.id)) {
+            return false;
+        }
+
+        if (!(GetUnitTypeId(GetEnumUnit()) != FourCC('h03S'))) {
+            return false;
+
+        }
+
+        return true
     }
 }

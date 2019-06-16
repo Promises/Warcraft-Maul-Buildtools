@@ -15,6 +15,7 @@ export class Defender extends AbstractPlayer {
     voidBuilder: unit | undefined;
     lootBoxer: unit | undefined;
     hybridBuilder: unit| undefined;
+    hybridTowers: any[] = [];
 
     constructor(id: number) {
         super(id);

@@ -1,4 +1,4 @@
-import {COLOUR_CODES} from "../../GlobalSettings";
+import { COLOUR_CODES } from '../../GlobalSettings';
 
 export abstract class AbstractPlayer {
     wcPlayer: player;
@@ -10,7 +10,7 @@ export abstract class AbstractPlayer {
     }
 
 
-    makeAlliance(otherPlayer: AbstractPlayer){
+    makeAlliance(otherPlayer: AbstractPlayer) {
         SetPlayerAllianceStateBJ(this.wcPlayer, otherPlayer.wcPlayer, bj_ALLIANCE_ALLIED_VISION);
     }
 
@@ -30,8 +30,8 @@ export abstract class AbstractPlayer {
         return GetPlayerName(this.wcPlayer);
     }
 
-    sendMessage(message:string){
-        DisplayTimedTextToPlayer(this.wcPlayer, 0, 0, 5, message)
+    sendMessage(message: string) {
+        DisplayTimedTextToPlayer(this.wcPlayer, 0, 0, 5, message);
 
     }
 
@@ -44,7 +44,7 @@ export abstract class AbstractPlayer {
     }
 
     setHandicap(percentage: number) {
-        SetPlayerHandicapBJ(this.wcPlayer,percentage)
+        SetPlayerHandicapBJ(this.wcPlayer, percentage);
     }
 
     giveLumber(amount: number) {
@@ -55,8 +55,16 @@ export abstract class AbstractPlayer {
         AdjustPlayerStateBJ(amount, this.wcPlayer, PLAYER_STATE_RESOURCE_GOLD);
     }
 
-    defeatPlayer(){
-        CustomDefeatBJ(this.wcPlayer, "Defeat!")
+    getGold(): number {
+        return GetPlayerState(this.wcPlayer, PLAYER_STATE_RESOURCE_GOLD);
+    }
+
+    getLumber(): number {
+        return GetPlayerState(this.wcPlayer, PLAYER_STATE_RESOURCE_LUMBER);
+    }
+
+    defeatPlayer() {
+        CustomDefeatBJ(this.wcPlayer, 'Defeat!');
     }
 
 }

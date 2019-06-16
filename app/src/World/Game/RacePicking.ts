@@ -165,7 +165,7 @@ export class RacePicking {
 
     private RandomRace(player: Defender): Race | undefined {
         let randomNumber = Util.randomInt(0, this.game.worldMap.races.length - 1);
-        if (player.races.length - this.game.worldMap.races.length <= this.game.worldMap.disabledRaces) {
+        if (this.game.worldMap.races.length - player.races.length <= this.game.worldMap.disabledRaces) {
             player.giveLumber(1);
             return;
         }
@@ -178,25 +178,41 @@ export class RacePicking {
         if (player.hasRace(randomedRace)) {
             return this.RandomRace(player);
         }
+
         player.races.push(randomedRace);
         this.GiveBuyingPlayerBuilder(player, randomedRace);
         return randomedRace;
     }
 
-    private randomChoice(myarr: any[]): any {
-        return myarr[Math.floor(Math.random() * myarr.length)];
+    private randomChoice(myarr: any[], blacklist: any[] = []): any {
+        let choice = myarr[Math.floor(Math.random() * myarr.length)];
+        if (blacklist.indexOf(choice) >= 0) {
+            choice = this.randomChoice(myarr, blacklist);
+        }
+
+        return choice;
     }
 
     private HybridRandomRace(player: Defender) {
-        let t1 = this.randomChoice(HybridTierOne);
-        let t2 = this.randomChoice(HybridTierTwo);
-        let t3 = this.randomChoice(HybridTierThree);
-        let t4 = this.randomChoice(HybridTierFour);
-        let t5 = this.randomChoice(HybridTierFive);
-        let t6 = this.randomChoice(HybridTierSix);
-        let t7 = this.randomChoice(HybridTierSeven);
-        let t8 = this.randomChoice(HybridTierEight);
-        let t9 = this.randomChoice(HybridTierNine);
+        let t1 = this.randomChoice(HybridTierOne, player.hybridTowers);
+        let t2 = this.randomChoice(HybridTierTwo, player.hybridTowers);
+        let t3 = this.randomChoice(HybridTierThree, player.hybridTowers);
+        let t4 = this.randomChoice(HybridTierFour, player.hybridTowers);
+        let t5 = this.randomChoice(HybridTierFive, player.hybridTowers);
+        let t6 = this.randomChoice(HybridTierSix, player.hybridTowers);
+        let t7 = this.randomChoice(HybridTierSeven, player.hybridTowers);
+        let t8 = this.randomChoice(HybridTierEight, player.hybridTowers);
+        let t9 = this.randomChoice(HybridTierNine, player.hybridTowers);
+        player.hybridTowers = [];
+        player.hybridTowers.push(t1);
+        player.hybridTowers.push(t2);
+        player.hybridTowers.push(t3);
+        player.hybridTowers.push(t4);
+        player.hybridTowers.push(t5);
+        player.hybridTowers.push(t6);
+        player.hybridTowers.push(t7);
+        player.hybridTowers.push(t8);
+        player.hybridTowers.push(t9);
 
         if (!player.hasHybridRandomed) {
             player.hybridBuilder = CreateUnit(player.wcPlayer, FourCC('e00I'), player.getCenterX(), player.getCenterY(), 0);

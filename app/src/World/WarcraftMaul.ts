@@ -45,7 +45,7 @@ export class WarcraftMaul {
             this.debugMode = true;
         }
         if(this.debugMode) {
-            this.waveTimer = 15;
+            this.waveTimer = 35;
         }
 
         // Set up all players

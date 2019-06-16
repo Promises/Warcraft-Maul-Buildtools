@@ -37,7 +37,7 @@ export class DifficultyVote {
                 DialogAddButtonBJ(
                     this.difficultyDialog,
                     `${Util.ColourString(settings.DIFFICULTY_COLOURS[i],
-                        `${settings.DIFFICULTIES[i]} ${settings.DIFFICULTY_STRINGS[i]}`)}`
+                        `${settings.DIFFICULTIES[i]}% ${settings.DIFFICULTY_STRINGS[i]}`)}`
                 )
             );
         }
