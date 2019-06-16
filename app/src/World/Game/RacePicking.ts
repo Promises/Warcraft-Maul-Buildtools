@@ -3,6 +3,15 @@ import { Trigger } from '../../JassOverrides/Trigger';
 import { WarcraftMaul } from '../WarcraftMaul';
 import { Defender } from '../Entity/Players/Defender';
 import { Race } from './Races/Race';
+import {
+    HybridTierEight,
+    HybridTierFive,
+    HybridTierFour, HybridTierNine,
+    HybridTierOne,
+    HybridTierSeven, HybridTierSix,
+    HybridTierThree,
+    HybridTierTwo
+} from '../../Generated/hybridRandomGEN';
 
 export class RacePicking {
     raceSelectTrigger: Trigger;
@@ -56,7 +65,6 @@ export class RacePicking {
     }
 
 
-
     private RaceSelectionActions() {
         let player = settings.players.get(GetPlayerId(GetOwningPlayer(GetBuyingUnit())));
         if (!player) {
@@ -70,14 +78,14 @@ export class RacePicking {
                 player.giveLumber(1);
                 player.sendMessage('You can only use Hybrid Random!');
             } else {
-                if(!player.hasHardcoreRandomed) {
-                    if(player.repickCounter == 0){
+                if (!player.hasHardcoreRandomed) {
+                    if (player.repickCounter == 0) {
                         player.hasHardcoreRandomed = true;
                         this.HardCoreRandomRace(player);
                         player.giveGold(50);
                     } else {
                         player.giveLumber(1);
-                        player.sendMessage("You can't hardcore random after using normal random!");
+                        player.sendMessage('You can\'t hardcore random after using normal random!');
                     }
                 } else {
                     player.giveLumber(1);
@@ -88,24 +96,24 @@ export class RacePicking {
                 player.giveLumber(1);
                 player.sendMessage('You can only use Hybrid Random!');
             } else {
-                if(player.repickCounter < 3){
+                if (player.repickCounter < 3) {
                     player.repickCounter++;
                 }
                 player.giveGold(40 - 10 * player.repickCounter);
                 this.NormalRandomRace(player);
             }
         } else if (soldItem == FourCC('I00X')) { // Hybrid Random
-            if(player.repickCounter == 0 && !player.hasHardcoreRandomed && !player.hasNormalPicked){
+            if (player.repickCounter == 0 && !player.hasHardcoreRandomed && !player.hasNormalPicked) {
                 this.HybridRandomRace(player);
                 player.giveGold(50);
             } else {
                 player.giveLumber(1);
-                player.sendMessage("You can't hybrid random after using normal / hardcore random / selection!");
+                player.sendMessage('You can\'t hybrid random after using normal / hardcore random / selection!');
             }
         } else {
-            if(player.hasHybridRandomed){
+            if (player.hasHybridRandomed) {
                 player.giveLumber(1);
-                player.sendMessage("You can only use Hybrid Random!");
+                player.sendMessage('You can only use Hybrid Random!');
             } else {
                 player.hasNormalPicked = true;
                 this.GetSelectedRace(player, soldItem);
@@ -116,58 +124,58 @@ export class RacePicking {
 
     private HardCoreRandomRace(player: Defender) {
         let randomedRace = this.RandomRace(player);
-        if(randomedRace){
-            DisplayTextToForce( GetPlayersAll(), player.getNameWithColour()+" has |cFF375FF1ra|r|cFF364CF0nd|r|cFF3535EFom|r|cFF4A34EFed|r " + randomedRace.name);
+        if (randomedRace) {
+            DisplayTextToForce(GetPlayersAll(), player.getNameWithColour() + ' has |cFF375FF1ra|r|cFF364CF0nd|r|cFF3535EFom|r|cFF4A34EFed|r ' + randomedRace.name);
         }
-
 
 
     }
 
     private GiveBuyingPlayerBuilder(player: Defender, randomedRace: Race) {
-        randomedRace.pickAction(player)
+        randomedRace.pickAction(player);
     }
 
     private GetSelectedRace(player: Defender, soldItem: number) {
         let race = this.getRaceFromItem(soldItem);
-        if(race){
+        if (race) {
             player.races.push(race);
             race.pickAction(player);
-            DisplayTextToForce( GetPlayersAll(), player.getNameWithColour()+" has chosen " + race.name);
+            DisplayTextToForce(GetPlayersAll(), player.getNameWithColour() + ' has chosen ' + race.name);
         }
 
     }
 
 
-    private getRaceFromItem(soldItem: number){
+    private getRaceFromItem(soldItem: number) {
         for (let race of this.game.worldMap.races) {
-            if(FourCC(race.itemid) == soldItem){
+            if (FourCC(race.itemid) == soldItem) {
                 return race;
             }
         }
         return null;
     }
-    private NormalRandomRace(player:Defender){
+
+    private NormalRandomRace(player: Defender) {
         let randomedRace = this.RandomRace(player);
-        if(randomedRace){
-            DisplayTextToForce( GetPlayersAll(), player.getNameWithColour()+" has |cFF375FF1ra|r|cFF364CF0nd|r|cFF3535EFom|r|cFF4A34EFed|r " + randomedRace.name);
+        if (randomedRace) {
+            DisplayTextToForce(GetPlayersAll(), player.getNameWithColour() + ' has |cFF375FF1ra|r|cFF364CF0nd|r|cFF3535EFom|r|cFF4A34EFed|r ' + randomedRace.name);
         }
 
     }
 
     private RandomRace(player: Defender): Race | undefined {
-        let randomNumber = Util.randomInt(0, this.game.worldMap.races.length -1);
-        if(player.races.length - this.game.worldMap.races.length  <= this.game.worldMap.disabledRaces){
+        let randomNumber = Util.randomInt(0, this.game.worldMap.races.length - 1);
+        if (player.races.length - this.game.worldMap.races.length <= this.game.worldMap.disabledRaces) {
             player.giveLumber(1);
             return;
         }
         let randomedRace = this.game.worldMap.races[randomNumber];
 
-        if(!randomedRace.enabled){
+        if (!randomedRace.enabled) {
             return this.RandomRace(player);
         }
 
-        if (player.hasRace(randomedRace)){
+        if (player.hasRace(randomedRace)) {
             return this.RandomRace(player);
         }
         player.races.push(randomedRace);
@@ -175,7 +183,93 @@ export class RacePicking {
         return randomedRace;
     }
 
+    private randomChoice(myarr: any[]): any {
+        return myarr[Math.floor(Math.random() * myarr.length)];
+    }
+
     private HybridRandomRace(player: Defender) {
+        let t1 = this.randomChoice(HybridTierOne);
+        let t2 = this.randomChoice(HybridTierTwo);
+        let t3 = this.randomChoice(HybridTierThree);
+        let t4 = this.randomChoice(HybridTierFour);
+        let t5 = this.randomChoice(HybridTierFive);
+        let t6 = this.randomChoice(HybridTierSix);
+        let t7 = this.randomChoice(HybridTierSeven);
+        let t8 = this.randomChoice(HybridTierEight);
+        let t9 = this.randomChoice(HybridTierNine);
+
+        if (!player.hasHybridRandomed) {
+            player.hybridBuilder = CreateUnit(player.wcPlayer, FourCC('e00I'), player.getCenterX(), player.getCenterY(), 0);
+        }
+
+        player.hasHybridRandomed = true;
+
+        for (let tower of HybridTierOne) {
+            if (tower != t1) {
+                SetPlayerUnitAvailableBJ(FourCC(tower), false, player.wcPlayer);
+            } else {
+                SetPlayerUnitAvailableBJ(FourCC(tower), true, player.wcPlayer);
+            }
+        }
+        for (let tower of HybridTierTwo) {
+            if (tower != t2) {
+                SetPlayerUnitAvailableBJ(FourCC(tower), false, player.wcPlayer);
+            } else {
+                SetPlayerUnitAvailableBJ(FourCC(tower), true, player.wcPlayer);
+            }
+        }
+        for (let tower of HybridTierThree) {
+            if (tower != t3) {
+                SetPlayerUnitAvailableBJ(FourCC(tower), false, player.wcPlayer);
+            } else {
+                SetPlayerUnitAvailableBJ(FourCC(tower), true, player.wcPlayer);
+            }
+        }
+        for (let tower of HybridTierFour) {
+            if (tower != t4) {
+                SetPlayerUnitAvailableBJ(FourCC(tower), false, player.wcPlayer);
+            } else {
+                SetPlayerUnitAvailableBJ(FourCC(tower), true, player.wcPlayer);
+            }
+        }
+        for (let tower of HybridTierFive) {
+            if (tower != t5) {
+                SetPlayerUnitAvailableBJ(FourCC(tower), false, player.wcPlayer);
+            } else {
+                SetPlayerUnitAvailableBJ(FourCC(tower), true, player.wcPlayer);
+            }
+        }
+        for (let tower of HybridTierSix) {
+            if (tower != t6) {
+                SetPlayerUnitAvailableBJ(FourCC(tower), false, player.wcPlayer);
+            } else {
+                SetPlayerUnitAvailableBJ(FourCC(tower), true, player.wcPlayer);
+            }
+        }
+        for (let tower of HybridTierSeven) {
+            if (tower != t7) {
+                SetPlayerUnitAvailableBJ(FourCC(tower), false, player.wcPlayer);
+            } else {
+                SetPlayerUnitAvailableBJ(FourCC(tower), true, player.wcPlayer);
+            }
+        }
+        for (let tower of HybridTierEight) {
+            if (tower != t8) {
+                SetPlayerUnitAvailableBJ(FourCC(tower), false, player.wcPlayer);
+            } else {
+                SetPlayerUnitAvailableBJ(FourCC(tower), true, player.wcPlayer);
+            }
+        }
+        for (let tower of HybridTierNine) {
+            if (tower != t9) {
+                SetPlayerUnitAvailableBJ(FourCC(tower), false, player.wcPlayer);
+            } else {
+                SetPlayerUnitAvailableBJ(FourCC(tower), true, player.wcPlayer);
+            }
+        }
+
+        DisplayTextToForce(GetPlayersAll(), player.getNameWithColour() + ' has |cFFB0F442hy|r|cFF8CF442b|r|cFF42F4C5r|r|cFF42F4F1id|r randomed!');
+
 
     }
 }

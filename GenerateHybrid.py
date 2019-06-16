@@ -18,8 +18,17 @@ class Quest:
         return str(self)
 
     def asquest(self):
-        return f'	call CreateQuestBJ(%s, "Reimagined %s", "%s", "%s")' % (
-                self.stype, self.title, self.body, self.icon)
+        q = list()
+        q.append('{')
+
+        q.append(f'   title: "%s",' % self.title)
+        q.append(f'   icon: "%s",' % self.icon)
+        q.append(f'   stype: %s,' % self.stype)
+        q.append(f'   body: "%s",' % self.body)
+
+        q.append('},')
+        q.reverse()
+        return q
 
 
 def create_all_imports():
@@ -131,7 +140,7 @@ def get_all_quests():
 
     template = list()
 
-    with open('scripts/Templates_GEN/quests_template.j') as f:
+    with open('templates/questsGEN.ts.template') as f:
         template = f.read().splitlines()
 
     stripped_list = list(map(str.strip, template))
@@ -142,14 +151,15 @@ def get_all_quests():
     generated_quest_list = list()
 
     for quest in quest_list:
-        generated_quest_list.append(spacer + quest.asquest())
+        for line in quest.asquest():
+            generated_quest_list.append(spacer + line)
 
     generated_quest_list.reverse()
     generated_library = template[0:pivot - 1]
     generated_library += generated_quest_list
     generated_library += template[pivot + 1:]
 
-    with open('scripts/Quests.j', 'w') as f:
+    with open('app/src/Generated/questsGEN.ts', 'w') as f:
         for item in generated_library:
             f.write("%s\n" % item)
 
@@ -188,7 +198,7 @@ def split_quest(quest_body):
 
 
 
-def get_buildnum_with_date(spacer):
+def get_buildnum_with_date():
     buildnum = "NaN"
 
     x = datetime.datetime.now()
@@ -197,19 +207,16 @@ def get_buildnum_with_date(spacer):
         buildnum = sys.argv[1]
 
     generated_list = list()
-    generated_list.append(
-        spacer + 'call Utility_DisplayMessageToAllPlayers("Welcome to'
-                 ' Warcraft Maul Reimagined")')
+    generated_list.append(f'export const BUILD_DATE: string = "%s";' % (x.strftime("%b %d %Y")))
 
-    generated_list.append(spacer +
-                          f'call Utility_DisplayMessageToAllPlayers("'
-                          f'This is build: %s, built %s.")' % (
-                              buildnum, x.strftime("%b %d %Y")))
+    generated_list.append(f'export const BUILD_NUMBER: string = "%s";' % buildnum)
 
 
 
 
-    return generated_list
+    with open('app/src/Generated/Version.ts', 'w') as f:
+        for item in generated_list:
+            f.write("%s\n" % item)
 
 
 def main():
@@ -226,8 +233,8 @@ def main():
 
     tier_towers = list()
     template = list()
-
-    with open('scripts/Templates_GEN/hybrid_template.j') as f:
+    get_buildnum_with_date()
+    with open('templates/hybridRandom.ts.template') as f:
         template = f.read().splitlines()
 
     stripped_list = list(map(str.strip, template))
@@ -269,32 +276,29 @@ def main():
         # set udg_TierOneTowers[0] = 'h00Z' // Dragonkin
         tier_string = numbers[tier]
         generated_hybrid_list.append(
-            spacer + "//========== TIER: " + tier_string)
+            spacer + "export const HybridTier" + tier_string + " = [")
 
         for tower in tier_towers[tier]:
             number_in_tier = tier_towers[tier].index(tower)
             unit_id = tower["UnitFunc"]["UnitId"]
             unit_name = tower["UnitFunc"]["Name"]
-            sttest = f"set udg_Tier%sTowers[%d] = '%s' // %s" % (
-                tier_string, number_in_tier, unit_id, unit_name)
+            sttest = f"    '%s', //%s" % (unit_id, unit_name)
             generated_hybrid_list.append(spacer + sttest)
 
-        generated_hybrid_list.append(spacer + f"set udg_Tier%sSize = %d" % (
-            tier_string, len(tier_towers[tier]) - 1))
+        generated_hybrid_list.append(spacer + "];")
 
     generated_library = template[0:pivot - 1]
-    generated_library += get_buildnum_with_date(spacer)
     generated_library += generated_hybrid_list
     generated_library += template[pivot + 1:]
 
-    with open('scripts/Races/HybridRandom.j', 'w') as f:
+    with open('app/src/Generated/hybridRandomGEN.ts', 'w') as f:
         for item in generated_library:
             f.write("%s\n" % item)
 
     # print(data[0]["Builds"])
     get_all_quests()
 
-    create_all_imports()
+    # create_all_imports()
 
 
 if __name__ == "__main__":

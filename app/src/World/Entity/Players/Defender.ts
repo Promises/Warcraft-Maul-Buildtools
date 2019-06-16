@@ -14,6 +14,7 @@ export class Defender extends AbstractPlayer {
     repickCounter: number = 0;
     voidBuilder: unit | undefined;
     lootBoxer: unit | undefined;
+    hybridBuilder: unit| undefined;
 
     constructor(id: number) {
         super(id);

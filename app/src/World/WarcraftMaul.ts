@@ -8,8 +8,9 @@ import { GameRound } from './Game/GameRound';
 import { DifficultyVote } from './Game/DifficultyVote';
 import { RacePicking } from './Game/RacePicking';
 import { MultiBoard } from './Game/MultiBoard';
-import { COLOUR_CODES } from './GlobalSettings';
+import { COLOUR_CODES, players } from './GlobalSettings';
 import { Quests } from '../Generated/questsGEN';
+import { BUILD_DATE, BUILD_NUMBER } from '../Generated/Version';
 
 export class WarcraftMaul {
 
@@ -89,12 +90,13 @@ export class WarcraftMaul {
             CreateUnit(Player(COLOUR.RED), FourCC('e00B'), 0.00, 0.00, bj_UNIT_FACING);
             CreateUnit(Player(COLOUR.RED), FourCC('hC07'), 0.00, 0.00, bj_UNIT_FACING);
         }
-        //
-        // for (let quest of Quests){
-        //     print(quest.title)
-        // }
 
-
+        for (let quest of Quests){
+            print(quest.title);
+            CreateQuestBJ(quest.stype, quest.title, quest.body, quest.icon);
+        }
+        this.MessageAllPlayers("Welcome to Warcraft Maul Reimagined");
+        this.MessageAllPlayers(`This is build: ${BUILD_NUMBER}, built ${BUILD_DATE}.`);
 
 
     }
@@ -150,6 +152,13 @@ export class WarcraftMaul {
             secsStr = "0" + secsStr;
 
         return "|cFF999999" + hrsStr + ":" + minsStr + ":" + secsStr + "|r";
+    }
+
+
+    MessageAllPlayers(str:string){
+        for (let player of settings.players.values()){
+            player.sendMessage(str);
+        }
     }
 
 

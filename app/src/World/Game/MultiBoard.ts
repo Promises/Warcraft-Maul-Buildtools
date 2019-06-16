@@ -1,6 +1,6 @@
 import { WarcraftMaul } from '../WarcraftMaul';
 import * as settings from '../GlobalSettings';
-import { ARMOUR_TYPE_NAMES } from '../GlobalSettings';
+import { ARMOUR_TYPE_NAMES, players } from '../GlobalSettings';
 
 export class MultiBoard {
     board: multiboard;
@@ -56,6 +56,11 @@ export class MultiBoard {
         MultiboardSetItemStyleBJ(this.board, 2, 6, true, false);
         MultiboardSetItemStyleBJ(this.board, 1, 7, true, false);
         MultiboardSetItemStyleBJ(this.board, 2, 7, true, false);
+        for (let i = 0; i < players.size; i++) {
+            MultiboardSetItemStyleBJ(this.board, 1, 8 + i, true, false);
+            MultiboardSetItemStyleBJ(this.board, 2, 8 + i, true, false);
+
+        }
 
         this.InitializePlayerScores();
 

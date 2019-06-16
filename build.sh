@@ -12,7 +12,7 @@ bt_arguments="-windowmode windowed"
 
 
 sh ./clean.sh
-
+sh ./wcm_generate.sh
 
 
 
@@ -83,7 +83,7 @@ if [ $status -ne 0 ]; then
 fi
 
 echo "Importing processed map script ..."
-WINEDEBUG=-all wine "$toolsDir\\MPQEditor.exe" add "$currentWINEdir\\$output\\$map" "$currentWINEdir\\$output\\map\\war3map.lua" "war3map.lua"
+WINEDEBUG=-all wine "$toolsDir\\MPQEditor.exe" add "$currentWINEdir\\$output\\$map" "$currentWINEdir\\$output\\map\\*" "/c" "/auto" "/r"
 ## get status ##
 status=$?
 ## take some decision ## 
