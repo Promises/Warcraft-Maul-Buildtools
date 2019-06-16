@@ -98,9 +98,6 @@ export class Commands {
                 break;
             case 'y':
             case 'yes':
-                print('Command not implemented yet');
-                //TODO: implement command
-
                 this.VoteYes(player);
                 break;
             case 'openall':
