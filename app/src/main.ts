@@ -1,13 +1,16 @@
 import { WarcraftMaul } from './World/WarcraftMaul';
 import './lib/translators';
 import { Trigger } from './JassOverrides/Trigger';
+import { Log, LogLevel } from './lib/Serilog/Serilog';
+import { StringSink } from './lib/Serilog/Sinks/StringSink';
 
-BJDebugMsg('initialising');
-
+Log.Init([
+]);
 function Main(this: void) {
     let maul = new WarcraftMaul();
-    if(maul.debugMode){
-        print('Initialisation finished');
+    if(maul.debugMode)
+    {
+        Log.Information('Initialisation finished');
     }
 
 
@@ -16,11 +19,12 @@ function Main(this: void) {
 
 xpcall(() => {
     // print('initialising');
+
     let init = new Trigger();
     init.RegisterTimerEvent(0.00, false);
     init.AddAction(() => Main());
 }, (err) => {
-    BJDebugMsg('Err: ' + err);
+    Log.Error(err);
 });
 
 

@@ -34,7 +34,6 @@ export class Defender extends AbstractPlayer {
         SetPlayerStateBJ(this.wcPlayer, PLAYER_STATE_RESOURCE_GOLD, this.id == COLOUR.GRAY ? 150 : 100);
         SetPlayerStateBJ(this.wcPlayer, PLAYER_STATE_RESOURCE_LUMBER, 1);
 
-        this.sendMessage(`Hello ${this.getNameWithColour()}, you are playing as ${this.getPlayerColour()}`);
 
         // Creat the allow player indicator tower
         const allowTowerLoc = ALLOW_PLAYER_TOWER_LOCATIONS[this.id];

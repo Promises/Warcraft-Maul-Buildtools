@@ -1,4 +1,5 @@
 import { CheckPoint } from './CheckPoint';
+import { Log } from '../../lib/Serilog/Serilog';
 
 export class Creep {
     creep: unit;
@@ -14,8 +15,6 @@ export class Creep {
 
 
     printId() {
-
-
-        print(GetUnitName(this.creep));
+        Log.Debug(GetUnitName(this.creep));
     }
 }

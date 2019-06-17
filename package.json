@@ -14,8 +14,8 @@
   "dependencies": {
     "codelyzer": "^5.1.0",
     "convertjasstots": "^1.0.5",
-    "lua-types": "^2.4.0",
+    "lua-types": "^2.5.0",
     "typescript": "^3.5.1",
-    "typescript-to-lua": "^0.21.1"
+    "typescript-to-lua": "^0.22.1"
   }
 }

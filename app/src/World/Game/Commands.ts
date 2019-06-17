@@ -2,6 +2,7 @@ import { WarcraftMaul } from '../WarcraftMaul';
 import { COLOUR_CODES, enemies, players } from '../GlobalSettings';
 import { Trigger } from '../../JassOverrides/Trigger';
 import { Defender } from '../Entity/Players/Defender';
+import { Log } from '../../lib/Serilog/Serilog';
 
 export class Commands {
 
@@ -31,7 +32,7 @@ export class Commands {
         }
         const playerCommand = GetEventPlayerChatString().substr(1).toLowerCase();
         const command = playerCommand.split(' ');
-        print(Util.ArraysToString(command));
+        Log.Debug(Util.ArraysToString(command));
         switch (command[0]) {
             case 'air':
                 player.sendMessage('|cFF999999Air:|r 5 / 15 / 20 / 25 / 30');
@@ -91,7 +92,7 @@ export class Commands {
                 break;
             case 'sa':
             case 'sellall':
-                print('Command not implemented yet');
+                Log.Error('Command not implemented yet');
                 //TODO: implement command
 
                 // SellAllActions()
@@ -167,7 +168,7 @@ export class Commands {
                 break;
             case 'kick':
             case 'votekick':
-                print('Command not implemented yet');
+                Log.Error('Command not implemented yet');
                 if (command[1]) {
                     let receiver = this.getPlayerIdFromColourName(command[1]);
                     const receivingPlayer = players.get(receiver);
@@ -180,7 +181,7 @@ export class Commands {
                 break;
             case 'give':
             case 'send':
-                print('Command not implemented yet');
+                Log.Error('Command not implemented yet');
                 if (command[1] && command[2]) {
                     let receiver = this.getPlayerIdFromColourName(command[1]);
                     const receivingPlayer = players.get(receiver);
@@ -194,25 +195,25 @@ export class Commands {
                 }
                 break;
             case 'allow':
-                print('Command not implemented yet');
+                Log.Error('Command not implemented yet');
                 // AllowSpecificPlayer();
                 break;
             case 'deny':
-                print('Command not implemented yet');
+                Log.Error('Command not implemented yet');
                 // DenySpecificPlayer();
                 break;
             case 'allowall':
-                print('Command not implemented yet');
+                Log.Error('Command not implemented yet');
                 // AllowAllPlayers();
                 player.sendMessage('ALL players are now |cFF00FF00allowed|r to build in your spawn!');
                 break;
             case 'denyall':
-                print('Command not implemented yet');
+                Log.Error('Command not implemented yet');
                 // DenyAllPlayers();
                 player.sendMessage('ALL players are now |cFFFF0000denied|r access to your spawn!');
                 break;
             case 'claim':
-                print('Command not implemented yet');
+                Log.Error('Command not implemented yet');
                 // AllowAllPlayers();
                 // DenyAllPlayers();
                 player.sendMessage('All towers in your spawn has now been claimed.');
@@ -247,7 +248,7 @@ export class Commands {
                 }
                 break;
             case 'maze':
-                print('Command not implemented yet');
+                Log.Error('Command not implemented yet');
                 //TODO: implement command
 
                 // ShowMazeAll()
@@ -346,7 +347,7 @@ export class Commands {
 
         if (!this.voteKickInProgress) {
             if (player != receivingPlayer) {
-                DisplayTextToForce(GetPlayersAll(), `${player.getNameWithColour()} has started a votekick for ${receivingPlayer.getNameWithColour()} (say -y to vote)`);
+                print(`${player.getNameWithColour()} has started a votekick for ${receivingPlayer.getNameWithColour()} (say -y to vote)`);
                 this.voteKickInProgress = true;
                 this.voteAgainstPlayer = receivingPlayer;
                 this.hasVotedToKick[player.id] = true;
@@ -363,7 +364,7 @@ export class Commands {
     private VotekickExpire() {
         let count = this.CountCurrentVotes();
         if (this.voteAgainstPlayer) {
-            DisplayTextToForce(GetPlayersAll(), `Votekick for ${this.voteAgainstPlayer.getNameWithColour()} has ended with ${count} votes`);
+            print(`Votekick for ${this.voteAgainstPlayer.getNameWithColour()} has ended with ${count} votes`);
         }
         this.voteKickInProgress = false;
 
@@ -407,7 +408,7 @@ export class Commands {
                 players.delete(this.voteAgainstPlayer.id);
 
 
-                DisplayTextToForce(GetPlayersAll(), `Votekick for ${this.voteAgainstPlayer.getNameWithColour()} has succeeded!`);
+                print(`Votekick for ${this.voteAgainstPlayer.getNameWithColour()} has succeeded!`);
                 CustomDefeatBJ(this.voteAgainstPlayer.wcPlayer, 'Kicked!');
 
                 DestroyTimer(this.voteKickTimer);
@@ -415,7 +416,7 @@ export class Commands {
 
             }
         } else {
-            DisplayTextToForce(GetPlayersAll(), 'You\'ll need ' + missingVotes + ' more votes to kick');
+            print('You\'ll need ' + missingVotes + ' more votes to kick');
         }
     }
 

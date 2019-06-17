@@ -5,6 +5,7 @@ import { Creep } from '../Entity/Creep';
 import { CheckPoint } from '../Entity/CheckPoint';
 import { COLOUR_CODES, enemies } from '../GlobalSettings';
 import { Trigger } from '../../JassOverrides/Trigger';
+import { Log } from '../../lib/Serilog/Serilog';
 
 export class GameRound {
     gameTimeTrigger: Trigger;
@@ -24,8 +25,8 @@ export class GameRound {
     constructor(game: WarcraftMaul) {
         this.game = game;
         this.gameTimeTrigger = new Trigger();
-        this.gameTimeTrigger.RegisterTimerEventPeriodic( 1.00);
-        this.gameTimeTrigger.AddAction( () => this.UpdateGameTime());
+        this.gameTimeTrigger.RegisterTimerEventPeriodic(1.00);
+        this.gameTimeTrigger.AddAction(() => this.UpdateGameTime());
 
         this.testStucture = this.FindThingForBossToDestroy() ||
             CreateDestructable(FourCC('B000'), 3520.0, -5312.0, 0.000, 0.900, 0);
@@ -34,7 +35,7 @@ export class GameRound {
         this.roundEndTrigger = new Trigger();
 
         for (let enemy of enemies) {
-            this.roundEndTrigger.RegisterPlayerStateEvent( enemy.wcPlayer, PLAYER_STATE_RESOURCE_FOOD_USED, EQUAL, 0.00);
+            this.roundEndTrigger.RegisterPlayerStateEvent(enemy.wcPlayer, PLAYER_STATE_RESOURCE_FOOD_USED, EQUAL, 0.00);
         }
 
         this.roundEndTrigger.AddCondition(() => this.CreepFoodConditions());
@@ -96,7 +97,6 @@ export class GameRound {
     }
 
 
-
     RoundEnd() {
 
 
@@ -122,14 +122,11 @@ export class GameRound {
             // Display lives lost
 
             if (this.game.gameLives == this.game.startLives) {
-                DisplayTimedTextToForce(
-                    GetPlayersAll(),
-                    5,
+                print(
                     '|cFFF44242Co|r|cFFF47442ng|r|cFFF4A742ra|r|cFFEBF442tu|r|cFFC5F442la|r|cFF8FF442ti|r|cFF62F442on|r|cFF42F477s n|r|cFF42F4E5o l|r|cFF42A7F4iv|r|cFF425FF4es|r|cFF7A42F4 lo|r|cFFC542F4st!|r'
                 );
             } else {
-                DisplayTextToForce(
-                    GetPlayersAll(),
+                print(
                     `${this.game.gameLives} ${Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Chances have been lost')}`
                 );
             }
@@ -189,20 +186,19 @@ export class GameRound {
     CreepFoodConditions(): boolean {
         for (let enemy of settings.enemies) {
             if (!(GetPlayerState(enemy.wcPlayer, PLAYER_STATE_RESOURCE_FOOD_USED) == 0)) {
-                print(`${enemy.id} still has food`);
+                Log.Debug(`${enemy.id} still has food`);
                 return false;
             }
         }
-        print(`nobody has food`);
+        Log.Debug(`nobody has food`);
 
         return true;
     }
 
     private SpawnCreeps() {
         let wave = this.game.worldMap.waveCreeps[this.currentWave - 1];
-        for (let player of settings.players.values()) {
-            player.sendMessage(`Level ${this.currentWave} - ${wave.name}`);
-        }
+        print(`Level ${this.currentWave} - ${wave.name}`);
+
         let spawnAmount: number = 10;
         switch (wave.getCreepType()) {
             case CREEP_TYPE.CHAMPION:
@@ -282,7 +278,7 @@ export class GameRound {
             case COLOUR.DARK_GREEN:
                 return 90;
             default:
-                print(`getSpawnFace, could not find player: ${id}`);
+                Log.Error(`getSpawnFace, could not find player: ${id}`);
                 return 0;
 
         }
@@ -333,7 +329,7 @@ export class GameRound {
 
 
     BonusRoundsOver() {
-        DisplayTextToForce(GetPlayersAll(), '|cFFF48C42That\'s all the bonus levels, see you next time!|r');
+        print('|cFFF48C42That\'s all the bonus levels, see you next time!|r');
         this.isWaveInProgress = false;
         this.game.gameEndTimer = settings.GAME_END_TIME;
         this.game.gameEnded = true;

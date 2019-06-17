@@ -1,4 +1,5 @@
 import { COLOUR_CODES } from '../World/GlobalSettings';
+import { Log } from '../lib/Serilog/Serilog';
 
 export class Trigger {
     nativeTrigger: trigger;
@@ -66,6 +67,6 @@ export class Trigger {
 
 
     private printError(err: any) {
-        print(`${Util.ColourString(COLOUR_CODES[COLOUR.RED], 'ERROR: ')}${err}`);
+        Log.Error(err);
     }
 }

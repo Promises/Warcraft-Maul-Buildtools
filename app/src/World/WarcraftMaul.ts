@@ -1,8 +1,8 @@
-import {Defender} from "./Entity/Players/Defender";
+import { Defender } from './Entity/Players/Defender';
 import * as settings from './GlobalSettings';
-import {Attacker} from "./Entity/Players/Attacker";
-import {WorldMap} from "./WorldMap"
-import {SpawnedCreeps} from "./Entity/SpawnedCreeps";
+import { Attacker } from './Entity/Players/Attacker';
+import { WorldMap } from './WorldMap';
+import { SpawnedCreeps } from './Entity/SpawnedCreeps';
 import { Commands } from './Game/Commands';
 import { GameRound } from './Game/GameRound';
 import { DifficultyVote } from './Game/DifficultyVote';
@@ -11,6 +11,8 @@ import { MultiBoard } from './Game/MultiBoard';
 import { COLOUR_CODES, players } from './GlobalSettings';
 import { Quests } from '../Generated/questsGEN';
 import { BUILD_DATE, BUILD_NUMBER } from '../Generated/Version';
+import { Log, LogLevel } from '../lib/Serilog/Serilog';
+import { StringSink } from '../lib/Serilog/Sinks/StringSink';
 
 export class WarcraftMaul {
 
@@ -34,19 +36,24 @@ export class WarcraftMaul {
     scoreBoard: MultiBoard | undefined;
 
 
-
     constructor() {
         let players = settings.players;
         let enemies = settings.enemies;
 
 
         // Should we enable debug mode?
-        if (GetPlayerName(Player(0)) === "WorldEdit") {
-            this.debugMode = true;
+        if (GetPlayerName(Player(0)) === 'WorldEdit') {
+            this.debugMode = false;
+
         }
-        if(this.debugMode) {
-            this.waveTimer = 35;
+        if (this.debugMode) {
+            this.waveTimer = 15;
+            Log.Init([
+                new StringSink(LogLevel.Debug, BJDebugMsg),
+            ]);
+            Log.Debug("Debug mode enabled");
         }
+
 
         // Set up all players
         for (let i = 0; i < 24; i++) {
@@ -66,7 +73,7 @@ export class WarcraftMaul {
 
         // Set Enemies should be allied with eachother
 
-        for(let enemy of enemies){
+        for (let enemy of enemies) {
             for (let enemyAlly of enemies) {
                 enemy.makeAlliance(enemyAlly);
             }
@@ -86,34 +93,32 @@ export class WarcraftMaul {
         this.gameRoundHandler = new GameRound(this);
 
         // Spawn testing units when in debug mode
-        if(this.debugMode) {
+        if (this.debugMode) {
             CreateUnit(Player(COLOUR.RED), FourCC('e00B'), 0.00, 0.00, bj_UNIT_FACING);
             CreateUnit(Player(COLOUR.RED), FourCC('hC07'), 0.00, 0.00, bj_UNIT_FACING);
         }
 
-        for (let quest of Quests){
-            print(quest.title);
+        for (let quest of Quests) {
             CreateQuestBJ(quest.stype, quest.title, quest.body, quest.icon);
         }
-        this.MessageAllPlayers("Welcome to Warcraft Maul Reimagined");
-        this.MessageAllPlayers(`This is build: ${BUILD_NUMBER}, built ${BUILD_DATE}.`);
+        print('Welcome to Warcraft Maul Reimagined');
+        print(`This is build: ${BUILD_NUMBER}, built ${BUILD_DATE}.`);
 
 
     }
 
-    DefeatAllPlayers(){
-        for (let player of settings.players.values()){
+    DefeatAllPlayers() {
+        for (let player of settings.players.values()) {
             player.defeatPlayer();
         }
     }
 
 
-
-    GameWin(){
-        if(this.gameLives > 0){
+    GameWin() {
+        if (this.gameLives > 0) {
             PlaySoundBJ(settings.Sounds.victorySound);
-            DisplayTimedTextToForce( GetPlayersAll(), 30, "|cFFF48C42YOU HAVE WON!|r" );
-            DisplayTimedTextToForce( GetPlayersAll(), 15, "You can either leave the game or stay for bonus rounds" );
+            print('|cFFF48C42YOU HAVE WON!|r');
+            print('You can either leave the game or stay for bonus rounds');
             this.GameWinEffects();
         }
     }
@@ -125,42 +130,27 @@ export class WarcraftMaul {
     }
 
 
-
     SpamEffects() {
         let x = GetRandomInt(0, 10000) - 5000;
         let y = GetRandomInt(0, 10000) - 5000;
         let loc = Location(x, y);
-        DestroyEffect(AddSpecialEffectLocBJ( loc, "Abilities\\Spells\\Human\\DispelMagic\\DispelMagicTarget.mdl" ));
-        RemoveLocation(loc)
+        DestroyEffect(AddSpecialEffectLocBJ(loc, 'Abilities\\Spells\\Human\\DispelMagic\\DispelMagicTarget.mdl'));
+        RemoveLocation(loc);
     }
 
 
-    PrettifyGameTime(time: number): string{
+    PrettifyGameTime(sec: number): string {
+        let hrs = Math.floor(sec / 3600);
+        let min = Math.floor((sec - (hrs * 3600)) / 60);
+        let seconds = sec - (hrs * 3600) - (min * 60);
+        seconds = Math.round(seconds * 100) / 100;
 
-        let secs = ModuloInteger(time, 60);
-        let mins = ModuloInteger(time / 60, 60);
-        let hrs = time / 3600;
-        let secsStr = secs+'';
-        let minsStr = mins+'';
-        let hrsStr = hrs+'';
-        if(mins < 10)
-            minsStr = "0" + minsStr;
-        if(hrs < 10)
-            hrsStr = "0" + hrsStr;
+        let result = (hrs < 10 ? '0' + hrs : hrs);
+        result += ':' + (min < 10 ? '0' + min : min);
+        result += ':' + (seconds < 10 ? '0' + Math.floor(seconds) : Math.floor(seconds));
+        return Util.ColourString('999999', '' + result);
 
-        if(secs < 10)
-            secsStr = "0" + secsStr;
-
-        return "|cFF999999" + hrsStr + ":" + minsStr + ":" + secsStr + "|r";
     }
-
-
-    MessageAllPlayers(str:string){
-        for (let player of settings.players.values()){
-            player.sendMessage(str);
-        }
-    }
-
 
 
 

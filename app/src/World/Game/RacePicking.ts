@@ -125,7 +125,7 @@ export class RacePicking {
     private HardCoreRandomRace(player: Defender) {
         let randomedRace = this.RandomRace(player);
         if (randomedRace) {
-            DisplayTextToForce(GetPlayersAll(), player.getNameWithColour() + ' has |cFF375FF1ra|r|cFF364CF0nd|r|cFF3535EFom|r|cFF4A34EFed|r ' + randomedRace.name);
+            print(player.getNameWithColour() + ' has |cFF375FF1ra|r|cFF364CF0nd|r|cFF3535EFom|r|cFF4A34EFed|r ' + randomedRace.name);
         }
 
 
@@ -140,7 +140,7 @@ export class RacePicking {
         if (race) {
             player.races.push(race);
             race.pickAction(player);
-            DisplayTextToForce(GetPlayersAll(), player.getNameWithColour() + ' has chosen ' + race.name);
+            print( player.getNameWithColour() + ' has chosen ' + race.name);
         }
 
     }
@@ -158,7 +158,7 @@ export class RacePicking {
     private NormalRandomRace(player: Defender) {
         let randomedRace = this.RandomRace(player);
         if (randomedRace) {
-            DisplayTextToForce(GetPlayersAll(), player.getNameWithColour() + ' has |cFF375FF1ra|r|cFF364CF0nd|r|cFF3535EFom|r|cFF4A34EFed|r ' + randomedRace.name);
+            print(player.getNameWithColour() + ' has |cFF375FF1ra|r|cFF364CF0nd|r|cFF3535EFom|r|cFF4A34EFed|r ' + randomedRace.name);
         }
 
     }
@@ -284,7 +284,7 @@ export class RacePicking {
             }
         }
 
-        DisplayTextToForce(GetPlayersAll(), player.getNameWithColour() + ' has |cFFB0F442hy|r|cFF8CF442b|r|cFF42F4C5r|r|cFF42F4F1id|r randomed!');
+        print(player.getNameWithColour() + ' has |cFFB0F442hy|r|cFF8CF442b|r|cFF42F4C5r|r|cFF42F4F1id|r randomed!');
 
 
     }

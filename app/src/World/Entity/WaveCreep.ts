@@ -1,3 +1,5 @@
+import { Log } from '../../lib/Serilog/Serilog';
+
 export class WaveCreep {
     id: string;
     name: string;
@@ -80,7 +82,7 @@ export class WaveCreep {
             case 36:
                 return ARMOUR_TYPE.HERO;
             default:
-                    print(`COULD NOT FIND ARMOUR TYPE FOR ${this.wave}:${this.id}:${this.name}`);
+                Log.Error(`COULD NOT FIND ARMOUR TYPE FOR ${this.wave}:${this.id}:${this.name}`);
                 return ARMOUR_TYPE.UNARMOURED;
         }
 
