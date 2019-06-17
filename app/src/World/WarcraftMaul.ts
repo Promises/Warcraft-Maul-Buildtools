@@ -42,8 +42,8 @@ export class WarcraftMaul {
 
 
         // Should we enable debug mode?
-        if (GetPlayerName(Player(0)) === 'WorldEdit') {
-            this.debugMode = false;
+        if (GetPlayerName(Player(COLOUR.RED)) === 'WorldEdit') {
+            this.debugMode = true;
 
         }
         if (this.debugMode) {

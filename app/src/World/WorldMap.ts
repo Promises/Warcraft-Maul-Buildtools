@@ -34,7 +34,7 @@ export class WorldMap {
     private setupWorldCreatures() {
 
         // Ship at the bottom of the world
-        this.ship = new Ship(CreateUnit(Player(13), FourCC('n05G'), 63.0, -5343.5, 0.000), this);
+        this.ship = new Ship(CreateUnit(Player(COLOUR.NAVY), FourCC('n05G'), 63.0, -5343.5, 0.000), this);
 
         this.createCreepWaves();
         this.createDummyCreeps();

@@ -231,7 +231,7 @@ export class GameRound {
                 if (spawn.spawnOne) {
 
                     let creep = CreateUnit(
-                        Player(13 + creepOwner % 4),
+                        Player(COLOUR.NAVY + creepOwner % 4),
                         FourCC(wave.id),
                         GetRectCenterX(spawn.spawnOne.rectangle),
                         GetRectCenterY(spawn.spawnOne.rectangle),
@@ -241,7 +241,7 @@ export class GameRound {
                     if (spawn.spawnTwo) {
 
                         creep = CreateUnit(
-                            Player(13 + creepOwner % 4),
+                            Player(COLOUR.NAVY + creepOwner % 4),
                             FourCC(wave.id),
                             GetRectCenterX(spawn.spawnTwo.rectangle),
                             GetRectCenterY(spawn.spawnTwo.rectangle),
