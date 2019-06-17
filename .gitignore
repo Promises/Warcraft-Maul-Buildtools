@@ -3,3 +3,5 @@
 /units.json
 /src
 /target
+
+/app/src/Generated/*
