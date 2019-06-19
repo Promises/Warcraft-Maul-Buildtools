@@ -8,6 +8,7 @@ import { CheckPoint } from './Entity/CheckPoint';
 import { Teleporter } from './Entity/Teleporter';
 import { RaceVoid } from './Game/Races/RaceVoid';
 import { RaceLootBoxer } from './Game/Races/RaceLootBoxer';
+import { AntiBlock } from './AntiBlock';
 
 export class WorldMap {
     game: WarcraftMaul;
@@ -43,6 +44,9 @@ export class WorldMap {
 
 
         this.setupCheckpoint();
+
+        new AntiBlock(this);
+
 
 
     }

@@ -1,6 +1,7 @@
 import { AbstractPlayer } from './AbstractPlayer';
 import { ALLOW_PLAYER_TOWER_LOCATIONS, PLAYER_AREAS } from '../../GlobalSettings';
 import { Race } from '../../Game/Races/Race';
+import { Rectangle } from '../../../JassOverrides/Rectangle';
 
 export class Defender extends AbstractPlayer {
     scoreSlot = 0;
@@ -76,4 +77,7 @@ export class Defender extends AbstractPlayer {
     }
 
 
+    getRectangle() {
+        return new Rectangle(this.getArea());
+    }
 }

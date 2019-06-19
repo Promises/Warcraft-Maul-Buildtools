@@ -169,3 +169,4 @@ export function InitializeStaticSounds() {
 
 
 
+export const UNIT_ORDER_CANCEL_UPGRADE = 851976;

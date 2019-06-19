@@ -10,7 +10,7 @@ export class Trigger {
 
 
     public AddAction(actionFunc: () => void): triggeraction {
-        return TriggerAddAction(this.nativeTrigger, () => xpcall(() => actionFunc(), err => this.printError(err)));
+        return TriggerAddAction(this.nativeTrigger, () => xpcall(() => actionFunc(), err => Trigger.printError(err)));
 
     }
 
@@ -41,7 +41,7 @@ export class Trigger {
     }
 
     public AddCondition(func: () => boolean): triggercondition {
-        return TriggerAddCondition(this.nativeTrigger, Condition(() => this.EvaluateCondition(func)));
+        return TriggerAddCondition(this.nativeTrigger, Condition(() => Trigger.EvaluateCondition(func)));
     }
 
     public RegisterAnyUnitEventBJ(whichEvent: playerunitevent) {
@@ -53,7 +53,7 @@ export class Trigger {
     }
 
 
-    private EvaluateCondition(func: () => boolean) {
+    public static EvaluateCondition(func: () => boolean) {
         let answer = false;
 
         xpcall(() => {
@@ -66,7 +66,7 @@ export class Trigger {
     }
 
 
-    private printError(err: any) {
-        Log.Error(err);
+    public static  printError(err: any) {
+        Log.Fatal(err);
     }
 }

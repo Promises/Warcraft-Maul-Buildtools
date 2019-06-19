@@ -13,6 +13,7 @@ import { Quests } from '../Generated/questsGEN';
 import { BUILD_DATE, BUILD_NUMBER } from '../Generated/Version';
 import { Log, LogLevel } from '../lib/Serilog/Serilog';
 import { StringSink } from '../lib/Serilog/Sinks/StringSink';
+import { AntiBlock } from './AntiBlock';
 
 export class WarcraftMaul {
 
@@ -101,6 +102,7 @@ export class WarcraftMaul {
         for (let quest of Quests) {
             CreateQuestBJ(quest.stype, quest.title, quest.body, quest.icon);
         }
+
         print('Welcome to Warcraft Maul Reimagined');
         print(`This is build: ${BUILD_NUMBER}, built ${BUILD_DATE}.`);
 

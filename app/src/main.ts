@@ -5,6 +5,7 @@ import { Log, LogLevel } from './lib/Serilog/Serilog';
 import { StringSink } from './lib/Serilog/Sinks/StringSink';
 
 Log.Init([
+    new StringSink(LogLevel.Fatal, BJDebugMsg),
 ]);
 function Main(this: void) {
     let maul = new WarcraftMaul();
@@ -15,16 +16,13 @@ function Main(this: void) {
 
 
 }
-// BJDebugMsg('prexp call');
 
 xpcall(() => {
-    // print('initialising');
-
     let init = new Trigger();
     init.RegisterTimerEvent(0.00, false);
     init.AddAction(() => Main());
 }, (err) => {
-    Log.Error(err);
+    Log.Fatal(err);
 });
 
 
