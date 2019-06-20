@@ -13,7 +13,7 @@ import { Quests } from '../Generated/questsGEN';
 import { BUILD_DATE, BUILD_NUMBER } from '../Generated/Version';
 import { Log, LogLevel } from '../lib/Serilog/Serilog';
 import { StringSink } from '../lib/Serilog/Sinks/StringSink';
-import { AntiBlock } from './AntiBlock';
+import { AntiBlockController } from './AntiBlockController';
 
 export class WarcraftMaul {
 

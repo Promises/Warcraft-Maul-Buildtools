@@ -8,7 +8,7 @@ import { CheckPoint } from './Entity/CheckPoint';
 import { Teleporter } from './Entity/Teleporter';
 import { RaceVoid } from './Game/Races/RaceVoid';
 import { RaceLootBoxer } from './Game/Races/RaceLootBoxer';
-import { AntiBlock } from './AntiBlock';
+import { AntiBlockController } from './AntiBlockController';
 
 export class WorldMap {
     game: WarcraftMaul;
@@ -23,12 +23,13 @@ export class WorldMap {
 
     playerSpawns: PlayerSpawns[] = [];
     disabledRaces: number = 0;
+    antiBlock: AntiBlockController;
 
 
     constructor(game: WarcraftMaul) {
         this.game = game;
         this.setupWorldCreatures();
-
+        this.antiBlock = new AntiBlockController(this);
 
     }
 
@@ -45,7 +46,6 @@ export class WorldMap {
 
         this.setupCheckpoint();
 
-        new AntiBlock(this);
 
 
 

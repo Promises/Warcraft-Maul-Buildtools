@@ -12,6 +12,7 @@ export class Commands {
     private voteAgainstPlayer: Defender | undefined;
     private hasVotedToKick: boolean[] = [];
     private voteKickTimer: timer = CreateTimer();
+    private drawings: any[] = [];
 
     constructor(game: WarcraftMaul) {
         this.game = game;
@@ -254,6 +255,42 @@ export class Commands {
                 // ShowMazeAll()
                 break;
 
+            case 'draw':
+                if(!this.game.debugMode){
+                    return;
+                }
+                let arr: rect[] = [];
+                switch (command[1]) {
+                    case "ab":
+                    case "antiblock":
+                        arr = this.game.worldMap.antiBlock.testRegions;
+                        break;
+                }
+                for (let i = 0; i < command.length - 2; i++) {
+                    if(!command[2+i]){
+                        Log.Error("Missing arguments");
+                        return;
+                    }
+                    if(!arr){
+                        Log.Error("invalid array");
+                        return;
+                    }
+
+                    if(!arr[+command[2+i]]){
+                        Log.Error("invalid index");
+                        return;
+                    }
+                    this.DrawRect(arr[+command[2+i]]);
+
+                }
+
+                break;
+            case "undraw":
+                if(!this.game.debugMode){
+                    return;
+                }
+                this.DestroyDrawings();
+                break;
         }
 
 
@@ -459,5 +496,40 @@ export class Commands {
         }
 
         return true
+    }
+
+    private DrawRect(rectangle: rect) {
+        let x1 = GetRectMinX(rectangle);
+        let y1 = GetRectMinY(rectangle);
+        let x2 = GetRectMaxX(rectangle);
+        let y2 = GetRectMaxY(rectangle);
+
+        let model = "Doodads\\\\Cinematic\\\\DemonFootPrint\\\\DemonFootPrint0.mdl";
+        let sfx: effect[] =  [];
+        for (let x = x1; x < x2; x = x + 16) {
+            sfx.push(AddSpecialEffect(model, x, y1))
+        }
+
+        for (let y = y1; y < y2; y = y + 16) {
+            sfx.push(AddSpecialEffect(model, x2, y))
+        }
+
+        for (let x = x1; x < x2; x = x + 16) {
+            sfx.push(AddSpecialEffect(model, x, y2))
+        }
+        for (let y = y1; y < y2; y = y + 16) {
+            sfx.push(AddSpecialEffect(model, x1, y))
+        }
+        this.drawings.push(sfx);
+
+    }
+    private DestroyDrawings(){
+        for (let drawing of this.drawings) {
+            for (let sfx of  drawing){
+                DestroyEffect(sfx);
+            }
+
+        }
+        this.drawings = [];
     }
 }
