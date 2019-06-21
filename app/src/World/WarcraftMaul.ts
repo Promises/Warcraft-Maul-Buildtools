@@ -60,7 +60,7 @@ export class WarcraftMaul {
         for (let i = 0; i < 24; i++) {
             if (GetPlayerSlotState(Player(i)) == PLAYER_SLOT_STATE_PLAYING) {
                 if (GetPlayerController(Player(i)) == MAP_CONTROL_USER) {
-                    players.set(i, new Defender(i));
+                    players.set(i, new Defender(i, this));
 
                 }
             }

@@ -1,7 +1,9 @@
 import { AbstractPlayer } from './AbstractPlayer';
-import { ALLOW_PLAYER_TOWER_LOCATIONS, PLAYER_AREAS } from '../../GlobalSettings';
+import { ALLOW_PLAYER_TOWER_LOCATIONS, PLAYER_AREAS, players } from '../../GlobalSettings';
 import { Race } from '../../Game/Races/Race';
 import { Rectangle } from '../../../JassOverrides/Rectangle';
+import { Trigger } from '../../../JassOverrides/Trigger';
+import { WarcraftMaul } from '../../WarcraftMaul';
 
 export class Defender extends AbstractPlayer {
     scoreSlot = 0;
@@ -17,13 +19,20 @@ export class Defender extends AbstractPlayer {
     lootBoxer: unit | undefined;
     hybridBuilder: unit| undefined;
     hybridTowers: any[] = [];
+    leaveTrigger: Trigger;
+    deniedPlayers: AbstractPlayer[] = [];
 
-    constructor(id: number) {
+    constructor(id: number, game: WarcraftMaul) {
         super(id);
         this.setUpPlayerVariables();
-
+        this.leaveTrigger = new Trigger();
+        this.leaveTrigger.AddCondition(()=>this.PlayerLeftTheGameConditions(game));
+        this.leaveTrigger.AddAction(() => this.PlayerLeftTheGame(game));
 
     }
+
+
+
 
     setUpPlayerVariables() {
 
@@ -79,5 +88,32 @@ export class Defender extends AbstractPlayer {
 
     getRectangle() {
         return new Rectangle(this.getArea());
+    }
+
+    private PlayerLeftTheGameConditions(game: WarcraftMaul) {
+        return game.gameLives > 0;
+    }
+
+    private PlayerLeftTheGame(game: WarcraftMaul) {
+        print(`${this.getNameWithColour()} has left the game!`);
+
+        this.ResetSpawnRestrictions();
+        TriggerSleepAction(2.00);
+        game.worldMap.playerSpawns[this.id].isOpen = false;
+        if (game.scoreBoard) {
+            MultiboardSetItemValueBJ(game.scoreBoard.board, 1, 7 + this.scoreSlot,
+                Util.ColourString(this.getColourCode(), '<Quit>'));
+        }
+
+        players.delete(this.id);
+
+        // this.DistributePlayerGold();
+        // this.DistributePlayerTowers();
+    }
+
+    private ResetSpawnRestrictions() {
+
+
+
     }
 }
