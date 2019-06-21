@@ -3,5 +3,7 @@
 /units.json
 /src
 /target
+/node_modules
+/package-lock.json
 
 /app/src/Generated/*
