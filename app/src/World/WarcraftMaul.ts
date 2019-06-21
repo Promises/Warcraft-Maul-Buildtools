@@ -14,6 +14,7 @@ import { BUILD_DATE, BUILD_NUMBER } from '../Generated/Version';
 import { Log, LogLevel } from '../lib/Serilog/Serilog';
 import { StringSink } from '../lib/Serilog/Sinks/StringSink';
 import { AntiBlockController } from './AntiBlockController';
+import { SellTower } from './Entity/Tower/SellTower';
 
 export class WarcraftMaul {
 
@@ -90,6 +91,7 @@ export class WarcraftMaul {
 
         new DifficultyVote(this);
         new RacePicking(this);
+        new SellTower();
 
         this.gameRoundHandler = new GameRound(this);
 
