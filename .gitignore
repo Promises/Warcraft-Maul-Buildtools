@@ -5,5 +5,5 @@
 /target
 /node_modules
 /package-lock.json
-
+/settings.bat
 /app/src/Generated/*
