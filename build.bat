@@ -1,5 +1,8 @@
 @echo off
 
+"tools/Warcraft-Maul-Race-Parser.exe" maps/map/Units units.json
+py -3 GenerateHybrid.py
+
 if not exist settings.bat (
   @echo WARNING: settings.bat missing, generating default ...
   copy "settings-base.bat" "settings.bat"
