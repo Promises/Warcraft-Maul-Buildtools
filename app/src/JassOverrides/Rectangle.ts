@@ -1,16 +1,27 @@
 export class Rectangle {
-    _rect: rect;
-
+    area: number[];
 
     constructor(area: number[]) {
-        this._rect = Rect(area[0],area[1],area[2],area[3])
+        this.area = area;
     }
-
-
 
     ContainsUnit(whichUnit: unit): boolean {
-        return RectContainsUnit(this._rect, GetConstructingStructure());
+        if (GetUnitX(whichUnit) < this.area[0]) {
+            return false;
+        }
+
+        if (GetUnitX(whichUnit) > this.area[2]) {
+            return false;
+        }
+
+        if (GetUnitY(whichUnit) < this.area[1]) {
+            return false;
+        }
+
+        if (GetUnitY(whichUnit) > this.area[3]) {
+            return false;
+        }
+
+        return true;
     }
-
-
 }
