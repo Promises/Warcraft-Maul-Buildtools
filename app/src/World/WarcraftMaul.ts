@@ -2,18 +2,15 @@ import { Defender } from './Entity/Players/Defender';
 import * as settings from './GlobalSettings';
 import { Attacker } from './Entity/Players/Attacker';
 import { WorldMap } from './WorldMap';
-import { SpawnedCreeps } from './Entity/SpawnedCreeps';
 import { Commands } from './Game/Commands';
 import { GameRound } from './Game/GameRound';
 import { DifficultyVote } from './Game/DifficultyVote';
 import { RacePicking } from './Game/RacePicking';
 import { MultiBoard } from './Game/MultiBoard';
-import { COLOUR_CODES, players } from './GlobalSettings';
 import { Quests } from '../Generated/questsGEN';
 import { BUILD_DATE, BUILD_NUMBER } from '../Generated/Version';
 import { Log, LogLevel } from '../lib/Serilog/Serilog';
 import { StringSink } from '../lib/Serilog/Sinks/StringSink';
-import { AntiBlockController } from './AntiBlockController';
 import { SellTower } from './Entity/Tower/SellTower';
 
 export class WarcraftMaul {
@@ -62,7 +59,6 @@ export class WarcraftMaul {
             if (GetPlayerSlotState(Player(i)) == PLAYER_SLOT_STATE_PLAYING) {
                 if (GetPlayerController(Player(i)) == MAP_CONTROL_USER) {
                     players.set(i, new Defender(i, this));
-
                 }
             }
         }
@@ -91,7 +87,7 @@ export class WarcraftMaul {
 
         new DifficultyVote(this);
         new RacePicking(this);
-        new SellTower();
+        new SellTower(this);
 
         this.gameRoundHandler = new GameRound(this);
 

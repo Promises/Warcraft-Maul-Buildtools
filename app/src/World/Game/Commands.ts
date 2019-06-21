@@ -263,7 +263,6 @@ export class Commands {
                 switch (command[1]) {
                     case "ab":
                     case "antiblock":
-                        arr = this.game.worldMap.antiBlock.testRegions;
                         break;
                 }
                 for (let i = 0; i < command.length - 2; i++) {

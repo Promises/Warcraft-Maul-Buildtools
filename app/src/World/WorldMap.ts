@@ -8,7 +8,9 @@ import { CheckPoint } from './Entity/CheckPoint';
 import { Teleporter } from './Entity/Teleporter';
 import { RaceVoid } from './Game/Races/RaceVoid';
 import { RaceLootBoxer } from './Game/Races/RaceLootBoxer';
-import { AntiBlockController } from './AntiBlockController';
+import { AntiBlock } from './AntiBlock';
+import {Maze} from "./Maze";
+import * as settings from "./GlobalSettings";
 
 export class WorldMap {
     game: WarcraftMaul;
@@ -22,33 +24,26 @@ export class WorldMap {
 
 
     playerSpawns: PlayerSpawns[] = [];
+    readonly playerMazes: Maze[] = [];
     disabledRaces: number = 0;
-    antiBlock: AntiBlockController;
+    antiBlock: AntiBlock;
 
 
     constructor(game: WarcraftMaul) {
         this.game = game;
         this.setupWorldCreatures();
-        this.antiBlock = new AntiBlockController(this);
-
+        this.antiBlock = new AntiBlock(this);
     }
 
     private setupWorldCreatures() {
-
         // Ship at the bottom of the world
         this.ship = new Ship(CreateUnit(Player(COLOUR.NAVY), FourCC('n05G'), 63.0, -5343.5, 0.000), this);
-
         this.createCreepWaves();
         this.createDummyCreeps();
         this.setupRaces();
         this.spawnedCreeps = new SpawnedCreeps();
-
-
         this.setupCheckpoint();
-
-
-
-
+        this.setupMazes();
     }
 
 
@@ -367,6 +362,25 @@ export class WorldMap {
         LightBlueCheckpoint.next = BrownCheckpoint;
 
 
+    }
+
+    public setupMazes() {
+        for (let i = 0; i < settings.PLAYER_AREAS.length; i++) {
+            const minX = settings.PLAYER_AREAS[i][0];
+            const minY = settings.PLAYER_AREAS[i][1];
+            const maxX = settings.PLAYER_AREAS[i][2];
+            const maxY = settings.PLAYER_AREAS[i][3];
+            const width = Math.abs((maxX - minX) / 64);
+            const height = Math.abs((maxY - minY) / 64);
+            const g: boolean[] = [];
+            for (let j = 0; j < width; j++) {
+                for (let k = 0; k < height; k++) {
+                    g[j + k * width] = true;
+                }
+            }
+
+            this.playerMazes[i] = new Maze(minX, minY, maxX, maxY, width, height, g);
+        }
     }
 
 
