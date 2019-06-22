@@ -7,11 +7,15 @@ import { Tower } from './Tower';
 import { WarcraftMaul } from '../../WarcraftMaul';
 import { OrcPeon } from './WorkersUnion/OrcPeon';
 import { HumanPeasant } from './WorkersUnion/HumanPeasant';
+import { UndeadAcolyte } from './WorkersUnion/UndeadAcolyte';
+import { NightElfWisp } from './WorkersUnion/NightElfWisp';
 
 
 export class TowerConstruction {
     towerConstructTrigger: Trigger;
     towerTypes: Map<number, object> = new Map<number, object>();
+    genericAttacks: (() => void)[] = [];
+    genericAttackTrigger: Trigger;
     game: WarcraftMaul;
 
     constructor(game: WarcraftMaul) {
@@ -21,6 +25,9 @@ export class TowerConstruction {
         this.towerConstructTrigger = new Trigger();
         this.towerConstructTrigger.RegisterAnyUnitEventBJ(EVENT_PLAYER_UNIT_CONSTRUCT_FINISH);
         this.towerConstructTrigger.AddAction(() => this.ConstructionFinished());
+        this.genericAttackTrigger = new Trigger();
+        this.genericAttackTrigger.RegisterPlayerUnitEventSimple(Player(COLOUR.NAVY), EVENT_PLAYER_UNIT_ATTACKED);
+        this.genericAttackTrigger.AddAction(() => this.DoGenericTowerAttacks());
     }
 
     private ConstructionFinished(): void {
@@ -47,5 +54,13 @@ export class TowerConstruction {
         this.towerTypes.set(FourCC('h03G'), NagaSlave);
         this.towerTypes.set(FourCC('h03E'), OrcPeon);
         this.towerTypes.set(FourCC('h03F'), HumanPeasant);
+        this.towerTypes.set(FourCC('h03I'), UndeadAcolyte);
+        this.towerTypes.set(FourCC('h03H'), NightElfWisp);
+    }
+
+    private DoGenericTowerAttacks(): void {
+        for (const atk of this.genericAttacks) {
+            atk();
+        }
     }
 }

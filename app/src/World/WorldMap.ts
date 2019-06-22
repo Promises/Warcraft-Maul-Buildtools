@@ -27,12 +27,13 @@ export class WorldMap {
     playerSpawns: PlayerSpawns[] = [];
     readonly playerMazes: Maze[] = [];
     disabledRaces: number = 0;
+    towerConstruction: TowerConstruction;
     antiBlock: AntiBlock;
 
     constructor(game: WarcraftMaul) {
         this.game = game;
         this.setupWorldCreatures();
-        const towercons = new TowerConstruction(game);
+        this.towerConstruction = new TowerConstruction(game);
         this.antiBlock = new AntiBlock(this);
     }
 

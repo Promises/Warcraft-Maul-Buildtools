@@ -72,4 +72,8 @@ export class Trigger {
     public RegisterPlayerChatEvent(whichPlayer: player, chatMessageToDetect: string, exactMatchOnly: boolean): event {
         return TriggerRegisterPlayerChatEvent(this.nativeTrigger, whichPlayer, chatMessageToDetect, exactMatchOnly);
     }
+
+    public RegisterPlayerUnitEventSimple(whichPlayer: player, whichEvent: playerunitevent): event {
+        return TriggerRegisterPlayerUnitEventSimple(this.nativeTrigger, whichPlayer, whichEvent);
+    }
 }
