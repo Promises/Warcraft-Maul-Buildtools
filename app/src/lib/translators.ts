@@ -9,6 +9,11 @@ interface ColourToIndex {
     [key: string]: number
 }
 
+// @ts-ignore
+function String(input: any): string {
+    return `${input}`;
+}
+
 class Util {
 
     static ColourString(colour: string, string: string): string {
