@@ -91,8 +91,8 @@ export class GameRound {
     UpdateScoreboardForWave() {
         if (this.game.scoreBoard) {
             MultiboardSetItemValueBJ(this.game.scoreBoard.board, 1, 1, 'Starting in');
-            MultiboardSetItemValueBJ(this.game.scoreBoard.board, 2, 5, settings.ARMOUR_TYPE_NAMES[this.game.worldMap.waveCreeps[this.currentWave].getArmourType()]);
-            MultiboardSetItemValueBJ(this.game.scoreBoard.board, 2, 5, settings.CREEP_TYPE_NAMES[this.game.worldMap.waveCreeps[this.currentWave].getCreepType()]);
+            MultiboardSetItemValueBJ(this.game.scoreBoard.board, 2, 5, settings.ARMOUR_TYPE_NAMES[this.game.worldMap.waveCreeps[this.currentWave-1].getArmourType()]);
+            MultiboardSetItemValueBJ(this.game.scoreBoard.board, 2, 5, settings.CREEP_TYPE_NAMES[this.game.worldMap.waveCreeps[this.currentWave-1].getCreepType()]);
         }
     }
 
