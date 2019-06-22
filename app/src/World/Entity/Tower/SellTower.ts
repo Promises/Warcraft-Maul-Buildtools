@@ -1,6 +1,8 @@
 import {Trigger} from '../../../JassOverrides/Trigger';
 import * as settings from '../../GlobalSettings';
 import {WarcraftMaul} from "../../WarcraftMaul";
+import {Rectangle} from "../../../JassOverrides/Rectangle";
+import {Log} from "../../../lib/Serilog/Serilog";
 
 export class SellTower {
 
@@ -20,10 +22,23 @@ export class SellTower {
         return GetSpellAbilityId() == FourCC('A02D');
     }
 
-
     private SellTower() {
         const u = GetTriggerUnit();
         const value = GetUnitPointValue(u);
+        let playerSpawnId: undefined | number = undefined;
+        for (let i = 0; i < settings.PLAYER_AREAS.length; i++) {
+            if (new Rectangle(settings.PLAYER_AREAS[i]).ContainsUnit(u)) {
+                playerSpawnId = i;
+                break;
+            }
+        }
+
+        if (playerSpawnId === undefined) {
+            Log.Error("Unable to locate the correct player spawn");
+            return;
+        }
+
+        const player = settings.players.get(GetPlayerId(GetOwningPlayer(u)));
         const txt = CreateTextTagUnitBJ(I2S(value), u, 1, 10, 100, 80.00, 0.00, 0);
 
         SetTextTagPermanentBJ(txt, false);
@@ -31,15 +46,14 @@ export class SellTower {
         SetTextTagVelocityBJ(txt, 64, 90);
         DestroyEffect(AddSpecialEffect('Abilities\\Spells\\Items\\ResourceItems\\ResourceEffectTarget.mdl', GetUnitX(u), GetUnitY(u)));
         PlaySoundOnUnitBJ(settings.Sounds.goldSound, 100, u);
-        const playerId = GetPlayerId(GetOwningPlayer(u));
-        const player = settings.players.get(playerId);
+
         if (player) {
             player.giveGold(value);
         }
         ShowUnitHide(u);
         RemoveUnit(u);
 
-        const maze = this.game.worldMap.playerMazes[playerId];
+        const maze = this.game.worldMap.playerMazes[playerSpawnId];
         const x = GetUnitX(u);
         const y = GetUnitY(u);
         const leftSide = ((x - 64) - maze.minX) / 64;
