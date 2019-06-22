@@ -1,10 +1,11 @@
 import * as settings from '../GlobalSettings';
-import {COLOUR_CODES, enemies} from '../GlobalSettings';
-import {WarcraftMaul} from '../WarcraftMaul';
-import {WaveCreep} from '../Entity/WaveCreep';
-import {Creep} from '../Entity/Creep';
-import {Trigger} from '../../JassOverrides/Trigger';
-import {Log} from '../../lib/Serilog/Serilog';
+import { WarcraftMaul } from '../WarcraftMaul';
+import { WaveCreep } from '../Entity/WaveCreep';
+import { Creep } from '../Entity/Creep';
+import { Trigger } from '../../JassOverrides/Trigger';
+import { Log } from '../../lib/Serilog/Serilog';
+import { PlayerSpawns } from '../Entity/PlayerSpawns';
+import { Ship } from '../Entity/Ship';
 
 export class GameRound {
     gameTimeTrigger: Trigger;
@@ -33,7 +34,7 @@ export class GameRound {
 
         this.roundEndTrigger = new Trigger();
 
-        for (let enemy of enemies) {
+        for (const enemy of settings.enemies) {
             this.roundEndTrigger.RegisterPlayerStateEvent(enemy.wcPlayer, PLAYER_STATE_RESOURCE_FOOD_USED, EQUAL, 0.00);
         }
 
@@ -41,9 +42,9 @@ export class GameRound {
         this.roundEndTrigger.AddAction(() => this.RoundEnd());
     }
 
-    UpdateGameTime() {
+    UpdateGameTime(): void {
         if (this.game.gameEnded) {
-            this.game.gameEndTimer--;
+            this.game.gameEndTimer -= 1;
             if (this.game.scoreBoard) {
                 MultiboardSetItemValueBJ(this.game.scoreBoard.board, 1, 1, 'End Time');
                 MultiboardSetItemValueBJ(this.game.scoreBoard.board, 2, 1, this.game.PrettifyGameTime(this.game.gameEndTimer));
@@ -52,7 +53,7 @@ export class GameRound {
                 this.game.DefeatAllPlayers();
             }
         } else {
-            this.game.gameTime++;
+            this.game.gameTime += 1;
 
             if (this.shouldStartWaveTimer) {
                 this.shouldStartWaveTimer = false;
@@ -68,11 +69,11 @@ export class GameRound {
             } else {
                 this.game.waveTimer = this.game.waveTimer - 1;
                 if (this.game.scoreBoard) {
-                    MultiboardSetItemValueBJ(this.game.scoreBoard.board, 2, 1, '|cFF999999' + this.game.waveTimer + '|r');
+                    MultiboardSetItemValueBJ(this.game.scoreBoard.board, 2, 1, Util.ColourString('999999', `${this.game.waveTimer}`));
                 }
             }
 
-            if (this.game.waveTimer == 0 && !this.isWaveInProgress) {
+            if (this.game.waveTimer === 0 && !this.isWaveInProgress) {
                 this.isWaveInProgress = true;
                 if (this.game.scoreBoard) {
                     MultiboardSetItemValueBJ(this.game.scoreBoard.board, 1, 1, 'Game Time');
@@ -87,16 +88,22 @@ export class GameRound {
 
     }
 
-    UpdateScoreboardForWave() {
+    UpdateScoreboardForWave(): void {
         if (this.game.scoreBoard) {
             MultiboardSetItemValueBJ(this.game.scoreBoard.board, 1, 1, 'Starting in');
-            MultiboardSetItemValueBJ(this.game.scoreBoard.board, 2, 5, settings.ARMOUR_TYPE_NAMES[this.game.worldMap.waveCreeps[this.currentWave-1].getArmourType()]);
-            MultiboardSetItemValueBJ(this.game.scoreBoard.board, 2, 5, settings.CREEP_TYPE_NAMES[this.game.worldMap.waveCreeps[this.currentWave-1].getCreepType()]);
+            MultiboardSetItemValueBJ(
+                this.game.scoreBoard.board,
+                2, 5,
+                settings.ARMOUR_TYPE_NAMES[this.game.worldMap.waveCreeps[this.currentWave - 1].getArmourType()]);
+            MultiboardSetItemValueBJ(
+                this.game.scoreBoard.board,
+                2, 5,
+                settings.CREEP_TYPE_NAMES[this.game.worldMap.waveCreeps[this.currentWave - 1].getCreepType()]);
         }
     }
 
 
-    RoundEnd() {
+    RoundEnd(): void {
 
 
         // Disable buffs
@@ -105,28 +112,40 @@ export class GameRound {
         // call DisableTrigger(gg_trg_CrippleAura)
         // call DisableTrigger(gg_trg_VampiricAura)
 
-        if (this.currentWave == this.game.worldMap.waveCreeps.length - 1) {
+        if (this.currentWave === this.game.worldMap.waveCreeps.length - 1) {
             this.BonusRoundsOver();
         } else {
             // call SetCreepAbilities()
-            this.currentWave++;
+            this.currentWave += 1;
             this.roundOverGoldReward += 2;
 
 
             // Update scoreboard
             if (this.game.scoreBoard) {
-                MultiboardSetItemValueBJ(this.game.scoreBoard.board, 2, 2, this.currentWave + '');
+                MultiboardSetItemValueBJ(this.game.scoreBoard.board, 2, 2, `${this.currentWave}`);
             }
 
             // Display lives lost
 
-            if (this.game.gameLives == this.game.startLives) {
+            if (this.game.gameLives === this.game.startLives) {
                 print(
-                    '|cFFF44242Co|r|cFFF47442ng|r|cFFF4A742ra|r|cFFEBF442tu|r|cFFC5F442la|r|cFF8FF442ti|r|cFF62F442on|r|cFF42F477s n|r|cFF42F4E5o l|r|cFF42A7F4iv|r|cFF425FF4es|r|cFF7A42F4 lo|r|cFFC542F4st!|r'
+                    '|cFFF44242Co|r' +
+                    '|cFFF47442ng|r' +
+                    '|cFFF4A742ra|r' +
+                    '|cFFEBF442tu|r' +
+                    '|cFFC5F442la|r' +
+                    '|cFF8FF442ti|r' +
+                    '|cFF62F442on|r' +
+                    '|cFF42F477s n|r' +
+                    '|cFF42F4E5o l|r' +
+                    '|cFF42A7F4iv|r' +
+                    '|cFF425FF4es|r' +
+                    '|cFF7A42F4 lo|r' +
+                    '|cFFC542F4st!|r',
                 );
             } else {
                 print(
-                    `${this.game.gameLives} ${Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Chances have been lost')}`
+                    `${this.game.gameLives} ${Util.ColourString(settings.COLOUR_CODES[COLOUR.RED], 'Chances have been lost')}`,
                 );
             }
             this.GiveWaveGoldReward();
@@ -138,13 +157,13 @@ export class GameRound {
             this.game.worldMap.HealEverythingOnMap();
 
 
-            if (this.currentWave == 35 && this.game.worldMap.archimondeDummy) {
+            if (this.currentWave === 35 && this.game.worldMap.archimondeDummy) {
                 PauseUnitBJ(false, this.game.worldMap.archimondeDummy);
                 IssueTargetDestructableOrder(this.game.worldMap.archimondeDummy, 'attack', this.testStucture);
 
 
             }
-            if (this.currentWave == this.game.worldMap.waveCreeps.length - 1) {
+            if (this.currentWave === this.game.worldMap.waveCreeps.length - 1) {
                 this.game.GameWin();
             }
 
@@ -183,19 +202,16 @@ export class GameRound {
     }
 
     CreepFoodConditions(): boolean {
-        for (let enemy of settings.enemies) {
-            if (!(GetPlayerState(enemy.wcPlayer, PLAYER_STATE_RESOURCE_FOOD_USED) == 0)) {
-                Log.Debug(`${enemy.id} still has food`);
+        for (const enemy of settings.enemies) {
+            if (!(GetPlayerState(enemy.wcPlayer, PLAYER_STATE_RESOURCE_FOOD_USED) === 0)) {
                 return false;
             }
         }
-        Log.Debug(`nobody has food`);
-
         return true;
     }
 
-    private SpawnCreeps() {
-        let wave = this.game.worldMap.waveCreeps[this.currentWave - 1];
+    private SpawnCreeps(): void {
+        const wave: WaveCreep = this.game.worldMap.waveCreeps[this.currentWave - 1];
         print(`Level ${this.currentWave} - ${wave.name}`);
 
         let spawnAmount: number = 10;
@@ -208,28 +224,28 @@ export class GameRound {
                 break;
 
         }
-        if (this.currentWave == 35) {
+        if (this.currentWave === 35) {
             SetTimeOfDay(0.00);
             SetWaterBaseColorBJ(100, 33.00, 33.00, 0);
         }
         this.startSpawning(spawnAmount, wave);
     }
 
-    private startSpawning(amount: number, wave: WaveCreep) {
-        let creepOwner = 0;
+    private startSpawning(amount: number, wave: WaveCreep): void {
+        let creepOwner: number = 0;
         if (!this.game.worldMap.spawnedCreeps) {
             return;
         }
-        let spawned = this.game.worldMap.spawnedCreeps.unitMap;
-        for (let y = 0; y < amount; y++) {
-            for (let i = 0; i < this.game.worldMap.playerSpawns.length; i++) {
-                const spawn = this.game.worldMap.playerSpawns[i];
+        const spawned: Map<number, Creep> = this.game.worldMap.spawnedCreeps.unitMap;
+        for (let y: number = 0; y < amount; y += 1) {
+            for (let i: number = 0; i < this.game.worldMap.playerSpawns.length; i += 1) {
+                const spawn: PlayerSpawns = this.game.worldMap.playerSpawns[i];
                 if (!spawn.isOpen) {
                     continue;
                 }
                 if (spawn.spawnOne) {
 
-                    let creep = CreateUnit(
+                    let creep: unit = CreateUnit(
                         Player(COLOUR.NAVY + creepOwner % 4),
                         FourCC(wave.id),
                         GetRectCenterX(spawn.spawnOne.rectangle),
@@ -249,7 +265,7 @@ export class GameRound {
                     }
                 }
             }
-            creepOwner++;
+            creepOwner += 1;
             TriggerSleepAction(0.50);
 
         }
@@ -257,7 +273,7 @@ export class GameRound {
 
     }
 
-    getSpawnFace(id: COLOUR) {
+    getSpawnFace(id: COLOUR): number {
         switch (id) {
             case COLOUR.RED:
             case COLOUR.PINK:
@@ -287,52 +303,57 @@ export class GameRound {
         let thingForBossToDestory;
 
         EnumDestructablesInRectAll(GetPlayableMapRect(), () => {
-            if (GetDestructableTypeId(GetEnumDestructable()) == FourCC('B000')) {
+            if (GetDestructableTypeId(GetEnumDestructable()) === FourCC('B000')) {
                 thingForBossToDestory = GetEnumDestructable();
             }
         });
+
         return thingForBossToDestory;
 
     }
 
-    private GiveWaveGoldReward() {
-        for (let player of settings.players.values()) {
-            if (this.currentWave == 15) {
+    private GiveWaveGoldReward(): void {
+        for (const player of settings.players.values()) {
+            if (this.currentWave === 15) {
                 player.giveLumber(1);
             }
-            if (player.id == COLOUR.GRAY) {
+            if (player.id === COLOUR.GRAY) {
                 player.giveGold(2 * this.roundOverGoldReward);
-                player.sendMessage(`|c0000cdf9You recieved|r ${2 * this.roundOverGoldReward}|c0000cdf9 extra gold for completing level as the last defender|r ${(this.currentWave - 1)}`);
+                player.sendMessage(
+                    `|c0000cdf9You recieved|r ${2 * this.roundOverGoldReward}|c0000cdf9` +
+                     `extra gold for completing level as the last defender|r ${(this.currentWave - 1)}`);
             } else {
                 player.giveGold(this.roundOverGoldReward);
-                player.sendMessage(`|c0000cdf9You recieved|r ${this.roundOverGoldReward} |c0000cdf9extra gold for completing level|r ${(this.currentWave - 1)}`);
+                player.sendMessage(
+                    `|c0000cdf9You recieved|r ${this.roundOverGoldReward} |c0000cdf9`+
+                    `extra gold for completing level|r ${(this.currentWave - 1)}`);
 
             }
         }
     }
 
 
-    BonusRoundEffects() {
-        let t = CreateTimer();
+    BonusRoundEffects(): void {
+        const t: timer = CreateTimer();
         TimerStart(t, 0.03, true, () => this.SpamBonusEffects());
     }
 
 
-    SpamBonusEffects() {
-        let x = GetRandomInt(0, 10000) - 5000;
-        let y = GetRandomInt(0, 10000) - 5000;
-        let loc = Location(x, y);
+    SpamBonusEffects(): void {
+        const x: number = GetRandomInt(0, 10000) - 5000;
+        const y: number = GetRandomInt(0, 10000) - 5000;
+        const loc: location = Location(x, y);
         DestroyEffect(AddSpecialEffectLocBJ(loc, 'Abilities\\Spells\\Human\\Flare\\FlareCaster.mdl'));
         RemoveLocation(loc);
     }
 
 
-    BonusRoundsOver() {
+    BonusRoundsOver(): void {
         print('|cFFF48C42That\'s all the bonus levels, see you next time!|r');
         this.isWaveInProgress = false;
         this.game.gameEndTimer = settings.GAME_END_TIME;
         this.game.gameEnded = true;
-        let ship = this.game.worldMap.ship;
+        const ship: Ship | undefined = this.game.worldMap.ship;
         if (ship) {
             ship.MoveShip();
         }
