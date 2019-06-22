@@ -1,16 +1,16 @@
-import {WarcraftMaul} from './WarcraftMaul';
-import {Ship} from './Entity/Ship';
-import {WaveCreep} from './Entity/WaveCreep';
-import {Race} from './Game/Races/Race';
-import {PlayerSpawns} from './Entity/PlayerSpawns';
-import {SpawnedCreeps} from './Entity/SpawnedCreeps';
-import {CheckPoint} from './Entity/CheckPoint';
-import {Teleporter} from './Entity/Teleporter';
-import {RaceVoid} from './Game/Races/RaceVoid';
-import {RaceLootBoxer} from './Game/Races/RaceLootBoxer';
-import {AntiBlock} from './AntiBlock';
-import {Maze} from "./Maze";
-import * as settings from "./GlobalSettings";
+import { WarcraftMaul } from './WarcraftMaul';
+import { Ship } from './Entity/Ship';
+import { WaveCreep } from './Entity/WaveCreep';
+import { Race } from './Game/Races/Race';
+import { PlayerSpawns } from './Entity/PlayerSpawns';
+import { SpawnedCreeps } from './Entity/SpawnedCreeps';
+import { CheckPoint } from './Entity/CheckPoint';
+import { Teleporter } from './Entity/Teleporter';
+import { RaceVoid } from './Game/Races/RaceVoid';
+import { RaceLootBoxer } from './Game/Races/RaceLootBoxer';
+import { AntiBlock } from './AntiBlock';
+import { Maze } from './Maze';
+import * as settings from './GlobalSettings';
 
 export class WorldMap {
     game: WarcraftMaul;
@@ -289,7 +289,7 @@ export class WorldMap {
         let GreysCheckpoint = GreysSpawns.spawnOne;
         GreysCheckpoint = GreysCheckpoint.next = new CheckPoint(Rect(-32.00, -3104.00, 32.00, -3040.00), this);
         GreysCheckpoint = GreysCheckpoint.next = new CheckPoint(Rect(-32.00, -4256.00, 32.00, -4192.00), this);
-        GreysCheckpoint.next = this.ship != undefined ? this.ship.killzone : undefined;
+        GreysCheckpoint.next = this.ship != undefined ? this.ship : undefined;
         this.playerSpawns[COLOUR.GRAY] = GreysSpawns;
 
 
@@ -414,5 +414,20 @@ export class WorldMap {
                 MinX = MinX + 128.0;
             }
         }
+    }
+
+    RemoveEveryUnit() {
+        let grp = GetUnitsInRectAll(GetPlayableMapRect());
+        ForGroupBJ(grp, () => this.RemoveUnitIfNotShip());
+        DestroyGroup(grp);
+    }
+
+    private RemoveUnitIfNotShip() {
+        if (GetUnitTypeId(GetEnumUnit()) == FourCC('n05G')) {
+            KillUnit(GetEnumUnit());
+        } else {
+            RemoveUnit(GetEnumUnit());
+        }
+
     }
 }

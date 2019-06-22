@@ -18,5 +18,9 @@
     "lua-types": "^2.5.0",
     "typescript": "^3.5.1",
     "typescript-to-lua": "^0.22.1"
+  },
+  "devDependencies": {
+    "tslint": "^5.18.0",
+    "tslint-config-airbnb": "^5.11.1"
   }
 }

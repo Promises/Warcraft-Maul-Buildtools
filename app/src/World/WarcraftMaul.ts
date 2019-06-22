@@ -156,5 +156,13 @@ export class WarcraftMaul {
 
     }
 
+    GameOver(){
+        this.gameEndTimer = settings.GAME_END_TIME;
+        this.gameEnded = true;
+        PlaySoundBJ(settings.Sounds.defeatSound);
+        print("|cFFFF0000GAME OVER|r");
+        this.worldMap.RemoveEveryUnit();
+    }
+
 
 }
