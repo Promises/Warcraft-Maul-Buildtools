@@ -7,3 +7,4 @@
 /package-lock.json
 /settings.bat
 /app/src/Generated/*
+/maps/map/war3map.lua
