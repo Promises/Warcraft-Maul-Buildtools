@@ -25,7 +25,7 @@ export class Ship extends CheckPoint {
     }
 
     checkPointAction() {
-        let u = GetEnteringUnit();
+        const u = GetEnteringUnit();
 
         if (this.game.gameEnded) {
             return;
@@ -33,9 +33,9 @@ export class Ship extends CheckPoint {
         if (this.game.gameRoundHandler.currentWave >= 36) {
             RemoveUnit(u);
         }
-        let spawnedCreeps = this.worldMap.spawnedCreeps;
+        const spawnedCreeps = this.worldMap.spawnedCreeps;
         if (spawnedCreeps) {
-            let creep = spawnedCreeps.unitMap.get(GetHandleIdBJ(GetEnteringUnit()));
+            const creep = spawnedCreeps.unitMap.get(GetHandleIdBJ(GetEnteringUnit()));
             if (creep) {
                 if (creep.getId() == FourCC('uC72')) {
                     print('Archimonde has boarded the ship! |cFFFF0000YOU LOSE!|r');
@@ -47,7 +47,7 @@ export class Ship extends CheckPoint {
 
 
                 creep.targetCheckpoint = undefined;
-                spawnedCreeps.unitMap.delete(GetHandleIdBJ(GetEnteringUnit()))
+                spawnedCreeps.unitMap.delete(GetHandleIdBJ(GetEnteringUnit()));
                 RemoveUnit(creep.creep);
 
                 PlaySoundBJ(Sounds.loseALifeSound);

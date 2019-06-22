@@ -1,9 +1,8 @@
 import * as settings from './GlobalSettings';
-import {WorldMap} from './WorldMap';
-import {Rectangle} from "../JassOverrides/Rectangle";
-import {Trigger} from "../JassOverrides/Trigger";
-import {Defender} from "./Entity/Players/Defender";
-
+import { WorldMap } from './WorldMap';
+import { Rectangle } from '../JassOverrides/Rectangle';
+import { Trigger } from '../JassOverrides/Trigger';
+import { Defender } from './Entity/Players/Defender';
 
 export class AntiBlock {
 

@@ -1,5 +1,5 @@
-import {Trigger} from "../../JassOverrides/Trigger";
-import {DamageEngineGlobals} from "./DamageEngineGlobals";
+import { Trigger } from '../../JassOverrides/Trigger';
+import { DamageEngineGlobals } from './DamageEngineGlobals';
 
 export class DamageEngine {
     /**
@@ -28,9 +28,9 @@ export class DamageEngine {
     private trig: Trigger = new Trigger();
     private otrg: Trigger = new Trigger();
 
-    private previousValue: number = 0.00;   //Added to track the original pure damage amount of Spirit Link
-    private previousType: number = 0;       //Track the type
-    private previousCode: boolean = false;  //Was it caused by a trigger/script?
+    private previousValue: number = 0.00;   // Added to track the original pure damage amount of Spirit Link
+    private previousType: number = 0;       // Track the type
+    private previousCode: boolean = false;  // Was it caused by a trigger/script?
 
     private lastSource: unit[] = [];
     private lastTarget: unit[] = [];
@@ -144,11 +144,11 @@ export class DamageEngine {
     }
 
     private Error() {
-        let s: string = "WARNING: Recursion error when dealing damage! Prior to dealing damage from within a DamageEvent response trigger, do this:\n";
-        s += "Set DamageEventTrigger = (This Trigger)\n";
-        s += "Unit - Cause <Source> to damage <Target>...\n\n";
-        s += "Alternatively, just use the UNKNOWN damage type. It will skip recursive damage on its own without needing the \"Set\" line:/n";
-        s += "Unit - Cause <Source> to damage <Target>, dealing <Amount> damage of attack type <Attack Type> and damage type Unknown";
+        let s: string = 'WARNING: Recursion error when dealing damage! Prior to dealing damage from within a DamageEvent response trigger, do this:\n';
+        s += 'Set DamageEventTrigger = (This Trigger)\n';
+        s += 'Unit - Cause <Source> to damage <Target>...\n\n';
+        s += 'Alternatively, just use the UNKNOWN damage type. It will skip recursive damage on its own without needing the "Set" line:/n';
+        s += 'Unit - Cause <Source> to damage <Target>, dealing <Amount> damage of attack type <Attack Type> and damage type Unknown';
 
         ClearTextMessages();
         DisplayTimedTextToPlayer(GetLocalPlayer(), 0.00, 0.00, 999.00, s);
@@ -156,7 +156,7 @@ export class DamageEngine {
 
     private ClearDamageEvent() {
         if (!IsTriggerEnabled(this.trig.nativeTrigger)) {
-            EnableTrigger(this.trig.nativeTrigger)
+            EnableTrigger(this.trig.nativeTrigger);
         }
 
         if (this.clearable) {
@@ -191,13 +191,13 @@ export class DamageEngine {
     }
 
     private SetVars(src: unit, tgt: unit, amt: number, at: attacktype, dt: damagetype, wt: weapontype, ph: number): boolean {
-        let i: number = this.recursion + 1;
+        const i: number = this.recursion + 1;
         const rec: boolean = this.recursive;
 
         this.ClearDamageEvent();
 
         if (ph < 2 && this.damageEngineGlobals.udg_NextDamageType === 0 && (this.damageEngineGlobals.udg_DamageEventTrigger !== undefined || rec)) {
-            this.damageEngineGlobals.udg_NextDamageType = this.damageEngineGlobals.udg_DamageTypeCode
+            this.damageEngineGlobals.udg_NextDamageType = this.damageEngineGlobals.udg_DamageTypeCode;
         }
         if (rec && ph === 1) {
             this.recursion = i;
@@ -216,7 +216,7 @@ export class DamageEngine {
                     }
                 }
             } else {
-                this.Error()
+                this.Error();
             }
 
             this.damageEngineGlobals.udg_NextDamageType = 0;
@@ -231,7 +231,7 @@ export class DamageEngine {
                 } else if (tgt === this.damageEngineGlobals.udg_EnhancedDamageTarget) {
                     this.damageEngineGlobals.udg_DamageEventLevel = this.damageEngineGlobals.udg_DamageEventLevel + 1;
                 } else if (!IsUnitInGroup(tgt, <group>this.damageEngineGlobals.udg_DamageEventAOEGroup)) {
-                    this.damageEngineGlobals.udg_DamageEventAOE = this.damageEngineGlobals.udg_DamageEventAOE + 1
+                    this.damageEngineGlobals.udg_DamageEventAOE = this.damageEngineGlobals.udg_DamageEventAOE + 1;
                 }
                 if ((dt === DAMAGE_TYPE_SPIRIT_LINK && this.damageEngineGlobals.udg_DamageEventAOE + this.damageEngineGlobals.udg_DamageEventLevel === 3) || dt === DAMAGE_TYPE_DEFENSIVE || dt === DAMAGE_TYPE_PLANT) {
                     this.previousValue = this.damageEngineGlobals.udg_DamageEventPrevAmt;

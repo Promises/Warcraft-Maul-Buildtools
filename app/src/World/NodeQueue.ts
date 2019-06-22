@@ -1,10 +1,10 @@
-import {Node} from "./Node";
+import { Node } from './Node';
 
 export class NodeQueue {
     private _nodes: Node[] = [];
     private _i: number = 0;
 
-    public push(node: Node) {
+    public push(node: Node): void {
         this._nodes.push(node);
     }
 
@@ -16,7 +16,7 @@ export class NodeQueue {
         return this._nodes[this._i];
     }
 
-    public pop() {
+    public pop(): void {
         this._nodes.shift();
     }
 }

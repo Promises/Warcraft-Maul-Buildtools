@@ -1,4 +1,3 @@
-gg_dest_B000_0160 = nil
 function InitGlobals()
 end
 

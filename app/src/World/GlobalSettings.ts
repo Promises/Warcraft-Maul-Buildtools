@@ -1,24 +1,24 @@
-import {Defender} from './Entity/Players/Defender';
-import {Attacker} from './Entity/Players/Attacker';
+import { Defender } from './Entity/Players/Defender';
+import { Attacker } from './Entity/Players/Attacker';
 
 export const players: Map<number, Defender> = new Map<number, Defender>();
 
 export const enemies: Attacker[] = [];
 
 export const ALLOW_PLAYER_TOWER_LOCATIONS = [
-    {x: -1536.0, y: 5376.0}, // Red
-    {x: 640.0, y: 4992.0}, // Blue
-    {x: 1536.0, y: 5376.0}, // Teal
-    {x: 5120.0, y: 448.0}, // Purple
-    {x: 768.0, y: 1984.0}, // Yellow
-    {x: -3616.0, y: 448.0}, // Orange
-    {x: -4736.0, y: -2816.0}, // Green
-    {x: 4736.0, y: -2816.0}, // Pink
-    {x: 512.0, y: -2176.0}, // Grey
-    {x: -1536.0, y: -2176.0}, // Lightblue
-    {x: 2816.0, y: -2176.0}, // Darkgreen
-    {x: -3712.0, y: 3456.0}, // Brown
-    {x: 4992.0, y: 3456.0}, // Maroon
+    { x: -1536.0, y: 5376.0 }, // Red
+    { x: 640.0, y: 4992.0 }, // Blue
+    { x: 1536.0, y: 5376.0 }, // Teal
+    { x: 5120.0, y: 448.0 }, // Purple
+    { x: 768.0, y: 1984.0 }, // Yellow
+    { x: -3616.0, y: 448.0 }, // Orange
+    { x: -4736.0, y: -2816.0 }, // Green
+    { x: 4736.0, y: -2816.0 }, // Pink
+    { x: 512.0, y: -2176.0 }, // Grey
+    { x: -1536.0, y: -2176.0 }, // Lightblue
+    { x: 2816.0, y: -2176.0 }, // Darkgreen
+    { x: -3712.0, y: 3456.0 }, // Brown
+    { x: 4992.0, y: 3456.0 }, // Maroon
 ];
 
 
@@ -33,7 +33,7 @@ export const DIFFICULTIES = [
     100,
     200,
     300,
-    400
+    400,
 ];
 
 export const DIFFICULTY_STRINGS = [
@@ -46,7 +46,7 @@ export const DIFFICULTY_COLOURS = [
     '00A651',
     'FFCD00',
     'FF0000',
-    '383838'
+    '383838',
 ];
 
 
@@ -74,14 +74,14 @@ export const COLOUR_CODES = [
     '282828',
     'ebf0ff',
     '00781e',
-    'a46f33'
+    'a46f33',
 ];
 
 export const CREEP_TYPE_NAMES = [
     'NORMAL',
     'AIR',
     'CHAMPION',
-    'BOSS'
+    'BOSS',
 ];
 export const ARMOUR_TYPE_NAMES = [
     'UNARMOURED',
@@ -89,7 +89,7 @@ export const ARMOUR_TYPE_NAMES = [
     'MEDIUM',
     'HEAVY',
     'FORTIFIED',
-    'HERO'
+    'HERO',
 
 ];
 
@@ -100,7 +100,7 @@ export const PLAYER_AREAS = [
     [3584.0, -2304.0, 5120.0, 128.0], // Purple area
     [-768.0, -768.0, 768.0, 1664.0], // Yellow area
     [-5120.0, -2304.0, -3584.0, 128.0], // Orange area
-    [-4480.0, -4224.0, -2048.0, -2688.0],// Green area
+    [-4480.0, -4224.0, -2048.0, -2688.0], // Green area
     [2048.0, -4224.0, 4480.0, -2688.0], // Pink area
     [-768.0, -4864.0, 768.0, -2432.0], // Grey area
     [-2944.0, -1920.0, -1408.0, 512.0], // Lightblue area
@@ -117,7 +117,7 @@ export class Sounds {
         true,
         10,
         10,
-        'DefaultEAXON'
+        'DefaultEAXON',
     );
     public static goldSound = CreateSound(
         'Abilities/Spells/Items/ResourceItems/ReceiveGold.wav',
@@ -126,7 +126,7 @@ export class Sounds {
         true,
         10,
         10,
-        'DefaultEAXON'
+        'DefaultEAXON',
     );
     public static victorySound = CreateSound(
         'Sound/Music/mp3Music/PH1.mp3',
@@ -135,7 +135,7 @@ export class Sounds {
         false,
         10,
         10,
-        'DefaultEAXON'
+        'DefaultEAXON',
     );
     public static defeatSound = CreateSound(
         'Sound/Music/mp3Music/TragicConfrontation.mp3',
@@ -144,15 +144,15 @@ export class Sounds {
         false,
         10,
         10,
-        'DefaultEAXON'
+        'DefaultEAXON',
     );
     public static impossibleDifficultySound = CreateSound('Sound/Music/mp3Music/PursuitTheme.mp3',
-        false,
-        false,
-        false,
-        10,
-        10,
-        'DefaultEAXON'
+                                                          false,
+                                                          false,
+                                                          false,
+                                                          10,
+                                                          10,
+                                                          'DefaultEAXON',
     );
 }
 
@@ -256,6 +256,6 @@ export const WEAPON_TYPE_AM_CHOP = 22;
 export const WEAPON_TYPE_RH_BASH = 23;
 
 // Strings
-export const udg_AttackTypeDebugStr = ["SPELLS", "NORMAL", "PIERCE", "SIEGE", "MAGIC", "CHAOS", "HERO"];
-export const udg_DamageTypeDebugStr = ["UNKNOWN", undefined, undefined, undefined, "NORMAL", "ENHANCED", undefined, undefined, "FIRE", "COLD", "LIGHTNING", "POISON", "DISEASE", "DIVINE", "MAGIC", "SONIC", "ACID", "FORCE", "DEATH", "MIND", "PLANT", "DEFENSIVE", "DEMOLITION", "SLOW_POISON", "SPIRIT_LINK", "SHADOW_STRIKE", "UNIVERSAL"];
-export const udg_WeaponTypeDebugStr = ["NONE", "METAL_LIGHT_CHOP", "METAL_MEDIUM_CHOP", "METAL_HEAVY_CHOP", "METAL_LIGHT_SLICE", "METAL_MEDIUM_SLICE", "METAL_HEAVY_SLICE", "METAL_MEDIUM_BASH", "METAL_HEAVY_BASH", "METAL_MEDIUM_STAB", "METAL_HEAVY_STAB", "WOOD_LIGHT_SLICE", "WOOD_MEDIUM_SLICE", "WOOD_HEAVY_SLICE", "WOOD_LIGHT_BASH", "WOOD_MEDIUM_BASH", "WOOD_HEAVY_BASH", "WOOD_LIGHT_STAB", "WOOD_MEDIUM_STAB", "CLAW_LIGHT_SLICE", "CLAW_MEDIUM_SLICE", "CLAW_HEAVY_SLICE", "AXE_MEDIUM_CHOP", "ROCK_HEAVY_BASH"];
+export const udg_AttackTypeDebugStr = ['SPELLS', 'NORMAL', 'PIERCE', 'SIEGE', 'MAGIC', 'CHAOS', 'HERO'];
+export const udg_DamageTypeDebugStr = ['UNKNOWN', undefined, undefined, undefined, 'NORMAL', 'ENHANCED', undefined, undefined, 'FIRE', 'COLD', 'LIGHTNING', 'POISON', 'DISEASE', 'DIVINE', 'MAGIC', 'SONIC', 'ACID', 'FORCE', 'DEATH', 'MIND', 'PLANT', 'DEFENSIVE', 'DEMOLITION', 'SLOW_POISON', 'SPIRIT_LINK', 'SHADOW_STRIKE', 'UNIVERSAL'];
+export const udg_WeaponTypeDebugStr = ['NONE', 'METAL_LIGHT_CHOP', 'METAL_MEDIUM_CHOP', 'METAL_HEAVY_CHOP', 'METAL_LIGHT_SLICE', 'METAL_MEDIUM_SLICE', 'METAL_HEAVY_SLICE', 'METAL_MEDIUM_BASH', 'METAL_HEAVY_BASH', 'METAL_MEDIUM_STAB', 'METAL_HEAVY_STAB', 'WOOD_LIGHT_SLICE', 'WOOD_MEDIUM_SLICE', 'WOOD_HEAVY_SLICE', 'WOOD_LIGHT_BASH', 'WOOD_MEDIUM_BASH', 'WOOD_HEAVY_BASH', 'WOOD_LIGHT_STAB', 'WOOD_MEDIUM_STAB', 'CLAW_LIGHT_SLICE', 'CLAW_MEDIUM_SLICE', 'CLAW_HEAVY_SLICE', 'AXE_MEDIUM_CHOP', 'ROCK_HEAVY_BASH'];

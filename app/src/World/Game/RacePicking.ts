@@ -1,8 +1,8 @@
 import * as settings from '../GlobalSettings';
-import {Trigger} from '../../JassOverrides/Trigger';
-import {WarcraftMaul} from '../WarcraftMaul';
-import {Defender} from '../Entity/Players/Defender';
-import {Race} from './Races/Race';
+import { Trigger } from '../../JassOverrides/Trigger';
+import { WarcraftMaul } from '../WarcraftMaul';
+import { Defender } from '../Entity/Players/Defender';
+import { Race } from './Races/Race';
 import {
     HybridTierEight,
     HybridTierFive,
@@ -12,7 +12,7 @@ import {
     HybridTierSeven,
     HybridTierSix,
     HybridTierThree,
-    HybridTierTwo
+    HybridTierTwo,
 } from '../../Generated/hybridRandomGEN';
 
 export class RacePicking {
@@ -32,7 +32,7 @@ export class RacePicking {
         CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('h00O'), -1920.00, 2240.00, 0.00);
         CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('h03C'), -1920.00, 1856.00, 0.00);
         CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('h03K'), -1920.00, 1472.00, 0.00);
-        for (let player of settings.players.values()) {
+        for (const player of settings.players.values()) {
             CreateUnit(player.wcPlayer, FourCC('e00C'), -1920.00, 3000.00, 0.00);
             CreateUnit(player.wcPlayer, FourCC('e00C'), -1920.00, 2624.00, 0.00);
             CreateUnit(player.wcPlayer, FourCC('e00C'), -1920.00, 2240.00, 0.00);
@@ -68,12 +68,12 @@ export class RacePicking {
 
 
     private RaceSelectionActions() {
-        let player = settings.players.get(GetPlayerId(GetOwningPlayer(GetBuyingUnit())));
+        const player = settings.players.get(GetPlayerId(GetOwningPlayer(GetBuyingUnit())));
         if (!player) {
             return;
         }
         this.game.worldMap.playerSpawns[player.id].isOpen = true;
-        let soldItem = GetItemTypeId(GetSoldItem());
+        const soldItem = GetItemTypeId(GetSoldItem());
 
         if (soldItem == FourCC('I00W')) { // Hardcore random
             if (player.hasHybridRandomed) {
@@ -125,7 +125,7 @@ export class RacePicking {
     }
 
     private HardCoreRandomRace(player: Defender) {
-        let randomedRace = this.RandomRace(player);
+        const randomedRace = this.RandomRace(player);
         if (randomedRace) {
             print(player.getNameWithColour() + ' has |cFF375FF1ra|r|cFF364CF0nd|r|cFF3535EFom|r|cFF4A34EFed|r ' + randomedRace.name);
         }
@@ -138,7 +138,7 @@ export class RacePicking {
     }
 
     private GetSelectedRace(player: Defender, soldItem: number) {
-        let race = this.getRaceFromItem(soldItem);
+        const race = this.getRaceFromItem(soldItem);
         if (race) {
             player.races.push(race);
             race.pickAction(player);
@@ -149,7 +149,7 @@ export class RacePicking {
 
 
     private getRaceFromItem(soldItem: number) {
-        for (let race of this.game.worldMap.races) {
+        for (const race of this.game.worldMap.races) {
             if (FourCC(race.itemid) == soldItem) {
                 return race;
             }
@@ -158,7 +158,7 @@ export class RacePicking {
     }
 
     private NormalRandomRace(player: Defender) {
-        let randomedRace = this.RandomRace(player);
+        const randomedRace = this.RandomRace(player);
         if (randomedRace) {
             print(player.getNameWithColour() + ' has |cFF375FF1ra|r|cFF364CF0nd|r|cFF3535EFom|r|cFF4A34EFed|r ' + randomedRace.name);
         }
@@ -166,12 +166,12 @@ export class RacePicking {
     }
 
     private RandomRace(player: Defender): Race | undefined {
-        let randomNumber = Util.randomInt(0, this.game.worldMap.races.length - 1);
+        const randomNumber = Util.randomInt(0, this.game.worldMap.races.length - 1);
         if (this.game.worldMap.races.length - player.races.length <= this.game.worldMap.disabledRaces) {
             player.giveLumber(1);
             return;
         }
-        let randomedRace = this.game.worldMap.races[randomNumber];
+        const randomedRace = this.game.worldMap.races[randomNumber];
 
         if (!randomedRace.enabled) {
             return this.RandomRace(player);
@@ -196,15 +196,15 @@ export class RacePicking {
     }
 
     private HybridRandomRace(player: Defender) {
-        let t1 = this.randomChoice(HybridTierOne, player.hybridTowers);
-        let t2 = this.randomChoice(HybridTierTwo, player.hybridTowers);
-        let t3 = this.randomChoice(HybridTierThree, player.hybridTowers);
-        let t4 = this.randomChoice(HybridTierFour, player.hybridTowers);
-        let t5 = this.randomChoice(HybridTierFive, player.hybridTowers);
-        let t6 = this.randomChoice(HybridTierSix, player.hybridTowers);
-        let t7 = this.randomChoice(HybridTierSeven, player.hybridTowers);
-        let t8 = this.randomChoice(HybridTierEight, player.hybridTowers);
-        let t9 = this.randomChoice(HybridTierNine, player.hybridTowers);
+        const t1 = this.randomChoice(HybridTierOne, player.hybridTowers);
+        const t2 = this.randomChoice(HybridTierTwo, player.hybridTowers);
+        const t3 = this.randomChoice(HybridTierThree, player.hybridTowers);
+        const t4 = this.randomChoice(HybridTierFour, player.hybridTowers);
+        const t5 = this.randomChoice(HybridTierFive, player.hybridTowers);
+        const t6 = this.randomChoice(HybridTierSix, player.hybridTowers);
+        const t7 = this.randomChoice(HybridTierSeven, player.hybridTowers);
+        const t8 = this.randomChoice(HybridTierEight, player.hybridTowers);
+        const t9 = this.randomChoice(HybridTierNine, player.hybridTowers);
         player.hybridTowers = [];
         player.hybridTowers.push(t1);
         player.hybridTowers.push(t2);
@@ -222,63 +222,63 @@ export class RacePicking {
 
         player.hasHybridRandomed = true;
 
-        for (let tower of HybridTierOne) {
+        for (const tower of HybridTierOne) {
             if (tower != t1) {
                 SetPlayerUnitAvailableBJ(FourCC(tower), false, player.wcPlayer);
             } else {
                 SetPlayerUnitAvailableBJ(FourCC(tower), true, player.wcPlayer);
             }
         }
-        for (let tower of HybridTierTwo) {
+        for (const tower of HybridTierTwo) {
             if (tower != t2) {
                 SetPlayerUnitAvailableBJ(FourCC(tower), false, player.wcPlayer);
             } else {
                 SetPlayerUnitAvailableBJ(FourCC(tower), true, player.wcPlayer);
             }
         }
-        for (let tower of HybridTierThree) {
+        for (const tower of HybridTierThree) {
             if (tower != t3) {
                 SetPlayerUnitAvailableBJ(FourCC(tower), false, player.wcPlayer);
             } else {
                 SetPlayerUnitAvailableBJ(FourCC(tower), true, player.wcPlayer);
             }
         }
-        for (let tower of HybridTierFour) {
+        for (const tower of HybridTierFour) {
             if (tower != t4) {
                 SetPlayerUnitAvailableBJ(FourCC(tower), false, player.wcPlayer);
             } else {
                 SetPlayerUnitAvailableBJ(FourCC(tower), true, player.wcPlayer);
             }
         }
-        for (let tower of HybridTierFive) {
+        for (const tower of HybridTierFive) {
             if (tower != t5) {
                 SetPlayerUnitAvailableBJ(FourCC(tower), false, player.wcPlayer);
             } else {
                 SetPlayerUnitAvailableBJ(FourCC(tower), true, player.wcPlayer);
             }
         }
-        for (let tower of HybridTierSix) {
+        for (const tower of HybridTierSix) {
             if (tower != t6) {
                 SetPlayerUnitAvailableBJ(FourCC(tower), false, player.wcPlayer);
             } else {
                 SetPlayerUnitAvailableBJ(FourCC(tower), true, player.wcPlayer);
             }
         }
-        for (let tower of HybridTierSeven) {
+        for (const tower of HybridTierSeven) {
             if (tower != t7) {
                 SetPlayerUnitAvailableBJ(FourCC(tower), false, player.wcPlayer);
             } else {
                 SetPlayerUnitAvailableBJ(FourCC(tower), true, player.wcPlayer);
             }
         }
-        for (let tower of HybridTierEight) {
+        for (const tower of HybridTierEight) {
             if (tower != t8) {
                 SetPlayerUnitAvailableBJ(FourCC(tower), false, player.wcPlayer);
             } else {
                 SetPlayerUnitAvailableBJ(FourCC(tower), true, player.wcPlayer);
             }
         }
-        for (let tower of HybridTierNine) {
+        for (const tower of HybridTierNine) {
             if (tower != t9) {
                 SetPlayerUnitAvailableBJ(FourCC(tower), false, player.wcPlayer);
             } else {

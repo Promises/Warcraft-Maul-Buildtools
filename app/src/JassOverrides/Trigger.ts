@@ -1,4 +1,3 @@
-import { COLOUR_CODES } from '../World/GlobalSettings';
 import { Log } from '../lib/Serilog/Serilog';
 
 export class Trigger {
