@@ -4,7 +4,7 @@ import { WarcraftMaul } from '../../WarcraftMaul';
 import { Rectangle } from '../../../JassOverrides/Rectangle';
 import { Log } from '../../../lib/Serilog/Serilog';
 import { Defender } from '../Players/Defender';
-import { Maze } from '../../Maze';
+import { Maze } from '../../Antiblock/Maze';
 
 export class SellTower {
 

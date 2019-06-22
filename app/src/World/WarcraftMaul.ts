@@ -17,20 +17,13 @@ import { DamageEngineGlobals } from './Game/DamageEngineGlobals';
 
 export class WarcraftMaul {
     debugMode: boolean = false;
-
-    waveTimer: number = settings.GAME_TIME_BEFORE_START;
-
-    worldMap: WorldMap;
-
-
-    gameTime: number = 0;
     gameEnded: boolean = false;
+    waveTimer: number = settings.GAME_TIME_BEFORE_START;
+    gameTime: number = 0;
     gameEndTimer: number = settings.GAME_END_TIME;
-
     gameLives: number = settings.INITIAL_LIVES;
     startLives: number = settings.INITIAL_LIVES;
-
-
+    worldMap: WorldMap;
     gameRoundHandler: GameRound;
     gameCommandHandler: Commands;
     gameDamageEngineGlobals: DamageEngineGlobals;
@@ -38,15 +31,14 @@ export class WarcraftMaul {
     scoreBoard: MultiBoard | undefined;
 
     constructor() {
-        const players = settings.players;
-        const enemies = settings.enemies;
-
+        const players: Map<number, Defender> = settings.players;
+        const enemies: Attacker[] = settings.enemies;
 
         // Should we enable debug mode?
         if (GetPlayerName(Player(COLOUR.RED)) === 'WorldEdit') {
             this.debugMode = true;
-
         }
+
         if (this.debugMode) {
             this.waveTimer = 15;
             Log.Init([
@@ -55,11 +47,10 @@ export class WarcraftMaul {
             Log.Debug('Debug mode enabled');
         }
 
-
         // Set up all players
-        for (let i = 0; i < 24; i++) {
-            if (GetPlayerSlotState(Player(i)) == PLAYER_SLOT_STATE_PLAYING) {
-                if (GetPlayerController(Player(i)) == MAP_CONTROL_USER) {
+        for (let i: number = 0; i < 24; i++) {
+            if (GetPlayerSlotState(Player(i)) === PLAYER_SLOT_STATE_PLAYING) {
+                if (GetPlayerController(Player(i)) === MAP_CONTROL_USER) {
                     players.set(i, new Defender(i, this));
                 }
             }
@@ -71,8 +62,7 @@ export class WarcraftMaul {
         enemies.push(new Attacker(COLOUR.VOILET));
         enemies.push(new Attacker(COLOUR.WHEAT));
 
-        // Set Enemies should be allied with eachother
-
+        // All enemies should be allied with each other
         for (const enemy of enemies) {
             for (const enemyAlly of enemies) {
                 enemy.makeAlliance(enemyAlly);
@@ -89,9 +79,9 @@ export class WarcraftMaul {
         this.gameCommandHandler = new Commands(this);
         // this.gameCommandHandler.OpenAllSpawns();
 
-        new DifficultyVote(this);
-        new RacePicking(this);
-        new SellTower(this);
+        const diffVote: DifficultyVote = new DifficultyVote(this);
+        const racePicking: RacePicking = new RacePicking(this);
+        const sellTower: SellTower = new SellTower(this);
 
         this.gameRoundHandler = new GameRound(this);
 
@@ -107,18 +97,15 @@ export class WarcraftMaul {
 
         print('Welcome to Warcraft Maul Reimagined');
         print(`This is build: ${BUILD_NUMBER}, built ${BUILD_DATE}.`);
-
-
     }
 
-    DefeatAllPlayers() {
+    DefeatAllPlayers(): void {
         for (const player of settings.players.values()) {
             player.defeatPlayer();
         }
     }
 
-
-    GameWin() {
+    GameWin(): void {
         if (this.gameLives > 0) {
             PlaySoundBJ(settings.Sounds.victorySound);
             print('|cFFF48C42YOU HAVE WON!|r');
@@ -127,42 +114,40 @@ export class WarcraftMaul {
         }
     }
 
-
-    GameWinEffects() {
-        const timer1 = CreateTimer();
-        TimerStart(timer1, 0.10, true, () => this.SpamEffects());
+    // FIXME: This function leaks!
+    GameWinEffects(): void {
+        const timer: timer = CreateTimer();
+        TimerStart(timer, 0.10, true, () => this.SpamEffects());
     }
 
-
-    SpamEffects() {
-        const x = GetRandomInt(0, 10000) - 5000;
-        const y = GetRandomInt(0, 10000) - 5000;
-        const loc = Location(x, y);
+    // FIXME: This function leaks!
+    SpamEffects(): void {
+        const x: number = GetRandomInt(0, 10000) - 5000;
+        const y: number = GetRandomInt(0, 10000) - 5000;
+        const loc: location = Location(x, y);
         DestroyEffect(AddSpecialEffectLocBJ(loc, 'Abilities\\Spells\\Human\\DispelMagic\\DispelMagicTarget.mdl'));
         RemoveLocation(loc);
     }
 
-
     PrettifyGameTime(sec: number): string {
-        const hrs = Math.floor(sec / 3600);
-        const min = Math.floor((sec - (hrs * 3600)) / 60);
-        let seconds = sec - (hrs * 3600) - (min * 60);
+        const hrs: number = Math.floor(sec / 3600);
+        const min: number = Math.floor((sec - (hrs * 3600)) / 60);
+        let seconds: number = sec - (hrs * 3600) - (min * 60);
         seconds = Math.round(seconds * 100) / 100;
 
-        let result = (hrs < 10 ? '0' + hrs : hrs);
-        result += ':' + (min < 10 ? '0' + min : min);
-        result += ':' + (seconds < 10 ? '0' + Math.floor(seconds) : Math.floor(seconds));
-        return Util.ColourString('999999', '' + result);
-
+        const prettyMinutes: string = (min < 10 ? `0${min}` : `${min}`);
+        const prettySeconds: string = (seconds < 10 ? `0${Math.floor(seconds)}` : `${Math.floor(seconds)}`);
+        let result: string = (hrs < 10 ? `0${hrs}` : `${hrs}`);
+        result += `:${prettyMinutes}`;
+        result += `:${prettySeconds}`;
+        return Util.ColourString('999999', `${result}`);
     }
 
-    GameOver() {
+    GameOver(): void {
         this.gameEndTimer = settings.GAME_END_TIME;
         this.gameEnded = true;
         PlaySoundBJ(settings.Sounds.defeatSound);
         print('|cFFFF0000GAME OVER|r');
         this.worldMap.RemoveEveryUnit();
     }
-
-
 }

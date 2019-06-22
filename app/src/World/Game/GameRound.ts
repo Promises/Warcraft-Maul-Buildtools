@@ -71,7 +71,7 @@ export class GameRound {
             } else {
                 this.game.waveTimer = this.game.waveTimer - 1;
                 if (this.game.scoreBoard) {
-                    MultiboardSetItemValueBJ(this.game.scoreBoard.board, 2, 1, Util.ColourString('999999', String(this.game.waveTimer)));
+                    MultiboardSetItemValueBJ(this.game.scoreBoard.board, 2, 1, Util.ColourString('999999', ToString(this.game.waveTimer)));
                 }
             }
 

@@ -8,8 +8,8 @@ import { CheckPoint } from './Entity/CheckPoint';
 import { Teleporter } from './Entity/Teleporter';
 import { RaceVoid } from './Game/Races/RaceVoid';
 import { RaceLootBoxer } from './Game/Races/RaceLootBoxer';
-import { AntiBlock } from './AntiBlock';
-import { Maze } from './Maze';
+import { AntiBlock } from './Antiblock/AntiBlock';
+import { Maze } from './Antiblock/Maze';
 import * as settings from './GlobalSettings';
 import { TowerConstruction } from './Entity/Tower/TowerConstruction';
 
