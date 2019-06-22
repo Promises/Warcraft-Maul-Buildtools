@@ -1,6 +1,6 @@
-import { Tower } from './Tower';
-import { Defender } from '../Players/Defender';
-import { WarcraftMaul } from '../../WarcraftMaul';
+import { Tower } from '../Tower';
+import { Defender } from '../../Players/Defender';
+import { WarcraftMaul } from '../../../WarcraftMaul';
 
 export class NagaSlave extends Tower {
 

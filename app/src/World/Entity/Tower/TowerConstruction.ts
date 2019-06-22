@@ -2,9 +2,11 @@ import { Trigger } from '../../../JassOverrides/Trigger';
 import { Defender } from '../Players/Defender';
 import * as settings from '../../GlobalSettings';
 import { Log } from '../../../lib/Serilog/Serilog';
-import { NagaSlave } from './NagaSlave';
+import { NagaSlave } from './WorkersUnion/NagaSlave';
 import { Tower } from './Tower';
 import { WarcraftMaul } from '../../WarcraftMaul';
+import { OrcPeon } from './WorkersUnion/OrcPeon';
+import { HumanPeasant } from './WorkersUnion/HumanPeasant';
 
 
 export class TowerConstruction {
@@ -43,5 +45,7 @@ export class TowerConstruction {
 
     private InitTypes(): void {
         this.towerTypes.set(FourCC('h03G'), NagaSlave);
+        this.towerTypes.set(FourCC('h03E'), OrcPeon);
+        this.towerTypes.set(FourCC('h03F'), HumanPeasant);
     }
 }
