@@ -4,7 +4,7 @@ import { Race } from '../../Game/Races/Race';
 import { Rectangle } from '../../../JassOverrides/Rectangle';
 import { Trigger } from '../../../JassOverrides/Trigger';
 import { WarcraftMaul } from '../../WarcraftMaul';
-import { AbstractHologramMaze } from '../../Game/AbstractHologramMaze';
+import { AbstractHologramMaze } from '../../Holograms/AbstractHologramMaze';
 import { Tower } from '../Tower/Tower';
 
 export class Defender extends AbstractPlayer {

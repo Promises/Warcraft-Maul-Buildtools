@@ -5,9 +5,9 @@ import { Trigger } from '../../JassOverrides/Trigger';
 import { Defender } from '../Entity/Players/Defender';
 import { Log } from '../../lib/Serilog/Serilog';
 import { CheckPoint } from '../Entity/CheckPoint';
-import { AdvancedHoloMaze } from './AdvancedHoloMaze';
-import { SimpleHoloMaze } from './SimpleHoloMaze';
-import { CircleHoloMaze } from './CircleHoloMaze';
+import { AdvancedHoloMaze } from '../Holograms/AdvancedHoloMaze';
+import { SimpleHoloMaze } from '../Holograms/SimpleHoloMaze';
+import { CircleHoloMaze } from '../Holograms/CircleHoloMaze';
 
 export class Commands {
 
