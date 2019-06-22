@@ -4,20 +4,18 @@ class console {
     }
 }
 
-
 interface ColourToIndex {
-    [key: string]: number
+    [key: string]: number;
 }
 
-// @ts-ignore
-function String(input: any): string {
+function ToString(input: any): string {
     return `${input}`;
 }
 
 class Util {
 
-    static ColourString(colour: string, string: string): string {
-        return `|cFF${colour}${string}|r`;
+    static ColourString(colour: string, str: string): string {
+        return `|cFF${colour}${str}|r`;
     }
     static randomInt(min: number, max: number): number{
         return Math.floor(Math.random() * (max - min + 1)) + min;
