@@ -32,7 +32,7 @@ export class WorldMap {
     constructor(game: WarcraftMaul) {
         this.game = game;
         this.setupWorldCreatures();
-        const towercons = new TowerConstruction();
+        const towercons = new TowerConstruction(game);
         this.antiBlock = new AntiBlock(this);
     }
 

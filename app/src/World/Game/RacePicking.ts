@@ -166,7 +166,7 @@ export class RacePicking {
     }
 
     private RandomRace(player: Defender): Race | undefined {
-        const randomNumber = Util.randomInt(0, this.game.worldMap.races.length - 1);
+        const randomNumber = Util.RandomInt(0, this.game.worldMap.races.length - 1);
         if (this.game.worldMap.races.length - player.races.length <= this.game.worldMap.disabledRaces) {
             player.giveLumber(1);
             return;

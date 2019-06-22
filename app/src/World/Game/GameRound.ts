@@ -6,6 +6,7 @@ import { Trigger } from '../../JassOverrides/Trigger';
 import { Log } from '../../lib/Serilog/Serilog';
 import { PlayerSpawns } from '../Entity/PlayerSpawns';
 import { Ship } from '../Entity/Ship';
+import { Tower } from '../Entity/Tower/Tower';
 
 export class GameRound {
     gameTimeTrigger: Trigger;
@@ -19,6 +20,7 @@ export class GameRound {
     roundOverGoldReward: number = 20;
 
     testStucture: destructable;
+    endOfTurnTowers: Tower[] = [];
 
     waitBetweenWaveTime: number = 20;
 
@@ -168,6 +170,10 @@ export class GameRound {
             }
 
 
+        }
+
+        for (const tower of this.endOfTurnTowers) {
+            tower.EndOfRoundAction();
         }
 
         /*

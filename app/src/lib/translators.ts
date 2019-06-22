@@ -19,7 +19,7 @@ class Util {
     static ColourString(colour: string, string: string): string {
         return `|cFF${colour}${string}|r`;
     }
-    static randomInt(min: number, max: number): number{
+    static RandomInt(min: number, max: number): number{
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
