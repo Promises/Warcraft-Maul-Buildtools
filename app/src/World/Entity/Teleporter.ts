@@ -1,5 +1,7 @@
 import { CheckPoint } from './CheckPoint';
 import { WorldMap } from '../WorldMap';
+import { SpawnedCreeps } from './SpawnedCreeps';
+import { Creep } from './Creep';
 
 export class Teleporter extends CheckPoint {
     facing: number;
@@ -9,16 +11,16 @@ export class Teleporter extends CheckPoint {
         this.facing = facing;
     }
 
-    checkPointAction() {
+    checkPointAction(): void {
         if (!this.next) {
             return;
         }
-        const x = GetRectCenterX(this.next.rectangle);
-        const y = GetRectCenterY(this.next.rectangle);
-        const spawnedCreeps = this.worldMap.spawnedCreeps;
-        if (spawnedCreeps) {
-            const spawnedCreep = spawnedCreeps.unitMap.get(GetHandleIdBJ(GetEnteringUnit()));
-            if (spawnedCreep) {
+        const x: number = GetRectCenterX(this.next.rectangle);
+        const y: number = GetRectCenterY(this.next.rectangle);
+        const spawnedCreeps: SpawnedCreeps | undefined = this.worldMap.spawnedCreeps;
+        if (spawnedCreeps !== undefined) {
+            const spawnedCreep: Creep | undefined = spawnedCreeps.unitMap.get(GetHandleIdBJ(GetEnteringUnit()));
+            if (spawnedCreep !== undefined) {
                 spawnedCreep.targetCheckpoint = this.next;
                 SetUnitPosition(GetEnteringUnit(), x, y);
                 SetUnitFacing(GetEnteringUnit(), this.facing);

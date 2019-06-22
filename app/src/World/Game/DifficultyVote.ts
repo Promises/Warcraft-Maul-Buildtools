@@ -29,9 +29,9 @@ export class DifficultyVote {
     }
 
 
-    InitializeVotes() {
+    InitializeVotes(): void {
         DialogSetMessageBJ(this.difficultyDialog, 'Difficulty vote:');
-        for (let i = 0; i < settings.DIFFICULTIES.length; i++) {
+        for (let i: number = 0; i < settings.DIFFICULTIES.length; i++) {
             this.difficultyButtons.push(
                 DialogAddButtonBJ(
                     this.difficultyDialog,
@@ -49,31 +49,29 @@ export class DifficultyVote {
 
         // DisableTriggers();
         this.InitializeVoteTimer();
-
-
     }
 
-    private InitializeVoteTimer() {
-        const t = CreateTimer();
+    private InitializeVoteTimer(): void {
+        const t: timer = CreateTimer();
         TimerStart(t, 10.00, false, () => this.VoteTimerExpired());
     }
 
-    private SetDifficulty(diffculty: number) {
+    private SetDifficulty(diffculty: number): void {
         for (const enemy of enemies) {
             enemy.setHandicap(diffculty);
         }
     }
 
-    private VoteTimerExpired() {
+    private VoteTimerExpired(): void {
         PauseTimer(GetExpiredTimer());
-        let votecount = 0;
+        let voteCount: number = 0;
         Log.Debug(Util.ArraysToString(this.votedDiff));
         for (const player of settings.players.values()) {
             if (!this.votedDiff[player.id]) {
                 DialogDisplayBJ(false, this.difficultyDialog, player.wcPlayer);
-                print(player.getNameWithColour() + ' did not vote, their vote will not be counted');
+                print(`${player.getNameWithColour()} did not vote, their vote will not be counted`);
             } else {
-                votecount++;
+                voteCount++;
                 this.totalVotedDiff += this.votedDiff[player.id];
             }
 
@@ -82,21 +80,21 @@ export class DifficultyVote {
         this.game.scoreBoard = new MultiBoard(this.game);
 
 
-        if (votecount == 0) {
+        if (voteCount === 0) {
             print('Nobody voted, difficulty will automaticall be set to Normal');
             this.difficulty = settings.DIFFICULTIES[0];
 
         } else {
-            this.difficulty = this.totalVotedDiff / votecount;
+            this.difficulty = this.totalVotedDiff / voteCount;
         }
 
 
-        const diffIndex = R2I((this.difficulty - 100.00) / 100.00 + ModuloReal((this.difficulty - 100.00) / 100.00, 1.00));
+        const diffIndex: number = R2I((this.difficulty - 100.00) / 100.00 + ModuloReal((this.difficulty - 100.00) / 100.00, 1.00));
         this.difficulty = Math.floor(this.difficulty);
         this.SetDifficulty(this.difficulty);
         SetPlayerHandicapBJ(Player(PLAYER_NEUTRAL_PASSIVE), this.difficulty);
-        print('Difficulty was set to ' + this.difficulty + '% (' +
-            Util.ColourString(settings.DIFFICULTY_COLOURS[diffIndex], settings.DIFFICULTY_STRINGS[diffIndex]) + ')');
+        print(`Difficulty was set to ${this.difficulty}% (${Util.ColourString(settings.DIFFICULTY_COLOURS[diffIndex],
+                                                                              settings.DIFFICULTY_STRINGS[diffIndex])})`);
 
         for (const player of settings.players.values()) {
             for (const ally of settings.players.values()) {
@@ -118,21 +116,22 @@ export class DifficultyVote {
         MultiboardSetItemValueBJ(
             this.game.scoreBoard.board,
             2, 3,
-            I2S(R2I(this.difficulty)) + '%' + ' (' + Util.ColourString(settings.DIFFICULTY_COLOURS[diffIndex], settings.DIFFICULTY_STRINGS[diffIndex]) + ')',
+            `${I2S(R2I(this.difficulty))}% (${Util.ColourString(settings.DIFFICULTY_COLOURS[diffIndex],
+                                                                settings.DIFFICULTY_STRINGS[diffIndex])})`,
         );
 
 
     }
 
-    private DifficultyVote() {
-        for (let i = 0; i < this.difficultyButtons.length; i++) {
-            const button = this.difficultyButtons[i];
+    private DifficultyVote(): void {
+        for (let i: number = 0; i < this.difficultyButtons.length; i++) {
+            const button: button = this.difficultyButtons[i];
 
-            if (GetClickedButtonBJ() == button) {
+            if (GetClickedButtonBJ() === button) {
                 this.votedDiff[GetPlayerId(GetTriggerPlayer())] = settings.DIFFICULTIES[i];
-                print(Util.ColourString(COLOUR_CODES[GetPlayerId(GetTriggerPlayer())],
-                                        GetPlayerName(GetTriggerPlayer())) + ' voted for: ' +
-                    Util.ColourString(settings.DIFFICULTY_COLOURS[i], settings.DIFFICULTY_STRINGS[i]));
+                print(`${Util.ColourString(COLOUR_CODES[GetPlayerId(GetTriggerPlayer())],
+                                           GetPlayerName(GetTriggerPlayer()))} voted for: ${Util.ColourString(settings.DIFFICULTY_COLOURS[i],
+                                                                                                              settings.DIFFICULTY_STRINGS[i])}`);
             }
         }
         DialogDisplayBJ(false, this.difficultyDialog, GetTriggerPlayer());

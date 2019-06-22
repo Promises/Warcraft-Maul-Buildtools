@@ -19,10 +19,7 @@ export class Race {
         }
     }
 
-
-    pickAction(player: Defender) {
-
-
+    pickAction(player: Defender): void {
         CreateUnit(player.wcPlayer, FourCC(this.id), player.getCenterX(), player.getCenterY(), bj_UNIT_FACING);
     }
 }

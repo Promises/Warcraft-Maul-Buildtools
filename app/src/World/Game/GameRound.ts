@@ -300,7 +300,8 @@ export class GameRound {
     }
 
     private FindThingForBossToDestroy(): destructable | undefined {
-        let thingForBossToDestory;
+        let thingForBossToDestory: destructable | undefined;
+        thingForBossToDestory = undefined;
 
         EnumDestructablesInRectAll(GetPlayableMapRect(), () => {
             if (GetDestructableTypeId(GetEnumDestructable()) === FourCC('B000')) {
@@ -309,7 +310,6 @@ export class GameRound {
         });
 
         return thingForBossToDestory;
-
     }
 
     private GiveWaveGoldReward(): void {
