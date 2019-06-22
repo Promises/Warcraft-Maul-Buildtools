@@ -24,6 +24,17 @@ export class Creep {
 
 
     printId() {
-        Log.Debug(GetUnitName(this.creep));
+        Log.Debug(this.getName());
     }
+
+    getName(): string{
+        return GetUnitName(this.creep)
+    }
+
+    getId():  number{
+        return GetUnitTypeId(this.creep);
+    }
+
+
+
 }

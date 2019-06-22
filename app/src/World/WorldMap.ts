@@ -9,8 +9,8 @@ import { Teleporter } from './Entity/Teleporter';
 import { RaceVoid } from './Game/Races/RaceVoid';
 import { RaceLootBoxer } from './Game/Races/RaceLootBoxer';
 import { AntiBlock } from './AntiBlock';
-import {Maze} from "./Maze";
-import * as settings from "./GlobalSettings";
+import { Maze } from './Maze';
+import * as settings from './GlobalSettings';
 
 export class WorldMap {
     game: WarcraftMaul;
@@ -172,7 +172,7 @@ export class WorldMap {
         this.races.push(new Race('e00D', 'Caerbannog', 'I000', this));
         this.races.push(new Race('n01V', 'Critters UNITE', 'I00L', this));
         this.races.push(new Race('n02A', 'Gnoll Republic', 'I00M', this));
-        this.races.push(new RaceVoid('h02T', 'Void Cult', 'I019',this));
+        this.races.push(new RaceVoid('h02T', 'Void Cult', 'I019', this));
         this.races.push(new Race('n02S', 'Alliance of Blades', 'I00P', this));
         this.races.push(new Race('n03C', 'Cavernous Creatures', 'I00Q', this));
         this.races.push(new Race('n046', 'Forest Troll Hut', 'I00O', this));
@@ -181,7 +181,7 @@ export class WorldMap {
         this.races.push(new Race('n04I', 'The Forsaken', 'I00T', this));
         this.races.push(new Race('e00H', 'Dwarven Mine', 'I00U', this));
         this.races.push(new Race('e00G', 'Galaxy', 'I00Z', this));
-        this.races.push(new RaceLootBoxer('u043', 'Loot Boxer', 'I02D',this));
+        this.races.push(new RaceLootBoxer('u043', 'Loot Boxer', 'I02D', this));
         this.races.push(new Race('u01B', 'Shrine of Buffs', 'I026', this));
     }
 
@@ -290,7 +290,7 @@ export class WorldMap {
         let GreysCheckpoint = GreysSpawns.spawnOne;
         GreysCheckpoint = GreysCheckpoint.next = new CheckPoint(Rect(-32.00, -3104.00, 32.00, -3040.00), this);
         GreysCheckpoint = GreysCheckpoint.next = new CheckPoint(Rect(-32.00, -4256.00, 32.00, -4192.00), this);
-        GreysCheckpoint.next = this.ship != undefined ? this.ship.killzone : undefined;
+        GreysCheckpoint.next = this.ship != undefined ? this.ship : undefined;
         this.playerSpawns[COLOUR.GRAY] = GreysSpawns;
 
 
@@ -415,5 +415,20 @@ export class WorldMap {
                 MinX = MinX + 128.0;
             }
         }
+    }
+
+    RemoveEveryUnit() {
+        let grp = GetUnitsInRectAll(GetPlayableMapRect());
+        ForGroupBJ(grp, () => this.RemoveUnitIfNotShip());
+        DestroyGroup(grp);
+    }
+
+    private RemoveUnitIfNotShip() {
+        if (GetUnitTypeId(GetEnumUnit()) == FourCC('n05G')) {
+            KillUnit(GetEnumUnit());
+        } else {
+            RemoveUnit(GetEnumUnit());
+        }
+
     }
 }
