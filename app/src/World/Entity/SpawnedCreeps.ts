@@ -1,5 +1,5 @@
-import { Creep } from './Creep';
-import { Trigger } from '../../JassOverrides/Trigger';
+import {Creep} from './Creep';
+import {Trigger} from '../../JassOverrides/Trigger';
 
 export class SpawnedCreeps {
 

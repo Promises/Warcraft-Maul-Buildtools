@@ -1,5 +1,5 @@
-import { CheckPoint } from './CheckPoint';
-import { WorldMap } from '../WorldMap';
+import {CheckPoint} from './CheckPoint';
+import {WorldMap} from '../WorldMap';
 
 export class Ship {
     ship: unit;
@@ -8,12 +8,12 @@ export class Ship {
 
     killzone: CheckPoint;
 
-    constructor(ship: unit, worldMap: WorldMap){
+    constructor(ship: unit, worldMap: WorldMap) {
         this.ship = ship;
         this.killzone = new CheckPoint(Rect(-768.00, -4992.00, 768.00, -4800.00), worldMap);
     }
 
-    MoveShip(){
+    MoveShip() {
         IssuePointOrder(this.ship, "move", GetRectCenterX(this.destination), GetRectCenterY(this.destination))
     }
 }

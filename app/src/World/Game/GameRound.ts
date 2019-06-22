@@ -1,11 +1,10 @@
 import * as settings from '../GlobalSettings';
-import { WarcraftMaul } from '../WarcraftMaul';
-import { WaveCreep } from '../Entity/WaveCreep';
-import { Creep } from '../Entity/Creep';
-import { CheckPoint } from '../Entity/CheckPoint';
-import { COLOUR_CODES, enemies } from '../GlobalSettings';
-import { Trigger } from '../../JassOverrides/Trigger';
-import { Log } from '../../lib/Serilog/Serilog';
+import {COLOUR_CODES, enemies} from '../GlobalSettings';
+import {WarcraftMaul} from '../WarcraftMaul';
+import {WaveCreep} from '../Entity/WaveCreep';
+import {Creep} from '../Entity/Creep';
+import {Trigger} from '../../JassOverrides/Trigger';
+import {Log} from '../../lib/Serilog/Serilog';
 
 export class GameRound {
     gameTimeTrigger: Trigger;

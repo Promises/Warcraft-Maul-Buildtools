@@ -1,11 +1,11 @@
-import { Trigger } from '../../../JassOverrides/Trigger';
+import {Trigger} from '../../../JassOverrides/Trigger';
 import * as settings from '../../GlobalSettings';
 import {WarcraftMaul} from "../../WarcraftMaul";
 
 export class SellTower {
 
     sellTrigger: Trigger;
-    game: WarcraftMaul
+    game: WarcraftMaul;
 
     constructor(game: WarcraftMaul) {
         this.game = game;

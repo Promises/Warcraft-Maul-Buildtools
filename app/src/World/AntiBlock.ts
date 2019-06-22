@@ -1,10 +1,8 @@
 import * as settings from './GlobalSettings';
-import { WorldMap } from './WorldMap';
+import {WorldMap} from './WorldMap';
 import {Rectangle} from "../JassOverrides/Rectangle";
 import {Trigger} from "../JassOverrides/Trigger";
 import {Defender} from "./Entity/Players/Defender";
-import {CheckPoint} from "./Entity/CheckPoint";
-import {Log} from "../lib/Serilog/Serilog";
 
 
 export class AntiBlock {

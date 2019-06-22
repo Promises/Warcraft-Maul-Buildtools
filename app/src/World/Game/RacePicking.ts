@@ -1,14 +1,16 @@
 import * as settings from '../GlobalSettings';
-import { Trigger } from '../../JassOverrides/Trigger';
-import { WarcraftMaul } from '../WarcraftMaul';
-import { Defender } from '../Entity/Players/Defender';
-import { Race } from './Races/Race';
+import {Trigger} from '../../JassOverrides/Trigger';
+import {WarcraftMaul} from '../WarcraftMaul';
+import {Defender} from '../Entity/Players/Defender';
+import {Race} from './Races/Race';
 import {
     HybridTierEight,
     HybridTierFive,
-    HybridTierFour, HybridTierNine,
+    HybridTierFour,
+    HybridTierNine,
     HybridTierOne,
-    HybridTierSeven, HybridTierSix,
+    HybridTierSeven,
+    HybridTierSix,
     HybridTierThree,
     HybridTierTwo
 } from '../../Generated/hybridRandomGEN';
@@ -140,7 +142,7 @@ export class RacePicking {
         if (race) {
             player.races.push(race);
             race.pickAction(player);
-            print( player.getNameWithColour() + ' has chosen ' + race.name);
+            print(player.getNameWithColour() + ' has chosen ' + race.name);
         }
 
     }

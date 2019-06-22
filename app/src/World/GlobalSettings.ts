@@ -1,5 +1,5 @@
-import { Defender } from './Entity/Players/Defender';
-import { Attacker } from './Entity/Players/Attacker';
+import {Defender} from './Entity/Players/Defender';
+import {Attacker} from './Entity/Players/Attacker';
 
 export const players: Map<number, Defender> = new Map<number, Defender>();
 
@@ -165,7 +165,6 @@ export function InitializeStaticSounds() {
     SetSoundChannel(Sounds.goldSound, 0);
     SetSoundDistances(Sounds.goldSound, 750.0, 1000.0);
 }
-
 
 
 export const UNIT_ORDER_CANCEL_UPGRADE = 851976;

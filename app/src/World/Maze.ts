@@ -31,7 +31,7 @@ export class Maze {
     }
 
     public breathFirstSearch(sourceX: number, sourceY: number, destinationX: number, destinationY: number): boolean {
-        if(this.maze[sourceX + sourceY * this.width] === false || this.maze[destinationX + destinationY * this.width] === false) {
+        if (this.maze[sourceX + sourceY * this.width] === false || this.maze[destinationX + destinationY * this.width] === false) {
             return false;
         }
 
@@ -48,7 +48,7 @@ export class Maze {
         const s: Node = new Node(sourceX, sourceY, 0);
         q.push(s);
 
-        while(!q.empty()) {
+        while (!q.empty()) {
             const curr: Node = q.front();
 
             if (curr.x === destinationX && curr.y === destinationY) {

@@ -1,5 +1,5 @@
-import { CheckPoint } from './CheckPoint';
-import { WorldMap } from '../WorldMap';
+import {CheckPoint} from './CheckPoint';
+import {WorldMap} from '../WorldMap';
 
 export class Teleporter extends CheckPoint {
     facing: number;

@@ -1,17 +1,17 @@
-import { Defender } from './Entity/Players/Defender';
+import {Defender} from './Entity/Players/Defender';
 import * as settings from './GlobalSettings';
-import { Attacker } from './Entity/Players/Attacker';
-import { WorldMap } from './WorldMap';
-import { Commands } from './Game/Commands';
-import { GameRound } from './Game/GameRound';
-import { DifficultyVote } from './Game/DifficultyVote';
-import { RacePicking } from './Game/RacePicking';
-import { MultiBoard } from './Game/MultiBoard';
-import { Quests } from '../Generated/questsGEN';
-import { BUILD_DATE, BUILD_NUMBER } from '../Generated/Version';
-import { Log, LogLevel } from '../lib/Serilog/Serilog';
-import { StringSink } from '../lib/Serilog/Sinks/StringSink';
-import { SellTower } from './Entity/Tower/SellTower';
+import {Attacker} from './Entity/Players/Attacker';
+import {WorldMap} from './WorldMap';
+import {Commands} from './Game/Commands';
+import {GameRound} from './Game/GameRound';
+import {DifficultyVote} from './Game/DifficultyVote';
+import {RacePicking} from './Game/RacePicking';
+import {MultiBoard} from './Game/MultiBoard';
+import {Quests} from '../Generated/questsGEN';
+import {BUILD_DATE, BUILD_NUMBER} from '../Generated/Version';
+import {Log, LogLevel} from '../lib/Serilog/Serilog';
+import {StringSink} from '../lib/Serilog/Sinks/StringSink';
+import {SellTower} from './Entity/Tower/SellTower';
 
 export class WarcraftMaul {
 
@@ -151,9 +151,6 @@ export class WarcraftMaul {
         return Util.ColourString('999999', '' + result);
 
     }
-
-
-
 
 
 }

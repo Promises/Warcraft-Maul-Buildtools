@@ -1,8 +1,8 @@
-import { WarcraftMaul } from '../WarcraftMaul';
-import { COLOUR_CODES, enemies, players } from '../GlobalSettings';
-import { Trigger } from '../../JassOverrides/Trigger';
-import { Defender } from '../Entity/Players/Defender';
-import { Log } from '../../lib/Serilog/Serilog';
+import {WarcraftMaul} from '../WarcraftMaul';
+import {COLOUR_CODES, enemies, players} from '../GlobalSettings';
+import {Trigger} from '../../JassOverrides/Trigger';
+import {Defender} from '../Entity/Players/Defender';
+import {Log} from '../../lib/Serilog/Serilog';
 
 export class Commands {
 
@@ -256,7 +256,7 @@ export class Commands {
                 break;
 
             case 'draw':
-                if(!this.game.debugMode){
+                if (!this.game.debugMode) {
                     return;
                 }
                 let arr: rect[] = [];
@@ -266,26 +266,26 @@ export class Commands {
                         break;
                 }
                 for (let i = 0; i < command.length - 2; i++) {
-                    if(!command[2+i]){
+                    if (!command[2 + i]) {
                         Log.Error("Missing arguments");
                         return;
                     }
-                    if(!arr){
+                    if (!arr) {
                         Log.Error("invalid array");
                         return;
                     }
 
-                    if(!arr[+command[2+i]]){
+                    if (!arr[+command[2 + i]]) {
                         Log.Error("invalid index");
                         return;
                     }
-                    this.DrawRect(arr[+command[2+i]]);
+                    this.DrawRect(arr[+command[2 + i]]);
 
                 }
 
                 break;
             case "undraw":
-                if(!this.game.debugMode){
+                if (!this.game.debugMode) {
                     return;
                 }
                 this.DestroyDrawings();
@@ -504,7 +504,7 @@ export class Commands {
         let y2 = GetRectMaxY(rectangle);
 
         let model = "Doodads\\\\Cinematic\\\\DemonFootPrint\\\\DemonFootPrint0.mdl";
-        let sfx: effect[] =  [];
+        let sfx: effect[] = [];
         for (let x = x1; x < x2; x = x + 16) {
             sfx.push(AddSpecialEffect(model, x, y1))
         }
@@ -522,9 +522,10 @@ export class Commands {
         this.drawings.push(sfx);
 
     }
-    private DestroyDrawings(){
+
+    private DestroyDrawings() {
         for (let drawing of this.drawings) {
-            for (let sfx of  drawing){
+            for (let sfx of  drawing) {
                 DestroyEffect(sfx);
             }
 

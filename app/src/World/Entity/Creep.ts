@@ -1,21 +1,20 @@
-import { CheckPoint } from './CheckPoint';
-import { Log } from '../../lib/Serilog/Serilog';
+import {CheckPoint} from './CheckPoint';
+import {Log} from '../../lib/Serilog/Serilog';
 
 export class Creep {
     creep: unit;
     targetCheckpoint: CheckPoint | undefined;
 
 
-    constructor(creep: unit){
+    constructor(creep: unit) {
         this.creep = creep;
-
 
 
     }
 
 
-    ReapplyMovement(){
-        if(!this.targetCheckpoint){
+    ReapplyMovement() {
+        if (!this.targetCheckpoint) {
             Log.Fatal('Creep is missing pathing data');
             return;
         }

@@ -1,9 +1,9 @@
-import { AbstractPlayer } from './AbstractPlayer';
-import { ALLOW_PLAYER_TOWER_LOCATIONS, PLAYER_AREAS, players } from '../../GlobalSettings';
-import { Race } from '../../Game/Races/Race';
-import { Rectangle } from '../../../JassOverrides/Rectangle';
-import { Trigger } from '../../../JassOverrides/Trigger';
-import { WarcraftMaul } from '../../WarcraftMaul';
+import {AbstractPlayer} from './AbstractPlayer';
+import {ALLOW_PLAYER_TOWER_LOCATIONS, PLAYER_AREAS, players} from '../../GlobalSettings';
+import {Race} from '../../Game/Races/Race';
+import {Rectangle} from '../../../JassOverrides/Rectangle';
+import {Trigger} from '../../../JassOverrides/Trigger';
+import {WarcraftMaul} from '../../WarcraftMaul';
 
 export class Defender extends AbstractPlayer {
     scoreSlot = 0;
@@ -17,7 +17,7 @@ export class Defender extends AbstractPlayer {
     repickCounter: number = 0;
     voidBuilder: unit | undefined;
     lootBoxer: unit | undefined;
-    hybridBuilder: unit| undefined;
+    hybridBuilder: unit | undefined;
     hybridTowers: any[] = [];
     leaveTrigger: Trigger;
     deniedPlayers: AbstractPlayer[] = [];
@@ -26,12 +26,10 @@ export class Defender extends AbstractPlayer {
         super(id);
         this.setUpPlayerVariables();
         this.leaveTrigger = new Trigger();
-        this.leaveTrigger.AddCondition(()=>this.PlayerLeftTheGameConditions(game));
+        this.leaveTrigger.AddCondition(() => this.PlayerLeftTheGameConditions(game));
         this.leaveTrigger.AddAction(() => this.PlayerLeftTheGame(game));
 
     }
-
-
 
 
     setUpPlayerVariables() {
@@ -51,7 +49,6 @@ export class Defender extends AbstractPlayer {
         this.allowPlayerTower = CreateUnit(this.wcPlayer, FourCC('h03S'), allowTowerLoc.x, allowTowerLoc.y, 0.000);
 
 
-
     }
 
     hasRace(randomedRace: Race) {
@@ -63,18 +60,18 @@ export class Defender extends AbstractPlayer {
         return PLAYER_AREAS[this.id];
     }
 
-    getCenterX(){
+    getCenterX() {
         let x1 = this.getArea()[0];
         let x2 = this.getArea()[2];
 
-        return (x1 + x2)/2;
+        return (x1 + x2) / 2;
     }
 
-    getCenterY(){
+    getCenterY() {
         let y1 = this.getArea()[1];
         let y2 = this.getArea()[3];
 
-        return (y1 + y2)/2;
+        return (y1 + y2) / 2;
     }
 
     getVoidBuilder() {
@@ -112,7 +109,6 @@ export class Defender extends AbstractPlayer {
     }
 
     private ResetSpawnRestrictions() {
-
 
 
     }

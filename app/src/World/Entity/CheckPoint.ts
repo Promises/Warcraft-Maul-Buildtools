@@ -1,8 +1,5 @@
-import { SpawnedCreeps } from './SpawnedCreeps';
-import { WorldMap } from '../WorldMap';
-import { Creep } from './Creep';
-import get = Reflect.get;
-import { Trigger } from '../../JassOverrides/Trigger';
+import {WorldMap} from '../WorldMap';
+import {Trigger} from '../../JassOverrides/Trigger';
 
 export class CheckPoint {
     private _previous: CheckPoint | undefined;

@@ -1,4 +1,4 @@
-import { COLOUR_CODES } from '../../GlobalSettings';
+import {COLOUR_CODES} from '../../GlobalSettings';
 
 export abstract class AbstractPlayer {
     wcPlayer: player;

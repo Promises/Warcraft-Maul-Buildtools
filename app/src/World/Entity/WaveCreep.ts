@@ -1,4 +1,4 @@
-import { Log } from '../../lib/Serilog/Serilog';
+import {Log} from '../../lib/Serilog/Serilog';
 
 export class WaveCreep {
     id: string;
@@ -37,7 +37,7 @@ export class WaveCreep {
 
     }
 
-    getArmourType(): ARMOUR_TYPE{
+    getArmourType(): ARMOUR_TYPE {
         switch (this.wave) {
             case 1:
             case 6:
