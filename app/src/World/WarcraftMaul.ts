@@ -12,9 +12,10 @@ import {BUILD_DATE, BUILD_NUMBER} from '../Generated/Version';
 import {Log, LogLevel} from '../lib/Serilog/Serilog';
 import {StringSink} from '../lib/Serilog/Sinks/StringSink';
 import {SellTower} from './Entity/Tower/SellTower';
+import {DamageEngine} from "./Game/DamageEngine";
+import {DamageEngineGlobals} from "./Game/DamageEngineGlobals";
 
 export class WarcraftMaul {
-
     debugMode: boolean = false;
 
     waveTimer: number = settings.GAME_TIME_BEFORE_START;
@@ -32,8 +33,9 @@ export class WarcraftMaul {
 
     gameRoundHandler: GameRound;
     gameCommandHandler: Commands;
+    gameDamageEngineGlobals: DamageEngineGlobals;
+    gameDamageEngine: DamageEngine;
     scoreBoard: MultiBoard | undefined;
-
 
     constructor() {
         let players = settings.players;
@@ -82,6 +84,8 @@ export class WarcraftMaul {
 
         // Create the map
         this.worldMap = new WorldMap(this);
+        this.gameDamageEngineGlobals = new DamageEngineGlobals();
+        this.gameDamageEngine = new DamageEngine(this.gameDamageEngineGlobals);
         this.gameCommandHandler = new Commands(this);
         // this.gameCommandHandler.OpenAllSpawns();
 

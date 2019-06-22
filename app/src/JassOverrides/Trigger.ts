@@ -44,6 +44,10 @@ export class Trigger {
         return TriggerAddCondition(this.nativeTrigger, Condition(() => Trigger.EvaluateCondition(func)));
     }
 
+    public AddFilterFuncCondition(filter: filterfunc): triggercondition {
+        return TriggerAddCondition(this.nativeTrigger, filter);
+    }
+
     public RegisterAnyUnitEventBJ(whichEvent: playerunitevent) {
         TriggerRegisterAnyUnitEventBJ(this.nativeTrigger, whichEvent);
     }

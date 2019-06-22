@@ -28,7 +28,6 @@ export class WorldMap {
     disabledRaces: number = 0;
     antiBlock: AntiBlock;
 
-
     constructor(game: WarcraftMaul) {
         this.game = game;
         this.setupWorldCreatures();
