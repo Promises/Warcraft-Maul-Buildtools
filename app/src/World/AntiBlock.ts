@@ -52,10 +52,10 @@ export class AntiBlock {
         const rightSide = (x - maze.minX) / 64;
         const topSide = (y - maze.minY) / 64;
         const bottomSide = ((y - 64) - maze.minY) / 64;
-        maze.setBlocked(leftSide + bottomSide * maze.width, false);
-        maze.setBlocked(rightSide + bottomSide * maze.width, false);
-        maze.setBlocked(leftSide + topSide * maze.width, false);
-        maze.setBlocked(rightSide + topSide * maze.width, false);
+        maze.setWalkable(leftSide + bottomSide * maze.width, false);
+        maze.setWalkable(rightSide + bottomSide * maze.width, false);
+        maze.setWalkable(leftSide + topSide * maze.width, false);
+        maze.setWalkable(rightSide + topSide * maze.width, false);
 
         const playerSpawn = this._worldMap.playerSpawns[playerSpawnId];
         if (!playerSpawn) {
@@ -78,6 +78,10 @@ export class AntiBlock {
         const firstCheckpointY = Math.floor((GetRectCenterY(firstCheckpoint.rectangle) - maze.minY) / 64);
         const isAbleToReachFirstCheckpoint = maze.breathFirstSearch(spawnX, spawnY, firstCheckpointX, firstCheckpointY);
         if (!isAbleToReachFirstCheckpoint) {
+            maze.setWalkable(leftSide + bottomSide * maze.width, true);
+            maze.setWalkable(rightSide + bottomSide * maze.width, true);
+            maze.setWalkable(leftSide + topSide * maze.width, true);
+            maze.setWalkable(rightSide + topSide * maze.width, true);
             this.blocking(consUnit, player);
             return;
         }
@@ -91,6 +95,10 @@ export class AntiBlock {
         const secondCheckpointY = Math.floor((GetRectCenterY(secondCheckpoint.rectangle) - maze.minY) / 64);
         const isAbleToReachSecondCheckpoint = maze.breathFirstSearch(firstCheckpointX, firstCheckpointY, secondCheckpointX, secondCheckpointY);
         if (!isAbleToReachSecondCheckpoint) {
+            maze.setWalkable(leftSide + bottomSide * maze.width, true);
+            maze.setWalkable(rightSide + bottomSide * maze.width, true);
+            maze.setWalkable(leftSide + topSide * maze.width, true);
+            maze.setWalkable(rightSide + topSide * maze.width, true);
             this.blocking(consUnit, player);
             return;
         }
@@ -104,6 +112,10 @@ export class AntiBlock {
         const endY = Math.max(Math.min(Math.floor((GetRectCenterY(end.rectangle) - maze.minY) / 64), maze.height - 1), 0);
         const isAbleToReachEnd = maze.breathFirstSearch(secondCheckpointX, secondCheckpointY, endX, endY);
         if (!isAbleToReachEnd) {
+            maze.setWalkable(leftSide + bottomSide * maze.width, true);
+            maze.setWalkable(rightSide + bottomSide * maze.width, true);
+            maze.setWalkable(leftSide + topSide * maze.width, true);
+            maze.setWalkable(rightSide + topSide * maze.width, true);
             this.blocking(consUnit, player);
             return;
         }
