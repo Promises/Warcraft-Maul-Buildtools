@@ -1,3 +1,4 @@
+/* tslint:disable:variable-name */ // TODO: Fix the variable names
 export class DamageEngineGlobals {
     /**
      * DAMAGE ENGINE GLOBALS
