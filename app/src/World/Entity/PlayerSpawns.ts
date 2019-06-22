@@ -1,6 +1,8 @@
 import { CheckPoint } from './CheckPoint';
 import { WorldMap } from '../WorldMap';
 import { Trigger } from '../../JassOverrides/Trigger';
+import { SpawnedCreeps } from './SpawnedCreeps';
+import { Creep } from './Creep';
 
 export class PlayerSpawns {
     private _spawnOne: CheckPoint | undefined;
@@ -50,16 +52,14 @@ export class PlayerSpawns {
 
 
     EnteringUnitIsCreepAndHasNoCheckpoint(): boolean {
-        const creep = GetEnteringUnit();
-
         if (!this.isEnteringUnitCreep()) {
             return false;
         }
 
-        const spawnedCreeps = this.worldMap.spawnedCreeps;
-        if (spawnedCreeps) {
-            const spawnedCreep = spawnedCreeps.unitMap.get(GetHandleIdBJ(GetEnteringUnit()));
-            if (spawnedCreep) {
+        const spawnedCreeps: SpawnedCreeps | undefined = this.worldMap.spawnedCreeps;
+        if (spawnedCreeps !== undefined) {
+            const spawnedCreep: Creep | undefined = spawnedCreeps.unitMap.get(GetHandleIdBJ(GetEnteringUnit()));
+            if (spawnedCreep !== undefined) {
                 if (spawnedCreep.targetCheckpoint) {
                     return false;
                 }
@@ -69,7 +69,7 @@ export class PlayerSpawns {
         return true;
     }
 
-    isEnteringUnitCreep() {
+    isEnteringUnitCreep(): boolean {
         const ownerID: COLOUR = GetPlayerId(GetOwningPlayer(GetEnteringUnit()));
         switch (ownerID) {
             case COLOUR.NAVY:
@@ -82,16 +82,16 @@ export class PlayerSpawns {
         }
     }
 
-    private SpawnAction(spawn: CheckPoint) {
+    private SpawnAction(spawn: CheckPoint): void {
         if (this.spawnOne && !spawn.next) {
             spawn = this.spawnOne;
         }
         if (!spawn.next) {
             return;
         }
-        const spawnedCreeps = this.worldMap.spawnedCreeps;
-        if (spawnedCreeps) {
-            const spawnedCreep = spawnedCreeps.unitMap.get(GetHandleIdBJ(GetEnteringUnit()));
+        const spawnedCreeps: SpawnedCreeps | undefined = this.worldMap.spawnedCreeps;
+        if (spawnedCreeps !== undefined) {
+            const spawnedCreep: Creep | undefined = spawnedCreeps.unitMap.get(GetHandleIdBJ(GetEnteringUnit()));
             if (spawnedCreep) {
                 if (spawn.next) {
                     spawnedCreep.targetCheckpoint = spawn.next;
@@ -104,7 +104,7 @@ export class PlayerSpawns {
 
     }
 
-    private AddCreepAbilities() {
+    private AddCreepAbilities(): void {
         // TODO: Implement Creep abilities
     }
 }

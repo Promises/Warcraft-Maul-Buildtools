@@ -69,6 +69,7 @@
     "no-inferrable-types": false,
     "no-misused-new": true,
     "no-non-null-assertion": true,
+    "no-parameter-reassignment": false,
     "no-shadowed-variable": true,
     "no-string-literal": false,
     "no-string-throw": true,

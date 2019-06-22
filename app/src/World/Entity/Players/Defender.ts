@@ -1,5 +1,5 @@
 import { AbstractPlayer } from './AbstractPlayer';
-import { ALLOW_PLAYER_TOWER_LOCATIONS, PLAYER_AREAS, players } from '../../GlobalSettings';
+import { ALLOW_PLAYER_TOWER_LOCATIONS, PLAYER_AREAS, players, Point } from '../../GlobalSettings';
 import { Race } from '../../Game/Races/Race';
 import { Rectangle } from '../../../JassOverrides/Rectangle';
 import { Trigger } from '../../../JassOverrides/Trigger';
@@ -34,7 +34,7 @@ export class Defender extends AbstractPlayer {
         this.leaveTrigger.AddAction(() => this.PlayerLeftTheGame(game));
     }
 
-    public setHoloMaze(holoMaze: AbstractHologramMaze | undefined) {
+    public setHoloMaze(holoMaze: AbstractHologramMaze | undefined): void {
         if (this.holoMaze !== undefined) {
             this.holoMaze.Destroy();
         }
@@ -42,66 +42,63 @@ export class Defender extends AbstractPlayer {
         this.holoMaze = holoMaze;
     }
 
-    setUpPlayerVariables() {
-
+    setUpPlayerVariables(): void {
         // Remove fog
         CreateFogModifierRectBJ(true, this.wcPlayer, FOG_OF_WAR_VISIBLE, GetPlayableMapRect());
 
 
         // Set Starting gold and lumber
-        SetPlayerStateBJ(this.wcPlayer, PLAYER_STATE_RESOURCE_GOLD, this.id == COLOUR.GRAY ? 150 : 100);
+        SetPlayerStateBJ(this.wcPlayer, PLAYER_STATE_RESOURCE_GOLD, this.id === COLOUR.GRAY ? 150 : 100);
         SetPlayerStateBJ(this.wcPlayer, PLAYER_STATE_RESOURCE_LUMBER, 1);
 
 
         // Creat the allow player indicator tower
-        const allowTowerLoc = ALLOW_PLAYER_TOWER_LOCATIONS[this.id];
+        const allowTowerLoc: Point = ALLOW_PLAYER_TOWER_LOCATIONS[this.id];
         //
         this.allowPlayerTower = CreateUnit(this.wcPlayer, FourCC('h03S'), allowTowerLoc.x, allowTowerLoc.y, 0.000);
-
-
     }
 
-    hasRace(randomedRace: Race) {
-        return this.races.indexOf(randomedRace) != -1;
+    hasRace(randomedRace: Race): boolean {
+        return this.races.indexOf(randomedRace) !== -1;
     }
 
 
-    getArea() {
+    getArea(): number[] {
         return PLAYER_AREAS[this.id];
     }
 
-    getCenterX() {
-        const x1 = this.getArea()[0];
-        const x2 = this.getArea()[2];
+    getCenterX(): number {
+        const x1: number = this.getArea()[0];
+        const x2: number = this.getArea()[2];
 
         return (x1 + x2) / 2;
     }
 
-    getCenterY() {
-        const y1 = this.getArea()[1];
-        const y2 = this.getArea()[3];
+    getCenterY(): number {
+        const y1: number = this.getArea()[1];
+        const y2: number = this.getArea()[3];
 
         return (y1 + y2) / 2;
     }
 
-    getVoidBuilder() {
+    getVoidBuilder(): unit | undefined {
         return this.voidBuilder;
     }
 
-    getLootBoxer() {
+    getLootBoxer(): unit | undefined {
         return this.lootBoxer;
     }
 
 
-    getRectangle() {
+    getRectangle(): Rectangle {
         return new Rectangle(this.getArea());
     }
 
-    private PlayerLeftTheGameConditions(game: WarcraftMaul) {
+    private PlayerLeftTheGameConditions(game: WarcraftMaul): boolean {
         return game.gameLives > 0;
     }
 
-    private PlayerLeftTheGame(game: WarcraftMaul) {
+    private PlayerLeftTheGame(game: WarcraftMaul): void {
         print(`${this.getNameWithColour()} has left the game!`);
 
         this.ResetSpawnRestrictions();
@@ -118,9 +115,8 @@ export class Defender extends AbstractPlayer {
         // this.DistributePlayerTowers();
     }
 
-    private ResetSpawnRestrictions() {
-
-
+    private ResetSpawnRestrictions(): void {
+        // TODO: Implement this function
     }
 
     AddTower(tower: Tower): void {

@@ -1,3 +1,4 @@
+/* tslint:disable:prefer-template */    // TODO: Fix this linting error and remove the exception
 import { WarcraftMaul } from '../WarcraftMaul';
 import { COLOUR_CODES, enemies, players } from '../GlobalSettings';
 import { Trigger } from '../../JassOverrides/Trigger';
@@ -25,18 +26,18 @@ export class Commands {
             this.commandTrigger.RegisterPlayerChatEvent(player.wcPlayer, '-', false);
         }
         this.commandTrigger.AddAction(() => this.handleCommand());
-        for (let i = 0; i < 24; i++) {
+        for (let i: number = 0; i < 24; i++) {
             this.hasVotedToKick[i] = false;
         }
     }
 
-    private handleCommand() {
-        const player = players.get(GetPlayerId(GetTriggerPlayer()));
+    private handleCommand(): void {
+        const player: Defender | undefined = players.get(GetPlayerId(GetTriggerPlayer()));
         if (!player) {
             return;
         }
-        const playerCommand = GetEventPlayerChatString().substr(1).toLowerCase();
-        const command = playerCommand.split(' ');
+        const playerCommand: string = GetEventPlayerChatString().substr(1).toLowerCase();
+        const command: string[] = playerCommand.split(' ');
         Log.Debug(Util.ArraysToString(command));
         switch (command[0]) {
             case 'air':
@@ -80,13 +81,15 @@ export class Commands {
                     '|cFFFFCC00Hardened Skin:|r Creeps ignore 2x creep level incoming physical damage\n' +
                     '|cFFFFCC00Evasion:|r Creeps will have a 1x creep level chance to evade physical damage\n' +
                     '|cFFFFCC00Armor Bonus:|r Increases creep armor by creep level divided by 3\n' +
-                    '|cFFFFCC00Cripple Aura:|r Whenever a creep takes damage it has a 10% chance to cripple the attacking tower, slowing attack speed by 1.5% times creep level\n' +
+                    '|cFFFFCC00Cripple Aura:|r Whenever a creep takes damage it has a 10% chance to cripple the attacking tower,' +
+                    'slowing attack speed by 1.5% times creep level\n' +
                     '|cFFFFCC00Spell Shield:|r Blocks targetting spells from casting every 4 (minus 0.1 times creep level) second\n' +
                     '|cFFFFCC00Tornado Aura:|r Nearby towers are slowed by 1% times creep level\n' +
                     '|cFFFFCC00Vampiric Aura:|r Creeps have a 10% chance to heal for 4x creep level\n' +
                     '|cFFFFCC00Divine Shield:|r Creeps ignore damage until they\'ve been damaged 1x creep level times\n' +
                     '|cFFFFCC00Walk it Off:|r slowed down creeps take 0.5% times creep level less damage\n' +
-                    '|cFFFFCC00Morning Person:|r creeps heal for 0.5% times creep level of their max health every time they reach a checkpoint (not teleports)');
+                    '|cFFFFCC00Morning Person:|r creeps heal for 0.5% times creep level of their max health every time they ' +
+                    'reach a checkpoint (not teleports)');
                 break;
             case 'repick':
                 if (this.RepickConditions(player)) {
@@ -115,7 +118,7 @@ export class Commands {
                 break;
             case 'gold':
                 if (this.game.debugMode) {
-                    const amount = Util.ParseInt(command[1]);
+                    const amount: number = Util.ParseInt(command[1]);
                     if (!amount) {
                         player.sendMessage(Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Invalid Amount'));
                         return;
@@ -126,7 +129,7 @@ export class Commands {
                 break;
             case 'lumber':
                 if (this.game.debugMode) {
-                    const amount = Util.ParsePositiveInt(command[1]);
+                    const amount: number = Util.ParsePositiveInt(command[1]);
                     if (!amount) {
                         player.sendMessage(Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Invalid Amount'));
                         return;
@@ -138,7 +141,7 @@ export class Commands {
                 break;
             case 'lives':
                 if (this.game.debugMode) {
-                    const amount = Util.ParseInt(command[1]);
+                    const amount: number = Util.ParseInt(command[1]);
                     if (!amount) {
                         player.sendMessage(Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Invalid Amount'));
                         return;
@@ -158,7 +161,7 @@ export class Commands {
                 break;
             case 'diff':
                 if (this.game.debugMode) {
-                    const amount = Util.ParsePositiveInt(command[1]);
+                    const amount: number = Util.ParsePositiveInt(command[1]);
                     if (!amount) {
                         player.sendMessage(Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Invalid Amount'));
                         return;
@@ -175,8 +178,8 @@ export class Commands {
             case 'votekick':
                 Log.Error('Command not implemented yet');
                 if (command[1]) {
-                    const receiver = this.getPlayerIdFromColourName(command[1]);
-                    const receivingPlayer = players.get(receiver);
+                    const receiver: number = this.getPlayerIdFromColourName(command[1]);
+                    const receivingPlayer: Defender | undefined = players.get(receiver);
                     if (receivingPlayer) {
                         this.VoteKick(player, receivingPlayer);
                     } else {
@@ -188,10 +191,10 @@ export class Commands {
             case 'send':
                 Log.Error('Command not implemented yet');
                 if (command[1] && command[2]) {
-                    const receiver = this.getPlayerIdFromColourName(command[1]);
-                    const receivingPlayer = players.get(receiver);
+                    const receiver: number = this.getPlayerIdFromColourName(command[1]);
+                    const receivingPlayer: Defender | undefined = players.get(receiver);
 
-                    const amount = Util.ParsePositiveInt(command[2]);
+                    const amount: number = Util.ParsePositiveInt(command[2]);
                     if (!amount) {
                         player.sendMessage(Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Invalid Amount'));
                         return;
@@ -225,8 +228,8 @@ export class Commands {
                 break;
             case 'zoom':
             case 'cam':
-                if (GetLocalPlayer() == player.wcPlayer) {
-                    const amount = Util.ParsePositiveInt(command[1]);
+                if (GetLocalPlayer() === player.wcPlayer) {
+                    const amount: number = Util.ParsePositiveInt(command[1]);
                     if (!amount) {
                         player.sendMessage(Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Invalid Amount'));
                         return;
@@ -237,7 +240,7 @@ export class Commands {
                 break;
             case 'wave':
                 if (this.game.debugMode) {
-                    const amount = Util.ParsePositiveInt(command[1]);
+                    const amount: number = Util.ParsePositiveInt(command[1]);
                     if (!amount) {
                         player.sendMessage(Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Invalid Amount'));
                         return;
@@ -253,9 +256,9 @@ export class Commands {
                 }
                 break;
             case 'maze':
-                let invalidMaze = false;
+                let invalidMaze: boolean = false;
                 if (command.length === 2) {
-                    const playerId = GetPlayerId(GetTriggerPlayer());
+                    const playerId: number = GetPlayerId(GetTriggerPlayer());
                     const firstSpawn: CheckPoint | undefined = this.game.worldMap.playerSpawns[playerId].spawnOne;
                     if (firstSpawn === undefined) {
                         return;
@@ -271,7 +274,7 @@ export class Commands {
                         return;
                     }
 
-                    let imagePath = '';
+                    let imagePath: string = '';
                     if (GetTriggerPlayer() === GetLocalPlayer()) {
                         imagePath = 'ReplaceableTextures\\Splats\\SuggestedPlacementSplat.blp';
                     }
@@ -281,13 +284,25 @@ export class Commands {
                             player.setHoloMaze(undefined);
                             break;
                         case '1':
-                            player.setHoloMaze(new CircleHoloMaze(imagePath, GetRectCenterX(firstCheckpoint.rectangle), GetRectCenterY(firstCheckpoint.rectangle), GetRectCenterX(secondCheckpoint.rectangle), GetRectCenterY(secondCheckpoint.rectangle)));
+                            player.setHoloMaze(new CircleHoloMaze(imagePath,
+                                                                  GetRectCenterX(firstCheckpoint.rectangle),
+                                                                  GetRectCenterY(firstCheckpoint.rectangle),
+                                                                  GetRectCenterX(secondCheckpoint.rectangle),
+                                                                  GetRectCenterY(secondCheckpoint.rectangle)));
                             break;
                         case '2':
-                            player.setHoloMaze(new SimpleHoloMaze(imagePath, GetRectCenterX(firstCheckpoint.rectangle), GetRectCenterY(firstCheckpoint.rectangle), GetRectCenterX(secondCheckpoint.rectangle), GetRectCenterY(secondCheckpoint.rectangle)));
+                            player.setHoloMaze(new SimpleHoloMaze(imagePath,
+                                                                  GetRectCenterX(firstCheckpoint.rectangle),
+                                                                  GetRectCenterY(firstCheckpoint.rectangle),
+                                                                  GetRectCenterX(secondCheckpoint.rectangle),
+                                                                  GetRectCenterY(secondCheckpoint.rectangle)));
                             break;
                         case '3':
-                            player.setHoloMaze(new AdvancedHoloMaze(imagePath, GetRectCenterX(firstCheckpoint.rectangle), GetRectCenterY(firstCheckpoint.rectangle), GetRectCenterX(secondCheckpoint.rectangle), GetRectCenterY(secondCheckpoint.rectangle)));
+                            player.setHoloMaze(new AdvancedHoloMaze(imagePath,
+                                                                    GetRectCenterX(firstCheckpoint.rectangle),
+                                                                    GetRectCenterY(firstCheckpoint.rectangle),
+                                                                    GetRectCenterX(secondCheckpoint.rectangle),
+                                                                    GetRectCenterY(secondCheckpoint.rectangle)));
                             break;
                         default:
                             invalidMaze = true;
@@ -316,7 +331,7 @@ export class Commands {
                     case 'antiblock':
                         break;
                 }
-                for (let i = 0; i < command.length - 2; i++) {
+                for (let i: number = 0; i < command.length - 2; i++) {
                     if (!command[2 + i]) {
                         Log.Error('Missing arguments');
                         return;
@@ -342,30 +357,25 @@ export class Commands {
                 this.DestroyDrawings();
                 break;
         }
-
-
     }
 
     getPlayerIdFromColourName(color: string): number {
         return Util.COLOUR_IDS[color.toUpperCase()];
     }
 
-
-    RepickActions(player: Defender) {
-        const grp = GetUnitsInRectAll(GetPlayableMapRect());
-        const maxgold = player.id == COLOUR.GRAY ? 150 : 100;
-        if (player.getGold() > maxgold) {
-            player.setGold(maxgold);
+    RepickActions(player: Defender): void {
+        const grp: group = GetUnitsInRectAll(GetPlayableMapRect());
+        const maxGold: number = player.id === COLOUR.GRAY ? 150 : 100;
+        if (player.getGold() > maxGold) {
+            player.setGold(maxGold);
         }
         player.setLumber(1);
         ForGroupBJ(grp, () => this.RemovePlayerUnits(player));
         DestroyGroup(grp);
-
-
     }
 
-    RepickConditions(player: Defender) {
-        if (!(this.game.gameRoundHandler.currentWave == 1)) {
+    RepickConditions(player: Defender): boolean {
+        if (!(this.game.gameRoundHandler.currentWave === 1)) {
             return false;
         }
         if (this.game.gameRoundHandler.isWaveInProgress) {
@@ -380,47 +390,47 @@ export class Commands {
         return true;
     }
 
-    RemovePlayerUnits(player: Defender) {
-        if (GetOwningPlayer(GetEnumUnit()) == player.wcPlayer) {
+    RemovePlayerUnits(player: Defender): void {
+        if (GetOwningPlayer(GetEnumUnit()) === player.wcPlayer) {
             if (this.RepickRemoveConditions(GetEnumUnit())) {
                 RemoveUnit(GetEnumUnit());
             }
         }
     }
 
-    private RepickRemoveConditions(Unit: unit) {
-        if (GetUnitTypeId(Unit) == FourCC('h03S')) {
+    private RepickRemoveConditions(Unit: unit): boolean {
+        if (GetUnitTypeId(Unit) === FourCC('h03S')) {
             return false;
         }
 
-        if (GetUnitTypeId(Unit) == FourCC('e00C')) {
+        if (GetUnitTypeId(Unit) === FourCC('e00C')) {
             return false;
         }
 
         return true;
     }
 
-    OpenAllSpawns() {
+    OpenAllSpawns(): void {
         for (const spawn of this.game.worldMap.playerSpawns) {
             spawn.isOpen = true;
         }
     }
 
-
-    CloseAllSpawns() {
+    CloseAllSpawns(): void {
         for (const spawn of this.game.worldMap.playerSpawns) {
             spawn.isOpen = false;
         }
     }
 
-
-    private giveGoldToPlayer(receivingPlayer: Defender | undefined, player: Defender, amount: number) {
+    private giveGoldToPlayer(receivingPlayer: Defender | undefined, player: Defender, amount: number): void {
         if (receivingPlayer) {
             if (player.getGold() >= amount) {
                 player.setGold(player.getGold() - amount);
                 receivingPlayer.setGold(receivingPlayer.getGold() + amount);
-                player.sendMessage(`You've sent ${Util.ColourString('FFCC00', '' + amount)} gold to ${receivingPlayer.getNameWithColour()}`);
-                receivingPlayer.sendMessage(`You've received ${Util.ColourString('FFCC00', '' + amount)} gold from ${player.getNameWithColour()}`);
+                player.sendMessage(
+                    `You've sent ${Util.ColourString('FFCC00', '' + amount)} gold to ${receivingPlayer.getNameWithColour()}`);
+                receivingPlayer.sendMessage(
+                    `You've received ${Util.ColourString('FFCC00', '' + amount)} gold from ${player.getNameWithColour()}`);
 
             } else {
                 player.sendMessage('You do not have this much gold');
@@ -430,10 +440,9 @@ export class Commands {
         }
     }
 
-    private VoteKick(player: Defender, receivingPlayer: Defender) {
-
+    private VoteKick(player: Defender, receivingPlayer: Defender): void {
         if (!this.voteKickInProgress) {
-            if (player != receivingPlayer) {
+            if (player !== receivingPlayer) {
                 print(`${player.getNameWithColour()} has started a votekick for ${receivingPlayer.getNameWithColour()} (say -y to vote)`);
                 this.voteKickInProgress = true;
                 this.voteAgainstPlayer = receivingPlayer;
@@ -448,20 +457,18 @@ export class Commands {
 
     }
 
-    private VotekickExpire() {
-        const count = this.CountCurrentVotes();
+    private VotekickExpire(): void {
+        const count: number = this.CountCurrentVotes();
         if (this.voteAgainstPlayer) {
             print(`Votekick for ${this.voteAgainstPlayer.getNameWithColour()} has ended with ${count} votes`);
         }
         this.voteKickInProgress = false;
-
-
     }
 
-    private VoteYes(player: Defender) {
+    private VoteYes(player: Defender): void {
         if (this.voteKickInProgress) {
             if (!this.hasVotedToKick[player.id]) {
-                if (!(this.voteAgainstPlayer == player)) {
+                if (!(this.voteAgainstPlayer === player)) {
                     this.hasVotedToKick[player.id] = true;
                     this.CheckVotes();
                 } else {
@@ -476,16 +483,15 @@ export class Commands {
         }
     }
 
-    private CheckVotes() {
-        const currentVotes = this.CountCurrentVotes();
-        const neededVotes = (players.size / 2) + 1;
-        const missingVotes = neededVotes - currentVotes;
+    private CheckVotes(): void {
+        const currentVotes: number = this.CountCurrentVotes();
+        const neededVotes: number = (players.size / 2) + 1;
+        const missingVotes: number = neededVotes - currentVotes;
 
 
         if (currentVotes >= neededVotes) {
             if (this.voteAgainstPlayer) {
                 this.game.worldMap.playerSpawns[this.voteAgainstPlayer.id].isOpen = true;
-
 
                 this.RemoveAllKickedPlayerTowers();
                 if (this.game.scoreBoard) {
@@ -494,13 +500,11 @@ export class Commands {
                 }
                 players.delete(this.voteAgainstPlayer.id);
 
-
                 print(`Votekick for ${this.voteAgainstPlayer.getNameWithColour()} has succeeded!`);
                 CustomDefeatBJ(this.voteAgainstPlayer.wcPlayer, 'Kicked!');
 
                 DestroyTimer(this.voteKickTimer);
                 this.voteKickInProgress = false;
-
             }
         } else {
             print('You\'ll need ' + missingVotes + ' more votes to kick');
@@ -508,8 +512,8 @@ export class Commands {
     }
 
     private CountCurrentVotes(): number {
-        let count = 0;
-        for (let i = 0; i < this.hasVotedToKick.length; i++) {
+        let count: number = 0;
+        for (let i: number = 0; i < this.hasVotedToKick.length; i++) {
             if (this.hasVotedToKick) {
                 count++;
             }
@@ -517,69 +521,63 @@ export class Commands {
         return count;
     }
 
-    private RemoveAllKickedPlayerTowers() {
-
-        const grp = GetUnitsInRectAll(GetPlayableMapRect());
-
+    private RemoveAllKickedPlayerTowers(): void {
+        const grp: group = GetUnitsInRectAll(GetPlayableMapRect());
         ForGroupBJ(GetUnitsInRectAll(GetPlayableMapRect()), () => this.RemoveKickedPlayerTowers());
         DestroyGroup(grp);
-
     }
 
-    private RemoveKickedPlayerTowers() {
+    private RemoveKickedPlayerTowers(): void {
         if (this.IsPickedUnitOwnedByKickedPlayer()) {
             RemoveUnit(GetEnumUnit());
         }
     }
 
-    private IsPickedUnitOwnedByKickedPlayer() {
+    private IsPickedUnitOwnedByKickedPlayer(): boolean {
         if (!this.voteAgainstPlayer) {
             return false;
         }
-        if (!(GetPlayerId(GetOwningPlayer(GetEnumUnit())) == this.voteAgainstPlayer.id)) {
+        if (!(GetPlayerId(GetOwningPlayer(GetEnumUnit())) === this.voteAgainstPlayer.id)) {
             return false;
         }
 
-        if (!(GetUnitTypeId(GetEnumUnit()) != FourCC('h03S'))) {
+        if (!(GetUnitTypeId(GetEnumUnit()) !== FourCC('h03S'))) {
             return false;
-
         }
 
         return true;
     }
 
-    private DrawRect(rectangle: rect) {
-        const x1 = GetRectMinX(rectangle);
-        const y1 = GetRectMinY(rectangle);
-        const x2 = GetRectMaxX(rectangle);
-        const y2 = GetRectMaxY(rectangle);
+    private DrawRect(rectangle: rect): void {
+        const x1: number = GetRectMinX(rectangle);
+        const y1: number = GetRectMinY(rectangle);
+        const x2: number = GetRectMaxX(rectangle);
+        const y2: number = GetRectMaxY(rectangle);
 
-        const model = 'Doodads\\\\Cinematic\\\\DemonFootPrint\\\\DemonFootPrint0.mdl';
+        const model: string = 'Doodads\\\\Cinematic\\\\DemonFootPrint\\\\DemonFootPrint0.mdl';
         const sfx: effect[] = [];
-        for (let x = x1; x < x2; x = x + 16) {
+        for (let x: number = x1; x < x2; x = x + 16) {
             sfx.push(AddSpecialEffect(model, x, y1));
         }
 
-        for (let y = y1; y < y2; y = y + 16) {
+        for (let y: number = y1; y < y2; y = y + 16) {
             sfx.push(AddSpecialEffect(model, x2, y));
         }
 
-        for (let x = x1; x < x2; x = x + 16) {
+        for (let x: number = x1; x < x2; x = x + 16) {
             sfx.push(AddSpecialEffect(model, x, y2));
         }
-        for (let y = y1; y < y2; y = y + 16) {
+        for (let y: number = y1; y < y2; y = y + 16) {
             sfx.push(AddSpecialEffect(model, x1, y));
         }
         this.drawings.push(sfx);
-
     }
 
-    private DestroyDrawings() {
+    private DestroyDrawings(): void {
         for (const drawing of this.drawings) {
             for (const sfx of  drawing) {
                 DestroyEffect(sfx);
             }
-
         }
         this.drawings = [];
     }

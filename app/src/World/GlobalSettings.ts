@@ -5,7 +5,12 @@ export const players: Map<number, Defender> = new Map<number, Defender>();
 
 export const enemies: Attacker[] = [];
 
-export const ALLOW_PLAYER_TOWER_LOCATIONS = [
+export interface Point {
+    x: number;
+    y: number;
+}
+
+export const ALLOW_PLAYER_TOWER_LOCATIONS: Point[] = [
     { x: -1536.0, y: 5376.0 }, // Red
     { x: 640.0, y: 4992.0 }, // Blue
     { x: 1536.0, y: 5376.0 }, // Teal
@@ -93,7 +98,7 @@ export const ARMOUR_TYPE_NAMES = [
 
 ];
 
-export const PLAYER_AREAS = [
+export const PLAYER_AREAS: number[][] = [
     [-4224.0, 3968.0, -1792.0, 5504.0], // Red area
     [-768.0, 2304.0, 768.0, 4736.0], // Blue area
     [1792.0, 3968.0, 4224.0, 5504.0], // Teal area

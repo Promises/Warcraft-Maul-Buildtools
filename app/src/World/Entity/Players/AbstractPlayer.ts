@@ -9,8 +9,7 @@ export abstract class AbstractPlayer {
         this.wcPlayer = Player(id);
     }
 
-
-    makeAlliance(otherPlayer: AbstractPlayer) {
+    makeAlliance(otherPlayer: AbstractPlayer): void {
         SetPlayerAllianceStateBJ(this.wcPlayer, otherPlayer.wcPlayer, bj_ALLIANCE_ALLIED_VISION);
     }
 
@@ -30,28 +29,27 @@ export abstract class AbstractPlayer {
         return GetPlayerName(this.wcPlayer);
     }
 
-    sendMessage(message: string) {
+    sendMessage(message: string): void {
         DisplayTimedTextToPlayer(this.wcPlayer, 0, 0, 5, message);
-
     }
 
-    setGold(amount: number) {
+    setGold(amount: number): void {
         SetPlayerStateBJ(this.wcPlayer, PLAYER_STATE_RESOURCE_GOLD, amount);
     }
 
-    setLumber(amount: number) {
+    setLumber(amount: number): void {
         SetPlayerStateBJ(this.wcPlayer, PLAYER_STATE_RESOURCE_LUMBER, amount);
     }
 
-    setHandicap(percentage: number) {
+    setHandicap(percentage: number): void {
         SetPlayerHandicapBJ(this.wcPlayer, percentage);
     }
 
-    giveLumber(amount: number) {
+    giveLumber(amount: number): void {
         AdjustPlayerStateBJ(amount, this.wcPlayer, PLAYER_STATE_RESOURCE_LUMBER);
     }
 
-    giveGold(amount: number) {
+    giveGold(amount: number): void {
         AdjustPlayerStateBJ(amount, this.wcPlayer, PLAYER_STATE_RESOURCE_GOLD);
     }
 
@@ -63,7 +61,7 @@ export abstract class AbstractPlayer {
         return GetPlayerState(this.wcPlayer, PLAYER_STATE_RESOURCE_LUMBER);
     }
 
-    defeatPlayer() {
+    defeatPlayer(): void {
         CustomDefeatBJ(this.wcPlayer, 'Defeat!');
     }
 

@@ -1,5 +1,7 @@
 import { WorldMap } from '../WorldMap';
 import { Trigger } from '../../JassOverrides/Trigger';
+import { SpawnedCreeps } from './SpawnedCreeps';
+import { Creep } from './Creep';
 
 export class CheckPoint {
     private _previous: CheckPoint | undefined;
@@ -28,10 +30,10 @@ export class CheckPoint {
         if (!this.isEnteringUnitCreep) {
             return false;
         }
-        const spawnedCreeps = this.worldMap.spawnedCreeps;
-        if (spawnedCreeps) {
-            const spawnedCreep = spawnedCreeps.unitMap.get(GetHandleIdBJ(GetEnteringUnit()));
-            if (spawnedCreep) {
+        const spawnedCreeps: SpawnedCreeps | undefined = this.worldMap.spawnedCreeps;
+        if (spawnedCreeps !== undefined) {
+            const spawnedCreep: Creep | undefined = spawnedCreeps.unitMap.get(GetHandleIdBJ(GetEnteringUnit()));
+            if (spawnedCreep !== undefined) {
                 if (spawnedCreep.targetCheckpoint) {
                     return spawnedCreep.targetCheckpoint === this;
                 }
@@ -40,14 +42,14 @@ export class CheckPoint {
         return true;
     }
 
-    checkPointAction() {
+    checkPointAction(): void {
         if (!this.next) {
             return;
         }
-        const spawnedCreeps = this.worldMap.spawnedCreeps;
-        if (spawnedCreeps) {
-            const creep = spawnedCreeps.unitMap.get(GetHandleIdBJ(GetEnteringUnit()));
-            if (creep) {
+        const spawnedCreeps: SpawnedCreeps | undefined = this.worldMap.spawnedCreeps;
+        if (spawnedCreeps !== undefined) {
+            const creep: Creep | undefined = spawnedCreeps.unitMap.get(GetHandleIdBJ(GetEnteringUnit()));
+            if (creep !== undefined) {
                 creep.targetCheckpoint = this.next;
                 IssuePointOrder(GetEnteringUnit(), 'move', GetRectCenterX(this.next.rectangle), GetRectCenterY(this.next.rectangle));
                 if (UnitHasBuffBJ(GetEnteringUnit(), FourCC('B028'))) {
@@ -76,7 +78,7 @@ export class CheckPoint {
     }
 
 
-    isEnteringUnitCreep() {
+    isEnteringUnitCreep(): boolean {
         const ownerID: COLOUR = GetPlayerId(GetOwningPlayer(GetEnteringUnit()));
         switch (ownerID) {
             case COLOUR.NAVY:

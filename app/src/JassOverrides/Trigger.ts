@@ -1,10 +1,28 @@
 import { Log } from '../lib/Serilog/Serilog';
 
 export class Trigger {
-    nativeTrigger: trigger;
 
     constructor() {
         this.nativeTrigger = CreateTrigger();
+    }
+    nativeTrigger: trigger;
+
+
+    public static EvaluateCondition(func: () => boolean): boolean {
+        let answer: boolean = false;
+
+        xpcall(() => {
+            answer = func();
+        },     (err: any) => {
+            this.printError(err);
+        });
+
+        return answer;
+    }
+
+
+    public static  printError(err: any) {
+        Log.Fatal(err);
     }
 
 
@@ -53,23 +71,5 @@ export class Trigger {
 
     public RegisterPlayerChatEvent(whichPlayer: player, chatMessageToDetect: string, exactMatchOnly: boolean): event {
         return TriggerRegisterPlayerChatEvent(this.nativeTrigger, whichPlayer, chatMessageToDetect, exactMatchOnly);
-    }
-
-
-    public static EvaluateCondition(func: () => boolean) {
-        let answer = false;
-
-        xpcall(() => {
-            answer = func();
-        }, err => {
-            this.printError(err);
-        });
-
-        return answer;
-    }
-
-
-    public static  printError(err: any) {
-        Log.Fatal(err);
     }
 }

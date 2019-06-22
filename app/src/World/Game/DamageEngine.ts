@@ -56,42 +56,42 @@ export class DamageEngine {
      * Adds an event that triggers right before a unit takes damage
      *  - Do not change the damage in any way during these events!
      */
-    public AddInitialDamageEvent(event: () => void) {
+    public AddInitialDamageEvent(event: () => void): void {
         this.initialDamageEvent.push(event);
     }
 
     /**
      * Adds an event that triggers right after a unit has taken 0 damage
      */
-    public AddZeroDamageEvent(event: () => void) {
+    public AddZeroDamageEvent(event: () => void): void {
         this.zeroDamageEvent.push(event);
     }
 
     /**
      * Add an event that adds or subtracts damage before it has been applied
      */
-    public AddInitialDamageModificationEvent(event: () => void) {
+    public AddInitialDamageModificationEvent(event: () => void): void {
         this.initialDamageModificationEvent.push(event);
     }
 
     /**
      * Add an event that multiplies or subtracts damage before it has been applied
      */
-    public AddMultiplicativeDamageModificationEvent(event: () => void) {
+    public AddMultiplicativeDamageModificationEvent(event: () => void): void {
         this.multiplicativeDamageModificationEvent.push(event);
     }
 
     /**
      * Adds an event that triggers right before armor and resistance has been factored in
      */
-    public AddPreFinalDamageModificationEvent(event: () => void) {
+    public AddPreFinalDamageModificationEvent(event: () => void): void {
         this.preFinalDamageModificationEvent.push(event);
     }
 
     /**
      * Adds an event that triggers right before a unit takes lethal damage
      */
-    public AddLethalDamageEvent(event: () => void) {
+    public AddLethalDamageEvent(event: () => void): void {
         this.damageEventLethalActions.push(event);
     }
 
@@ -99,7 +99,7 @@ export class DamageEngine {
      * Adds an event that triggers immediately once more than 1 unit has taken
      * damage from the same source
      */
-    public AddAOEDamageEvent(event: () => void) {
+    public AddAOEDamageEvent(event: () => void): void {
         this.damageEventAOEActions.push(event);
     }
 
@@ -107,44 +107,45 @@ export class DamageEngine {
      * Adds an event that triggers after all other damage modifiers
      * have been factored in (even armor and resistance)
      */
-    public AddFinalDamageModificationEvent(event: () => void) {
+    public AddFinalDamageModificationEvent(event: () => void): void {
         this.finalDamageModificationEvent.push(event);
     }
 
-    private InitialDamageEvent() {
+    private InitialDamageEvent(): void {
         this.initialDamageEvent.forEach(action => action());
     }
 
-    private ZeroDamageEvent() {
+    private ZeroDamageEvent(): void {
         this.zeroDamageEvent.forEach(action => action());
     }
 
-    private DamageEventAOE() {
+    private DamageEventAOE(): void {
         this.damageEventAOEActions.forEach(action => action());
     }
 
-    private DamageEventLethal() {
+    private DamageEventLethal(): void {
         this.damageEventLethalActions.forEach(action => action());
     }
 
-    private InitialDamageModificationEvent() {
+    private InitialDamageModificationEvent(): void {
         this.initialDamageModificationEvent.forEach(action => action());
     }
 
-    private MultiplicativeDamageModificationEvent() {
+    private MultiplicativeDamageModificationEvent(): void {
         this.multiplicativeDamageModificationEvent.forEach(action => action());
     }
 
-    private PreFinalDamageModificationEvent() {
+    private PreFinalDamageModificationEvent(): void {
         this.preFinalDamageModificationEvent.forEach(action => action());
     }
 
-    private FinalDamageModificationEvent() {
+    private FinalDamageModificationEvent(): void {
         this.finalDamageModificationEvent.forEach(action => action());
     }
 
-    private Error() {
-        let s: string = 'WARNING: Recursion error when dealing damage! Prior to dealing damage from within a DamageEvent response trigger, do this:\n';
+    private Error(): void {
+        let s: string = 'WARNING: Recursion error when dealing damage! ';
+        s += 'Prior to dealing damage from within a DamageEvent response trigger, do this:\n';
         s += 'Set DamageEventTrigger = (This Trigger)\n';
         s += 'Unit - Cause <Source> to damage <Target>...\n\n';
         s += 'Alternatively, just use the UNKNOWN damage type. It will skip recursive damage on its own without needing the "Set" line:/n';
@@ -154,7 +155,7 @@ export class DamageEngine {
         DisplayTimedTextToPlayer(GetLocalPlayer(), 0.00, 0.00, 999.00, s);
     }
 
-    private ClearDamageEvent() {
+    private ClearDamageEvent(): void {
         if (!IsTriggerEnabled(this.trig.nativeTrigger)) {
             EnableTrigger(this.trig.nativeTrigger);
         }
@@ -172,7 +173,7 @@ export class DamageEngine {
         }
     }
 
-    private OnAOEEnd() {
+    private OnAOEEnd(): void {
         if (this.damageEngineGlobals.udg_DamageEventAOE > 1) {
             this.DamageEventAOE();
             this.damageEngineGlobals.udg_DamageEventAOE = 1;
@@ -184,7 +185,7 @@ export class DamageEngine {
         GroupClear(<group>this.damageEngineGlobals.udg_DamageEventAOEGroup);
     }
 
-    private OnExpire() {
+    private OnExpire(): void {
         this.started = false;
         this.ClearDamageEvent();
         this.OnAOEEnd();
@@ -196,7 +197,8 @@ export class DamageEngine {
 
         this.ClearDamageEvent();
 
-        if (ph < 2 && this.damageEngineGlobals.udg_NextDamageType === 0 && (this.damageEngineGlobals.udg_DamageEventTrigger !== undefined || rec)) {
+        if (ph < 2 && this.damageEngineGlobals.udg_NextDamageType === 0 &&
+            (this.damageEngineGlobals.udg_DamageEventTrigger !== undefined || rec)) {
             this.damageEngineGlobals.udg_NextDamageType = this.damageEngineGlobals.udg_DamageTypeCode;
         }
         if (rec && ph === 1) {
@@ -233,7 +235,9 @@ export class DamageEngine {
                 } else if (!IsUnitInGroup(tgt, <group>this.damageEngineGlobals.udg_DamageEventAOEGroup)) {
                     this.damageEngineGlobals.udg_DamageEventAOE = this.damageEngineGlobals.udg_DamageEventAOE + 1;
                 }
-                if ((dt === DAMAGE_TYPE_SPIRIT_LINK && this.damageEngineGlobals.udg_DamageEventAOE + this.damageEngineGlobals.udg_DamageEventLevel === 3) || dt === DAMAGE_TYPE_DEFENSIVE || dt === DAMAGE_TYPE_PLANT) {
+                if ((dt === DAMAGE_TYPE_SPIRIT_LINK &&
+                    this.damageEngineGlobals.udg_DamageEventAOE + this.damageEngineGlobals.udg_DamageEventLevel === 3)
+                    || dt === DAMAGE_TYPE_DEFENSIVE || dt === DAMAGE_TYPE_PLANT) {
                     this.previousValue = this.damageEngineGlobals.udg_DamageEventPrevAmt;
                     this.previousType = this.damageEngineGlobals.udg_DamageEventType;
                     this.previousCode = this.damageEngineGlobals.udg_IsDamageCode;
@@ -259,7 +263,8 @@ export class DamageEngine {
 
                 this.damageEngineGlobals.udg_DamageEventTrigger = undefined;
             }
-            this.damageEngineGlobals.udg_DamageEventOverride = dt === undefined || amt === 0.00 || this.damageEngineGlobals.udg_DamageEventType * this.damageEngineGlobals.udg_DamageEventType === 4;
+            this.damageEngineGlobals.udg_DamageEventOverride = dt === undefined ||
+                amt === 0.00 || this.damageEngineGlobals.udg_DamageEventType * this.damageEngineGlobals.udg_DamageEventType === 4;
             this.damageEngineGlobals.udg_DamageEventPrevAmt = amt;
         }
         this.damageEngineGlobals.udg_DamageEventSource = src;
@@ -288,7 +293,8 @@ export class DamageEngine {
 
             this.InitialDamageModificationEvent();
 
-            this.damageEngineGlobals.udg_DamageEventOverride = this.damageEngineGlobals.udg_DamageEventOverride || this.damageEngineGlobals.udg_DamageEventType * this.damageEngineGlobals.udg_DamageEventType === 4;
+            this.damageEngineGlobals.udg_DamageEventOverride = this.damageEngineGlobals.udg_DamageEventOverride ||
+                this.damageEngineGlobals.udg_DamageEventType * this.damageEngineGlobals.udg_DamageEventType === 4;
             if (!this.damageEngineGlobals.udg_DamageEventOverride) {
                 this.MultiplicativeDamageModificationEvent();
                 this.PreFinalDamageModificationEvent();
@@ -301,7 +307,8 @@ export class DamageEngine {
     }
 
     private OnPreDamage(): boolean {
-        if (this.SetVars(GetEventDamageSource(), BlzGetEventDamageTarget(), GetEventDamage(), BlzGetEventAttackType(), BlzGetEventDamageType(), BlzGetEventWeaponType(), 1)) {
+        if (this.SetVars(GetEventDamageSource(), BlzGetEventDamageTarget(),
+                         GetEventDamage(), BlzGetEventAttackType(), BlzGetEventDamageType(), BlzGetEventWeaponType(), 1)) {
             BlzSetEventAttackType(ConvertAttackType(this.damageEngineGlobals.udg_DamageEventAttackT));
             BlzSetEventDamageType(ConvertDamageType(this.damageEngineGlobals.udg_DamageEventDamageT));
             BlzSetEventWeaponType(ConvertWeaponType(this.damageEngineGlobals.udg_DamageEventWeaponT));
@@ -314,25 +321,31 @@ export class DamageEngine {
         return false;
     }
 
-    private UDTX(src: unit, tgt: unit, amt: number, a: boolean, r: boolean, at: attacktype, dt: damagetype, wt: weapontype, ph: number): boolean {
+    private UDTX(src: unit, tgt: unit, amt: number, a: boolean,
+                 r: boolean, at: attacktype, dt: damagetype, wt: weapontype, ph: number): boolean {
         if (this.SetVars(src, tgt, amt, at, dt, wt, ph)) {
             DisableTrigger(this.trig.nativeTrigger);
-            UnitDamageTarget(<unit>this.damageEngineGlobals.udg_DamageEventSource, <unit>this.damageEngineGlobals.udg_DamageEventTarget, this.damageEngineGlobals.udg_DamageEventAmount, a, r, ConvertAttackType(this.damageEngineGlobals.udg_DamageEventAttackT), ConvertDamageType(this.damageEngineGlobals.udg_DamageEventDamageT), ConvertWeaponType(this.damageEngineGlobals.udg_DamageEventWeaponT));
+            UnitDamageTarget(<unit>this.damageEngineGlobals.udg_DamageEventSource, <unit>this.damageEngineGlobals.udg_DamageEventTarget,
+                             this.damageEngineGlobals.udg_DamageEventAmount, a, r,
+                             ConvertAttackType(this.damageEngineGlobals.udg_DamageEventAttackT),
+                             ConvertDamageType(this.damageEngineGlobals.udg_DamageEventDamageT),
+                             ConvertWeaponType(this.damageEngineGlobals.udg_DamageEventWeaponT));
             this.ClearDamageEvent();
             return true;
         }
         return false;
     }
 
-    private DoCleanup() {
-        let i = -1;
+    private DoCleanup(): void {
+        let i: number = -1;
         for (; i >= this.recursion; i++) {
-            if (this.lastAmount[i] != 0.00) {
+            if (this.lastAmount[i] !== 0.00) {
                 this.damageEngineGlobals.udg_NextDamageType = this.lastType[i];
                 if (this.lastTrig[i] !== undefined) {
                     DisableTrigger(this.lastTrig[i]);
                 }
-                this.UDTX(this.lastSource[i], this.lastTarget[i], this.lastAmount[i], true, false, this.lastAttackT[i], this.lastDamageT[i], this.lastWeaponT[i], -1);
+                this.UDTX(this.lastSource[i], this.lastTarget[i], this.lastAmount[i], true,
+                          false, this.lastAttackT[i], this.lastDamageT[i], this.lastWeaponT[i], -1);
             }
         }
         for (; i <= -1;) {
@@ -367,11 +380,13 @@ export class DamageEngine {
             if (this.damageEngineGlobals.udg_DamageEventAmount > 0.00) {
                 this.FinalDamageModificationEvent();
 
-                this.damageEngineGlobals.udg_LethalDamageHP = GetWidgetLife(<unit>this.damageEngineGlobals.udg_DamageEventTarget) - this.damageEngineGlobals.udg_DamageEventAmount;
+                this.damageEngineGlobals.udg_LethalDamageHP = GetWidgetLife(
+                    <unit>this.damageEngineGlobals.udg_DamageEventTarget) - this.damageEngineGlobals.udg_DamageEventAmount;
                 if (this.damageEngineGlobals.udg_LethalDamageHP <= 0.405) {
                     this.DamageEventLethal();
 
-                    this.damageEngineGlobals.udg_DamageEventAmount = GetWidgetLife(<unit>this.damageEngineGlobals.udg_DamageEventTarget) - this.damageEngineGlobals.udg_LethalDamageHP;
+                    this.damageEngineGlobals.udg_DamageEventAmount = GetWidgetLife(
+                        <unit>this.damageEngineGlobals.udg_DamageEventTarget) - this.damageEngineGlobals.udg_LethalDamageHP;
                     if (this.damageEngineGlobals.udg_DamageEventType < 0 && this.damageEngineGlobals.udg_LethalDamageHP <= 0.405) {
                         SetUnitExploded(<unit>this.damageEngineGlobals.udg_DamageEventTarget, true);
                     }
@@ -379,7 +394,9 @@ export class DamageEngine {
             }
 
             if (this.damageEngineGlobals.udg_DamageEventAmount < 0.00) {
-                SetWidgetLife(<unit>this.damageEngineGlobals.udg_DamageEventTarget, GetWidgetLife(<unit>this.damageEngineGlobals.udg_DamageEventTarget) - this.damageEngineGlobals.udg_DamageEventAmount);
+                SetWidgetLife(
+                    <unit>this.damageEngineGlobals.udg_DamageEventTarget,
+                    GetWidgetLife(<unit>this.damageEngineGlobals.udg_DamageEventTarget) - this.damageEngineGlobals.udg_DamageEventAmount);
                 BlzSetEventDamage(0);
             } else {
                 BlzSetEventDamage(this.damageEngineGlobals.udg_DamageEventAmount);
@@ -396,7 +413,8 @@ export class DamageEngine {
         return false;
     }
 
-    public UnitDamageTargetEx(src: unit, tgt: unit, amt: number, a: boolean, r: boolean, at: attacktype, dt: damagetype, wt: weapontype): boolean {
+    public UnitDamageTargetEx(src: unit, tgt: unit, amt: number, a: boolean,
+                              r: boolean, at: attacktype, dt: damagetype, wt: weapontype): boolean {
         if (this.damageEngineGlobals.udg_DamageEventTrigger === undefined) {
             this.damageEngineGlobals.udg_DamageEventTrigger = GetTriggeringTrigger();
         }
