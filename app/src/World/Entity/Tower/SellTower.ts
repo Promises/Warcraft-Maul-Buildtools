@@ -46,9 +46,9 @@ export class SellTower {
         const rightSide = (x - maze.minX) / 64;
         const topSide = (y - maze.minY) / 64;
         const bottomSide = ((y - 64) - maze.minY) / 64;
-        maze.setBlocked(leftSide + bottomSide * maze.width, true);
-        maze.setBlocked(rightSide + bottomSide * maze.width, true);
-        maze.setBlocked(leftSide + topSide * maze.width, true);
-        maze.setBlocked(rightSide + topSide * maze.width, true);
+        maze.setWalkable(leftSide + bottomSide * maze.width, true);
+        maze.setWalkable(rightSide + bottomSide * maze.width, true);
+        maze.setWalkable(leftSide + topSide * maze.width, true);
+        maze.setWalkable(rightSide + topSide * maze.width, true);
     }
 }

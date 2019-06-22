@@ -22,12 +22,12 @@ export class Maze {
         this.maze = maze;
     }
 
-    public setBlocked(nodeIndex: number, isBlocked: boolean) {
+    public setWalkable(nodeIndex: number, isWalkable: boolean) {
         if (nodeIndex > this.maze.length) {
             return;
         }
 
-        this.maze[nodeIndex] = isBlocked;
+        this.maze[nodeIndex] = isWalkable;
     }
 
     public breathFirstSearch(sourceX: number, sourceY: number, destinationX: number, destinationY: number): boolean {
