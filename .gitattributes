@@ -4,3 +4,5 @@
 *.j text eol=crlf
 ./mapfiles/* text eol=crlf
 ./scripts/* text eol=lf
+/app/src/lib/core/blizzard.d.ts text eol=crlf
+/app/src/lib/core/common.d.ts text eol=crlf
