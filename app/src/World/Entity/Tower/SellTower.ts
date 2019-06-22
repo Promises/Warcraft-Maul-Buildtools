@@ -1,8 +1,10 @@
-import {Trigger} from '../../../JassOverrides/Trigger';
+import { Trigger } from '../../../JassOverrides/Trigger';
 import * as settings from '../../GlobalSettings';
-import {WarcraftMaul} from "../../WarcraftMaul";
-import {Rectangle} from "../../../JassOverrides/Rectangle";
-import {Log} from "../../../lib/Serilog/Serilog";
+import { WarcraftMaul } from '../../WarcraftMaul';
+import { Rectangle } from '../../../JassOverrides/Rectangle';
+import { Log } from '../../../lib/Serilog/Serilog';
+import { Defender } from '../Players/Defender';
+import { Maze } from '../../Maze';
 
 export class SellTower {
 
@@ -18,15 +20,15 @@ export class SellTower {
     }
 
 
-    private AreWeSellingTheTower() {
-        return GetSpellAbilityId() == FourCC('A02D');
+    private AreWeSellingTheTower(): boolean {
+        return GetSpellAbilityId() === FourCC('A02D');
     }
 
-    private SellTower() {
-        const u = GetTriggerUnit();
-        const value = GetUnitPointValue(u);
-        let playerSpawnId: undefined | number = undefined;
-        for (let i = 0; i < settings.PLAYER_AREAS.length; i++) {
+    private SellTower(): void {
+        const u: unit = GetTriggerUnit();
+        const value: number = GetUnitPointValue(u);
+        let playerSpawnId: undefined | number;
+        for (let i: number = 0; i < settings.PLAYER_AREAS.length; i++) {
             if (new Rectangle(settings.PLAYER_AREAS[i]).ContainsUnit(u)) {
                 playerSpawnId = i;
                 break;
@@ -34,12 +36,12 @@ export class SellTower {
         }
 
         if (playerSpawnId === undefined) {
-            Log.Error("Unable to locate the correct player spawn");
+            Log.Error('Unable to locate the correct player spawn');
             return;
         }
 
-        const player = settings.players.get(GetPlayerId(GetOwningPlayer(u)));
-        const txt = CreateTextTagUnitBJ(I2S(value), u, 1, 10, 100, 80.00, 0.00, 0);
+        const player: Defender | undefined = settings.players.get(GetPlayerId(GetOwningPlayer(u)));
+        const txt: texttag = CreateTextTagUnitBJ(I2S(value), u, 1, 10, 100, 80.00, 0.00, 0);
 
         SetTextTagPermanentBJ(txt, false);
         SetTextTagLifespanBJ(txt, 2.00);
@@ -53,13 +55,13 @@ export class SellTower {
         ShowUnitHide(u);
         RemoveUnit(u);
 
-        const maze = this.game.worldMap.playerMazes[playerSpawnId];
-        const x = GetUnitX(u);
-        const y = GetUnitY(u);
-        const leftSide = ((x - 64) - maze.minX) / 64;
-        const rightSide = (x - maze.minX) / 64;
-        const topSide = (y - maze.minY) / 64;
-        const bottomSide = ((y - 64) - maze.minY) / 64;
+        const maze: Maze = this.game.worldMap.playerMazes[playerSpawnId];
+        const x: number = GetUnitX(u);
+        const y: number = GetUnitY(u);
+        const leftSide: number = ((x - 64) - maze.minX) / 64;
+        const rightSide: number = (x - maze.minX) / 64;
+        const topSide: number = (y - maze.minY) / 64;
+        const bottomSide: number = ((y - 64) - maze.minY) / 64;
         maze.setWalkable(leftSide + bottomSide * maze.width, true);
         maze.setWalkable(rightSide + bottomSide * maze.width, true);
         maze.setWalkable(leftSide + topSide * maze.width, true);

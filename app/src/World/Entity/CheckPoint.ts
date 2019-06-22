@@ -1,5 +1,5 @@
-import {WorldMap} from '../WorldMap';
-import {Trigger} from '../../JassOverrides/Trigger';
+import { WorldMap } from '../WorldMap';
+import { Trigger } from '../../JassOverrides/Trigger';
 
 export class CheckPoint {
     private _previous: CheckPoint | undefined;
@@ -28,9 +28,9 @@ export class CheckPoint {
         if (!this.isEnteringUnitCreep) {
             return false;
         }
-        let spawnedCreeps = this.worldMap.spawnedCreeps;
+        const spawnedCreeps = this.worldMap.spawnedCreeps;
         if (spawnedCreeps) {
-            let spawnedCreep = spawnedCreeps.unitMap.get(GetHandleIdBJ(GetEnteringUnit()));
+            const spawnedCreep = spawnedCreeps.unitMap.get(GetHandleIdBJ(GetEnteringUnit()));
             if (spawnedCreep) {
                 if (spawnedCreep.targetCheckpoint) {
                     return spawnedCreep.targetCheckpoint === this;
@@ -44,9 +44,9 @@ export class CheckPoint {
         if (!this.next) {
             return;
         }
-        let spawnedCreeps = this.worldMap.spawnedCreeps;
+        const spawnedCreeps = this.worldMap.spawnedCreeps;
         if (spawnedCreeps) {
-            let creep = spawnedCreeps.unitMap.get(GetHandleIdBJ(GetEnteringUnit()));
+            const creep = spawnedCreeps.unitMap.get(GetHandleIdBJ(GetEnteringUnit()));
             if (creep) {
                 creep.targetCheckpoint = this.next;
                 IssuePointOrder(GetEnteringUnit(), 'move', GetRectCenterX(this.next.rectangle), GetRectCenterY(this.next.rectangle));
@@ -77,7 +77,7 @@ export class CheckPoint {
 
 
     isEnteringUnitCreep() {
-        let ownerID: COLOUR = GetPlayerId(GetOwningPlayer(GetEnteringUnit()));
+        const ownerID: COLOUR = GetPlayerId(GetOwningPlayer(GetEnteringUnit()));
         switch (ownerID) {
             case COLOUR.NAVY:
             case COLOUR.TURQUOISE:

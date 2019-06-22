@@ -1,6 +1,6 @@
-import {WarcraftMaul} from '../WarcraftMaul';
+import { WarcraftMaul } from '../WarcraftMaul';
 import * as settings from '../GlobalSettings';
-import {ARMOUR_TYPE_NAMES, players} from '../GlobalSettings';
+import { ARMOUR_TYPE_NAMES, players } from '../GlobalSettings';
 
 export class MultiBoard {
     board: multiboard;
@@ -13,19 +13,19 @@ export class MultiBoard {
         this.scoreboardColumnWidth[1] = 10.00;
         this.scoreboardColumnWidth[2] = 8.00;
         this.board = CreateMultiboardBJ(2, settings.players.size + 7, settings.GAME_NAME);
-        MultiboardSetItemValueBJ(this.board, 1, 1, "Starting in");
+        MultiboardSetItemValueBJ(this.board, 1, 1, 'Starting in');
         MultiboardSetItemValueBJ(this.board, 2, 1, this.game.waveTimer + '');
-        MultiboardSetItemValueBJ(this.board, 1, 2, "Level");
+        MultiboardSetItemValueBJ(this.board, 1, 2, 'Level');
         MultiboardSetItemValueBJ(this.board, 2, 2, this.game.gameRoundHandler.currentWave + '');
-        MultiboardSetItemValueBJ(this.board, 1, 3, "Difficulty");
-        MultiboardSetItemValueBJ(this.board, 1, 4, "Lives");
+        MultiboardSetItemValueBJ(this.board, 1, 3, 'Difficulty');
+        MultiboardSetItemValueBJ(this.board, 1, 4, 'Lives');
         MultiboardSetItemValueBJ(this.board, 2, 4, this.game.gameLives + '');
-        MultiboardSetItemValueBJ(this.board, 1, 5, "Armour Type");
+        MultiboardSetItemValueBJ(this.board, 1, 5, 'Armour Type');
         let armourType = ARMOUR_TYPE_NAMES[this.game.worldMap.waveCreeps[0].getArmourType()].toLowerCase();
         armourType = armourType.charAt(0).toUpperCase() + armourType.slice(1);
         MultiboardSetItemValueBJ(this.board, 2, 5, armourType);
-        MultiboardSetItemValueBJ(this.board, 1, 7, "Player");
-        MultiboardSetItemValueBJ(this.board, 2, 7, "Kills");
+        MultiboardSetItemValueBJ(this.board, 1, 7, 'Player');
+        MultiboardSetItemValueBJ(this.board, 2, 7, 'Kills');
 
         MultiboardSetItemWidthBJ(this.board, 1, 1, this.scoreboardColumnWidth[1]); // Game time
         MultiboardSetItemWidthBJ(this.board, 2, 1, this.scoreboardColumnWidth[2]);
@@ -69,7 +69,7 @@ export class MultiBoard {
 
     private InitializePlayerScores() {
         let count = 0;
-        for (let player of settings.players.values()) {
+        for (const player of settings.players.values()) {
             player.scoreSlot = count;
             MultiboardSetItemValueBJ(this.board, 1, 7 + count, player.getNameWithColour());
             MultiboardSetItemValueBJ(this.board, 2, 7 + count, '' + player.kills);

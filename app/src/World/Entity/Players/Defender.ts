@@ -1,14 +1,14 @@
-import {AbstractPlayer} from './AbstractPlayer';
-import {ALLOW_PLAYER_TOWER_LOCATIONS, PLAYER_AREAS, players} from '../../GlobalSettings';
-import {Race} from '../../Game/Races/Race';
-import {Rectangle} from '../../../JassOverrides/Rectangle';
-import {Trigger} from '../../../JassOverrides/Trigger';
-import {WarcraftMaul} from '../../WarcraftMaul';
-import {AbstractHologramMaze} from "../../Game/AbstractHologramMaze";
+import { AbstractPlayer } from './AbstractPlayer';
+import { ALLOW_PLAYER_TOWER_LOCATIONS, PLAYER_AREAS, players } from '../../GlobalSettings';
+import { Race } from '../../Game/Races/Race';
+import { Rectangle } from '../../../JassOverrides/Rectangle';
+import { Trigger } from '../../../JassOverrides/Trigger';
+import { WarcraftMaul } from '../../WarcraftMaul';
+import { AbstractHologramMaze } from '../../Game/AbstractHologramMaze';
 
 export class Defender extends AbstractPlayer {
-    scoreSlot = 0;
-    kills = 0;
+    scoreSlot: number = 0;
+    kills: number = 0;
     allowPlayerTower: unit | undefined;
     hasHybridRandomed: boolean = false;
     hasHardcoreRandomed: boolean = false;
@@ -69,15 +69,15 @@ export class Defender extends AbstractPlayer {
     }
 
     getCenterX() {
-        let x1 = this.getArea()[0];
-        let x2 = this.getArea()[2];
+        const x1 = this.getArea()[0];
+        const x2 = this.getArea()[2];
 
         return (x1 + x2) / 2;
     }
 
     getCenterY() {
-        let y1 = this.getArea()[1];
-        let y2 = this.getArea()[3];
+        const y1 = this.getArea()[1];
+        const y2 = this.getArea()[3];
 
         return (y1 + y2) / 2;
     }
@@ -107,7 +107,7 @@ export class Defender extends AbstractPlayer {
         game.worldMap.playerSpawns[this.id].isOpen = false;
         if (game.scoreBoard) {
             MultiboardSetItemValueBJ(game.scoreBoard.board, 1, 7 + this.scoreSlot,
-                Util.ColourString(this.getColourCode(), '<Quit>'));
+                                     Util.ColourString(this.getColourCode(), '<Quit>'));
         }
 
         players.delete(this.id);

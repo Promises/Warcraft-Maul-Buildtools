@@ -1,5 +1,5 @@
-import {Creep} from './Creep';
-import {Trigger} from '../../JassOverrides/Trigger';
+import { Creep } from './Creep';
+import { Trigger } from '../../JassOverrides/Trigger';
 
 export class SpawnedCreeps {
 
@@ -10,7 +10,7 @@ export class SpawnedCreeps {
         // let creativeName = CreateUnit(Player(COLOUR.NAVY), FourCC('u000'), -64.00, 4032.00, 240.0);
         // this.unitMap.set(GetHandleIdBJ(creativeName), new Creep(creativeName));
 
-        let triggerTest = new Trigger();
+        const triggerTest = new Trigger();
         triggerTest.RegisterAnyUnitEventBJ(EVENT_PLAYER_UNIT_SELECTED);
         triggerTest.AddAction(() => this.printUnit());
 

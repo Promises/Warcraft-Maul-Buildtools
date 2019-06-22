@@ -1,12 +1,12 @@
-import {WarcraftMaul} from '../WarcraftMaul';
-import {COLOUR_CODES, enemies, players} from '../GlobalSettings';
-import {Trigger} from '../../JassOverrides/Trigger';
-import {Defender} from '../Entity/Players/Defender';
-import {Log} from '../../lib/Serilog/Serilog';
-import {CheckPoint} from "../Entity/CheckPoint";
-import {AdvancedHoloMaze} from "./AdvancedHoloMaze";
-import {SimpleHoloMaze} from "./SimpleHoloMaze";
-import {CircleHoloMaze} from "./CircleHoloMaze";
+import { WarcraftMaul } from '../WarcraftMaul';
+import { COLOUR_CODES, enemies, players } from '../GlobalSettings';
+import { Trigger } from '../../JassOverrides/Trigger';
+import { Defender } from '../Entity/Players/Defender';
+import { Log } from '../../lib/Serilog/Serilog';
+import { CheckPoint } from '../Entity/CheckPoint';
+import { AdvancedHoloMaze } from './AdvancedHoloMaze';
+import { SimpleHoloMaze } from './SimpleHoloMaze';
+import { CircleHoloMaze } from './CircleHoloMaze';
 
 export class Commands {
 
@@ -21,7 +21,7 @@ export class Commands {
     constructor(game: WarcraftMaul) {
         this.game = game;
         this.commandTrigger = new Trigger();
-        for (let player of players.values()) {
+        for (const player of players.values()) {
             this.commandTrigger.RegisterPlayerChatEvent(player.wcPlayer, '-', false);
         }
         this.commandTrigger.AddAction(() => this.handleCommand());
@@ -98,7 +98,7 @@ export class Commands {
             case 'sa':
             case 'sellall':
                 Log.Error('Command not implemented yet');
-                //TODO: implement command
+                // TODO: implement command
 
                 // SellAllActions()
                 break;
@@ -115,7 +115,7 @@ export class Commands {
                 break;
             case 'gold':
                 if (this.game.debugMode) {
-                    let amount = Util.ParseInt(command[1]);
+                    const amount = Util.ParseInt(command[1]);
                     if (!amount) {
                         player.sendMessage(Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Invalid Amount'));
                         return;
@@ -126,7 +126,7 @@ export class Commands {
                 break;
             case 'lumber':
                 if (this.game.debugMode) {
-                    let amount = Util.ParsePositiveInt(command[1]);
+                    const amount = Util.ParsePositiveInt(command[1]);
                     if (!amount) {
                         player.sendMessage(Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Invalid Amount'));
                         return;
@@ -138,7 +138,7 @@ export class Commands {
                 break;
             case 'lives':
                 if (this.game.debugMode) {
-                    let amount = Util.ParseInt(command[1]);
+                    const amount = Util.ParseInt(command[1]);
                     if (!amount) {
                         player.sendMessage(Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Invalid Amount'));
                         return;
@@ -158,7 +158,7 @@ export class Commands {
                 break;
             case 'diff':
                 if (this.game.debugMode) {
-                    let amount = Util.ParsePositiveInt(command[1]);
+                    const amount = Util.ParsePositiveInt(command[1]);
                     if (!amount) {
                         player.sendMessage(Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Invalid Amount'));
                         return;
@@ -166,7 +166,7 @@ export class Commands {
                     }
                     player.sendMessage(`Difficulty was set to ${amount}%`);
 
-                    for (let enemy of enemies) {
+                    for (const enemy of enemies) {
                         enemy.setHandicap(amount);
                     }
                 }
@@ -175,7 +175,7 @@ export class Commands {
             case 'votekick':
                 Log.Error('Command not implemented yet');
                 if (command[1]) {
-                    let receiver = this.getPlayerIdFromColourName(command[1]);
+                    const receiver = this.getPlayerIdFromColourName(command[1]);
                     const receivingPlayer = players.get(receiver);
                     if (receivingPlayer) {
                         this.VoteKick(player, receivingPlayer);
@@ -188,10 +188,10 @@ export class Commands {
             case 'send':
                 Log.Error('Command not implemented yet');
                 if (command[1] && command[2]) {
-                    let receiver = this.getPlayerIdFromColourName(command[1]);
+                    const receiver = this.getPlayerIdFromColourName(command[1]);
                     const receivingPlayer = players.get(receiver);
 
-                    let amount = Util.ParsePositiveInt(command[2]);
+                    const amount = Util.ParsePositiveInt(command[2]);
                     if (!amount) {
                         player.sendMessage(Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Invalid Amount'));
                         return;
@@ -226,7 +226,7 @@ export class Commands {
             case 'zoom':
             case 'cam':
                 if (GetLocalPlayer() == player.wcPlayer) {
-                    let amount = Util.ParsePositiveInt(command[1]);
+                    const amount = Util.ParsePositiveInt(command[1]);
                     if (!amount) {
                         player.sendMessage(Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Invalid Amount'));
                         return;
@@ -237,7 +237,7 @@ export class Commands {
                 break;
             case 'wave':
                 if (this.game.debugMode) {
-                    let amount = Util.ParsePositiveInt(command[1]);
+                    const amount = Util.ParsePositiveInt(command[1]);
                     if (!amount) {
                         player.sendMessage(Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Invalid Amount'));
                         return;
@@ -271,22 +271,22 @@ export class Commands {
                         return;
                     }
 
-                    let imagePath = "";
+                    let imagePath = '';
                     if (GetTriggerPlayer() === GetLocalPlayer()) {
-                        imagePath = "ReplaceableTextures\\Splats\\SuggestedPlacementSplat.blp";
+                        imagePath = 'ReplaceableTextures\\Splats\\SuggestedPlacementSplat.blp';
                     }
 
-                    switch(command[1]) {
-                        case "none":
+                    switch (command[1]) {
+                        case 'none':
                             player.setHoloMaze(undefined);
                             break;
-                        case "1":
+                        case '1':
                             player.setHoloMaze(new CircleHoloMaze(imagePath, GetRectCenterX(firstCheckpoint.rectangle), GetRectCenterY(firstCheckpoint.rectangle), GetRectCenterX(secondCheckpoint.rectangle), GetRectCenterY(secondCheckpoint.rectangle)));
                             break;
-                        case "2":
+                        case '2':
                             player.setHoloMaze(new SimpleHoloMaze(imagePath, GetRectCenterX(firstCheckpoint.rectangle), GetRectCenterY(firstCheckpoint.rectangle), GetRectCenterX(secondCheckpoint.rectangle), GetRectCenterY(secondCheckpoint.rectangle)));
                             break;
-                        case "3":
+                        case '3':
                             player.setHoloMaze(new AdvancedHoloMaze(imagePath, GetRectCenterX(firstCheckpoint.rectangle), GetRectCenterY(firstCheckpoint.rectangle), GetRectCenterX(secondCheckpoint.rectangle), GetRectCenterY(secondCheckpoint.rectangle)));
                             break;
                         default:
@@ -299,35 +299,35 @@ export class Commands {
 
                 if (invalidMaze === true) {
                     player.sendMessage(
-                        "Unknown maze selected, please try one of the mazes shown below\n" +
-                        "|cFFFFCC00-maze none|r: removes the current maze\n" +
-                        "|cFFFFCC00-maze 1|r: shows a very simple circled maze\n" +
-                        "|cFFFFCC00-maze 2|r: shows a basic maze\n" +
-                        "|cFFFFCC00-maze 3|r: shows a more advanced maze");
+                        'Unknown maze selected, please try one of the mazes shown below\n' +
+                        '|cFFFFCC00-maze none|r: removes the current maze\n' +
+                        '|cFFFFCC00-maze 1|r: shows a very simple circled maze\n' +
+                        '|cFFFFCC00-maze 2|r: shows a basic maze\n' +
+                        '|cFFFFCC00-maze 3|r: shows a more advanced maze');
                 }
                 break;
             case 'draw':
                 if (!this.game.debugMode) {
                     return;
                 }
-                let arr: rect[] = [];
+                const arr: rect[] = [];
                 switch (command[1]) {
-                    case "ab":
-                    case "antiblock":
+                    case 'ab':
+                    case 'antiblock':
                         break;
                 }
                 for (let i = 0; i < command.length - 2; i++) {
                     if (!command[2 + i]) {
-                        Log.Error("Missing arguments");
+                        Log.Error('Missing arguments');
                         return;
                     }
                     if (!arr) {
-                        Log.Error("invalid array");
+                        Log.Error('invalid array');
                         return;
                     }
 
                     if (!arr[+command[2 + i]]) {
-                        Log.Error("invalid index");
+                        Log.Error('invalid index');
                         return;
                     }
                     this.DrawRect(arr[+command[2 + i]]);
@@ -335,7 +335,7 @@ export class Commands {
                 }
 
                 break;
-            case "undraw":
+            case 'undraw':
                 if (!this.game.debugMode) {
                     return;
                 }
@@ -352,8 +352,8 @@ export class Commands {
 
 
     RepickActions(player: Defender) {
-        let grp = GetUnitsInRectAll(GetPlayableMapRect());
-        let maxgold = player.id == COLOUR.GRAY ? 150 : 100;
+        const grp = GetUnitsInRectAll(GetPlayableMapRect());
+        const maxgold = player.id == COLOUR.GRAY ? 150 : 100;
         if (player.getGold() > maxgold) {
             player.setGold(maxgold);
         }
@@ -401,14 +401,14 @@ export class Commands {
     }
 
     OpenAllSpawns() {
-        for (let spawn of this.game.worldMap.playerSpawns) {
+        for (const spawn of this.game.worldMap.playerSpawns) {
             spawn.isOpen = true;
         }
     }
 
 
     CloseAllSpawns() {
-        for (let spawn of this.game.worldMap.playerSpawns) {
+        for (const spawn of this.game.worldMap.playerSpawns) {
             spawn.isOpen = false;
         }
     }
@@ -449,7 +449,7 @@ export class Commands {
     }
 
     private VotekickExpire() {
-        let count = this.CountCurrentVotes();
+        const count = this.CountCurrentVotes();
         if (this.voteAgainstPlayer) {
             print(`Votekick for ${this.voteAgainstPlayer.getNameWithColour()} has ended with ${count} votes`);
         }
@@ -477,9 +477,9 @@ export class Commands {
     }
 
     private CheckVotes() {
-        let currentVotes = this.CountCurrentVotes();
-        let neededVotes = (players.size / 2) + 1;
-        let missingVotes = neededVotes - currentVotes;
+        const currentVotes = this.CountCurrentVotes();
+        const neededVotes = (players.size / 2) + 1;
+        const missingVotes = neededVotes - currentVotes;
 
 
         if (currentVotes >= neededVotes) {
@@ -490,7 +490,7 @@ export class Commands {
                 this.RemoveAllKickedPlayerTowers();
                 if (this.game.scoreBoard) {
                     MultiboardSetItemValueBJ(this.game.scoreBoard.board, 1, 7 + this.voteAgainstPlayer.scoreSlot,
-                        Util.ColourString(this.voteAgainstPlayer.getColourCode(), '<Kicked>'));
+                                             Util.ColourString(this.voteAgainstPlayer.getColourCode(), '<Kicked>'));
                 }
                 players.delete(this.voteAgainstPlayer.id);
 
@@ -499,7 +499,7 @@ export class Commands {
                 CustomDefeatBJ(this.voteAgainstPlayer.wcPlayer, 'Kicked!');
 
                 DestroyTimer(this.voteKickTimer);
-                this.voteKickInProgress = false
+                this.voteKickInProgress = false;
 
             }
         } else {
@@ -519,7 +519,7 @@ export class Commands {
 
     private RemoveAllKickedPlayerTowers() {
 
-        let grp = GetUnitsInRectAll(GetPlayableMapRect());
+        const grp = GetUnitsInRectAll(GetPlayableMapRect());
 
         ForGroupBJ(GetUnitsInRectAll(GetPlayableMapRect()), () => this.RemoveKickedPlayerTowers());
         DestroyGroup(grp);
@@ -545,38 +545,38 @@ export class Commands {
 
         }
 
-        return true
+        return true;
     }
 
     private DrawRect(rectangle: rect) {
-        let x1 = GetRectMinX(rectangle);
-        let y1 = GetRectMinY(rectangle);
-        let x2 = GetRectMaxX(rectangle);
-        let y2 = GetRectMaxY(rectangle);
+        const x1 = GetRectMinX(rectangle);
+        const y1 = GetRectMinY(rectangle);
+        const x2 = GetRectMaxX(rectangle);
+        const y2 = GetRectMaxY(rectangle);
 
-        let model = "Doodads\\\\Cinematic\\\\DemonFootPrint\\\\DemonFootPrint0.mdl";
-        let sfx: effect[] = [];
+        const model = 'Doodads\\\\Cinematic\\\\DemonFootPrint\\\\DemonFootPrint0.mdl';
+        const sfx: effect[] = [];
         for (let x = x1; x < x2; x = x + 16) {
-            sfx.push(AddSpecialEffect(model, x, y1))
+            sfx.push(AddSpecialEffect(model, x, y1));
         }
 
         for (let y = y1; y < y2; y = y + 16) {
-            sfx.push(AddSpecialEffect(model, x2, y))
+            sfx.push(AddSpecialEffect(model, x2, y));
         }
 
         for (let x = x1; x < x2; x = x + 16) {
-            sfx.push(AddSpecialEffect(model, x, y2))
+            sfx.push(AddSpecialEffect(model, x, y2));
         }
         for (let y = y1; y < y2; y = y + 16) {
-            sfx.push(AddSpecialEffect(model, x1, y))
+            sfx.push(AddSpecialEffect(model, x1, y));
         }
         this.drawings.push(sfx);
 
     }
 
     private DestroyDrawings() {
-        for (let drawing of this.drawings) {
-            for (let sfx of  drawing) {
+        for (const drawing of this.drawings) {
+            for (const sfx of  drawing) {
                 DestroyEffect(sfx);
             }
 

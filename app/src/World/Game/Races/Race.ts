@@ -1,5 +1,5 @@
-import {Defender} from '../../Entity/Players/Defender';
-import {WorldMap} from '../../WorldMap';
+import { Defender } from '../../Entity/Players/Defender';
+import { WorldMap } from '../../WorldMap';
 
 export class Race {
     id: string;

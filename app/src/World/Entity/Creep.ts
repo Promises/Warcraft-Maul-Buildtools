@@ -1,5 +1,5 @@
-import {CheckPoint} from './CheckPoint';
-import {Log} from '../../lib/Serilog/Serilog';
+import { CheckPoint } from './CheckPoint';
+import { Log } from '../../lib/Serilog/Serilog';
 
 export class Creep {
     creep: unit;
@@ -26,14 +26,13 @@ export class Creep {
         Log.Debug(this.getName());
     }
 
-    getName(): string{
-        return GetUnitName(this.creep)
+    getName(): string {
+        return GetUnitName(this.creep);
     }
 
-    getId():  number{
+    getId(): number {
         return GetUnitTypeId(this.creep);
     }
-
 
 
 }

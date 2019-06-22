@@ -1,6 +1,6 @@
-import {AbstractHologramMaze} from "./AbstractHologramMaze";
-import {Image} from "../../JassOverrides/Image";
-import {HologramCheckpointDistance} from "./HologramCheckpointDistance";
+import { AbstractHologramMaze } from './AbstractHologramMaze';
+import { Image } from '../../JassOverrides/Image';
+import { HologramCheckpointDistance } from './HologramCheckpointDistance';
 
 export class CircleHoloMaze extends AbstractHologramMaze {
     constructor(imagePath: string, firstCheckpointX: number, firstCheckpointY: number, secondCheckpointX: number, secondCheckpointY: number) {

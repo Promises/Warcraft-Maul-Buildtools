@@ -1,4 +1,4 @@
-import {Log} from '../../lib/Serilog/Serilog';
+import { Log } from '../../lib/Serilog/Serilog';
 
 export class WaveCreep {
     id: string;

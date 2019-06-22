@@ -5,15 +5,15 @@ export class Image {
         this.img = CreateImage(imagePath, size, size, 0, x - (size / 2), y - (size / 2), z, 0, 0, 0, 2);
     }
 
-    public Destroy() {
+    public Destroy(): void {
         DestroyImage(this.img);
     }
 
-    public SetImageRenderAlways(flag: boolean) {
+    public SetImageRenderAlways(flag: boolean): void {
         SetImageRenderAlways(this.img, flag);
     }
 
-    public ShowImage(flag: boolean) {
+    public ShowImage(flag: boolean): void {
         ShowImage(this.img, flag);
     }
 }

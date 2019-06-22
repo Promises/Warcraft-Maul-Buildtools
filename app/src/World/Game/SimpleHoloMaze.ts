@@ -1,6 +1,6 @@
-import {AbstractHologramMaze} from "./AbstractHologramMaze";
-import {Image} from "../../JassOverrides/Image";
-import {HologramCheckpointDistance} from "./HologramCheckpointDistance";
+import { AbstractHologramMaze } from './AbstractHologramMaze';
+import { Image } from '../../JassOverrides/Image';
+import { HologramCheckpointDistance } from './HologramCheckpointDistance';
 
 export class SimpleHoloMaze extends AbstractHologramMaze {
     constructor(imagePath: string, firstCheckpointX: number, firstCheckpointY: number, secondCheckpointX: number, secondCheckpointY: number) {
@@ -49,8 +49,8 @@ export class SimpleHoloMaze extends AbstractHologramMaze {
         this.images.push(new Image(imagePath, 192, firstCheckpointX - dist.yDividedBy18 - dist.yDividedBy9 + dist.xDividedBy18 + dist.xDividedBy9, firstCheckpointY + dist.yDividedBy18 + dist.yDividedBy9 - dist.xDividedBy18 - dist.xDividedBy9, 0.00));
 
         this.images.forEach(img => {
-           img.SetImageRenderAlways(true);
-           img.ShowImage(true);
+            img.SetImageRenderAlways(true);
+            img.ShowImage(true);
         });
     }
 }

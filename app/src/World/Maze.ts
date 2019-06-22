@@ -1,16 +1,7 @@
-import {Node} from "./Node";
-import {NodeQueue} from "./NodeQueue";
+import { Node } from './Node';
+import { NodeQueue } from './NodeQueue';
 
 export class Maze {
-    public readonly minX: number;
-    public readonly minY: number;
-    public readonly maxX: number;
-    public readonly maxY: number;
-    public readonly width: number;
-    public readonly height: number;
-    public static readonly ROW_NUM: number[] = [-1, 0, 0, 1];
-    public static readonly COL_NUM: number[] = [0, -1, 1, 0];
-    private readonly maze: boolean[];
 
     constructor(minX: number, minY: number, maxX: number, maxY: number, width: number, height: number, maze: boolean[]) {
         this.minX = minX;
@@ -21,6 +12,15 @@ export class Maze {
         this.height = height;
         this.maze = maze;
     }
+    public static readonly ROW_NUM: number[] = [-1, 0, 0, 1];
+    public static readonly COL_NUM: number[] = [0, -1, 1, 0];
+    public readonly minX: number;
+    public readonly minY: number;
+    public readonly maxX: number;
+    public readonly maxY: number;
+    public readonly width: number;
+    public readonly height: number;
+    private readonly maze: boolean[];
 
     public setWalkable(nodeIndex: number, isWalkable: boolean) {
         if (nodeIndex > this.maze.length) {
