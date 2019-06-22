@@ -4,6 +4,7 @@ import {Race} from '../../Game/Races/Race';
 import {Rectangle} from '../../../JassOverrides/Rectangle';
 import {Trigger} from '../../../JassOverrides/Trigger';
 import {WarcraftMaul} from '../../WarcraftMaul';
+import { Tower } from '../Tower/Tower';
 
 export class Defender extends AbstractPlayer {
     scoreSlot = 0;
@@ -21,6 +22,7 @@ export class Defender extends AbstractPlayer {
     hybridTowers: any[] = [];
     leaveTrigger: Trigger;
     deniedPlayers: AbstractPlayer[] = [];
+    towers: Map<number, Tower> = new Map<number, Tower>();
 
     constructor(id: number, game: WarcraftMaul) {
         super(id);
@@ -111,5 +113,9 @@ export class Defender extends AbstractPlayer {
     private ResetSpawnRestrictions() {
 
 
+    }
+
+    AddTower(tower: Tower): void {
+        this.towers.set(tower.handleId, tower);
     }
 }

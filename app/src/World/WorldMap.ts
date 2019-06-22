@@ -11,6 +11,7 @@ import { RaceLootBoxer } from './Game/Races/RaceLootBoxer';
 import { AntiBlock } from './AntiBlock';
 import { Maze } from './Maze';
 import * as settings from './GlobalSettings';
+import { TowerConstruction } from './Entity/Tower/TowerConstruction';
 
 export class WorldMap {
     game: WarcraftMaul;
@@ -31,6 +32,7 @@ export class WorldMap {
     constructor(game: WarcraftMaul) {
         this.game = game;
         this.setupWorldCreatures();
+        const towercons = new TowerConstruction();
         this.antiBlock = new AntiBlock(this);
     }
 
