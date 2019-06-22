@@ -3,6 +3,10 @@ import {COLOUR_CODES, enemies, players} from '../GlobalSettings';
 import {Trigger} from '../../JassOverrides/Trigger';
 import {Defender} from '../Entity/Players/Defender';
 import {Log} from '../../lib/Serilog/Serilog';
+import {CheckPoint} from "../Entity/CheckPoint";
+import {AdvancedHoloMaze} from "./AdvancedHoloMaze";
+import {SimpleHoloMaze} from "./SimpleHoloMaze";
+import {CircleHoloMaze} from "./CircleHoloMaze";
 
 export class Commands {
 
@@ -249,12 +253,59 @@ export class Commands {
                 }
                 break;
             case 'maze':
-                Log.Error('Command not implemented yet');
-                //TODO: implement command
+                let invalidMaze = false;
+                if (command.length === 2) {
+                    const playerId = GetPlayerId(GetTriggerPlayer());
+                    const firstSpawn: CheckPoint | undefined = this.game.worldMap.playerSpawns[playerId].spawnOne;
+                    if (firstSpawn === undefined) {
+                        return;
+                    }
 
-                // ShowMazeAll()
+                    const firstCheckpoint: CheckPoint | undefined = firstSpawn.next;
+                    if (firstCheckpoint === undefined) {
+                        return;
+                    }
+
+                    const secondCheckpoint: CheckPoint | undefined = firstCheckpoint.next;
+                    if (secondCheckpoint === undefined) {
+                        return;
+                    }
+
+                    let imagePath = "";
+                    if (GetTriggerPlayer() === GetLocalPlayer()) {
+                        imagePath = "ReplaceableTextures\\Splats\\SuggestedPlacementSplat.blp";
+                    }
+
+                    switch(command[1]) {
+                        case "none":
+                            player.setHoloMaze(undefined);
+                            break;
+                        case "1":
+                            player.setHoloMaze(new CircleHoloMaze(imagePath, GetRectCenterX(firstCheckpoint.rectangle), GetRectCenterY(firstCheckpoint.rectangle), GetRectCenterX(secondCheckpoint.rectangle), GetRectCenterY(secondCheckpoint.rectangle)));
+                            break;
+                        case "2":
+                            player.setHoloMaze(new SimpleHoloMaze(imagePath, GetRectCenterX(firstCheckpoint.rectangle), GetRectCenterY(firstCheckpoint.rectangle), GetRectCenterX(secondCheckpoint.rectangle), GetRectCenterY(secondCheckpoint.rectangle)));
+                            break;
+                        case "3":
+                            player.setHoloMaze(new AdvancedHoloMaze(imagePath, GetRectCenterX(firstCheckpoint.rectangle), GetRectCenterY(firstCheckpoint.rectangle), GetRectCenterX(secondCheckpoint.rectangle), GetRectCenterY(secondCheckpoint.rectangle)));
+                            break;
+                        default:
+                            invalidMaze = true;
+                            break;
+                    }
+                } else {
+                    invalidMaze = true;
+                }
+
+                if (invalidMaze === true) {
+                    player.sendMessage(
+                        "Unknown maze selected, please try one of the mazes shown below\n" +
+                        "|cFFFFCC00-maze none|r: removes the current maze\n" +
+                        "|cFFFFCC00-maze 1|r: shows a very simple circled maze\n" +
+                        "|cFFFFCC00-maze 2|r: shows a basic maze\n" +
+                        "|cFFFFCC00-maze 3|r: shows a more advanced maze");
+                }
                 break;
-
             case 'draw':
                 if (!this.game.debugMode) {
                     return;

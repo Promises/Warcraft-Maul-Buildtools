@@ -4,6 +4,7 @@ import {Race} from '../../Game/Races/Race';
 import {Rectangle} from '../../../JassOverrides/Rectangle';
 import {Trigger} from '../../../JassOverrides/Trigger';
 import {WarcraftMaul} from '../../WarcraftMaul';
+import {AbstractHologramMaze} from "../../Game/AbstractHologramMaze";
 
 export class Defender extends AbstractPlayer {
     scoreSlot = 0;
@@ -21,6 +22,7 @@ export class Defender extends AbstractPlayer {
     hybridTowers: any[] = [];
     leaveTrigger: Trigger;
     deniedPlayers: AbstractPlayer[] = [];
+    holoMaze: AbstractHologramMaze | undefined = undefined;
 
     constructor(id: number, game: WarcraftMaul) {
         super(id);
@@ -28,9 +30,15 @@ export class Defender extends AbstractPlayer {
         this.leaveTrigger = new Trigger();
         this.leaveTrigger.AddCondition(() => this.PlayerLeftTheGameConditions(game));
         this.leaveTrigger.AddAction(() => this.PlayerLeftTheGame(game));
-
     }
 
+    public setHoloMaze(holoMaze: AbstractHologramMaze | undefined) {
+        if (this.holoMaze !== undefined) {
+            this.holoMaze.Destroy();
+        }
+
+        this.holoMaze = holoMaze;
+    }
 
     setUpPlayerVariables() {
 
