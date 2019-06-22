@@ -37,8 +37,8 @@ export class WarcraftMaul {
         // Should we enable debug mode?
         if (GetPlayerName(Player(COLOUR.RED)) === 'WorldEdit') {
             this.debugMode = true;
-
         }
+
         if (this.debugMode) {
             this.waveTimer = 15;
             Log.Init([
@@ -46,7 +46,6 @@ export class WarcraftMaul {
             ]);
             Log.Debug('Debug mode enabled');
         }
-
 
         // Set up all players
         for (let i: number = 0; i < 24; i++) {
@@ -63,8 +62,7 @@ export class WarcraftMaul {
         enemies.push(new Attacker(COLOUR.VOILET));
         enemies.push(new Attacker(COLOUR.WHEAT));
 
-        // Set Enemies should be allied with eachother
-
+        // All enemies should be allied with each other
         for (const enemy of enemies) {
             for (const enemyAlly of enemies) {
                 enemy.makeAlliance(enemyAlly);
