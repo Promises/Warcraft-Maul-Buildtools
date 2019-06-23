@@ -6,6 +6,7 @@ import { GenericAutoAttackTower } from './GenericAutoAttackTower';
 import { PassiveCreepDiesInAreaEffectTower } from './PassiveCreepDiesInAreaEffectTower';
 import * as settings from '../../GlobalSettings';
 import { Log } from '../../../lib/Serilog/Serilog';
+import { DamageModificationTower } from './DamageModificationTower';
 
 export class Tower {
     private _tower: unit;
@@ -53,6 +54,9 @@ export class Tower {
     public IsAreaEffectTower(): this is PassiveCreepDiesInAreaEffectTower {
         return 'PassiveCreepDiesInAreaEffect' in this;
     }
+    public IsDamageModificationTower(): this is DamageModificationTower {
+        return 'DamageModificationEvent' in this;
+    }
 
     public Sell(): void {
         this.owner.towers.delete(this.handleId);
@@ -61,6 +65,9 @@ export class Tower {
         }
         if (this.IsAttackActionTower()) {
             this.game.gameDamageEngine.initialDamageEventTowers.delete(this.handleId);
+        }
+        if (this.IsDamageModificationTower()) {
+            this.game.gameDamageEngine.multiplicativeDamageModificationEventTowers.delete(this.handleId);
         }
         if (this.IsGenericAutoAttackTower()) {
             this.game.worldMap.towerConstruction.genericAttacks.delete(this.handleId);

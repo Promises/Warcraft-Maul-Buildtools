@@ -2,6 +2,7 @@ import { Trigger } from '../../JassOverrides/Trigger';
 import { DamageEngineGlobals } from './DamageEngineGlobals';
 import { Tower } from '../Entity/Tower/Tower';
 import { AttackActionTower } from '../Entity/Tower/AttackActionTower';
+import { DamageModificationTower } from '../Entity/Tower/DamageModificationTower';
 
 export class DamageEngine {
     /**
@@ -9,6 +10,8 @@ export class DamageEngine {
      */
     private initialDamageEvent: (() => void)[] = [];
     public initialDamageEventTowers: Map<number, AttackActionTower> = new Map<number, AttackActionTower>();
+    public multiplicativeDamageModificationEventTowers: Map<number, DamageModificationTower> = new Map<number, DamageModificationTower>();
+
     private zeroDamageEvent: (() => void)[] = [];
     private damageEventAOEActions: (() => void)[] = [];
     private damageEventLethalActions: (() => void)[] = [];
@@ -93,6 +96,10 @@ export class DamageEngine {
         this.multiplicativeDamageModificationEvent.push(event);
     }
 
+    public AddMultiplicativeDamageModificationEventTower(handleId: number, tower: DamageModificationTower): void {
+        this.multiplicativeDamageModificationEventTowers.set(handleId, tower);
+    }
+
     /**
      * Adds an event that triggers right before armor and resistance has been factored in
      */
@@ -146,6 +153,8 @@ export class DamageEngine {
 
     private MultiplicativeDamageModificationEvent(): void {
         this.multiplicativeDamageModificationEvent.forEach(action => action());
+        this.multiplicativeDamageModificationEventTowers.forEach(tower => tower.DamageModificationEvent());
+
     }
 
     private PreFinalDamageModificationEvent(): void {

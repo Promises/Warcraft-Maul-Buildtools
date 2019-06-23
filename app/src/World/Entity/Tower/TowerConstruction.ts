@@ -12,6 +12,7 @@ import { NightElfWisp } from './WorkersUnion/NightElfWisp';
 import { SacrificialPit } from './Undead/SacrificialPit';
 import { EndOfRoundTower } from './EndOfRoundTower';
 import { GenericAutoAttackTower } from './GenericAutoAttackTower';
+import { EarthPandaren } from './Tavern/EarthPandaren';
 
 
 export class TowerConstruction {
@@ -60,6 +61,9 @@ export class TowerConstruction {
         if (ObjectExtendsTower.IsAttackActionTower()) {
             this.game.gameDamageEngine.AddInitialDamageEventTower(ObjectExtendsTower.handleId, ObjectExtendsTower);
         }
+        if (ObjectExtendsTower.IsDamageModificationTower()) {
+            this.game.gameDamageEngine.AddMultiplicativeDamageModificationEventTower(ObjectExtendsTower.handleId, ObjectExtendsTower);
+        }
         if (ObjectExtendsTower.IsGenericAutoAttackTower()) {
             this.genericAttacks.set(ObjectExtendsTower.handleId, ObjectExtendsTower);
         }
@@ -87,6 +91,7 @@ export class TowerConstruction {
         this.towerTypes.set(FourCC('h03I'), UndeadAcolyte);
         this.towerTypes.set(FourCC('h03H'), NightElfWisp);
         this.towerTypes.set(FourCC('h00R'), SacrificialPit);
+        this.towerTypes.set(FourCC('h01F'), EarthPandaren);
     }
 
     private DoGenericTowerAttacks(): void {
