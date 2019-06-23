@@ -29,7 +29,7 @@ export class SellTower {
         const value: number = GetUnitPointValue(u);
         let playerSpawnId: undefined | number;
         for (let i: number = 0; i < settings.PLAYER_AREAS.length; i++) {
-            if (new Rectangle(settings.PLAYER_AREAS[i]).ContainsUnit(u)) {
+            if (settings.PLAYER_AREAS[i].ContainsUnit(u)) {
                 playerSpawnId = i;
                 break;
             }

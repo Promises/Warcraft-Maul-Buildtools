@@ -1,23 +1,16 @@
 import { Tower } from '../Tower';
 import { Defender } from '../../Players/Defender';
 import { WarcraftMaul } from '../../../WarcraftMaul';
+import { EndOfRoundTower } from '../EndOfRoundTower';
+import { AttackActionTower } from '../AttackActionTower';
+import { GenericAutoAttackTower } from '../GenericAutoAttackTower';
 
-export class NightElfWisp extends Tower {
-
-    genericAtk: () => void;
-
-    constructor(tower: unit, owner: Defender, game: WarcraftMaul) {
-        super(tower, owner, game);
-        game.gameDamageEngine.AddInitialDamageEvent(() => this.AttackAction(game));
-        game.gameRoundHandler.endOfTurnTowers.push(this);
-        this.genericAtk = () => this.GenericAttack();
-        game.worldMap.towerConstruction.genericAttacks.push(this.genericAtk);
-    }
+export class NightElfWisp extends Tower implements EndOfRoundTower, AttackActionTower, GenericAutoAttackTower {
 
 
-    AttackAction(game: WarcraftMaul): void {
-        const u: unit | undefined = game.gameDamageEngineGlobals.udg_DamageEventSource;
-        if (game.gameDamageEngineGlobals.udg_DamageEventAOE !== 1) {
+    public AttackAction(): void {
+        const u: unit | undefined = this.game.gameDamageEngineGlobals.udg_DamageEventSource;
+        if (this.game.gameDamageEngineGlobals.udg_DamageEventAOE !== 1) {
             return;
         }
         if (u === this.tower) {
@@ -31,12 +24,12 @@ export class NightElfWisp extends Tower {
 
     }
 
-    GenericAttack(): void {
+    public GenericAttack(): void {
         IssueImmediateOrderBJ(this.tower, 'stomp');
     }
 
 
-    EndOfRoundAction(): void {
+    public EndOfRoundAction(): void {
         BlzSetUnitBaseDamage(this.tower, 39, 0);
     }
 

@@ -406,10 +406,10 @@ export class WorldMap {
 
     public setupMazes(): void {
         for (let i: number = 0; i < settings.PLAYER_AREAS.length; i++) {
-            const minX: number = settings.PLAYER_AREAS[i][0];
-            const minY: number = settings.PLAYER_AREAS[i][1];
-            const maxX: number = settings.PLAYER_AREAS[i][2];
-            const maxY: number = settings.PLAYER_AREAS[i][3];
+            const minX: number = settings.PLAYER_AREAS[i].minX;
+            const minY: number = settings.PLAYER_AREAS[i].minY;
+            const maxX: number = settings.PLAYER_AREAS[i].maxX;
+            const maxY: number = settings.PLAYER_AREAS[i].maxY;
             const width: number = Math.abs((maxX - minX) / 64);
             const height: number = Math.abs((maxY - minY) / 64);
             const g: boolean[] = [];

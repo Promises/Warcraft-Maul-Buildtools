@@ -1,11 +1,14 @@
 import { Trigger } from '../../JassOverrides/Trigger';
 import { DamageEngineGlobals } from './DamageEngineGlobals';
+import { Tower } from '../Entity/Tower/Tower';
+import { AttackActionTower } from '../Entity/Tower/AttackActionTower';
 
 export class DamageEngine {
     /**
      * Damage Event Arrays
      */
     private initialDamageEvent: (() => void)[] = [];
+    public initialDamageEventTowers: AttackActionTower[] = [];
     private zeroDamageEvent: (() => void)[] = [];
     private damageEventAOEActions: (() => void)[] = [];
     private damageEventLethalActions: (() => void)[] = [];
@@ -61,6 +64,15 @@ export class DamageEngine {
     }
 
     /**
+     * Adds an event that triggers right before a unit takes damage
+     *  - Do not change the damage in any way during these events!
+     */
+    public AddInitialDamageEventTower(tower: AttackActionTower): void {
+        this.initialDamageEventTowers.push(tower);
+    }
+
+
+    /**
      * Adds an event that triggers right after a unit has taken 0 damage
      */
     public AddZeroDamageEvent(event: () => void): void {
@@ -113,6 +125,7 @@ export class DamageEngine {
 
     private InitialDamageEvent(): void {
         this.initialDamageEvent.forEach(action => action());
+        this.initialDamageEventTowers.forEach(tower => tower.AttackAction());
     }
 
     private ZeroDamageEvent(): void {

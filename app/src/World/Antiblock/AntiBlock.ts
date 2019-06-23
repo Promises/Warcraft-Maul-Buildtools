@@ -32,7 +32,7 @@ export class AntiBlock {
 
         let playerSpawnId;
         for (let i = 0; i < settings.PLAYER_AREAS.length; i++) {
-            if (new Rectangle(settings.PLAYER_AREAS[i]).ContainsUnit(consUnit)) {
+            if (settings.PLAYER_AREAS[i].ContainsUnit(consUnit)) {
                 playerSpawnId = i;
                 break;
             }

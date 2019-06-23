@@ -10,14 +10,16 @@ import { HumanPeasant } from './WorkersUnion/HumanPeasant';
 import { UndeadAcolyte } from './WorkersUnion/UndeadAcolyte';
 import { NightElfWisp } from './WorkersUnion/NightElfWisp';
 import { SacrificialPit } from './Undead/SacrificialPit';
+import { EndOfRoundTower } from './EndOfRoundTower';
+import { GenericAutoAttackTower } from './GenericAutoAttackTower';
 
 
 export class TowerConstruction {
-    towerConstructTrigger: Trigger;
-    towerTypes: Map<number, object> = new Map<number, object>();
-    genericAttacks: (() => void)[] = [];
-    genericAttackTrigger: Trigger;
-    game: WarcraftMaul;
+    private towerConstructTrigger: Trigger;
+    private towerTypes: Map<number, object> = new Map<number, object>();
+    private genericAttacks: GenericAutoAttackTower[] = [];
+    private genericAttackTrigger: Trigger;
+    private game: WarcraftMaul;
 
     constructor(game: WarcraftMaul) {
         Log.Debug('Starting towercons');
@@ -28,6 +30,9 @@ export class TowerConstruction {
         this.towerConstructTrigger.AddAction(() => this.ConstructionFinished());
         this.genericAttackTrigger = new Trigger();
         this.genericAttackTrigger.RegisterPlayerUnitEventSimple(Player(COLOUR.NAVY), EVENT_PLAYER_UNIT_ATTACKED);
+        this.genericAttackTrigger.RegisterPlayerUnitEventSimple(Player(COLOUR.TURQUOISE), EVENT_PLAYER_UNIT_ATTACKED);
+        this.genericAttackTrigger.RegisterPlayerUnitEventSimple(Player(COLOUR.VOILET), EVENT_PLAYER_UNIT_ATTACKED);
+        this.genericAttackTrigger.RegisterPlayerUnitEventSimple(Player(COLOUR.WHEAT), EVENT_PLAYER_UNIT_ATTACKED);
         this.genericAttackTrigger.AddAction(() => this.DoGenericTowerAttacks());
     }
 
@@ -49,6 +54,15 @@ export class TowerConstruction {
         } else {
             ObjectExtendsTower = new Tower(tower, owner, this.game);
         }
+        if (ObjectExtendsTower.IsEndOfRoundTower()) {
+            this.game.gameRoundHandler.endOfTurnTowers.push(ObjectExtendsTower);
+        }
+        if (ObjectExtendsTower.IsAttackActionTower()) {
+            this.game.gameDamageEngine.AddInitialDamageEventTower(ObjectExtendsTower);
+        }
+        if (ObjectExtendsTower.IsGenericAutoAttackTower()) {
+            this.genericAttacks.push(ObjectExtendsTower);
+        }
     }
 
     private InitTypes(): void {
@@ -61,8 +75,10 @@ export class TowerConstruction {
     }
 
     private DoGenericTowerAttacks(): void {
-        for (const atk of this.genericAttacks) {
-            atk();
+        for (const tower of this.genericAttacks) {
+            tower.GenericAttack();
         }
     }
+
+
 }

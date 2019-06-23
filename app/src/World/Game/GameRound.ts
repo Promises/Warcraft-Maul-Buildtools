@@ -9,6 +9,7 @@ import { Ship } from '../Entity/Ship';
 import { Tower } from '../Entity/Tower/Tower';
 import { ArchimondeGate } from './ArchimondeGate';
 import { ArchimondeTeleport } from './ArchimondeTeleport';
+import { EndOfRoundTower } from '../Entity/Tower/EndOfRoundTower';
 
 export class GameRound {
     gameTimeTrigger: Trigger;
@@ -18,7 +19,7 @@ export class GameRound {
     isWaveInProgress: boolean = false;
     currentWave: number = 1;
     roundOverGoldReward: number = 20;
-    endOfTurnTowers: Tower[] = [];
+    endOfTurnTowers: EndOfRoundTower[] = [];
     waitBetweenWaveTime: number = 20;
     private archimondeGate: ArchimondeGate;
     private archimondeTeleport: ArchimondeTeleport;

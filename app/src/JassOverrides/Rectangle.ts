@@ -1,11 +1,11 @@
 export class Rectangle {
-    area: number[];
+    private area: number[];
 
     constructor(area: number[]) {
         this.area = area;
     }
 
-    ContainsUnit(whichUnit: unit): boolean {
+    public ContainsUnit(whichUnit: unit): boolean {
         if (GetUnitX(whichUnit) < this.area[0]) {
             return false;
         }
@@ -23,5 +23,19 @@ export class Rectangle {
         }
 
         return true;
+    }
+
+
+    public get minX(): number {
+        return this.area[0];
+    }
+    public get minY(): number {
+        return this.area[1];
+    }
+    public get maxX(): number {
+        return this.area[2];
+    }
+    public get maxY(): number {
+        return this.area[3];
     }
 }

@@ -1,18 +1,12 @@
 import { Tower } from '../Tower';
-import { Defender } from '../../Players/Defender';
-import { WarcraftMaul } from '../../../WarcraftMaul';
+import { EndOfRoundTower } from '../EndOfRoundTower';
+import { AttackActionTower } from '../AttackActionTower';
 
-export class OrcPeon extends Tower {
+export class OrcPeon extends Tower implements EndOfRoundTower, AttackActionTower {
 
-    constructor(tower: unit, owner: Defender, game: WarcraftMaul) {
-        super(tower, owner, game);
-        game.gameDamageEngine.AddInitialDamageEvent(() => this.AttackAction(game));
-        game.gameRoundHandler.endOfTurnTowers.push(this);
 
-    }
-
-    AttackAction(game: WarcraftMaul): void {
-        const u: unit | undefined = game.gameDamageEngineGlobals.udg_DamageEventSource;
+    public AttackAction(): void {
+        const u: unit | undefined = this.game.gameDamageEngineGlobals.udg_DamageEventSource;
         if (u === this.tower) {
             if (!(GetUnitAbilityLevel(this.tower, FourCC('A09Q')) > 0)) {
                 return;
@@ -25,8 +19,7 @@ export class OrcPeon extends Tower {
     }
 
 
-
-    EndOfRoundAction(): void {
+    public EndOfRoundAction(): void {
         BlzSetUnitBaseDamage(this.tower, 0, 0);
     }
 

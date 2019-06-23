@@ -63,20 +63,20 @@ export class Defender extends AbstractPlayer {
     }
 
 
-    getArea(): number[] {
+    public getArea(): Rectangle {
         return PLAYER_AREAS[this.id];
     }
 
-    getCenterX(): number {
-        const x1: number = this.getArea()[0];
-        const x2: number = this.getArea()[2];
+    public getCenterX(): number {
+        const x1: number = this.getArea().minX;
+        const x2: number = this.getArea().maxX;
 
         return (x1 + x2) / 2;
     }
 
-    getCenterY(): number {
-        const y1: number = this.getArea()[1];
-        const y2: number = this.getArea()[3];
+    public getCenterY(): number {
+        const y1: number = this.getArea().minY;
+        const y2: number = this.getArea().maxY;
 
         return (y1 + y2) / 2;
     }
@@ -91,7 +91,7 @@ export class Defender extends AbstractPlayer {
 
 
     getRectangle(): Rectangle {
-        return new Rectangle(this.getArea());
+        return this.getArea();
     }
 
     private PlayerLeftTheGameConditions(game: WarcraftMaul): boolean {

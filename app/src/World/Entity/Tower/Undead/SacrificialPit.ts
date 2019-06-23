@@ -1,19 +1,13 @@
 import { Tower } from '../Tower';
-import { Defender } from '../../Players/Defender';
-import { WarcraftMaul } from '../../../WarcraftMaul';
+import { AttackActionTower } from '../AttackActionTower';
 
-export class SacrificialPit extends Tower {
+export class SacrificialPit extends Tower implements AttackActionTower {
 
-    constructor(tower: unit, owner: Defender, game: WarcraftMaul) {
-        super(tower, owner, game);
-        game.gameDamageEngine.AddInitialDamageEvent(() => this.AttackAction(game));
 
-    }
-
-    AttackAction(game: WarcraftMaul): void {
-        const u: unit | undefined = game.gameDamageEngineGlobals.udg_DamageEventSource;
-        const dmgEventAmount: number = game.gameDamageEngineGlobals.udg_DamageEventAmount;
-        const target: unit | undefined = game.gameDamageEngineGlobals.udg_DamageEventTarget;
+    public AttackAction(): void {
+        const u: unit | undefined = this.game.gameDamageEngineGlobals.udg_DamageEventSource;
+        const dmgEventAmount: number = this.game.gameDamageEngineGlobals.udg_DamageEventAmount;
+        const target: unit | undefined = this.game.gameDamageEngineGlobals.udg_DamageEventTarget;
         if (target) {
             if (!UnitHasBuffBJ(target, FourCC('B014'))) {
                 return;
