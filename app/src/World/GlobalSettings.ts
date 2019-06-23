@@ -1,5 +1,6 @@
 import { Defender } from './Entity/Players/Defender';
 import { Attacker } from './Entity/Players/Attacker';
+import { Rectangle } from '../JassOverrides/Rectangle';
 
 export const players: Map<number, Defender> = new Map<number, Defender>();
 
@@ -98,20 +99,20 @@ export const ARMOUR_TYPE_NAMES = [
 
 ];
 
-export const PLAYER_AREAS: number[][] = [
-    [-4224.0, 3968.0, -1792.0, 5504.0], // Red area
-    [-768.0, 2304.0, 768.0, 4736.0], // Blue area
-    [1792.0, 3968.0, 4224.0, 5504.0], // Teal area
-    [3584.0, -2304.0, 5120.0, 128.0], // Purple area
-    [-768.0, -768.0, 768.0, 1664.0], // Yellow area
-    [-5120.0, -2304.0, -3584.0, 128.0], // Orange area
-    [-4480.0, -4224.0, -2048.0, -2688.0], // Green area
-    [2048.0, -4224.0, 4480.0, -2688.0], // Pink area
-    [-768.0, -4864.0, 768.0, -2432.0], // Grey area
-    [-2944.0, -1920.0, -1408.0, 512.0], // Lightblue area
-    [1408.0, -1920.0, 2944.0, 512.0], // Darkgreen area
-    [-5120.0, 768.0, -3584.0, 3200.0], // Brown area
-    [3584.0, 768.0, 5120.0, 3200.0], // Maroon area
+export const PLAYER_AREAS: Rectangle[] = [
+    new Rectangle([-4224.0, 3968.0, -1792.0, 5504.0]), // Red area
+    new Rectangle([-768.0, 2304.0, 768.0, 4736.0]), // Blue area
+    new Rectangle([1792.0, 3968.0, 4224.0, 5504.0]), // Teal area
+    new Rectangle([3584.0, -2304.0, 5120.0, 128.0]), // Purple area
+    new Rectangle([-768.0, -768.0, 768.0, 1664.0]), // Yellow area
+    new Rectangle([-5120.0, -2304.0, -3584.0, 128.0]), // Orange area
+    new Rectangle([-4480.0, -4224.0, -2048.0, -2688.0]), // Green area
+    new Rectangle([2048.0, -4224.0, 4480.0, -2688.0]), // Pink area
+    new Rectangle([-768.0, -4864.0, 768.0, -2432.0]), // Grey area
+    new Rectangle([-2944.0, -1920.0, -1408.0, 512.0]), // Lightblue area
+    new Rectangle([1408.0, -1920.0, 2944.0, 512.0]), // Darkgreen area
+    new Rectangle([-5120.0, 768.0, -3584.0, 3200.0]), // Brown area
+    new Rectangle([3584.0, 768.0, 5120.0, 3200.0]), // Maroon area
 ];
 
 export class Sounds {
