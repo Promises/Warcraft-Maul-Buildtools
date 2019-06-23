@@ -42,7 +42,7 @@ export class WarcraftMaul {
         if (this.debugMode) {
             this.waveTimer = 15;
             Log.Init([
-                new StringSink(LogLevel.Debug, BJDebugMsg),
+                new StringSink(LogLevel.Debug, SendMessage),
             ]);
             Log.Debug('Debug mode enabled');
         }
@@ -95,8 +95,8 @@ export class WarcraftMaul {
             CreateQuestBJ(quest.stype, quest.title, quest.body, quest.icon);
         }
 
-        print('Welcome to Warcraft Maul Reimagined');
-        print(`This is build: ${BUILD_NUMBER}, built ${BUILD_DATE}.`);
+        SendMessage('Welcome to Warcraft Maul Reimagined');
+        SendMessage(`This is build: ${BUILD_NUMBER}, built ${BUILD_DATE}.`);
     }
 
     DefeatAllPlayers(): void {
@@ -108,8 +108,8 @@ export class WarcraftMaul {
     GameWin(): void {
         if (this.gameLives > 0) {
             PlaySoundBJ(settings.Sounds.victorySound);
-            print('|cFFF48C42YOU HAVE WON!|r');
-            print('You can either leave the game or stay for bonus rounds');
+            SendMessage('|cFFF48C42YOU HAVE WON!|r');
+            SendMessage('You can either leave the game or stay for bonus rounds');
             this.GameWinEffects();
         }
     }
@@ -147,7 +147,7 @@ export class WarcraftMaul {
         this.gameEndTimer = settings.GAME_END_TIME;
         this.gameEnded = true;
         PlaySoundBJ(settings.Sounds.defeatSound);
-        print('|cFFFF0000GAME OVER|r');
+        SendMessage('|cFFFF0000GAME OVER|r');
         this.worldMap.RemoveEveryUnit();
     }
 }

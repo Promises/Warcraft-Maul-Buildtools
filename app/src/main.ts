@@ -5,7 +5,7 @@ import { Log, LogLevel } from './lib/Serilog/Serilog';
 import { StringSink } from './lib/Serilog/Sinks/StringSink';
 
 Log.Init([
-    new StringSink(LogLevel.Fatal, BJDebugMsg),
+    new StringSink(LogLevel.Fatal, SendMessage),
 ]);
 function Main(this: void) {
     let maul = new WarcraftMaul();

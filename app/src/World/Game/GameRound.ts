@@ -130,7 +130,7 @@ export class GameRound {
             // Display lives lost
 
             if (this.game.gameLives === this.game.startLives) {
-                print(
+                SendMessage(
                     '|cFFF44242Co|r' +
                     '|cFFF47442ng|r' +
                     '|cFFF4A742ra|r' +
@@ -146,7 +146,7 @@ export class GameRound {
                     '|cFFC542F4st!|r',
                 );
             } else {
-                print(
+                SendMessage(
                     `${this.game.gameLives} ${Util.ColourString(settings.COLOUR_CODES[COLOUR.RED], 'Chances have been lost')}`,
                 );
             }
@@ -218,7 +218,7 @@ export class GameRound {
 
     private SpawnCreeps(): void {
         const wave: WaveCreep = this.game.worldMap.waveCreeps[this.currentWave - 1];
-        print(`Level ${this.currentWave} - ${wave.name}`);
+        SendMessage(`Level ${this.currentWave} - ${wave.name}`);
 
         let spawnAmount: number = 10;
         switch (wave.getCreepType()) {
@@ -355,7 +355,7 @@ export class GameRound {
 
 
     BonusRoundsOver(): void {
-        print('|cFFF48C42That\'s all the bonus levels, see you next time!|r');
+        SendMessage('|cFFF48C42That\'s all the bonus levels, see you next time!|r');
         this.isWaveInProgress = false;
         this.game.gameEndTimer = settings.GAME_END_TIME;
         this.game.gameEnded = true;

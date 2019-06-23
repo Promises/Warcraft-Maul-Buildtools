@@ -1,7 +1,11 @@
 class console {
     static log(input: string) {
-        BJDebugMsg(input);
+        SendMessage(input);
     }
+}
+
+function SendMessage(this: void, msg: any): void {
+    DisplayTimedTextToForce(bj_FORCE_ALL_PLAYERS, 10, `${msg}`);
 }
 
 interface ColourToIndex {
@@ -17,7 +21,8 @@ class Util {
     static ColourString(colour: string, str: string): string {
         return `|cFF${colour}${str}|r`;
     }
-    static RandomInt(min: number, max: number): number{
+
+    static RandomInt(min: number, max: number): number {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
@@ -64,9 +69,10 @@ class Util {
     static ParseInt(str: string): number {
         return +str;
     }
+
     static ParsePositiveInt(str: string): number {
         let int: number = Number(str);
-        if(int < 0) {
+        if (int < 0) {
             return 0;
         }
         return int;

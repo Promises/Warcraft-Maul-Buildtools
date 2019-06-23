@@ -9,5 +9,5 @@ if [ $status -ne 0 ]; then
 fi 
 currentWINEdir="Z:\\$(pwd | sed 's#/#\\#g'  )"
 
-#/Applications/Warcraft\ III/x86_64/Warcraft\ III.app/Contents/MacOS/Warcraft\ III -loadfile target/map.w3x
-exec wine ~/.wine/drive_c/Program\ Files/Warcraft\ III/x86/Warcraft\ III.exe -loadfile ${currentWINEdir}\\target\\map.w3x
+/Applications/Warcraft\ III/x86_64/Warcraft\ III.app/Contents/MacOS/Warcraft\ III -loadfile target/map.w3x
+#exec wine ~/.wine/drive_c/Program\ Files/Warcraft\ III/x86/Warcraft\ III.exe -loadfile ${currentWINEdir}\\target\\map.w3x

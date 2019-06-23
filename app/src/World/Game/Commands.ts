@@ -444,7 +444,7 @@ export class Commands {
     private VoteKick(player: Defender, receivingPlayer: Defender): void {
         if (!this.voteKickInProgress) {
             if (player !== receivingPlayer) {
-                print(`${player.getNameWithColour()} has started a votekick for ${receivingPlayer.getNameWithColour()} (say -y to vote)`);
+                SendMessage(`${player.getNameWithColour()} has started a votekick for ${receivingPlayer.getNameWithColour()} (say -y to vote)`);
                 this.voteKickInProgress = true;
                 this.voteAgainstPlayer = receivingPlayer;
                 this.hasVotedToKick[player.id] = true;
@@ -461,7 +461,7 @@ export class Commands {
     private VotekickExpire(): void {
         const count: number = this.CountCurrentVotes();
         if (this.voteAgainstPlayer) {
-            print(`Votekick for ${this.voteAgainstPlayer.getNameWithColour()} has ended with ${count} votes`);
+            SendMessage(`Votekick for ${this.voteAgainstPlayer.getNameWithColour()} has ended with ${count} votes`);
         }
         this.voteKickInProgress = false;
     }
@@ -501,14 +501,14 @@ export class Commands {
                 }
                 players.delete(this.voteAgainstPlayer.id);
 
-                print(`Votekick for ${this.voteAgainstPlayer.getNameWithColour()} has succeeded!`);
+                SendMessage(`Votekick for ${this.voteAgainstPlayer.getNameWithColour()} has succeeded!`);
                 CustomDefeatBJ(this.voteAgainstPlayer.wcPlayer, 'Kicked!');
 
                 DestroyTimer(this.voteKickTimer);
                 this.voteKickInProgress = false;
             }
         } else {
-            print('You\'ll need ' + missingVotes + ' more votes to kick');
+            SendMessage('You\'ll need ' + missingVotes + ' more votes to kick');
         }
     }
 

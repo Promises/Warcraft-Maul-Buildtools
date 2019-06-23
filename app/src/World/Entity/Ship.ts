@@ -40,10 +40,10 @@ export class Ship extends CheckPoint {
             const creep: Creep | undefined = spawnedCreeps.unitMap.get(GetHandleIdBJ(GetEnteringUnit()));
             if (creep !== undefined) {
                 if (creep.getId() === FourCC('uC72')) {
-                    print('Archimonde has boarded the ship! |cFFFF0000YOU LOSE!|r');
+                    SendMessage('Archimonde has boarded the ship! |cFFFF0000YOU LOSE!|r');
                     this.game.gameLives = 0;
                 } else {
-                    print(`|c00ff0000A unit has boarded the ship!|r ${this.game.gameLives} |c00ff0000chances left|r`);
+                    SendMessage(`|c00ff0000A unit has boarded the ship!|r ${this.game.gameLives} |c00ff0000chances left|r`);
                     this.game.gameLives--;
                 }
 

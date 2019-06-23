@@ -30,7 +30,7 @@ export abstract class AbstractPlayer {
     }
 
     sendMessage(message: string): void {
-        DisplayTimedTextToPlayer(this.wcPlayer, 0, 0, 5, message);
+        DisplayTimedTextToPlayer(this.wcPlayer, 0, 0, 10, message);
     }
 
     setGold(amount: number): void {

@@ -19,7 +19,7 @@ sh ./wcm_generate.sh
 
 
 if [ "$bt_alwaysnpm" = true ]; then
-    /home/henning/.nvm/versions/node/v11.11.0/bin/npm i
+    npm i
 fi
 
 
@@ -68,12 +68,12 @@ echo "Converting TypeScript to Lua ..."
 node node_modules/typescript-to-lua/dist/tstl.js  -p tsconfig.json
 mv src/app/src/main.lua src/
 
- ./tools/ceres/ceres-linux
+ ./tools/ceres/ceres
 
 
 
 echo "Processing map script ..."
- ./tools/ceres/ceres-linux build "map"
+ ./tools/ceres/ceres build "map"
 ## get status ##
 status=$?
 ## take some decision ## 

@@ -99,7 +99,7 @@ export class Defender extends AbstractPlayer {
     }
 
     private PlayerLeftTheGame(game: WarcraftMaul): void {
-        print(`${this.getNameWithColour()} has left the game!`);
+        SendMessage(`${this.getNameWithColour()} has left the game!`);
 
         this.ResetSpawnRestrictions();
         TriggerSleepAction(2.00);
