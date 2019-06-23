@@ -12,6 +12,7 @@ import { AntiBlock } from './Antiblock/AntiBlock';
 import { Maze } from './Antiblock/Maze';
 import * as settings from './GlobalSettings';
 import { TowerConstruction } from './Entity/Tower/TowerConstruction';
+import { DirectionalArrow } from './Game/DirectionalArrow';
 
 export class WorldMap {
     game: WarcraftMaul;
@@ -37,7 +38,7 @@ export class WorldMap {
         this.antiBlock = new AntiBlock(this);
     }
 
-    private setupWorldCreatures() {
+    private setupWorldCreatures(): void {
         // Ship at the bottom of the world
         this.ship = new Ship(CreateUnit(Player(COLOUR.NAVY), FourCC('n05G'), 63.0, -5343.5, 0.000), this);
         this.createCreepWaves();
@@ -46,11 +47,53 @@ export class WorldMap {
         this.spawnedCreeps = new SpawnedCreeps();
         this.setupCheckpoint();
         this.setupMazes();
+        this.setupArrows();
     }
 
+    private setupArrows(): void {
+        const directionalArrows: DirectionalArrow[] = [];
+        for (let playerId: number = 0; playerId < 13; playerId++) {
+            const firstSpawn: CheckPoint | undefined = this.playerSpawns[playerId].spawnOne;
+            if (firstSpawn === undefined) {
+                return;
+            }
 
-    createDummyCreeps() {
+            const firstCheckpoint: CheckPoint | undefined = firstSpawn.next;
+            if (firstCheckpoint === undefined) {
+                return;
+            }
 
+            const secondCheckpoint: CheckPoint | undefined = firstCheckpoint.next;
+            if (secondCheckpoint === undefined) {
+                return;
+            }
+
+            let modelPath: string = '';
+            if (Player(playerId) === GetLocalPlayer()) {
+                // modelPath = 'Doodads\\Cinematic\\DemonFootPrint\\DemonFootPrint0.mdl';
+                // modelPath = 'Abilities\\Spells\\Items\\OrbCorruption\\OrbCorruptionMissile.mdl';
+                modelPath = 'Abilities\\Spells\\NightElf\\FaerieDragonInvis\\FaerieDragon_Invis.mdl';
+            }
+
+            directionalArrows.push(new DirectionalArrow(modelPath,
+                                                        GetRectCenterX(firstCheckpoint.rectangle),
+                                                        GetRectCenterY(firstCheckpoint.rectangle),
+                                                        GetRectCenterX(secondCheckpoint.rectangle),
+                                                        GetRectCenterY(secondCheckpoint.rectangle)));
+        }
+
+        // TODO: This needs to be replaced with a timer library!
+        const t: timer = CreateTimer();
+        TimerStart(t, 10.00, false, () => {
+            let directionalArrow: DirectionalArrow | undefined = directionalArrows.pop();
+            while (directionalArrow !== undefined) {
+                directionalArrow.Destroy();
+                directionalArrow = directionalArrows.pop();
+            }
+        });
+    }
+
+    createDummyCreeps(): void {
         // set up neutrals
         const dummyCreeps: unit[] = [];
 
@@ -110,7 +153,7 @@ export class WorldMap {
 
     }
 
-    createCreepWaves() {
+    createCreepWaves(): void {
         this.waveCreeps.push(new WaveCreep(1, 'u006', 'Wisp'));
         this.waveCreeps.push(new WaveCreep(2, 'hC04', 'Clockwerk'));
         this.waveCreeps.push(new WaveCreep(3, 'eC05', 'Acolyte'));
@@ -149,7 +192,7 @@ export class WorldMap {
         this.waveCreeps.push(new WaveCreep(36, 'hC79', 'CRAB OF DEATH'));
     }
 
-    setupRaces() {
+    setupRaces(): void {
         this.races.push(new Race('h03L', 'Workers Union', 'I01A', this));
         this.races.push(new Race('uC98', 'Demon Portal', 'I001', this));
         this.races.push(new Race('oC22', 'Undead Necropolis', 'I002', this));
@@ -187,12 +230,11 @@ export class WorldMap {
         this.races.push(new Race('u01B', 'Shrine of Buffs', 'I026', this));
     }
 
-    private setupCheckpoint() {
-
-        const RedSpawns = new PlayerSpawns(this);
+    private setupCheckpoint(): void {
+        const RedSpawns: PlayerSpawns = new PlayerSpawns(this);
         RedSpawns.spawnOne = new CheckPoint(Rect(-1792.0, 4736.0, -1472.0, 5056.0), this);
         RedSpawns.spawnTwo = new CheckPoint(Rect(-1792.0, 4416.0, -1472.0, 4736.0), this);
-        let RedCheckpoint = RedSpawns.spawnOne;
+        let RedCheckpoint: CheckPoint = RedSpawns.spawnOne;
         RedCheckpoint = RedCheckpoint.next = new CheckPoint(Rect(-2464.00, 4704.00, -2400.00, 4768.00), this);
         RedCheckpoint = RedCheckpoint.next = new CheckPoint(Rect(-3616.00, 4704.00, -3552.00, 4768.00), this);
         RedCheckpoint = RedCheckpoint.next = new Teleporter(Rect(-4384.00, 4704.00, -4320.00, 4768.00), this, 270.00);
@@ -200,26 +242,26 @@ export class WorldMap {
         this.playerSpawns[COLOUR.RED] = RedSpawns;
 
 
-        const BlueSpawns = new PlayerSpawns(this);
+        const BlueSpawns: PlayerSpawns = new PlayerSpawns(this);
         BlueSpawns.spawnOne = new CheckPoint(Rect(-320.0, 4768.0, 0.0, 5088.0), this);
         BlueSpawns.spawnTwo = new CheckPoint(Rect(0.0, 4768.0, 320.0, 5088.0), this);
 
-        let BluePrimaryCheckpoint = BlueSpawns.spawnOne;
+        let BluePrimaryCheckpoint: CheckPoint = BlueSpawns.spawnOne;
         BluePrimaryCheckpoint = BluePrimaryCheckpoint.next = new CheckPoint(Rect(-64.00, 4032.00, 64.00, 4160.00), this);
         BluePrimaryCheckpoint = BluePrimaryCheckpoint.next = new CheckPoint(Rect(-64.00, 2880.00, 64.00, 3008.00), this);
         BluePrimaryCheckpoint = BluePrimaryCheckpoint.next = new CheckPoint(Rect(-64, 1920, 64, 2016), this);
 
-        let BlueSecondaryCheckpoint = BlueSpawns.spawnTwo;
+        let BlueSecondaryCheckpoint: CheckPoint = BlueSpawns.spawnTwo;
         BlueSecondaryCheckpoint = BlueSecondaryCheckpoint.next = new CheckPoint(Rect(-64.00, 4032.00, 64.00, 4160.00), this);
         BlueSecondaryCheckpoint = BlueSecondaryCheckpoint.next = new CheckPoint(Rect(-64.00, 2880.00, 64.00, 3008.00), this);
         BlueSecondaryCheckpoint = BlueSecondaryCheckpoint.next = new CheckPoint(Rect(-64, 1920, 64, 2016), this);
         this.playerSpawns[COLOUR.BLUE] = BlueSpawns;
 
 
-        const TealSpawns = new PlayerSpawns(this);
+        const TealSpawns: PlayerSpawns = new PlayerSpawns(this);
         TealSpawns.spawnOne = new CheckPoint(Rect(1472.0, 4768.0, 1792.0, 5088.0), this);
         TealSpawns.spawnTwo = new CheckPoint(Rect(1472.0, 4448.0, 1792.0, 4768.0), this);
-        let TealCheckpoint = TealSpawns.spawnOne;
+        let TealCheckpoint: CheckPoint = TealSpawns.spawnOne;
         TealCheckpoint = TealCheckpoint.next = new CheckPoint(Rect(2400.00, 4704.00, 2464.00, 4768.00), this);
         TealCheckpoint = TealCheckpoint.next = new CheckPoint(Rect(3552.00, 4704.00, 3616.00, 4768.00), this);
         TealCheckpoint = TealCheckpoint.next = new Teleporter(Rect(4320.00, 4704.00, 4384.00, 4768.00), this, 270.00);
@@ -227,27 +269,27 @@ export class WorldMap {
         this.playerSpawns[COLOUR.TEAL] = TealSpawns;
 
 
-        const PurpleSpawns = new PlayerSpawns(this);
+        const PurpleSpawns: PlayerSpawns = new PlayerSpawns(this);
         PurpleSpawns.spawnOne = new CheckPoint(Rect(4032.0, 128.0, 4352.0, 448.0), this);
         PurpleSpawns.spawnTwo = new CheckPoint(Rect(4352.0, 128.0, 4672.0, 448.0), this);
-        let PurpleCheckpoint = PurpleSpawns.spawnOne;
+        let PurpleCheckpoint: CheckPoint = PurpleSpawns.spawnOne;
         PurpleCheckpoint = PurpleCheckpoint.next = new CheckPoint(Rect(4320.00, -544.00, 4384.00, -480.00), this);
         PurpleCheckpoint = PurpleCheckpoint.next = new CheckPoint(Rect(4320.00, -1696.00, 4384.00, -1632.00), this);
         PurpleCheckpoint = PurpleCheckpoint.next = new Teleporter(Rect(4320.00, -2464.00, 4384.00, -2400.00), this, 180.0);
         PurpleCheckpoint = PurpleCheckpoint.next = new CheckPoint(Rect(4672.00, -3488.00, 4736.00, -3424.00), this);
         this.playerSpawns[COLOUR.PURPLE] = PurpleSpawns;
 
-        const YellowSpawns = new PlayerSpawns(this);
+        const YellowSpawns: PlayerSpawns = new PlayerSpawns(this);
         YellowSpawns.spawnOne = new CheckPoint(Rect(-320.0, 1664.0, 0.0, 1984.0), this);
         YellowSpawns.spawnTwo = new CheckPoint(Rect(0.0, 1664.0, 320.0, 1984.0), this);
 
-        let YellowPrimaryCheckpoint = YellowSpawns.spawnOne;
+        let YellowPrimaryCheckpoint: CheckPoint = YellowSpawns.spawnOne;
         YellowPrimaryCheckpoint = YellowPrimaryCheckpoint.next = new CheckPoint(Rect(-32.00, 992.00, 32.00, 1056.00), this);
         YellowPrimaryCheckpoint = YellowPrimaryCheckpoint.next = new CheckPoint(Rect(-32.00, -160.00, 32.00, -96.00), this);
         YellowPrimaryCheckpoint = YellowPrimaryCheckpoint.next = new Teleporter(Rect(-32.00, -928.00, 32.00, -864.00), this, 180.0);
         YellowPrimaryCheckpoint = YellowPrimaryCheckpoint.next = new CheckPoint(Rect(-2208.00, -2144.00, -2144.00, -2080.00), this);
 
-        let YellowSecondaryCheckpoint = YellowSpawns.spawnTwo;
+        let YellowSecondaryCheckpoint: CheckPoint = YellowSpawns.spawnTwo;
         YellowSecondaryCheckpoint = YellowSecondaryCheckpoint.next = new CheckPoint(Rect(-32.00, 992.00, 32.00, 1056.00), this);
         YellowSecondaryCheckpoint = YellowSecondaryCheckpoint.next = new CheckPoint(Rect(-32.00, -160.00, 32.00, -96.00), this);
         YellowSecondaryCheckpoint = YellowSecondaryCheckpoint.next = new Teleporter(Rect(-32.00, -928.00, 32.00, -864.00), this, 180.0);
@@ -256,10 +298,10 @@ export class WorldMap {
         this.playerSpawns[COLOUR.YELLOW] = YellowSpawns;
 
 
-        const OrangeSpawns = new PlayerSpawns(this);
+        const OrangeSpawns: PlayerSpawns = new PlayerSpawns(this);
         OrangeSpawns.spawnOne = new CheckPoint(Rect(-4672.0, 128.0, -4352.0, 448.0), this);
         OrangeSpawns.spawnTwo = new CheckPoint(Rect(-4352.0, 128.0, -4032.0, 448.0), this);
-        let OrangeCheckpoint = OrangeSpawns.spawnOne;
+        let OrangeCheckpoint: CheckPoint = OrangeSpawns.spawnOne;
         OrangeCheckpoint = OrangeCheckpoint.next = new CheckPoint(Rect(-4384.00, -544.00, -4320.00, -480.00), this);
         OrangeCheckpoint = OrangeCheckpoint.next = new CheckPoint(Rect(-4384.00, -1696.00, -4320.00, -1632.00), this);
         OrangeCheckpoint = OrangeCheckpoint.next = new Teleporter(Rect(-4384.00, -2464.00, -4320.00, -2400.00), this, 0.0);
@@ -267,41 +309,41 @@ export class WorldMap {
         this.playerSpawns[COLOUR.ORANGE] = OrangeSpawns;
 
 
-        const GreenSpawns = new PlayerSpawns(this);
+        const GreenSpawns: PlayerSpawns = new PlayerSpawns(this);
         GreenSpawns.spawnOne = new CheckPoint(Rect(-4800.0, -3456.0, -4480.0, -3136.0), this);
         GreenSpawns.spawnTwo = new CheckPoint(Rect(-4800.0, -3776.0, -4480.0, -3456.0), this);
-        let GreenCheckpoint = GreenSpawns.spawnOne;
+        let GreenCheckpoint: CheckPoint = GreenSpawns.spawnOne;
         GreenCheckpoint = GreenCheckpoint.next = new CheckPoint(Rect(-3872.00, -3488.00, -3808.00, -3424.00), this);
         GreenCheckpoint = GreenCheckpoint.next = new CheckPoint(Rect(-2720.00, -3488.00, -2656.00, -3424.00), this);
         GreenCheckpoint = GreenCheckpoint.next = new Teleporter(Rect(-1952.00, -3488.00, -1888.00, -3424.00), this, 270);
         this.playerSpawns[COLOUR.GREEN] = GreenSpawns;
 
 
-        const PinkSpawns = new PlayerSpawns(this);
+        const PinkSpawns: PlayerSpawns = new PlayerSpawns(this);
         PinkSpawns.spawnOne = new CheckPoint(Rect(4480.0, -3456.0, 4800.0, -3136.0), this);
         PinkSpawns.spawnTwo = new CheckPoint(Rect(4480.0, -3776.0, 4800.0, -3456.0), this);
-        let PinkCheckpoint = PinkSpawns.spawnOne;
+        let PinkCheckpoint: CheckPoint = PinkSpawns.spawnOne;
         PinkCheckpoint = PinkCheckpoint.next = new CheckPoint(Rect(3808.00, -3488.00, 3872.00, -3424.00), this);
         PinkCheckpoint = PinkCheckpoint.next = new CheckPoint(Rect(2656.00, -3488.00, 2720.00, -3424.00), this);
         PinkCheckpoint = PinkCheckpoint.next = new Teleporter(Rect(1888.00, -3488.00, 1952.00, -3424.00), this, 270);
         this.playerSpawns[COLOUR.PINK] = PinkSpawns;
 
 
-        const GreysSpawns = new PlayerSpawns(this);
+        const GreysSpawns: PlayerSpawns = new PlayerSpawns(this);
         GreysSpawns.spawnOne = new CheckPoint(Rect(-160.0, -2464.0, 160.0, -2144.0), this);
-        let GreysCheckpoint = GreysSpawns.spawnOne;
+        let GreysCheckpoint: CheckPoint = GreysSpawns.spawnOne;
         GreysCheckpoint = GreysCheckpoint.next = new CheckPoint(Rect(-32.00, -3104.00, 32.00, -3040.00), this);
         GreysCheckpoint = GreysCheckpoint.next = new CheckPoint(Rect(-32.00, -4256.00, 32.00, -4192.00), this);
-        GreysCheckpoint.next = this.ship != undefined ? this.ship : undefined;
+        GreysCheckpoint.next = this.ship !== undefined ? this.ship : undefined;
         this.playerSpawns[COLOUR.GRAY] = GreysSpawns;
 
 
         // brown
-        const BrownSpawns = new PlayerSpawns(this);
+        const BrownSpawns: PlayerSpawns = new PlayerSpawns(this);
         BrownSpawns.spawnOne = new CheckPoint(Rect(-4672.0, 3200.0, -4352.0, 3520.0), this);
         BrownSpawns.spawnTwo = new CheckPoint(Rect(-4352.0, 3200.0, -4032.0, 3520.0), this);
 
-        let BrownCheckpoint = BrownSpawns.spawnOne;
+        let BrownCheckpoint: CheckPoint = BrownSpawns.spawnOne;
         BrownCheckpoint = BrownCheckpoint.next = new CheckPoint(Rect(-4384.00, 2528.00, -4320.00, 2592.00), this);
         BrownCheckpoint = BrownCheckpoint.next = new CheckPoint(Rect(-4384.00, 1376.00, -4320.00, 1440.00), this);
         BrownCheckpoint = BrownCheckpoint.next = new CheckPoint(Rect(-4416.00, 384.00, -4288.00, 480.00), this);
@@ -310,20 +352,20 @@ export class WorldMap {
         this.playerSpawns[COLOUR.BROWN] = BrownSpawns;
 
 
-        const MaroonsSpawns = new PlayerSpawns(this);
+        const MaroonsSpawns: PlayerSpawns = new PlayerSpawns(this);
         MaroonsSpawns.spawnOne = new CheckPoint(Rect(4032.0, 3200.0, 4352.0, 3520.0), this);
         MaroonsSpawns.spawnTwo = new CheckPoint(Rect(4352.0, 3200.0, 4672.0, 3520.0), this);
-        let MaroonsCheckpoint = MaroonsSpawns.spawnOne;
+        let MaroonsCheckpoint: CheckPoint = MaroonsSpawns.spawnOne;
         MaroonsCheckpoint = MaroonsCheckpoint.next = new CheckPoint(Rect(4320.00, 2528.00, 4384.00, 2592.00), this);
         MaroonsCheckpoint = MaroonsCheckpoint.next = new CheckPoint(Rect(4320.00, 1376.00, 4384.00, 1440.00), this);
         MaroonsCheckpoint = MaroonsCheckpoint.next = new CheckPoint(Rect(4288.00, 384.00, 4416.00, 480.00), this);
         this.playerSpawns[COLOUR.MAROON] = MaroonsSpawns;
 
 
-        const LightBlueSpawns = new PlayerSpawns(this);
+        const LightBlueSpawns: PlayerSpawns = new PlayerSpawns(this);
         LightBlueSpawns.spawnOne = new CheckPoint(Rect(-2496.0, -2240.0, -2176.0, -1920.0), this);
         LightBlueSpawns.spawnTwo = new CheckPoint(Rect(-2176.0, -2240.0, -1856.0, -1920.0), this);
-        let LightBlueCheckpoint = LightBlueSpawns.spawnOne;
+        let LightBlueCheckpoint: CheckPoint = LightBlueSpawns.spawnOne;
         LightBlueCheckpoint = LightBlueCheckpoint.next = new CheckPoint(Rect(-2208.00, -1312.00, -2144.00, -1248.00), this);
         LightBlueCheckpoint = LightBlueCheckpoint.next = new CheckPoint(Rect(-2208.00, -160.00, -2144.00, -96.00), this);
         LightBlueCheckpoint = LightBlueCheckpoint.next = new Teleporter(Rect(-2208.00, 608.00, -2144.00, 672.00), this, 270);
@@ -331,10 +373,10 @@ export class WorldMap {
         // LightBlueCheckpoint = LightBlueCheckpoint.next = OrangeSpawns.spawnOne;
         this.playerSpawns[COLOUR.LIGHT_BLUE] = LightBlueSpawns;
 
-        const DarkGreenSpawns = new PlayerSpawns(this);
+        const DarkGreenSpawns: PlayerSpawns = new PlayerSpawns(this);
         DarkGreenSpawns.spawnOne = new CheckPoint(Rect(1856.0, -2240.0, 2176.0, -1920.0), this);
         DarkGreenSpawns.spawnTwo = new CheckPoint(Rect(2176.0, -2240.0, 2496.0, -1920.0), this);
-        let DarkGreenCheckpoint = DarkGreenSpawns.spawnOne;
+        let DarkGreenCheckpoint: CheckPoint = DarkGreenSpawns.spawnOne;
         DarkGreenCheckpoint = DarkGreenCheckpoint.next = new CheckPoint(Rect(2144.00, -1312.00, 2208.00, -1248.00), this);
         DarkGreenCheckpoint = DarkGreenCheckpoint.next = new CheckPoint(Rect(2144.00, -160.00, 2208.00, -96.00), this);
         DarkGreenCheckpoint = DarkGreenCheckpoint.next = new Teleporter(Rect(2144.00, 608.00, 2208.00, 672.00), this, 270);
@@ -366,17 +408,17 @@ export class WorldMap {
 
     }
 
-    public setupMazes() {
-        for (let i = 0; i < settings.PLAYER_AREAS.length; i++) {
-            const minX = settings.PLAYER_AREAS[i][0];
-            const minY = settings.PLAYER_AREAS[i][1];
-            const maxX = settings.PLAYER_AREAS[i][2];
-            const maxY = settings.PLAYER_AREAS[i][3];
-            const width = Math.abs((maxX - minX) / 64);
-            const height = Math.abs((maxY - minY) / 64);
+    public setupMazes(): void {
+        for (let i: number = 0; i < settings.PLAYER_AREAS.length; i++) {
+            const minX: number = settings.PLAYER_AREAS[i][0];
+            const minY: number = settings.PLAYER_AREAS[i][1];
+            const maxX: number = settings.PLAYER_AREAS[i][2];
+            const maxY: number = settings.PLAYER_AREAS[i][3];
+            const width: number = Math.abs((maxX - minX) / 64);
+            const height: number = Math.abs((maxY - minY) / 64);
             const g: boolean[] = [];
-            for (let j = 0; j < width; j++) {
-                for (let k = 0; k < height; k++) {
+            for (let j: number = 0; j < width; j++) {
+                for (let k: number = 0; k < height; k++) {
                     g[j + k * width] = true;
                 }
             }
@@ -386,29 +428,25 @@ export class WorldMap {
     }
 
 
-    HealEverythingOnMap() {
-        const grp = GetUnitsInRectAll(GetPlayableMapRect());
+    HealEverythingOnMap(): void {
+        const grp: group = GetUnitsInRectAll(GetPlayableMapRect());
         ForGroupBJ(grp, () => {
             SetUnitLifePercentBJ(GetEnumUnit(), 100);
         });
         DestroyGroup(grp);
     }
 
-
-    ReplaceRunedBricksWithLava() {
+    ReplaceRunedBricksWithLava(): void {
         this.ReplaceTerrainTypeId('Irbk', 'Dlvc', -5888.0, 5888.0, -5888.0, 5888.0);
-
     }
 
-    private ReplaceTerrainTypeId(OldTerrain: string, NewTerrain: string, MinX: number, MaxX: number, MinY: number, MaxY: number) {
-
+    private ReplaceTerrainTypeId(OldTerrain: string, NewTerrain: string, MinX: number, MaxX: number, MinY: number, MaxY: number): void {
         for (; MinY < MaxY; MinY++) {
-            if (GetTerrainType(MinX, MinY) == FourCC(OldTerrain)) {
+            if (GetTerrainType(MinX, MinY) === FourCC(OldTerrain)) {
                 SetTerrainType(MinX, MinY, FourCC(NewTerrain), -1, 1, 1);
                 if (GetRandomInt(0, 99) > 89) {
                     AddSpecialEffect('Abilities\\Spells\\Human\\FlameStrike\\FlameStrikeEmbers.mdl', MinX, MinY);
                 }
-
             }
             if (MinX >= MaxX) {
                 MinY = MinY + 128.0;
@@ -419,18 +457,17 @@ export class WorldMap {
         }
     }
 
-    RemoveEveryUnit() {
-        const grp = GetUnitsInRectAll(GetPlayableMapRect());
+    RemoveEveryUnit(): void {
+        const grp: group = GetUnitsInRectAll(GetPlayableMapRect());
         ForGroupBJ(grp, () => this.RemoveUnitIfNotShip());
         DestroyGroup(grp);
     }
 
-    private RemoveUnitIfNotShip() {
-        if (GetUnitTypeId(GetEnumUnit()) == FourCC('n05G')) {
+    private RemoveUnitIfNotShip(): void {
+        if (GetUnitTypeId(GetEnumUnit()) === FourCC('n05G')) {
             KillUnit(GetEnumUnit());
         } else {
             RemoveUnit(GetEnumUnit());
         }
-
     }
 }
