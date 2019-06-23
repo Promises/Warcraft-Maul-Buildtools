@@ -13,6 +13,8 @@ import { SacrificialPit } from './Undead/SacrificialPit';
 import { EndOfRoundTower } from './EndOfRoundTower';
 import { GenericAutoAttackTower } from './GenericAutoAttackTower';
 import { EarthPandaren } from './Tavern/EarthPandaren';
+import { StormPandaren } from './Tavern/StormPandaren';
+import { FirePandaren } from './Tavern/FirePandaren';
 
 
 export class TowerConstruction {
@@ -92,6 +94,8 @@ export class TowerConstruction {
         this.towerTypes.set(FourCC('h03H'), NightElfWisp);
         this.towerTypes.set(FourCC('h00R'), SacrificialPit);
         this.towerTypes.set(FourCC('h01F'), EarthPandaren);
+        this.towerTypes.set(FourCC('h01J'), StormPandaren);
+        this.towerTypes.set(FourCC('h01I'), FirePandaren);
     }
 
     private DoGenericTowerAttacks(): void {
