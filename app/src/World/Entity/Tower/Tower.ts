@@ -3,6 +3,7 @@ import { WarcraftMaul } from '../../WarcraftMaul';
 import { EndOfRoundTower } from './EndOfRoundTower';
 import { AttackActionTower } from './AttackActionTower';
 import { GenericAutoAttackTower } from './GenericAutoAttackTower';
+import { PassiveCreepDiesInAreaEffectTower } from './PassiveCreepDiesInAreaEffectTower';
 
 export class Tower {
     private _tower: unit;
@@ -45,6 +46,10 @@ export class Tower {
 
     public IsGenericAutoAttackTower(): this is GenericAutoAttackTower {
         return 'GenericAttack' in this;
+    }
+
+    public IsAreaEffectTower(): this is PassiveCreepDiesInAreaEffectTower {
+        return 'PassiveCreepDiesInAreaEffect' in this;
     }
 
 }

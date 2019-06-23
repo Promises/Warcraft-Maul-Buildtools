@@ -31,5 +31,12 @@ export class Creep {
         return GetUnitTypeId(this.creep);
     }
 
+    getHandleId(): number {
+        return GetHandleIdBJ(this.creep);
+    }
 
+
+    public getLocation(): location {
+        return GetUnitLoc(this.creep);
+    }
 }

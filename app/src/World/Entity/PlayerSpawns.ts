@@ -3,10 +3,13 @@ import { WorldMap } from '../WorldMap';
 import { Trigger } from '../../JassOverrides/Trigger';
 import { SpawnedCreeps } from './SpawnedCreeps';
 import { Creep } from './Creep';
+import { PassiveCreepDiesInAreaEffectTower } from './Tower/PassiveCreepDiesInAreaEffectTower';
 
 export class PlayerSpawns {
     private _spawnOne: CheckPoint | undefined;
     private _spawnTwo: CheckPoint | undefined;
+    public areaTowers: PassiveCreepDiesInAreaEffectTower[] = [];
+
 
     oneTrig: Trigger | undefined;
     twoTrig: Trigger | undefined;
@@ -106,5 +109,11 @@ export class PlayerSpawns {
 
     private AddCreepAbilities(): void {
         // TODO: Implement Creep abilities
+    }
+
+    public AreaTowerActions(dieingCreep: Creep): void {
+        for (const tower of this.areaTowers) {
+            tower.PassiveCreepDiesInAreaEffect(dieingCreep);
+        }
     }
 }

@@ -25,9 +25,11 @@ export class Defender extends AbstractPlayer {
     deniedPlayers: AbstractPlayer[] = [];
     towers: Map<number, Tower> = new Map<number, Tower>();
     holoMaze: AbstractHologramMaze | undefined = undefined;
+    game: WarcraftMaul;
 
     constructor(id: number, game: WarcraftMaul) {
         super(id);
+        this.game = game;
         this.setUpPlayerVariables();
         this.leaveTrigger = new Trigger();
         this.leaveTrigger.AddCondition(() => this.PlayerLeftTheGameConditions(game));
@@ -121,5 +123,14 @@ export class Defender extends AbstractPlayer {
 
     AddTower(tower: Tower): void {
         this.towers.set(tower.handleId, tower);
+    }
+
+    public GiveKillCount(): void {
+        this.kills++;
+        if (this.game.scoreBoard) {
+            MultiboardSetItemValueBJ(this.game.scoreBoard.board, 2, 7 + this.scoreSlot, `${this.kills}`);
+
+        }
+
     }
 }

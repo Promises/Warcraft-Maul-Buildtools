@@ -63,6 +63,21 @@ export class TowerConstruction {
         if (ObjectExtendsTower.IsGenericAutoAttackTower()) {
             this.genericAttacks.push(ObjectExtendsTower);
         }
+        if (ObjectExtendsTower.IsAreaEffectTower()) {
+            let area: number | undefined;
+
+            for (let i: number = 0; i < settings.PLAYER_AREAS.length; i++) {
+                if (settings.PLAYER_AREAS[i].ContainsUnit(tower)) {
+                    area = i;
+                    break;
+                }
+            }
+            if (area) {
+                this.game.worldMap.playerSpawns[area].areaTowers.push(ObjectExtendsTower);
+            } else {
+                Log.Fatal(`${GetUnitName(tower)} built outside of requires area.`);
+            }
+        }
     }
 
     private InitTypes(): void {

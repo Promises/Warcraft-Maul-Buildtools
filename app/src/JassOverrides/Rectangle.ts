@@ -1,8 +1,14 @@
+import { Creep } from '../World/Entity/Creep';
+
 export class Rectangle {
     private area: number[];
 
     constructor(area: number[]) {
         this.area = area;
+    }
+
+    public ContainsCreep(whichCreep: Creep): boolean {
+        return this.ContainsUnit(whichCreep.creep);
     }
 
     public ContainsUnit(whichUnit: unit): boolean {
@@ -29,12 +35,15 @@ export class Rectangle {
     public get minX(): number {
         return this.area[0];
     }
+
     public get minY(): number {
         return this.area[1];
     }
+
     public get maxX(): number {
         return this.area[2];
     }
+
     public get maxY(): number {
         return this.area[3];
     }

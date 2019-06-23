@@ -56,18 +56,13 @@ export class MultiBoard {
         MultiboardSetItemStyleBJ(this.board, 2, 6, true, false);
         MultiboardSetItemStyleBJ(this.board, 1, 7, true, false);
         MultiboardSetItemStyleBJ(this.board, 2, 7, true, false);
-        for (let i = 0; i < players.size; i++) {
-            MultiboardSetItemStyleBJ(this.board, 1, 8 + i, true, false);
-            MultiboardSetItemStyleBJ(this.board, 2, 8 + i, true, false);
-
-        }
 
         this.InitializePlayerScores();
 
         MultiboardDisplayBJ(true, this.board);
     }
 
-    private InitializePlayerScores() {
+    private InitializePlayerScores(): void {
         let count = 0;
         for (const player of settings.players.values()) {
             player.scoreSlot = count;
@@ -79,6 +74,8 @@ export class MultiBoard {
             MultiboardSetItemWidthBJ(this.board, 2, 7 + count, this.scoreboardColumnWidth[2]);
             count++;
         }
+        MultiboardSetItemStyleBJ(this.board, 1, 7 + count, true, false);
+        MultiboardSetItemStyleBJ(this.board, 2, 7 + count, true, false);
 
 
     }

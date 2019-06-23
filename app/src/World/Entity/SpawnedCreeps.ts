@@ -2,12 +2,16 @@ import { Creep } from './Creep';
 import { Trigger } from '../../JassOverrides/Trigger';
 import { Log } from '../../lib/Serilog/Serilog';
 import * as settings from '../GlobalSettings';
+import { WorldMap } from '../WorldMap';
+import { Defender } from './Players/Defender';
 
 export class SpawnedCreeps {
     public unitMap: Map<number, Creep> = new Map<number, Creep>();
     private unitDiesTrigger: Trigger;
+    private worldMap: WorldMap;
 
-    constructor() {
+    constructor(worldMap: WorldMap) {
+        this.worldMap = worldMap;
         // let creativeName = CreateUnit(Player(COLOUR.NAVY), FourCC('u000'), -64.00, 4032.00, 240.0);
         // this.unitMap.set(GetHandleIdBJ(creativeName), new Creep(creativeName));
         const triggerTest: Trigger = new Trigger();
@@ -34,9 +38,26 @@ export class SpawnedCreeps {
             return;
         }
 
-        const killingPlayerID: number = GetPlayerId(GetOwningPlayer(GetKillingUnitBJ()));
+        let area: number | undefined;
+
+        for (let i: number = 0; i < settings.PLAYER_AREAS.length; i++) {
+            if (settings.PLAYER_AREAS[i].ContainsCreep(creep)) {
+                area = i;
+                break;
+            }
+        }
+        if (area) {
+            this.worldMap.playerSpawns[area].AreaTowerActions(creep);
+        }
+
+        const player: Defender | undefined = settings.players.get(GetPlayerId(GetOwningPlayer(GetKillingUnitBJ())));
+        if (player) {
+            player.GiveKillCount();
+        }
 
 
+        this.unitMap.delete(creep.getId());
+        RemoveUnit(creep.creep);
 
 
     }

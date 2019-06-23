@@ -41,7 +41,7 @@ export class WorldMap {
         this.createCreepWaves();
         this.createDummyCreeps();
         this.setupRaces();
-        this.spawnedCreeps = new SpawnedCreeps();
+        this.spawnedCreeps = new SpawnedCreeps(this);
         this.setupCheckpoint();
         this.setupMazes();
         this.setupArrows();
