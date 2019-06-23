@@ -7,6 +7,8 @@ import { Log } from '../../lib/Serilog/Serilog';
 import { PlayerSpawns } from '../Entity/PlayerSpawns';
 import { Ship } from '../Entity/Ship';
 import { Tower } from '../Entity/Tower/Tower';
+import { ArchimondeGate } from './ArchimondeGate';
+import { ArchimondeTeleport } from './ArchimondeTeleport';
 
 export class GameRound {
     gameTimeTrigger: Trigger;
@@ -14,26 +16,20 @@ export class GameRound {
     game: WarcraftMaul;
     shouldStartWaveTimer: boolean = false;
     isWaveInProgress: boolean = false;
-
-
     currentWave: number = 1;
     roundOverGoldReward: number = 20;
-
-    testStucture: destructable;
     endOfTurnTowers: Tower[] = [];
-
     waitBetweenWaveTime: number = 20;
+    private archimondeGate: ArchimondeGate;
+    private archimondeTeleport: ArchimondeTeleport;
 
     constructor(game: WarcraftMaul) {
         this.game = game;
+        this.archimondeGate = new ArchimondeGate(this.game.worldMap.archimondeDummy);
+        this.archimondeTeleport = new ArchimondeTeleport(this.game.worldMap.archimondeDummy);
         this.gameTimeTrigger = new Trigger();
         this.gameTimeTrigger.RegisterTimerEventPeriodic(1.00);
         this.gameTimeTrigger.AddAction(() => this.UpdateGameTime());
-
-        this.testStucture = this.FindThingForBossToDestroy() ||
-            CreateDestructable(FourCC('B000'), 3520.0, -5312.0, 0.000, 0.900, 0);
-
-
         this.roundEndTrigger = new Trigger();
 
         for (const enemy of settings.enemies) {
@@ -158,18 +154,13 @@ export class GameRound {
 
             this.game.worldMap.HealEverythingOnMap();
 
-
             if (this.currentWave === 35 && this.game.worldMap.archimondeDummy) {
                 PauseUnitBJ(false, this.game.worldMap.archimondeDummy);
-                IssueTargetDestructableOrder(this.game.worldMap.archimondeDummy, 'attack', this.testStucture);
-
-
+                IssueTargetDestructableOrder(this.game.worldMap.archimondeDummy, 'attack', this.archimondeGate.gate);
             }
             if (this.currentWave === this.game.worldMap.waveCreeps.length - 1) {
                 this.game.GameWin();
             }
-
-
         }
 
         for (const tower of this.endOfTurnTowers) {

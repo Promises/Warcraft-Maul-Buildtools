@@ -47,6 +47,9 @@ export class Trigger {
         return TriggerRegisterPlayerStateEvent(this.nativeTrigger, whichPlayer, whichState, opcode, limitval);
     }
 
+    public RegisterDeathEvent(whichWidget: widget): event {
+        return TriggerRegisterDeathEvent(this.nativeTrigger, whichWidget);
+    }
 
     public RegisterDialogEventBJ(whichDialog: dialog): event {
         return TriggerRegisterDialogEventBJ(this.nativeTrigger, whichDialog);
