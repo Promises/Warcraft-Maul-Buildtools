@@ -14,6 +14,7 @@ import { StringSink } from '../lib/Serilog/Sinks/StringSink';
 import { SellTower } from './Entity/Tower/SellTower';
 import { DamageEngine } from './Game/DamageEngine';
 import { DamageEngineGlobals } from './Game/DamageEngineGlobals';
+import { TowerTicker } from './Game/TowerTicker';
 
 export class WarcraftMaul {
     debugMode: boolean = false;
@@ -28,6 +29,7 @@ export class WarcraftMaul {
     gameCommandHandler: Commands;
     gameDamageEngineGlobals: DamageEngineGlobals;
     gameDamageEngine: DamageEngine;
+    public readonly towerTicker: TowerTicker;
     scoreBoard: MultiBoard | undefined;
 
     constructor() {
@@ -75,6 +77,7 @@ export class WarcraftMaul {
         // Create the map
         this.worldMap = new WorldMap(this);
         this.gameDamageEngineGlobals = new DamageEngineGlobals();
+        this.towerTicker = new TowerTicker();
         this.gameDamageEngine = new DamageEngine(this.gameDamageEngineGlobals);
         this.gameCommandHandler = new Commands(this);
         // this.gameCommandHandler.OpenAllSpawns();
