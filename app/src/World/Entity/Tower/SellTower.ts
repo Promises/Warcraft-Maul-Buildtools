@@ -41,7 +41,11 @@ export class SellTower {
         }
 
         const player: Defender | undefined = settings.players.get(GetPlayerId(GetOwningPlayer(u)));
-        const txt: texttag = CreateTextTagUnitBJ(I2S(value), u, 1, 10, 100, 80.00, 0.00, 0);
+        let str: string = '';
+        if (GetOwningPlayer(u) === GetLocalPlayer()) {
+            str = I2S(value);
+        }
+        const txt: texttag = CreateTextTagUnitBJ(str, u, 1, 10, 100, 80.00, 0.00, 0);
 
         SetTextTagPermanentBJ(txt, false);
         SetTextTagLifespanBJ(txt, 2.00);
