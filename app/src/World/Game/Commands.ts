@@ -8,6 +8,7 @@ import { CheckPoint } from '../Entity/CheckPoint';
 import { AdvancedHoloMaze } from '../Holograms/AdvancedHoloMaze';
 import { SimpleHoloMaze } from '../Holograms/SimpleHoloMaze';
 import { CircleHoloMaze } from '../Holograms/CircleHoloMaze';
+import { DirectionalArrow } from './DirectionalArrow';
 
 export class Commands {
 
@@ -355,6 +356,38 @@ export class Commands {
                     return;
                 }
                 this.DestroyDrawings();
+                break;
+            case 'arrows':
+                // const playerId: number = GetPlayerId(GetTriggerPlayer());
+                for (let playerId: number = 0; playerId < 13; playerId++) {
+                    const firstSpawn: CheckPoint | undefined = this.game.worldMap.playerSpawns[playerId].spawnOne;
+                    if (firstSpawn === undefined) {
+                        return;
+                    }
+
+                    const firstCheckpoint: CheckPoint | undefined = firstSpawn.next;
+                    if (firstCheckpoint === undefined) {
+                        return;
+                    }
+
+                    const secondCheckpoint: CheckPoint | undefined = firstCheckpoint.next;
+                    if (secondCheckpoint === undefined) {
+                        return;
+                    }
+
+                    let modelPath: string = '';
+                    if (GetTriggerPlayer() === GetLocalPlayer()) {
+                        // modelPath = 'Doodads\\Cinematic\\DemonFootPrint\\DemonFootPrint0.mdl';
+                        // modelPath = 'Abilities\\Spells\\Items\\OrbCorruption\\OrbCorruptionMissile.mdl';
+                        modelPath = 'Abilities\\Spells\\NightElf\\FaerieDragonInvis\\FaerieDragon_Invis.mdl';
+                    }
+
+                    const directionalArrow: DirectionalArrow = new DirectionalArrow(modelPath,
+                                                                                    GetRectCenterX(firstCheckpoint.rectangle),
+                                                                                    GetRectCenterY(firstCheckpoint.rectangle),
+                                                                                    GetRectCenterX(secondCheckpoint.rectangle),
+                                                                                    GetRectCenterY(secondCheckpoint.rectangle));
+                }
                 break;
         }
     }
