@@ -8,7 +8,7 @@ import { PassiveCreepDiesInAreaEffectTower } from './Tower/PassiveCreepDiesInAre
 export class PlayerSpawns {
     private _spawnOne: CheckPoint | undefined;
     private _spawnTwo: CheckPoint | undefined;
-    public areaTowers: PassiveCreepDiesInAreaEffectTower[] = [];
+    public areaTowers: Map<number, PassiveCreepDiesInAreaEffectTower> = new Map<number, PassiveCreepDiesInAreaEffectTower>();
 
 
     oneTrig: Trigger | undefined;
@@ -112,7 +112,7 @@ export class PlayerSpawns {
     }
 
     public AreaTowerActions(dieingCreep: Creep): void {
-        for (const tower of this.areaTowers) {
+        for (const tower of this.areaTowers.values()) {
             tower.PassiveCreepDiesInAreaEffect(dieingCreep);
         }
     }

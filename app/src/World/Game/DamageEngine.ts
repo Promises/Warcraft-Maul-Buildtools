@@ -8,7 +8,7 @@ export class DamageEngine {
      * Damage Event Arrays
      */
     private initialDamageEvent: (() => void)[] = [];
-    public initialDamageEventTowers: AttackActionTower[] = [];
+    public initialDamageEventTowers: Map<number, AttackActionTower> = new Map<number, AttackActionTower>();
     private zeroDamageEvent: (() => void)[] = [];
     private damageEventAOEActions: (() => void)[] = [];
     private damageEventLethalActions: (() => void)[] = [];
@@ -67,8 +67,8 @@ export class DamageEngine {
      * Adds an event that triggers right before a unit takes damage
      *  - Do not change the damage in any way during these events!
      */
-    public AddInitialDamageEventTower(tower: AttackActionTower): void {
-        this.initialDamageEventTowers.push(tower);
+    public AddInitialDamageEventTower(handleId: number, tower: AttackActionTower): void {
+        this.initialDamageEventTowers.set(handleId, tower);
     }
 
 

@@ -5,6 +5,7 @@ import { Rectangle } from '../../../JassOverrides/Rectangle';
 import { Log } from '../../../lib/Serilog/Serilog';
 import { Defender } from '../Players/Defender';
 import { Maze } from '../../Antiblock/Maze';
+import { Tower } from './Tower';
 
 export class SellTower {
 
@@ -55,6 +56,10 @@ export class SellTower {
 
         if (player) {
             player.giveGold(value);
+            const tower: Tower | undefined = player.towers.get(GetHandleIdBJ(u));
+            if (tower) {
+                tower.Sell();
+            }
         }
         ShowUnitHide(u);
         RemoveUnit(u);

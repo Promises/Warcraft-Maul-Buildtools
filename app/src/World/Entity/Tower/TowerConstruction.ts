@@ -17,7 +17,7 @@ import { GenericAutoAttackTower } from './GenericAutoAttackTower';
 export class TowerConstruction {
     private towerConstructTrigger: Trigger;
     private towerTypes: Map<number, object> = new Map<number, object>();
-    private genericAttacks: GenericAutoAttackTower[] = [];
+    public genericAttacks: Map<number, GenericAutoAttackTower> = new Map<number, GenericAutoAttackTower>();
     private genericAttackTrigger: Trigger;
     private game: WarcraftMaul;
 
@@ -55,13 +55,13 @@ export class TowerConstruction {
             ObjectExtendsTower = new Tower(tower, owner, this.game);
         }
         if (ObjectExtendsTower.IsEndOfRoundTower()) {
-            this.game.gameRoundHandler.endOfTurnTowers.push(ObjectExtendsTower);
+            this.game.gameRoundHandler.endOfTurnTowers.set(ObjectExtendsTower.handleId, ObjectExtendsTower);
         }
         if (ObjectExtendsTower.IsAttackActionTower()) {
-            this.game.gameDamageEngine.AddInitialDamageEventTower(ObjectExtendsTower);
+            this.game.gameDamageEngine.AddInitialDamageEventTower(ObjectExtendsTower.handleId, ObjectExtendsTower);
         }
         if (ObjectExtendsTower.IsGenericAutoAttackTower()) {
-            this.genericAttacks.push(ObjectExtendsTower);
+            this.genericAttacks.set(ObjectExtendsTower.handleId, ObjectExtendsTower);
         }
         if (ObjectExtendsTower.IsAreaEffectTower()) {
             let area: number | undefined;
@@ -73,9 +73,9 @@ export class TowerConstruction {
                 }
             }
             if (area) {
-                this.game.worldMap.playerSpawns[area].areaTowers.push(ObjectExtendsTower);
+                this.game.worldMap.playerSpawns[area].areaTowers.set(ObjectExtendsTower.handleId, ObjectExtendsTower);
             } else {
-                Log.Fatal(`${GetUnitName(tower)} built outside of requires area.`);
+                Log.Fatal(`${GetUnitName(tower)} built outside of requires area. Please screenshot and report`);
             }
         }
     }
@@ -90,7 +90,7 @@ export class TowerConstruction {
     }
 
     private DoGenericTowerAttacks(): void {
-        for (const tower of this.genericAttacks) {
+        for (const tower of this.genericAttacks.values()) {
             tower.GenericAttack();
         }
     }

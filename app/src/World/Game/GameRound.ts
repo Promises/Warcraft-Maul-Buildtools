@@ -19,7 +19,7 @@ export class GameRound {
     isWaveInProgress: boolean = false;
     currentWave: number = 1;
     roundOverGoldReward: number = 20;
-    endOfTurnTowers: EndOfRoundTower[] = [];
+    endOfTurnTowers: Map<number, EndOfRoundTower> = new Map<number, EndOfRoundTower>();
     waitBetweenWaveTime: number = 20;
     private archimondeGate: ArchimondeGate;
     private archimondeTeleport: ArchimondeTeleport;
@@ -164,7 +164,7 @@ export class GameRound {
             }
         }
 
-        for (const tower of this.endOfTurnTowers) {
+        for (const tower of this.endOfTurnTowers.values()) {
             tower.EndOfRoundAction();
         }
 
