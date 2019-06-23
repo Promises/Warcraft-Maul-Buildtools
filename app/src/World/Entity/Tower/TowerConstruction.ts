@@ -9,6 +9,7 @@ import { OrcPeon } from './WorkersUnion/OrcPeon';
 import { HumanPeasant } from './WorkersUnion/HumanPeasant';
 import { UndeadAcolyte } from './WorkersUnion/UndeadAcolyte';
 import { NightElfWisp } from './WorkersUnion/NightElfWisp';
+import { SacrificialPit } from './Undead/SacrificialPit';
 
 
 export class TowerConstruction {
@@ -56,6 +57,7 @@ export class TowerConstruction {
         this.towerTypes.set(FourCC('h03F'), HumanPeasant);
         this.towerTypes.set(FourCC('h03I'), UndeadAcolyte);
         this.towerTypes.set(FourCC('h03H'), NightElfWisp);
+        this.towerTypes.set(FourCC('h00R'), SacrificialPit);
     }
 
     private DoGenericTowerAttacks(): void {
