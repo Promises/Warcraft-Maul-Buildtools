@@ -28,7 +28,7 @@
       true,
       140
     ],
-    "member-access": false,
+    "member-access": true,
     "ter-indent": [
       true,
       4,
