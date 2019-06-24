@@ -5,7 +5,7 @@ import { Rectangle } from '../../../JassOverrides/Rectangle';
 import { Trigger } from '../../../JassOverrides/Trigger';
 import { WarcraftMaul } from '../../WarcraftMaul';
 import { AbstractHologramMaze } from '../../Holograms/AbstractHologramMaze';
-import { Tower } from '../Tower/Tower';
+import { Tower } from '../Tower/Specs/Tower';
 
 export class Defender extends AbstractPlayer {
     scoreSlot: number = 0;

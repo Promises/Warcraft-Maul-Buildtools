@@ -1,4 +1,4 @@
-import { Creep } from '../Creep';
+import { Creep } from '../../Creep';
 
 export interface PassiveCreepDiesInAreaEffectTower {
     PassiveCreepDiesInAreaEffect(dieingCreep: Creep): void;

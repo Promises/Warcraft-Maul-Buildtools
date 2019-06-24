@@ -9,7 +9,7 @@ import { AdvancedHoloMaze } from '../Holograms/AdvancedHoloMaze';
 import { SimpleHoloMaze } from '../Holograms/SimpleHoloMaze';
 import { CircleHoloMaze } from '../Holograms/CircleHoloMaze';
 import { DirectionalArrow } from './DirectionalArrow';
-import { Tower } from '../Entity/Tower/Tower';
+import { Tower } from '../Entity/Tower/Specs/Tower';
 import { Rectangle } from '../../JassOverrides/Rectangle';
 
 export class Commands {

@@ -1,6 +1,6 @@
-import { Tower } from '../Tower';
-import { EndOfRoundTower } from '../EndOfRoundTower';
-import { AttackActionTower } from '../AttackActionTower';
+import { Tower } from '../Specs/Tower';
+import { EndOfRoundTower } from '../Specs/EndOfRoundTower';
+import { AttackActionTower } from '../Specs/AttackActionTower';
 
 export class HumanPeasant extends Tower implements EndOfRoundTower, AttackActionTower {
 

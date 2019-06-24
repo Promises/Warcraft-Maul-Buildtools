@@ -1,6 +1,6 @@
-import { Tower } from '../Tower';
-import { AttackActionTower } from '../AttackActionTower';
-import { PassiveCreepDiesInAreaEffectTower } from '../PassiveCreepDiesInAreaEffectTower';
+import { Tower } from '../Specs/Tower';
+import { AttackActionTower } from '../Specs/AttackActionTower';
+import { PassiveCreepDiesInAreaEffectTower } from '../Specs/PassiveCreepDiesInAreaEffectTower';
 import { Creep } from '../../Creep';
 
 export class SacrificialPit extends Tower implements PassiveCreepDiesInAreaEffectTower {

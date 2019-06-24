@@ -1,9 +1,9 @@
-import { Tower } from '../Tower';
+import { Tower } from '../Specs/Tower';
 import { Defender } from '../../Players/Defender';
 import { WarcraftMaul } from '../../../WarcraftMaul';
-import { EndOfRoundTower } from '../EndOfRoundTower';
-import { AttackActionTower } from '../AttackActionTower';
-import { GenericAutoAttackTower } from '../GenericAutoAttackTower';
+import { EndOfRoundTower } from '../Specs/EndOfRoundTower';
+import { AttackActionTower } from '../Specs/AttackActionTower';
+import { GenericAutoAttackTower } from '../Specs/GenericAutoAttackTower';
 
 export class NightElfWisp extends Tower implements EndOfRoundTower, AttackActionTower, GenericAutoAttackTower {
 

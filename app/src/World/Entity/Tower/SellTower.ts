@@ -5,7 +5,7 @@ import { Rectangle } from '../../../JassOverrides/Rectangle';
 import { Log } from '../../../lib/Serilog/Serilog';
 import { Defender } from '../Players/Defender';
 import { Maze } from '../../Antiblock/Maze';
-import { Tower } from './Tower';
+import { Tower } from './Specs/Tower';
 
 export class SellTower {
 

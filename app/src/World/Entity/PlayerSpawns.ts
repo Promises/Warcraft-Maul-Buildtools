@@ -3,7 +3,7 @@ import { WorldMap } from '../WorldMap';
 import { Trigger } from '../../JassOverrides/Trigger';
 import { SpawnedCreeps } from './SpawnedCreeps';
 import { Creep } from './Creep';
-import { PassiveCreepDiesInAreaEffectTower } from './Tower/PassiveCreepDiesInAreaEffectTower';
+import { PassiveCreepDiesInAreaEffectTower } from './Tower/Specs/PassiveCreepDiesInAreaEffectTower';
 
 export class PlayerSpawns {
     private _spawnOne: CheckPoint | undefined;

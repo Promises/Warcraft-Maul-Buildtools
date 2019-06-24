@@ -1,22 +1,8 @@
-import { Tower } from '../Tower';
-import { DamageModificationTower } from '../DamageModificationTower';
-import { GenericAutoAttackTower } from '../GenericAutoAttackTower';
+import { Tower } from '../Specs/Tower';
+import { DamageModificationTower } from '../Specs/DamageModificationTower';
+import { GenericAutoAttackTower } from '../Specs/GenericAutoAttackTower';
 
-export class EarthPandaren extends Tower implements DamageModificationTower, GenericAutoAttackTower {
-    public DamageModificationEvent(): void {
-        const target: unit | undefined = this.game.gameDamageEngineGlobals.udg_DamageEventTarget;
-        if (!target) {
-            return;
-        }
-        if (!UnitHasBuffBJ(target, FourCC('B018'))) {
-            return;
-        }
-
-        this.game.gameDamageEngineGlobals.udg_DamageEventAmount *=  1.25;
-    }
-
-
-
+export class EarthPandaren extends Tower implements GenericAutoAttackTower {
     public GenericAttack(): void {
         IssueTargetOrderBJ(GetAttacker(), 'drunkenhaze', GetAttackedUnitBJ());
     }

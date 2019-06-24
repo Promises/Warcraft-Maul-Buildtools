@@ -15,6 +15,7 @@ import { SellTower } from './Entity/Tower/SellTower';
 import { DamageEngine } from './Game/DamageEngine';
 import { DamageEngineGlobals } from './Game/DamageEngineGlobals';
 import { TowerTicker } from './Game/TowerTicker';
+import { BuffHandler } from './Entity/Buff/BuffHandler';
 
 export class WarcraftMaul {
     debugMode: boolean = false;
@@ -30,6 +31,7 @@ export class WarcraftMaul {
     gameDamageEngineGlobals: DamageEngineGlobals;
     gameDamageEngine: DamageEngine;
     public readonly towerTicker: TowerTicker;
+    buffHandler: BuffHandler;
     scoreBoard: MultiBoard | undefined;
 
     constructor() {
@@ -80,6 +82,8 @@ export class WarcraftMaul {
         this.towerTicker = new TowerTicker();
         this.gameDamageEngine = new DamageEngine(this.gameDamageEngineGlobals);
         this.gameCommandHandler = new Commands(this);
+        this.buffHandler = new BuffHandler(this);
+
         // this.gameCommandHandler.OpenAllSpawns();
 
         const diffVote: DifficultyVote = new DifficultyVote(this);

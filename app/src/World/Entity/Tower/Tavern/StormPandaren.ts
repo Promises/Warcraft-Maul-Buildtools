@@ -1,5 +1,5 @@
-import { Tower } from '../Tower';
-import { AttackActionTower } from '../AttackActionTower';
+import { Tower } from '../Specs/Tower';
+import { AttackActionTower } from '../Specs/AttackActionTower';
 
 export class StormPandaren extends Tower implements AttackActionTower {
     public AttackAction(): void {

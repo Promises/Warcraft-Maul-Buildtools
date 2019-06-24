@@ -13,6 +13,7 @@ import { Maze } from './Antiblock/Maze';
 import * as settings from './GlobalSettings';
 import { TowerConstruction } from './Entity/Tower/TowerConstruction';
 import { DirectionalArrow } from './Game/DirectionalArrow';
+import { BuffHandler } from './Entity/Buff/BuffHandler';
 
 export class WorldMap {
     game: WarcraftMaul;

@@ -1,7 +1,7 @@
-import { Tower } from '../Tower';
+import { Tower } from '../Specs/Tower';
 import { WarcraftMaul } from '../../../WarcraftMaul';
-import { EndOfRoundTower } from '../EndOfRoundTower';
-import { AttackActionTower } from '../AttackActionTower';
+import { EndOfRoundTower } from '../Specs/EndOfRoundTower';
+import { AttackActionTower } from '../Specs/AttackActionTower';
 
 export class NagaSlave extends Tower implements EndOfRoundTower, AttackActionTower {
 

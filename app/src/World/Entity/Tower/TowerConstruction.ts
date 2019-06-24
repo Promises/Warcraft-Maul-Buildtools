@@ -3,19 +3,20 @@ import { Defender } from '../Players/Defender';
 import * as settings from '../../GlobalSettings';
 import { Log } from '../../../lib/Serilog/Serilog';
 import { NagaSlave } from './WorkersUnion/NagaSlave';
-import { Tower } from './Tower';
+import { Tower } from './Specs/Tower';
 import { WarcraftMaul } from '../../WarcraftMaul';
 import { OrcPeon } from './WorkersUnion/OrcPeon';
 import { HumanPeasant } from './WorkersUnion/HumanPeasant';
 import { UndeadAcolyte } from './WorkersUnion/UndeadAcolyte';
 import { NightElfWisp } from './WorkersUnion/NightElfWisp';
 import { SacrificialPit } from './Undead/SacrificialPit';
-import { EndOfRoundTower } from './EndOfRoundTower';
-import { GenericAutoAttackTower } from './GenericAutoAttackTower';
+import { EndOfRoundTower } from './Specs/EndOfRoundTower';
+import { GenericAutoAttackTower } from './Specs/GenericAutoAttackTower';
 import { EarthPandaren } from './Tavern/EarthPandaren';
 import { StormPandaren } from './Tavern/StormPandaren';
 import { FirePandaren } from './Tavern/FirePandaren';
 import { AcidSpittingSpider } from './Arachnid/AcidSpittingSpider';
+import { NerubianBehemoth } from './Arachnid/NerubianBehemoth';
 
 
 export class TowerConstruction {
@@ -84,9 +85,7 @@ export class TowerConstruction {
         if (ObjectExtendsTower.IsAttackActionTower()) {
             this.game.gameDamageEngine.AddInitialDamageEventTower(ObjectExtendsTower.handleId, ObjectExtendsTower);
         }
-        if (ObjectExtendsTower.IsDamageModificationTower()) {
-            this.game.gameDamageEngine.AddMultiplicativeDamageModificationEventTower(ObjectExtendsTower.handleId, ObjectExtendsTower);
-        }
+
         if (ObjectExtendsTower.IsGenericAutoAttackTower()) {
             this.genericAttacks.set(ObjectExtendsTower.handleId, ObjectExtendsTower);
         }
@@ -118,6 +117,7 @@ export class TowerConstruction {
         this.towerTypes.set(FourCC('h01J'), StormPandaren);
         this.towerTypes.set(FourCC('h01I'), FirePandaren);
         this.towerTypes.set(FourCC('o019'), AcidSpittingSpider);
+        this.towerTypes.set(FourCC('h00W'), NerubianBehemoth);
     }
 
     private DoGenericTowerAttacks(): void {

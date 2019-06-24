@@ -8,7 +8,7 @@ import { PlayerSpawns } from '../Entity/PlayerSpawns';
 import { Ship } from '../Entity/Ship';
 import { ArchimondeGate } from './ArchimondeGate';
 import { ArchimondeTeleport } from './ArchimondeTeleport';
-import { EndOfRoundTower } from '../Entity/Tower/EndOfRoundTower';
+import { EndOfRoundTower } from '../Entity/Tower/Specs/EndOfRoundTower';
 
 export class GameRound {
 
