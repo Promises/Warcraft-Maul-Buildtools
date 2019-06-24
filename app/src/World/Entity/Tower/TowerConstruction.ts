@@ -15,10 +15,12 @@ import { GenericAutoAttackTower } from './GenericAutoAttackTower';
 import { EarthPandaren } from './Tavern/EarthPandaren';
 import { StormPandaren } from './Tavern/StormPandaren';
 import { FirePandaren } from './Tavern/FirePandaren';
+import { AcidSpittingSpider } from './Arachnid/AcidSpittingSpider';
 
 
 export class TowerConstruction {
     private towerConstructTrigger: Trigger;
+    private towerRemoveUpgradeTrigger: Trigger;
     private towerTypes: Map<number, object> = new Map<number, object>();
     public genericAttacks: Map<number, GenericAutoAttackTower> = new Map<number, GenericAutoAttackTower>();
     private genericAttackTrigger: Trigger;
@@ -30,13 +32,32 @@ export class TowerConstruction {
         this.InitTypes();
         this.towerConstructTrigger = new Trigger();
         this.towerConstructTrigger.RegisterAnyUnitEventBJ(EVENT_PLAYER_UNIT_CONSTRUCT_FINISH);
+        this.towerConstructTrigger.RegisterAnyUnitEventBJ(EVENT_PLAYER_UNIT_UPGRADE_FINISH);
         this.towerConstructTrigger.AddAction(() => this.ConstructionFinished());
+
+        this.towerRemoveUpgradeTrigger = new Trigger();
+        this.towerRemoveUpgradeTrigger.RegisterAnyUnitEventBJ(EVENT_PLAYER_UNIT_UPGRADE_START);
+        this.towerRemoveUpgradeTrigger.AddAction(() => this.RemoveUpgradingTower());
+
+
         this.genericAttackTrigger = new Trigger();
         this.genericAttackTrigger.RegisterPlayerUnitEventSimple(Player(COLOUR.NAVY), EVENT_PLAYER_UNIT_ATTACKED);
         this.genericAttackTrigger.RegisterPlayerUnitEventSimple(Player(COLOUR.TURQUOISE), EVENT_PLAYER_UNIT_ATTACKED);
         this.genericAttackTrigger.RegisterPlayerUnitEventSimple(Player(COLOUR.VOILET), EVENT_PLAYER_UNIT_ATTACKED);
         this.genericAttackTrigger.RegisterPlayerUnitEventSimple(Player(COLOUR.WHEAT), EVENT_PLAYER_UNIT_ATTACKED);
         this.genericAttackTrigger.AddAction(() => this.DoGenericTowerAttacks());
+    }
+
+    private RemoveUpgradingTower(): void {
+        const tower: unit = GetTriggerUnit();
+        const owner: Defender | undefined = settings.players.get(GetPlayerId(GetOwningPlayer(tower)));
+        if (!owner) {
+            return;
+        }
+        const instance: Tower | undefined = owner.towers.get(GetHandleIdBJ(tower));
+        if (instance) {
+            instance.Sell();
+        }
     }
 
     private ConstructionFinished(): void {
@@ -96,6 +117,7 @@ export class TowerConstruction {
         this.towerTypes.set(FourCC('h01F'), EarthPandaren);
         this.towerTypes.set(FourCC('h01J'), StormPandaren);
         this.towerTypes.set(FourCC('h01I'), FirePandaren);
+        this.towerTypes.set(FourCC('o019'), AcidSpittingSpider);
     }
 
     private DoGenericTowerAttacks(): void {

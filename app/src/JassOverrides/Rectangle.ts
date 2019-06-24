@@ -31,6 +31,10 @@ export class Rectangle {
         return true;
     }
 
+    public toString(): string {
+        return `{ x: ${this.minX}}, y: ${this.minY} }, { x: ${this.maxX}, y: ${this.maxY} }`;
+    };
+
 
     public get minX(): number {
         return this.area[0];

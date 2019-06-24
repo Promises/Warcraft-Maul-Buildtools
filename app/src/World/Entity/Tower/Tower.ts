@@ -7,6 +7,7 @@ import { PassiveCreepDiesInAreaEffectTower } from './PassiveCreepDiesInAreaEffec
 import * as settings from '../../GlobalSettings';
 import { Log } from '../../../lib/Serilog/Serilog';
 import { DamageModificationTower } from './DamageModificationTower';
+import { Rectangle } from '../../../JassOverrides/Rectangle';
 
 export class Tower {
     private _tower: unit;
@@ -21,6 +22,16 @@ export class Tower {
         this._owner = owner;
         owner.AddTower(this);
 
+    }
+
+    public GetName(): string {
+        return GetUnitName(this.tower);
+    }
+
+    public GetRectangle(): Rectangle {
+        const x: number = GetUnitX(this.tower);
+        const y: number = GetUnitX(this.tower);
+        return new Rectangle([x - 64, y - 64, x + 64, y + 64]);
     }
 
     public get game(): WarcraftMaul {
@@ -54,6 +65,7 @@ export class Tower {
     public IsAreaEffectTower(): this is PassiveCreepDiesInAreaEffectTower {
         return 'PassiveCreepDiesInAreaEffect' in this;
     }
+
     public IsDamageModificationTower(): this is DamageModificationTower {
         return 'DamageModificationEvent' in this;
     }

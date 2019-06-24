@@ -9,11 +9,13 @@ import { AdvancedHoloMaze } from '../Holograms/AdvancedHoloMaze';
 import { SimpleHoloMaze } from '../Holograms/SimpleHoloMaze';
 import { CircleHoloMaze } from '../Holograms/CircleHoloMaze';
 import { DirectionalArrow } from './DirectionalArrow';
+import { Tower } from '../Entity/Tower/Tower';
+import { Rectangle } from '../../JassOverrides/Rectangle';
 
 export class Commands {
 
-    commandTrigger: Trigger;
-    game: WarcraftMaul;
+    public commandTrigger: Trigger;
+    public game: WarcraftMaul;
     private voteKickInProgress: boolean = false;
     private voteAgainstPlayer: Defender | undefined;
     private hasVotedToKick: boolean[] = [];
@@ -32,6 +34,119 @@ export class Commands {
         }
     }
 
+    private handleDebugCommand(player: Defender, command: string[]): void {
+        Log.Debug(Util.ArraysToString(command));
+        let amount: number = 0;
+        switch (command[0]) {
+            case 'openall':
+                player.sendMessage('All spawns are not open!');
+                this.OpenAllSpawns();
+                break;
+            case 'gold':
+                amount = Util.ParseInt(command[1]);
+                if (!amount) {
+                    player.sendMessage(Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Invalid Amount'));
+                    return;
+                }
+                player.sendMessage(`Gold was set to |cFFFFCC00${amount}|r`);
+                player.setGold(amount);
+                break;
+            case 'lumber':
+                amount = Util.ParsePositiveInt(command[1]);
+                if (!amount) {
+                    player.sendMessage(Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Invalid Amount'));
+                    return;
+
+                }
+                player.sendMessage(`Lumber was set to |cFF00C850${amount}|r`);
+                player.setLumber(amount);
+                break;
+            case 'lives':
+                amount = Util.ParseInt(command[1]);
+                if (!amount) {
+                    player.sendMessage(Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Invalid Amount'));
+                    return;
+
+                }
+                this.game.gameLives = amount;
+                this.game.startLives = amount;
+                player.sendMessage('Lives were set to |cFFFFCC00' + amount + '|r');
+                break;
+            case 'closeall':
+                player.sendMessage('All spawns are now closed!');
+                this.CloseAllSpawns();
+
+                break;
+            case 'diff':
+                amount = Util.ParsePositiveInt(command[1]);
+                if (!amount) {
+                    player.sendMessage(Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Invalid Amount'));
+                    return;
+
+                }
+                player.sendMessage(`Difficulty was set to ${amount}%`);
+
+                for (const enemy of enemies) {
+                    enemy.setHandicap(amount);
+                }
+                break;
+            case 'wave':
+                amount = Util.ParsePositiveInt(command[1]);
+                if (!amount) {
+                    player.sendMessage(Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Invalid Amount'));
+                    return;
+
+                }
+                if (amount >= this.game.worldMap.waveCreeps.length) {
+                    player.sendMessage(Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Invalid Amount'));
+                    return;
+                }
+                player.sendMessage(`Current wave was set to ${amount}`);
+
+                this.game.gameRoundHandler.currentWave = amount;
+                break;
+            case 'draw':
+                const arr: Rectangle[] = [];
+                switch (command[1]) {
+                    case 'ab':
+                    case 'antiblock':
+                        break;
+                }
+                for (let i: number = 0; i < command.length - 2; i++) {
+                    if (!command[2 + i]) {
+                        Log.Error('Missing arguments');
+                        return;
+                    }
+                    if (!arr) {
+                        Log.Error('invalid array');
+                        return;
+                    }
+
+                    if (!arr[+command[2 + i]]) {
+                        Log.Error('invalid index');
+                        return;
+                    }
+                    this.DrawRect(arr[+command[2 + i]]);
+
+                }
+
+                break;
+            case 'undraw':
+
+                this.DestroyDrawings();
+                break;
+            case 'towers':
+                this.DrawRect(player.getRectangle());
+
+                for (const tower of player.towers.values()) {
+                    player.sendMessage(tower.GetName());
+                    this.DrawRect(tower.GetRectangle());
+                    player.sendMessage(tower.GetRectangle().toString());
+                }
+                break;
+        }
+    }
+
     private handleCommand(): void {
         const player: Defender | undefined = players.get(GetPlayerId(GetTriggerPlayer()));
         if (!player) {
@@ -39,7 +154,6 @@ export class Commands {
         }
         const playerCommand: string = GetEventPlayerChatString().substr(1).toLowerCase();
         const command: string[] = playerCommand.split(' ');
-        Log.Debug(Util.ArraysToString(command));
         switch (command[0]) {
             case 'air':
                 player.sendMessage('|cFF999999Air:|r 5 / 15 / 20 / 25 / 30');
@@ -110,71 +224,7 @@ export class Commands {
             case 'yes':
                 this.VoteYes(player);
                 break;
-            case 'openall':
-                if (this.game.debugMode) {
-                    player.sendMessage('All spawns are not open!');
-                    this.OpenAllSpawns();
 
-                }
-                break;
-            case 'gold':
-                if (this.game.debugMode) {
-                    const amount: number = Util.ParseInt(command[1]);
-                    if (!amount) {
-                        player.sendMessage(Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Invalid Amount'));
-                        return;
-                    }
-                    player.sendMessage(`Gold was set to |cFFFFCC00${amount}|r`);
-                    player.setGold(amount);
-                }
-                break;
-            case 'lumber':
-                if (this.game.debugMode) {
-                    const amount: number = Util.ParsePositiveInt(command[1]);
-                    if (!amount) {
-                        player.sendMessage(Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Invalid Amount'));
-                        return;
-
-                    }
-                    player.sendMessage(`Lumber was set to |cFF00C850${amount}|r`);
-                    player.setLumber(amount);
-                }
-                break;
-            case 'lives':
-                if (this.game.debugMode) {
-                    const amount: number = Util.ParseInt(command[1]);
-                    if (!amount) {
-                        player.sendMessage(Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Invalid Amount'));
-                        return;
-
-                    }
-                    this.game.gameLives = amount;
-                    this.game.startLives = amount;
-                    player.sendMessage('Lives were set to |cFFFFCC00' + amount + '|r');
-                }
-                break;
-            case 'closeall':
-                if (this.game.debugMode) {
-                    player.sendMessage('All spawns are now closed!');
-                    this.CloseAllSpawns();
-
-                }
-                break;
-            case 'diff':
-                if (this.game.debugMode) {
-                    const amount: number = Util.ParsePositiveInt(command[1]);
-                    if (!amount) {
-                        player.sendMessage(Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Invalid Amount'));
-                        return;
-
-                    }
-                    player.sendMessage(`Difficulty was set to ${amount}%`);
-
-                    for (const enemy of enemies) {
-                        enemy.setHandicap(amount);
-                    }
-                }
-                break;
             case 'kick':
             case 'votekick':
                 Log.Error('Command not implemented yet');
@@ -190,7 +240,6 @@ export class Commands {
                 break;
             case 'give':
             case 'send':
-                Log.Error('Command not implemented yet');
                 if (command[1] && command[2]) {
                     const receiver: number = this.getPlayerIdFromColourName(command[1]);
                     const receivingPlayer: Defender | undefined = players.get(receiver);
@@ -239,23 +288,7 @@ export class Commands {
                     SetCameraField(CAMERA_FIELD_TARGET_DISTANCE, amount, 1);
                 }
                 break;
-            case 'wave':
-                if (this.game.debugMode) {
-                    const amount: number = Util.ParsePositiveInt(command[1]);
-                    if (!amount) {
-                        player.sendMessage(Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Invalid Amount'));
-                        return;
 
-                    }
-                    if (amount >= this.game.worldMap.waveCreeps.length) {
-                        player.sendMessage(Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Invalid Amount'));
-                        return;
-                    }
-                    player.sendMessage(`Current wave was set to ${amount}`);
-
-                    this.game.gameRoundHandler.currentWave = amount;
-                }
-                break;
             case 'maze':
                 let invalidMaze: boolean = false;
                 if (command.length === 2) {
@@ -322,49 +355,18 @@ export class Commands {
                         '|cFFFFCC00-maze 3|r: shows a more advanced maze');
                 }
                 break;
-            case 'draw':
-                if (!this.game.debugMode) {
-                    return;
-                }
-                const arr: rect[] = [];
-                switch (command[1]) {
-                    case 'ab':
-                    case 'antiblock':
-                        break;
-                }
-                for (let i: number = 0; i < command.length - 2; i++) {
-                    if (!command[2 + i]) {
-                        Log.Error('Missing arguments');
-                        return;
-                    }
-                    if (!arr) {
-                        Log.Error('invalid array');
-                        return;
-                    }
 
-                    if (!arr[+command[2 + i]]) {
-                        Log.Error('invalid index');
-                        return;
-                    }
-                    this.DrawRect(arr[+command[2 + i]]);
-
-                }
-
-                break;
-            case 'undraw':
-                if (!this.game.debugMode) {
-                    return;
-                }
-                this.DestroyDrawings();
-                break;
+        }
+        if (this.game.debugMode) {
+            this.handleDebugCommand(player, command);
         }
     }
 
-    getPlayerIdFromColourName(color: string): number {
+    public getPlayerIdFromColourName(color: string): number {
         return Util.COLOUR_IDS[color.toUpperCase()];
     }
 
-    RepickActions(player: Defender): void {
+    public RepickActions(player: Defender): void {
         const grp: group = GetUnitsInRectAll(GetPlayableMapRect());
         const maxGold: number = player.id === COLOUR.GRAY ? 150 : 100;
         if (player.getGold() > maxGold) {
@@ -375,7 +377,7 @@ export class Commands {
         DestroyGroup(grp);
     }
 
-    RepickConditions(player: Defender): boolean {
+    public RepickConditions(player: Defender): boolean {
         if (!(this.game.gameRoundHandler.currentWave === 1)) {
             return false;
         }
@@ -391,7 +393,7 @@ export class Commands {
         return true;
     }
 
-    RemovePlayerUnits(player: Defender): void {
+    public RemovePlayerUnits(player: Defender): void {
         if (GetOwningPlayer(GetEnumUnit()) === player.wcPlayer) {
             if (this.RepickRemoveConditions(GetEnumUnit())) {
                 RemoveUnit(GetEnumUnit());
@@ -411,13 +413,13 @@ export class Commands {
         return true;
     }
 
-    OpenAllSpawns(): void {
+    public OpenAllSpawns(): void {
         for (const spawn of this.game.worldMap.playerSpawns) {
             spawn.isOpen = true;
         }
     }
 
-    CloseAllSpawns(): void {
+    public CloseAllSpawns(): void {
         for (const spawn of this.game.worldMap.playerSpawns) {
             spawn.isOpen = false;
         }
@@ -444,7 +446,8 @@ export class Commands {
     private VoteKick(player: Defender, receivingPlayer: Defender): void {
         if (!this.voteKickInProgress) {
             if (player !== receivingPlayer) {
-                SendMessage(`${player.getNameWithColour()} has started a votekick for ${receivingPlayer.getNameWithColour()} (say -y to vote)`);
+                SendMessage(
+                    `${player.getNameWithColour()} has started a votekick for ${receivingPlayer.getNameWithColour()} (say -y to vote)`);
                 this.voteKickInProgress = true;
                 this.voteAgainstPlayer = receivingPlayer;
                 this.hasVotedToKick[player.id] = true;
@@ -549,13 +552,13 @@ export class Commands {
         return true;
     }
 
-    private DrawRect(rectangle: rect): void {
-        const x1: number = GetRectMinX(rectangle);
-        const y1: number = GetRectMinY(rectangle);
-        const x2: number = GetRectMaxX(rectangle);
-        const y2: number = GetRectMaxY(rectangle);
+    private DrawRect(rectangle: Rectangle): void {
+        const x1: number = rectangle.minX;
+        const y1: number = rectangle.minY;
+        const x2: number = rectangle.maxX;
+        const y2: number = rectangle.maxY;
 
-        const model: string = 'Doodads\\\\Cinematic\\\\DemonFootPrint\\\\DemonFootPrint0.mdl';
+        const model: string = 'Doodads\\Cinematic\\DemonFootPrint\\DemonFootPrint0.mdl';
         const sfx: effect[] = [];
         for (let x: number = x1; x < x2; x = x + 16) {
             sfx.push(AddSpecialEffect(model, x, y1));

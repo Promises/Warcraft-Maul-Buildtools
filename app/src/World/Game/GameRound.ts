@@ -13,7 +13,6 @@ import { EndOfRoundTower } from '../Entity/Tower/EndOfRoundTower';
 export class GameRound {
 
 
-
     private gameTimeTrigger: Trigger;
     private roundEndTrigger: Trigger;
     private game: WarcraftMaul;
@@ -51,6 +50,11 @@ export class GameRound {
     get currentWave(): number {
         return this._currentWave;
     }
+
+    set currentWave(value: number) {
+        this._currentWave = value;
+    }
+
 
     get isWaveInProgress(): boolean {
         return this._isWaveInProgress;
