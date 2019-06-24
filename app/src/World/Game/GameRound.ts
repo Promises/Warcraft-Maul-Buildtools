@@ -6,21 +6,23 @@ import { Trigger } from '../../JassOverrides/Trigger';
 import { Log } from '../../lib/Serilog/Serilog';
 import { PlayerSpawns } from '../Entity/PlayerSpawns';
 import { Ship } from '../Entity/Ship';
-import { Tower } from '../Entity/Tower/Tower';
 import { ArchimondeGate } from './ArchimondeGate';
 import { ArchimondeTeleport } from './ArchimondeTeleport';
 import { EndOfRoundTower } from '../Entity/Tower/EndOfRoundTower';
 
 export class GameRound {
-    gameTimeTrigger: Trigger;
-    roundEndTrigger: Trigger;
-    game: WarcraftMaul;
-    shouldStartWaveTimer: boolean = false;
-    isWaveInProgress: boolean = false;
-    currentWave: number = 1;
-    roundOverGoldReward: number = settings.GAME_GOLD_REWARD_BASE;
-    endOfTurnTowers: Map<number, EndOfRoundTower> = new Map<number, EndOfRoundTower>();
-    waitBetweenWaveTime: number = settings.GAME_TIME_BEFORE_WAVE;
+
+
+
+    private gameTimeTrigger: Trigger;
+    private roundEndTrigger: Trigger;
+    private game: WarcraftMaul;
+    private shouldStartWaveTimer: boolean = false;
+    private _isWaveInProgress: boolean = false;
+    private _currentWave: number = 1;
+    private roundOverGoldReward: number = settings.GAME_GOLD_REWARD_BASE;
+    private _endOfTurnTowers: Map<number, EndOfRoundTower> = new Map<number, EndOfRoundTower>();
+    private waitBetweenWaveTime: number = settings.GAME_TIME_BEFORE_WAVE;
     private archimondeGate: ArchimondeGate;
     private archimondeTeleport: ArchimondeTeleport;
 
@@ -41,7 +43,20 @@ export class GameRound {
         this.roundEndTrigger.AddAction(() => this.RoundEnd());
     }
 
-    UpdateGameTime(): void {
+    get endOfTurnTowers(): Map<number, EndOfRoundTower> {
+        return this._endOfTurnTowers;
+    }
+
+
+    get currentWave(): number {
+        return this._currentWave;
+    }
+
+    get isWaveInProgress(): boolean {
+        return this._isWaveInProgress;
+    }
+
+    private UpdateGameTime(): void {
         if (this.game.gameEnded) {
             this.game.gameEndTimer -= 1;
             if (this.game.scoreBoard) {
@@ -61,7 +76,7 @@ export class GameRound {
                 this.UpdateScoreboardForWave();
             }
 
-            if (this.isWaveInProgress) {
+            if (this._isWaveInProgress) {
                 if (this.game.scoreBoard) {
                     MultiboardSetItemValueBJ(this.game.scoreBoard.board, 2, 1, this.game.PrettifyGameTime(this.game.gameTime));
                 }
@@ -72,8 +87,8 @@ export class GameRound {
                 }
             }
 
-            if (this.game.waveTimer === 0 && !this.isWaveInProgress) {
-                this.isWaveInProgress = true;
+            if (this.game.waveTimer === 0 && !this._isWaveInProgress) {
+                this._isWaveInProgress = true;
                 if (this.game.scoreBoard) {
                     MultiboardSetItemValueBJ(this.game.scoreBoard.board, 1, 1, 'Game Time');
                 }
@@ -87,22 +102,22 @@ export class GameRound {
 
     }
 
-    UpdateScoreboardForWave(): void {
+    private UpdateScoreboardForWave(): void {
         if (this.game.scoreBoard) {
             MultiboardSetItemValueBJ(this.game.scoreBoard.board, 1, 1, 'Starting in');
             MultiboardSetItemValueBJ(
                 this.game.scoreBoard.board,
                 2, 5,
-                settings.ARMOUR_TYPE_NAMES[this.game.worldMap.waveCreeps[this.currentWave - 1].getArmourType()]);
+                settings.ARMOUR_TYPE_NAMES[this.game.worldMap.waveCreeps[this._currentWave - 1].getArmourType()]);
             MultiboardSetItemValueBJ(
                 this.game.scoreBoard.board,
                 2, 5,
-                settings.CREEP_TYPE_NAMES[this.game.worldMap.waveCreeps[this.currentWave - 1].getCreepType()]);
+                settings.CREEP_TYPE_NAMES[this.game.worldMap.waveCreeps[this._currentWave - 1].getCreepType()]);
         }
     }
 
 
-    RoundEnd(): void {
+    private RoundEnd(): void {
 
 
         // Disable buffs
@@ -111,17 +126,17 @@ export class GameRound {
         // call DisableTrigger(gg_trg_CrippleAura)
         // call DisableTrigger(gg_trg_VampiricAura)
 
-        if (this.currentWave === this.game.worldMap.waveCreeps.length - 1) {
+        if (this._currentWave === this.game.worldMap.waveCreeps.length - 1) {
             this.BonusRoundsOver();
         } else {
             // call SetCreepAbilities()
-            this.currentWave += 1;
+            this._currentWave += 1;
             this.roundOverGoldReward += 2;
 
 
             // Update scoreboard
             if (this.game.scoreBoard) {
-                MultiboardSetItemValueBJ(this.game.scoreBoard.board, 2, 2, `${this.currentWave}`);
+                MultiboardSetItemValueBJ(this.game.scoreBoard.board, 2, 2, `${this._currentWave}`);
             }
 
             // Display lives lost
@@ -150,21 +165,21 @@ export class GameRound {
             this.GiveWaveGoldReward();
 
             // Start new timers
-            this.isWaveInProgress = false;
+            this._isWaveInProgress = false;
             this.shouldStartWaveTimer = true;
 
             this.game.worldMap.HealEverythingOnMap();
 
-            if (this.currentWave === 35 && this.game.worldMap.archimondeDummy) {
+            if (this._currentWave === 35 && this.game.worldMap.archimondeDummy) {
                 PauseUnitBJ(false, this.game.worldMap.archimondeDummy);
                 IssueTargetDestructableOrder(this.game.worldMap.archimondeDummy, 'attack', this.archimondeGate.gate);
             }
-            if (this.currentWave === this.game.worldMap.waveCreeps.length - 1) {
+            if (this._currentWave === this.game.worldMap.waveCreeps.length - 1) {
                 this.game.GameWin();
             }
         }
 
-        for (const tower of this.endOfTurnTowers.values()) {
+        for (const tower of this._endOfTurnTowers.values()) {
             tower.EndOfRoundAction();
         }
 
@@ -199,7 +214,7 @@ export class GameRound {
          */
     }
 
-    CreepFoodConditions(): boolean {
+    private CreepFoodConditions(): boolean {
         for (const enemy of settings.enemies) {
             if (!(GetPlayerState(enemy.wcPlayer, PLAYER_STATE_RESOURCE_FOOD_USED) === 0)) {
                 return false;
@@ -209,8 +224,8 @@ export class GameRound {
     }
 
     private SpawnCreeps(): void {
-        const wave: WaveCreep = this.game.worldMap.waveCreeps[this.currentWave - 1];
-        SendMessage(`Level ${this.currentWave} - ${wave.name}`);
+        const wave: WaveCreep = this.game.worldMap.waveCreeps[this._currentWave - 1];
+        SendMessage(`Level ${this._currentWave} - ${wave.name}`);
 
         let spawnAmount: number = 10;
         switch (wave.getCreepType()) {
@@ -222,7 +237,7 @@ export class GameRound {
                 break;
 
         }
-        if (this.currentWave === 35) {
+        if (this._currentWave === 35) {
             SetTimeOfDay(0.00);
             SetWaterBaseColorBJ(100, 33.00, 33.00, 0);
         }
@@ -271,7 +286,7 @@ export class GameRound {
 
     }
 
-    getSpawnFace(id: COLOUR): number {
+    private getSpawnFace(id: COLOUR): number {
         switch (id) {
             case COLOUR.RED:
             case COLOUR.PINK:
@@ -297,47 +312,34 @@ export class GameRound {
         }
     }
 
-    private FindThingForBossToDestroy(): destructable | undefined {
-        let thingForBossToDestory: destructable | undefined;
-        thingForBossToDestory = undefined;
-
-        EnumDestructablesInRectAll(GetPlayableMapRect(), () => {
-            if (GetDestructableTypeId(GetEnumDestructable()) === FourCC('B000')) {
-                thingForBossToDestory = GetEnumDestructable();
-            }
-        });
-
-        return thingForBossToDestory;
-    }
-
     private GiveWaveGoldReward(): void {
         for (const player of settings.players.values()) {
-            if (this.currentWave === 15) {
+            if (this._currentWave === 15) {
                 player.giveLumber(1);
             }
             if (player.id === COLOUR.GRAY) {
                 player.giveGold(2 * this.roundOverGoldReward);
                 player.sendMessage(
                     `|c0000cdf9You recieved|r ${2 * this.roundOverGoldReward}|c0000cdf9` +
-                    `extra gold for completing level as the last defender|r ${(this.currentWave - 1)}`);
+                    `extra gold for completing level as the last defender|r ${(this._currentWave - 1)}`);
             } else {
                 player.giveGold(this.roundOverGoldReward);
                 player.sendMessage(
                     `|c0000cdf9You recieved|r ${this.roundOverGoldReward} |c0000cdf9` +
-                    `extra gold for completing level|r ${(this.currentWave - 1)}`);
+                    `extra gold for completing level|r ${(this._currentWave - 1)}`);
 
             }
         }
     }
 
 
-    BonusRoundEffects(): void {
+    private BonusRoundEffects(): void {
         const t: timer = CreateTimer();
         TimerStart(t, 0.03, true, () => this.SpamBonusEffects());
     }
 
 
-    SpamBonusEffects(): void {
+    private SpamBonusEffects(): void {
         const x: number = GetRandomInt(0, 10000) - 5000;
         const y: number = GetRandomInt(0, 10000) - 5000;
         const loc: location = Location(x, y);
@@ -346,9 +348,9 @@ export class GameRound {
     }
 
 
-    BonusRoundsOver(): void {
+    private BonusRoundsOver(): void {
         SendMessage('|cFFF48C42That\'s all the bonus levels, see you next time!|r');
-        this.isWaveInProgress = false;
+        this._isWaveInProgress = false;
         this.game.gameEndTimer = settings.GAME_END_TIME;
         this.game.gameEnded = true;
         const ship: Ship | undefined = this.game.worldMap.ship;
