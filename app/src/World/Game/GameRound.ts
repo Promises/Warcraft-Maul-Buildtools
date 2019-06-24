@@ -18,9 +18,9 @@ export class GameRound {
     shouldStartWaveTimer: boolean = false;
     isWaveInProgress: boolean = false;
     currentWave: number = 1;
-    roundOverGoldReward: number = 20;
+    roundOverGoldReward: number = settings.GAME_GOLD_REWARD_BASE;
     endOfTurnTowers: Map<number, EndOfRoundTower> = new Map<number, EndOfRoundTower>();
-    waitBetweenWaveTime: number = 20;
+    waitBetweenWaveTime: number = settings.GAME_TIME_BEFORE_WAVE;
     private archimondeGate: ArchimondeGate;
     private archimondeTeleport: ArchimondeTeleport;
 
