@@ -8,3 +8,8 @@ Tavern:
     - Earth Pandaren
     - Fire Pandaren
     - Storm Pandaren
+
+
+Arachnid
+    - AcidSpittingSpider
+    - NerubianBehemoth

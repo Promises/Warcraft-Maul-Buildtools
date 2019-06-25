@@ -6,7 +6,6 @@ import { GenericAutoAttackTower } from './GenericAutoAttackTower';
 import { PassiveCreepDiesInAreaEffectTower } from './PassiveCreepDiesInAreaEffectTower';
 import * as settings from '../../../GlobalSettings';
 import { Log } from '../../../../lib/Serilog/Serilog';
-import { DamageModificationTower } from './DamageModificationTower';
 import { Rectangle } from '../../../../JassOverrides/Rectangle';
 
 export class Tower {
@@ -67,7 +66,6 @@ export class Tower {
     }
 
 
-
     public Sell(): void {
         this.owner.towers.delete(this.handleId);
         if (this.IsEndOfRoundTower()) {
@@ -95,5 +93,11 @@ export class Tower {
             }
         }
 
+    }
+
+    public CastSpellOnAttackedUnitLocation(spell: string): void {
+        const x: number = GetUnitX(GetAttackedUnitBJ());
+        const y: number = GetUnitY(GetAttackedUnitBJ());
+        IssuePointOrder(GetAttacker(), spell, x, y);
     }
 }

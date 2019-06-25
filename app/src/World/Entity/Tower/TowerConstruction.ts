@@ -17,6 +17,9 @@ import { StormPandaren } from './Tavern/StormPandaren';
 import { FirePandaren } from './Tavern/FirePandaren';
 import { AcidSpittingSpider } from './Arachnid/AcidSpittingSpider';
 import { NerubianBehemoth } from './Arachnid/NerubianBehemoth';
+import { CavernDruid } from './CavernousCreatures/CavernDruid';
+import { CavernHermit } from './CavernousCreatures/CavernHermit';
+import { CavernMushroom } from './CavernousCreatures/CavernMushroom';
 
 
 export class TowerConstruction {
@@ -107,17 +110,30 @@ export class TowerConstruction {
     }
 
     private InitTypes(): void {
+
+        // WorkersUnion
         this.towerTypes.set(FourCC('h03G'), NagaSlave);
         this.towerTypes.set(FourCC('h03E'), OrcPeon);
         this.towerTypes.set(FourCC('h03F'), HumanPeasant);
         this.towerTypes.set(FourCC('h03I'), UndeadAcolyte);
         this.towerTypes.set(FourCC('h03H'), NightElfWisp);
+
+        // Undead
         this.towerTypes.set(FourCC('h00R'), SacrificialPit);
+
+        // Tavern
         this.towerTypes.set(FourCC('h01F'), EarthPandaren);
         this.towerTypes.set(FourCC('h01J'), StormPandaren);
         this.towerTypes.set(FourCC('h01I'), FirePandaren);
+
+        // Arachnid
         this.towerTypes.set(FourCC('o019'), AcidSpittingSpider);
         this.towerTypes.set(FourCC('h00W'), NerubianBehemoth);
+
+        // Cavernous Creatures
+        this.towerTypes.set(FourCC('h04Q'), CavernDruid);
+        this.towerTypes.set(FourCC('h04M'), CavernHermit);
+        this.towerTypes.set(FourCC('h04T'), CavernMushroom);
     }
 
     private DoGenericTowerAttacks(): void {

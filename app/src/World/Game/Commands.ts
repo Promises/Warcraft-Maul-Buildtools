@@ -1,4 +1,4 @@
-/* tslint:disable:prefer-template */    // TODO: Fix this linting error and remove the exception
+/* tslint:disable:prefer-template */                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                // TODO: Fix this linting error and remove the exception
 import { WarcraftMaul } from '../WarcraftMaul';
 import { COLOUR_CODES, enemies, players } from '../GlobalSettings';
 import { Trigger } from '../../JassOverrides/Trigger';
@@ -8,8 +8,6 @@ import { CheckPoint } from '../Entity/CheckPoint';
 import { AdvancedHoloMaze } from '../Holograms/AdvancedHoloMaze';
 import { SimpleHoloMaze } from '../Holograms/SimpleHoloMaze';
 import { CircleHoloMaze } from '../Holograms/CircleHoloMaze';
-import { DirectionalArrow } from './DirectionalArrow';
-import { Tower } from '../Entity/Tower/Specs/Tower';
 import { Rectangle } from '../../JassOverrides/Rectangle';
 
 export class Commands {
@@ -38,6 +36,11 @@ export class Commands {
         Log.Debug(Util.ArraysToString(command));
         let amount: number = 0;
         switch (command[0]) {
+            case 'ui':
+                let bool: boolean = BlzLoadTOCFile('uiImport\\MyBar.toc');
+                player.sendMessage(`ui! ${bool}`);
+                this.TestUi();
+                break;
             case 'openall':
                 player.sendMessage('All spawns are not open!');
                 this.OpenAllSpawns();
@@ -584,5 +587,28 @@ export class Commands {
             }
         }
         this.drawings = [];
+    }
+
+    private TestUi(): void {
+        const fh: framehandle = BlzCreateSimpleFrame('TestPanel', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), 0);
+        // const fh: framehandle = BlzGetFrameByName('SimpleUnitStatsPanel', 0);
+        BlzFrameClearAllPoints(fh);
+        BlzFrameSetAbsPoint(fh, FRAMEPOINT_TOP, 0.4, 0.23);
+        // BlzFrameSetPoint(fh, FRAMEPOINT_TOP, BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), FRAMEPOINT_TOP, 0, -0.3);
+        Log.Debug(ToString(BlzFrameGetValue(fh)));
+        // BlzFrameSetAbsPoint(fh, FRAMEPOINT_TOP, 0.0, 0.1);
+        // BlzFrameSetValue(fh, 100);
+        // BlzFrameSetText(BlzGetFrameByName('MyBarText', 0), '');
+        // BlzFrameSetTexture(BlzGetFrameByName('MyBarBackground', 0), 'Replaceabletextures\\CommandButtons\\BTNHeroDeathKnight.blp', 0, true);
+        // BlzFrameSetTexture(fh, 'Replaceabletextures\\CommandButtons\\BTNArthas.blp', 0, false);
+        // BlzFrameSetSize(fh, 0.02, 0.02);
+        // TimerStart(CreateTimer(), 0.08, true, () => this.ChangeUI());
+    }
+
+
+    private ChangeUI(): void {
+        const fh: framehandle = BlzGetFrameByName('MyBar', 0);
+        BlzFrameSetValue(fh, BlzFrameGetValue(fh) + GetRandomReal(-3, 3));
+
     }
 }

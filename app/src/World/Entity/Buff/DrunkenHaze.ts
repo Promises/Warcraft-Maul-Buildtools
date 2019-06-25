@@ -20,6 +20,6 @@ export class DrunkenHaze extends Buff implements DamageModificationBuff {
             return;
         }
 
-        this.damageEngineGlobals.udg_DamageEventAmount *= 100.25;
+        this.damageEngineGlobals.udg_DamageEventAmount *= 1.25;
     }
 }

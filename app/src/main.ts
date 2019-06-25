@@ -5,12 +5,12 @@ import { Log, LogLevel } from './lib/Serilog/Serilog';
 import { StringSink } from './lib/Serilog/Sinks/StringSink';
 
 Log.Init([
-    new StringSink(LogLevel.Fatal, SendMessage),
-]);
+             new StringSink(LogLevel.Fatal, SendMessage),
+         ]);
+
 function Main(this: void) {
     let maul = new WarcraftMaul();
-    if(maul.debugMode)
-    {
+    if (maul.debugMode) {
         Log.Information('Initialisation finished');
     }
 
@@ -24,6 +24,7 @@ xpcall(() => {
 }, (err) => {
     Log.Fatal(err);
 });
+
 
 
 
