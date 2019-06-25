@@ -592,10 +592,13 @@ export class Commands {
     private TestUi(): void {
         const fh: framehandle = BlzCreateSimpleFrame('TestPanel', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), 0);
         // const fh: framehandle = BlzGetFrameByName('SimpleUnitStatsPanel', 0);
-        BlzFrameClearAllPoints(fh);
-        BlzFrameSetAbsPoint(fh, FRAMEPOINT_TOP, 0.4, 0.23);
+        // BlzFrameClearAllPoints(fh);
+        BlzFrameSetSize(fh, 0.1, 0.1);
+
+        BlzFrameSetAbsPoint(fh, FRAMEPOINT_CENTER,  0.4, 0.3);
+        Log.Debug(ToString(GetHandleId(fh)));
         // BlzFrameSetPoint(fh, FRAMEPOINT_TOP, BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), FRAMEPOINT_TOP, 0, -0.3);
-        Log.Debug(ToString(BlzFrameGetValue(fh)));
+        // Log.Debug(ToString(BlzFrameGetValue(fh)));
         // BlzFrameSetAbsPoint(fh, FRAMEPOINT_TOP, 0.0, 0.1);
         // BlzFrameSetValue(fh, 100);
         // BlzFrameSetText(BlzGetFrameByName('MyBarText', 0), '');
