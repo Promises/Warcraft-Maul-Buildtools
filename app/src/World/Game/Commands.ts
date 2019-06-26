@@ -1,4 +1,4 @@
-/* tslint:disable:prefer-template */                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                // TODO: Fix this linting error and remove the exception
+/* tslint:disable:prefer-template */                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                // TODO: Fix this linting error and remove the exception
 import { WarcraftMaul } from '../WarcraftMaul';
 import { COLOUR_CODES, enemies, players } from '../GlobalSettings';
 import { Trigger } from '../../JassOverrides/Trigger';
@@ -9,6 +9,7 @@ import { AdvancedHoloMaze } from '../Holograms/AdvancedHoloMaze';
 import { SimpleHoloMaze } from '../Holograms/SimpleHoloMaze';
 import { CircleHoloMaze } from '../Holograms/CircleHoloMaze';
 import { Rectangle } from '../../JassOverrides/Rectangle';
+import { SpawnedCreeps } from '../Entity/SpawnedCreeps';
 
 export class Commands {
 
@@ -145,6 +146,13 @@ export class Commands {
                     player.sendMessage(tower.GetName());
                     this.DrawRect(tower.GetRectangle());
                     player.sendMessage(tower.GetRectangle().toString());
+                }
+                break;
+            case 'killall':
+                const spawnedCreeps: SpawnedCreeps | undefined = this.game.worldMap.spawnedCreeps;
+                if (spawnedCreeps) {
+                    spawnedCreeps.unitMap.forEach(u => KillUnit(u.creep));
+
                 }
                 break;
         }
@@ -595,7 +603,7 @@ export class Commands {
         // BlzFrameClearAllPoints(fh);
         BlzFrameSetSize(fh, 0.1, 0.1);
 
-        BlzFrameSetAbsPoint(fh, FRAMEPOINT_CENTER,  0.4, 0.3);
+        BlzFrameSetAbsPoint(fh, FRAMEPOINT_CENTER, 0.4, 0.3);
         Log.Debug(ToString(GetHandleId(fh)));
         // BlzFrameSetPoint(fh, FRAMEPOINT_TOP, BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), FRAMEPOINT_TOP, 0, -0.3);
         // Log.Debug(ToString(BlzFrameGetValue(fh)));
