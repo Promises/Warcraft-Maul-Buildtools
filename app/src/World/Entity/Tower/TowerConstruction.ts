@@ -23,6 +23,10 @@ import { CavernMushroom } from './CavernousCreatures/CavernMushroom';
 import { CavernRevenant } from './CavernousCreatures/CavernRevenant';
 import { CavernTurtle } from './CavernousCreatures/CavernTurtle';
 import { CorruptedTreeofLife } from './CorruptedNightElves/CorruptedTreeofLife';
+import { FelGuard } from './Demon/FelGuard';
+import { Mannoroth } from './Demon/Mannoroth';
+import { SummoningShrine } from './Demon/SummoningShrine';
+import { KilJaeden } from './Demon/KilJaeden';
 
 
 export class TowerConstruction {
@@ -142,6 +146,13 @@ export class TowerConstruction {
 
         // CorruptedNightElves
         this.towerTypes.set(FourCC('n00P'), CorruptedTreeofLife);
+
+        // Demon
+        this.towerTypes.set(FourCC('h03W'), FelGuard);
+        this.towerTypes.set(FourCC('o00L'), Mannoroth);
+        this.towerTypes.set(FourCC('n00U'), SummoningShrine);
+        this.towerTypes.set(FourCC('eC93'), KilJaeden);
+
 
 
     }
