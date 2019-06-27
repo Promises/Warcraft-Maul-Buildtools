@@ -29,6 +29,7 @@ import { SummoningShrine } from './Demon/SummoningShrine';
 import { KilJaeden } from './Demon/KilJaeden';
 import { DwarfKing } from './Dwaven/DwarfKing';
 import { MoonDancer } from './Galaxy/MoonDancer';
+import { OgreWarrior } from './Giants/OgreWarrior';
 
 
 export class TowerConstruction {
@@ -161,6 +162,9 @@ export class TowerConstruction {
 
         // Galaxy
         this.towerTypes.set(FourCC('e00K'), MoonDancer);
+
+        // Giants
+        this.towerTypes.set(FourCC('oC35'), OgreWarrior);
 
 
     }
