@@ -32,6 +32,7 @@ import { MoonDancer } from './Galaxy/MoonDancer';
 import { OgreWarrior } from './Giants/OgreWarrior';
 import { GoblinMineLayer } from './Goblin/GoblinMineLayer';
 import { GoblinTinkerer } from './Goblin/GoblinTinkerer';
+import { GoblinBlademaster } from './Goblin/GoblinBlademaster';
 
 
 export class TowerConstruction {
@@ -171,6 +172,7 @@ export class TowerConstruction {
         // Goblin
         this.towerTypes.set(FourCC('o01R'), GoblinMineLayer);
         this.towerTypes.set(FourCC('o01S'), GoblinTinkerer);
+        this.towerTypes.set(FourCC('o01P'), GoblinBlademaster);
 
 
 

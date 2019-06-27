@@ -50,3 +50,7 @@ Arachnid
     - OgreWarrior
 
 
+- Goblin
+    - GoblinBlademaster
+    - GoblinMineLayer
+    - GoblinTinkerer
