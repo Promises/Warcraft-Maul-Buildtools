@@ -34,6 +34,8 @@ import { GoblinMineLayer } from './Goblin/GoblinMineLayer';
 import { GoblinTinkerer } from './Goblin/GoblinTinkerer';
 import { GoblinBlademaster } from './Goblin/GoblinBlademaster';
 import { VenomTower } from './Human/VenomTower';
+import { RaceLootBoxer } from '../../Game/Races/RaceLootBoxer';
+import { LootBoxerHandler } from './LootBoxer/LootBoxerHandler';
 
 
 export class TowerConstruction {
@@ -43,11 +45,24 @@ export class TowerConstruction {
     public genericAttacks: Map<number, GenericAutoAttackTower> = new Map<number, GenericAutoAttackTower>();
     private genericAttackTrigger: Trigger;
     private game: WarcraftMaul;
+    private lootBoxerHander: LootBoxerHandler;
+    private lootBoxerTowers: number[] = [
+        FourCC('u044'), // Tier 1
+        FourCC('u045'), // Tier 2
+        FourCC('u047'), // Tier 3
+        FourCC('u046'), // Tier 4
+        FourCC('u048'), // Tier 5
+        FourCC('u049'), // Tier 6
+        FourCC('u04A'), // Tier 7
+        FourCC('u04B'), // Tier 8
+        FourCC('u04C'), // Tier 9
+    ];
 
     constructor(game: WarcraftMaul) {
         Log.Debug('Starting towercons');
         this.game = game;
         this.InitTypes();
+        this.lootBoxerHander = new LootBoxerHandler();
         this.towerConstructTrigger = new Trigger();
         this.towerConstructTrigger.RegisterAnyUnitEventBJ(EVENT_PLAYER_UNIT_CONSTRUCT_FINISH);
         this.towerConstructTrigger.RegisterAnyUnitEventBJ(EVENT_PLAYER_UNIT_UPGRADE_FINISH);
@@ -79,7 +94,7 @@ export class TowerConstruction {
     }
 
     private ConstructionFinished(): void {
-        const tower: unit = GetTriggerUnit();
+        let tower: unit = GetTriggerUnit();
 
         const owner: Defender | undefined = settings.players.get(GetPlayerId(GetOwningPlayer(tower)));
         UnitRemoveAbilityBJ(FourCC('ARal'), tower);
@@ -88,6 +103,12 @@ export class TowerConstruction {
             return;
         }
         let ObjectExtendsTower: Tower;
+        if (this.isLootBoxer(tower)) {
+
+            tower = this.lootBoxerHander.handleLootBoxTower(tower, this.lootBoxerTowers.indexOf(GetUnitTypeId(tower)));
+            UnitRemoveAbilityBJ(FourCC('ARal'), tower);
+
+        }
 
         const obj: object | undefined = this.towerTypes.get(GetUnitTypeId(tower));
         if (obj) {
@@ -179,7 +200,6 @@ export class TowerConstruction {
         this.towerTypes.set(FourCC('h045'), VenomTower);
 
 
-
     }
 
     private DoGenericTowerAttacks(): void {
@@ -189,4 +209,7 @@ export class TowerConstruction {
     }
 
 
+    private isLootBoxer(tower: unit): boolean {
+        return this.lootBoxerTowers.indexOf(GetUnitTypeId(tower)) > -1;
+    }
 }

@@ -2,7 +2,7 @@ import { Race } from './Race';
 import { Defender } from '../../Entity/Players/Defender';
 
 export class RaceLootBoxer extends Race {
-    pickAction(player: Defender): void {
+    public pickAction(player: Defender): void {
         if (player.lootBoxer) {
             player.sendMessage('I\'m sorry Dave, I\'m afraid I can\'t do that');
             player.giveLumber(1);
