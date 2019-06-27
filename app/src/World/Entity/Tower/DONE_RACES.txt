@@ -42,3 +42,11 @@ Arachnid
     - battle roar (buff)
 
 
+- Galaxy
+    - MoonDancer
+    - Moonstorm (buff)
+
+- Giants
+    - OgreWarrior
+
+
