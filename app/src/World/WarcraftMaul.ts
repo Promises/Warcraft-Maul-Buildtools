@@ -127,13 +127,10 @@ export class WarcraftMaul {
         TimerStart(timer, 0.10, true, () => this.SpamEffects());
     }
 
-    // FIXME: This function leaks!
-    SpamEffects(): void {
+    private SpamEffects(): void {
         const x: number = GetRandomInt(0, 10000) - 5000;
         const y: number = GetRandomInt(0, 10000) - 5000;
-        const loc: location = Location(x, y);
-        DestroyEffect(AddSpecialEffectLocBJ(loc, 'Abilities\\Spells\\Human\\DispelMagic\\DispelMagicTarget.mdl'));
-        RemoveLocation(loc);
+        DestroyEffect(AddSpecialEffect('Abilities\\Spells\\Human\\DispelMagic\\DispelMagicTarget.mdl', x, y));
     }
 
     PrettifyGameTime(sec: number): string {
