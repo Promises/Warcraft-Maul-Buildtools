@@ -24,7 +24,7 @@ Arachnid
 
 
 - Corrupted Night Elves
-    -Corrupted tree of life
+    - Corrupted tree of life
     - Force of nature (BUFF)
 
 
