@@ -49,8 +49,13 @@ Arachnid
 - Giants
     - OgreWarrior
 
-
 - Goblin
     - GoblinBlademaster
     - GoblinMineLayer
     - GoblinTinkerer
+
+- Human
+    - Venom Tower
+
+- Ice Trolls
+    - Ice Troll joker (buff)

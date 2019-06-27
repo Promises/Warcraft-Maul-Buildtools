@@ -33,6 +33,7 @@ import { OgreWarrior } from './Giants/OgreWarrior';
 import { GoblinMineLayer } from './Goblin/GoblinMineLayer';
 import { GoblinTinkerer } from './Goblin/GoblinTinkerer';
 import { GoblinBlademaster } from './Goblin/GoblinBlademaster';
+import { VenomTower } from './Human/VenomTower';
 
 
 export class TowerConstruction {
@@ -173,6 +174,9 @@ export class TowerConstruction {
         this.towerTypes.set(FourCC('o01R'), GoblinMineLayer);
         this.towerTypes.set(FourCC('o01S'), GoblinTinkerer);
         this.towerTypes.set(FourCC('o01P'), GoblinBlademaster);
+
+        // Human
+        this.towerTypes.set(FourCC('h045'), VenomTower);
 
 
 
