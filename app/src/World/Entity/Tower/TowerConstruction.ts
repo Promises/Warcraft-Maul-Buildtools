@@ -21,6 +21,7 @@ import { CavernDruid } from './CavernousCreatures/CavernDruid';
 import { CavernHermit } from './CavernousCreatures/CavernHermit';
 import { CavernMushroom } from './CavernousCreatures/CavernMushroom';
 import { CavernRevenant } from './CavernousCreatures/CavernRevenant';
+import { CavernTurtle } from './CavernousCreatures/CavernTurtle';
 
 
 export class TowerConstruction {
@@ -136,6 +137,7 @@ export class TowerConstruction {
         this.towerTypes.set(FourCC('h04M'), CavernHermit);
         this.towerTypes.set(FourCC('h04T'), CavernMushroom);
         this.towerTypes.set(FourCC('h04O'), CavernRevenant);
+        this.towerTypes.set(FourCC('h04N'), CavernTurtle);
     }
 
     private DoGenericTowerAttacks(): void {
