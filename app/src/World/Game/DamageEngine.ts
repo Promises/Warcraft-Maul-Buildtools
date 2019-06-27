@@ -451,7 +451,7 @@ export class DamageEngine {
         if (this.damageEngineGlobals.udg_DamageEventPrevAmt === 0.00) {
             this.ZeroDamageEvent();
         } else {
-            if (this.damageEngineGlobals.udg_DamageEventPrevAmt === 0.00) {
+            if (this.damageEngineGlobals.udg_DamageEventAmount !== 0.00 && r !== 0.00) {
                 this.damageEngineGlobals.udg_DamageScalingWC3 = r / this.damageEngineGlobals.udg_DamageEventAmount;
             } else if (this.damageEngineGlobals.udg_DamageEventAmount > 0.00) {
                 this.damageEngineGlobals.udg_DamageScalingWC3 = 0.00;
