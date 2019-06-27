@@ -28,6 +28,7 @@ import { Mannoroth } from './Demon/Mannoroth';
 import { SummoningShrine } from './Demon/SummoningShrine';
 import { KilJaeden } from './Demon/KilJaeden';
 import { DwarfKing } from './Dwaven/DwarfKing';
+import { MoonDancer } from './Galaxy/MoonDancer';
 
 
 export class TowerConstruction {
@@ -158,6 +159,8 @@ export class TowerConstruction {
         // Dwarven
         this.towerTypes.set(FourCC('n05Q'), DwarfKing);
 
+        // Galaxy
+        this.towerTypes.set(FourCC('e00K'), MoonDancer);
 
 
     }

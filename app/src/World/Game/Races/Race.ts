@@ -8,7 +8,7 @@ export class Race {
     enabled: boolean;
     map: WorldMap;
 
-    constructor(id: string, name: string, itemid: string, map: WorldMap, enabled = true) {
+    constructor(id: string, name: string, itemid: string, map: WorldMap, enabled: boolean = true) {
         this.id = id;
         this.name = name;
         this.itemid = itemid;
@@ -19,7 +19,7 @@ export class Race {
         }
     }
 
-    pickAction(player: Defender): void {
+    public pickAction(player: Defender): void {
         CreateUnit(player.wcPlayer, FourCC(this.id), player.getCenterX(), player.getCenterY(), bj_UNIT_FACING);
     }
 }
