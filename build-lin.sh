@@ -19,7 +19,7 @@ sh ./wcm_generate.sh
 
 
 if [ "$bt_alwaysnpm" = true ]; then
-    /home/henning/.nvm/versions/node/v11.11.0/bin/npm i
+    npm i
 fi
 
 
