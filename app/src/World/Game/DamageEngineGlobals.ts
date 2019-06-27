@@ -27,8 +27,13 @@ export class DamageEngineGlobals {
     public udg_DamageEventAmount: number = 0;
     public udg_DamageEventPrevAmt: number = 0;
     public udg_LethalDamageHP: number = 0;
+    public udg_DamageEventArmorPierced: number = 0;
+    public udg_DamageScalingWC3: number = 0;
+    public udg_DamageScalingUser: number = 0;
 
     public udg_DamageEventAttackT: number = 0;
     public udg_DamageEventDamageT: number = 0;
     public udg_DamageEventWeaponT: number = 0;
+    public udg_DamageEventArmorT: number = 0;
+    public udg_DamageEventDefenseT: number = 0;
 }
