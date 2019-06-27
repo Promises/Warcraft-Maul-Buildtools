@@ -94,8 +94,8 @@ export class WarcraftMaul {
 
         // Spawn testing units when in debug mode
         if (this.debugMode) {
-            CreateUnit(Player(COLOUR.RED), FourCC('e00B'), 0.00, 0.00, bj_UNIT_FACING);
-            CreateUnit(Player(COLOUR.RED), FourCC('uC98'), 0.00, 0.00, bj_UNIT_FACING);
+            // CreateUnit(Player(COLOUR.RED), FourCC('e00B'), 0.00, 0.00, bj_UNIT_FACING);
+            // CreateUnit(Player(COLOUR.RED), FourCC('uC98'), 0.00, 0.00, bj_UNIT_FACING);
         }
 
         for (const quest of Quests) {
