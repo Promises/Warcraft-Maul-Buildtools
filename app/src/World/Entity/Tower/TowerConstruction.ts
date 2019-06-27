@@ -30,6 +30,8 @@ import { KilJaeden } from './Demon/KilJaeden';
 import { DwarfKing } from './Dwaven/DwarfKing';
 import { MoonDancer } from './Galaxy/MoonDancer';
 import { OgreWarrior } from './Giants/OgreWarrior';
+import { GoblinMineLayer } from './Goblin/GoblinMineLayer';
+import { GoblinTinkerer } from './Goblin/GoblinTinkerer';
 
 
 export class TowerConstruction {
@@ -165,6 +167,11 @@ export class TowerConstruction {
 
         // Giants
         this.towerTypes.set(FourCC('oC35'), OgreWarrior);
+
+        // Goblin
+        this.towerTypes.set(FourCC('o01R'), GoblinMineLayer);
+        this.towerTypes.set(FourCC('o01S'), GoblinTinkerer);
+
 
 
     }
