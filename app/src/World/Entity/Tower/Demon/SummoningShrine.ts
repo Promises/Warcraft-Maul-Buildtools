@@ -16,7 +16,7 @@ export class SummoningShrine extends Tower implements AttackActionTower {
                 bj_UNIT_FACING);
             UnitApplyTimedLifeBJ(3.00, FourCC('BTLF'), tempUnit);
             UnitAddAbilityBJ(FourCC('A06P'), tempUnit);
-            IssuePointOrder(u, 'dreadlordinferno', GetUnitX(target), GetUnitY(target))
+            IssuePointOrder(tempUnit, 'dreadlordinferno', GetUnitX(target), GetUnitY(target));
 
         }
     }
