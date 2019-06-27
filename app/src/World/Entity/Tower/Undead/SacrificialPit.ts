@@ -6,9 +6,9 @@ import { Creep } from '../../Creep';
 export class SacrificialPit extends Tower implements PassiveCreepDiesInAreaEffectTower {
 
 
-    public PassiveCreepDiesInAreaEffect(dieingCreep: Creep): void {
+    public PassiveCreepDiesInAreaEffect(dyingCreep: Creep): void {
 
-        const loc: location = dieingCreep.getLocation();
+        const loc: location = dyingCreep.getLocation();
         const dummy: unit = CreateUnitAtLoc(this.owner.wcPlayer, FourCC('u008'), loc, bj_UNIT_FACING);
         UnitAddAbilityBJ(FourCC('A08P'), dummy);
         IssuePointOrderLocBJ(dummy, 'rainoffire', loc);

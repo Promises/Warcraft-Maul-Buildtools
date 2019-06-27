@@ -111,9 +111,9 @@ export class PlayerSpawns {
         // TODO: Implement Creep abilities
     }
 
-    public AreaTowerActions(dieingCreep: Creep): void {
+    public AreaTowerActions(dyingCreep: Creep): void {
         for (const tower of this.areaTowers.values()) {
-            tower.PassiveCreepDiesInAreaEffect(dieingCreep);
+            tower.PassiveCreepDiesInAreaEffect(dyingCreep);
         }
     }
 }
