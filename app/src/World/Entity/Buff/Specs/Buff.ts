@@ -3,6 +3,7 @@ import { DamageEngine } from '../../../Game/DamageEngine';
 import { DamageEngineGlobals } from '../../../Game/DamageEngineGlobals';
 import { DamageModificationTower } from '../../Tower/Specs/DamageModificationTower';
 import { DamageModificationBuff } from './DamageModificationBuff';
+import { AttackActionBuff } from './AttackActionBuff';
 
 export class Buff {
 
@@ -36,6 +37,9 @@ export class Buff {
 
     public IsDamageModificationBuff(): this is DamageModificationBuff {
         return 'ModifyDamage' in this;
+    }
+    public IsAttackActionBuff(): this is AttackActionBuff {
+        return 'AttackAction' in this;
     }
 
 }

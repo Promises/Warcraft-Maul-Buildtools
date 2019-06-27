@@ -22,6 +22,7 @@ import { CavernHermit } from './CavernousCreatures/CavernHermit';
 import { CavernMushroom } from './CavernousCreatures/CavernMushroom';
 import { CavernRevenant } from './CavernousCreatures/CavernRevenant';
 import { CavernTurtle } from './CavernousCreatures/CavernTurtle';
+import { CorruptedTreeofLife } from './CorruptedNightElves/CorruptedTreeofLife';
 
 
 export class TowerConstruction {
@@ -138,6 +139,11 @@ export class TowerConstruction {
         this.towerTypes.set(FourCC('h04T'), CavernMushroom);
         this.towerTypes.set(FourCC('h04O'), CavernRevenant);
         this.towerTypes.set(FourCC('h04N'), CavernTurtle);
+
+        // CorruptedNightElves
+        this.towerTypes.set(FourCC('n00P'), CorruptedTreeofLife);
+
+
     }
 
     private DoGenericTowerAttacks(): void {

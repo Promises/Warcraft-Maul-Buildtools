@@ -13,3 +13,16 @@ Tavern:
 Arachnid
     - AcidSpittingSpider
     - NerubianBehemoth
+
+
+-Cavernous creatures:
+    - CavernDruid
+    - CavernHermit
+    - CavernMushroom
+    - CavernRevenant
+    - CavernTurtle
+
+
+- Corrupted Night Elves
+    -Corrupted tree of life
+    - Force of nature (BUFF)

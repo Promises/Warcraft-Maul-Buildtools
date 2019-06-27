@@ -2,6 +2,7 @@ import { WarcraftMaul } from '../../WarcraftMaul';
 import { Buff } from './Specs/Buff';
 import { CrushedDamageBuff } from './CrushedDamageBuff';
 import { DrunkenHaze } from './DrunkenHaze';
+import { ForceOfNature } from './ForceOfNature';
 
 export class BuffHandler {
     private game: WarcraftMaul;
@@ -18,6 +19,7 @@ export class BuffHandler {
     private AddBuffsToList(): void {
         this.buffs.push(CrushedDamageBuff);
         this.buffs.push(DrunkenHaze);
+        this.buffs.push(ForceOfNature);
     }
 
     private SetupBuffs(): void {
@@ -29,6 +31,9 @@ export class BuffHandler {
 
             if (ObjectExtendsBuff.IsDamageModificationBuff()) {
                 this.game.gameDamageEngine.AddMultiplicativeDamageModificationEventBuff(ObjectExtendsBuff);
+            }
+            if (ObjectExtendsBuff.IsAttackActionBuff()) {
+                this.game.gameDamageEngine.AddInitialDamageEventBuff(ObjectExtendsBuff);
             }
 
             this.activeBuffs.push(ObjectExtendsBuff);

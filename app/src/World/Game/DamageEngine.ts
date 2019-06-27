@@ -2,6 +2,7 @@ import { Trigger } from '../../JassOverrides/Trigger';
 import { DamageEngineGlobals } from './DamageEngineGlobals';
 import { AttackActionTower } from '../Entity/Tower/Specs/AttackActionTower';
 import { DamageModificationBuff } from '../Entity/Buff/Specs/DamageModificationBuff';
+import { AttackActionBuff } from '../Entity/Buff/Specs/AttackActionBuff';
 
 export class DamageEngine {
     /**
@@ -9,6 +10,7 @@ export class DamageEngine {
      */
     private initialDamageEvent: (() => void)[] = [];
     public initialDamageEventTowers: Map<number, AttackActionTower> = new Map<number, AttackActionTower>();
+    public initialDamageEventBuffs: AttackActionBuff[] = [];
     public multiplicativeDamageModificationEventBuff: DamageModificationBuff[] = [];
 
     private zeroDamageEvent: (() => void)[] = [];
@@ -72,6 +74,9 @@ export class DamageEngine {
     public AddInitialDamageEventTower(handleId: number, tower: AttackActionTower): void {
         this.initialDamageEventTowers.set(handleId, tower);
     }
+    public AddInitialDamageEventBuff(buff: AttackActionBuff): void {
+        this.initialDamageEventBuffs.push(buff);
+    }
 
 
     /**
@@ -132,6 +137,8 @@ export class DamageEngine {
     private InitialDamageEvent(): void {
         this.initialDamageEvent.forEach(action => action());
         this.initialDamageEventTowers.forEach(tower => tower.AttackAction());
+        this.initialDamageEventBuffs.forEach(buff => buff.AttackAction());
+
     }
 
     private ZeroDamageEvent(): void {

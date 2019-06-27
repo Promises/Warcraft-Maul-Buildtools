@@ -25,7 +25,6 @@ Frame "SIMPLESTATUSBAR" "MyBar" {
        }
    }
 }
-
 Frame "SIMPLEFRAME" "TestPanel" {
     UseActiveContext,
     DecorateFileNames,
@@ -34,30 +33,30 @@ Frame "SIMPLEFRAME" "TestPanel" {
     // --- icon -------------------------------------------------------------
     Texture "TestPanelBackdrop" INHERITS "InfoPanelIconTemplate" {
         File "HeroStrengthIcon",
-         UseActiveContext,
+        UseActiveContext,
         SetAllPoints, //copy "parent"
     }
 
     // --- icon # -----------------------------------------------------------
-	String "TestPanelLevel" INHERITS "SimpleInfoPanelAttributeTextTemplate" {
-	    //SetAllPoints, //copy "parent"
+    String "TestPanelLevel" INHERITS "SimpleInfoPanelAttributeTextTemplate" {
+        //SetAllPoints, //copy "parent"
         SetPoint CENTER, "TestPanelBackdrop", BOTTOMRIGHT, -0.007625, 0.006875,
-	}
+    }
 
     // --- label ------------------------------------------------------------
     String "TestPanelLabel" INHERITS "SimpleInfoPanelLabelTextTemplate" {
-    	//SetAllPoints, //copy "parent"
+        //SetAllPoints, //copy "parent"
         SetPoint TOPLEFT, "TestPanelBackdrop", TOPRIGHT, 0.0, -0.003,
         Text "COLON_DAMAGE",
-		Width 0.24,
+        Width 0.24,
     }
 
     // --- value ------------------------------------------------------------
     String "TestPanelValue" INHERITS "SimpleInfoPanelValueTextTemplate" {
-    	//SetAllPoints, //copy "parent"
-		SetPoint TOPLEFT, "TestPanelLabel", BOTTOMLEFT, 0.002625, -0.003,
-		Font "InfoPanelTextFont",0.008,
-		Text "COLON_value",
-		Width 0.24,
+        //SetAllPoints, //copy "parent"
+        SetPoint TOPLEFT, "TestPanelLabel", BOTTOMLEFT, 0.002625, -0.003,
+        Font "InfoPanelTextFont",0.008,
+        Text "COLON_value",
+        Width 0.24,
     }
 }
