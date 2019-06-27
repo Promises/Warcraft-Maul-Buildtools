@@ -220,6 +220,8 @@ def get_buildnum_with_date():
 
 
 def main():
+    if not os.path.exists('app/src/Generated/'):
+        os.makedirs('app/src/Generated/')
     data = {}
 
     builders = dict()
@@ -290,8 +292,7 @@ def main():
     generated_library = template[0:pivot - 1]
     generated_library += generated_hybrid_list
     generated_library += template[pivot + 1:]
-    if not os.path.exists('app/src/Generated/'):
-        os.makedirs('app/src/Generated/')
+
     with open('app/src/Generated/hybridRandomGEN.ts', 'w') as f:
         for item in generated_library:
             f.write("%s\n" % item)
