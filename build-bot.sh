@@ -41,12 +41,12 @@ cp "$input/$map" "$output/$map"
 
 echo "Exporting original map script ..."
 
-currentWINEdir="Z:\\$(pwd | sed 's#/#\\#g'  )"
-toolsDir="$currentWINEdir\\tools\\MPQEditor\\x64"
+#currentWINEdir="Z:\\$(pwd | sed 's#/#\\#g'  )"
+toolsDir="tools/MPQEditor/Win32"
 mapfilesdir=$currentWINEdir//mapfiles
 
 
-WINEDEBUG=-all wine "$toolsDir\\MPQEditor.exe" extract "$currentWINEdir\\$output\\$map" "war3map.lua" "$currentWINEdir\\$input\\map"
+WINEDEBUG=-all wine "$toolsDir\\MPQEditor.exe" extract "$input/$map" "war3map.lua" "$input/map"
 ## get status ##
 status=$?
 ## take some decision ## 
@@ -82,7 +82,7 @@ if [ $status -ne 0 ]; then
 fi
 
 echo "Importing processed map script ..."
-WINEDEBUG=-all wine "$toolsDir\\MPQEditor.exe" add "$currentWINEdir\\$output\\$map" "$currentWINEdir\\$output\\map\\*" "/c" "/auto" "/r"
+WINEDEBUG=-all wine "$toolsDir\\MPQEditor.exe" add "$output/$map" "$output/map/*" "/c" "/auto" "/r"
 ## get status ##
 status=$?
 ## take some decision ## 
