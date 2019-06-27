@@ -29,7 +29,14 @@ Arachnid
 
 
 - Demon
-    -Fel Guard
-    -Kil'jaeden
-    -Mannoroth
-    -SummoningShrine
+    - Fel Guard
+    - Kil'jaeden
+    - Mannoroth
+    - SummoningShrine
+
+
+- dwarfs
+    - Dwarf King
+
+- forest trolls
+    - battle roar (buff)

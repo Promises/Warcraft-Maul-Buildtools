@@ -27,6 +27,7 @@ import { FelGuard } from './Demon/FelGuard';
 import { Mannoroth } from './Demon/Mannoroth';
 import { SummoningShrine } from './Demon/SummoningShrine';
 import { KilJaeden } from './Demon/KilJaeden';
+import { DwarfKing } from './Dwaven/DwarfKing';
 
 
 export class TowerConstruction {
@@ -152,6 +153,10 @@ export class TowerConstruction {
         this.towerTypes.set(FourCC('o00L'), Mannoroth);
         this.towerTypes.set(FourCC('n00U'), SummoningShrine);
         this.towerTypes.set(FourCC('eC93'), KilJaeden);
+
+
+        // Dwarven
+        this.towerTypes.set(FourCC('n05Q'), DwarfKing);
 
 
 
