@@ -43,8 +43,8 @@ export class Ship extends CheckPoint {
                     SendMessage('Archimonde has boarded the ship! |cFFFF0000YOU LOSE!|r');
                     this.game.gameLives = 0;
                 } else {
-                    SendMessage(`|c00ff0000A unit has boarded the ship!|r ${this.game.gameLives} |c00ff0000chances left|r`);
                     this.game.gameLives--;
+                    SendMessage(`|c00ff0000A unit has boarded the ship!|r ${this.game.gameLives} |c00ff0000chances left|r`);
                 }
 
 
