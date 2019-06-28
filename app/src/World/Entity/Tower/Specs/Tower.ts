@@ -7,6 +7,7 @@ import { PassiveCreepDiesInAreaEffectTower } from './PassiveCreepDiesInAreaEffec
 import * as settings from '../../../GlobalSettings';
 import { Log } from '../../../../lib/Serilog/Serilog';
 import { Rectangle } from '../../../../JassOverrides/Rectangle';
+import { InitialDamageModificationTower } from './InitialDamageModificationTower';
 
 export class Tower {
     private _tower: unit;
@@ -57,6 +58,11 @@ export class Tower {
         return 'AttackAction' in this;
     }
 
+
+    public IsInitialDamageModificationTower(): this is InitialDamageModificationTower {
+        return 'InitialDamageModification' in this;
+    }
+
     public IsGenericAutoAttackTower(): this is GenericAutoAttackTower {
         return 'GenericAttack' in this;
     }
@@ -73,6 +79,9 @@ export class Tower {
         }
         if (this.IsAttackActionTower()) {
             this.game.gameDamageEngine.initialDamageEventTowers.delete(this.handleId);
+        }
+        if (this.IsInitialDamageModificationTower()) {
+            this.game.gameDamageEngine.initialDamageModificationEventTowers.delete(this.handleId);
         }
         if (this.IsGenericAutoAttackTower()) {
             this.game.worldMap.towerConstruction.genericAttacks.delete(this.handleId);

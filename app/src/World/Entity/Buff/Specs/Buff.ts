@@ -1,7 +1,6 @@
 import { WarcraftMaul } from '../../../WarcraftMaul';
 import { DamageEngine } from '../../../Game/DamageEngine';
 import { DamageEngineGlobals } from '../../../Game/DamageEngineGlobals';
-import { DamageModificationTower } from '../../Tower/Specs/DamageModificationTower';
 import { DamageModificationBuff } from './DamageModificationBuff';
 import { AttackActionBuff } from './AttackActionBuff';
 

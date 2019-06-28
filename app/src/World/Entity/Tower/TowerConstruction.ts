@@ -10,7 +10,6 @@ import { HumanPeasant } from './WorkersUnion/HumanPeasant';
 import { UndeadAcolyte } from './WorkersUnion/UndeadAcolyte';
 import { NightElfWisp } from './WorkersUnion/NightElfWisp';
 import { SacrificialPit } from './Undead/SacrificialPit';
-import { EndOfRoundTower } from './Specs/EndOfRoundTower';
 import { GenericAutoAttackTower } from './Specs/GenericAutoAttackTower';
 import { EarthPandaren } from './Tavern/EarthPandaren';
 import { StormPandaren } from './Tavern/StormPandaren';
@@ -34,7 +33,6 @@ import { GoblinMineLayer } from './Goblin/GoblinMineLayer';
 import { GoblinTinkerer } from './Goblin/GoblinTinkerer';
 import { GoblinBlademaster } from './Goblin/GoblinBlademaster';
 import { VenomTower } from './Human/VenomTower';
-import { RaceLootBoxer } from '../../Game/Races/RaceLootBoxer';
 import { LootBoxerHandler } from './LootBoxer/LootBoxerHandler';
 
 
@@ -122,6 +120,10 @@ export class TowerConstruction {
         }
         if (ObjectExtendsTower.IsAttackActionTower()) {
             this.game.gameDamageEngine.AddInitialDamageEventTower(ObjectExtendsTower.handleId, ObjectExtendsTower);
+        }
+
+        if (ObjectExtendsTower.IsInitialDamageModificationTower()) {
+            this.game.gameDamageEngine.AddInitialDamageModificationEventTower(ObjectExtendsTower.handleId, ObjectExtendsTower);
         }
 
         if (ObjectExtendsTower.IsGenericAutoAttackTower()) {
