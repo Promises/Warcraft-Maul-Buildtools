@@ -44,7 +44,7 @@ export class TowerConstruction {
     private genericAttackTrigger: Trigger;
     private game: WarcraftMaul;
     private lootBoxerHander: LootBoxerHandler;
-    private lootBoxerTowers: number[] = [
+    public lootBoxerTowers: number[] = [
         FourCC('u044'), // Tier 1
         FourCC('u045'), // Tier 2
         FourCC('u047'), // Tier 3
@@ -60,7 +60,7 @@ export class TowerConstruction {
         Log.Debug('Starting towercons');
         this.game = game;
         this.InitTypes();
-        this.lootBoxerHander = new LootBoxerHandler();
+        this.lootBoxerHander = new LootBoxerHandler(this, game);
         this.towerConstructTrigger = new Trigger();
         this.towerConstructTrigger.RegisterAnyUnitEventBJ(EVENT_PLAYER_UNIT_CONSTRUCT_FINISH);
         this.towerConstructTrigger.RegisterAnyUnitEventBJ(EVENT_PLAYER_UNIT_UPGRADE_FINISH);
@@ -92,7 +92,7 @@ export class TowerConstruction {
     }
 
     private ConstructionFinished(): void {
-        let tower: unit = GetTriggerUnit();
+        const tower: unit = GetTriggerUnit();
 
         const owner: Defender | undefined = settings.players.get(GetPlayerId(GetOwningPlayer(tower)));
         UnitRemoveAbilityBJ(FourCC('ARal'), tower);
@@ -100,10 +100,17 @@ export class TowerConstruction {
         if (!owner) {
             return;
         }
+
+        this.SetupTower(tower, owner);
+    }
+
+
+    public SetupTower(tower: unit, owner: Defender): void {
+
         let ObjectExtendsTower: Tower;
         if (this.isLootBoxer(tower)) {
 
-            tower = this.lootBoxerHander.handleLootBoxTower(tower, this.lootBoxerTowers.indexOf(GetUnitTypeId(tower)));
+            tower = this.lootBoxerHander.handleLootBoxTower(tower, owner, this.lootBoxerTowers.indexOf(GetUnitTypeId(tower)));
             UnitRemoveAbilityBJ(FourCC('ARal'), tower);
 
         }

@@ -16,6 +16,7 @@ import { DamageEngine } from './Game/DamageEngine';
 import { DamageEngineGlobals } from './Game/DamageEngineGlobals';
 import { TowerTicker } from './Game/TowerTicker';
 import { BuffHandler } from './Entity/Buff/BuffHandler';
+import { ItemHandler } from './Entity/Item/ItemHandler';
 
 export class WarcraftMaul {
     debugMode: boolean = false;
@@ -33,6 +34,7 @@ export class WarcraftMaul {
     public readonly towerTicker: TowerTicker;
     buffHandler: BuffHandler;
     scoreBoard: MultiBoard | undefined;
+    private itemHandler: ItemHandler;
 
     constructor() {
         const players: Map<number, Defender> = settings.players;
@@ -83,6 +85,7 @@ export class WarcraftMaul {
         this.gameDamageEngine = new DamageEngine(this.gameDamageEngineGlobals);
         this.gameCommandHandler = new Commands(this);
         this.buffHandler = new BuffHandler(this);
+        this.itemHandler = new ItemHandler(this);
 
         // this.gameCommandHandler.OpenAllSpawns();
 
@@ -154,4 +157,7 @@ export class WarcraftMaul {
         SendMessage('|cFFFF0000GAME OVER|r');
         this.worldMap.RemoveEveryUnit();
     }
+
+
+
 }
