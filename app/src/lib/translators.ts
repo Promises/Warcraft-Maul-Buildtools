@@ -16,6 +16,11 @@ function ToString(input: any): string {
     return `${input}`;
 }
 
+function DecodeFourCC(fourcc: number): string {
+    // tslint:disable-next-line:no-bitwise
+    return string.char((fourcc >>> 24) & 255, (fourcc >>> 16) & 255, (fourcc >>> 8) & 255, (fourcc) & 255);
+}
+
 class Util {
 
     static ColourString(colour: string, str: string): string {
