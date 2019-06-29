@@ -16,6 +16,7 @@
     "codelyzer": "^5.1.0",
     "convertjasstots": "^1.0.5",
     "lua-types": "^2.5.0",
+    "luamin": "^1.0.4",
     "typescript": "^3.5.1",
     "typescript-to-lua": "^0.22.1"
   },
