@@ -53,5 +53,5 @@ if %ERRORLEVEL% GEQ 1 EXIT /B 1
 @echo.
 
 @echo Importing processed map script ...
-"tools\MPQEditor\x64\MPQEditor.exe" add "%output%\%map%" "%output%\map\war3map.lua" "war3map.lua"
+"tools\MPQEditor\x64\MPQEditor.exe" add "%output%\%map%" "%output%\map\*" "/c" "/auto" "/r"
 if %ERRORLEVEL% GEQ 1 EXIT /B 1
