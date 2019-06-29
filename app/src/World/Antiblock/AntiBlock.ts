@@ -1,8 +1,10 @@
 import * as settings from '../GlobalSettings';
 import { WorldMap } from '../WorldMap';
-import { Rectangle } from '../../JassOverrides/Rectangle';
 import { Trigger } from '../../JassOverrides/Trigger';
 import { Defender } from '../Entity/Players/Defender';
+import { Maze } from './Maze';
+import { PlayerSpawns } from '../Entity/PlayerSpawns';
+import { CheckPoint } from '../Entity/CheckPoint';
 
 export class AntiBlock {
 
@@ -16,10 +18,10 @@ export class AntiBlock {
         this._eventTrigger.AddAction(() => this.Action());
     }
 
-    public Action() {
-        const consUnit = GetConstructingStructure();
-        const player = settings.players.get(GetPlayerId(GetOwningPlayer(consUnit)));
-        if (!player) {
+    public Action(): void {
+        const consUnit: unit = GetConstructingStructure();
+        const player: Defender | undefined = settings.players.get(GetPlayerId(GetOwningPlayer(consUnit)));
+        if (player === undefined) {
             return;
         }
 
@@ -30,50 +32,50 @@ export class AntiBlock {
             }
         }
 
-        let playerSpawnId;
-        for (let i = 0; i < settings.PLAYER_AREAS.length; i++) {
+        let playerSpawnId: number | undefined;
+        for (let i: number = 0; i < settings.PLAYER_AREAS.length; i++) {
             if (settings.PLAYER_AREAS[i].ContainsUnit(consUnit)) {
                 playerSpawnId = i;
                 break;
             }
         }
 
-        if (!playerSpawnId) {
+        if (playerSpawnId === undefined) {
             return;
         }
 
-        const maze = this._worldMap.playerMazes[playerSpawnId];
-        const x = GetUnitX(GetConstructingStructure());
-        const y = GetUnitY(GetConstructingStructure());
-        const leftSide = ((x - 64) - maze.minX) / 64;
-        const rightSide = (x - maze.minX) / 64;
-        const topSide = (y - maze.minY) / 64;
-        const bottomSide = ((y - 64) - maze.minY) / 64;
+        const maze: Maze = this._worldMap.playerMazes[playerSpawnId];
+        const x: number = GetUnitX(GetConstructingStructure());
+        const y: number = GetUnitY(GetConstructingStructure());
+        const leftSide: number = ((x - 64) - maze.minX) / 64;
+        const rightSide: number = (x - maze.minX) / 64;
+        const topSide: number = (y - maze.minY) / 64;
+        const bottomSide: number = ((y - 64) - maze.minY) / 64;
         maze.setWalkable(leftSide + bottomSide * maze.width, false);
         maze.setWalkable(rightSide + bottomSide * maze.width, false);
         maze.setWalkable(leftSide + topSide * maze.width, false);
         maze.setWalkable(rightSide + topSide * maze.width, false);
 
-        const playerSpawn = this._worldMap.playerSpawns[playerSpawnId];
+        const playerSpawn: PlayerSpawns = this._worldMap.playerSpawns[playerSpawnId];
         if (!playerSpawn) {
             return;
         }
 
-        const spawnOne = playerSpawn.spawnOne;
+        const spawnOne: CheckPoint | undefined = playerSpawn.spawnOne;
         if (spawnOne === undefined) {
             return;
         }
 
-        const firstCheckpoint = spawnOne.next;
+        const firstCheckpoint: CheckPoint | undefined = spawnOne.next;
         if (firstCheckpoint === undefined) {
             return;
         }
 
-        const spawnX = Math.max(Math.min(Math.floor((GetRectCenterX(spawnOne.rectangle) - maze.minX) / 64), maze.width - 1), 0);
-        const spawnY = Math.max(Math.min(Math.floor((GetRectCenterY(spawnOne.rectangle) - maze.minY) / 64), maze.height - 1), 0);
-        const firstCheckpointX = Math.floor((GetRectCenterX(firstCheckpoint.rectangle) - maze.minX) / 64);
-        const firstCheckpointY = Math.floor((GetRectCenterY(firstCheckpoint.rectangle) - maze.minY) / 64);
-        const isAbleToReachFirstCheckpoint = maze.breathFirstSearch(spawnX, spawnY, firstCheckpointX, firstCheckpointY);
+        const spawnX: number = Math.max(Math.min(Math.floor((GetRectCenterX(spawnOne.rectangle) - maze.minX) / 64), maze.width - 1), 0);
+        const spawnY: number = Math.max(Math.min(Math.floor((GetRectCenterY(spawnOne.rectangle) - maze.minY) / 64), maze.height - 1), 0);
+        const firstCheckpointX: number = Math.floor((GetRectCenterX(firstCheckpoint.rectangle) - maze.minX) / 64);
+        const firstCheckpointY: number = Math.floor((GetRectCenterY(firstCheckpoint.rectangle) - maze.minY) / 64);
+        const isAbleToReachFirstCheckpoint: boolean = maze.breathFirstSearch(spawnX, spawnY, firstCheckpointX, firstCheckpointY);
         if (!isAbleToReachFirstCheckpoint) {
             maze.setWalkable(leftSide + bottomSide * maze.width, true);
             maze.setWalkable(rightSide + bottomSide * maze.width, true);
@@ -83,14 +85,15 @@ export class AntiBlock {
             return;
         }
 
-        const secondCheckpoint = firstCheckpoint.next;
+        const secondCheckpoint: CheckPoint | undefined = firstCheckpoint.next;
         if (secondCheckpoint === undefined) {
             return;
         }
 
-        const secondCheckpointX = Math.floor((GetRectCenterX(secondCheckpoint.rectangle) - maze.minX) / 64);
-        const secondCheckpointY = Math.floor((GetRectCenterY(secondCheckpoint.rectangle) - maze.minY) / 64);
-        const isAbleToReachSecondCheckpoint = maze.breathFirstSearch(firstCheckpointX, firstCheckpointY, secondCheckpointX, secondCheckpointY);
+        const secondCheckpointX: number = Math.floor((GetRectCenterX(secondCheckpoint.rectangle) - maze.minX) / 64);
+        const secondCheckpointY: number = Math.floor((GetRectCenterY(secondCheckpoint.rectangle) - maze.minY) / 64);
+        const isAbleToReachSecondCheckpoint: boolean =
+            maze.breathFirstSearch(firstCheckpointX, firstCheckpointY, secondCheckpointX, secondCheckpointY);
         if (!isAbleToReachSecondCheckpoint) {
             maze.setWalkable(leftSide + bottomSide * maze.width, true);
             maze.setWalkable(rightSide + bottomSide * maze.width, true);
@@ -100,14 +103,14 @@ export class AntiBlock {
             return;
         }
 
-        const end = secondCheckpoint.next;
+        const end: CheckPoint | undefined = secondCheckpoint.next;
         if (end === undefined) {
             return;
         }
 
-        const endX = Math.max(Math.min(Math.floor((GetRectCenterX(end.rectangle) - maze.minX) / 64), maze.width - 1), 0);
-        const endY = Math.max(Math.min(Math.floor((GetRectCenterY(end.rectangle) - maze.minY) / 64), maze.height - 1), 0);
-        const isAbleToReachEnd = maze.breathFirstSearch(secondCheckpointX, secondCheckpointY, endX, endY);
+        const endX: number = Math.max(Math.min(Math.floor((GetRectCenterX(end.rectangle) - maze.minX) / 64), maze.width - 1), 0);
+        const endY: number = Math.max(Math.min(Math.floor((GetRectCenterY(end.rectangle) - maze.minY) / 64), maze.height - 1), 0);
+        const isAbleToReachEnd: boolean = maze.breathFirstSearch(secondCheckpointX, secondCheckpointY, endX, endY);
         if (!isAbleToReachEnd) {
             maze.setWalkable(leftSide + bottomSide * maze.width, true);
             maze.setWalkable(rightSide + bottomSide * maze.width, true);
@@ -118,17 +121,18 @@ export class AntiBlock {
         }
     }
 
-    private blocking(consUnit: unit, player: Defender) {
-        player.sendMessage('|CFFFF0303[Anti-Block]|r |CFFFFFF01Detected a possible blocking attempt. Your building has been cancelled and you have been refunded the full cost.|r');
+    private blocking(consUnit: unit, player: Defender): void {
+        player.sendMessage('|CFFFF0303[Anti-Block]|r |CFFFFFF01Detected a possible blocking attempt.' +
+                               ' Your building has been cancelled and you have been refunded the full cost.|r');
         this.cancelBuilding(consUnit);
     }
 
-    private homesick(consUnit: unit, player: Defender) {
+    private homesick(consUnit: unit, player: Defender): void {
         player.sendMessage('|CFFFF0303Your tower got|r ' + '|CFFFFFF01homesick|r' + ' |CFFFF0303for being too far away from your spawn.|r');
         this.cancelBuilding(consUnit);
     }
 
-    private cancelBuilding(consUnit: unit) {
+    private cancelBuilding(consUnit: unit): void {
         TriggerSleepAction(0.01);
         IssueImmediateOrderById(consUnit, settings.UNIT_ORDER_CANCEL_UPGRADE);
     }

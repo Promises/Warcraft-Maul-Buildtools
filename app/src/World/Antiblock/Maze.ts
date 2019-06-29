@@ -22,7 +22,7 @@ export class Maze {
     public readonly height: number;
     private readonly maze: boolean[];
 
-    public setWalkable(nodeIndex: number, isWalkable: boolean) {
+    public setWalkable(nodeIndex: number, isWalkable: boolean): void {
         if (nodeIndex > this.maze.length) {
             return;
         }
@@ -36,8 +36,8 @@ export class Maze {
         }
 
         const visited: boolean[] = [];
-        for (let i = 0; i < this.width; i++) {
-            for (let j = 0; j < this.height; j++) {
+        for (let i: number = 0; i < this.width; i++) {
+            for (let j: number = 0; j < this.height; j++) {
                 visited[i + j * this.width] = false;
             }
         }
@@ -57,7 +57,7 @@ export class Maze {
 
             q.pop();
 
-            for (let i = 0; i < 4; i++) {
+            for (let i: number = 0; i < 4; i++) {
                 const row: number = curr.x + Maze.ROW_NUM[i];
                 const col: number = curr.y + Maze.COL_NUM[i];
 
