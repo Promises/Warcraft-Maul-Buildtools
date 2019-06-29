@@ -3,6 +3,9 @@ import { Item } from './Item';
 export class StackingItem extends Item {
 
     public StackingCondition(): boolean {
+        if (this.itemID !== GetItemTypeId(GetManipulatedItem())) {
+            return false;
+        }
         if (!(UnitHasItemOfTypeBJ(GetManipulatingUnit(), GetItemTypeId(GetManipulatedItem())))) {
             return false;
         }

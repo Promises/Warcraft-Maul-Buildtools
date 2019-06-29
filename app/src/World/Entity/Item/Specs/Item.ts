@@ -5,17 +5,17 @@ import { StackingItem } from './StackingItem';
 export class Item {
 
 
-    private buffID: number;
+    private _itemID: number;
     private _game: WarcraftMaul;
 
     constructor(buffID: string, game: WarcraftMaul) {
-        this.buffID = FourCC(buffID);
+        this._itemID = FourCC(buffID);
         this._game = game;
 
     }
 
     public ManipulateCondition(): boolean {
-        return GetItemTypeId(GetManipulatedItem()) === this.buffID;
+        return GetItemTypeId(GetManipulatedItem()) === this._itemID;
     }
 
 
@@ -33,6 +33,14 @@ export class Item {
 
     set game(value: WarcraftMaul) {
         this._game = value;
+    }
+
+    get itemID(): number {
+        return this._itemID;
+    }
+
+    set itemID(value: number) {
+        this._itemID = value;
     }
 
 

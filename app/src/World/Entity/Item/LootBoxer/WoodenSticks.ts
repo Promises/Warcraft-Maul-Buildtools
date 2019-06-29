@@ -1,7 +1,7 @@
-import { StackingItem } from '../Specs/StackingItem';
 import { WarcraftMaul } from '../../../WarcraftMaul';
+import { Item } from '../Specs/Item';
 
-export class WoodenSticks extends StackingItem {
+export class WoodenSticks extends Item {
     constructor(game: WarcraftMaul) {
         super('I028', game);
     }

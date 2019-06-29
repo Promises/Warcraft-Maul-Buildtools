@@ -1,8 +1,7 @@
-import { Item } from '../Specs/Item';
 import { WarcraftMaul } from '../../../WarcraftMaul';
-import { Log } from '../../../../lib/Serilog/Serilog';
+import { StackingItem } from '../Specs/StackingItem';
 
-export class LootBagItem extends Item {
+export class LootBagItem extends StackingItem {
     constructor(game: WarcraftMaul) {
         super('I02B', game);
     }

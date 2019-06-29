@@ -46,7 +46,7 @@ export class ItemHandler {
         for (const item of this.items) {
             // @ts-ignore
             const ObjectExtendsItem: Item = new item(this.game);
-            if (ObjectExtendsItem.IsStackingItem()) {
+            if (ObjectExtendsItem instanceof StackingItem) {
                 this.stackingItems.push(ObjectExtendsItem);
             }
             this.activeItems.push(ObjectExtendsItem);
@@ -56,8 +56,8 @@ export class ItemHandler {
 
     private UseItem(): void {
 
-        Log.Debug(`[${DecodeFourCC(GetItemTypeId(GetManipulatedItem()))}]: ${GetItemName(GetManipulatedItem())}`);
         // UnitAddItemByIdSwapped(FourCC('I02B'), GetTriggerUnit());
+        Log.Debug(`[${DecodeFourCC(GetItemTypeId(GetManipulatedItem()))}]: ${GetItemName(GetManipulatedItem())}`);
 
         for (const item of this.activeItems) {
             if (item.ManipulateCondition()) {
