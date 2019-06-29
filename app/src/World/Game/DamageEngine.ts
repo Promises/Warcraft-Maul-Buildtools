@@ -4,7 +4,6 @@ import { AttackActionTower } from '../Entity/Tower/Specs/AttackActionTower';
 import { DamageModificationBuff } from '../Entity/Buff/Specs/DamageModificationBuff';
 import { AttackActionBuff } from '../Entity/Buff/Specs/AttackActionBuff';
 import * as settings from '../GlobalSettings';
-import { Log } from '../../lib/Serilog/Serilog';
 import { InitialDamageModificationTower } from '../Entity/Tower/Specs/InitialDamageModificationTower';
 
 /**
@@ -16,7 +15,8 @@ export class DamageEngine {
      */
     private initialDamageEvent: (() => void)[] = [];
     public initialDamageEventTowers: Map<number, AttackActionTower> = new Map<number, AttackActionTower>();
-    public initialDamageModificationEventTowers: Map<number, InitialDamageModificationTower> = new Map<number, InitialDamageModificationTower>();
+    public initialDamageModificationEventTowers: Map<number, InitialDamageModificationTower> =
+        new Map<number, InitialDamageModificationTower>();
     public initialDamageEventBuffs: AttackActionBuff[] = [];
     public multiplicativeDamageModificationEventBuff: DamageModificationBuff[] = [];
 
@@ -250,7 +250,7 @@ export class DamageEngine {
                     }
 
                     UnitDamageTarget(this.lastSource[i], this.lastTarget[i], this.lastAmount[i],
-                        true, false, this.lastAttackT[i], this.lastDamageT[i], this.lastWeaponT[i]);
+                                     true, false, this.lastAttackT[i], this.lastDamageT[i], this.lastWeaponT[i]);
                     this.Finish();
                 }
                 for (; i <= -1; i--) {
@@ -372,9 +372,9 @@ export class DamageEngine {
             this.damageEngineGlobals.udg_DamageEventWeaponT = GetHandleId(wt);
             this.CalibrateMR();
             this.damageEngineGlobals.udg_DamageEventArmorT = BlzGetUnitIntegerField(this.damageEngineGlobals.udg_DamageEventTarget,
-                UNIT_IF_ARMOR_TYPE);
+                                                                                    UNIT_IF_ARMOR_TYPE);
             this.damageEngineGlobals.udg_DamageEventDefenseT = BlzGetUnitIntegerField(this.damageEngineGlobals.udg_DamageEventTarget,
-                UNIT_IF_DEFENSE_TYPE);
+                                                                                      UNIT_IF_DEFENSE_TYPE);
             this.armorType = this.damageEngineGlobals.udg_DamageEventArmorT;
             this.defenseType = this.damageEngineGlobals.udg_DamageEventDefenseT;
             this.damageEngineGlobals.udg_DamageEventArmorPierced = 0.00;
@@ -394,16 +394,16 @@ export class DamageEngine {
                 BlzSetEventWeaponType(ConvertWeaponType(this.damageEngineGlobals.udg_DamageEventWeaponT));
                 if (this.damageEngineGlobals.udg_DamageEventArmorPierced !== 0.00) {
                     BlzSetUnitArmor(this.damageEngineGlobals.udg_DamageEventTarget,
-                        BlzGetUnitArmor(this.damageEngineGlobals.udg_DamageEventTarget) -
-                        this.damageEngineGlobals.udg_DamageEventArmorPierced);
+                                    BlzGetUnitArmor(this.damageEngineGlobals.udg_DamageEventTarget) -
+                                        this.damageEngineGlobals.udg_DamageEventArmorPierced);
                 }
                 if (this.armorType !== this.damageEngineGlobals.udg_DamageEventArmorT) {
                     BlzSetUnitIntegerField(this.damageEngineGlobals.udg_DamageEventTarget,
-                        UNIT_IF_ARMOR_TYPE, this.damageEngineGlobals.udg_DamageEventArmorT);
+                                           UNIT_IF_ARMOR_TYPE, this.damageEngineGlobals.udg_DamageEventArmorT);
                 }
                 if (this.defenseType !== this.damageEngineGlobals.udg_DamageEventDefenseT) {
                     BlzSetUnitIntegerField(this.damageEngineGlobals.udg_DamageEventTarget,
-                        UNIT_IF_DEFENSE_TYPE, this.damageEngineGlobals.udg_DamageEventDefenseT);
+                                           UNIT_IF_DEFENSE_TYPE, this.damageEngineGlobals.udg_DamageEventDefenseT);
                 }
 
                 BlzSetEventDamage(this.damageEngineGlobals.udg_DamageEventAmount);
@@ -445,8 +445,8 @@ export class DamageEngine {
 
         if (this.damageEngineGlobals.udg_DamageEventArmorPierced !== 0.00) {
             BlzSetUnitArmor(<unit>this.damageEngineGlobals.udg_DamageEventTarget,
-                BlzGetUnitArmor(<unit>this.damageEngineGlobals.udg_DamageEventTarget) +
-                this.damageEngineGlobals.udg_DamageEventArmorPierced);
+                            BlzGetUnitArmor(<unit>this.damageEngineGlobals.udg_DamageEventTarget) +
+                                this.damageEngineGlobals.udg_DamageEventArmorPierced);
         }
 
         if (this.armorType !== this.damageEngineGlobals.udg_DamageEventArmorT) {
