@@ -78,8 +78,8 @@ if [ $status -ne 0 ]; then
     echo "FAILED!" 
     exit 1
 fi
-mv target/map/war3map.lua src/compiled.lua
-./node_modules/luamin/bin/luamin -f src/compiled.lua > target/map/war3map.lua
+#mv target/map/war3map.lua src/compiled.lua
+#./node_modules/luamin/bin/luamin -f src/compiled.lua > target/map/war3map.lua
 
 echo "Importing processed map script ..."
 WINEDEBUG=-all wine "$toolsDir\\MPQEditor.exe" add "$output/$map" "$output/map/*" "/c" "/auto" "/r"
