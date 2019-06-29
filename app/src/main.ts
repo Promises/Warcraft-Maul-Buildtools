@@ -8,6 +8,7 @@ Log.Init([
     new StringSink(LogLevel.Fatal, SendMessage),
 ]);
 
+
 function Main(this: void): void {
     const maul: WarcraftMaul = new WarcraftMaul();
     if (maul.debugMode) {
