@@ -5,13 +5,12 @@ import { StackingItem } from './StackingItem';
 export class Item {
 
 
-
     private buffID: number;
-    private game: WarcraftMaul;
+    private _game: WarcraftMaul;
 
     constructor(buffID: string, game: WarcraftMaul) {
         this.buffID = FourCC(buffID);
-        this.game = game;
+        this._game = game;
 
     }
 
@@ -27,4 +26,14 @@ export class Item {
     public IsStackingItem(): this is StackingItem {
         return 'MakeStack' in this;
     }
+
+    get game(): WarcraftMaul {
+        return this._game;
+    }
+
+    set game(value: WarcraftMaul) {
+        this._game = value;
+    }
+
+
 }

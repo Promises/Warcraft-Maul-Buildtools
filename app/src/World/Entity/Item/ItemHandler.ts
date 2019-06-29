@@ -5,6 +5,9 @@ import { Trigger } from '../../../JassOverrides/Trigger';
 import { LootBagItem } from './LootBoxer/LootBagItem';
 import { StackingItem } from './Specs/StackingItem';
 import { Rocks } from './LootBoxer/Rocks';
+import { GoldCoin } from './LootBoxer/GoldCoin';
+import { PlatinumToken } from './LootBoxer/PlatinumToken';
+import { WoodenSticks } from './LootBoxer/WoodenSticks';
 
 
 export class ItemHandler {
@@ -33,6 +36,9 @@ export class ItemHandler {
     private AddItemsToList(): void {
         this.items.push(LootBagItem);
         this.items.push(Rocks);
+        this.items.push(GoldCoin);
+        this.items.push(PlatinumToken);
+        this.items.push(WoodenSticks);
     }
 
     private SetupItems(): void {

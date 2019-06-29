@@ -29,7 +29,6 @@ export class LootBoxerHandler {
         this.abilityUpgradeTrigger.AddCondition(() => this.IsUpgradeAbility());
         this.abilityUpgradeTrigger.AddAction(() => this.UpgradeToTower());
 
-
     }
 
     private GetId(tier: number): number {
