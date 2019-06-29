@@ -34,6 +34,7 @@ import { GoblinTinkerer } from './Goblin/GoblinTinkerer';
 import { GoblinBlademaster } from './Goblin/GoblinBlademaster';
 import { VenomTower } from './Human/VenomTower';
 import { LootBoxerHandler } from './LootBoxer/LootBoxerHandler';
+import { Wyvern } from './Aviaries/Wyvern';
 
 
 export class TowerConstruction {
@@ -109,10 +110,8 @@ export class TowerConstruction {
 
         let ObjectExtendsTower: Tower;
         if (this.isLootBoxer(tower)) {
-
             tower = this.lootBoxerHander.handleLootBoxTower(tower, owner, this.lootBoxerTowers.indexOf(GetUnitTypeId(tower)));
             UnitRemoveAbilityBJ(FourCC('ARal'), tower);
-
         }
 
         const obj: object | undefined = this.towerTypes.get(GetUnitTypeId(tower));
@@ -207,6 +206,9 @@ export class TowerConstruction {
 
         // Human
         this.towerTypes.set(FourCC('h045'), VenomTower);
+
+        // Aviaries
+        this.towerTypes.set(FourCC('oC60'), Wyvern);
 
 
     }
