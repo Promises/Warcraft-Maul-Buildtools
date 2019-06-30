@@ -330,9 +330,9 @@ export class Commands {
                     }
 
                     let imagePath: string = '';
-                    if (GetTriggerPlayer() === GetLocalPlayer()) {
+                    // if (GetTriggerPlayer() === GetLocalPlayer()) {
                         imagePath = 'ReplaceableTextures\\Splats\\SuggestedPlacementSplat.blp';
-                    }
+                    // }
 
                     switch (command[1]) {
                         case 'none':
@@ -516,7 +516,7 @@ export class Commands {
 
         if (currentVotes >= neededVotes) {
             if (this.voteAgainstPlayer) {
-                this.game.worldMap.playerSpawns[this.voteAgainstPlayer.id].isOpen = true;
+                this.game.worldMap.playerSpawns[this.voteAgainstPlayer.id].isOpen = false;
 
                 this.RemoveAllKickedPlayerTowers();
                 if (this.game.scoreBoard) {

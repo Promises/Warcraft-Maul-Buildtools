@@ -14,12 +14,14 @@ export class Tower {
     private _handleId: number;
     private _owner: Defender;
     private _game: WarcraftMaul;
+    private sellValue: number;
 
     constructor(tower: unit, owner: Defender, game: WarcraftMaul) {
         this._game = game;
         this._tower = tower;
         this._handleId = GetHandleIdBJ(tower);
         this._owner = owner;
+        this.sellValue = GetUnitPointValue(tower);
         owner.AddTower(this);
     }
 
@@ -107,8 +109,16 @@ export class Tower {
         IssuePointOrder(GetAttacker(), spell, x, y);
     }
 
-    public SetOwnership(newOwner: Defender): void {
+    public SetOwnership(newOwner: Defender): Tower {
         SetUnitOwner(this.tower, newOwner.wcPlayer, true);
-        this.game.worldMap.towerConstruction.SetupTower(this.tower, newOwner);
+        return this.game.worldMap.towerConstruction.SetupTower(this.tower, newOwner);
+    }
+
+    public SetLeaverSellValue(): void {
+        this.sellValue  *= 0.3;
+    }
+
+    public GetSellValue(): number {
+        return this.sellValue;
     }
 }

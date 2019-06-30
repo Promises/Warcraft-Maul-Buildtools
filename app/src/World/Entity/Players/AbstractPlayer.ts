@@ -50,7 +50,9 @@ export abstract class AbstractPlayer {
     }
 
     giveGold(amount: number): void {
-        AdjustPlayerStateBJ(amount, this.wcPlayer, PLAYER_STATE_RESOURCE_GOLD);
+        if (amount) {
+            AdjustPlayerStateBJ(amount, this.wcPlayer, PLAYER_STATE_RESOURCE_GOLD);
+        }
     }
 
     getGold(): number {

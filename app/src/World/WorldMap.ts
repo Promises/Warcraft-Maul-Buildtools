@@ -65,17 +65,17 @@ export class WorldMap {
             }
 
             let modelPath: string = '';
-            if (Player(playerId) === GetLocalPlayer()) {
-                // modelPath = 'Doodads\\Cinematic\\DemonFootPrint\\DemonFootPrint0.mdl';
-                // modelPath = 'Abilities\\Spells\\Items\\OrbCorruption\\OrbCorruptionMissile.mdl';
-                modelPath = 'Abilities\\Spells\\NightElf\\FaerieDragonInvis\\FaerieDragon_Invis.mdl';
-            }
-
+            // if (Player(playerId) === GetLocalPlayer()) {
+            // modelPath = 'Doodads\\Cinematic\\DemonFootPrint\\DemonFootPrint0.mdl';
+            // modelPath = 'Abilities\\Spells\\Items\\OrbCorruption\\OrbCorruptionMissile.mdl';
+            modelPath = 'Abilities\\Spells\\NightElf\\FaerieDragonInvis\\FaerieDragon_Invis.mdl';
+            // }
+            //
             directionalArrows.push(new DirectionalArrow(modelPath,
-                                                        GetRectCenterX(firstCheckpoint.rectangle),
-                                                        GetRectCenterY(firstCheckpoint.rectangle),
-                                                        GetRectCenterX(secondCheckpoint.rectangle),
-                                                        GetRectCenterY(secondCheckpoint.rectangle)));
+                GetRectCenterX(firstCheckpoint.rectangle),
+                GetRectCenterY(firstCheckpoint.rectangle),
+                GetRectCenterX(secondCheckpoint.rectangle),
+                GetRectCenterY(secondCheckpoint.rectangle)));
         }
 
         // TODO: This needs to be replaced with a timer library!
@@ -222,7 +222,7 @@ export class WorldMap {
         this.races.push(new Race('e00H', 'Dwarven Mine', 'I00U', this));
         this.races.push(new Race('e00G', 'Galaxy', 'I00Z', this));
         this.races.push(new RaceLootBoxer('u043', 'Loot Boxer', 'I02D', this));
-        this.races.push(new Race('u01B', 'Shrine of Buffs', 'I026', this));
+        this.races.push(new Race('u01B', 'Shrine of Buffs', 'I026', this, false));
     }
 
     private setupCheckpoint(): void {

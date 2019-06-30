@@ -17,6 +17,7 @@ import { DamageEngineGlobals } from './Game/DamageEngineGlobals';
 import { TowerTicker } from './Game/TowerTicker';
 import { BuffHandler } from './Entity/Buff/BuffHandler';
 import { ItemHandler } from './Entity/Item/ItemHandler';
+import { GenericAbilityHandler } from './Entity/GenericAbilties/GenericAbilityHandler';
 
 export class WarcraftMaul {
     debugMode: boolean = false;
@@ -35,6 +36,7 @@ export class WarcraftMaul {
     buffHandler: BuffHandler;
     scoreBoard: MultiBoard | undefined;
     private itemHandler: ItemHandler;
+    private abilityHandler: GenericAbilityHandler;
 
     constructor() {
         const players: Map<number, Defender> = settings.players;
@@ -85,6 +87,7 @@ export class WarcraftMaul {
         this.gameDamageEngine = new DamageEngine(this.gameDamageEngineGlobals);
         this.gameCommandHandler = new Commands(this);
         this.buffHandler = new BuffHandler(this);
+        this.abilityHandler = new GenericAbilityHandler(this);
         this.itemHandler = new ItemHandler(this);
 
         // this.gameCommandHandler.OpenAllSpawns();

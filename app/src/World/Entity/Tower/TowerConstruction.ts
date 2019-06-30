@@ -106,7 +106,7 @@ export class TowerConstruction {
         this.SetupTower(tower, owner);
     }
 
-    public SetupTower(tower: unit, owner: Defender): void {
+    public SetupTower(tower: unit, owner: Defender): Tower {
         let ObjectExtendsTower: Tower;
         if (this.isLootBoxer(tower)) {
             tower = this.lootBoxerHander.handleLootBoxTower(tower, owner, this.lootBoxerTowers.indexOf(GetUnitTypeId(tower)));
@@ -149,6 +149,7 @@ export class TowerConstruction {
                 Log.Fatal(`${GetUnitName(tower)} built outside of requires area. Please screenshot and report`);
             }
         }
+        return ObjectExtendsTower;
     }
 
     private InitTypes(): void {

@@ -18,6 +18,7 @@ export class DamageEngine {
     public initialDamageModificationEventTowers: Map<number, InitialDamageModificationTower> =
         new Map<number, InitialDamageModificationTower>();
     public initialDamageEventBuffs: AttackActionBuff[] = [];
+    public initialDamageEventAbilities: AttackActionAbility[] = [];
     public multiplicativeDamageModificationEventBuff: DamageModificationBuff[] = [];
 
     private zeroDamageEvent: (() => void)[] = [];
@@ -95,6 +96,10 @@ export class DamageEngine {
         this.initialDamageEventBuffs.push(buff);
     }
 
+    public AddInitialDamageEventAbility(ability: AttackActionAbility): void {
+        this.initialDamageEventAbilities.push(ability);
+    }
+
     /**
      * Adds an event that triggers right after a unit has taken 0 damage
      */
@@ -167,6 +172,7 @@ export class DamageEngine {
         this.initialDamageEvent.forEach(action => action());
         this.initialDamageEventTowers.forEach(tower => tower.AttackAction());
         this.initialDamageEventBuffs.forEach(buff => buff.AttackAction());
+        this.initialDamageEventAbilities.forEach(ability => ability.AttackAction());
     }
 
     private ZeroDamageEvent(): void {
@@ -503,6 +509,7 @@ export class DamageEngine {
         }
         return false;
     }
+
 
 
 }

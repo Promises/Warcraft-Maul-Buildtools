@@ -24,7 +24,7 @@ export class SellTower {
 
     private SellTower(): void {
         const unit: unit = GetTriggerUnit();
-        const value: number = GetUnitPointValue(unit);
+        let value: number = GetUnitPointValue(unit);
         let playerSpawnId: undefined | number;
         for (let i: number = 0; i < settings.PLAYER_AREAS.length; i++) {
             if (settings.PLAYER_AREAS[i].ContainsUnit(unit)) {
@@ -41,18 +41,19 @@ export class SellTower {
         const owningPlayer: player = GetOwningPlayer(unit);
         const player: Defender = <Defender>settings.players.get(GetPlayerId(owningPlayer));
         if (player) {
-            player.giveGold(value);
             const tower: Tower | undefined = player.towers.get(GetHandleIdBJ(unit));
             if (tower) {
+                value = tower.GetSellValue();
+                Log.Debug(`SellValue: ${value}`);
                 tower.Sell();
             }
+            player.giveGold(value);
+
         }
 
-        let str: string = '';
-        if (GetOwningPlayer(unit) === GetLocalPlayer()) {
-            str = I2S(value);
-        }
-        const txt: texttag = CreateTextTagUnitBJ(str, unit, 1, 10, 100, 80.00, 0.00, 0);
+        // if (GetOwningPlayer(unit) === GetLocalPlayer()) {
+        // }
+        const txt: texttag = CreateTextTagUnitBJ(ToString(value), unit, 1, 10, 100, 80.00, 0.00, 0);
 
         SetTextTagPermanentBJ(txt, false);
         SetTextTagLifespanBJ(txt, 2.00);

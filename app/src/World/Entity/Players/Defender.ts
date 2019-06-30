@@ -263,7 +263,8 @@ export class Defender extends AbstractPlayer {
             tower.Sell();
             const newOwner: Defender | undefined = players.get(Util.GetRandomKey(players));
             if (newOwner) {
-                tower.SetOwnership(newOwner);
+                const nutower: Tower = tower.SetOwnership(newOwner);
+                nutower.SetLeaverSellValue();
             }
         }
         for (const builder of this.builders) {
@@ -277,8 +278,6 @@ export class Defender extends AbstractPlayer {
         ForGroupBJ(grp, () => this.ClaimTower());
         RemoveRect(rectangle);
         DestroyGroup(grp);
-
-
     }
 
 
