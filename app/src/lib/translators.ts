@@ -56,7 +56,7 @@ class Util {
         'WHEAT': 16,
         'PEACH': 17,
         'MINT': 18,
-        'LEVANDER': 19,
+        'LAVENDER': 19,
         'COAL': 20,
         'SNOW': 21,
         'EMERALD': 22,
@@ -112,11 +112,11 @@ enum COLOUR {
     WHEAT,
     PEACH,
     MINT,
-    LEVANDER,
+    LAVENDER,
     COAL,
     SNOW,
     EMERALD,
-    PEANUT
+    PEANUT,
 }
 
 
@@ -124,7 +124,7 @@ enum CREEP_TYPE {
     NORMAL,
     AIR,
     CHAMPION,
-    BOSS
+    BOSS,
 }
 
 enum ARMOUR_TYPE {
@@ -133,7 +133,7 @@ enum ARMOUR_TYPE {
     MEDIUM,
     HEAVY,
     FORTIFIED,
-    HERO
+    HERO,
 
 }
 
