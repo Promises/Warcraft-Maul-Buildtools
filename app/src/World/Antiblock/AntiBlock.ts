@@ -26,9 +26,11 @@ export class AntiBlock {
         const y: number = GetUnitY(GetConstructingStructure());
         const loc: location = GetUnitLoc(consUnit);
         const antiJuggleTowers: unit[] = [];
+        let hasBuiltOnAntiJuggle: boolean = false;
         ForGroup(GetUnitsInRangeOfLocAll(128.00, loc), () => {
             if (GetUnitTypeId(GetEnumUnit()) === FourCC('uC14')) {
                 if (GetUnitX(GetEnumUnit()) === x && GetUnitY(GetEnumUnit()) === y) {
+                    hasBuiltOnAntiJuggle = true;
                     RemoveUnit(GetEnumUnit());
                 } else {
                     antiJuggleTowers.push(GetEnumUnit());
@@ -43,7 +45,7 @@ export class AntiBlock {
 
         const isWaveInProgress: boolean = this._worldMap.game.gameRoundHandler.isWaveInProgress;
         const antiJuggleCreeps: Creep[] = [];
-        if (isWaveInProgress) {
+        if (isWaveInProgress && hasBuiltOnAntiJuggle === false) {
             let isJuggling: boolean = false;
             ForGroup(GetUnitsInRangeOfLocAll(128.00, loc), () => {
                 const ownerID: COLOUR = GetPlayerId(GetOwningPlayer(GetEnumUnit()));
