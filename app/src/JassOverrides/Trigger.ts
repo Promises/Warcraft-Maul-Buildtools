@@ -1,4 +1,6 @@
 import { Log } from '../lib/Serilog/Serilog';
+import { Defender } from '../World/Entity/Players/Defender';
+import { AbstractPlayer } from '../World/Entity/Players/AbstractPlayer';
 
 export class Trigger {
 
@@ -68,7 +70,7 @@ export class Trigger {
         return TriggerAddCondition(this.nativeTrigger, filter);
     }
 
-    public RegisterAnyUnitEventBJ(whichEvent: playerunitevent) {
+    public RegisterAnyUnitEventBJ(whichEvent: playerunitevent): void {
         TriggerRegisterAnyUnitEventBJ(this.nativeTrigger, whichEvent);
     }
 
@@ -78,5 +80,10 @@ export class Trigger {
 
     public RegisterPlayerUnitEventSimple(whichPlayer: player, whichEvent: playerunitevent): event {
         return TriggerRegisterPlayerUnitEventSimple(this.nativeTrigger, whichPlayer, whichEvent);
+    }
+
+    public RegisterPlayerEventLeave(whichPlayer: AbstractPlayer): event {
+        return TriggerRegisterPlayerEventLeave(this.nativeTrigger, whichPlayer.wcPlayer);
+
     }
 }

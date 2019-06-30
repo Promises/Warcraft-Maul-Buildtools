@@ -106,4 +106,9 @@ export class Tower {
         const y: number = GetUnitY(GetAttackedUnitBJ());
         IssuePointOrder(GetAttacker(), spell, x, y);
     }
+
+    public SetOwnership(newOwner: Defender): void {
+        SetUnitOwner(this.tower, newOwner.wcPlayer, true);
+        this.game.worldMap.towerConstruction.SetupTower(this.tower, newOwner);
+    }
 }

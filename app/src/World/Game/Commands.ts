@@ -294,9 +294,7 @@ export class Commands {
                 player.sendMessage('ALL players are now |cFFFF0000denied|r access to your spawn!');
                 break;
             case 'claim':
-                Log.Error('Command not implemented yet');
-                // AllowAllPlayers();
-                // DenyAllPlayers();
+                player.ClaimTowers();
                 player.sendMessage('All towers in your spawn has now been claimed.');
                 break;
             case 'zoom':

@@ -51,4 +51,8 @@ export class Rectangle {
     public get maxY(): number {
         return this.area[3];
     }
+
+    public toRect(): rect {
+        return Rect(this.minX, this.minY, this.maxX, this.maxY);
+    }
 }

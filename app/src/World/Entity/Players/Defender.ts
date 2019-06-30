@@ -8,6 +8,14 @@ import { AbstractHologramMaze } from '../../Holograms/AbstractHologramMaze';
 import { Tower } from '../Tower/Specs/Tower';
 
 export class Defender extends AbstractPlayer {
+    get builders(): unit[] {
+        return this._builders;
+    }
+
+    set builders(value: unit[]) {
+        this._builders = value;
+    }
+
     private _scoreSlot: number = 0;
     private _kills: number = 0;
     private allowPlayerTower: unit | undefined;
@@ -27,12 +35,14 @@ export class Defender extends AbstractPlayer {
     private _towers: Map<number, Tower> = new Map<number, Tower>();
     private holoMaze: AbstractHologramMaze | undefined = undefined;
     private game: WarcraftMaul;
+    private _builders: unit[] = [];
 
     constructor(id: number, game: WarcraftMaul) {
         super(id);
         this.game = game;
         this.setUpPlayerVariables();
         this.leaveTrigger = new Trigger();
+        this.leaveTrigger.RegisterPlayerEventLeave(this);
         this.leaveTrigger.AddCondition(() => this.PlayerLeftTheGameConditions(game));
         this.leaveTrigger.AddAction(() => this.PlayerLeftTheGame(game));
     }
@@ -104,22 +114,17 @@ export class Defender extends AbstractPlayer {
     private PlayerLeftTheGame(game: WarcraftMaul): void {
         SendMessage(`${this.getNameWithColour()} has left the game!`);
 
-        this.ResetSpawnRestrictions();
         TriggerSleepAction(2.00);
         game.worldMap.playerSpawns[this.id].isOpen = false;
         if (game.scoreBoard) {
             MultiboardSetItemValueBJ(game.scoreBoard.board, 1, 7 + this._scoreSlot,
-                                     Util.ColourString(this.getColourCode(), '<Quit>'));
+                Util.ColourString(this.getColourCode(), '<Quit>'));
         }
 
         players.delete(this.id);
 
-        // this.DistributePlayerGold();
-        // this.DistributePlayerTowers();
-    }
-
-    private ResetSpawnRestrictions(): void {
-        // TODO: Implement this function
+        this.DistributePlayerGold();
+        this.DistributePlayerTowers();
     }
 
     public AddTower(tower: Tower): void {
@@ -238,5 +243,55 @@ export class Defender extends AbstractPlayer {
 
     set scoreSlot(value: number) {
         this._scoreSlot = value;
+    }
+
+    private DistributePlayerGold(): void {
+        const leavingPlayerGold: number = this.getGold();
+        let goldDistribution: number = leavingPlayerGold / players.size;
+
+        goldDistribution *= 0.3;
+
+        for (const player of players.values()) {
+            player.sendMessage(`You have received |cffffcc00${Math.floor(goldDistribution)}|r gold from the leaving player!`);
+            player.giveGold(Math.floor(goldDistribution));
+        }
+    }
+
+    private DistributePlayerTowers(): void {
+        players.values();
+        for (const tower of this.towers.values()) {
+            tower.Sell();
+            const newOwner: Defender | undefined = players.get(Util.GetRandomKey(players));
+            if (newOwner) {
+                tower.SetOwnership(newOwner);
+            }
+        }
+        for (const builder of this.builders) {
+            RemoveUnit(builder);
+        }
+    }
+
+    public ClaimTowers(): void {
+        const rectangle: rect = this.getRectangle().toRect();
+        const grp: group = GetUnitsInRectAll(rectangle);
+        ForGroupBJ(grp, () => this.ClaimTower());
+        RemoveRect(rectangle);
+        DestroyGroup(grp);
+
+
+    }
+
+
+    private ClaimTower(): void {
+        if (IsUnitType(GetEnumUnit(), UNIT_TYPE_STRUCTURE)) {
+            const owner: Defender | undefined = players.get(GetPlayerId(GetOwningPlayer(GetEnumUnit())));
+            if (owner) {
+                const tower: Tower | undefined = owner.towers.get(GetHandleIdBJ(GetEnumUnit()));
+                if (tower) {
+                    tower.Sell();
+                    tower.SetOwnership(this);
+                }
+            }
+        }
     }
 }

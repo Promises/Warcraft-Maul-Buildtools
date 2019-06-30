@@ -31,6 +31,16 @@ class Util {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
+    static GetRandomKey(collection: Map<any, any>): any {
+        const index: number = Math.floor(Math.random() * collection.size);
+        let cntr: number = 0;
+        for (const key of collection.keys()) {
+            if (cntr++ === index) {
+                return key;
+            }
+        }
+    }
+
     static COLOUR_IDS: ColourToIndex = {
         'RED': 0,
         'BLUE': 1,
