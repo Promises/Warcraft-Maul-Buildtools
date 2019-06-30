@@ -2,6 +2,8 @@ import * as settings from '../GlobalSettings';
 import { WorldMap } from '../WorldMap';
 import { Trigger } from '../../JassOverrides/Trigger';
 import { Defender } from '../Entity/Players/Defender';
+import { Creep } from '../Entity/Creep';
+import { Log } from '../../lib/Serilog/Serilog';
 import { Maze } from './Maze';
 import { PlayerSpawns } from '../Entity/PlayerSpawns';
 import { CheckPoint } from '../Entity/CheckPoint';
@@ -18,17 +20,64 @@ export class AntiBlock {
         this._eventTrigger.AddAction(() => this.Action());
     }
 
-    public Action(): void {
+    private Action(): void {
         const consUnit: unit = GetConstructingStructure();
+        const x: number = GetUnitX(GetConstructingStructure());
+        const y: number = GetUnitY(GetConstructingStructure());
+        const loc: location = GetUnitLoc(consUnit);
+        const antiJuggleTowers: unit[] = [];
+        ForGroup(GetUnitsInRangeOfLocAll(128.00, loc), () => {
+            if (GetUnitTypeId(GetEnumUnit()) === FourCC('uC14')) {
+                if (GetUnitX(GetEnumUnit()) === x && GetUnitY(GetEnumUnit()) === y) {
+                    RemoveUnit(GetEnumUnit());
+                } else {
+                    antiJuggleTowers.push(GetEnumUnit());
+                }
+            }
+        });
+
         const player: Defender | undefined = settings.players.get(GetPlayerId(GetOwningPlayer(consUnit)));
         if (player === undefined) {
             return;
         }
 
+        const isWaveInProgress: boolean = this._worldMap.game.gameRoundHandler.isWaveInProgress;
+        const antiJuggleCreeps: Creep[] = [];
+        if (isWaveInProgress) {
+            let isJuggling: boolean = false;
+            ForGroup(GetUnitsInRangeOfLocAll(128.00, loc), () => {
+                const ownerID: COLOUR = GetPlayerId(GetOwningPlayer(GetEnumUnit()));
+                switch (ownerID) {
+                    case COLOUR.NAVY:
+                    case COLOUR.TURQUOISE:
+                    case COLOUR.VOILET:
+                    case COLOUR.WHEAT:
+                        if (IsUnitAliveBJ(GetEnumUnit())) {
+                            const creep: Creep | undefined = this._worldMap.spawnedCreeps.unitMap.get(GetHandleId(GetEnumUnit()));
+                            if (creep !== undefined) {
+                                antiJuggleCreeps.push(creep);
+                            } else {
+                                Log.Debug('Creep is missing in spawnedCreeps unitMap');
+                            }
+                            isJuggling = true;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            });
+
+            if (isJuggling) {
+                RemoveLocation(loc);
+                return this.juggling(consUnit, player, antiJuggleCreeps);
+            }
+        }
+
+        RemoveLocation(loc);
+
         if (GetUnitAbilityLevelSwapped(FourCC('A0CR'), consUnit) > 0) {
             if (!player.getRectangle().ContainsUnit(consUnit)) {
-                this.homesick(consUnit, player);
-                return;
+                return this.homesick(consUnit, player);
             }
         }
 
@@ -45,8 +94,6 @@ export class AntiBlock {
         }
 
         const maze: Maze = this._worldMap.playerMazes[playerSpawnId];
-        const x: number = GetUnitX(GetConstructingStructure());
-        const y: number = GetUnitY(GetConstructingStructure());
         const leftSide: number = ((x - 64) - maze.minX) / 64;
         const rightSide: number = (x - maze.minX) / 64;
         const topSide: number = (y - maze.minY) / 64;
@@ -55,76 +102,98 @@ export class AntiBlock {
         maze.setWalkable(rightSide + bottomSide * maze.width, false);
         maze.setWalkable(leftSide + topSide * maze.width, false);
         maze.setWalkable(rightSide + topSide * maze.width, false);
-
         const playerSpawn: PlayerSpawns = this._worldMap.playerSpawns[playerSpawnId];
-        if (!playerSpawn) {
-            return;
-        }
-
-        const spawnOne: CheckPoint | undefined = playerSpawn.spawnOne;
-        if (spawnOne === undefined) {
-            return;
-        }
-
-        const firstCheckpoint: CheckPoint | undefined = spawnOne.next;
-        if (firstCheckpoint === undefined) {
-            return;
-        }
+        const spawnOne: CheckPoint = <CheckPoint>playerSpawn.spawnOne;
+        const firstCheckpoint: CheckPoint = <CheckPoint>spawnOne.next;
 
         const spawnX: number = Math.max(Math.min(Math.floor((GetRectCenterX(spawnOne.rectangle) - maze.minX) / 64), maze.width - 1), 0);
         const spawnY: number = Math.max(Math.min(Math.floor((GetRectCenterY(spawnOne.rectangle) - maze.minY) / 64), maze.height - 1), 0);
         const firstCheckpointX: number = Math.floor((GetRectCenterX(firstCheckpoint.rectangle) - maze.minX) / 64);
         const firstCheckpointY: number = Math.floor((GetRectCenterY(firstCheckpoint.rectangle) - maze.minY) / 64);
-        const isAbleToReachFirstCheckpoint: boolean = maze.breathFirstSearch(spawnX, spawnY, firstCheckpointX, firstCheckpointY);
-        if (!isAbleToReachFirstCheckpoint) {
+        const firstCheckpointBFS: number = maze.breathFirstSearch(spawnX, spawnY, firstCheckpointX, firstCheckpointY);
+        if (firstCheckpointBFS === -1) {
             maze.setWalkable(leftSide + bottomSide * maze.width, true);
             maze.setWalkable(rightSide + bottomSide * maze.width, true);
             maze.setWalkable(leftSide + topSide * maze.width, true);
             maze.setWalkable(rightSide + topSide * maze.width, true);
-            this.blocking(consUnit, player);
-            return;
+            antiJuggleTowers.forEach((antiJuggleTower) => {
+                const antiJuggleX: number = GetUnitX(antiJuggleTower);
+                const antiJuggleY: number = GetUnitY(antiJuggleTower);
+                const antiJuggleLeftSide: number = ((antiJuggleX - 64) - maze.minX) / 64;
+                const antiJuggleRightSide: number = (antiJuggleX - maze.minX) / 64;
+                const antiJuggleTopSide: number = (antiJuggleY - maze.minY) / 64;
+                const antiJuggleBottomSide: number = ((antiJuggleY - 64) - maze.minY) / 64;
+                maze.setWalkable(antiJuggleLeftSide + antiJuggleBottomSide * maze.width, false);
+                maze.setWalkable(antiJuggleRightSide + antiJuggleBottomSide * maze.width, false);
+                maze.setWalkable(antiJuggleLeftSide + antiJuggleTopSide * maze.width, false);
+                maze.setWalkable(antiJuggleRightSide + antiJuggleTopSide * maze.width, false);
+            });
+            return this.blocking(consUnit, player);
         }
 
-        const secondCheckpoint: CheckPoint | undefined = firstCheckpoint.next;
-        if (secondCheckpoint === undefined) {
-            return;
-        }
-
+        const secondCheckpoint: CheckPoint = <CheckPoint>firstCheckpoint.next;
         const secondCheckpointX: number = Math.floor((GetRectCenterX(secondCheckpoint.rectangle) - maze.minX) / 64);
         const secondCheckpointY: number = Math.floor((GetRectCenterY(secondCheckpoint.rectangle) - maze.minY) / 64);
-        const isAbleToReachSecondCheckpoint: boolean =
+        const secondCheckpointBFS: number =
             maze.breathFirstSearch(firstCheckpointX, firstCheckpointY, secondCheckpointX, secondCheckpointY);
-        if (!isAbleToReachSecondCheckpoint) {
+        if (secondCheckpointBFS === -1) {
             maze.setWalkable(leftSide + bottomSide * maze.width, true);
             maze.setWalkable(rightSide + bottomSide * maze.width, true);
             maze.setWalkable(leftSide + topSide * maze.width, true);
             maze.setWalkable(rightSide + topSide * maze.width, true);
-            this.blocking(consUnit, player);
-            return;
+            antiJuggleTowers.forEach((antiJuggleTower) => {
+                const antiJuggleX: number = GetUnitX(antiJuggleTower);
+                const antiJuggleY: number = GetUnitY(antiJuggleTower);
+                const antiJuggleLeftSide: number = ((antiJuggleX - 64) - maze.minX) / 64;
+                const antiJuggleRightSide: number = (antiJuggleX - maze.minX) / 64;
+                const antiJuggleTopSide: number = (antiJuggleY - maze.minY) / 64;
+                const antiJuggleBottomSide: number = ((antiJuggleY - 64) - maze.minY) / 64;
+                maze.setWalkable(antiJuggleLeftSide + antiJuggleBottomSide * maze.width, false);
+                maze.setWalkable(antiJuggleRightSide + antiJuggleBottomSide * maze.width, false);
+                maze.setWalkable(antiJuggleLeftSide + antiJuggleTopSide * maze.width, false);
+                maze.setWalkable(antiJuggleRightSide + antiJuggleTopSide * maze.width, false);
+            });
+            return this.blocking(consUnit, player);
         }
 
-        const end: CheckPoint | undefined = secondCheckpoint.next;
-        if (end === undefined) {
-            return;
-        }
-
+        const end: CheckPoint = <CheckPoint>secondCheckpoint.next;
         const endX: number = Math.max(Math.min(Math.floor((GetRectCenterX(end.rectangle) - maze.minX) / 64), maze.width - 1), 0);
         const endY: number = Math.max(Math.min(Math.floor((GetRectCenterY(end.rectangle) - maze.minY) / 64), maze.height - 1), 0);
-        const isAbleToReachEnd: boolean = maze.breathFirstSearch(secondCheckpointX, secondCheckpointY, endX, endY);
-        if (!isAbleToReachEnd) {
+        const exitPointBFS: number = maze.breathFirstSearch(secondCheckpointX, secondCheckpointY, endX, endY);
+        if (exitPointBFS === -1) {
             maze.setWalkable(leftSide + bottomSide * maze.width, true);
             maze.setWalkable(rightSide + bottomSide * maze.width, true);
             maze.setWalkable(leftSide + topSide * maze.width, true);
             maze.setWalkable(rightSide + topSide * maze.width, true);
-            this.blocking(consUnit, player);
-            return;
+            antiJuggleTowers.forEach((antiJuggleTower) => {
+                const antiJuggleX: number = GetUnitX(antiJuggleTower);
+                const antiJuggleY: number = GetUnitY(antiJuggleTower);
+                const antiJuggleLeftSide: number = ((antiJuggleX - 64) - maze.minX) / 64;
+                const antiJuggleRightSide: number = (antiJuggleX - maze.minX) / 64;
+                const antiJuggleTopSide: number = (antiJuggleY - maze.minY) / 64;
+                const antiJuggleBottomSide: number = ((antiJuggleY - 64) - maze.minY) / 64;
+                maze.setWalkable(antiJuggleLeftSide + antiJuggleBottomSide * maze.width, false);
+                maze.setWalkable(antiJuggleRightSide + antiJuggleBottomSide * maze.width, false);
+                maze.setWalkable(antiJuggleLeftSide + antiJuggleTopSide * maze.width, false);
+                maze.setWalkable(antiJuggleRightSide + antiJuggleTopSide * maze.width, false);
+            });
+            return this.blocking(consUnit, player);
         }
+
+        player.totalMazeLength = firstCheckpointBFS + secondCheckpointBFS + exitPointBFS;
     }
 
     private blocking(consUnit: unit, player: Defender): void {
         player.sendMessage('|CFFFF0303[Anti-Block]|r |CFFFFFF01Detected a possible blocking attempt.' +
                                ' Your building has been cancelled and you have been refunded the full cost.|r');
         this.cancelBuilding(consUnit);
+    }
+
+    private juggling(consUnit: unit, player: Defender, antiJuggleCreeps: Creep[]): void {
+        player.sendMessage('|CFFFF0303[Anti-Juggle]|r |CFFFFFF01Detected a possible juggling attempt.' +
+                               ' Your building has been cancelled and you have been refunded the full cost.|r');
+        this.cancelBuilding(consUnit);
+        antiJuggleCreeps.forEach(creep => creep.ReapplyMovement());
     }
 
     private homesick(consUnit: unit, player: Defender): void {

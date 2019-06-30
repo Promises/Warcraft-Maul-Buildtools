@@ -8,24 +8,25 @@ import { AbstractHologramMaze } from '../../Holograms/AbstractHologramMaze';
 import { Tower } from '../Tower/Specs/Tower';
 
 export class Defender extends AbstractPlayer {
-    scoreSlot: number = 0;
-    kills: number = 0;
-    allowPlayerTower: unit | undefined;
-    hasHybridRandomed: boolean = false;
-    hasHardcoreRandomed: boolean = false;
-    hasNormalPicked: boolean = false;
-    races: Race[] = [];
+    private _scoreSlot: number = 0;
+    private _kills: number = 0;
+    private allowPlayerTower: unit | undefined;
+    private _hasHybridRandomed: boolean = false;
+    private _hasHardcoreRandomed: boolean = false;
+    private _hasNormalPicked: boolean = false;
+    private _races: Race[] = [];
+    private _totalMazeLength: number = 0;
 
-    repickCounter: number = 0;
-    voidBuilder: unit | undefined;
-    lootBoxer: unit | undefined;
-    hybridBuilder: unit | undefined;
-    hybridTowers: any[] = [];
-    leaveTrigger: Trigger;
-    deniedPlayers: AbstractPlayer[] = [];
-    towers: Map<number, Tower> = new Map<number, Tower>();
-    holoMaze: AbstractHologramMaze | undefined = undefined;
-    game: WarcraftMaul;
+    private _repickCounter: number = 0;
+    private _voidBuilder: unit | undefined;
+    private _lootBoxer: unit | undefined;
+    private _hybridBuilder: unit | undefined;
+    private _hybridTowers: any[] = [];
+    private leaveTrigger: Trigger;
+    private deniedPlayers: AbstractPlayer[] = [];
+    private _towers: Map<number, Tower> = new Map<number, Tower>();
+    private holoMaze: AbstractHologramMaze | undefined = undefined;
+    private game: WarcraftMaul;
 
     constructor(id: number, game: WarcraftMaul) {
         super(id);
@@ -44,7 +45,7 @@ export class Defender extends AbstractPlayer {
         this.holoMaze = holoMaze;
     }
 
-    setUpPlayerVariables(): void {
+    private setUpPlayerVariables(): void {
         // Remove fog
         CreateFogModifierRectBJ(true, this.wcPlayer, FOG_OF_WAR_VISIBLE, GetPlayableMapRect());
 
@@ -60,8 +61,8 @@ export class Defender extends AbstractPlayer {
         this.allowPlayerTower = CreateUnit(this.wcPlayer, FourCC('h03S'), allowTowerLoc.x, allowTowerLoc.y, 0.000);
     }
 
-    hasRace(randomedRace: Race): boolean {
-        return this.races.indexOf(randomedRace) !== -1;
+    public hasRace(race: Race): boolean {
+        return this._races.indexOf(race) !== -1;
     }
 
 
@@ -83,16 +84,16 @@ export class Defender extends AbstractPlayer {
         return (y1 + y2) / 2;
     }
 
-    getVoidBuilder(): unit | undefined {
-        return this.voidBuilder;
+    public getVoidBuilder(): unit | undefined {
+        return this._voidBuilder;
     }
 
-    getLootBoxer(): unit | undefined {
-        return this.lootBoxer;
+    public getLootBoxer(): unit | undefined {
+        return this._lootBoxer;
     }
 
 
-    getRectangle(): Rectangle {
+    public getRectangle(): Rectangle {
         return this.getArea();
     }
 
@@ -107,7 +108,7 @@ export class Defender extends AbstractPlayer {
         TriggerSleepAction(2.00);
         game.worldMap.playerSpawns[this.id].isOpen = false;
         if (game.scoreBoard) {
-            MultiboardSetItemValueBJ(game.scoreBoard.board, 1, 7 + this.scoreSlot,
+            MultiboardSetItemValueBJ(game.scoreBoard.board, 1, 7 + this._scoreSlot,
                                      Util.ColourString(this.getColourCode(), '<Quit>'));
         }
 
@@ -121,16 +122,121 @@ export class Defender extends AbstractPlayer {
         // TODO: Implement this function
     }
 
-    AddTower(tower: Tower): void {
-        this.towers.set(tower.handleId, tower);
+    public AddTower(tower: Tower): void {
+        this._towers.set(tower.handleId, tower);
     }
 
     public GiveKillCount(): void {
-        this.kills++;
+        this._kills++;
         if (this.game.scoreBoard) {
-            MultiboardSetItemValueBJ(this.game.scoreBoard.board, 2, 7 + this.scoreSlot, `${this.kills}`);
-
+            MultiboardSetItemValueBJ(this.game.scoreBoard.board, 2, 7 + this._scoreSlot, `${this._kills}`);
         }
+    }
 
+    /**
+     * Getters and Setters
+     */
+    get totalMazeLength(): number {
+        return this._totalMazeLength;
+    }
+
+    set totalMazeLength(value: number) {
+        this._totalMazeLength = value;
+    }
+
+    get towers(): Map<number, Tower> {
+        return this._towers;
+    }
+
+    set towers(value: Map<number, Tower>) {
+        this._towers = value;
+    }
+
+    get hybridTowers(): any[] {
+        return this._hybridTowers;
+    }
+
+    set hybridTowers(value: any[]) {
+        this._hybridTowers = value;
+    }
+
+    get hasHardcoreRandomed(): boolean {
+        return this._hasHardcoreRandomed;
+    }
+
+    set hasHardcoreRandomed(value: boolean) {
+        this._hasHardcoreRandomed = value;
+    }
+
+    get hasNormalPicked(): boolean {
+        return this._hasNormalPicked;
+    }
+
+    set hasNormalPicked(value: boolean) {
+        this._hasNormalPicked = value;
+    }
+
+    get races(): Race[] {
+        return this._races;
+    }
+
+    set races(value: Race[]) {
+        this._races = value;
+    }
+
+    get hybridBuilder(): unit | undefined {
+        return this._hybridBuilder;
+    }
+
+    set hybridBuilder(value: unit | undefined) {
+        this._hybridBuilder = value;
+    }
+
+    get hasHybridRandomed(): boolean {
+        return this._hasHybridRandomed;
+    }
+
+    set hasHybridRandomed(value: boolean) {
+        this._hasHybridRandomed = value;
+    }
+
+    get lootBoxer(): unit | undefined {
+        return this._lootBoxer;
+    }
+
+    set lootBoxer(value: unit | undefined) {
+        this._lootBoxer = value;
+    }
+
+    get voidBuilder(): unit | undefined {
+        return this._voidBuilder;
+    }
+
+    set voidBuilder(value: unit | undefined) {
+        this._voidBuilder = value;
+    }
+
+    get repickCounter(): number {
+        return this._repickCounter;
+    }
+
+    set repickCounter(value: number) {
+        this._repickCounter = value;
+    }
+
+    get kills(): number {
+        return this._kills;
+    }
+
+    set kills(value: number) {
+        this._kills = value;
+    }
+
+    get scoreSlot(): number {
+        return this._scoreSlot;
+    }
+
+    set scoreSlot(value: number) {
+        this._scoreSlot = value;
     }
 }

@@ -6570,6 +6570,12 @@ Tip=
 Ubertip=
 Buttonpos=0,0
 
+[uC14]
+Art=ReplaceableTextures\CommandButtons\BTNDemolish.blp
+Name=|CFFFF0303[Anti-Juggle]|r
+Ubertip="This tower prevents juggling creeps while waves are in progress"
+Buttonpos=0,0
+
 [uC13]
 Art=ReplaceableTextures\CommandButtons\BTNMilitia.blp
 Name=[Builder] - Giant Worker

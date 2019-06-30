@@ -13,14 +13,13 @@ import { Maze } from './Antiblock/Maze';
 import * as settings from './GlobalSettings';
 import { TowerConstruction } from './Entity/Tower/TowerConstruction';
 import { DirectionalArrow } from './Game/DirectionalArrow';
-import { BuffHandler } from './Entity/Buff/BuffHandler';
 
 export class WorldMap {
     game: WarcraftMaul;
     worldCreatures: Map<String, unit> = new Map<String, unit>();
     waveCreeps: WaveCreep[] = [];
     races: Race[] = [];
-    spawnedCreeps: SpawnedCreeps | undefined;
+    private _spawnedCreeps: SpawnedCreeps = new SpawnedCreeps(this);
     ship: Ship | undefined;
     public archimondeDummy!: unit;
     playerSpawns: PlayerSpawns[] = [];
@@ -42,7 +41,6 @@ export class WorldMap {
         this.createCreepWaves();
         this.createDummyCreeps();
         this.setupRaces();
-        this.spawnedCreeps = new SpawnedCreeps(this);
         this.setupCheckpoint();
         this.setupMazes();
         this.setupArrows();
@@ -466,5 +464,17 @@ export class WorldMap {
         } else {
             RemoveUnit(GetEnumUnit());
         }
+    }
+
+    /**
+     * Getters and Setters
+     */
+
+    get spawnedCreeps(): SpawnedCreeps {
+        return this._spawnedCreeps;
+    }
+
+    set spawnedCreeps(value: SpawnedCreeps) {
+        this._spawnedCreeps = value;
     }
 }
