@@ -15,15 +15,15 @@ export class SellTower {
         this._sellTrigger = new Trigger();
         this._sellTrigger.RegisterAnyUnitEventBJ(EVENT_PLAYER_UNIT_SPELL_EFFECT);
         this._sellTrigger.AddCondition(() => this.AreWeSellingTheTower());
-        this._sellTrigger.AddAction(() => this.SellTower());
+        this._sellTrigger.AddAction(() => this.FindAndSellTower());
     }
 
     private AreWeSellingTheTower(): boolean {
         return GetSpellAbilityId() === FourCC('A02D');
     }
 
-    private SellTower(): void {
-        const unit: unit = GetTriggerUnit();
+
+    public SellTower(unit: unit): void {
         let value: number = GetUnitPointValue(unit);
         let playerSpawnId: undefined | number;
         for (let i: number = 0; i < settings.PLAYER_AREAS.length; i++) {
@@ -43,7 +43,7 @@ export class SellTower {
         if (player) {
             const tower: Tower | undefined = player.towers.get(GetHandleIdBJ(unit));
             if (tower) {
-                value = tower.GetSellValue();
+                value = Math.floor(tower.GetSellValue());
                 Log.Debug(`SellValue: ${value}`);
                 tower.Sell();
             }
@@ -59,7 +59,7 @@ export class SellTower {
         SetTextTagLifespanBJ(txt, 2.00);
         SetTextTagVelocityBJ(txt, 64, 90);
         DestroyEffect(AddSpecialEffect('Abilities\\Spells\\Items\\ResourceItems\\ResourceEffectTarget.mdl',
-                                       GetUnitX(unit), GetUnitY(unit)));
+            GetUnitX(unit), GetUnitY(unit)));
         PlaySoundOnUnitBJ(settings.Sounds.goldSound, 100, unit);
 
         const isWaveInProgress: boolean = this._game.gameRoundHandler.isWaveInProgress;
@@ -79,5 +79,11 @@ export class SellTower {
             maze.setWalkable(rightSide + topSide * maze.width, true);
             RemoveUnit(unit);
         }
+    }
+
+    private FindAndSellTower(): void {
+        const unit: unit = GetTriggerUnit();
+        this.SellTower(unit);
+
     }
 }

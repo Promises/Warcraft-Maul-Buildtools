@@ -10,11 +10,13 @@ import { Rectangle } from '../../../../JassOverrides/Rectangle';
 import { InitialDamageModificationTower } from './InitialDamageModificationTower';
 
 export class Tower {
+
     private _tower: unit;
     private _handleId: number;
     private _owner: Defender;
     private _game: WarcraftMaul;
     private sellValue: number;
+    private _leaverOwned: boolean = false;
 
     constructor(tower: unit, owner: Defender, game: WarcraftMaul) {
         this._game = game;
@@ -49,6 +51,14 @@ export class Tower {
 
     public get tower(): unit {
         return this._tower;
+    }
+
+    public get leaverOwned(): boolean {
+        return this._leaverOwned;
+    }
+
+    public set leaverOwned(value: boolean) {
+        this._leaverOwned = value;
     }
 
     public IsEndOfRoundTower(): this is EndOfRoundTower {
@@ -115,7 +125,8 @@ export class Tower {
     }
 
     public SetLeaverSellValue(): void {
-        this.sellValue  *= 0.3;
+        this.sellValue *= 0.3;
+        this._leaverOwned = true;
     }
 
     public GetSellValue(): number {

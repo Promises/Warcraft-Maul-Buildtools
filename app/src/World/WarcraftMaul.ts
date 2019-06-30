@@ -36,6 +36,7 @@ export class WarcraftMaul {
     buffHandler: BuffHandler;
     scoreBoard: MultiBoard | undefined;
     private itemHandler: ItemHandler;
+    sellTower: SellTower;
     private abilityHandler: GenericAbilityHandler;
 
     constructor() {
@@ -94,7 +95,7 @@ export class WarcraftMaul {
 
         const diffVote: DifficultyVote = new DifficultyVote(this);
         const racePicking: RacePicking = new RacePicking(this);
-        const sellTower: SellTower = new SellTower(this);
+        this.sellTower = new SellTower(this);
 
         this.gameRoundHandler = new GameRound(this);
 

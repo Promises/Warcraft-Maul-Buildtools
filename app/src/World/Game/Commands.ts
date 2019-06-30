@@ -9,6 +9,7 @@ import { SimpleHoloMaze } from '../Holograms/SimpleHoloMaze';
 import { CircleHoloMaze } from '../Holograms/CircleHoloMaze';
 import { Rectangle } from '../../JassOverrides/Rectangle';
 import { SpawnedCreeps } from '../Entity/SpawnedCreeps';
+import { SellTower } from '../Entity/Tower/SellTower';
 
 export class Commands {
 
@@ -238,10 +239,11 @@ export class Commands {
                 break;
             case 'sa':
             case 'sellall':
-                Log.Error('Command not implemented yet');
-                // TODO: implement command
-
-                // SellAllActions()
+                for (const tower of player.towers.values()) {
+                    if (tower.leaverOwned) {
+                        this.game.sellTower.SellTower(tower.tower);
+                    }
+                }
                 break;
             case 'y':
             case 'yes':
@@ -331,7 +333,7 @@ export class Commands {
 
                     let imagePath: string = '';
                     // if (GetTriggerPlayer() === GetLocalPlayer()) {
-                        imagePath = 'ReplaceableTextures\\Splats\\SuggestedPlacementSplat.blp';
+                    imagePath = 'ReplaceableTextures\\Splats\\SuggestedPlacementSplat.blp';
                     // }
 
                     switch (command[1]) {
@@ -340,24 +342,24 @@ export class Commands {
                             break;
                         case '1':
                             player.setHoloMaze(new CircleHoloMaze(imagePath,
-                                                                  GetRectCenterX(firstCheckpoint.rectangle),
-                                                                  GetRectCenterY(firstCheckpoint.rectangle),
-                                                                  GetRectCenterX(secondCheckpoint.rectangle),
-                                                                  GetRectCenterY(secondCheckpoint.rectangle)));
+                                GetRectCenterX(firstCheckpoint.rectangle),
+                                GetRectCenterY(firstCheckpoint.rectangle),
+                                GetRectCenterX(secondCheckpoint.rectangle),
+                                GetRectCenterY(secondCheckpoint.rectangle)));
                             break;
                         case '2':
                             player.setHoloMaze(new SimpleHoloMaze(imagePath,
-                                                                  GetRectCenterX(firstCheckpoint.rectangle),
-                                                                  GetRectCenterY(firstCheckpoint.rectangle),
-                                                                  GetRectCenterX(secondCheckpoint.rectangle),
-                                                                  GetRectCenterY(secondCheckpoint.rectangle)));
+                                GetRectCenterX(firstCheckpoint.rectangle),
+                                GetRectCenterY(firstCheckpoint.rectangle),
+                                GetRectCenterX(secondCheckpoint.rectangle),
+                                GetRectCenterY(secondCheckpoint.rectangle)));
                             break;
                         case '3':
                             player.setHoloMaze(new AdvancedHoloMaze(imagePath,
-                                                                    GetRectCenterX(firstCheckpoint.rectangle),
-                                                                    GetRectCenterY(firstCheckpoint.rectangle),
-                                                                    GetRectCenterX(secondCheckpoint.rectangle),
-                                                                    GetRectCenterY(secondCheckpoint.rectangle)));
+                                GetRectCenterX(firstCheckpoint.rectangle),
+                                GetRectCenterY(firstCheckpoint.rectangle),
+                                GetRectCenterX(secondCheckpoint.rectangle),
+                                GetRectCenterY(secondCheckpoint.rectangle)));
                             break;
                         default:
                             invalidMaze = true;
@@ -521,7 +523,7 @@ export class Commands {
                 this.RemoveAllKickedPlayerTowers();
                 if (this.game.scoreBoard) {
                     MultiboardSetItemValueBJ(this.game.scoreBoard.board, 1, 7 + this.voteAgainstPlayer.scoreSlot,
-                                             Util.ColourString(this.voteAgainstPlayer.getColourCode(), '<Kicked>'));
+                        Util.ColourString(this.voteAgainstPlayer.getColourCode(), '<Kicked>'));
                 }
                 players.delete(this.voteAgainstPlayer.id);
 
