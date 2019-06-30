@@ -9,6 +9,7 @@ import { Ship } from '../Entity/Ship';
 import { ArchimondeGate } from './ArchimondeGate';
 import { ArchimondeTeleport } from './ArchimondeTeleport';
 import { EndOfRoundTower } from '../Entity/Tower/Specs/EndOfRoundTower';
+import { ARMOUR_TYPE_COLOURS, ARMOUR_TYPE_NAMES, CREEP_TYPE_COLOURS } from '../GlobalSettings';
 
 export class GameRound {
 
@@ -109,14 +110,32 @@ export class GameRound {
     private UpdateScoreboardForWave(): void {
         if (this.game.scoreBoard) {
             MultiboardSetItemValueBJ(this.game.scoreBoard.board, 1, 1, 'Starting in');
+            let armourType: string = ARMOUR_TYPE_NAMES[this.game.worldMap.waveCreeps[this._currentWave - 1].getArmourType()].toLowerCase();
+            armourType = armourType.charAt(0).toUpperCase() + armourType.slice(1);
             MultiboardSetItemValueBJ(
                 this.game.scoreBoard.board,
                 2, 5,
-                settings.ARMOUR_TYPE_NAMES[this.game.worldMap.waveCreeps[this._currentWave - 1].getArmourType()]);
-            MultiboardSetItemValueBJ(
-                this.game.scoreBoard.board,
-                2, 5,
-                settings.CREEP_TYPE_NAMES[this.game.worldMap.waveCreeps[this._currentWave - 1].getCreepType()]);
+                Util.ColourString(ARMOUR_TYPE_COLOURS[this.game.worldMap.waveCreeps[this._currentWave - 1].getArmourType()], armourType));
+            const creepType: CREEP_TYPE = this.game.worldMap.waveCreeps[this._currentWave - 1].getCreepType();
+            if (creepType !== CREEP_TYPE.NORMAL) {
+                let creepTypeName: string = settings.CREEP_TYPE_NAMES[this.game.worldMap.waveCreeps[this._currentWave - 1].getCreepType()];
+                creepTypeName = creepTypeName.charAt(0).toUpperCase() + creepTypeName.toLowerCase().slice(1);
+                MultiboardSetItemValueBJ(
+                    this.game.scoreBoard.board,
+                    2, 6,
+                    Util.ColourString(
+                        CREEP_TYPE_COLOURS[this.game.worldMap.waveCreeps[this._currentWave - 1].getCreepType()],
+                        `(${creepTypeName})`));
+            } else {
+                MultiboardSetItemValueBJ(
+                    this.game.scoreBoard.board,
+                    2, 6,
+                    '');
+            }
+            //
+            //
+            //
+            //
         }
     }
 
@@ -178,7 +197,7 @@ export class GameRound {
                 PauseUnitBJ(false, this.game.worldMap.archimondeDummy);
                 IssueTargetDestructableOrder(this.game.worldMap.archimondeDummy, 'attack', this.archimondeGate.gate);
             }
-            if (this._currentWave === this.game.worldMap.waveCreeps.length - 1) {
+            if (this._currentWave === this.game.worldMap.waveCreeps.length) {
                 this.game.GameWin();
             }
         }

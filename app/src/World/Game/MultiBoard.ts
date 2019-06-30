@@ -1,6 +1,6 @@
 import { WarcraftMaul } from '../WarcraftMaul';
 import * as settings from '../GlobalSettings';
-import { ARMOUR_TYPE_NAMES, players } from '../GlobalSettings';
+import { ARMOUR_TYPE_COLOURS, ARMOUR_TYPE_NAMES, players } from '../GlobalSettings';
 
 export class MultiBoard {
     board: multiboard;
@@ -21,9 +21,11 @@ export class MultiBoard {
         MultiboardSetItemValueBJ(this.board, 1, 4, 'Lives');
         MultiboardSetItemValueBJ(this.board, 2, 4, this.game.gameLives + '');
         MultiboardSetItemValueBJ(this.board, 1, 5, 'Armour Type');
-        let armourType = ARMOUR_TYPE_NAMES[this.game.worldMap.waveCreeps[0].getArmourType()].toLowerCase();
+        let armourType: string = ARMOUR_TYPE_NAMES[this.game.worldMap.waveCreeps[0].getArmourType()].toLowerCase();
         armourType = armourType.charAt(0).toUpperCase() + armourType.slice(1);
-        MultiboardSetItemValueBJ(this.board, 2, 5, armourType);
+        MultiboardSetItemValueBJ(
+            this.board, 2, 5,
+            Util.ColourString(ARMOUR_TYPE_COLOURS[this.game.worldMap.waveCreeps[0].getArmourType()], armourType));
         MultiboardSetItemValueBJ(this.board, 1, 7, 'Player');
         MultiboardSetItemValueBJ(this.board, 2, 7, 'Kills');
 

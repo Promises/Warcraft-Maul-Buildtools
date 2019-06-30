@@ -92,6 +92,13 @@ export const CREEP_TYPE_NAMES: string[] = [
     'CHAMPION',
     'BOSS',
 ];
+export const CREEP_TYPE_COLOURS: string[] = [
+    'FFFFFF',
+    '999999',
+    '3737F2',
+    'F2A137',
+];
+
 export const ARMOUR_TYPE_NAMES: string[] = [
     'UNARMOURED',
     'LIGHT',
@@ -99,7 +106,15 @@ export const ARMOUR_TYPE_NAMES: string[] = [
     'HEAVY',
     'FORTIFIED',
     'HERO',
+];
 
+export const ARMOUR_TYPE_COLOURS: string[] = [
+    '999999',
+    '6d7c86',
+    '416073',
+    '154360',
+    'CA8500',
+    '7525FF',
 ];
 
 export const PLAYER_AREAS: Rectangle[] = [

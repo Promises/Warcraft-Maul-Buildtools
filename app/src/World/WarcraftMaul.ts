@@ -46,7 +46,7 @@ export class WarcraftMaul {
         }
 
         if (this.debugMode) {
-            this.waveTimer = 15;
+            // this.waveTimer = 15;
             Log.Init([
                 new StringSink(LogLevel.Debug, SendMessage),
             ]);
