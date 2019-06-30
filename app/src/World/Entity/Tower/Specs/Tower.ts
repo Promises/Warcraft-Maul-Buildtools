@@ -70,13 +70,7 @@ export class Tower {
         return 'PassiveCreepDiesInAreaEffect' in this;
     }
 
-    public ATest(): void {
-        Log.Debug('Tower -> ATest()');
-    }
-
     public Sell(): void {
-        this.ATest();
-
         this.owner.towers.delete(this.handleId);
         if (this.IsEndOfRoundTower()) {
             this.game.gameRoundHandler.endOfTurnTowers.delete(this.handleId);

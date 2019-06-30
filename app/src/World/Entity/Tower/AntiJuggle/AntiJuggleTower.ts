@@ -174,9 +174,4 @@ export class AntiJuggleTower extends Tower implements EndOfRoundTower {
         RemoveLocation(loc);
         RemoveUnit(this.tower);
     }
-
-    public ATest(): void {
-        super.ATest();
-        Log.Debug('AntiJuggleTower -> ATest()');
-    }
 }
