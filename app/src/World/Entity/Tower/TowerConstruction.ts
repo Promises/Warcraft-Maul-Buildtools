@@ -35,6 +35,7 @@ import { GoblinBlademaster } from './Goblin/GoblinBlademaster';
 import { VenomTower } from './Human/VenomTower';
 import { LootBoxerHandler } from './LootBoxer/LootBoxerHandler';
 import { Wyvern } from './Aviaries/Wyvern';
+import { AntiJuggleTower } from './AntiJuggle/AntiJuggleTower';
 
 
 export class TowerConstruction {
@@ -105,9 +106,7 @@ export class TowerConstruction {
         this.SetupTower(tower, owner);
     }
 
-
     public SetupTower(tower: unit, owner: Defender): void {
-
         let ObjectExtendsTower: Tower;
         if (this.isLootBoxer(tower)) {
             tower = this.lootBoxerHander.handleLootBoxTower(tower, owner, this.lootBoxerTowers.indexOf(GetUnitTypeId(tower)));
@@ -211,6 +210,8 @@ export class TowerConstruction {
         this.towerTypes.set(FourCC('oC60'), Wyvern);
 
 
+        // AntiJuggle
+        this.towerTypes.set(FourCC('uC14'), AntiJuggleTower);
     }
 
     private DoGenericTowerAttacks(): void {
@@ -218,7 +219,6 @@ export class TowerConstruction {
             tower.GenericAttack();
         }
     }
-
 
     private isLootBoxer(tower: unit): boolean {
         return this.lootBoxerTowers.indexOf(GetUnitTypeId(tower)) > -1;

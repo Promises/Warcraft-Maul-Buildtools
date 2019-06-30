@@ -21,7 +21,6 @@ export class Tower {
         this._handleId = GetHandleIdBJ(tower);
         this._owner = owner;
         owner.AddTower(this);
-
     }
 
     public GetName(): string {
@@ -71,7 +70,6 @@ export class Tower {
         return 'PassiveCreepDiesInAreaEffect' in this;
     }
 
-
     public Sell(): void {
         this.owner.towers.delete(this.handleId);
         if (this.IsEndOfRoundTower()) {
@@ -101,7 +99,6 @@ export class Tower {
                 Log.Fatal(`${GetUnitName(this.tower)} built outside of requires area, unable to remove. Please screenshot and report`);
             }
         }
-
     }
 
     public CastSpellOnAttackedUnitLocation(spell: string): void {

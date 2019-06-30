@@ -22,7 +22,7 @@ export class Maze {
     public readonly height: number;
     private readonly maze: boolean[];
 
-    public setWalkable(nodeIndex: number, isWalkable: boolean) {
+    public setWalkable(nodeIndex: number, isWalkable: boolean): void {
         if (nodeIndex > this.maze.length) {
             return;
         }
@@ -30,14 +30,14 @@ export class Maze {
         this.maze[nodeIndex] = isWalkable;
     }
 
-    public breathFirstSearch(sourceX: number, sourceY: number, destinationX: number, destinationY: number): boolean {
+    public breathFirstSearch(sourceX: number, sourceY: number, destinationX: number, destinationY: number): number {
         if (this.maze[sourceX + sourceY * this.width] === false || this.maze[destinationX + destinationY * this.width] === false) {
-            return false;
+            return -1;
         }
 
         const visited: boolean[] = [];
-        for (let i = 0; i < this.width; i++) {
-            for (let j = 0; j < this.height; j++) {
+        for (let i: number = 0; i < this.width; i++) {
+            for (let j: number = 0; j < this.height; j++) {
                 visited[i + j * this.width] = false;
             }
         }
@@ -52,23 +52,24 @@ export class Maze {
             const curr: Node = q.front();
 
             if (curr.x === destinationX && curr.y === destinationY) {
-                return true;
+                return curr.distance;
             }
 
             q.pop();
 
-            for (let i = 0; i < 4; i++) {
+            for (let i: number = 0; i < 4; i++) {
                 const row: number = curr.x + Maze.ROW_NUM[i];
                 const col: number = curr.y + Maze.COL_NUM[i];
 
                 if (this.isValid(row, col) && this.maze[row + col * this.width] === true && visited[row + col * this.width] === false) {
                     visited[row + col * this.width] = true;
+                    // AddSpecialEffect('Doodads\\\\Cinematic\\\\DemonFootPrint\\\\DemonFootPrint0.mdl', this.minX + 64 * row, this.minY + 64 * col);
                     q.push(new Node(row, col, curr.distance + 1));
                 }
             }
         }
 
-        return false;
+        return -1;
     }
 
     private isValid(row: number, col: number): boolean {
