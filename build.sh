@@ -66,7 +66,7 @@ fi
 
 echo "Converting TypeScript to Lua ..."
 node node_modules/typescript-to-lua/dist/tstl.js  -p tsconfig.json
-mv src/app/src/main.lua src/
+cp src/app/src/main.lua src/
 
 
 
@@ -94,3 +94,4 @@ if [ $status -ne 0 ]; then
     echo "FAILED!" 
     exit 1
 fi
+

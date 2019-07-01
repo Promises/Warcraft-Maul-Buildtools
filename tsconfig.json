@@ -14,6 +14,8 @@
 			"lua-types/core/table",
 			"lua-types/core/debug",
 			"lua-types/special/5.3",
+			"busted-tstl"
+
 		]
 	},
 	"tstl": {

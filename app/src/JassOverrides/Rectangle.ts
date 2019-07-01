@@ -55,4 +55,19 @@ export class Rectangle {
     public toRect(): rect {
         return Rect(this.minX, this.minY, this.maxX, this.maxY);
     }
+
+
+    public GetCenterX(): number {
+        const x1: number = this.minX;
+        const x2: number = this.maxX;
+
+        return (x1 + x2) / 2;
+    }
+
+    public GetCenterY(): number {
+        const y1: number = this.minY;
+        const y2: number = this.maxY;
+
+        return (y1 + y2) / 2;
+    }
 }
