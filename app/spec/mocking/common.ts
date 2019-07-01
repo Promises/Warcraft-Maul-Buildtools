@@ -74,3 +74,12 @@ _G.DialogCreate = function (): number {
 _G.CreateDestructable = function (objectid: number, x: number, y: number, face: number, scale: number, variation: number): number {
     return 1;
 };
+
+_G.TriggerSleepAction = function (timeout: number): void {
+    return;
+};
+
+//declare function DisplayTimedTextToPlayer(toPlayer: player, x: number, y: number, duration: number, message: string): void
+_G.DisplayTimedTextToPlayer = function (toPlayer: player, x: number, y: number, duration: number, message: string): void {
+    return;
+}

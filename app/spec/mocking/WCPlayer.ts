@@ -75,7 +75,16 @@ _G.Player = (colourId: number): player => {
 _G.SetPlayerStateBJ = function (whichPlayer: player, whichPlayerState: string, value: number): void {
     // @ts-ignore
     whichPlayer[whichPlayerState] = value;
+};
+
+_G.AdjustPlayerStateBJ = function (value: number, whichPlayer: player, whichPlayerState: string): void {
     // @ts-ignore
+    whichPlayer[whichPlayerState] += value;
+};
+
+_G.GetPlayerState = function (whichPlayer: player, whichPlayerState: number): number {
+    // @ts-ignore
+    return whichPlayer[whichPlayerState];
 };
 
 _G.SetPlayerFlagBJ = function (whichPlayerFlag: playerstate, flag: boolean, whichPlayer: player): void {
