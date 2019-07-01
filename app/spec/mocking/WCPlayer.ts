@@ -1,7 +1,5 @@
 /** @noSelfInFile **/
 
-import { Sounds } from '../../src/World/GlobalSettings';
-
 enum PlayerType {
     PLAYER,
     COMPUTER,
@@ -125,3 +123,8 @@ _G.SetSoundChannel = function (audio: sound, channel: number): void {
 _G.SetSoundDistances = function (audio: sound, minDist: number, maxDist: number): void {
     return;
 };
+
+_G.GetPlayerId = function (whichPlayer: player): number {
+    return whichPlayer.colour;
+};
+
