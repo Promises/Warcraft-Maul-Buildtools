@@ -36,6 +36,9 @@ import { VenomTower } from './Human/VenomTower';
 import { LootBoxerHandler } from './LootBoxer/LootBoxerHandler';
 import { Wyvern } from './Aviaries/Wyvern';
 import { AntiJuggleTower } from './AntiJuggle/AntiJuggleTower';
+import { DemonicIllidan } from './NightElf/DemonicIllidan';
+import { CorruptedIllidan } from './NightElf/CorruptedIllidan';
+import { Warden } from './NightElf/Warden';
 
 
 export class TowerConstruction {
@@ -209,6 +212,11 @@ export class TowerConstruction {
 
         // Aviaries
         this.towerTypes.set(FourCC('oC60'), Wyvern);
+
+        // Night Elf
+        this.towerTypes.set(FourCC('h00S'), DemonicIllidan);
+        this.towerTypes.set(FourCC('eC83'), CorruptedIllidan);
+        this.towerTypes.set(FourCC('h00G'), Warden);
 
 
         // AntiJuggle
