@@ -151,7 +151,7 @@ export class GameRound {
         // call DisableTrigger(gg_trg_CrippleAura)
         // call DisableTrigger(gg_trg_VampiricAura)
 
-        if (this._currentWave === this.game.worldMap.waveCreeps.length - 1) {
+        if (this._currentWave === this.game.worldMap.waveCreeps.length) {
             this.BonusRoundsOver();
         } else {
             // call SetCreepAbilities()
@@ -199,7 +199,7 @@ export class GameRound {
                 PauseUnitBJ(false, this.game.worldMap.archimondeDummy);
                 IssueTargetDestructableOrder(this.game.worldMap.archimondeDummy, 'attack', this.archimondeGate.gate);
             }
-            if (this._currentWave === this.game.worldMap.waveCreeps.length) {
+            if (this._currentWave === 36) {
                 this.game.GameWin();
             }
         }
