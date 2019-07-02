@@ -19,7 +19,7 @@ export class Magtheridon extends Tower implements AttackActionTower {
                 bj_UNIT_FACING);
             UnitApplyTimedLifeBJ(3.00, FourCC('BTLF'), tempUnit);
             UnitAddAbilityBJ(FourCC('A0DT'), tempUnit);
-            IssueTargetOrderBJ(tempUnit, 'rainoffire', target);
+            IssuePointOrder(tempUnit, 'rainoffire', GetUnitX(target), GetUnitY(target));
         }
     }
 }
