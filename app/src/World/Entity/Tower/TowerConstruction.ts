@@ -69,6 +69,8 @@ import { BronzeDrake } from './Dragons/BronzeDrake';
 import { BronzeDragon } from './Dragons/BronzeDragon';
 import { GargoyleSpire } from './Forsaken/GargoyleSpire';
 import { Varimathras } from './Forsaken/Varimathras';
+import { GrowthLvl2 } from './CavernousCreatures/Growth/GrowthLvl2';
+import { GrowthLvl3 } from './CavernousCreatures/Growth/GrowthLvl3';
 
 
 export class TowerConstruction {
@@ -218,6 +220,8 @@ export class TowerConstruction {
         this.towerTypes.set(FourCC('h04T'), CavernMushroom);
         this.towerTypes.set(FourCC('h04O'), CavernRevenant);
         this.towerTypes.set(FourCC('h04N'), CavernTurtle);
+        this.towerTypes.set(FourCC('h04S'), GrowthLvl2);
+        this.towerTypes.set(FourCC('h04L'), GrowthLvl3);
 
         // CorruptedNightElves
         this.towerTypes.set(FourCC('n00P'), CorruptedTreeofLife);
