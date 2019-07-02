@@ -41,7 +41,6 @@ export class WarcraftMaul {
     private abilityHandler: GenericAbilityHandler;
 
 
-
     players: Map<number, Defender> = new Map<number, Defender>();
 
     enemies: Attacker[] = [];
@@ -54,7 +53,6 @@ export class WarcraftMaul {
         if (GetPlayerName(Player(COLOUR.RED)) === 'WorldEdit') {
             this.debugMode = true;
         }
-
         if (this.debugMode) {
             // this.waveTimer = 15;
             Log.Init([
@@ -62,7 +60,12 @@ export class WarcraftMaul {
             ]);
             Log.Debug('Debug mode enabled');
         }
-
+        if (this.IsReplay()) {
+            Log.Init([
+                new StringSink(LogLevel.Verbose, SendMessage),
+            ]);
+            Log.Verbose('Registered replay state, printing verbose');
+        }
         // Set up all players
         for (let i: number = 0; i < 24; i++) {
             if (GetPlayerSlotState(Player(i)) === PLAYER_SLOT_STATE_PLAYING) {
@@ -169,6 +172,9 @@ export class WarcraftMaul {
         this.worldMap.RemoveEveryUnit();
     }
 
+    private IsReplay(): boolean {
+        return BlzFrameIsVisible(BlzGetFrameByName('ReplayFogCheckBox', 0));
+    }
 
 
 }
