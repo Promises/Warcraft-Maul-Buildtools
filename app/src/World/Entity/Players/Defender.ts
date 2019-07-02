@@ -111,14 +111,14 @@ export class Defender extends AbstractPlayer {
         return game.gameLives > 0;
     }
 
-    private PlayerLeftTheGame(game: WarcraftMaul): void {
+    public PlayerLeftTheGame(game: WarcraftMaul): void {
         SendMessage(`${this.getNameWithColour()} has left the game!`);
 
         TriggerSleepAction(2.00);
         game.worldMap.playerSpawns[this.id].isOpen = false;
         if (game.scoreBoard) {
             MultiboardSetItemValueBJ(game.scoreBoard.board, 1, 7 + this._scoreSlot,
-                Util.ColourString(this.getColourCode(), '<Quit>'));
+                                     Util.ColourString(this.getColourCode(), '<Quit>'));
         }
 
         players.delete(this.id);
@@ -290,6 +290,14 @@ export class Defender extends AbstractPlayer {
                     tower.Sell();
                     tower.SetOwnership(this);
                 }
+            }
+        }
+    }
+
+    public SellAll(): void {
+        for (const tower of this.towers.values()) {
+            if (tower.leaverOwned) {
+                this.game.sellTower.SellTower(tower.tower);
             }
         }
     }

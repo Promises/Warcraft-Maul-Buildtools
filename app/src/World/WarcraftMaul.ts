@@ -18,6 +18,7 @@ import { TowerTicker } from './Game/TowerTicker';
 import { BuffHandler } from './Entity/Buff/BuffHandler';
 import { ItemHandler } from './Entity/Item/ItemHandler';
 import { GenericAbilityHandler } from './Entity/GenericAbilties/GenericAbilityHandler';
+import set = Reflect.set;
 
 export class WarcraftMaul {
     debugMode: boolean = false;
@@ -40,6 +41,9 @@ export class WarcraftMaul {
     private abilityHandler: GenericAbilityHandler;
 
     constructor() {
+        // @ts-ignore to enable tests
+        settings.players = new Map<number, Defender>();
+
         const players: Map<number, Defender> = settings.players;
         const enemies: Attacker[] = settings.enemies;
 

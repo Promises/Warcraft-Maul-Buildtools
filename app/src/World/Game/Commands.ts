@@ -239,11 +239,7 @@ export class Commands {
                 break;
             case 'sa':
             case 'sellall':
-                for (const tower of player.towers.values()) {
-                    if (tower.leaverOwned) {
-                        this.game.sellTower.SellTower(tower.tower);
-                    }
-                }
+                player.SellAll();
                 break;
             case 'y':
             case 'yes':

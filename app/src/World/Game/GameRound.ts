@@ -14,6 +14,7 @@ import { ARMOUR_TYPE_COLOURS, ARMOUR_TYPE_NAMES, CREEP_TYPE_COLOURS } from '../G
 export class GameRound {
 
 
+
     private gameTimeTrigger: Trigger;
     private roundEndTrigger: Trigger;
     private game: WarcraftMaul;
@@ -60,6 +61,7 @@ export class GameRound {
     get isWaveInProgress(): boolean {
         return this._isWaveInProgress;
     }
+
 
     private UpdateGameTime(): void {
         if (this.game.gameEnded) {
@@ -384,5 +386,9 @@ export class GameRound {
 
     }
 
+    // FOR TESTING ONLY
+    set isWaveInProgress(value: boolean) {
+        this._isWaveInProgress = value;
+    }
 
 }
