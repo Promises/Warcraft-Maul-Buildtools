@@ -1,5 +1,5 @@
 import * as settings from '../GlobalSettings';
-import { COLOUR_CODES, enemies } from '../GlobalSettings';
+import { COLOUR_CODES } from '../GlobalSettings';
 import { WarcraftMaul } from '../WarcraftMaul';
 import { MultiBoard } from './MultiBoard';
 import { Trigger } from '../../JassOverrides/Trigger';
@@ -41,7 +41,7 @@ export class DifficultyVote {
             );
         }
 
-        for (const player of settings.players.values()) {
+        for (const player of this.game.players.values()) {
             PanCameraToTimedForPlayer(player.wcPlayer, -1900.00, 2100.00, 0.00);
             DialogDisplayBJ(true, this.difficultyDialog, player.wcPlayer);
 
@@ -57,7 +57,7 @@ export class DifficultyVote {
     }
 
     private SetDifficulty(diffculty: number): void {
-        for (const enemy of enemies) {
+        for (const enemy of this.game.enemies) {
             enemy.setHandicap(diffculty);
         }
     }
@@ -66,7 +66,7 @@ export class DifficultyVote {
         PauseTimer(GetExpiredTimer());
         let voteCount: number = 0;
         Log.Debug(Util.ArraysToString(this.votedDiff));
-        for (const player of settings.players.values()) {
+        for (const player of this.game.players.values()) {
             if (!this.votedDiff[player.id]) {
                 DialogDisplayBJ(false, this.difficultyDialog, player.wcPlayer);
                 SendMessage(`${player.getNameWithColour()} did not vote, their vote will not be counted`);
@@ -96,8 +96,8 @@ export class DifficultyVote {
         SendMessage(`Difficulty was set to ${this.difficulty}% (${Util.ColourString(settings.DIFFICULTY_COLOURS[diffIndex],
                                                                               settings.DIFFICULTY_STRINGS[diffIndex])})`);
 
-        for (const player of settings.players.values()) {
-            for (const ally of settings.players.values()) {
+        for (const player of this.game.players.values()) {
+            for (const ally of this.game.players.values()) {
                 SetPlayerAllianceBJ(player.wcPlayer, ALLIANCE_HELP_REQUEST, false, ally.wcPlayer);
 
             }

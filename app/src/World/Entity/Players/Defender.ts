@@ -1,12 +1,11 @@
 import { AbstractPlayer } from './AbstractPlayer';
-import { ALLOW_PLAYER_TOWER_LOCATIONS, PLAYER_AREAS, players, Point } from '../../GlobalSettings';
+import { ALLOW_PLAYER_TOWER_LOCATIONS, PLAYER_AREAS, Point } from '../../GlobalSettings';
 import { Race } from '../../Game/Races/Race';
 import { Rectangle } from '../../../JassOverrides/Rectangle';
 import { Trigger } from '../../../JassOverrides/Trigger';
 import { WarcraftMaul } from '../../WarcraftMaul';
 import { AbstractHologramMaze } from '../../Holograms/AbstractHologramMaze';
 import { Tower } from '../Tower/Specs/Tower';
-import { Log } from '../../../lib/Serilog/Serilog';
 
 export class Defender extends AbstractPlayer {
     get builders(): unit[] {
@@ -118,10 +117,11 @@ export class Defender extends AbstractPlayer {
         TriggerSleepAction(2.00);
         game.worldMap.playerSpawns[this.id].isOpen = false;
         if (game.scoreBoard) {
-            MultiboardSetItemValueBJ(game.scoreBoard.board, 1, 7 + this._scoreSlot,
+            MultiboardSetItemValueBJ(
+                game.scoreBoard.board, 1, 7 + this._scoreSlot,
                 Util.ColourString(this.getColourCode(), '<Quit>'));
         }
-        players.delete(this.id);
+        game.players.delete(this.id);
 
         this.DistributePlayerGold();
         this.DistributePlayerTowers();
@@ -247,11 +247,11 @@ export class Defender extends AbstractPlayer {
 
     private DistributePlayerGold(): void {
         const leavingPlayerGold: number = this.getGold();
-        let goldDistribution: number = leavingPlayerGold / players.size;
+        let goldDistribution: number = leavingPlayerGold / this.game.players.size;
 
         goldDistribution *= 0.3;
 
-        for (const player of players.values()) {
+        for (const player of this.game.players.values()) {
             player.sendMessage(`You have received |cffffcc00${Math.floor(goldDistribution)}|r gold from the leaving player!`);
             player.giveGold(Math.floor(goldDistribution));
         }
@@ -260,7 +260,7 @@ export class Defender extends AbstractPlayer {
     private DistributePlayerTowers(): void {
         for (const tower of this.towers.values()) {
             tower.Sell();
-            const newOwner: Defender = <Defender>players.get(Util.GetRandomKey(players));
+            const newOwner: Defender = <Defender>this.game.players.get(Util.GetRandomKey(this.game.players));
 
             const nutower: Tower = tower.SetOwnership(newOwner);
             nutower.SetLeaverSellValue();
@@ -282,7 +282,7 @@ export class Defender extends AbstractPlayer {
 
     private ClaimTower(): void {
         if (IsUnitType(GetEnumUnit(), UNIT_TYPE_STRUCTURE)) {
-            const owner: Defender | undefined = players.get(GetPlayerId(GetOwningPlayer(GetEnumUnit())));
+            const owner: Defender | undefined = this.game.players.get(GetPlayerId(GetOwningPlayer(GetEnumUnit())));
             if (owner) {
                 const tower: Tower | undefined = owner.towers.get(GetHandleIdBJ(GetEnumUnit()));
                 if (tower) {
@@ -295,7 +295,7 @@ export class Defender extends AbstractPlayer {
 
     public SellAll(): void {
 
-        const keys = Util.GetAllKeys(this.towers);
+        const keys: number[] = Util.GetAllKeys(this.towers);
 
         for (const key of keys) {
             const tower: Tower = <Tower>this.towers.get(key);

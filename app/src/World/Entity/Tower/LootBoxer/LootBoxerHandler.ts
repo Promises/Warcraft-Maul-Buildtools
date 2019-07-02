@@ -183,7 +183,7 @@ export class LootBoxerHandler {
     private UpgradeToTower(): void {
         let tower: unit = GetSpellAbilityUnit();
 
-        const owner: Defender | undefined = settings.players.get(GetPlayerId(GetOwningPlayer(tower)));
+        const owner: Defender | undefined = this.game.players.get(GetPlayerId(GetOwningPlayer(tower)));
         if (!owner) {
             return;
         }

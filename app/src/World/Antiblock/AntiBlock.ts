@@ -38,7 +38,7 @@ export class AntiBlock {
             }
         });
 
-        const player: Defender | undefined = settings.players.get(GetPlayerId(GetOwningPlayer(consUnit)));
+        const player: Defender | undefined = this._worldMap.game.players.get(GetPlayerId(GetOwningPlayer(consUnit)));
         if (player === undefined) {
             return;
         }

@@ -36,7 +36,7 @@ export class GameRound {
         this.gameTimeTrigger.AddAction(() => this.UpdateGameTime());
         this.roundEndTrigger = new Trigger();
 
-        for (const enemy of settings.enemies) {
+        for (const enemy of this.game.enemies) {
             this.roundEndTrigger.RegisterPlayerStateEvent(enemy.wcPlayer, PLAYER_STATE_RESOURCE_FOOD_USED, EQUAL, 0.00);
         }
 
@@ -240,7 +240,7 @@ export class GameRound {
     }
 
     private CreepFoodConditions(): boolean {
-        for (const enemy of settings.enemies) {
+        for (const enemy of this.game.enemies) {
             if (!(GetPlayerState(enemy.wcPlayer, PLAYER_STATE_RESOURCE_FOOD_USED) === 0)) {
                 return false;
             }
@@ -338,7 +338,7 @@ export class GameRound {
     }
 
     private GiveWaveGoldReward(): void {
-        for (const player of settings.players.values()) {
+        for (const player of this.game.players.values()) {
             if (this._currentWave === 15) {
                 player.giveLumber(1);
             }

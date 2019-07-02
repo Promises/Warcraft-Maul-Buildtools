@@ -1,5 +1,5 @@
 import { WarcraftMaul } from '../WarcraftMaul';
-import { COLOUR_CODES, enemies, players } from '../GlobalSettings';
+import { COLOUR_CODES } from '../GlobalSettings';
 import { Trigger } from '../../JassOverrides/Trigger';
 import { Defender } from '../Entity/Players/Defender';
 import { Log } from '../../lib/Serilog/Serilog';
@@ -24,7 +24,7 @@ export class Commands {
     constructor(game: WarcraftMaul) {
         this.game = game;
         this.commandTrigger = new Trigger();
-        for (const player of players.values()) {
+        for (const player of this.game.players.values()) {
             this.commandTrigger.RegisterPlayerChatEvent(player.wcPlayer, '-', false);
         }
         this.commandTrigger.AddAction(() => this.handleCommand());
@@ -38,7 +38,7 @@ export class Commands {
         let amount: number = 0;
         switch (command[0]) {
             case 'ui':
-                let bool: boolean = BlzLoadTOCFile('uiImport\\MyBar.toc');
+                const bool: boolean = BlzLoadTOCFile('uiImport\\MyBar.toc');
                 player.sendMessage(`ui! ${bool}`);
                 this.TestUi();
                 break;
@@ -74,7 +74,7 @@ export class Commands {
                 }
                 this.game.gameLives = amount;
                 this.game.startLives = amount;
-                player.sendMessage('Lives were set to |cFFFFCC00' + amount + '|r');
+                player.sendMessage(`Lives were set to |cFFFFCC00${amount}|r`);
                 break;
             case 'closeall':
                 player.sendMessage('All spawns are now closed!');
@@ -90,7 +90,7 @@ export class Commands {
                 }
                 player.sendMessage(`Difficulty was set to ${amount}%`);
 
-                for (const enemy of enemies) {
+                for (const enemy of this.game.enemies) {
                     enemy.setHandicap(amount);
                 }
                 break;
@@ -172,7 +172,7 @@ export class Commands {
     }
 
     private handleCommand(): void {
-        const player: Defender | undefined = players.get(GetPlayerId(GetTriggerPlayer()));
+        const player: Defender | undefined = this.game.players.get(GetPlayerId(GetTriggerPlayer()));
         if (!player) {
             return;
         }
@@ -252,7 +252,7 @@ export class Commands {
                 Log.Error('Command not implemented yet');
                 if (command[1]) {
                     const receiver: number = this.getPlayerIdFromColourName(command[1]);
-                    const receivingPlayer: Defender | undefined = players.get(receiver);
+                    const receivingPlayer: Defender | undefined = this.game.players.get(receiver);
                     if (receivingPlayer) {
                         this.VoteKick(player, receivingPlayer);
                     } else {
@@ -264,7 +264,7 @@ export class Commands {
             case 'send':
                 if (command[1] && command[2]) {
                     const receiver: number = this.getPlayerIdFromColourName(command[1]);
-                    const receivingPlayer: Defender | undefined = players.get(receiver);
+                    const receivingPlayer: Defender | undefined = this.game.players.get(receiver);
 
                     const amount: number = Util.ParsePositiveInt(command[2]);
                     if (!amount) {
@@ -338,25 +338,31 @@ export class Commands {
                             player.setHoloMaze(undefined);
                             break;
                         case '1':
-                            player.setHoloMaze(new CircleHoloMaze(imagePath,
-                                GetRectCenterX(firstCheckpoint.rectangle),
-                                GetRectCenterY(firstCheckpoint.rectangle),
-                                GetRectCenterX(secondCheckpoint.rectangle),
-                                GetRectCenterY(secondCheckpoint.rectangle)));
+                            player.setHoloMaze(
+                                new CircleHoloMaze(
+                                    imagePath,
+                                    GetRectCenterX(firstCheckpoint.rectangle),
+                                    GetRectCenterY(firstCheckpoint.rectangle),
+                                    GetRectCenterX(secondCheckpoint.rectangle),
+                                    GetRectCenterY(secondCheckpoint.rectangle)));
                             break;
                         case '2':
-                            player.setHoloMaze(new SimpleHoloMaze(imagePath,
-                                GetRectCenterX(firstCheckpoint.rectangle),
-                                GetRectCenterY(firstCheckpoint.rectangle),
-                                GetRectCenterX(secondCheckpoint.rectangle),
-                                GetRectCenterY(secondCheckpoint.rectangle)));
+                            player.setHoloMaze(
+                                new SimpleHoloMaze(
+                                    imagePath,
+                                    GetRectCenterX(firstCheckpoint.rectangle),
+                                    GetRectCenterY(firstCheckpoint.rectangle),
+                                    GetRectCenterX(secondCheckpoint.rectangle),
+                                    GetRectCenterY(secondCheckpoint.rectangle)));
                             break;
                         case '3':
-                            player.setHoloMaze(new AdvancedHoloMaze(imagePath,
-                                GetRectCenterX(firstCheckpoint.rectangle),
-                                GetRectCenterY(firstCheckpoint.rectangle),
-                                GetRectCenterX(secondCheckpoint.rectangle),
-                                GetRectCenterY(secondCheckpoint.rectangle)));
+                            player.setHoloMaze(
+                                new AdvancedHoloMaze(
+                                    imagePath,
+                                    GetRectCenterX(firstCheckpoint.rectangle),
+                                    GetRectCenterY(firstCheckpoint.rectangle),
+                                    GetRectCenterX(secondCheckpoint.rectangle),
+                                    GetRectCenterY(secondCheckpoint.rectangle)));
                             break;
                         default:
                             invalidMaze = true;
@@ -451,9 +457,9 @@ export class Commands {
                 player.setGold(player.getGold() - amount);
                 receivingPlayer.setGold(receivingPlayer.getGold() + amount);
                 player.sendMessage(
-                    `You've sent ${Util.ColourString('FFCC00', '' + amount)} gold to ${receivingPlayer.getNameWithColour()}`);
+                    `You've sent ${Util.ColourString('FFCC00', `${amount}`)} gold to ${receivingPlayer.getNameWithColour()}`);
                 receivingPlayer.sendMessage(
-                    `You've received ${Util.ColourString('FFCC00', '' + amount)} gold from ${player.getNameWithColour()}`);
+                    `You've received ${Util.ColourString('FFCC00', `${amount}`)} gold from ${player.getNameWithColour()}`);
 
             } else {
                 player.sendMessage('You do not have this much gold');
@@ -509,7 +515,7 @@ export class Commands {
 
     private CheckVotes(): void {
         const currentVotes: number = this.CountCurrentVotes();
-        const neededVotes: number = (players.size / 2) + 1;
+        const neededVotes: number = (this.game.players.size / 2) + 1;
         const missingVotes: number = neededVotes - currentVotes;
 
 
@@ -522,7 +528,7 @@ export class Commands {
                     MultiboardSetItemValueBJ(this.game.scoreBoard.board, 1, 7 + this.voteAgainstPlayer.scoreSlot,
                         Util.ColourString(this.voteAgainstPlayer.getColourCode(), '<Kicked>'));
                 }
-                players.delete(this.voteAgainstPlayer.id);
+                this.game.players.delete(this.voteAgainstPlayer.id);
 
                 SendMessage(`Votekick for ${this.voteAgainstPlayer.getNameWithColour()} has succeeded!`);
                 CustomDefeatBJ(this.voteAgainstPlayer.wcPlayer, 'Kicked!');
@@ -531,7 +537,7 @@ export class Commands {
                 this.voteKickInProgress = false;
             }
         } else {
-            SendMessage('You\'ll need ' + missingVotes + ' more votes to kick');
+            SendMessage(`You'll need ${missingVotes} more votes to kick`);
         }
     }
 

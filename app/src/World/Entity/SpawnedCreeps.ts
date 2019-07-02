@@ -50,7 +50,7 @@ export class SpawnedCreeps {
             this.worldMap.playerSpawns[area].AreaTowerActions(creep);
         }
 
-        const player: Defender | undefined = settings.players.get(GetPlayerId(GetOwningPlayer(GetKillingUnitBJ())));
+        const player: Defender | undefined = this.worldMap.game.players.get(GetPlayerId(GetOwningPlayer(GetKillingUnitBJ())));
         if (player) {
             player.GiveKillCount();
         }

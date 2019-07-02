@@ -83,7 +83,7 @@ export class TowerConstruction {
 
     private RemoveUpgradingTower(): void {
         const tower: unit = GetTriggerUnit();
-        const owner: Defender | undefined = settings.players.get(GetPlayerId(GetOwningPlayer(tower)));
+        const owner: Defender | undefined = this.game.players.get(GetPlayerId(GetOwningPlayer(tower)));
         if (!owner) {
             return;
         }
@@ -96,7 +96,7 @@ export class TowerConstruction {
     private ConstructionFinished(): void {
         const tower: unit = GetTriggerUnit();
 
-        const owner: Defender | undefined = settings.players.get(GetPlayerId(GetOwningPlayer(tower)));
+        const owner: Defender | undefined = this.game.players.get(GetPlayerId(GetOwningPlayer(tower)));
         UnitRemoveAbilityBJ(FourCC('ARal'), tower);
 
         if (!owner) {

@@ -2,9 +2,7 @@ import { Defender } from './Entity/Players/Defender';
 import { Attacker } from './Entity/Players/Attacker';
 import { Rectangle } from '../JassOverrides/Rectangle';
 
-export let players: Map<number, Defender> = new Map<number, Defender>();
 
-export const enemies: Attacker[] = [];
 
 export interface Point {
     x: number;

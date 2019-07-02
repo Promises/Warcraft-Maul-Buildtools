@@ -40,11 +40,15 @@ export class WarcraftMaul {
     sellTower: SellTower;
     private abilityHandler: GenericAbilityHandler;
 
+
+
+    players: Map<number, Defender> = new Map<number, Defender>();
+
+    enemies: Attacker[] = [];
+
     constructor() {
         // @ts-ignore to enable tests
 
-        const players: Map<number, Defender> = settings.players;
-        const enemies: Attacker[] = settings.enemies;
 
         // Should we enable debug mode?
         if (GetPlayerName(Player(COLOUR.RED)) === 'WorldEdit') {
@@ -63,20 +67,20 @@ export class WarcraftMaul {
         for (let i: number = 0; i < 24; i++) {
             if (GetPlayerSlotState(Player(i)) === PLAYER_SLOT_STATE_PLAYING) {
                 if (GetPlayerController(Player(i)) === MAP_CONTROL_USER) {
-                    players.set(i, new Defender(i, this));
+                    this.players.set(i, new Defender(i, this));
                 }
             }
         }
 
         // Set up enemies
-        enemies.push(new Attacker(COLOUR.NAVY));
-        enemies.push(new Attacker(COLOUR.TURQUOISE));
-        enemies.push(new Attacker(COLOUR.VOILET));
-        enemies.push(new Attacker(COLOUR.WHEAT));
+        this.enemies.push(new Attacker(COLOUR.NAVY, this));
+        this.enemies.push(new Attacker(COLOUR.TURQUOISE, this));
+        this.enemies.push(new Attacker(COLOUR.VOILET, this));
+        this.enemies.push(new Attacker(COLOUR.WHEAT, this));
 
         // All enemies should be allied with each other
-        for (const enemy of enemies) {
-            for (const enemyAlly of enemies) {
+        for (const enemy of this.enemies) {
+            for (const enemyAlly of this.enemies) {
                 enemy.makeAlliance(enemyAlly);
             }
         }
@@ -117,7 +121,7 @@ export class WarcraftMaul {
     }
 
     DefeatAllPlayers(): void {
-        for (const player of settings.players.values()) {
+        for (const player of this.players.values()) {
             player.defeatPlayer();
         }
     }

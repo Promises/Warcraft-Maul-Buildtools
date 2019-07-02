@@ -32,7 +32,7 @@ export class RacePicking {
         CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('h00O'), -1920.00, 2240.00, 0.00);
         CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('h03C'), -1920.00, 1856.00, 0.00);
         CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('h03K'), -1920.00, 1472.00, 0.00);
-        for (const player of settings.players.values()) {
+        for (const player of this.game.players.values()) {
             CreateUnit(player.wcPlayer, FourCC('e00C'), -1920.00, 3000.00, 0.00);
             CreateUnit(player.wcPlayer, FourCC('e00C'), -1920.00, 2624.00, 0.00);
             CreateUnit(player.wcPlayer, FourCC('e00C'), -1920.00, 2240.00, 0.00);
@@ -68,7 +68,7 @@ export class RacePicking {
 
 
     private RaceSelectionActions() {
-        const player = settings.players.get(GetPlayerId(GetOwningPlayer(GetBuyingUnit())));
+        const player = this.game.players.get(GetPlayerId(GetOwningPlayer(GetBuyingUnit())));
         if (!player) {
             return;
         }

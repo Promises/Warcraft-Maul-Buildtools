@@ -5,7 +5,6 @@ import '../spec/ceresmocking';
 
 import { WarcraftMaul } from './World/WarcraftMaul';
 import { StringSinkTest } from './lib/Serilog/Sinks/StringSinkTest';
-import * as settings from './World/GlobalSettings';
 import { Defender } from './World/Entity/Players/Defender';
 import { CheckPoint } from './World/Entity/CheckPoint';
 import { HologramCheckpointDistance } from './World/Holograms/HologramCheckpointDistance';
@@ -22,7 +21,7 @@ describe('Warcraft Maul', () => {
 
     it('there should be 13 players', () => {
 
-        assert.equals(settings.players.size, 13);
+        assert.equals(game.players.size, 13);
 
     });
 
@@ -62,24 +61,36 @@ describe('Warcraft Maul', () => {
 
         // const player: Defender = <Defender>settings.players.get(0);
 
-        for (let i: number = 0; i < Util.RandomInt(1, settings.players.size - 1); i++) {
-            game.gameRoundHandler.isWaveInProgress = !game.gameRoundHandler.isWaveInProgress;
+        for (let j = 0; j < Util.RandomInt(1, 100); j++) {
+            game = new WarcraftMaul();
 
-            const player: Defender = <Defender>settings.players.get(Util.GetRandomKey(settings.players));
-            print(`Chose ${player.id} ${game.gameRoundHandler.isWaveInProgress}`);
-            createTowersForPlayer(game, player);
-            assert.is_not_truthy(player.towers.size === 0);
-
-            player.PlayerLeftTheGame(game);
-            // print(player.towers.size);
-
-            const playerb: Defender = <Defender>settings.players.get(Util.GetRandomKey(settings.players));
+            const randomNum: number = Util.RandomInt(1, 2);
+            if (randomNum === 1) {
+                game.gameRoundHandler.isWaveInProgress = true;
+            } else {
+                game.gameRoundHandler.isWaveInProgress = false;
+            }
+            print(`RoundInProgress: ${game.gameRoundHandler.isWaveInProgress}`);
 
 
-            playerb.SellAll();
-            print(playerb.towers.size);
-            playerb.towers.forEach((tower) => assert.equals(GetUnitTypeId(tower.tower), FourCC('uC14')));
+            for (let i: number = 0; i < Util.RandomInt(1, game.players.size - 1); i++) {
+
+                const player: Defender = <Defender>game.players.get(Util.GetRandomKey(game.players));
+                createTowersForPlayer(game, player);
+                assert.is_not_truthy(player.towers.size === 0);
+
+                player.PlayerLeftTheGame(game);
+                // print(player.towers.size);
+
+                const playerb: Defender = <Defender>game.players.get(Util.GetRandomKey(game.players));
+                assert.equals(1, 2);
+
+                playerb.SellAll();
+                playerb.towers.forEach((tower) => assert.equals(GetUnitTypeId(tower.tower), FourCC('uC14')));
+            }
         }
+
+
         // }
 
 

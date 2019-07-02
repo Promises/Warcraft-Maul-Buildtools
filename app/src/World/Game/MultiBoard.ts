@@ -1,6 +1,6 @@
 import { WarcraftMaul } from '../WarcraftMaul';
 import * as settings from '../GlobalSettings';
-import { ARMOUR_TYPE_COLOURS, ARMOUR_TYPE_NAMES, players } from '../GlobalSettings';
+import { ARMOUR_TYPE_COLOURS, ARMOUR_TYPE_NAMES } from '../GlobalSettings';
 
 export class MultiBoard {
     board: multiboard;
@@ -12,7 +12,7 @@ export class MultiBoard {
 
         this.scoreboardColumnWidth[1] = 10.00;
         this.scoreboardColumnWidth[2] = 8.00;
-        this.board = CreateMultiboardBJ(2, settings.players.size + 7, settings.GAME_NAME);
+        this.board = CreateMultiboardBJ(2, this.game.players.size + 7, settings.GAME_NAME);
         MultiboardSetItemValueBJ(this.board, 1, 1, 'Starting in');
         MultiboardSetItemValueBJ(this.board, 2, 1, this.game.waveTimer + '');
         MultiboardSetItemValueBJ(this.board, 1, 2, 'Level');
@@ -66,7 +66,7 @@ export class MultiBoard {
 
     private InitializePlayerScores(): void {
         let count = 0;
-        for (const player of settings.players.values()) {
+        for (const player of this.game.players.values()) {
             player.scoreSlot = count;
             MultiboardSetItemValueBJ(this.board, 1, 7 + count, player.getNameWithColour());
             MultiboardSetItemValueBJ(this.board, 2, 7 + count, '' + player.kills);
