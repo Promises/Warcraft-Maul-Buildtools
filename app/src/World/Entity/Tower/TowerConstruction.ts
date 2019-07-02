@@ -42,6 +42,33 @@ import { Warden } from './NightElf/Warden';
 import { Rokhan } from './OrcStronghold/Rokhan';
 import { WarchiefThrall } from './OrcStronghold/WarchiefThrall';
 import { Magtheridon } from './Outland/Magtheridon';
+import { Prawn } from './Summons/Prawn';
+import { Wisp } from './NightElf/Wisp';
+import { VoidPriest } from './Void/VoidPriest';
+import { KodoBeast } from './ShrineOfBuffs/KodoBeast';
+import { Berserker } from './OrcStronghold/Berserker';
+import { DemonizedDreadlord } from './Demon/DemonizedDreadlord';
+import { VoidFissure } from './Void/VoidFissure';
+import { ParasiticBroodmother } from './Arachnid/ParasiticBroodmother';
+import { DraeneiSeer } from './Draenei/DraeneiSeer';
+import { Akama } from './Draenei/Akama';
+import { SalamanderLord } from './Draenei/SalamanderLord';
+import { Gyrocopter } from './Aviaries/Gyrocopter';
+import { FleshGolem } from './Giants/FleshGolem';
+import { Kael } from './HighElven/Kael';
+import { LavaSpawn } from './Summons/LavaSpawn';
+import { StarChaser } from './Galaxy/StarChaser';
+import { CelestialMist } from './Galaxy/CelestialMist';
+import { FlyingDwarf } from './Dwaven/FlyingDwarf';
+import { SirGalahad } from './Human/SirGalahad';
+import { ForestTrollHighPriest } from './ForestTrolls/ForestTrollHighPriest';
+import { GoblinSapper } from './Goblin/GoblinSapper';
+import { GoblinAlchemist } from './Goblin/GoblinAlchemist';
+import { BronzeDragonWhelp } from './Dragons/BronzeDragonWhelp';
+import { BronzeDrake } from './Dragons/BronzeDrake';
+import { BronzeDragon } from './Dragons/BronzeDragon';
+import { GargoyleSpire } from './Forsaken/GargoyleSpire';
+import { Varimathras } from './Forsaken/Varimathras';
 
 
 export class TowerConstruction {
@@ -178,6 +205,12 @@ export class TowerConstruction {
         // Arachnid
         this.towerTypes.set(FourCC('o019'), AcidSpittingSpider);
         this.towerTypes.set(FourCC('h00W'), NerubianBehemoth);
+        this.towerTypes.set(FourCC('o01A'), ParasiticBroodmother);
+
+        // Aviaries
+        this.towerTypes.set(FourCC('oC60'), Wyvern);
+        this.towerTypes.set(FourCC('hC36'), Gyrocopter);
+
 
         // Cavernous Creatures
         this.towerTypes.set(FourCC('h04Q'), CavernDruid);
@@ -194,40 +227,79 @@ export class TowerConstruction {
         this.towerTypes.set(FourCC('o00L'), Mannoroth);
         this.towerTypes.set(FourCC('n00U'), SummoningShrine);
         this.towerTypes.set(FourCC('eC93'), KilJaeden);
+        this.towerTypes.set(FourCC('h00F'), DemonizedDreadlord);
+
+        // Draenei
+        this.towerTypes.set(FourCC('h04F'), DraeneiSeer);
+        this.towerTypes.set(FourCC('h00I'), Akama);
+        this.towerTypes.set(FourCC('h04I'), SalamanderLord);
+
+        // Dragons
+        this.towerTypes.set(FourCC('o00M'), BronzeDragonWhelp);
+        this.towerTypes.set(FourCC('o01F'), BronzeDrake);
+        this.towerTypes.set(FourCC('o01K'), BronzeDragon);
 
 
         // Dwarven
         this.towerTypes.set(FourCC('n05Q'), DwarfKing);
+        this.towerTypes.set(FourCC('n05N'), FlyingDwarf);
+
+        // Forest Trolls
+        this.towerTypes.set(FourCC('n03I'), ForestTrollHighPriest);
+
+        // Forsaken
+        this.towerTypes.set(FourCC('u00F'), GargoyleSpire);
+        this.towerTypes.set(FourCC('u012'), Varimathras);
 
         // Galaxy
         this.towerTypes.set(FourCC('e00K'), MoonDancer);
+        this.towerTypes.set(FourCC('e00P'), StarChaser);
+        this.towerTypes.set(FourCC('e00R'), CelestialMist);
 
         // Giants
         this.towerTypes.set(FourCC('oC35'), OgreWarrior);
+        this.towerTypes.set(FourCC('o00G'), FleshGolem);
 
         // Goblin
         this.towerTypes.set(FourCC('o01R'), GoblinMineLayer);
         this.towerTypes.set(FourCC('o01S'), GoblinTinkerer);
         this.towerTypes.set(FourCC('o01P'), GoblinBlademaster);
+        this.towerTypes.set(FourCC('o01M'), GoblinSapper);
+        this.towerTypes.set(FourCC('o01O'), GoblinAlchemist);
+
+        // High Elven
+        this.towerTypes.set(FourCC('o00N'), Kael);
 
         // Human
         this.towerTypes.set(FourCC('h045'), VenomTower);
-
-        // Aviaries
-        this.towerTypes.set(FourCC('oC60'), Wyvern);
+        this.towerTypes.set(FourCC('n05C'), SirGalahad);
 
         // Night Elf
         this.towerTypes.set(FourCC('h00S'), DemonicIllidan);
         this.towerTypes.set(FourCC('eC83'), CorruptedIllidan);
         this.towerTypes.set(FourCC('h00G'), Warden);
+        this.towerTypes.set(FourCC('e00E'), Wisp);
+
 
         // Orc Stronghold
         this.towerTypes.set(FourCC('h002'), Rokhan);
         this.towerTypes.set(FourCC('oC65'), WarchiefThrall);
+        this.towerTypes.set(FourCC('o00E'), Berserker);
 
         // Outland
         this.towerTypes.set(FourCC('u01C'), Magtheridon);
 
+
+        // Summons
+        this.towerTypes.set(FourCC('h027'), Prawn);
+        this.towerTypes.set(FourCC('h026'), LavaSpawn);
+
+        // Shrine of buffs
+        this.towerTypes.set(FourCC('oC58'), KodoBeast);
+
+        // Void
+        this.towerTypes.set(FourCC('h02F'), VoidPriest);
+        this.towerTypes.set(FourCC('h01M'), VoidFissure);
 
         // AntiJuggle
         this.towerTypes.set(FourCC('uC14'), AntiJuggleTower);
