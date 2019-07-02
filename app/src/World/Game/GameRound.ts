@@ -14,7 +14,6 @@ import { ARMOUR_TYPE_COLOURS, ARMOUR_TYPE_NAMES, CREEP_TYPE_COLOURS } from '../G
 export class GameRound {
 
 
-
     private gameTimeTrigger: Trigger;
     private roundEndTrigger: Trigger;
     private game: WarcraftMaul;
@@ -261,6 +260,9 @@ export class GameRound {
                 spawnAmount = 1;
                 break;
 
+        }
+        if (wave.wave > 35) {
+            spawnAmount = 1;
         }
         if (this._currentWave === 35) {
             SetTimeOfDay(0.00);
