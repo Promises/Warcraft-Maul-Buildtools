@@ -39,6 +39,9 @@ import { AntiJuggleTower } from './AntiJuggle/AntiJuggleTower';
 import { DemonicIllidan } from './NightElf/DemonicIllidan';
 import { CorruptedIllidan } from './NightElf/CorruptedIllidan';
 import { Warden } from './NightElf/Warden';
+import { Rokhan } from './OrcStronghold/Rokhan';
+import { WarchiefThrall } from './OrcStronghold/WarchiefThrall';
+import { Magtheridon } from './Outland/Magtheridon';
 
 
 export class TowerConstruction {
@@ -217,6 +220,13 @@ export class TowerConstruction {
         this.towerTypes.set(FourCC('h00S'), DemonicIllidan);
         this.towerTypes.set(FourCC('eC83'), CorruptedIllidan);
         this.towerTypes.set(FourCC('h00G'), Warden);
+
+        // Orc Stronghold
+        this.towerTypes.set(FourCC('h002'), Rokhan);
+        this.towerTypes.set(FourCC('oC65'), WarchiefThrall);
+
+        // Outland
+        this.towerTypes.set(FourCC('u01C'), Magtheridon);
 
 
         // AntiJuggle
