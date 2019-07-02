@@ -8,6 +8,8 @@ import * as settings from '../../../GlobalSettings';
 import { Log } from '../../../../lib/Serilog/Serilog';
 import { Rectangle } from '../../../../JassOverrides/Rectangle';
 import { InitialDamageModificationTower } from './InitialDamageModificationTower';
+import { KillingActionTower } from './KillingActionTower';
+import { TowerForce } from './TowerForce';
 
 export class Tower {
 
@@ -29,6 +31,10 @@ export class Tower {
 
     public GetName(): string {
         return GetUnitName(this.tower);
+    }
+
+    public GetID(): number {
+        return GetUnitTypeId(this.tower);
     }
 
     public GetRectangle(): Rectangle {
@@ -78,8 +84,17 @@ export class Tower {
         return 'GenericAttack' in this;
     }
 
+    public IsKillingActionTower(): this is KillingActionTower {
+        return 'KillingAction' in this;
+    }
+
+
     public IsAreaEffectTower(): this is PassiveCreepDiesInAreaEffectTower {
         return 'PassiveCreepDiesInAreaEffect' in this;
+    }
+
+    public IsTowerForceTower(): this is TowerForce {
+        return 'UpdateSize' in this;
     }
 
     public Sell(): void {
@@ -95,6 +110,19 @@ export class Tower {
         }
         if (this.IsGenericAutoAttackTower()) {
             this.game.worldMap.towerConstruction.genericAttacks.delete(this.handleId);
+        }
+        if (this.IsKillingActionTower()) {
+            this.game.worldMap.towerConstruction.killingActions.delete(this.handleId);
+        }
+        if (this.IsTowerForceTower()) {
+            if (this.owner.towerForces.has(this.GetID())) {
+                this.owner.towerForces.set(this.GetID(), <number>this.owner.towerForces.get(this.GetID()) - 1);
+                for (const towerx of this.owner.towers.values()) {
+                    if (towerx.IsTowerForceTower() && towerx.GetID === this.GetID) {
+                        towerx.UpdateSize();
+                    }
+                }
+            }
         }
         if (this.IsAreaEffectTower()) {
             let area: number | undefined;

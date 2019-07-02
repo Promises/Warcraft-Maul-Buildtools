@@ -71,6 +71,10 @@ import { GargoyleSpire } from './Forsaken/GargoyleSpire';
 import { Varimathras } from './Forsaken/Varimathras';
 import { GrowthLvl2 } from './CavernousCreatures/Growth/GrowthLvl2';
 import { GrowthLvl3 } from './CavernousCreatures/Growth/GrowthLvl3';
+import { AncientMonstrosity } from './Unique/AncientMonstrosity';
+import { KillingActionTower } from './Specs/KillingActionTower';
+import { Hydralisk } from './Unique/Hydralisk';
+import { Marine } from './Unique/Marine';
 
 
 export class TowerConstruction {
@@ -78,7 +82,9 @@ export class TowerConstruction {
     private towerRemoveUpgradeTrigger: Trigger;
     private towerTypes: Map<number, object> = new Map<number, object>();
     public genericAttacks: Map<number, GenericAutoAttackTower> = new Map<number, GenericAutoAttackTower>();
+    public killingActions: Map<number, KillingActionTower> = new Map<number, KillingActionTower>();
     private genericAttackTrigger: Trigger;
+    private killingActionsTrigger: Trigger;
     private game: WarcraftMaul;
     private lootBoxerHander: LootBoxerHandler;
     public lootBoxerTowers: number[] = [
@@ -114,6 +120,13 @@ export class TowerConstruction {
         this.genericAttackTrigger.RegisterPlayerUnitEventSimple(Player(COLOUR.VOILET), EVENT_PLAYER_UNIT_ATTACKED);
         this.genericAttackTrigger.RegisterPlayerUnitEventSimple(Player(COLOUR.WHEAT), EVENT_PLAYER_UNIT_ATTACKED);
         this.genericAttackTrigger.AddAction(() => this.DoGenericTowerAttacks());
+
+        this.killingActionsTrigger = new Trigger();
+        this.killingActionsTrigger.RegisterPlayerUnitEventSimple(Player(COLOUR.NAVY), EVENT_PLAYER_UNIT_DEATH);
+        this.killingActionsTrigger.RegisterPlayerUnitEventSimple(Player(COLOUR.TURQUOISE), EVENT_PLAYER_UNIT_DEATH);
+        this.killingActionsTrigger.RegisterPlayerUnitEventSimple(Player(COLOUR.VOILET), EVENT_PLAYER_UNIT_DEATH);
+        this.killingActionsTrigger.RegisterPlayerUnitEventSimple(Player(COLOUR.WHEAT), EVENT_PLAYER_UNIT_DEATH);
+        this.killingActionsTrigger.AddAction(() => this.DoKillingTowerActions());
     }
 
     private RemoveUpgradingTower(): void {
@@ -169,6 +182,23 @@ export class TowerConstruction {
         if (ObjectExtendsTower.IsGenericAutoAttackTower()) {
             this.genericAttacks.set(ObjectExtendsTower.handleId, ObjectExtendsTower);
         }
+        if (ObjectExtendsTower.IsKillingActionTower()) {
+            this.killingActions.set(ObjectExtendsTower.handleId, ObjectExtendsTower);
+        }
+        if (ObjectExtendsTower.IsTowerForceTower()) {
+            if (owner.towerForces.has(ObjectExtendsTower.GetID())) {
+                owner.towerForces.set(ObjectExtendsTower.GetID(), <number>owner.towerForces.get(ObjectExtendsTower.GetID()) + 1);
+                for (const towerx of owner.towers.values()) {
+                    if (towerx.IsTowerForceTower() && towerx.GetID === ObjectExtendsTower.GetID) {
+                        towerx.UpdateSize();
+                    }
+                }
+            } else {
+                owner.towerForces.set(ObjectExtendsTower.GetID(), 1);
+            }
+        }
+
+
         if (ObjectExtendsTower.IsAreaEffectTower()) {
             let area: number | undefined;
 
@@ -305,6 +335,11 @@ export class TowerConstruction {
         this.towerTypes.set(FourCC('h02F'), VoidPriest);
         this.towerTypes.set(FourCC('h01M'), VoidFissure);
 
+        // Unique
+        this.towerTypes.set(FourCC('h02K'), AncientMonstrosity);
+        this.towerTypes.set(FourCC('h02L'), Hydralisk);
+        this.towerTypes.set(FourCC('h02H'), Marine);
+
         // AntiJuggle
         this.towerTypes.set(FourCC('uC14'), AntiJuggleTower);
     }
@@ -312,6 +347,12 @@ export class TowerConstruction {
     private DoGenericTowerAttacks(): void {
         for (const tower of this.genericAttacks.values()) {
             tower.GenericAttack();
+        }
+    }
+
+    private DoKillingTowerActions(): void {
+        for (const tower of this.killingActions.values()) {
+            tower.KillingAction();
         }
     }
 

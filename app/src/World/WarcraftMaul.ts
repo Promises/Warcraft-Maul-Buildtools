@@ -64,8 +64,9 @@ export class WarcraftMaul {
             Log.Init([
                 new StringSink(LogLevel.Verbose, SendMessage),
             ]);
-            Log.Verbose('Registered replay state, printing verbose');
         }
+        Log.Verbose('Registered replay state, printing verbose');
+
         // Set up all players
         for (let i: number = 0; i < 24; i++) {
             if (GetPlayerSlotState(Player(i)) === PLAYER_SLOT_STATE_PLAYING) {

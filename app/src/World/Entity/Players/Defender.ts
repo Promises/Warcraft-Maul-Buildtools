@@ -8,6 +8,10 @@ import { AbstractHologramMaze } from '../../Holograms/AbstractHologramMaze';
 import { Tower } from '../Tower/Specs/Tower';
 
 export class Defender extends AbstractPlayer {
+    get towerForces(): Map<number, number> {
+        return this._towerForces;
+    }
+
     get builders(): unit[] {
         return this._builders;
     }
@@ -36,6 +40,8 @@ export class Defender extends AbstractPlayer {
     private holoMaze: AbstractHologramMaze | undefined = undefined;
     private game: WarcraftMaul;
     private _builders: unit[] = [];
+
+    private _towerForces: Map<number, number> = new Map<number, number>();
 
     constructor(id: number, game: WarcraftMaul) {
         super(id);
