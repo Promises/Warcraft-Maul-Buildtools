@@ -83,7 +83,6 @@ describe('Warcraft Maul', () => {
                 // print(player.towers.size);
 
                 const playerb: Defender = <Defender>game.players.get(Util.GetRandomKey(game.players));
-                assert.equals(1, 2);
 
                 playerb.SellAll();
                 playerb.towers.forEach((tower) => assert.equals(GetUnitTypeId(tower.tower), FourCC('uC14')));
