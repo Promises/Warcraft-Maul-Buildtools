@@ -1,11 +1,12 @@
 import { Tower } from '../Specs/Tower';
 import { AttackActionTower } from '../Specs/AttackActionTower';
 
-export class DemonicIllidan extends Tower implements AttackActionTower {
+export class WarchiefThrall extends Tower implements AttackActionTower {
     public AttackAction(): void {
         const u: unit | undefined = this.game.gameDamageEngineGlobals.udg_DamageEventSource;
         const target: unit | undefined = this.game.gameDamageEngineGlobals.udg_DamageEventTarget;
-        if (!this.game.gameDamageEngineGlobals.udg_IsDamageSpell) {
+
+        if (Util.RandomInt(1, 100) > 5) {
             return;
         }
         if (u === this.tower && target) {
@@ -13,12 +14,12 @@ export class DemonicIllidan extends Tower implements AttackActionTower {
             const tempUnit: unit = CreateUnit(
                 this.owner.wcPlayer,
                 FourCC('u008'),
-                GetUnitX(target),
-                GetUnitY(target),
+                GetUnitX(this.tower),
+                GetUnitY(this.tower),
                 bj_UNIT_FACING);
-            UnitApplyTimedLifeBJ(4.00, FourCC('BTLF'), tempUnit);
-            UnitAddAbilityBJ(FourCC('A0BZ'), tempUnit);
-            IssueTargetOrderBJ(tempUnit, 'soulburn', target);
+            UnitApplyTimedLifeBJ(3.00, FourCC('BTLF'), tempUnit);
+            UnitAddAbilityBJ(FourCC('A03J'), tempUnit);
+            IssueTargetOrderBJ(tempUnit, 'forkedlightning', target);
         }
     }
 }
