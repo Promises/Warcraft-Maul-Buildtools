@@ -239,6 +239,7 @@ export class Commands {
                 break;
             case 'sa':
             case 'sellall':
+                Log.Debug('[command] sellall');
                 player.SellAll();
                 break;
             case 'y':

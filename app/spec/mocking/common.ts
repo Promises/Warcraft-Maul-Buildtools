@@ -1,7 +1,7 @@
 import { Rectangle } from '../../src/JassOverrides/Rectangle';
 
 
-_G.DisplayTimedTextToForce = function (toForce: force, duration: number, message: string): void {
+_G.DisplayTimedTextToForce = function (this: void, toForce: force, duration: number, message: string): void {
     print(`[SendMessage]: ${message}`);
 };
 _G.sound = {
@@ -81,5 +81,11 @@ _G.TriggerSleepAction = function (timeout: number): void {
 
 //declare function DisplayTimedTextToPlayer(toPlayer: player, x: number, y: number, duration: number, message: string): void
 _G.DisplayTimedTextToPlayer = function (toPlayer: player, x: number, y: number, duration: number, message: string): void {
+    return;
+}
+
+
+//SetTerrainPathable(x: number, y: number, t: pathingtype, flag: boolean): void
+_G.SetTerrainPathable = function (x: number, y: number, t: pathingtype, flag: boolean): void {
     return;
 }

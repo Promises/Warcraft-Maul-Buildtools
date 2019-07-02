@@ -81,3 +81,10 @@ _G.RemoveUnit = function (whichUnit: unit): void {
     // @ts-ignore
     unitTable[unitTable.indexOf(whichUnit)] = null;
 };
+
+
+// declare function ReplaceUnitBJ(whichUnit: unit, newUnitId: number, unitStateMethod: number): unit
+_G.ReplaceUnitBJ = function (whichUnit: unit, newUnitId: number, unitStateMethod: number): unit {
+    whichUnit.unitid = newUnitId;
+    return whichUnit;
+};

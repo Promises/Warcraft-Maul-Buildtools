@@ -42,7 +42,6 @@ export class WarcraftMaul {
 
     constructor() {
         // @ts-ignore to enable tests
-        settings.players = new Map<number, Defender>();
 
         const players: Map<number, Defender> = settings.players;
         const enemies: Attacker[] = settings.enemies;

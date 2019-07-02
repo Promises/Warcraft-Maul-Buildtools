@@ -24,6 +24,11 @@ export class SellTower {
 
 
     public SellTower(unit: unit): void {
+
+        if (GetUnitTypeId(unit) === FourCC('uC14')) {
+            return;
+        }
+
         let value: number = GetUnitPointValue(unit);
         let playerSpawnId: undefined | number;
         for (let i: number = 0; i < settings.PLAYER_AREAS.length; i++) {
@@ -34,7 +39,7 @@ export class SellTower {
         }
 
         if (playerSpawnId === undefined) {
-            Log.Error('Unable to locate the correct player spawn');
+            Log.Fatal('Unable to locate the correct player spawn');
             return;
         }
 
@@ -79,6 +84,7 @@ export class SellTower {
             maze.setWalkable(rightSide + topSide * maze.width, true);
             RemoveUnit(unit);
         }
+
     }
 
     private FindAndSellTower(): void {

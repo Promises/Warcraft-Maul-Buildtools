@@ -6,6 +6,7 @@ import { Trigger } from '../../../JassOverrides/Trigger';
 import { WarcraftMaul } from '../../WarcraftMaul';
 import { AbstractHologramMaze } from '../../Holograms/AbstractHologramMaze';
 import { Tower } from '../Tower/Specs/Tower';
+import { Log } from '../../../lib/Serilog/Serilog';
 
 export class Defender extends AbstractPlayer {
     get builders(): unit[] {
@@ -118,9 +119,8 @@ export class Defender extends AbstractPlayer {
         game.worldMap.playerSpawns[this.id].isOpen = false;
         if (game.scoreBoard) {
             MultiboardSetItemValueBJ(game.scoreBoard.board, 1, 7 + this._scoreSlot,
-                                     Util.ColourString(this.getColourCode(), '<Quit>'));
+                Util.ColourString(this.getColourCode(), '<Quit>'));
         }
-
         players.delete(this.id);
 
         this.DistributePlayerGold();
@@ -258,14 +258,13 @@ export class Defender extends AbstractPlayer {
     }
 
     private DistributePlayerTowers(): void {
-        players.values();
         for (const tower of this.towers.values()) {
             tower.Sell();
-            const newOwner: Defender | undefined = players.get(Util.GetRandomKey(players));
-            if (newOwner) {
-                const nutower: Tower = tower.SetOwnership(newOwner);
-                nutower.SetLeaverSellValue();
-            }
+            const newOwner: Defender = <Defender>players.get(Util.GetRandomKey(players));
+
+            const nutower: Tower = tower.SetOwnership(newOwner);
+            nutower.SetLeaverSellValue();
+
         }
         for (const builder of this.builders) {
             RemoveUnit(builder);
@@ -295,8 +294,13 @@ export class Defender extends AbstractPlayer {
     }
 
     public SellAll(): void {
-        for (const tower of this.towers.values()) {
+
+        const keys = Util.GetAllKeys(this.towers);
+
+        for (const key of keys) {
+            const tower: Tower = <Tower>this.towers.get(key);
             if (tower.leaverOwned) {
+
                 this.game.sellTower.SellTower(tower.tower);
             }
         }

@@ -7,7 +7,7 @@ import { StringSink } from './lib/Serilog/Sinks/StringSink';
 
 ceres.addHook('main::after', () => {
     Log.Init([
-        new StringSink(LogLevel.Fatal, SendMessage),
+        new StringSink(LogLevel.Error, SendMessage),
     ]);
 
 

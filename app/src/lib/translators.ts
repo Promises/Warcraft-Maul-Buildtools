@@ -41,6 +41,14 @@ class Util {
         }
     }
 
+    static GetAllKeys(collection: Map<any, any>): any[] {
+        const keys: any[] = [];
+        for (const key of collection.keys()) {
+            keys.push(key);
+        }
+        return keys;
+    }
+
     static COLOUR_IDS: ColourToIndex = {
         'RED': 0,
         'BLUE': 1,

@@ -10,18 +10,19 @@ import { Defender } from './World/Entity/Players/Defender';
 import { CheckPoint } from './World/Entity/CheckPoint';
 import { HologramCheckpointDistance } from './World/Holograms/HologramCheckpointDistance';
 
-Log.Init([
-             new StringSinkTest(LogLevel.Fatal, print),
-         ]);
 
+Log.Init([
+    new StringSinkTest(LogLevel.Error, print),
+]);
 
 describe('Warcraft Maul', () => {
+
     let game: WarcraftMaul = new WarcraftMaul();
+
 
     it('there should be 13 players', () => {
 
         assert.equals(settings.players.size, 13);
-        assert.equals(game.PrettifyGameTime(1000), '|cFF99999900:16:40|r');
 
     });
 
@@ -60,25 +61,25 @@ describe('Warcraft Maul', () => {
     it('player constructs a bunch of  towers, and leaves', () => {
 
         // const player: Defender = <Defender>settings.players.get(0);
-        game.gameRoundHandler.isWaveInProgress = true;
 
-            for (let i: number = 0; i < Util.RandomInt(1, settings.players.size - 1); i++) {
+        for (let i: number = 0; i < Util.RandomInt(1, settings.players.size - 1); i++) {
+            game.gameRoundHandler.isWaveInProgress = !game.gameRoundHandler.isWaveInProgress;
 
-                const player: Defender = <Defender>settings.players.get(Util.GetRandomKey(settings.players));
-                print(`Chose ${player.id} ${game.gameRoundHandler.isWaveInProgress}`);
-                createTowersForPlayer(game, player);
-                print(player.towers.size);
+            const player: Defender = <Defender>settings.players.get(Util.GetRandomKey(settings.players));
+            print(`Chose ${player.id} ${game.gameRoundHandler.isWaveInProgress}`);
+            createTowersForPlayer(game, player);
+            assert.is_not_truthy(player.towers.size === 0);
 
-                player.PlayerLeftTheGame(game);
-                print(player.towers.size);
+            player.PlayerLeftTheGame(game);
+            // print(player.towers.size);
 
-                const playerb: Defender = <Defender>settings.players.get(Util.GetRandomKey(settings.players));
-                print(playerb.towers.size);
+            const playerb: Defender = <Defender>settings.players.get(Util.GetRandomKey(settings.players));
 
-                playerb.SellAll();
-                print(playerb.towers.size);
-                assert.equals(playerb.towers.size, 0);
-            }
+
+            playerb.SellAll();
+            print(playerb.towers.size);
+            playerb.towers.forEach((tower) => assert.equals(GetUnitTypeId(tower.tower), FourCC('uC14')));
+        }
         // }
 
 
@@ -112,64 +113,64 @@ function createTowersForPlayer(game: WarcraftMaul, player: Defender): void {
         secondCheckpointX - firstCheckpointX,
         secondCheckpointY - firstCheckpointY);
     game.worldMap.towerConstruction.SetupTower(CreateUnit(player.wcPlayer, FourCC('h03G'),
-                                                          firstCheckpointX + dist.yDividedBy9,
-                                                          firstCheckpointY + dist.xDividedBy9, bj_UNIT_FACING), player);
+        firstCheckpointX + dist.yDividedBy9,
+        firstCheckpointY + dist.xDividedBy9, bj_UNIT_FACING), player);
     game.worldMap.towerConstruction.SetupTower(CreateUnit(player.wcPlayer, FourCC('h03G'),
-                                                          firstCheckpointX + dist.xDividedBy9,
-                                                          firstCheckpointY + dist.yDividedBy9, bj_UNIT_FACING), player);
+        firstCheckpointX + dist.xDividedBy9,
+        firstCheckpointY + dist.yDividedBy9, bj_UNIT_FACING), player);
     game.worldMap.towerConstruction.SetupTower(CreateUnit(player.wcPlayer, FourCC('h03G'),
-                                                          firstCheckpointX - dist.yDividedBy9,
-                                                          firstCheckpointY - dist.xDividedBy9, bj_UNIT_FACING), player);
+        firstCheckpointX - dist.yDividedBy9,
+        firstCheckpointY - dist.xDividedBy9, bj_UNIT_FACING), player);
     game.worldMap.towerConstruction.SetupTower(CreateUnit(player.wcPlayer, FourCC('h03G'),
-                                                          firstCheckpointX - dist.xDividedBy9 - dist.yDividedBy18,
-                                                          firstCheckpointY - dist.yDividedBy9 - dist.xDividedBy18, bj_UNIT_FACING), player);
+        firstCheckpointX - dist.xDividedBy9 - dist.yDividedBy18,
+        firstCheckpointY - dist.yDividedBy9 - dist.xDividedBy18, bj_UNIT_FACING), player);
     game.worldMap.towerConstruction.SetupTower(CreateUnit(player.wcPlayer, FourCC('h03G'),
-                                                          firstCheckpointX - dist.xDividedBy9 - dist.xDividedBy18 + dist.yDividedBy9 - dist.yDividedBy18,
-                                                          firstCheckpointY - dist.yDividedBy9 - dist.yDividedBy18 + dist.xDividedBy9 - dist.xDividedBy18, bj_UNIT_FACING), player);
+        firstCheckpointX - dist.xDividedBy9 - dist.xDividedBy18 + dist.yDividedBy9 - dist.yDividedBy18,
+        firstCheckpointY - dist.yDividedBy9 - dist.yDividedBy18 + dist.xDividedBy9 - dist.xDividedBy18, bj_UNIT_FACING), player);
     game.worldMap.towerConstruction.SetupTower(CreateUnit(player.wcPlayer, FourCC('h03G'),
-                                                          firstCheckpointX - dist.xDividedBy9 - dist.xDividedBy18 + 2 * dist.yDividedBy9 - dist.yDividedBy18,
-                                                          firstCheckpointY - dist.yDividedBy9 - dist.yDividedBy18 + 2 * dist.xDividedBy9 - dist.xDividedBy18, bj_UNIT_FACING), player);
+        firstCheckpointX - dist.xDividedBy9 - dist.xDividedBy18 + 2 * dist.yDividedBy9 - dist.yDividedBy18,
+        firstCheckpointY - dist.yDividedBy9 - dist.yDividedBy18 + 2 * dist.xDividedBy9 - dist.xDividedBy18, bj_UNIT_FACING), player);
     game.worldMap.towerConstruction.SetupTower(CreateUnit(player.wcPlayer, FourCC('h03G'),
-                                                          firstCheckpointX - dist.xDividedBy18 + 3 * dist.yDividedBy9 - dist.yDividedBy18,
-                                                          firstCheckpointY - dist.yDividedBy18 + 3 * dist.xDividedBy9 - dist.xDividedBy18, bj_UNIT_FACING), player);
+        firstCheckpointX - dist.xDividedBy18 + 3 * dist.yDividedBy9 - dist.yDividedBy18,
+        firstCheckpointY - dist.yDividedBy18 + 3 * dist.xDividedBy9 - dist.xDividedBy18, bj_UNIT_FACING), player);
     game.worldMap.towerConstruction.SetupTower(CreateUnit(player.wcPlayer, FourCC('h03G'),
-                                                          firstCheckpointX + dist.xDividedBy18 + 3 * dist.yDividedBy9 - dist.yDividedBy18,
-                                                          firstCheckpointY + dist.yDividedBy18 + 3 * dist.xDividedBy9 - dist.xDividedBy18, bj_UNIT_FACING), player);
+        firstCheckpointX + dist.xDividedBy18 + 3 * dist.yDividedBy9 - dist.yDividedBy18,
+        firstCheckpointY + dist.yDividedBy18 + 3 * dist.xDividedBy9 - dist.xDividedBy18, bj_UNIT_FACING), player);
     game.worldMap.towerConstruction.SetupTower(CreateUnit(player.wcPlayer, FourCC('h03G'),
-                                                          firstCheckpointX + dist.xDividedBy9 + dist.xDividedBy18 + 2 * dist.yDividedBy9 - dist.yDividedBy18,
-                                                          firstCheckpointY + dist.yDividedBy9 + dist.yDividedBy18 + 2 * dist.xDividedBy9 - dist.xDividedBy18, bj_UNIT_FACING), player);
+        firstCheckpointX + dist.xDividedBy9 + dist.xDividedBy18 + 2 * dist.yDividedBy9 - dist.yDividedBy18,
+        firstCheckpointY + dist.yDividedBy9 + dist.yDividedBy18 + 2 * dist.xDividedBy9 - dist.xDividedBy18, bj_UNIT_FACING), player);
     game.worldMap.towerConstruction.SetupTower(CreateUnit(player.wcPlayer, FourCC('h03G'),
-                                                          firstCheckpointX + 2 * dist.xDividedBy9 + dist.xDividedBy18 + dist.yDividedBy9 - dist.yDividedBy18,
-                                                          firstCheckpointY + 2 * dist.yDividedBy9 + dist.yDividedBy18 + dist.xDividedBy9 - dist.xDividedBy18, bj_UNIT_FACING), player);
+        firstCheckpointX + 2 * dist.xDividedBy9 + dist.xDividedBy18 + dist.yDividedBy9 - dist.yDividedBy18,
+        firstCheckpointY + 2 * dist.yDividedBy9 + dist.yDividedBy18 + dist.xDividedBy9 - dist.xDividedBy18, bj_UNIT_FACING), player);
     game.worldMap.towerConstruction.SetupTower(CreateUnit(player.wcPlayer, FourCC('h03G'),
-                                                          firstCheckpointX + 2 * dist.xDividedBy9 + dist.xDividedBy18 - dist.yDividedBy18,
-                                                          firstCheckpointY + 2 * dist.yDividedBy9 + dist.yDividedBy18 - dist.xDividedBy18, bj_UNIT_FACING), player);
+        firstCheckpointX + 2 * dist.xDividedBy9 + dist.xDividedBy18 - dist.yDividedBy18,
+        firstCheckpointY + 2 * dist.yDividedBy9 + dist.yDividedBy18 - dist.xDividedBy18, bj_UNIT_FACING), player);
     game.worldMap.towerConstruction.SetupTower(CreateUnit(player.wcPlayer, FourCC('h03G'),
-                                                          firstCheckpointX + dist.xDividedBy9 + dist.xDividedBy18 - dist.yDividedBy9 - dist.yDividedBy18,
-                                                          firstCheckpointY + dist.yDividedBy9 + dist.yDividedBy18 - dist.xDividedBy9 - dist.xDividedBy18, bj_UNIT_FACING), player);
+        firstCheckpointX + dist.xDividedBy9 + dist.xDividedBy18 - dist.yDividedBy9 - dist.yDividedBy18,
+        firstCheckpointY + dist.yDividedBy9 + dist.yDividedBy18 - dist.xDividedBy9 - dist.xDividedBy18, bj_UNIT_FACING), player);
     game.worldMap.towerConstruction.SetupTower(CreateUnit(player.wcPlayer, FourCC('h03G'),
-                                                          firstCheckpointX + dist.xDividedBy18 - 2 * dist.yDividedBy9 - dist.yDividedBy18,
-                                                          firstCheckpointY + dist.yDividedBy18 - 2 * dist.xDividedBy9 - dist.xDividedBy18, bj_UNIT_FACING), player);
+        firstCheckpointX + dist.xDividedBy18 - 2 * dist.yDividedBy9 - dist.yDividedBy18,
+        firstCheckpointY + dist.yDividedBy18 - 2 * dist.xDividedBy9 - dist.xDividedBy18, bj_UNIT_FACING), player);
     game.worldMap.towerConstruction.SetupTower(CreateUnit(player.wcPlayer, FourCC('h03G'),
-                                                          firstCheckpointX - dist.xDividedBy9 + dist.xDividedBy18 - 2 * dist.yDividedBy9 - dist.yDividedBy18,
-                                                          firstCheckpointY - dist.yDividedBy9 + dist.yDividedBy18 - 2 * dist.xDividedBy9 - dist.xDividedBy18, bj_UNIT_FACING), player);
+        firstCheckpointX - dist.xDividedBy9 + dist.xDividedBy18 - 2 * dist.yDividedBy9 - dist.yDividedBy18,
+        firstCheckpointY - dist.yDividedBy9 + dist.yDividedBy18 - 2 * dist.xDividedBy9 - dist.xDividedBy18, bj_UNIT_FACING), player);
     game.worldMap.towerConstruction.SetupTower(CreateUnit(player.wcPlayer, FourCC('h03G'),
-                                                          firstCheckpointX - 2 * dist.xDividedBy9 + dist.xDividedBy18 - 2 * dist.yDividedBy9,
-                                                          firstCheckpointY - 2 * dist.yDividedBy9 + dist.yDividedBy18 - 2 * dist.xDividedBy9, bj_UNIT_FACING), player);
+        firstCheckpointX - 2 * dist.xDividedBy9 + dist.xDividedBy18 - 2 * dist.yDividedBy9,
+        firstCheckpointY - 2 * dist.yDividedBy9 + dist.yDividedBy18 - 2 * dist.xDividedBy9, bj_UNIT_FACING), player);
     game.worldMap.towerConstruction.SetupTower(CreateUnit(player.wcPlayer, FourCC('h03G'),
-                                                          firstCheckpointX - 3 * dist.xDividedBy9 + dist.xDividedBy18 - dist.yDividedBy9,
-                                                          firstCheckpointY - 3 * dist.yDividedBy9 + dist.yDividedBy18 - dist.xDividedBy9, bj_UNIT_FACING), player);
+        firstCheckpointX - 3 * dist.xDividedBy9 + dist.xDividedBy18 - dist.yDividedBy9,
+        firstCheckpointY - 3 * dist.yDividedBy9 + dist.yDividedBy18 - dist.xDividedBy9, bj_UNIT_FACING), player);
     game.worldMap.towerConstruction.SetupTower(CreateUnit(player.wcPlayer, FourCC('h03G'),
-                                                          firstCheckpointX - 3 * dist.xDividedBy9,
-                                                          firstCheckpointY - 3 * dist.yDividedBy9, bj_UNIT_FACING), player);
+        firstCheckpointX - 3 * dist.xDividedBy9,
+        firstCheckpointY - 3 * dist.yDividedBy9, bj_UNIT_FACING), player);
     game.worldMap.towerConstruction.SetupTower(CreateUnit(player.wcPlayer, FourCC('h03G'),
-                                                          firstCheckpointX - 3 * dist.xDividedBy9 + dist.yDividedBy9,
-                                                          firstCheckpointY - 3 * dist.yDividedBy9 + dist.xDividedBy9, bj_UNIT_FACING), player);
+        firstCheckpointX - 3 * dist.xDividedBy9 + dist.yDividedBy9,
+        firstCheckpointY - 3 * dist.yDividedBy9 + dist.xDividedBy9, bj_UNIT_FACING), player);
     game.worldMap.towerConstruction.SetupTower(CreateUnit(player.wcPlayer, FourCC('h03G'),
-                                                          firstCheckpointX - 3 * dist.xDividedBy9 + 2 * dist.yDividedBy9,
-                                                          firstCheckpointY - 3 * dist.yDividedBy9 + 2 * dist.xDividedBy9, bj_UNIT_FACING), player);
+        firstCheckpointX - 3 * dist.xDividedBy9 + 2 * dist.yDividedBy9,
+        firstCheckpointY - 3 * dist.yDividedBy9 + 2 * dist.xDividedBy9, bj_UNIT_FACING), player);
     game.worldMap.towerConstruction.SetupTower(CreateUnit(player.wcPlayer, FourCC('h03G'),
-                                                          firstCheckpointX - 2 * dist.xDividedBy9 + 3 * dist.yDividedBy9,
-                                                          firstCheckpointY - 2 * dist.yDividedBy9 + 3 * dist.xDividedBy9, 0.00), player);
+        firstCheckpointX - 2 * dist.xDividedBy9 + 3 * dist.yDividedBy9,
+        firstCheckpointY - 2 * dist.yDividedBy9 + 3 * dist.xDividedBy9, 0.00), player);
 
 }
