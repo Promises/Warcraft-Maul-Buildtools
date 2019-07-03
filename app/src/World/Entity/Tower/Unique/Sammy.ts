@@ -9,7 +9,7 @@ export class Sammy extends Tower implements AttackActionTower {
 
         if (u === this.tower) {
             SetUnitManaBJ(this.tower, (GetUnitStateSwap(UNIT_STATE_MANA, this.tower) + 1.00));
-            if (GetUnitStateSwap(UNIT_STATE_MANA, this.tower) >= 10) {
+            if (GetUnitStateSwap(UNIT_STATE_MANA, this.tower) >= 1000) {
                 this.Sell();
                 const tower: unit = ReplaceUnitBJ(
                     this.tower,
