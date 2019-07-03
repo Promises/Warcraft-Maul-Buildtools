@@ -10,6 +10,9 @@ import { Rectangle } from '../../../../JassOverrides/Rectangle';
 import { InitialDamageModificationTower } from './InitialDamageModificationTower';
 import { KillingActionTower } from './KillingActionTower';
 import { TowerForce } from './TowerForce';
+import { LimitedTower } from './LimitedTower';
+import { ConstructActionTower } from './ConstructActionTower';
+import { SellActionTower } from './SellActionTower';
 
 export class Tower {
 
@@ -97,6 +100,17 @@ export class Tower {
         return 'UpdateSize' in this;
     }
 
+    public IsConstructActionTower(): this is ConstructActionTower {
+        return 'ConstructionFinished' in this;
+    }
+
+    public IsSellActionTower(): this is SellActionTower {
+        return 'SellAction' in this;
+    }
+
+    public IsLimitedTower(): this is LimitedTower {
+        return 'MaxCount' in this;
+    }
     public Sell(): void {
         this.owner.towers.delete(this.handleId);
         if (this.IsEndOfRoundTower()) {
@@ -113,6 +127,9 @@ export class Tower {
         }
         if (this.IsKillingActionTower()) {
             this.game.worldMap.towerConstruction.killingActions.delete(this.handleId);
+        }
+        if (this.IsSellActionTower()) {
+            this.SellAction();
         }
         if (this.IsTowerForceTower()) {
             if (this.owner.towerForces.has(this.GetID())) {

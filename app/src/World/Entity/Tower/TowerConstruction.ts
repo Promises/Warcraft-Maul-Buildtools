@@ -75,6 +75,8 @@ import { AncientMonstrosity } from './Unique/AncientMonstrosity';
 import { KillingActionTower } from './Specs/KillingActionTower';
 import { Hydralisk } from './Unique/Hydralisk';
 import { Marine } from './Unique/Marine';
+import { ProudMoore } from './Unique/ProudMoore';
+import { Sammy } from './Unique/Sammy';
 
 
 export class TowerConstruction {
@@ -184,6 +186,12 @@ export class TowerConstruction {
         }
         if (ObjectExtendsTower.IsKillingActionTower()) {
             this.killingActions.set(ObjectExtendsTower.handleId, ObjectExtendsTower);
+        }
+        if (ObjectExtendsTower.IsLimitedTower()) {
+            SetPlayerTechMaxAllowedSwap(GetUnitTypeId(ObjectExtendsTower.tower), ObjectExtendsTower.MaxCount(), owner.wcPlayer);
+        }
+        if (ObjectExtendsTower.IsConstructActionTower()) {
+            ObjectExtendsTower.ConstructionFinished();
         }
         if (ObjectExtendsTower.IsTowerForceTower()) {
             if (owner.towerForces.has(ObjectExtendsTower.GetID())) {
@@ -339,9 +347,13 @@ export class TowerConstruction {
         this.towerTypes.set(FourCC('h02K'), AncientMonstrosity);
         this.towerTypes.set(FourCC('h02L'), Hydralisk);
         this.towerTypes.set(FourCC('h02H'), Marine);
+        this.towerTypes.set(FourCC('h02J'), ProudMoore);
+        this.towerTypes.set(FourCC('u03F'), Sammy);
 
         // AntiJuggle
         this.towerTypes.set(FourCC('uC14'), AntiJuggleTower);
+
+
     }
 
     private DoGenericTowerAttacks(): void {

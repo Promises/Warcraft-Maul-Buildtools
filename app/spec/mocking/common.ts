@@ -82,10 +82,22 @@ _G.TriggerSleepAction = function (timeout: number): void {
 //declare function DisplayTimedTextToPlayer(toPlayer: player, x: number, y: number, duration: number, message: string): void
 _G.DisplayTimedTextToPlayer = function (toPlayer: player, x: number, y: number, duration: number, message: string): void {
     return;
-}
+};
 
 
 //SetTerrainPathable(x: number, y: number, t: pathingtype, flag: boolean): void
 _G.SetTerrainPathable = function (x: number, y: number, t: pathingtype, flag: boolean): void {
     return;
-}
+};
+
+
+_G.BlzGetFrameByName = function (name: string, createContext: number): any {
+    return undefined;
+};
+_G.BlzFrameIsVisible = function (frame: framehandle): boolean {
+    return false;
+};
+
+_G.SetPlayerTechMaxAllowedSwap = function (this: void, techid: number, maximum: number, whichPlayer: player) {
+    print(`Set MaxCount of ${DecodeFourCC(techid)} to ${maximum} for ${whichPlayer.name}`);
+};
