@@ -88,7 +88,8 @@ describe('Warcraft Maul', () => {
 
                 playerb.SellAll();
                 playerb.towers.forEach((tower) => {
-                    assert.equals(GetUnitTypeId(tower.tower), FourCC('uC14'));
+                    assert.equals(GetUnitTypeId(tower.tower), FourCC('uC14'),
+                                  `Not anti-juggle: ${DecodeFourCC(GetUnitTypeId(tower.tower))}`);
                 });
             }
         }

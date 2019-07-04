@@ -88,3 +88,9 @@ _G.ReplaceUnitBJ = function (whichUnit: unit, newUnitId: number, unitStateMethod
     whichUnit.unitid = newUnitId;
     return whichUnit;
 };
+_G.GetUnitAbilityLevel = function (whichUnit: unit, abilcode: number): number {
+    if (whichUnit.unitid === FourCC('uC14')) {
+        return 0;
+    }
+    return 1;
+};

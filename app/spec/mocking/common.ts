@@ -101,3 +101,4 @@ _G.BlzFrameIsVisible = function (frame: framehandle): boolean {
 _G.SetPlayerTechMaxAllowedSwap = function (this: void, techid: number, maximum: number, whichPlayer: player) {
     print(`Set MaxCount of ${DecodeFourCC(techid)} to ${maximum} for ${whichPlayer.name}`);
 };
+

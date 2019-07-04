@@ -25,7 +25,7 @@ export class SellTower {
 
     public SellTower(unit: unit): void {
 
-        if (GetUnitTypeId(unit) === FourCC('uC14')) {
+        if (!(GetUnitAbilityLevel(unit, FourCC('A02D')) > 0)) {
             return;
         }
 
@@ -64,7 +64,7 @@ export class SellTower {
         SetTextTagLifespanBJ(txt, 2.00);
         SetTextTagVelocityBJ(txt, 64, 90);
         DestroyEffect(AddSpecialEffect('Abilities\\Spells\\Items\\ResourceItems\\ResourceEffectTarget.mdl',
-            GetUnitX(unit), GetUnitY(unit)));
+                                       GetUnitX(unit), GetUnitY(unit)));
         PlaySoundOnUnitBJ(settings.Sounds.goldSound, 100, unit);
 
         const isWaveInProgress: boolean = this._game.gameRoundHandler.isWaveInProgress;
