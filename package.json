@@ -13,13 +13,13 @@
   "author": "Nikolaj \"William\" Mariager",
   "license": "MIT",
   "dependencies": {
-    "busted-tstl": "0.0.6",
+    "busted-tstl": "0.0.7",
     "codelyzer": "^5.1.0",
     "convertjasstots": "^1.0.5",
     "lua-types": "^2.5.0",
     "luamin": "^1.0.4",
     "typescript": "^3.5.1",
-    "typescript-to-lua": "^0.22.1"
+    "typescript-to-lua": "^0.23.0"
   },
   "devDependencies": {
     "tslint": "^5.18.0",
