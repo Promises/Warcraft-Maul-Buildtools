@@ -3,8 +3,8 @@ import { GenericAutoAttackTower } from '../Specs/GenericAutoAttackTower';
 import { EndOfRoundTower } from '../Specs/EndOfRoundTower';
 
 export class ZerglingHive extends Tower implements GenericAutoAttackTower, EndOfRoundTower {
-    private chance: number = 30;
-    private currentHit: number = 30;
+    private chance: number = 55;
+    private currentHit: number = 55;
 
 
     public GenericAttack(): void {
@@ -23,7 +23,7 @@ export class ZerglingHive extends Tower implements GenericAutoAttackTower, EndOf
     }
 
     public EndOfRoundAction(): void {
-        this.currentHit = 30;
+        this.currentHit = 55;
     }
 
 }
