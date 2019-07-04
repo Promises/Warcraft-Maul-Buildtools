@@ -77,12 +77,17 @@ import { Hydralisk } from './Unique/Hydralisk';
 import { Marine } from './Unique/Marine';
 import { ProudMoore } from './Unique/ProudMoore';
 import { Sammy } from './Unique/Sammy';
+import { TowerMap } from './Specs/TowerMap';
 
 
 export class TowerConstruction {
+    get towerTypes(): TowerMap<number, object> {
+        return this._towerTypes;
+    }
+
     private towerConstructTrigger: Trigger;
     private towerRemoveUpgradeTrigger: Trigger;
-    private towerTypes: Map<number, object> = new Map<number, object>();
+    private _towerTypes: TowerMap<number, object> = new TowerMap<number, object>();
     public genericAttacks: Map<number, GenericAutoAttackTower> = new Map<number, GenericAutoAttackTower>();
     public killingActions: Map<number, KillingActionTower> = new Map<number, KillingActionTower>();
     private genericAttackTrigger: Trigger;
@@ -163,7 +168,7 @@ export class TowerConstruction {
             UnitRemoveAbilityBJ(FourCC('ARal'), tower);
         }
 
-        const obj: object | undefined = this.towerTypes.get(GetUnitTypeId(tower));
+        const obj: object | undefined = this._towerTypes.get(GetUnitTypeId(tower));
         if (obj) {
             // @ts-ignore
             ObjectExtendsTower = new obj(tower, owner, this.game);
@@ -227,131 +232,134 @@ export class TowerConstruction {
 
     private InitTypes(): void {
 
+        // const oldset: (key: number, value: object) => Map<number, object> = this._towerTypes.set;
+
+
         // WorkersUnion
-        this.towerTypes.set(FourCC('h03G'), NagaSlave);
-        this.towerTypes.set(FourCC('h03E'), OrcPeon);
-        this.towerTypes.set(FourCC('h03F'), HumanPeasant);
-        this.towerTypes.set(FourCC('h03I'), UndeadAcolyte);
-        this.towerTypes.set(FourCC('h03H'), NightElfWisp);
+        this._towerTypes.add(FourCC('h03G'), NagaSlave);
+        this._towerTypes.add(FourCC('h03E'), OrcPeon);
+        this._towerTypes.add(FourCC('h03F'), HumanPeasant);
+        this._towerTypes.add(FourCC('h03I'), UndeadAcolyte);
+        this._towerTypes.add(FourCC('h03H'), NightElfWisp);
 
         // Undead
-        this.towerTypes.set(FourCC('h00R'), SacrificialPit);
+        this._towerTypes.add(FourCC('h00R'), SacrificialPit);
 
         // Tavern
-        this.towerTypes.set(FourCC('h01F'), EarthPandaren);
-        this.towerTypes.set(FourCC('h01J'), StormPandaren);
-        this.towerTypes.set(FourCC('h01I'), FirePandaren);
+        this._towerTypes.add(FourCC('h01F'), EarthPandaren);
+        this._towerTypes.add(FourCC('h01J'), StormPandaren);
+        this._towerTypes.add(FourCC('h01I'), FirePandaren);
 
         // Arachnid
-        this.towerTypes.set(FourCC('o019'), AcidSpittingSpider);
-        this.towerTypes.set(FourCC('h00W'), NerubianBehemoth);
-        this.towerTypes.set(FourCC('o01A'), ParasiticBroodmother);
+        this._towerTypes.add(FourCC('o019'), AcidSpittingSpider);
+        this._towerTypes.add(FourCC('h00W'), NerubianBehemoth);
+        this._towerTypes.add(FourCC('o01A'), ParasiticBroodmother);
 
         // Aviaries
-        this.towerTypes.set(FourCC('oC60'), Wyvern);
-        this.towerTypes.set(FourCC('hC36'), Gyrocopter);
+        this._towerTypes.add(FourCC('oC60'), Wyvern);
+        this._towerTypes.add(FourCC('hC36'), Gyrocopter);
 
 
-        // Cavernous Creatures
-        this.towerTypes.set(FourCC('h04Q'), CavernDruid);
-        this.towerTypes.set(FourCC('h04M'), CavernHermit);
-        this.towerTypes.set(FourCC('h04T'), CavernMushroom);
-        this.towerTypes.set(FourCC('h04O'), CavernRevenant);
-        this.towerTypes.set(FourCC('h04N'), CavernTurtle);
-        this.towerTypes.set(FourCC('h04S'), GrowthLvl2);
-        this.towerTypes.set(FourCC('h04L'), GrowthLvl3);
+        // Cavernous Creaaddes
+        this._towerTypes.add(FourCC('h04Q'), CavernDruid);
+        this._towerTypes.add(FourCC('h04M'), CavernHermit);
+        this._towerTypes.add(FourCC('h04T'), CavernMushroom);
+        this._towerTypes.add(FourCC('h04O'), CavernRevenant);
+        this._towerTypes.add(FourCC('h04N'), CavernTurtle);
+        this._towerTypes.add(FourCC('h04S'), GrowthLvl2);
+        this._towerTypes.add(FourCC('h04L'), GrowthLvl3);
 
-        // CorruptedNightElves
-        this.towerTypes.set(FourCC('n00P'), CorruptedTreeofLife);
+        // CorruptedNightaddes
+        this._towerTypes.add(FourCC('n00P'), CorruptedTreeofLife);
 
         // Demon
-        this.towerTypes.set(FourCC('h03W'), FelGuard);
-        this.towerTypes.set(FourCC('o00L'), Mannoroth);
-        this.towerTypes.set(FourCC('n00U'), SummoningShrine);
-        this.towerTypes.set(FourCC('eC93'), KilJaeden);
-        this.towerTypes.set(FourCC('h00F'), DemonizedDreadlord);
+        this._towerTypes.add(FourCC('h03W'), FelGuard);
+        this._towerTypes.add(FourCC('o00L'), Mannoroth);
+        this._towerTypes.add(FourCC('n00U'), SummoningShrine);
+        this._towerTypes.add(FourCC('eC93'), KilJaeden);
+        this._towerTypes.add(FourCC('h00F'), DemonizedDreadlord);
 
         // Draenei
-        this.towerTypes.set(FourCC('h04F'), DraeneiSeer);
-        this.towerTypes.set(FourCC('h00I'), Akama);
-        this.towerTypes.set(FourCC('h04I'), SalamanderLord);
+        this._towerTypes.add(FourCC('h04F'), DraeneiSeer);
+        this._towerTypes.add(FourCC('h00I'), Akama);
+        this._towerTypes.add(FourCC('h04I'), SalamanderLord);
 
         // Dragons
-        this.towerTypes.set(FourCC('o00M'), BronzeDragonWhelp);
-        this.towerTypes.set(FourCC('o01F'), BronzeDrake);
-        this.towerTypes.set(FourCC('o01K'), BronzeDragon);
+        this._towerTypes.add(FourCC('o00M'), BronzeDragonWhelp);
+        this._towerTypes.add(FourCC('o01F'), BronzeDrake);
+        this._towerTypes.add(FourCC('o01K'), BronzeDragon);
 
 
         // Dwarven
-        this.towerTypes.set(FourCC('n05Q'), DwarfKing);
-        this.towerTypes.set(FourCC('n05N'), FlyingDwarf);
+        this._towerTypes.add(FourCC('n05Q'), DwarfKing);
+        this._towerTypes.add(FourCC('n05N'), FlyingDwarf);
 
         // Forest Trolls
-        this.towerTypes.set(FourCC('n03I'), ForestTrollHighPriest);
+        this._towerTypes.add(FourCC('n03I'), ForestTrollHighPriest);
 
         // Forsaken
-        this.towerTypes.set(FourCC('u00F'), GargoyleSpire);
-        this.towerTypes.set(FourCC('u012'), Varimathras);
+        this._towerTypes.add(FourCC('u00F'), GargoyleSpire);
+        this._towerTypes.add(FourCC('u012'), Varimathras);
 
         // Galaxy
-        this.towerTypes.set(FourCC('e00K'), MoonDancer);
-        this.towerTypes.set(FourCC('e00P'), StarChaser);
-        this.towerTypes.set(FourCC('e00R'), CelestialMist);
+        this._towerTypes.add(FourCC('e00K'), MoonDancer);
+        this._towerTypes.add(FourCC('e00P'), StarChaser);
+        this._towerTypes.add(FourCC('e00R'), CelestialMist);
 
         // Giants
-        this.towerTypes.set(FourCC('oC35'), OgreWarrior);
-        this.towerTypes.set(FourCC('o00G'), FleshGolem);
+        this._towerTypes.add(FourCC('oC35'), OgreWarrior);
+        this._towerTypes.add(FourCC('o00G'), FleshGolem);
 
         // Goblin
-        this.towerTypes.set(FourCC('o01R'), GoblinMineLayer);
-        this.towerTypes.set(FourCC('o01S'), GoblinTinkerer);
-        this.towerTypes.set(FourCC('o01P'), GoblinBlademaster);
-        this.towerTypes.set(FourCC('o01M'), GoblinSapper);
-        this.towerTypes.set(FourCC('o01O'), GoblinAlchemist);
+        this._towerTypes.add(FourCC('o01R'), GoblinMineLayer);
+        this._towerTypes.add(FourCC('o01S'), GoblinTinkerer);
+        this._towerTypes.add(FourCC('o01P'), GoblinBlademaster);
+        this._towerTypes.add(FourCC('o01M'), GoblinSapper);
+        this._towerTypes.add(FourCC('o01O'), GoblinAlchemist);
 
         // High Elven
-        this.towerTypes.set(FourCC('o00N'), Kael);
+        this._towerTypes.add(FourCC('o00N'), Kael);
 
         // Human
-        this.towerTypes.set(FourCC('h045'), VenomTower);
-        this.towerTypes.set(FourCC('n05C'), SirGalahad);
+        this._towerTypes.add(FourCC('h045'), VenomTower);
+        this._towerTypes.add(FourCC('n05C'), SirGalahad);
 
         // Night Elf
-        this.towerTypes.set(FourCC('h00S'), DemonicIllidan);
-        this.towerTypes.set(FourCC('eC83'), CorruptedIllidan);
-        this.towerTypes.set(FourCC('h00G'), Warden);
-        this.towerTypes.set(FourCC('e00E'), Wisp);
+        this._towerTypes.add(FourCC('h00S'), DemonicIllidan);
+        this._towerTypes.add(FourCC('eC83'), CorruptedIllidan);
+        this._towerTypes.add(FourCC('h00G'), Warden);
+        this._towerTypes.add(FourCC('e00E'), Wisp);
 
 
         // Orc Stronghold
-        this.towerTypes.set(FourCC('h002'), Rokhan);
-        this.towerTypes.set(FourCC('oC65'), WarchiefThrall);
-        this.towerTypes.set(FourCC('o00E'), Berserker);
+        this._towerTypes.add(FourCC('h002'), Rokhan);
+        this._towerTypes.add(FourCC('oC65'), WarchiefThrall);
+        this._towerTypes.add(FourCC('o00E'), Berserker);
 
         // Outland
-        this.towerTypes.set(FourCC('u01C'), Magtheridon);
+        this._towerTypes.add(FourCC('u01C'), Magtheridon);
 
 
         // Summons
-        this.towerTypes.set(FourCC('h027'), Prawn);
-        this.towerTypes.set(FourCC('h026'), LavaSpawn);
+        this._towerTypes.add(FourCC('h027'), Prawn);
+        this._towerTypes.add(FourCC('h026'), LavaSpawn);
 
-        // Shrine of buffs
-        this.towerTypes.set(FourCC('oC58'), KodoBeast);
+        // Shrine of buffadd
+        this._towerTypes.add(FourCC('oC58'), KodoBeast);
 
         // Void
-        this.towerTypes.set(FourCC('h02F'), VoidPriest);
-        this.towerTypes.set(FourCC('h01M'), VoidFissure);
+        this._towerTypes.add(FourCC('h02F'), VoidPriest);
+        this._towerTypes.add(FourCC('h01M'), VoidFissure);
 
         // Unique
-        this.towerTypes.set(FourCC('h02K'), AncientMonstrosity);
-        this.towerTypes.set(FourCC('h02L'), Hydralisk);
-        this.towerTypes.set(FourCC('h02H'), Marine);
-        this.towerTypes.set(FourCC('h02J'), ProudMoore);
-        this.towerTypes.set(FourCC('u03F'), Sammy);
+        this._towerTypes.add(FourCC('h02K'), AncientMonstrosity);
+        this._towerTypes.add(FourCC('h02L'), Hydralisk);
+        this._towerTypes.add(FourCC('h02H'), Marine);
+        this._towerTypes.add(FourCC('h02J'), ProudMoore);
+        this._towerTypes.add(FourCC('u03F'), Sammy);
 
         // AntiJuggle
-        this.towerTypes.set(FourCC('uC14'), AntiJuggleTower);
+        this._towerTypes.add(FourCC('uC14'), AntiJuggleTower);
 
 
     }
