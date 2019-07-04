@@ -79,6 +79,7 @@ import { ProudMoore } from './Unique/ProudMoore';
 import { Sammy } from './Unique/Sammy';
 import { TowerMap } from './Specs/TowerMap';
 import { ZerglingHive } from './Unique/ZerglingHive';
+import { TheDarkness } from './Unique/TheDarkness';
 
 
 export class TowerConstruction {
@@ -359,6 +360,7 @@ export class TowerConstruction {
         this._towerTypes.add(FourCC('h02J'), ProudMoore);
         this._towerTypes.add(FourCC('u03F'), Sammy);
         this._towerTypes.add(FourCC('u03E'), ZerglingHive);
+        this._towerTypes.add(FourCC('u040'), TheDarkness);
 
         // AntiJuggle
         this._towerTypes.add(FourCC('uC14'), AntiJuggleTower);
