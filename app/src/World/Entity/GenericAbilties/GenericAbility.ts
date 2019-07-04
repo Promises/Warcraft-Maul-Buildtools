@@ -17,7 +17,16 @@ export class GenericAbility {
         this._game = value;
     }
 
+
+    public Condition(): boolean{
+        return GetSpellAbilityId() === this.abilityId;
+    }
+
     public IsAttackActionAbility(): this is AttackActionAbility {
         return 'AttackAction' in this;
+    }
+
+    public IsAbilityTargetsUnit(): this is AbilityTargetsUnit {
+        return 'TargetAction' in this;
     }
 }
