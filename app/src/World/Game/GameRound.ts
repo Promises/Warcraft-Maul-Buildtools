@@ -183,7 +183,7 @@ export class GameRound {
                 );
             } else {
                 SendMessage(
-                    `${this.game.gameLives} ${Util.ColourString(settings.COLOUR_CODES[COLOUR.RED], 'Chances have been lost')}`,
+                    `${this.game.startLives - this.game.gameLives} ${Util.ColourString(settings.COLOUR_CODES[COLOUR.RED], 'Chances have been lost')}`,
                 );
             }
             this.GiveWaveGoldReward();
