@@ -80,6 +80,8 @@ import { Sammy } from './Unique/Sammy';
 import { TowerMap } from './Specs/TowerMap';
 import { ZerglingHive } from './Unique/ZerglingHive';
 import { TheDarkness } from './Unique/TheDarkness';
+import { CrackedBarrel } from './Arachnid/CrackedBarrel';
+import { VoidWorshipper } from './Void/VoidWorshipper';
 
 
 export class TowerConstruction {
@@ -256,6 +258,7 @@ export class TowerConstruction {
         this._towerTypes.add(FourCC('o019'), AcidSpittingSpider);
         this._towerTypes.add(FourCC('h00W'), NerubianBehemoth);
         this._towerTypes.add(FourCC('o01A'), ParasiticBroodmother);
+        this._towerTypes.add(FourCC('H03T'), CrackedBarrel);
 
         // Aviaries
         this._towerTypes.add(FourCC('oC60'), Wyvern);
@@ -352,6 +355,7 @@ export class TowerConstruction {
         // Void
         this._towerTypes.add(FourCC('h02F'), VoidPriest);
         this._towerTypes.add(FourCC('h01M'), VoidFissure);
+        this._towerTypes.add(FourCC('h02G'), VoidWorshipper);
 
         // Unique
         this._towerTypes.add(FourCC('h02K'), AncientMonstrosity);
