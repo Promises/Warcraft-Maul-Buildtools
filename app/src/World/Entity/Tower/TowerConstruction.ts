@@ -258,7 +258,7 @@ export class TowerConstruction {
         this._towerTypes.add(FourCC('o019'), AcidSpittingSpider);
         this._towerTypes.add(FourCC('h00W'), NerubianBehemoth);
         this._towerTypes.add(FourCC('o01A'), ParasiticBroodmother);
-        this._towerTypes.add(FourCC('H03T'), CrackedBarrel);
+        this._towerTypes.add(FourCC('h03T'), CrackedBarrel);
 
         // Aviaries
         this._towerTypes.add(FourCC('oC60'), Wyvern);
