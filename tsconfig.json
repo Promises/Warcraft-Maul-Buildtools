@@ -13,6 +13,8 @@
 			"lua-types/core/string",
 			"lua-types/core/table",
 			"lua-types/core/debug",
+			"lua-types/core/io",
+			"lua-types/core/os",
 			"lua-types/special/5.3",
 			"busted-tstl"
 

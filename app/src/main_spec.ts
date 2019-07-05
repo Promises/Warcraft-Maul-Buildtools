@@ -8,12 +8,12 @@ import { StringSinkTest } from './lib/Serilog/Sinks/StringSinkTest';
 import { Defender } from './World/Entity/Players/Defender';
 import { CheckPoint } from './World/Entity/CheckPoint';
 import { HologramCheckpointDistance } from './World/Holograms/HologramCheckpointDistance';
+import { SLKLoader, Unit } from './lib/SLKLoader/SLKLoader';
 
 
 Log.Init([
              new StringSinkTest(LogLevel.Error, print),
          ]);
-
 
 
 describe('Warcraft Maul', () => {
@@ -115,6 +115,18 @@ describe('Warcraft Maul', () => {
                      `Found duplicate keys: ${KeysToList(game.worldMap.towerConstruction.towerTypes.duplicateKeys)}`);
     });
 
+    it('Loads slk files', () => {
+        SLKLoader.loadFile('maps/map/Units/UnitAbilities.slk');
+    });
+
+    it('Check defined towers are in slk files', () => {
+        let slkUnits: Map<number, Unit> = SLKLoader.loadFile('maps/map/Units/UnitAbilities.slk');
+        for (const key of Util.GetAllKeys(game.worldMap.towerConstruction.towerTypes)) {
+            assert.truthy(slkUnits.has(key));
+        }
+
+    });
+
 
 });
 
@@ -131,7 +143,6 @@ function KeysToList(duplicateKeys: number[]): string {
     return output;
 
 }
-
 
 
 function createTowersForPlayer(game: WarcraftMaul, player: Defender): void {
