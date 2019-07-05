@@ -82,6 +82,8 @@ import { ZerglingHive } from './Unique/ZerglingHive';
 import { TheDarkness } from './Unique/TheDarkness';
 import { CrackedBarrel } from './Arachnid/CrackedBarrel';
 import { VoidWorshipper } from './Void/VoidWorshipper';
+import { VoidBeing } from './Void/VoidBeing';
+import { VoidCorrupter } from './Void/VoidCorrupter';
 
 
 export class TowerConstruction {
@@ -356,6 +358,8 @@ export class TowerConstruction {
         this._towerTypes.add(FourCC('h02F'), VoidPriest);
         this._towerTypes.add(FourCC('h01M'), VoidFissure);
         this._towerTypes.add(FourCC('h02G'), VoidWorshipper);
+        this._towerTypes.add(FourCC('h00T'), VoidBeing);
+        this._towerTypes.add(FourCC('h01A'), VoidCorrupter);
 
         // Unique
         this._towerTypes.add(FourCC('h02K'), AncientMonstrosity);
