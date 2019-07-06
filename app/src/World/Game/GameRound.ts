@@ -277,6 +277,7 @@ export class GameRound {
         if (!this.game.worldMap.spawnedCreeps) {
             return;
         }
+
         const spawned: Map<number, Creep> = this.game.worldMap.spawnedCreeps.unitMap;
         for (let y: number = 0; y < amount; y += 1) {
             for (let i: number = 0; i < this.game.worldMap.playerSpawns.length; i += 1) {
@@ -292,7 +293,7 @@ export class GameRound {
                         GetRectCenterX(spawn.spawnOne.rectangle),
                         GetRectCenterY(spawn.spawnOne.rectangle),
                         this.getSpawnFace(i));
-                    spawned.set(GetHandleId(creep), new Creep(creep));
+                    spawned.set(GetHandleId(creep), new Creep(creep, this));
 
                     if (spawn.spawnTwo) {
 
@@ -302,7 +303,7 @@ export class GameRound {
                             GetRectCenterX(spawn.spawnTwo.rectangle),
                             GetRectCenterY(spawn.spawnTwo.rectangle),
                             this.getSpawnFace(i));
-                        spawned.set(GetHandleId(creep), new Creep(creep));
+                        spawned.set(GetHandleId(creep), new Creep(creep, this));
                     }
                 }
             }
@@ -348,7 +349,7 @@ export class GameRound {
             if (player.id === COLOUR.GRAY) {
                 player.giveGold(2 * this.roundOverGoldReward);
                 player.sendMessage(
-                    `|c0000cdf9You recieved|r ${2 * this.roundOverGoldReward}|c0000cdf9` +
+                    `|c0000cdf9You recieved|r ${2 * this.roundOverGoldReward} |c0000cdf9` +
                     `extra gold for completing level as the last defender|r ${(this._currentWave - 1)}`);
             } else {
                 player.giveGold(this.roundOverGoldReward);

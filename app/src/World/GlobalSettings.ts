@@ -31,7 +31,7 @@ export const INITIAL_LIVES: number = 20;
 export const GAME_END_TIME: number = 600;
 export const GAME_TIME_BEFORE_START: number = 90;
 export const GAME_TIME_BEFORE_WAVE: number = 20;
-export const GAME_GOLD_REWARD_BASE: number = 20;
+export const GAME_GOLD_REWARD_BASE: number = 10;
 
 export const GAME_NAME: string = 'Warcraft Maul Reimagined';
 
