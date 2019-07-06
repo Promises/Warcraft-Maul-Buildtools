@@ -19,7 +19,7 @@ export class WorldMap {
     worldCreatures: Map<String, unit> = new Map<String, unit>();
     waveCreeps: WaveCreep[] = [];
     races: Race[] = [];
-    private _spawnedCreeps: SpawnedCreeps = new SpawnedCreeps(this);
+    private _spawnedCreeps: SpawnedCreeps;
     ship: Ship | undefined;
     public archimondeDummy!: unit;
     playerSpawns: PlayerSpawns[] = [];
@@ -31,6 +31,7 @@ export class WorldMap {
     constructor(game: WarcraftMaul) {
         this.game = game;
         this.setupWorldCreatures();
+        this._spawnedCreeps = new SpawnedCreeps(this);
         this.towerConstruction = new TowerConstruction(game);
         this.antiBlock = new AntiBlock(this);
     }

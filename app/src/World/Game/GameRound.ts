@@ -10,6 +10,7 @@ import { ArchimondeGate } from './ArchimondeGate';
 import { ArchimondeTeleport } from './ArchimondeTeleport';
 import { EndOfRoundTower } from '../Entity/Tower/Specs/EndOfRoundTower';
 import { ARMOUR_TYPE_COLOURS, ARMOUR_TYPE_NAMES, CREEP_TYPE_COLOURS } from '../GlobalSettings';
+import { CreepAbility } from '../Entity/CreepAbilities/specs/CreepAbility';
 
 export class GameRound {
 
@@ -279,6 +280,7 @@ export class GameRound {
         }
 
         const spawned: Map<number, Creep> = this.game.worldMap.spawnedCreeps.unitMap;
+        const abilities: CreepAbility[] = this.game.creepAbilityHandler.GetAbilitiesForWave(wave);
         for (let y: number = 0; y < amount; y += 1) {
             for (let i: number = 0; i < this.game.worldMap.playerSpawns.length; i += 1) {
                 const spawn: PlayerSpawns = this.game.worldMap.playerSpawns[i];
@@ -293,7 +295,7 @@ export class GameRound {
                         GetRectCenterX(spawn.spawnOne.rectangle),
                         GetRectCenterY(spawn.spawnOne.rectangle),
                         this.getSpawnFace(i));
-                    spawned.set(GetHandleId(creep), new Creep(creep, this));
+                    spawned.set(GetHandleId(creep), new Creep(creep, this, abilities));
 
                     if (spawn.spawnTwo) {
 
@@ -303,7 +305,7 @@ export class GameRound {
                             GetRectCenterX(spawn.spawnTwo.rectangle),
                             GetRectCenterY(spawn.spawnTwo.rectangle),
                             this.getSpawnFace(i));
-                        spawned.set(GetHandleId(creep), new Creep(creep, this));
+                        spawned.set(GetHandleId(creep), new Creep(creep, this, abilities));
                     }
                 }
             }

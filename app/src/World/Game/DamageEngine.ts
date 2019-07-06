@@ -5,6 +5,8 @@ import { DamageModificationBuff } from '../Entity/Buff/Specs/DamageModificationB
 import { AttackActionBuff } from '../Entity/Buff/Specs/AttackActionBuff';
 import * as settings from '../GlobalSettings';
 import { InitialDamageModificationTower } from '../Entity/Tower/Specs/InitialDamageModificationTower';
+import { FinalDamageModificationCreepAbility } from '../Entity/CreepAbilities/specs/FinalDamageModificationCreepAbility';
+import { AttackActionCreepAbility } from '../Entity/CreepAbilities/specs/AttackActionCreepAbility';
 
 /**
  * Damage Engine 5.3.0.1
@@ -19,6 +21,7 @@ export class DamageEngine {
         new Map<number, InitialDamageModificationTower>();
     public initialDamageEventBuffs: AttackActionBuff[] = [];
     public initialDamageEventAbilities: AttackActionAbility[] = [];
+    public initialDamageEventCreepAbilities: AttackActionCreepAbility[] = [];
     public multiplicativeDamageModificationEventBuff: DamageModificationBuff[] = [];
 
     private zeroDamageEvent: (() => void)[] = [];
@@ -28,6 +31,7 @@ export class DamageEngine {
     private multiplicativeDamageModificationEvent: (() => void)[] = [];
     private preFinalDamageModificationEvent: (() => void)[] = [];
     private finalDamageModificationEvent: (() => void)[] = [];
+    private finalDamageModificationCreepAbilities: FinalDamageModificationCreepAbility[] = [];
     private afterDamageEvent: (() => void)[] = [];
 
     /**
@@ -100,6 +104,10 @@ export class DamageEngine {
         this.initialDamageEventAbilities.push(ability);
     }
 
+    public AddInitialDamageEventCreepAbility(ability: AttackActionCreepAbility): void {
+        this.initialDamageEventCreepAbilities.push(ability);
+    }
+
     /**
      * Adds an event that triggers right after a unit has taken 0 damage
      */
@@ -160,6 +168,9 @@ export class DamageEngine {
         this.finalDamageModificationEvent.push(event);
     }
 
+    public AddFinalDamageModificationCreepAbility(ObjectExtendsAbility: FinalDamageModificationCreepAbility): void {
+        this.finalDamageModificationCreepAbilities.push(ObjectExtendsAbility);
+    }
     /**
      * Adds an event that triggers after damage has been applied
      * to the target
@@ -173,6 +184,7 @@ export class DamageEngine {
         this.initialDamageEventTowers.forEach(tower => tower.AttackAction());
         this.initialDamageEventBuffs.forEach(buff => buff.AttackAction());
         this.initialDamageEventAbilities.forEach(ability => ability.AttackAction());
+        this.initialDamageEventCreepAbilities.forEach(ability => ability.AttackAction());
     }
 
     private ZeroDamageEvent(): void {
@@ -204,6 +216,7 @@ export class DamageEngine {
 
     private FinalDamageModificationEvent(): void {
         this.finalDamageModificationEvent.forEach(action => action());
+        this.finalDamageModificationCreepAbilities.forEach(ability => ability.ModifyFinalDamage());
     }
 
     private AfterDamageEvent(): void {

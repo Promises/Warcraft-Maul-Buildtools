@@ -1,17 +1,17 @@
 import { SLKUnit } from './SLKLoader';
 
 export interface SLKUnit {
-    Abilties: SLKAbilties;
+    Abilities: SLKAbilities;
 }
 
-export interface SLKAbilties {
+export interface SLKAbilities {
     abilList: string[];
 
 }
 
 export class Unit implements SLKUnit {
     public id: string;
-    public Abilties: SLKAbilties = {
+    public Abilities: SLKAbilities = {
         abilList: [],
     };
 
@@ -53,10 +53,10 @@ export module SLKLoader {
                     case 4:
                         break;
                     case 5:
-                        const abilties: string = <string><unknown>string.match(line, 'C;X%d+;K"(.*)"');
-                        if (abilties.length >= 4) {
-                            for (const ability of abilties.split(',')) {
-                                currentUnit.Abilties.abilList.push(ability);
+                        const abilities: string = <string><unknown>string.match(line, 'C;X%d+;K"(.*)"');
+                        if (abilities.length >= 4) {
+                            for (const ability of abilities.split(',')) {
+                                currentUnit.Abilities.abilList.push(ability);
                             }
                         }
                         break;
@@ -68,7 +68,7 @@ export module SLKLoader {
             print(file[1]);
         }
         // for (const unit of units.values()) {
-            // print(`Unit: ${unit.id} - ${Util.ArraysToString(unit.Abilties.abilList)}`);
+            // print(`Unit: ${unit.id} - ${Util.ArraysToString(unit.Abilities.abilList)}`);
         // }
         // if (file) {
         //     print(file);

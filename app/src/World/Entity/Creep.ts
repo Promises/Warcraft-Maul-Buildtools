@@ -1,12 +1,21 @@
 import { CheckPoint } from './CheckPoint';
 import { Log } from '../../lib/Serilog/Serilog';
+import { GameRound } from '../Game/GameRound';
+import { CreepAbility } from './CreepAbilities/specs/CreepAbility';
 
 export class Creep {
     creep: unit;
     targetCheckpoint: CheckPoint | undefined;
+    gameRound: GameRound;
 
-    constructor(creep: unit) {
+    constructor(creep: unit, gameRound: GameRound, abilities: CreepAbility[]) {
         this.creep = creep;
+        this.gameRound = gameRound;
+
+        for (const ability of abilities) {
+            ability.AddAbilityToCreep(this);
+        }
+
     }
 
     ReapplyMovement(): void {
@@ -38,5 +47,11 @@ export class Creep {
 
     public getLocation(): location {
         return GetUnitLoc(this.creep);
+    }
+
+    public morningPerson(): void {
+        const mdlFile: string = 'Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpecialArt.mdl';
+        DestroyEffect(AddSpecialEffect(mdlFile, GetUnitX(this.creep), GetUnitY(this.creep)));
+        SetUnitLifePercentBJ(GetEnteringUnit(), GetUnitLifePercent(this.creep) + 0.50 * this.gameRound.currentWave);
     }
 }

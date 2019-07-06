@@ -53,7 +53,7 @@ export class CheckPoint {
                 creep.targetCheckpoint = this.next;
                 IssuePointOrder(GetEnteringUnit(), 'move', GetRectCenterX(this.next.rectangle), GetRectCenterY(this.next.rectangle));
                 if (UnitHasBuffBJ(GetEnteringUnit(), FourCC('B028'))) {
-                    // TODO: creep.morningPerson();
+                    creep.morningPerson();
                 }
 
             }

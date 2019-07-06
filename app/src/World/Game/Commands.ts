@@ -43,7 +43,7 @@ export class Commands {
                 this.TestUi();
                 break;
             case 'openall':
-                player.sendMessage('All spawns are not open!');
+                player.sendMessage('All spawns are now open!');
                 this.OpenAllSpawns();
                 break;
             case 'gold':
@@ -89,7 +89,7 @@ export class Commands {
 
                 }
                 player.sendMessage(`Difficulty was set to ${amount}%`);
-
+                this.game.diffVote.difficulty = amount;
                 for (const enemy of this.game.enemies) {
                     enemy.setHandicap(amount);
                 }

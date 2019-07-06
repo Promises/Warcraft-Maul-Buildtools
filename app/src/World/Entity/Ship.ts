@@ -44,7 +44,8 @@ export class Ship extends CheckPoint {
                     this.game.gameLives = 0;
                 } else {
                     this.game.gameLives--;
-                    SendMessage(`|c00ff0000A unit has boarded the ship!|r ${this.game.gameLives} |c00ff0000chances left|r`);
+                    SendMessage(
+                        `|c00ff0000A unit has boarded the ship!|r ${Math.floor(this.game.gameLives)} |c00ff0000chances left|r`);
                 }
 
 

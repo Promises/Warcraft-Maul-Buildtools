@@ -17,10 +17,12 @@ import { DamageEngineGlobals } from './Game/DamageEngineGlobals';
 import { TowerTicker } from './Game/TowerTicker';
 import { BuffHandler } from './Entity/Buff/BuffHandler';
 import { ItemHandler } from './Entity/Item/ItemHandler';
-import { GenericAbilityHandler } from './Entity/GenericAbilties/GenericAbilityHandler';
+import { GenericAbilityHandler } from './Entity/GenericAbilities/GenericAbilityHandler';
 import set = Reflect.set;
+import { CreepAbilityHandler } from './Entity/CreepAbilities/CreepAbilityHandler';
 
 export class WarcraftMaul {
+
     debugMode: boolean = false;
     gameEnded: boolean = false;
     waveTimer: number = settings.GAME_TIME_BEFORE_START;
@@ -33,6 +35,7 @@ export class WarcraftMaul {
     gameCommandHandler: Commands;
     gameDamageEngineGlobals: DamageEngineGlobals;
     gameDamageEngine: DamageEngine;
+    diffVote: DifficultyVote;
     public readonly towerTicker: TowerTicker;
     buffHandler: BuffHandler;
     scoreBoard: MultiBoard | undefined;
@@ -44,6 +47,7 @@ export class WarcraftMaul {
     players: Map<number, Defender> = new Map<number, Defender>();
 
     enemies: Attacker[] = [];
+    private _creepAbilityHandler: CreepAbilityHandler;
 
     constructor() {
         // @ts-ignore to enable tests
@@ -101,10 +105,13 @@ export class WarcraftMaul {
         this.buffHandler = new BuffHandler(this);
         this.abilityHandler = new GenericAbilityHandler(this);
         this.itemHandler = new ItemHandler(this);
+        this._creepAbilityHandler = new CreepAbilityHandler(this);
+
+
 
         // this.gameCommandHandler.OpenAllSpawns();
 
-        const diffVote: DifficultyVote = new DifficultyVote(this);
+        this.diffVote = new DifficultyVote(this);
         const racePicking: RacePicking = new RacePicking(this);
         this.sellTower = new SellTower(this);
 
@@ -177,5 +184,7 @@ export class WarcraftMaul {
         return BlzFrameIsVisible(BlzGetFrameByName('ReplayFogCheckBox', 0));
     }
 
-
+    get creepAbilityHandler(): CreepAbilityHandler {
+        return this._creepAbilityHandler;
+    }
 }
