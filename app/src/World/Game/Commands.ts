@@ -308,6 +308,10 @@ export class Commands {
                     SetCameraField(CAMERA_FIELD_TARGET_DISTANCE, amount, 1);
                 }
                 break;
+            case 'dt':
+            case 'disabletowers':
+                player.DisableTowers();
+                break;
 
             case 'maze':
                 let invalidMaze: boolean = false;

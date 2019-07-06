@@ -28,6 +28,7 @@ export class Defender extends AbstractPlayer {
     private _hasNormalPicked: boolean = false;
     private _races: Race[] = [];
     private _totalMazeLength: number = 0;
+    private towersEnabled: boolean = true;
 
     private _repickCounter: number = 0;
     private _voidBuilder: unit | undefined;
@@ -42,6 +43,16 @@ export class Defender extends AbstractPlayer {
     private _builders: unit[] = [];
 
     private _towerForces: Map<number, number> = new Map<number, number>();
+
+    private protectedTowers: number[] = [ // towers that cant be disabled
+        FourCC('n01D'), // [High Elven Farm] - High Elven Farm
+        FourCC('n01E'), // [High Elven Farm] - Hungry Sheep
+        FourCC('n01F'), // [High Elven Farm] - Hungry Albatross
+        FourCC('n01G'), // [High Elven Farm] - Hungry Seal
+        FourCC('n01I'), // [High Elven Farm] - Hungry Crab
+        FourCC('n009'), // [Corrupt N.Elves] - Corrupted Moon Well
+    ];
+
 
     constructor(id: number, game: WarcraftMaul) {
         super(id);
@@ -310,5 +321,29 @@ export class Defender extends AbstractPlayer {
                 this.game.sellTower.SellTower(tower.tower);
             }
         }
+    }
+
+
+    public DisableTowers(): void {
+        this.towersEnabled = !this.towersEnabled;
+
+        this.towers.forEach((tower) => {
+            if (tower.GetSellValue() <= 8 && (this.protectedTowers.indexOf(tower.GetID()) >= 0)) {
+                if (this.towersEnabled) {
+                    PauseUnitBJ(false, tower.tower);
+                } else {
+                    PauseUnitBJ(true, tower.tower);
+                }
+            }
+        });
+
+        if (this.towersEnabled) {
+            this.sendMessage('Towers enabled');
+        } else {
+            this.sendMessage('Towers disabled');
+
+
+        }
+
     }
 }
