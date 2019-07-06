@@ -328,7 +328,7 @@ export class Defender extends AbstractPlayer {
         this.towersEnabled = !this.towersEnabled;
 
         this.towers.forEach((tower) => {
-            if (tower.GetSellValue() <= 8 && (this.protectedTowers.indexOf(tower.GetID()) >= 0)) {
+            if (tower.GetSellValue() <= 8 && !(this.protectedTowers.indexOf(tower.GetID()) >= 0)) {
                 if (this.towersEnabled) {
                     PauseUnitBJ(false, tower.tower);
                 } else {
@@ -341,8 +341,6 @@ export class Defender extends AbstractPlayer {
             this.sendMessage('Towers enabled');
         } else {
             this.sendMessage('Towers disabled');
-
-
         }
 
     }
