@@ -99,7 +99,7 @@ export class PlayerSpawns {
                 if (spawn.next) {
                     spawnedCreep.targetCheckpoint = spawn.next;
                     IssuePointOrder(GetEnteringUnit(), 'move', GetRectCenterX(spawn.next.rectangle), GetRectCenterY(spawn.next.rectangle));
-                    this.AddCreepAbilities();
+                    spawnedCreep.AddCreepAbilities();
                 }
 
             }
@@ -107,9 +107,6 @@ export class PlayerSpawns {
 
     }
 
-    private AddCreepAbilities(): void {
-        // TODO: Implement Creep abilities
-    }
 
     public AreaTowerActions(dyingCreep: Creep): void {
         for (const tower of this.areaTowers.values()) {

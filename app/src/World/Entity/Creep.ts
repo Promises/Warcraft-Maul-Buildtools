@@ -7,14 +7,13 @@ export class Creep {
     creep: unit;
     targetCheckpoint: CheckPoint | undefined;
     gameRound: GameRound;
+    abilities: CreepAbility[]
 
     constructor(creep: unit, gameRound: GameRound, abilities: CreepAbility[]) {
         this.creep = creep;
         this.gameRound = gameRound;
 
-        for (const ability of abilities) {
-            ability.AddAbilityToCreep(this);
-        }
+        this.abilities = abilities;
 
     }
 
@@ -53,5 +52,11 @@ export class Creep {
         const mdlFile: string = 'Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpecialArt.mdl';
         DestroyEffect(AddSpecialEffect(mdlFile, GetUnitX(this.creep), GetUnitY(this.creep)));
         SetUnitLifePercentBJ(GetEnteringUnit(), GetUnitLifePercent(this.creep) + 0.50 * this.gameRound.currentWave);
+    }
+
+    public AddCreepAbilities(): void {
+        for (const ability of this.abilities) {
+            ability.AddAbilityToCreep(this);
+        }
     }
 }
