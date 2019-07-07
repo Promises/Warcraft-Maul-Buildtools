@@ -84,6 +84,7 @@ import { CrackedBarrel } from './Arachnid/CrackedBarrel';
 import { VoidWorshipper } from './Void/VoidWorshipper';
 import { VoidBeing } from './Void/VoidBeing';
 import { VoidCorrupter } from './Void/VoidCorrupter';
+import { AncientProtector } from './NightElf/AncientProtector';
 
 
 export class TowerConstruction {
@@ -336,6 +337,7 @@ export class TowerConstruction {
         this._towerTypes.add(FourCC('eC83'), CorruptedIllidan);
         this._towerTypes.add(FourCC('h00G'), Warden);
         this._towerTypes.add(FourCC('e00E'), Wisp);
+        this._towerTypes.add(FourCC('hC82'), AncientProtector);
 
 
         // Orc Stronghold
