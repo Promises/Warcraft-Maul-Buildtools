@@ -206,5 +206,6 @@ export class AntiBlock {
     private cancelBuilding(consUnit: unit): void {
         TriggerSleepAction(0.01);
         IssueImmediateOrderById(consUnit, settings.UNIT_ORDER_CANCEL_UPGRADE);
+        RemoveUnit(consUnit);
     }
 }
