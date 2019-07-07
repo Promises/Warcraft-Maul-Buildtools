@@ -4,7 +4,7 @@ import { AttackActionCreepAbility } from './specs/AttackActionCreepAbility';
 
 export class VampiricAura extends CreepAbility implements AttackActionCreepAbility {
     constructor(game: WarcraftMaul) {
-        super('A01T', game);
+        super('A0B3', game);
     }
 
     public AttackAction(): void {

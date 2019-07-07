@@ -1,4 +1,5 @@
 import * as settings from '../GlobalSettings';
+import { ARMOUR_TYPE_COLOURS, ARMOUR_TYPE_NAMES, CREEP_TYPE_COLOURS } from '../GlobalSettings';
 import { WarcraftMaul } from '../WarcraftMaul';
 import { WaveCreep } from '../Entity/WaveCreep';
 import { Creep } from '../Entity/Creep';
@@ -9,7 +10,6 @@ import { Ship } from '../Entity/Ship';
 import { ArchimondeGate } from './ArchimondeGate';
 import { ArchimondeTeleport } from './ArchimondeTeleport';
 import { EndOfRoundTower } from '../Entity/Tower/Specs/EndOfRoundTower';
-import { ARMOUR_TYPE_COLOURS, ARMOUR_TYPE_NAMES, CREEP_TYPE_COLOURS } from '../GlobalSettings';
 import { CreepAbility } from '../Entity/CreepAbilities/specs/CreepAbility';
 
 export class GameRound {
@@ -312,6 +312,9 @@ export class GameRound {
             creepOwner += 1;
             TriggerSleepAction(0.50);
 
+        }
+        for (const ability of abilities) {
+            Log.Debug(GetAbilityName(ability.GetID()));
         }
 
 

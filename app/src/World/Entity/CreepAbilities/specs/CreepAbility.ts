@@ -2,6 +2,8 @@ import { WarcraftMaul } from '../../../WarcraftMaul';
 import { FinalDamageModificationCreepAbility } from './FinalDamageModificationCreepAbility';
 import { Creep } from '../../Creep';
 import { AttackActionCreepAbility } from './AttackActionCreepAbility';
+import { WaveCreep } from '../../WaveCreep';
+import { DivineShield } from '../DivineShield';
 
 export class CreepAbility {
 
@@ -40,6 +42,10 @@ export class CreepAbility {
     }
 
     public AddAbilityToCreep(creep: Creep): void {
+        const currentWave: WaveCreep = this.game.worldMap.waveCreeps[this.game.gameRoundHandler.currentWave - 1];
+        if (this.GetID() === FourCC('A01E') && currentWave.getCreepType() === CREEP_TYPE.AIR) {
+            return;
+        }
         UnitAddAbilityBJ(this.GetID(), creep.creep);
         SetUnitAbilityLevelSwapped(this.GetID(), creep.creep, this.game.gameRoundHandler.currentWave + 1);
     }

@@ -26,25 +26,15 @@ export class CreepAbilityHandler {
 
     private AddAbilitiesToList(): void {
         this.abilities.push(HardnedSkin);
-        0;
         this.abilities.push(Evasion);
-        1;
         this.abilities.push(ArmorBonus);
-        2;
         this.abilities.push(CrippleAura);
-        3;
         this.abilities.push(SpellShield);
-        4;
         this.abilities.push(TornadoAura);
-        5;
         this.abilities.push(VampiricAura);
-        6;
         this.abilities.push(DivineShield);
-        7;
         this.abilities.push(WalkItOff);
-        8;
         this.abilities.push(MorningPerson);
-        9;
     }
 
 
@@ -75,29 +65,29 @@ export class CreepAbilityHandler {
             return [];
         }
         currentDiff -= 100;
-        const abilities: CreepAbility[] = [];
-        while (currentDiff > 0) {
-            const chance: number = RMinBJ(currentDiff, 100);
-            if (Util.RandomInt(1, 100) <= chance) {
-                const ability: CreepAbility = this.activeAbilities[Util.RandomInt(0, this.activeAbilities.length - 1)];
-                if (!(abilities.indexOf(ability) >= 0)) {
-                    if (!(wave.getCreepType() === CREEP_TYPE.AIR && ability instanceof DivineShield)) {
-                        abilities.push(ability);
-                        currentDiff -= 100;
-                    } else {
-                        if (abilities.length === this.activeAbilities.length - 1) {
-                            currentDiff = 0;
-                        }
-                    }
+        const allAbilities: CreepAbility[] = this.activeAbilities.slice(0, this.activeAbilities.length - 1);
+        // allAbilities.sort(() => 0.5 - Math.random());
+        this.ShuffleArray(allAbilities);
+        let picks: number = Math.floor(currentDiff / 100);
+        const rest: number = currentDiff % 100;
 
-                } else {
-                    if (abilities.length === this.activeAbilities.length) {
-                        currentDiff = 0;
-                    }
-                }
-            }
+        if (Util.RandomInt(1, 100) <= rest) {
+            picks++;
         }
+        if (picks === 0) {
+            return [];
+        }
+        return allAbilities.slice(0, IMinBJ(picks - 1, allAbilities.length - 1));
+    }
 
-        return abilities;
+    private ShuffleArray(arr: any[]): void {
+        for (let i: number = arr.length - 1; i > 0; i--) {
+            let j: number = Math.floor(Math.random() * (i + 1)); // random index from 0 to i
+            // [arr[i], arr[j]] = [arr[j], arr[i]]; // swap elements
+
+            const temp: any = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
     }
 }

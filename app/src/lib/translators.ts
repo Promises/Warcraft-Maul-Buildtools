@@ -31,6 +31,18 @@ class Util {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
+    static ShuffleArray(arr: any[]): void {
+        for (let i: number = arr.length - 1; i > 0; i--) {
+            let j: number = Math.floor(Math.random() * (i + 1)); // random index from 0 to i
+            // [arr[i], arr[j]] = [arr[j], arr[i]]; // swap elements
+
+            const temp: any = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+    }
+
+
     static GetRandomKey(collection: Map<any, any>): any {
         const index: number = Math.floor(Math.random() * collection.size);
         let cntr: number = 0;
