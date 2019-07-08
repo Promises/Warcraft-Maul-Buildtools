@@ -1,0 +1,3 @@
+interface AbilityOnEffectTargetsUnit {
+    TargetOnEffectAction(): void;
+}

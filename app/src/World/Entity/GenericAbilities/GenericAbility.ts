@@ -26,7 +26,10 @@ export class GenericAbility {
         return 'AttackAction' in this;
     }
 
-    public IsAbilityTargetsUnit(): this is AbilityTargetsUnit {
-        return 'TargetAction' in this;
+    public IsAbilityOnEffectTargetsUnit(): this is AbilityOnEffectTargetsUnit {
+        return 'TargetOnEffectAction' in this;
+    }
+    public IsAbilityOnCastTargetsUnit(): this is AbilityOnCastTargetsUnit {
+        return 'TargetOnCastAction' in this;
     }
 }

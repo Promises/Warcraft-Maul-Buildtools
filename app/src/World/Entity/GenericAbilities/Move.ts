@@ -7,12 +7,12 @@ import { Creep } from '../Creep';
  *  Move (Builders)
  *  Forces target unit to move
  */
-export class Move extends GenericAbility implements AbilityTargetsUnit {
+export class Move extends GenericAbility implements AbilityOnEffectTargetsUnit {
     constructor(game: WarcraftMaul) {
         super('A0EB', game);
     }
 
-    public TargetAction(): void {
+    public TargetOnEffectAction(): void {
         const target: unit = GetSpellTargetUnit();
 
         const creep: Creep | undefined = this.game.worldMap.spawnedCreeps.unitMap.get(GetHandleIdBJ(target));
