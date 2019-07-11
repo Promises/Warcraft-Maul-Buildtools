@@ -86,6 +86,16 @@ import { VoidBeing } from './Void/VoidBeing';
 import { VoidCorrupter } from './Void/VoidCorrupter';
 import { AncientProtector } from './NightElf/AncientProtector';
 import { UnchargedRune } from './Elementalist/UnchargedRune';
+import { IceTrollKing } from './IceTrolls/IceTrollKing';
+import { Undead } from './Elementalist/Undead';
+import { Undead2 } from './Elementalist/Undead2';
+import { DormantPheonixEgg } from './Elementalist/DormantPheonixEgg';
+import { LowTide } from './Elementalist/LowTide';
+import { HighTide } from './Elementalist/HighTide';
+import { Sapling } from './Elementalist/Sapling';
+import { Tornado } from './Elementalist/Tornado';
+import { Bubbles } from './Elementalist/Bubbles';
+import { Blaze } from './Elementalist/Blaze';
 
 
 export class TowerConstruction {
@@ -333,6 +343,9 @@ export class TowerConstruction {
         this._towerTypes.add(FourCC('h045'), VenomTower);
         this._towerTypes.add(FourCC('n05C'), SirGalahad);
 
+        // Ice Trolls
+        this._towerTypes.add(FourCC('n01B'), IceTrollKing);
+
         // Night Elf
         this._towerTypes.add(FourCC('h00S'), DemonicIllidan);
         this._towerTypes.add(FourCC('eC83'), CorruptedIllidan);
@@ -375,6 +388,15 @@ export class TowerConstruction {
 
         // Elementalist
         this._towerTypes.add(FourCC('n00A'), UnchargedRune);
+        this._towerTypes.add(FourCC('n026'), Undead);
+        this._towerTypes.add(FourCC('u038'), Undead2);
+        this._towerTypes.add(FourCC('u01D'), DormantPheonixEgg);
+        this._towerTypes.add(FourCC('u01F'), LowTide);
+        this._towerTypes.add(FourCC('u029'), HighTide);
+        this._towerTypes.add(FourCC('u021'), Sapling);
+        this._towerTypes.add(FourCC('u022'), Tornado);
+        this._towerTypes.add(FourCC('u026'), Bubbles);
+        this._towerTypes.add(FourCC('u027'), Blaze);
 
         // AntiJuggle
         this._towerTypes.add(FourCC('uC14'), AntiJuggleTower);
