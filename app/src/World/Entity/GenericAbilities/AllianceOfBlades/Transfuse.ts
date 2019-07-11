@@ -1,6 +1,6 @@
 /**
- *  Enchanment (Alliance Of Blades)
- *  Upgrade an item to lvl two
+ *  Transfuse (Alliance Of Blades)
+ *  consume lvl 2 item
  */
 import { GenericAbility } from '../GenericAbility';
 import { WarcraftMaul } from '../../../WarcraftMaul';
@@ -9,9 +9,9 @@ import { Tower } from '../../Tower/Specs/Tower';
 import { AOB_ITEM_LOOT_LEVEL_ONE, AOB_ITEM_LOOT_LEVEL_TWO } from '../../../GlobalSettings';
 
 
-export class Enchantment extends GenericAbility implements AbilityOnEffectTargetsUnit {
+export class Transfuse extends GenericAbility implements AbilityOnEffectTargetsUnit {
     constructor(game: WarcraftMaul) {
-        super('A03F', game);
+        super('A03A', game);
     }
 
 
@@ -22,12 +22,9 @@ export class Enchantment extends GenericAbility implements AbilityOnEffectTarget
 
             const tower: Tower | undefined = owner.towers.get(GetHandleId(u));
             if (tower) {
-                if (GetItemLevel(UnitItemInSlotBJ(tower.tower, 1)) === 1) {
-                    const i: item = UnitItemInSlotBJ(tower.tower, 1);
-                    const indx: number = AOB_ITEM_LOOT_LEVEL_ONE.indexOf(GetItemTypeId(i));
-                    const lvlTwoItem: number = AOB_ITEM_LOOT_LEVEL_TWO[indx];
+                if (GetItemLevel(UnitItemInSlotBJ(tower.tower, 1)) === 2) {
                     RemoveItem(UnitItemInSlotBJ(tower.tower, 1));
-                    UnitAddItemByIdSwapped(lvlTwoItem, tower.tower);
+                    SetUnitManaBJ(tower.tower, GetUnitStateSwap(UNIT_STATE_MANA, tower.tower) + 1.00);
                 }
             }
         }

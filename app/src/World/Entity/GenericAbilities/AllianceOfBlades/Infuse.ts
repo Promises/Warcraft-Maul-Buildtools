@@ -1,17 +1,17 @@
 /**
- *  Enchanment (Alliance Of Blades)
- *  Upgrade an item to lvl two
+ *  Infuse (Alliance Of Blades)
+ *  gamble upgrade lvl 2 to 3
  */
 import { GenericAbility } from '../GenericAbility';
 import { WarcraftMaul } from '../../../WarcraftMaul';
 import { Defender } from '../../Players/Defender';
 import { Tower } from '../../Tower/Specs/Tower';
-import { AOB_ITEM_LOOT_LEVEL_ONE, AOB_ITEM_LOOT_LEVEL_TWO } from '../../../GlobalSettings';
+import { AOB_ITEM_LOOT_LEVEL_THREE, AOB_ITEM_LOOT_LEVEL_TWO } from '../../../GlobalSettings';
 
 
-export class Enchantment extends GenericAbility implements AbilityOnEffectTargetsUnit {
+export class Infuse extends GenericAbility implements AbilityOnEffectTargetsUnit {
     constructor(game: WarcraftMaul) {
-        super('A03F', game);
+        super('A0A7', game);
     }
 
 
@@ -22,12 +22,16 @@ export class Enchantment extends GenericAbility implements AbilityOnEffectTarget
 
             const tower: Tower | undefined = owner.towers.get(GetHandleId(u));
             if (tower) {
-                if (GetItemLevel(UnitItemInSlotBJ(tower.tower, 1)) === 1) {
+                if (GetItemLevel(UnitItemInSlotBJ(tower.tower, 1)) === 2) {
                     const i: item = UnitItemInSlotBJ(tower.tower, 1);
-                    const indx: number = AOB_ITEM_LOOT_LEVEL_ONE.indexOf(GetItemTypeId(i));
-                    const lvlTwoItem: number = AOB_ITEM_LOOT_LEVEL_TWO[indx];
+                    const indx: number = AOB_ITEM_LOOT_LEVEL_TWO.indexOf(GetItemTypeId(i));
+
                     RemoveItem(UnitItemInSlotBJ(tower.tower, 1));
-                    UnitAddItemByIdSwapped(lvlTwoItem, tower.tower);
+                    const mana: number = GetUnitStateSwap(UNIT_STATE_MANA, tower.tower);
+                    SetUnitManaBJ(tower.tower, 0);
+                    if (10 * mana > Util.RandomInt(0, 99)) {
+                        UnitAddItemByIdSwapped(AOB_ITEM_LOOT_LEVEL_THREE[indx], tower.tower);
+                    }
                 }
             }
         }

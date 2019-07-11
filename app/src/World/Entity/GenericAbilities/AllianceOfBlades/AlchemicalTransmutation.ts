@@ -1,17 +1,17 @@
 /**
- *  Enchanment (Alliance Of Blades)
- *  Upgrade an item to lvl two
+ *  AlchemicalTransmutation (Alliance Of Blades)
+ *  Pay 75g to upgrade lvl 1 to 3
  */
 import { GenericAbility } from '../GenericAbility';
 import { WarcraftMaul } from '../../../WarcraftMaul';
 import { Defender } from '../../Players/Defender';
 import { Tower } from '../../Tower/Specs/Tower';
-import { AOB_ITEM_LOOT_LEVEL_ONE, AOB_ITEM_LOOT_LEVEL_TWO } from '../../../GlobalSettings';
+import {  AOB_ITEM_LOOT_LEVEL_ONE, AOB_ITEM_LOOT_LEVEL_THREE } from '../../../GlobalSettings';
 
 
-export class Enchantment extends GenericAbility implements AbilityOnEffectTargetsUnit {
+export class AlchemicalTransmutation extends GenericAbility implements AbilityOnEffectTargetsUnit {
     constructor(game: WarcraftMaul) {
-        super('A03F', game);
+        super('A0B0', game);
     }
 
 
@@ -25,9 +25,10 @@ export class Enchantment extends GenericAbility implements AbilityOnEffectTarget
                 if (GetItemLevel(UnitItemInSlotBJ(tower.tower, 1)) === 1) {
                     const i: item = UnitItemInSlotBJ(tower.tower, 1);
                     const indx: number = AOB_ITEM_LOOT_LEVEL_ONE.indexOf(GetItemTypeId(i));
-                    const lvlTwoItem: number = AOB_ITEM_LOOT_LEVEL_TWO[indx];
                     RemoveItem(UnitItemInSlotBJ(tower.tower, 1));
-                    UnitAddItemByIdSwapped(lvlTwoItem, tower.tower);
+                    UnitAddItemByIdSwapped(AOB_ITEM_LOOT_LEVEL_THREE[indx], tower.tower);
+                } else {
+                    owner.giveGold(75);
                 }
             }
         }

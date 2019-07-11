@@ -10,6 +10,10 @@ import { UnchargedRuneMorph } from './Elementalist/UnchargedRuneMorph';
 import { ElementalistSettings } from './Elementalist/ElementalistSettings';
 import { SiphonEnergy } from './Elementalist/SiphonEnergy';
 import { Enchantment } from './AllianceOfBlades/Enchantment';
+import { Transfuse } from './AllianceOfBlades/Transfuse';
+import { Infuse } from './AllianceOfBlades/Infuse';
+import { Sacrifice } from './AllianceOfBlades/Sacrifice';
+import { AlchemicalTransmutation } from './AllianceOfBlades/AlchemicalTransmutation';
 
 export class GenericAbilityHandler {
     private game: WarcraftMaul;
@@ -42,6 +46,10 @@ export class GenericAbilityHandler {
         this.abilities.push(UnchargedRuneMorph);
         this.abilities.push(SiphonEnergy);
         this.abilities.push(Enchantment);
+        this.abilities.push(Transfuse);
+        this.abilities.push(Infuse);
+        this.abilities.push(Sacrifice);
+        this.abilities.push(AlchemicalTransmutation);
 
     }
 
