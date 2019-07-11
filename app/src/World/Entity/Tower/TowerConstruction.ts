@@ -98,6 +98,7 @@ import { Bubbles } from './Elementalist/Bubbles';
 import { Blaze } from './Elementalist/Blaze';
 import { RockGiant } from './Giants/RockGiant';
 import { SeaGiant } from './Giants/SeaGiant';
+import { Adventurer } from './AllianceOfBlades/Adventurer';
 
 
 export class TowerConstruction {
@@ -269,6 +270,9 @@ export class TowerConstruction {
         this._towerTypes.add(FourCC('h01F'), EarthPandaren);
         this._towerTypes.add(FourCC('h01J'), StormPandaren);
         this._towerTypes.add(FourCC('h01I'), FirePandaren);
+
+        // Alliance Of Blades
+        this._towerTypes.add(FourCC('n02T'), Adventurer);
 
         // Arachnid
         this._towerTypes.add(FourCC('o019'), AcidSpittingSpider);

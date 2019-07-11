@@ -121,6 +121,47 @@ export const ELEMENTALIST_ABILITIES: number[] = [
     FourCC('A0C3'),
 ];
 
+export const AOB_ITEM_LOOT_LEVEL_ONE: number[] = [
+    FourCC('I00A'),
+    FourCC('I010'),
+    FourCC('I011'),
+    FourCC('I012'),
+    FourCC('I013'),
+    FourCC('I014'),
+    FourCC('I015'),
+    FourCC('I016'),
+];
+export const AOB_ITEM_LOOT_LEVEL_TWO: number[] = [
+    FourCC('I01D'),
+    FourCC('I01C'),
+    FourCC('I017'),
+    FourCC('I01F'),
+    FourCC('I01G'),
+    FourCC('I01B'),
+    FourCC('I01E'),
+    FourCC('I018'),
+];
+export const AOB_ITEM_LOOT_LEVEL_THREE: number[] = [
+    FourCC('I01H'),
+    FourCC('I01M'),
+    FourCC('I01N'),
+    FourCC('I01L'),
+    FourCC('I01I'),
+    FourCC('I01J'),
+    FourCC('I01K'),
+    FourCC('I01O'),
+];
+export const AOB_ITEM_LOOT_LEVEL_FOUR: number[] = [
+    FourCC('I01W'),
+    FourCC('I01P'),
+    FourCC('I01U'),
+    FourCC('I01V'),
+    FourCC('I01R'),
+    FourCC('I01T'),
+    FourCC('I01Q'),
+    FourCC('I01S'),
+];
+
 export const PLAYER_AREAS: Rectangle[] = [
     new Rectangle([-4224.0, 3968.0, -1792.0, 5504.0]), // Red area
     new Rectangle([-768.0, 2304.0, 768.0, 4736.0]), // Blue area
