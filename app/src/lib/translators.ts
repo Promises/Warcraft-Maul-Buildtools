@@ -23,6 +23,19 @@ function DecodeFourCC(fourcc: number): string {
 
 class Util {
 
+    static isUnitCreep(u: unit): boolean {
+        const ownerID: COLOUR = GetPlayerId(GetOwningPlayer(u));
+        switch (ownerID) {
+            case COLOUR.NAVY:
+            case COLOUR.TURQUOISE:
+            case COLOUR.VOILET:
+            case COLOUR.WHEAT:
+                return true;
+            default:
+                return false;
+        }
+    }
+
     static ColourString(colour: string, str: string): string {
         return `|cFF${colour}${str}|r`;
     }

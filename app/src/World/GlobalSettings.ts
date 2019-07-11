@@ -1,7 +1,4 @@
-import { Defender } from './Entity/Players/Defender';
-import { Attacker } from './Entity/Players/Attacker';
 import { Rectangle } from '../JassOverrides/Rectangle';
-
 
 
 export interface Point {
@@ -10,19 +7,19 @@ export interface Point {
 }
 
 export const ALLOW_PLAYER_TOWER_LOCATIONS: Point[] = [
-    { x: -1536.0, y: 5376.0 }, // Red
-    { x: 640.0, y: 4992.0 }, // Blue
-    { x: 1536.0, y: 5376.0 }, // Teal
-    { x: 5120.0, y: 448.0 }, // Purple
-    { x: 768.0, y: 1984.0 }, // Yellow
-    { x: -3616.0, y: 448.0 }, // Orange
-    { x: -4736.0, y: -2816.0 }, // Green
-    { x: 4736.0, y: -2816.0 }, // Pink
-    { x: 512.0, y: -2176.0 }, // Grey
-    { x: -1536.0, y: -2176.0 }, // Lightblue
-    { x: 2816.0, y: -2176.0 }, // Darkgreen
-    { x: -3712.0, y: 3456.0 }, // Brown
-    { x: 4992.0, y: 3456.0 }, // Maroon
+    {x: -1536.0, y: 5376.0}, // Red
+    {x: 640.0, y: 4992.0}, // Blue
+    {x: 1536.0, y: 5376.0}, // Teal
+    {x: 5120.0, y: 448.0}, // Purple
+    {x: 768.0, y: 1984.0}, // Yellow
+    {x: -3616.0, y: 448.0}, // Orange
+    {x: -4736.0, y: -2816.0}, // Green
+    {x: 4736.0, y: -2816.0}, // Pink
+    {x: 512.0, y: -2176.0}, // Grey
+    {x: -1536.0, y: -2176.0}, // Lightblue
+    {x: 2816.0, y: -2176.0}, // Darkgreen
+    {x: -3712.0, y: 3456.0}, // Brown
+    {x: 4992.0, y: 3456.0}, // Maroon
 ];
 
 
@@ -113,6 +110,15 @@ export const ARMOUR_TYPE_COLOURS: string[] = [
     '154360',
     'CA8500',
     '7525FF',
+];
+
+export const ELEMENTALIST_ABILITIES: number[] = [
+    FourCC('A0BO'),
+    FourCC('A0BS'),
+    FourCC('A0C0'),
+    FourCC('A0C1'),
+    FourCC('A0C2'),
+    FourCC('A0C3'),
 ];
 
 export const PLAYER_AREAS: Rectangle[] = [

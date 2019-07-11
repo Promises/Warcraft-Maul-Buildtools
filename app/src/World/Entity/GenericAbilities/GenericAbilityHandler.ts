@@ -6,11 +6,15 @@ import { Move } from './Move';
 import { FelineSwiftness } from './NightElfAncientProtector/FelineSwiftness';
 import { NaturesNourishment } from './NightElfAncientProtector/NaturesNourishment';
 import { WolvenFury } from './NightElfAncientProtector/WolvenFury';
+import { UnchargedRuneMorph } from './Elementalist/UnchargedRuneMorph';
+import { ElementalistSettings } from './Elementalist/ElementalistSettings';
+import { SiphonEnergy } from './Elementalist/SiphonEnergy';
 
 export class GenericAbilityHandler {
     private game: WarcraftMaul;
     private abilities: object[] = [];
     private activeAbilities: GenericAbility[] = [];
+    public  elementalistSettings: ElementalistSettings = new ElementalistSettings();
     private targetUnitOnEffectAbilities: (GenericAbility & AbilityOnEffectTargetsUnit)[] = [];
     private targetUnitOnCastAbilities: (GenericAbility & AbilityOnCastTargetsUnit)[] = [];
     private targetUnitOnEffectAbilitiesTrigger: Trigger;
@@ -34,6 +38,8 @@ export class GenericAbilityHandler {
         this.abilities.push(FelineSwiftness);
         this.abilities.push(NaturesNourishment);
         this.abilities.push(WolvenFury);
+        this.abilities.push(UnchargedRuneMorph);
+        this.abilities.push(SiphonEnergy);
 
     }
 

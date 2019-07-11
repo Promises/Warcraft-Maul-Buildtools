@@ -41,7 +41,7 @@ export class WarcraftMaul {
     scoreBoard: MultiBoard | undefined;
     private itemHandler: ItemHandler;
     sellTower: SellTower;
-    private abilityHandler: GenericAbilityHandler;
+    public abilityHandler: GenericAbilityHandler;
 
 
     players: Map<number, Defender> = new Map<number, Defender>();

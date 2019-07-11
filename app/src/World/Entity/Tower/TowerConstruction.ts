@@ -85,6 +85,7 @@ import { VoidWorshipper } from './Void/VoidWorshipper';
 import { VoidBeing } from './Void/VoidBeing';
 import { VoidCorrupter } from './Void/VoidCorrupter';
 import { AncientProtector } from './NightElf/AncientProtector';
+import { UnchargedRune } from './Elementalist/UnchargedRune';
 
 
 export class TowerConstruction {
@@ -371,6 +372,9 @@ export class TowerConstruction {
         this._towerTypes.add(FourCC('u03F'), Sammy);
         this._towerTypes.add(FourCC('u03E'), ZerglingHive);
         this._towerTypes.add(FourCC('u040'), TheDarkness);
+
+        // Elementalist
+        this._towerTypes.add(FourCC('n00A'), UnchargedRune);
 
         // AntiJuggle
         this._towerTypes.add(FourCC('uC14'), AntiJuggleTower);
