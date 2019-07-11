@@ -96,6 +96,8 @@ import { Sapling } from './Elementalist/Sapling';
 import { Tornado } from './Elementalist/Tornado';
 import { Bubbles } from './Elementalist/Bubbles';
 import { Blaze } from './Elementalist/Blaze';
+import { RockGiant } from './Giants/RockGiant';
+import { SeaGiant } from './Giants/SeaGiant';
 
 
 export class TowerConstruction {
@@ -328,6 +330,8 @@ export class TowerConstruction {
         // Giants
         this._towerTypes.add(FourCC('oC35'), OgreWarrior);
         this._towerTypes.add(FourCC('o00G'), FleshGolem);
+        this._towerTypes.add(FourCC('hC53'), RockGiant);
+        this._towerTypes.add(FourCC('o00Y'), SeaGiant);
 
         // Goblin
         this._towerTypes.add(FourCC('o01R'), GoblinMineLayer);
