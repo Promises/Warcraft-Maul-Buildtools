@@ -1,6 +1,6 @@
 /**
- *  UnchargedRuneMorph (Elementalist)
- *  Forces target unit to move
+ *  Siphon Energy (Elementalist)
+ *  Combines two runes to one tower
  */
 import { GenericAbility } from '../GenericAbility';
 import { WarcraftMaul } from '../../../WarcraftMaul';

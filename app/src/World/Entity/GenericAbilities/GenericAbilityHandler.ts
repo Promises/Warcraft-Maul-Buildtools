@@ -9,6 +9,7 @@ import { WolvenFury } from './NightElfAncientProtector/WolvenFury';
 import { UnchargedRuneMorph } from './Elementalist/UnchargedRuneMorph';
 import { ElementalistSettings } from './Elementalist/ElementalistSettings';
 import { SiphonEnergy } from './Elementalist/SiphonEnergy';
+import { Enchantment } from './AllianceOfBlades/Enchantment';
 
 export class GenericAbilityHandler {
     private game: WarcraftMaul;
@@ -40,6 +41,7 @@ export class GenericAbilityHandler {
         this.abilities.push(WolvenFury);
         this.abilities.push(UnchargedRuneMorph);
         this.abilities.push(SiphonEnergy);
+        this.abilities.push(Enchantment);
 
     }
 
