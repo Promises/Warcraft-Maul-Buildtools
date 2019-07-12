@@ -28,7 +28,11 @@ export class DrinkWaterRune extends GenericAbility implements AbilityOnEffectTar
                     const newTarget: unit = ReplaceUnitBJ(target.tower, FourCC('n027'), bj_UNIT_STATE_METHOD_DEFAULTS);
                     this.game.worldMap.towerConstruction.SetupTower(newTarget, target.owner);
                     if (mana > 8) {
-                        const newTower: unit = ReplaceUnitBJ(tower.tower, FourCC('u037'), bj_UNIT_STATE_METHOD_DEFAULTS);
+                        let newId: number = FourCC('u037');
+                        if (Util.RandomInt(1000, 2000) === 1337) {
+                            newId = FourCC('h03G');
+                        }
+                        const newTower: unit = ReplaceUnitBJ(tower.tower, newId, bj_UNIT_STATE_METHOD_DEFAULTS);
                         this.game.worldMap.towerConstruction.SetupTower(newTower, target.owner);
 
                     } else {
