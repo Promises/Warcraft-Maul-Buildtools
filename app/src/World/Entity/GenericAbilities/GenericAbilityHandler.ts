@@ -16,7 +16,7 @@ import { Sacrifice } from './AllianceOfBlades/Sacrifice';
 import { AlchemicalTransmutation } from './AllianceOfBlades/AlchemicalTransmutation';
 import { ChannelItem } from './AllianceOfBlades/ChannelItem';
 import { Trade } from './AllianceOfBlades/Trade';
-import { AwakenDormantPheonixEgg } from './AwakenDormantPheonixEgg';
+import { AwakenDormantPheonixEgg } from './Elementalist/AwakenDormantPheonixEgg';
 
 export class GenericAbilityHandler {
     private game: WarcraftMaul;
