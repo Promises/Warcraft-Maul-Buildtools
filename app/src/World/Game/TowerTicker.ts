@@ -1,9 +1,9 @@
 import { Trigger } from '../../JassOverrides/Trigger';
-import { TickingTower } from './TickingTower';
+import { TickingTower } from '../Entity/Tower/Specs/TickingTower';
 
 export class TowerTicker {
     private readonly trig: Trigger;
-    private tickingTowers: TickingTower[] = [];
+    private tickingTowers: Map<number, TickingTower> = new Map<number, TickingTower>();
     private tick: number = 0;
     private readonly maxTick: number = 100000;
 
@@ -12,12 +12,18 @@ export class TowerTicker {
         this.trig.RegisterTimerEventPeriodic(0.10);
         this.trig.AddAction(() => {
             this.tick = (this.tick + 1) % this.maxTick;
-            this.tickingTowers.filter(tickingTower => this.tick % tickingTower.GetTickModulo() === 0)
-                .forEach(tickingTower => tickingTower.Action());
+            this.tickingTowers.forEach((tickingTower) => {
+                if (this.tick % tickingTower.GetTickModulo() === 0) {
+                    tickingTower.Action();
+                }
+            });
         });
     }
 
-    public AddTickingTower(tickingTower: TickingTower): void {
-        this.tickingTowers.push(tickingTower);
+    public AddTickingTower(id: number, tickingTower: TickingTower): void {
+        this.tickingTowers.set(id, tickingTower);
+    }
+    public RemoveTickingTower(id: number): void {
+        this.tickingTowers.delete(id);
     }
 }

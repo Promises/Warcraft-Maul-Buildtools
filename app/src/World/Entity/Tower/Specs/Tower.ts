@@ -13,6 +13,7 @@ import { TowerForce } from './TowerForce';
 import { LimitedTower } from './LimitedTower';
 import { ConstructActionTower } from './ConstructActionTower';
 import { SellActionTower } from './SellActionTower';
+import { TickingTower } from './TickingTower';
 
 export class Tower {
 
@@ -111,6 +112,11 @@ export class Tower {
     public IsLimitedTower(): this is LimitedTower {
         return 'MaxCount' in this;
     }
+
+    public IsTickingTower(): this is TickingTower {
+        return 'GetTickModulo' in this;
+    }
+
     public Sell(): void {
         this.owner.towers.delete(this.handleId);
         if (this.IsEndOfRoundTower()) {
@@ -118,6 +124,9 @@ export class Tower {
         }
         if (this.IsAttackActionTower()) {
             this.game.gameDamageEngine.initialDamageEventTowers.delete(this.handleId);
+        }
+        if (this.IsTickingTower()) {
+            this.game.towerTicker.RemoveTickingTower(this.handleId);
         }
         if (this.IsInitialDamageModificationTower()) {
             this.game.gameDamageEngine.initialDamageModificationEventTowers.delete(this.handleId);

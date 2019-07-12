@@ -99,6 +99,7 @@ import { Blaze } from './Elementalist/Blaze';
 import { RockGiant } from './Giants/RockGiant';
 import { SeaGiant } from './Giants/SeaGiant';
 import { Adventurer } from './AllianceOfBlades/Adventurer';
+import { IceTrollEmperor } from './IceTrolls/IceTrollEmperor';
 
 
 export class TowerConstruction {
@@ -218,6 +219,9 @@ export class TowerConstruction {
         }
         if (ObjectExtendsTower.IsConstructActionTower()) {
             ObjectExtendsTower.ConstructionFinished();
+        }
+        if (ObjectExtendsTower.IsTickingTower()) {
+            this.game.towerTicker.AddTickingTower(ObjectExtendsTower.handleId, ObjectExtendsTower);
         }
         if (ObjectExtendsTower.IsTowerForceTower()) {
             if (owner.towerForces.has(ObjectExtendsTower.GetID())) {
@@ -353,6 +357,7 @@ export class TowerConstruction {
 
         // Ice Trolls
         this._towerTypes.add(FourCC('n01B'), IceTrollKing);
+        this._towerTypes.add(FourCC('n01C'), IceTrollEmperor);
 
         // Night Elf
         this._towerTypes.add(FourCC('h00S'), DemonicIllidan);
