@@ -8,6 +8,7 @@ import { AbstractHologramMaze } from '../../Holograms/AbstractHologramMaze';
 import { Tower } from '../Tower/Specs/Tower';
 
 export class Defender extends AbstractPlayer {
+
     get towerForces(): Map<number, number> {
         return this._towerForces;
     }
@@ -19,6 +20,8 @@ export class Defender extends AbstractPlayer {
     set builders(value: unit[]) {
         this._builders = value;
     }
+    private _voidFragments: number = 0;
+
 
     private _scoreSlot: number = 0;
     private _kills: number = 0;
@@ -343,5 +346,9 @@ export class Defender extends AbstractPlayer {
             this.sendMessage('Towers disabled');
         }
 
+    }
+
+    public GetVoidFragments(): number {
+        return this._voidFragments;
     }
 }
