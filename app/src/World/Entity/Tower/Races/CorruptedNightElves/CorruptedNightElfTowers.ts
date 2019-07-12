@@ -1,0 +1,13 @@
+import { TowerMap } from '../../Specs/TowerMap';
+import { RaceTowers } from '../RaceTowers';
+import { CorruptedTreeofLife } from './CorruptedTreeofLife';
+
+
+
+export class CorruptedNightElfTowers extends RaceTowers {
+    public AddTowersToList(list: TowerMap<number, object>): void {
+        // CorruptedNightaddes
+        list.add(FourCC('n00P'), CorruptedTreeofLife);
+    }
+
+}

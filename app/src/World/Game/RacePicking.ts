@@ -14,6 +14,7 @@ import {
     HybridTierThree,
     HybridTierTwo,
 } from '../../Generated/hybridRandomGEN';
+import { InitialiseAllRaceTowers } from '../Entity/Tower/Races/RaceInitialiser';
 
 export class RacePicking {
     raceSelectTrigger: Trigger;
@@ -25,7 +26,6 @@ export class RacePicking {
         this.raceSelectTrigger.RegisterAnyUnitEventBJ(EVENT_PLAYER_UNIT_SELL_ITEM);
         this.raceSelectTrigger.AddCondition(() => this.RaceSelectionConditions());
         this.raceSelectTrigger.AddAction(() => this.RaceSelectionActions());
-
 
         CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('h03Q'), -1920.00, 3000.00, 0.00);
         CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('h00H'), -1920.00, 2624.00, 0.00);

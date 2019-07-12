@@ -94,3 +94,7 @@ _G.GetUnitAbilityLevel = function (whichUnit: unit, abilcode: number): number {
     }
     return 1;
 };
+
+_G.UnitAddAbilityBJ = function (abilityId: number, whichUnit: unit): void {
+    return;
+};

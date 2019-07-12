@@ -66,6 +66,7 @@ _G.IngamePlayers = [
 
 ];
 _G.PLAYER_NEUTRAL_PASSIVE = 24;
+_G.bj_PLAYER_NEUTRAL_EXTRA = 25;
 _G.Player = (colourId: number): player => {
     return _G.IngamePlayers[colourId + 1];
 };
