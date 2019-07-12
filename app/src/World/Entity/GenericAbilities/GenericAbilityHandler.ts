@@ -14,6 +14,7 @@ import { Transfuse } from './AllianceOfBlades/Transfuse';
 import { Infuse } from './AllianceOfBlades/Infuse';
 import { Sacrifice } from './AllianceOfBlades/Sacrifice';
 import { AlchemicalTransmutation } from './AllianceOfBlades/AlchemicalTransmutation';
+import { ChannelItem } from './AllianceOfBlades/ChannelItem';
 
 export class GenericAbilityHandler {
     private game: WarcraftMaul;
@@ -50,6 +51,7 @@ export class GenericAbilityHandler {
         this.abilities.push(Infuse);
         this.abilities.push(Sacrifice);
         this.abilities.push(AlchemicalTransmutation);
+        this.abilities.push(ChannelItem);
 
     }
 
