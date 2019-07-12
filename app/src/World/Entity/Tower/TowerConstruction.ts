@@ -100,6 +100,7 @@ import { RockGiant } from './Giants/RockGiant';
 import { SeaGiant } from './Giants/SeaGiant';
 import { Adventurer } from './AllianceOfBlades/Adventurer';
 import { IceTrollEmperor } from './IceTrolls/IceTrollEmperor';
+import { IceTrollPriest } from './IceTrolls/IceTrollPriest';
 
 
 export class TowerConstruction {
@@ -358,6 +359,7 @@ export class TowerConstruction {
         // Ice Trolls
         this._towerTypes.add(FourCC('n01B'), IceTrollKing);
         this._towerTypes.add(FourCC('n01C'), IceTrollEmperor);
+        this._towerTypes.add(FourCC('n018'), IceTrollPriest);
 
         // Night Elf
         this._towerTypes.add(FourCC('h00S'), DemonicIllidan);

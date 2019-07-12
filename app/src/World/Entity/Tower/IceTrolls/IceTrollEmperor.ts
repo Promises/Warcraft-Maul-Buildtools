@@ -1,6 +1,5 @@
 import { Tower } from '../Specs/Tower';
 import { TickingTower } from '../Specs/TickingTower';
-import { Log } from '../../../../lib/Serilog/Serilog';
 
 export class IceTrollEmperor extends Tower implements TickingTower {
     public Action(): void {
