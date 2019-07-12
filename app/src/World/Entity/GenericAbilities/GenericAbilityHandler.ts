@@ -19,6 +19,10 @@ import { Trade } from './AllianceOfBlades/Trade';
 import { AwakenDormantPheonixEgg } from './Elementalist/AwakenDormantPheonixEgg';
 import { PayTheToll } from './Void/PayTheToll';
 import { VoidLordAbility } from './Void/VoidLordAbility';
+import { PurchaseVoidBeast } from './Void/PurchaseVoidBeast';
+import { PurchaseVoidBeing } from './Void/PurchaseVoidBeing';
+import { PurchaseVoidLord } from './Void/PurchaseVoidLord';
+import { PurchaseVoidMonstrosity } from './Void/PurchaseVoidMonstrosity';
 
 export class GenericAbilityHandler {
     private game: WarcraftMaul;
@@ -60,6 +64,10 @@ export class GenericAbilityHandler {
         this.abilities.push(AwakenDormantPheonixEgg);
         this.abilities.push(PayTheToll);
         this.abilities.push(VoidLordAbility);
+        this.abilities.push(PurchaseVoidBeing);
+        this.abilities.push(PurchaseVoidBeast);
+        this.abilities.push(PurchaseVoidMonstrosity);
+        this.abilities.push(PurchaseVoidLord);
 
     }
 

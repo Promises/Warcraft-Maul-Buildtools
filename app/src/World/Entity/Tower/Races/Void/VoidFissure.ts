@@ -1,14 +1,25 @@
 import { Tower } from '../../Specs/Tower';
 import { GenericAutoAttackTower } from '../../Specs/GenericAutoAttackTower';
 import { AttackActionTower } from '../../Specs/AttackActionTower';
+import { Defender } from '../../../Players/Defender';
+import { WarcraftMaul } from '../../../../WarcraftMaul';
+import { SellActionTower } from '../../Specs/SellActionTower';
 
-export class VoidFissure extends Tower implements GenericAutoAttackTower, AttackActionTower {
-
+export class VoidFissure extends Tower implements GenericAutoAttackTower, AttackActionTower, SellActionTower {
+    constructor(tower: unit, owner: Defender, game: WarcraftMaul) {
+        super(tower, owner, game);
+        this.owner.SetVoidFragmentTick(this.owner.GetVoidFragmentTick() + 50);
+    }
     public GenericAttack(): void {
         IssueImmediateOrderBJ(GetAttacker(), 'roar');
     }
 
-    public AttackAction(): void {
+
+    public SellAction(): void {
+        this.owner.SetVoidFragmentTick(this.owner.GetVoidFragmentTick() - 50);
+
+    }
+    public AttackAction(): void {h02S
         const u: unit | undefined = this.game.gameDamageEngineGlobals.udg_DamageEventSource;
         const target: unit | undefined = this.game.gameDamageEngineGlobals.udg_DamageEventTarget;
 

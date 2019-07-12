@@ -20,6 +20,7 @@ import { ItemHandler } from './Entity/Item/ItemHandler';
 import { GenericAbilityHandler } from './Entity/GenericAbilities/GenericAbilityHandler';
 import set = Reflect.set;
 import { CreepAbilityHandler } from './Entity/CreepAbilities/CreepAbilityHandler';
+import { VoidTicker } from './Game/VoidTicker';
 
 export class WarcraftMaul {
 
@@ -48,6 +49,7 @@ export class WarcraftMaul {
 
     enemies: Attacker[] = [];
     private _creepAbilityHandler: CreepAbilityHandler;
+    private voidTicker: VoidTicker;
 
     constructor() {
         // @ts-ignore to enable tests
@@ -100,6 +102,7 @@ export class WarcraftMaul {
         this.worldMap = new WorldMap(this);
         this.gameDamageEngineGlobals = new DamageEngineGlobals();
         this.towerTicker = new TowerTicker();
+        this.voidTicker = new VoidTicker(this);
         this.gameDamageEngine = new DamageEngine(this.gameDamageEngineGlobals);
         this.gameCommandHandler = new Commands(this);
         this.buffHandler = new BuffHandler(this);
