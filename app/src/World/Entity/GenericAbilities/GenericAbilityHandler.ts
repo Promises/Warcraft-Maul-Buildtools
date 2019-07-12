@@ -16,6 +16,7 @@ import { Sacrifice } from './AllianceOfBlades/Sacrifice';
 import { AlchemicalTransmutation } from './AllianceOfBlades/AlchemicalTransmutation';
 import { ChannelItem } from './AllianceOfBlades/ChannelItem';
 import { Trade } from './AllianceOfBlades/Trade';
+import { AwakenDormantPheonixEgg } from './AwakenDormantPheonixEgg';
 
 export class GenericAbilityHandler {
     private game: WarcraftMaul;
@@ -54,6 +55,7 @@ export class GenericAbilityHandler {
         this.abilities.push(AlchemicalTransmutation);
         this.abilities.push(ChannelItem);
         this.abilities.push(Trade);
+        this.abilities.push(AwakenDormantPheonixEgg);
 
     }
 
