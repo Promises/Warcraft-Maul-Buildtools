@@ -20,7 +20,9 @@ export class Defender extends AbstractPlayer {
     set builders(value: unit[]) {
         this._builders = value;
     }
+
     private _voidFragments: number = 0;
+    private _voidFragmentTick: number = 0;
 
 
     private _scoreSlot: number = 0;
@@ -350,5 +352,17 @@ export class Defender extends AbstractPlayer {
 
     public GetVoidFragments(): number {
         return this._voidFragments;
+    }
+
+    public GetVoidFragmentTick(): number {
+        return this._voidFragmentTick;
+    }
+
+    public SetVoidFragments(value: number): void {
+        this._voidFragments = value;
+    }
+
+    public SetVoidFragmentTick(value: number): void {
+        this._voidFragments = value;
     }
 }
