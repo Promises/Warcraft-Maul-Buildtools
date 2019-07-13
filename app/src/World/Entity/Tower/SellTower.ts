@@ -70,9 +70,10 @@ export class SellTower {
         const isWaveInProgress: boolean = this._game.gameRoundHandler.isWaveInProgress;
         const x: number = GetUnitX(unit);
         const y: number = GetUnitY(unit);
-        if (isWaveInProgress) {
-            this._game.worldMap.towerConstruction.SetupTower(ReplaceUnitBJ(unit, FourCC('uC14'), bj_UNIT_STATE_METHOD_DEFAULTS), player);
-        } else {
+        // TODO: FIX ANTI-JUGGLE
+        // if (isWaveInProgress) {
+        //     this._game.worldMap.towerConstruction.SetupTower(ReplaceUnitBJ(unit, FourCC('uC14'), bj_UNIT_STATE_METHOD_DEFAULTS), player);
+        // } else {
             const maze: Maze = this._game.worldMap.playerMazes[playerSpawnId];
             const leftSide: number = ((x - 64) - maze.minX) / 64;
             const rightSide: number = (x - maze.minX) / 64;
@@ -83,7 +84,7 @@ export class SellTower {
             maze.setWalkable(leftSide + topSide * maze.width, true);
             maze.setWalkable(rightSide + topSide * maze.width, true);
             RemoveUnit(unit);
-        }
+        // }
 
     }
 
