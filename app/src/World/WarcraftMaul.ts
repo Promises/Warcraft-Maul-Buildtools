@@ -66,11 +66,11 @@ export class WarcraftMaul {
             ]);
             Log.Debug('Debug mode enabled');
         }
-        if (this.IsReplay()) {
-            Log.Init([
-                new StringSink(LogLevel.Verbose, SendMessage),
-            ]);
-        }
+        // if (this.IsReplay()) {
+        //     Log.Init([
+        //         new StringSink(LogLevel.Verbose, SendMessage),
+        //     ]);
+        // }
         Log.Verbose('Registered replay state, printing verbose');
 
         // Set up all players
