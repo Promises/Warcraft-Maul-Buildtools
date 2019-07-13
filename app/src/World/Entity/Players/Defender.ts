@@ -288,9 +288,12 @@ export class Defender extends AbstractPlayer {
             nutower.SetLeaverSellValue();
 
         }
-        for (const builder of this.builders) {
-            RemoveUnit(builder);
-        }
+        // for (const builder of this.builders) {
+        //     RemoveUnit(builder);
+        // }
+        const grp : group = GetUnitsInRectAll(GetPlayableMapRect());
+        ForGroupBJ(grp, () => this.DestroyLeftoverUnits());
+        DestroyGroup(grp);
     }
 
     public ClaimTowers(): void {
@@ -376,5 +379,9 @@ export class Defender extends AbstractPlayer {
 
     public AllowPlayer(num: number): void {
         this.deniedPlayers.set(num, false);
+    }
+
+    private DestroyLeftoverUnits(): void {
+        RemoveUnit(GetEnumUnit());
     }
 }

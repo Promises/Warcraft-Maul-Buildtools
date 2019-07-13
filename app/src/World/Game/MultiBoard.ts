@@ -1,6 +1,7 @@
 import { WarcraftMaul } from '../WarcraftMaul';
 import * as settings from '../GlobalSettings';
 import { ARMOUR_TYPE_COLOURS, ARMOUR_TYPE_NAMES } from '../GlobalSettings';
+import { Defender } from '../Entity/Players/Defender';
 
 export class MultiBoard {
     board: multiboard;
@@ -65,16 +66,19 @@ export class MultiBoard {
     }
 
     private InitializePlayerScores(): void {
-        let count = 0;
-        for (const player of this.game.players.values()) {
-            player.scoreSlot = count;
-            MultiboardSetItemValueBJ(this.board, 1, 7 + count, player.getNameWithColour());
-            MultiboardSetItemValueBJ(this.board, 2, 7 + count, '' + player.kills);
-            MultiboardSetItemStyleBJ(this.board, 1, 7 + count, true, false);
-            MultiboardSetItemStyleBJ(this.board, 2, 7 + count, true, false);
-            MultiboardSetItemWidthBJ(this.board, 1, 7 + count, this.scoreboardColumnWidth[1]); // Kills
-            MultiboardSetItemWidthBJ(this.board, 2, 7 + count, this.scoreboardColumnWidth[2]);
-            count++;
+        let count: number = 0;
+        for (let i: number = 0; i < 24; i++) {
+            const player: Defender | undefined = this.game.players.get(i);
+            if (player) {
+                player.scoreSlot = count;
+                MultiboardSetItemValueBJ(this.board, 1, 7 + count, player.getNameWithColour());
+                MultiboardSetItemValueBJ(this.board, 2, 7 + count, '' + player.kills);
+                MultiboardSetItemStyleBJ(this.board, 1, 7 + count, true, false);
+                MultiboardSetItemStyleBJ(this.board, 2, 7 + count, true, false);
+                MultiboardSetItemWidthBJ(this.board, 1, 7 + count, this.scoreboardColumnWidth[1]); // Kills
+                MultiboardSetItemWidthBJ(this.board, 2, 7 + count, this.scoreboardColumnWidth[2]);
+                count++;
+            }
         }
         MultiboardSetItemStyleBJ(this.board, 1, 7 + count, true, false);
         MultiboardSetItemStyleBJ(this.board, 2, 7 + count, true, false);
