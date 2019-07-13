@@ -316,9 +316,9 @@ export class Defender extends AbstractPlayer {
                     tower.SetOwnership(this);
                 }
             }
-        } else {
+        } else if (!IsUnitType(GetEnumUnit(), UNIT_TYPE_SUMMONED)) {
             const owner: Defender | undefined = this.game.players.get(GetPlayerId(GetOwningPlayer(GetEnumUnit())));
-            if (owner) {
+            if (owner && owner !== this) {
                 SetUnitPosition(GetEnumUnit(), owner.getCenterX(), owner.getCenterY());
             }
         }
