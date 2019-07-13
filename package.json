@@ -16,7 +16,7 @@
     "@types/node": "^12.6.2",
     "busted-tstl": "0.1.0",
     "codelyzer": "^5.1.0",
-    "convertjasstots": "^1.0.7",
+    "convertjasstots": "^1.0.10",
     "fs-extra": "^8.1.0",
     "lua-types": "^2.5.2",
     "luamin": "^1.0.4",
