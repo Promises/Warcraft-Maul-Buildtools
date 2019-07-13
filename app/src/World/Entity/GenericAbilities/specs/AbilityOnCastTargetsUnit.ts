@@ -1,0 +1,3 @@
+interface AbilityOnCastTargetsUnit {
+    TargetOnCastAction(): void;
+}

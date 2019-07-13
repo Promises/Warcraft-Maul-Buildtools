@@ -1,0 +1,62 @@
+IncludeFile "UI\FrameDef\UI\simpleinfopanel.fdf",
+String "MyBarTextTemplate" {
+   //FontColor 0.99 0.427 0.0705 1.0, //Red Green Blue Alpha 0.0 to 1.0
+   FontColor 1.0 1.0 1.0 1.0,
+   FontShadowColor 0.0 0.0 0.0 0.9,
+   FontShadowOffset 0.001 -0.001,
+   Font "MasterFont", 0.01, //MasterFont is only valid with "DecorateFileNames,"
+}
+
+Frame "SIMPLESTATUSBAR" "MyBar" {
+   Width 0.07,
+   Height 0.012,
+   Layer "BACKGROUND" {
+       Texture "MyBarBackground" {
+           File "Replaceabletextures\Teamcolor\Teamcolor27.blp",
+       }
+   }
+   Frame "SIMPLEFRAME" "MyBarFrame" {
+       SetAllPoints,
+       DecorateFileNames,
+       Layer "ARTWORK" {
+           String "MyBarText" INHERITS "MyBarTextTemplate" {
+               Text "MyBar",
+           }
+       }
+   }
+}
+Frame "SIMPLEFRAME" "TestPanel" {
+    UseActiveContext,
+    DecorateFileNames,
+    Height 0.03125,
+
+    // --- icon -------------------------------------------------------------
+    Texture "TestPanelBackdrop" INHERITS "InfoPanelIconTemplate" {
+        File "HeroStrengthIcon",
+        UseActiveContext,
+        SetAllPoints, //copy "parent"
+    }
+
+    // --- icon # -----------------------------------------------------------
+    String "TestPanelLevel" INHERITS "SimpleInfoPanelAttributeTextTemplate" {
+        //SetAllPoints, //copy "parent"
+        SetPoint CENTER, "TestPanelBackdrop", BOTTOMRIGHT, -0.007625, 0.006875,
+    }
+
+    // --- label ------------------------------------------------------------
+    String "TestPanelLabel" INHERITS "SimpleInfoPanelLabelTextTemplate" {
+        //SetAllPoints, //copy "parent"
+        SetPoint TOPLEFT, "TestPanelBackdrop", TOPRIGHT, 0.0, -0.003,
+        Text "COLON_DAMAGE",
+        Width 0.24,
+    }
+
+    // --- value ------------------------------------------------------------
+    String "TestPanelValue" INHERITS "SimpleInfoPanelValueTextTemplate" {
+        //SetAllPoints, //copy "parent"
+        SetPoint TOPLEFT, "TestPanelLabel", BOTTOMLEFT, 0.002625, -0.003,
+        Font "InfoPanelTextFont",0.008,
+        Text "COLON_value",
+        Width 0.24,
+    }
+}
