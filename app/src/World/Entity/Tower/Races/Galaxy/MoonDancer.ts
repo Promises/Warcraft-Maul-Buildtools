@@ -9,16 +9,13 @@ export class MoonDancer extends Tower implements AttackActionTower {
     public AttackAction(): void {
         const u: unit | undefined = this.game.gameDamageEngineGlobals.udg_DamageEventSource;
         if (u === this.tower) {
-            if (!(GetUnitAbilityLevel(this.tower, FourCC('A09U')) > 0)) {
-                return;
-            }
             const mana: number = GetUnitStateSwap(UNIT_STATE_MANA, this.tower) + 1.00;
             SetUnitManaBJ(this.tower, mana);
             if (mana > 4) {
                 SetUnitManaBJ(this.tower, 0.00);
                 this.DoSpell(this.game);
             }
-            this.DoSpell(this.game);
+            // this.DoSpell(this.game);
         }
 
     }
