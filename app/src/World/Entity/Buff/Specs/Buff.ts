@@ -8,10 +8,10 @@ export class Buff {
 
 
 
-    private buffID: number;
+    private readonly buffID: number;
     private game: WarcraftMaul;
-    private _damageEngine: DamageEngine;
-    private _damageEngineGlobals: DamageEngineGlobals;
+    private readonly _damageEngine: DamageEngine;
+    private readonly _damageEngineGlobals: DamageEngineGlobals;
 
     constructor(buffID: string, game: WarcraftMaul) {
         this.buffID = FourCC(buffID);

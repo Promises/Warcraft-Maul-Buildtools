@@ -2,7 +2,7 @@ import { Tower } from '../../Specs/Tower';
 import { KillingActionTower } from '../../Specs/KillingActionTower';
 import { AOB_ITEM_LOOT_LEVEL_ONE } from '../../../../GlobalSettings';
 
-export class Adventurer extends Tower implements KillingActionTower { //n02T
+export class Adventurer extends Tower implements KillingActionTower { // n02T
 
 
     public KillingAction(): void {

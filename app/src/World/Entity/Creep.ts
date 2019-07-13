@@ -4,10 +4,10 @@ import { GameRound } from '../Game/GameRound';
 import { CreepAbility } from './CreepAbilities/specs/CreepAbility';
 
 export class Creep {
-    creep: unit;
-    targetCheckpoint: CheckPoint | undefined;
-    gameRound: GameRound;
-    abilities: CreepAbility[]
+    public creep: unit;
+    public targetCheckpoint: CheckPoint | undefined;
+    public gameRound: GameRound;
+    public abilities: CreepAbility[];
 
     constructor(creep: unit, gameRound: GameRound, abilities: CreepAbility[]) {
         this.creep = creep;
@@ -17,7 +17,7 @@ export class Creep {
 
     }
 
-    ReapplyMovement(): void {
+    public ReapplyMovement(): void {
         if (!this.targetCheckpoint) {
             Log.Fatal('Creep is missing pathing data');
             return;
@@ -27,19 +27,19 @@ export class Creep {
                         GetRectCenterY(this.targetCheckpoint.rectangle));
     }
 
-    printId(): void {
+    public printId(): void {
         Log.Debug(this.getName());
     }
 
-    getName(): string {
+    public getName(): string {
         return GetUnitName(this.creep);
     }
 
-    getId(): number {
+    public getId(): number {
         return GetUnitTypeId(this.creep);
     }
 
-    getHandleId(): number {
+    public getHandleId(): number {
         return GetHandleIdBJ(this.creep);
     }
 

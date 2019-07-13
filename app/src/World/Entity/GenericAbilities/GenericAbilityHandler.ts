@@ -25,7 +25,7 @@ import { PurchaseVoidLord } from './Void/PurchaseVoidLord';
 import { PurchaseVoidMonstrosity } from './Void/PurchaseVoidMonstrosity';
 
 export class GenericAbilityHandler {
-    private game: WarcraftMaul;
+    private readonly game: WarcraftMaul;
     private abilities: object[] = [];
     private activeAbilities: GenericAbility[] = [];
     public  elementalistSettings: ElementalistSettings = new ElementalistSettings();

@@ -14,7 +14,7 @@ interface Quest {
 const Quests: Quest[] = [];
 
 _G.CreateQuestBJ = function (questType: number, title: string, description: string, iconPath: string): Quest {
-    const q: Quest = {questType, title, description, iconPath};
+    const q: Quest = { questType, title, description, iconPath };
 
     Quests.push(q);
     return q;

@@ -17,10 +17,10 @@ import { TickingTower } from './TickingTower';
 
 export class Tower {
 
-    private _tower: unit;
-    private _handleId: number;
-    private _owner: Defender;
-    private _game: WarcraftMaul;
+    private readonly _tower: unit;
+    private readonly _handleId: number;
+    private readonly _owner: Defender;
+    private readonly _game: WarcraftMaul;
     private sellValue: number;
     private _leaverOwned: boolean = false;
 

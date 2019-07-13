@@ -21,12 +21,12 @@ export class TowerConstruction {
 
     private towerConstructTrigger: Trigger;
     private towerRemoveUpgradeTrigger: Trigger;
-    private _towerTypes: TowerMap<number, object>;
+    private readonly _towerTypes: TowerMap<number, object>;
     public genericAttacks: Map<number, GenericAutoAttackTower> = new Map<number, GenericAutoAttackTower>();
     public killingActions: Map<number, KillingActionTower> = new Map<number, KillingActionTower>();
     private genericAttackTrigger: Trigger;
     private killingActionsTrigger: Trigger;
-    private game: WarcraftMaul;
+    private readonly game: WarcraftMaul;
     private lootBoxerHander: LootBoxerHandler;
     public lootBoxerTowers: number[] = [
         FourCC('u044'), // Tier 1

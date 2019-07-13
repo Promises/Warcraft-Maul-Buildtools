@@ -9,7 +9,6 @@ import { SimpleHoloMaze } from '../Holograms/SimpleHoloMaze';
 import { CircleHoloMaze } from '../Holograms/CircleHoloMaze';
 import { Rectangle } from '../../JassOverrides/Rectangle';
 import { SpawnedCreeps } from '../Entity/SpawnedCreeps';
-import { SellTower } from '../Entity/Tower/SellTower';
 
 export class Commands {
 
@@ -178,214 +177,180 @@ export class Commands {
         }
         const playerCommand: string = GetEventPlayerChatString().substr(1).toLowerCase();
         const command: string[] = playerCommand.split(' ');
-        switch (command[0]) {
-            case 'air':
-                player.sendMessage('|cFF999999Air:|r 5 / 15 / 20 / 25 / 30');
-                break;
-            case 'boss':
-                player.sendMessage('|cFF3737F2Boss:|r 9 / 14 / 19 / 24 / 29 / 31');
-                break;
-            case 'champ':
-            case 'champion':
-                player.sendMessage('|cFFF2A137Champion:|r 35 / 36');
-                break;
-            case 'light':
-                player.sendMessage('|cFF6d7c86Light:|r 4 / 8 / 11 / 16 / 19 / 23 / 27 / 32');
-                break;
-            case 'medium':
-                player.sendMessage('|cFF416073Medium:|r 3 / 7 / 12 / 17 / 24 / 28 / 33');
-                break;
-            case 'heavy':
-                player.sendMessage('|cFF154360Heavy:|r 2 / 5 / 13 / 15 / 20 / 25 / 30 / 32 / 35');
-                break;
-            case 'fortified':
-                player.sendMessage('|cFFCA8500Fortified:|r 10 / 18 / 22 / 26 / 31');
-                break;
-            case 'hero':
-                player.sendMessage('|cFF7525FFHero:|r 36');
-                break;
-            case 'waves':
-                player.sendMessage(
-                    '|cFF999999Air:|r 5 / 15 / 20 / 25 / 30\n' +
-                    '|cFF3737F2Boss:|r 9 / 14 / 19 / 24 / 29 / 31\n' +
-                    '|cFFF2A137Champion:|r 35 / 36\n' +
-                    '|cFF6d7c86Light:|r 4 / 8 / 11 / 16 / 19 / 23 / 27 / 32\n' +
-                    '|cFF416073Medium:|r 3 / 7 / 12 / 17 / 24 / 28 / 33\n' +
-                    '|cFF154360Heavy:|r 2 / 5 / 13 / 15 / 20 / 25 / 30 / 32 / 35\n' +
-                    '|cFFCA8500Fortified:|r 10 / 18 / 22 / 26 / 31\n' +
-                    '|cFF7525FFHero:|r 36');
-                break;
-            case 'buffs':
-                player.sendMessage(
-                    '|cFFFFCC00Hardened Skin:|r Creeps ignore 2x creep level incoming physical damage\n' +
-                    '|cFFFFCC00Evasion:|r Creeps will have a 1x creep level chance to evade physical damage\n' +
-                    '|cFFFFCC00Armor Bonus:|r Increases creep armor by creep level divided by 3\n' +
-                    '|cFFFFCC00Cripple Aura:|r Whenever a creep takes damage it has a 10% chance to cripple the attacking tower,' +
-                    'slowing attack speed by 1.5% times creep level\n' +
-                    '|cFFFFCC00Spell Shield:|r Blocks targetting spells from casting every 4 (minus 0.1 times creep level) second\n' +
-                    '|cFFFFCC00Tornado Aura:|r Nearby towers are slowed by 1% times creep level\n' +
-                    '|cFFFFCC00Vampiric Aura:|r Creeps have a 10% chance to heal for 4x creep level\n' +
-                    '|cFFFFCC00Divine Shield:|r Creeps ignore damage until they\'ve been damaged 1x creep level times\n' +
-                    '|cFFFFCC00Walk it Off:|r slowed down creeps take 0.5% times creep level less damage\n' +
-                    '|cFFFFCC00Morning Person:|r creeps heal for 0.5% times creep level of their max health every time they ' +
-                    'reach a checkpoint (not teleports)');
-                break;
-            case 'repick':
-                if (this.RepickConditions(player)) {
-                    this.RepickActions(player);
+        if (command[0] === 'air') {
+            player.sendMessage('|cFF999999Air:|r 5 / 15 / 20 / 25 / 30');
+        } else if (command[0] === 'boss') {
+            player.sendMessage('|cFF3737F2Boss:|r 9 / 14 / 19 / 24 / 29 / 31');
+        } else if (command[0] === 'champ' || command[0] === 'champion') {
+            player.sendMessage('|cFFF2A137Champion:|r 35 / 36');
+        } else if (command[0] === 'light') {
+            player.sendMessage('|cFF6d7c86Light:|r 4 / 8 / 11 / 16 / 19 / 23 / 27 / 32');
+        } else if (command[0] === 'medium') {
+            player.sendMessage('|cFF416073Medium:|r 3 / 7 / 12 / 17 / 24 / 28 / 33');
+        } else if (command[0] === 'heavy') {
+            player.sendMessage('|cFF154360Heavy:|r 2 / 5 / 13 / 15 / 20 / 25 / 30 / 32 / 35');
+        } else if (command[0] === 'fortified') {
+            player.sendMessage('|cFFCA8500Fortified:|r 10 / 18 / 22 / 26 / 31');
+        } else if (command[0] === 'hero') {
+            player.sendMessage('|cFF7525FFHero:|r 36');
+        } else if (command[0] === 'waves') {
+            player.sendMessage(
+                `|cFF999999Air:|r 5 / 15 / 20 / 25 / 30
+|cFF3737F2Boss:|r 9 / 14 / 19 / 24 / 29 / 31
+|cFFF2A137Champion:|r 35 / 36
+|cFF6d7c86Light:|r 4 / 8 / 11 / 16 / 19 / 23 / 27 / 32
+|cFF416073Medium:|r 3 / 7 / 12 / 17 / 24 / 28 / 33
+|cFF154360Heavy:|r 2 / 5 / 13 / 15 / 20 / 25 / 30 / 32 / 35
+|cFFCA8500Fortified:|r 10 / 18 / 22 / 26 / 31
+|cFF7525FFHero:|r 36`);
+        } else if (command[0] === 'buffs') {
+            player.sendMessage(
+                '|cFFFFCC00Hardened Skin:|r Creeps ignore 2x creep level incoming physical damage\n' +
+                '|cFFFFCC00Evasion:|r Creeps will have a 1x creep level chance to evade physical damage\n' +
+                '|cFFFFCC00Armor Bonus:|r Increases creep armor by creep level divided by 3\n' +
+                '|cFFFFCC00Cripple Aura:|r Whenever a creep takes damage it has a 10% chance to cripple the attacking tower,' +
+                'slowing attack speed by 1.5% times creep level\n' +
+                '|cFFFFCC00Spell Shield:|r Blocks targetting spells from casting every 4 (minus 0.1 times creep level) second\n' +
+                '|cFFFFCC00Tornado Aura:|r Nearby towers are slowed by 1% times creep level\n' +
+                '|cFFFFCC00Vampiric Aura:|r Creeps have a 10% chance to heal for 4x creep level\n' +
+                '|cFFFFCC00Divine Shield:|r Creeps ignore damage until they\'ve been damaged 1x creep level times\n' +
+                '|cFFFFCC00Walk it Off:|r slowed down creeps take 0.5% times creep level less damage\n' +
+                '|cFFFFCC00Morning Person:|r creeps heal for 0.5% times creep level of their max health every time they ' +
+                'reach a checkpoint (not teleports)');
+        } else if (command[0] === 'repick') {
+            if (this.RepickConditions(player)) {
+                this.RepickActions(player);
+            } else {
+                DisplayTimedTextToPlayer(GetTriggerPlayer(), 0, 0, 5, 'You can only repick before wave 1!');
+            }
+        } else if (command[0] === 'sa' || command[0] === 'sellall') {
+            Log.Debug('[command] sellall');
+            player.SellAll();
+        } else if (command[0] === 'y' || command[0] === 'yes') {
+            this.VoteYes(player);
+        } else if (command[0] === 'kick' || command[0] === 'votekick') {
+            Log.Error('Command not implemented yet');
+            if (command[1]) {
+                const receiver: number = this.getPlayerIdFromColourName(command[1]);
+                const receivingPlayer: Defender | undefined = this.game.players.get(receiver);
+                if (receivingPlayer) {
+                    this.VoteKick(player, receivingPlayer);
                 } else {
-                    DisplayTimedTextToPlayer(GetTriggerPlayer(), 0, 0, 5, 'You can only repick before wave 1!');
+                    player.sendMessage('Player not available');
                 }
-                break;
-            case 'sa':
-            case 'sellall':
-                Log.Debug('[command] sellall');
-                player.SellAll();
-                break;
-            case 'y':
-            case 'yes':
-                this.VoteYes(player);
-                break;
+            }
+        } else if (command[0] === 'give' || command[0] === 'send') {
+            if (command[1] && command[2]) {
+                const receiver: number = this.getPlayerIdFromColourName(command[1]);
+                const receivingPlayer: Defender | undefined = this.game.players.get(receiver);
 
-            case 'kick':
-            case 'votekick':
-                Log.Error('Command not implemented yet');
-                if (command[1]) {
-                    const receiver: number = this.getPlayerIdFromColourName(command[1]);
-                    const receivingPlayer: Defender | undefined = this.game.players.get(receiver);
-                    if (receivingPlayer) {
-                        this.VoteKick(player, receivingPlayer);
-                    } else {
-                        player.sendMessage('Player not available');
-                    }
+                const amount: number = Util.ParsePositiveInt(command[2]);
+                if (!amount) {
+                    player.sendMessage(Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Invalid Amount'));
+                    return;
                 }
-                break;
-            case 'give':
-            case 'send':
-                if (command[1] && command[2]) {
-                    const receiver: number = this.getPlayerIdFromColourName(command[1]);
-                    const receivingPlayer: Defender | undefined = this.game.players.get(receiver);
+                this.giveGoldToPlayer(receivingPlayer, player, amount);
+            }
+        } else if (command[0] === 'allow') {
+            Log.Error('Command not implemented yet');
+            // AllowSpecificPlayer();
+        } else if (command[0] === 'deny') {
+            Log.Error('Command not implemented yet');
+            // DenySpecificPlayer();
+        } else if (command[0] === 'allowall') {
+            Log.Error('Command not implemented yet');
+            // AllowAllPlayers();
+            player.sendMessage('ALL players are now |cFF00FF00allowed|r to build in your spawn!');
+        } else if (command[0] === 'denyall') {
+            Log.Error('Command not implemented yet');
+            // DenyAllPlayers();
+            player.sendMessage('ALL players are now |cFFFF0000denied|r access to your spawn!');
+        } else if (command[0] === 'claim') {
+            player.ClaimTowers();
+            player.sendMessage('All towers in your spawn has now been claimed.');
+        } else if (command[0] === 'zoom' || command[0] === 'cam') {
+            if (GetLocalPlayer() === player.wcPlayer) {
+                const amount: number = Util.ParsePositiveInt(command[1]);
+                if (!amount) {
+                    player.sendMessage(Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Invalid Amount'));
+                    return;
 
-                    const amount: number = Util.ParsePositiveInt(command[2]);
-                    if (!amount) {
-                        player.sendMessage(Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Invalid Amount'));
-                        return;
-                    }
-                    this.giveGoldToPlayer(receivingPlayer, player, amount);
                 }
-                break;
-            case 'allow':
-                Log.Error('Command not implemented yet');
-                // AllowSpecificPlayer();
-                break;
-            case 'deny':
-                Log.Error('Command not implemented yet');
-                // DenySpecificPlayer();
-                break;
-            case 'allowall':
-                Log.Error('Command not implemented yet');
-                // AllowAllPlayers();
-                player.sendMessage('ALL players are now |cFF00FF00allowed|r to build in your spawn!');
-                break;
-            case 'denyall':
-                Log.Error('Command not implemented yet');
-                // DenyAllPlayers();
-                player.sendMessage('ALL players are now |cFFFF0000denied|r access to your spawn!');
-                break;
-            case 'claim':
-                player.ClaimTowers();
-                player.sendMessage('All towers in your spawn has now been claimed.');
-                break;
-            case 'zoom':
-            case 'cam':
-                if (GetLocalPlayer() === player.wcPlayer) {
-                    const amount: number = Util.ParsePositiveInt(command[1]);
-                    if (!amount) {
-                        player.sendMessage(Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Invalid Amount'));
-                        return;
-
-                    }
-                    SetCameraField(CAMERA_FIELD_TARGET_DISTANCE, amount, 1);
-                }
-                break;
-            case 'dt':
-            case 'disabletowers':
-                player.DisableTowers();
-                break;
-
-            case 'maze':
-                let invalidMaze: boolean = false;
-                if (command.length === 2) {
-                    const playerId: number = GetPlayerId(GetTriggerPlayer());
-                    const firstSpawn: CheckPoint | undefined = this.game.worldMap.playerSpawns[playerId].spawnOne;
-                    if (firstSpawn === undefined) {
-                        return;
-                    }
-
-                    const firstCheckpoint: CheckPoint | undefined = firstSpawn.next;
-                    if (firstCheckpoint === undefined) {
-                        return;
-                    }
-
-                    const secondCheckpoint: CheckPoint | undefined = firstCheckpoint.next;
-                    if (secondCheckpoint === undefined) {
-                        return;
-                    }
-
-                    let imagePath: string = '';
-                    // if (GetTriggerPlayer() === GetLocalPlayer()) {
-                    imagePath = 'ReplaceableTextures\\Splats\\SuggestedPlacementSplat.blp';
-                    // }
-
-                    switch (command[1]) {
-                        case 'none':
-                            player.setHoloMaze(undefined);
-                            break;
-                        case '1':
-                            player.setHoloMaze(
-                                new CircleHoloMaze(
-                                    imagePath,
-                                    GetRectCenterX(firstCheckpoint.rectangle),
-                                    GetRectCenterY(firstCheckpoint.rectangle),
-                                    GetRectCenterX(secondCheckpoint.rectangle),
-                                    GetRectCenterY(secondCheckpoint.rectangle)));
-                            break;
-                        case '2':
-                            player.setHoloMaze(
-                                new SimpleHoloMaze(
-                                    imagePath,
-                                    GetRectCenterX(firstCheckpoint.rectangle),
-                                    GetRectCenterY(firstCheckpoint.rectangle),
-                                    GetRectCenterX(secondCheckpoint.rectangle),
-                                    GetRectCenterY(secondCheckpoint.rectangle)));
-                            break;
-                        case '3':
-                            player.setHoloMaze(
-                                new AdvancedHoloMaze(
-                                    imagePath,
-                                    GetRectCenterX(firstCheckpoint.rectangle),
-                                    GetRectCenterY(firstCheckpoint.rectangle),
-                                    GetRectCenterX(secondCheckpoint.rectangle),
-                                    GetRectCenterY(secondCheckpoint.rectangle)));
-                            break;
-                        default:
-                            invalidMaze = true;
-                            break;
-                    }
-                } else {
-                    invalidMaze = true;
+                SetCameraField(CAMERA_FIELD_TARGET_DISTANCE, amount, 1);
+            }
+        } else if (command[0] === 'dt' || command[0] === 'disabletowers') {
+            player.DisableTowers();
+        } else if (command[0] === 'maze') {
+            let invalidMaze: boolean = false;
+            if (command.length === 2) {
+                const playerId: number = GetPlayerId(GetTriggerPlayer());
+                const firstSpawn: CheckPoint | undefined = this.game.worldMap.playerSpawns[playerId].spawnOne;
+                if (firstSpawn === undefined) {
+                    return;
                 }
 
-                if (invalidMaze === true) {
-                    player.sendMessage(
-                        'Unknown maze selected, please try one of the mazes shown below\n' +
-                        '|cFFFFCC00-maze none|r: removes the current maze\n' +
-                        '|cFFFFCC00-maze 1|r: shows a very simple circled maze\n' +
-                        '|cFFFFCC00-maze 2|r: shows a basic maze\n' +
-                        '|cFFFFCC00-maze 3|r: shows a more advanced maze');
+                const firstCheckpoint: CheckPoint | undefined = firstSpawn.next;
+                if (firstCheckpoint === undefined) {
+                    return;
                 }
-                break;
 
+                const secondCheckpoint: CheckPoint | undefined = firstCheckpoint.next;
+                if (secondCheckpoint === undefined) {
+                    return;
+                }
+
+                let imagePath: string = '';
+                // if (GetTriggerPlayer() === GetLocalPlayer()) {
+                imagePath = 'ReplaceableTextures\\Splats\\SuggestedPlacementSplat.blp';
+                // }
+
+                switch (command[1]) {
+                    case 'none':
+                        player.setHoloMaze(undefined);
+                        break;
+                    case '1':
+                        player.setHoloMaze(
+                            new CircleHoloMaze(
+                                imagePath,
+                                GetRectCenterX(firstCheckpoint.rectangle),
+                                GetRectCenterY(firstCheckpoint.rectangle),
+                                GetRectCenterX(secondCheckpoint.rectangle),
+                                GetRectCenterY(secondCheckpoint.rectangle)));
+                        break;
+                    case '2':
+                        player.setHoloMaze(
+                            new SimpleHoloMaze(
+                                imagePath,
+                                GetRectCenterX(firstCheckpoint.rectangle),
+                                GetRectCenterY(firstCheckpoint.rectangle),
+                                GetRectCenterX(secondCheckpoint.rectangle),
+                                GetRectCenterY(secondCheckpoint.rectangle)));
+                        break;
+                    case '3':
+                        player.setHoloMaze(
+                            new AdvancedHoloMaze(
+                                imagePath,
+                                GetRectCenterX(firstCheckpoint.rectangle),
+                                GetRectCenterY(firstCheckpoint.rectangle),
+                                GetRectCenterX(secondCheckpoint.rectangle),
+                                GetRectCenterY(secondCheckpoint.rectangle)));
+                        break;
+                    default:
+                        invalidMaze = true;
+                        break;
+                }
+            } else {
+                invalidMaze = true;
+            }
+
+            if (invalidMaze === true) {
+                player.sendMessage(
+                    'Unknown maze selected, please try one of the mazes shown below\n' +
+                    '|cFFFFCC00-maze none|r: removes the current maze\n' +
+                    '|cFFFFCC00-maze 1|r: shows a very simple circled maze\n' +
+                    '|cFFFFCC00-maze 2|r: shows a basic maze\n' +
+                    '|cFFFFCC00-maze 3|r: shows a more advanced maze');
+            }
         }
         if (this.game.debugMode) {
             this.handleDebugCommand(player, command);
@@ -530,7 +495,7 @@ export class Commands {
                 this.RemoveAllKickedPlayerTowers();
                 if (this.game.scoreBoard) {
                     MultiboardSetItemValueBJ(this.game.scoreBoard.board, 1, 7 + this.voteAgainstPlayer.scoreSlot,
-                        Util.ColourString(this.voteAgainstPlayer.getColourCode(), '<Kicked>'));
+                                             Util.ColourString(this.voteAgainstPlayer.getColourCode(), '<Kicked>'));
                 }
                 this.game.players.delete(this.voteAgainstPlayer.id);
 

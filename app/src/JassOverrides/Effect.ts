@@ -1,5 +1,5 @@
 export class Effect {
-    readonly eff: effect;
+    public readonly eff: effect;
 
     constructor(eff: effect) {
         this.eff = eff;

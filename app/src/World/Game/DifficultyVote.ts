@@ -1,20 +1,19 @@
 import * as settings from '../GlobalSettings';
-import { COLOUR_CODES } from '../GlobalSettings';
 import { WarcraftMaul } from '../WarcraftMaul';
 import { MultiBoard } from './MultiBoard';
 import { Trigger } from '../../JassOverrides/Trigger';
 import { Log } from '../../lib/Serilog/Serilog';
 
 export class DifficultyVote {
-    initializeVotesTrigger: Trigger;
-    difficultyVoteTrigger: Trigger;
-    difficultyDialog: dialog = DialogCreate();
-    difficultyButtons: button[] = [];
+    public initializeVotesTrigger: Trigger;
+    public difficultyVoteTrigger: Trigger;
+    public difficultyDialog: dialog = DialogCreate();
+    public difficultyButtons: button[] = [];
 
-    game: WarcraftMaul;
+    public game: WarcraftMaul;
     private votedDiff: number[] = [];
     private totalVotedDiff: number = 0;
-    difficulty: number = 0;
+    public difficulty: number = 0;
 
 
     constructor(game: WarcraftMaul) {
@@ -29,7 +28,7 @@ export class DifficultyVote {
     }
 
 
-    InitializeVotes(): void {
+    public InitializeVotes(): void {
         DialogSetMessageBJ(this.difficultyDialog, 'Difficulty vote:');
         for (let i: number = 0; i < settings.DIFFICULTIES.length; i++) {
             this.difficultyButtons.push(
@@ -94,7 +93,7 @@ export class DifficultyVote {
         this.SetDifficulty(this.difficulty);
         SetPlayerHandicapBJ(Player(PLAYER_NEUTRAL_PASSIVE), this.difficulty);
         SendMessage(`Difficulty was set to ${this.difficulty}% (${Util.ColourString(settings.DIFFICULTY_COLOURS[diffIndex],
-                                                                              settings.DIFFICULTY_STRINGS[diffIndex])})`);
+                                                                                    settings.DIFFICULTY_STRINGS[diffIndex])})`);
 
         for (const player of this.game.players.values()) {
             for (const ally of this.game.players.values()) {
@@ -129,9 +128,10 @@ export class DifficultyVote {
 
             if (GetClickedButtonBJ() === button) {
                 this.votedDiff[GetPlayerId(GetTriggerPlayer())] = settings.DIFFICULTIES[i];
-                SendMessage(`${Util.ColourString(COLOUR_CODES[GetPlayerId(GetTriggerPlayer())],
-                                           GetPlayerName(GetTriggerPlayer()))} voted for: ${Util.ColourString(settings.DIFFICULTY_COLOURS[i],
-                                                                                                              settings.DIFFICULTY_STRINGS[i])}`);
+                SendMessage(`${Util.ColourString(settings.COLOUR_CODES[GetPlayerId(GetTriggerPlayer())],
+                                                 GetPlayerName(GetTriggerPlayer()))
+                                } voted for: ${Util.ColourString(settings.DIFFICULTY_COLOURS[i],
+                                                                 settings.DIFFICULTY_STRINGS[i])}`);
             }
         }
         DialogDisplayBJ(false, this.difficultyDialog, GetTriggerPlayer());

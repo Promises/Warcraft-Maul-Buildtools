@@ -7,7 +7,7 @@ import { DivineShield } from '../DivineShield';
 
 export class CreepAbility {
 
-    private abilityId: number;
+    private readonly abilityId: number;
     private _game: WarcraftMaul;
 
     constructor(abiID: string, game: WarcraftMaul) {

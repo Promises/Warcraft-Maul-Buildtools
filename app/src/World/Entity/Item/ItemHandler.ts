@@ -11,7 +11,7 @@ import { WoodenSticks } from './LootBoxer/WoodenSticks';
 
 
 export class ItemHandler {
-    private game: WarcraftMaul;
+    private readonly game: WarcraftMaul;
     private items: object[] = [];
     private activeItems: Item[] = [];
     private useItemTrigger: Trigger;

@@ -16,7 +16,7 @@ export class Wyvern extends Tower implements AttackActionTower {
         if (u === this.tower) {
 
             const loc: location = GetUnitLoc(this.tower);
-            let grp = GetUnitsInRangeOfLocAll(128, loc);
+            const grp: group = GetUnitsInRangeOfLocAll(128, loc);
             ForGroupBJ(grp, () => this.AttackGroup());
             DestroyGroup(grp);
             RemoveLocation(loc);

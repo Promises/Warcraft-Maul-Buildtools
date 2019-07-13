@@ -6,9 +6,9 @@ import { Creep } from './Creep';
 export class CheckPoint {
     private _previous: CheckPoint | undefined;
     private _next: CheckPoint | undefined;
-    rectangle: rect;
-    eventTrig: Trigger;
-    worldMap: WorldMap;
+    public rectangle: rect;
+    public eventTrig: Trigger;
+    public worldMap: WorldMap;
 
 
     constructor(rectangle: rect, worldMap: WorldMap) {
@@ -25,7 +25,7 @@ export class CheckPoint {
     }
 
 
-    verifyTargetCheckpoint(): boolean {
+    public verifyTargetCheckpoint(): boolean {
 
         if (!this.isEnteringUnitCreep) {
             return false;
@@ -42,7 +42,7 @@ export class CheckPoint {
         return true;
     }
 
-    checkPointAction(): void {
+    public checkPointAction(): void {
         if (!this.next) {
             return;
         }
@@ -78,7 +78,7 @@ export class CheckPoint {
     }
 
 
-    isEnteringUnitCreep(): boolean {
+    public isEnteringUnitCreep(): boolean {
         const ownerID: COLOUR = GetPlayerId(GetOwningPlayer(GetEnteringUnit()));
         switch (ownerID) {
             case COLOUR.NAVY:

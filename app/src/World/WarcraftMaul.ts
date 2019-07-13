@@ -48,7 +48,7 @@ export class WarcraftMaul {
     players: Map<number, Defender> = new Map<number, Defender>();
 
     enemies: Attacker[] = [];
-    private _creepAbilityHandler: CreepAbilityHandler;
+    private readonly _creepAbilityHandler: CreepAbilityHandler;
     private voidTicker: VoidTicker;
 
     constructor() {

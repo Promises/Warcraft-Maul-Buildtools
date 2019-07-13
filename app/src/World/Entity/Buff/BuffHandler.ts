@@ -8,7 +8,7 @@ import { Moonstorm } from './Moonstorm';
 import { BattleRoar } from './BattleRoar';
 
 export class BuffHandler {
-    private game: WarcraftMaul;
+    private readonly game: WarcraftMaul;
     private buffs: object[] = [];
     private activeBuffs: Buff[] = [];
 

@@ -13,7 +13,7 @@ import { TornadoAura } from './TornadoAura';
 import { MorningPerson } from './MorningPerson';
 
 export class CreepAbilityHandler {
-    private game: WarcraftMaul;
+    private readonly game: WarcraftMaul;
     private abilities: object[] = [];
     private activeAbilities: CreepAbility[] = [];
 
@@ -82,7 +82,7 @@ export class CreepAbilityHandler {
 
     private ShuffleArray(arr: any[]): void {
         for (let i: number = arr.length - 1; i > 0; i--) {
-            let j: number = Math.floor(Math.random() * (i + 1)); // random index from 0 to i
+            const j: number = Math.floor(Math.random() * (i + 1)); // random index from 0 to i
             // [arr[i], arr[j]] = [arr[j], arr[i]]; // swap elements
 
             const temp: any = arr[i];

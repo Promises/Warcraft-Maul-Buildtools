@@ -2,7 +2,7 @@ import { WarcraftMaul } from '../../WarcraftMaul';
 
 export class GenericAbility {
 
-    private abilityId: number;
+    private readonly abilityId: number;
     private _game: WarcraftMaul;
     constructor(abiID: string, game: WarcraftMaul){
         this.abilityId = FourCC(abiID);

@@ -1,7 +1,7 @@
 import { Trigger } from '../../JassOverrides/Trigger';
 
 export class ArchimondeGate {
-    readonly gate: destructable;
+    public readonly gate: destructable;
     private trig: Trigger;
 
     constructor(archimonde: unit) {

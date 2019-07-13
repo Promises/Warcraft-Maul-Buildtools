@@ -1,7 +1,7 @@
 import { Creep } from '../World/Entity/Creep';
 
 export class Rectangle {
-    private area: number[];
+    private readonly area: number[];
 
     constructor(area: number[]) {
         this.area = area;

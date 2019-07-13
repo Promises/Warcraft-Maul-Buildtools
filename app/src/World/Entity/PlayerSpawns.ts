@@ -19,7 +19,7 @@ export class PlayerSpawns {
     public isOpen: boolean;
     public worldMap: WorldMap;
     public colourId: number;
-    private area: Rectangle;
+    private readonly area: Rectangle;
     private enterTrig: Trigger;
 
     constructor(worldMap: WorldMap, colourId: number) {

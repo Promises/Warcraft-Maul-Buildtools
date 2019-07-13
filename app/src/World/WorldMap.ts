@@ -15,18 +15,18 @@ import { TowerConstruction } from './Entity/Tower/TowerConstruction';
 import { DirectionalArrow } from './Game/DirectionalArrow';
 
 export class WorldMap {
-    game: WarcraftMaul;
-    worldCreatures: Map<String, unit> = new Map<String, unit>();
-    waveCreeps: WaveCreep[] = [];
-    races: Race[] = [];
+    public game: WarcraftMaul;
+    public worldCreatures: Map<String, unit> = new Map<String, unit>();
+    public waveCreeps: WaveCreep[] = [];
+    public races: Race[] = [];
     private _spawnedCreeps: SpawnedCreeps;
-    ship: Ship | undefined;
+    public ship: Ship | undefined;
     public archimondeDummy!: unit;
-    playerSpawns: PlayerSpawns[] = [];
-    readonly playerMazes: Maze[] = [];
-    disabledRaces: number = 0;
-    towerConstruction: TowerConstruction;
-    antiBlock: AntiBlock;
+    public playerSpawns: PlayerSpawns[] = [];
+    public readonly playerMazes: Maze[] = [];
+    public disabledRaces: number = 0;
+    public towerConstruction: TowerConstruction;
+    public antiBlock: AntiBlock;
 
     constructor(game: WarcraftMaul) {
         this.game = game;
@@ -73,10 +73,10 @@ export class WorldMap {
             // }
             //
             directionalArrows.push(new DirectionalArrow(modelPath,
-                GetRectCenterX(firstCheckpoint.rectangle),
-                GetRectCenterY(firstCheckpoint.rectangle),
-                GetRectCenterX(secondCheckpoint.rectangle),
-                GetRectCenterY(secondCheckpoint.rectangle)));
+                                                        GetRectCenterX(firstCheckpoint.rectangle),
+                                                        GetRectCenterY(firstCheckpoint.rectangle),
+                                                        GetRectCenterX(secondCheckpoint.rectangle),
+                                                        GetRectCenterY(secondCheckpoint.rectangle)));
         }
 
         // TODO: This needs to be replaced with a timer library!
@@ -90,7 +90,7 @@ export class WorldMap {
         });
     }
 
-    createDummyCreeps(): void {
+    public createDummyCreeps(): void {
         // set up neutrals
         const dummyCreeps: unit[] = [];
 
@@ -149,7 +149,7 @@ export class WorldMap {
 
     }
 
-    createCreepWaves(): void {
+    public createCreepWaves(): void {
         this.waveCreeps.push(new WaveCreep(1, 'u006', 'Wisp'));
         this.waveCreeps.push(new WaveCreep(2, 'hC04', 'Clockwerk'));
         this.waveCreeps.push(new WaveCreep(3, 'eC05', 'Acolyte'));
@@ -188,7 +188,7 @@ export class WorldMap {
         this.waveCreeps.push(new WaveCreep(36, 'hC79', 'CRAB OF DEATH'));
     }
 
-    setupRaces(): void {
+    public setupRaces(): void {
         this.races.push(new Race('h03L', 'Workers Union', 'I01A', this));
         this.races.push(new Race('uC98', 'Demon Portal', 'I001', this));
         this.races.push(new Race('oC22', 'Undead Necropolis', 'I002', this));
@@ -424,7 +424,7 @@ export class WorldMap {
     }
 
 
-    HealEverythingOnMap(): void {
+    public HealEverythingOnMap(): void {
         const grp: group = GetUnitsInRectAll(GetPlayableMapRect());
         ForGroupBJ(grp, () => {
             SetUnitLifePercentBJ(GetEnumUnit(), 100);
@@ -432,7 +432,7 @@ export class WorldMap {
         DestroyGroup(grp);
     }
 
-    ReplaceRunedBricksWithLava(): void {
+    public ReplaceRunedBricksWithLava(): void {
         this.ReplaceTerrainTypeId('Irbk', 'Dlvc', -5888.0, 5888.0, -5888.0, 5888.0);
     }
 
@@ -453,7 +453,7 @@ export class WorldMap {
         }
     }
 
-    RemoveEveryUnit(): void {
+    public RemoveEveryUnit(): void {
         const grp: group = GetUnitsInRectAll(GetPlayableMapRect());
         ForGroupBJ(grp, () => this.RemoveUnitIfNotShip());
         DestroyGroup(grp);

@@ -15,7 +15,7 @@ _G.CreateSound = function (fileName: string,
                            fadeOutRate: number,
                            eaxSetting: string): sound {
     // @ts-ignore
-    return {filename: fileName};
+    return { filename: fileName };
 };
 
 _G.GetPlayableMapRect = function (): Rectangle {
@@ -79,13 +79,13 @@ _G.TriggerSleepAction = function (timeout: number): void {
     return;
 };
 
-//declare function DisplayTimedTextToPlayer(toPlayer: player, x: number, y: number, duration: number, message: string): void
+// declare function DisplayTimedTextToPlayer(toPlayer: player, x: number, y: number, duration: number, message: string): void
 _G.DisplayTimedTextToPlayer = function (toPlayer: player, x: number, y: number, duration: number, message: string): void {
     return;
 };
 
 
-//SetTerrainPathable(x: number, y: number, t: pathingtype, flag: boolean): void
+// SetTerrainPathable(x: number, y: number, t: pathingtype, flag: boolean): void
 _G.SetTerrainPathable = function (x: number, y: number, t: pathingtype, flag: boolean): void {
     return;
 };
@@ -98,7 +98,7 @@ _G.BlzFrameIsVisible = function (frame: framehandle): boolean {
     return false;
 };
 
-_G.SetPlayerTechMaxAllowedSwap = function (this: void, techid: number, maximum: number, whichPlayer: player) {
-    print(`Set MaxCount of ${DecodeFourCC(techid)} to ${maximum} for ${whichPlayer.name}`);
+_G.SetPlayerTechMaxAllowedSwap = function (this: void, techid: number, maximum: number, whichPlayer: player): void {
+    // print(`Set MaxCount of ${DecodeFourCC(techid)} to ${maximum} for ${whichPlayer.name}`);
 };
 
