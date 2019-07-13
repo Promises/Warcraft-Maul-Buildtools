@@ -41,7 +41,7 @@ export class Defender extends AbstractPlayer {
     private _hybridBuilder: unit | undefined;
     private _hybridTowers: any[] = [];
     private leaveTrigger: Trigger;
-    private deniedPlayers: AbstractPlayer[] = [];
+    private deniedPlayers: Map<number, boolean> = new Map<number, boolean>();
     private _towers: Map<number, Tower> = new Map<number, Tower>();
     private holoMaze: AbstractHologramMaze | undefined = undefined;
     private game: WarcraftMaul;
@@ -364,5 +364,17 @@ export class Defender extends AbstractPlayer {
 
     public SetVoidFragmentTick(value: number): void {
         this._voidFragments = value;
+    }
+
+    public HasDenied(num: number): boolean {
+        return !!this.deniedPlayers.get(num);
+    }
+
+    public DenyPlayer(num: number): void {
+        this.deniedPlayers.set(num, true);
+    }
+
+    public AllowPlayer(num: number): void {
+        this.deniedPlayers.set(num, false);
     }
 }

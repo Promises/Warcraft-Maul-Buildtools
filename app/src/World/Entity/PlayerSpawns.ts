@@ -4,6 +4,9 @@ import { Trigger } from '../../JassOverrides/Trigger';
 import { SpawnedCreeps } from './SpawnedCreeps';
 import { Creep } from './Creep';
 import { PassiveCreepDiesInAreaEffectTower } from './Tower/Specs/PassiveCreepDiesInAreaEffectTower';
+import { PLAYER_AREAS } from '../GlobalSettings';
+import { Rectangle } from '../../JassOverrides/Rectangle';
+import { Defender } from './Players/Defender';
 
 export class PlayerSpawns {
     private _spawnOne: CheckPoint | undefined;
@@ -11,14 +14,22 @@ export class PlayerSpawns {
     public areaTowers: Map<number, PassiveCreepDiesInAreaEffectTower> = new Map<number, PassiveCreepDiesInAreaEffectTower>();
 
 
-    oneTrig: Trigger | undefined;
-    twoTrig: Trigger | undefined;
-    isOpen: boolean;
-    worldMap: WorldMap;
+    public oneTrig: Trigger | undefined;
+    public twoTrig: Trigger | undefined;
+    public isOpen: boolean;
+    public worldMap: WorldMap;
+    public colourId: number;
+    private area: Rectangle;
+    private enterTrig: Trigger;
 
-    constructor(worldMap: WorldMap) {
+    constructor(worldMap: WorldMap, colourId: number) {
         this.worldMap = worldMap;
         this.isOpen = false;
+        this.colourId = colourId;
+        this.area = PLAYER_AREAS[this.colourId];
+        this.enterTrig = new Trigger();
+        this.enterTrig.RegisterEnterRectangle(this.area);
+        this.enterTrig.AddAction(() => this.EnterRegions());
     }
 
 
@@ -54,7 +65,7 @@ export class PlayerSpawns {
     }
 
 
-    EnteringUnitIsCreepAndHasNoCheckpoint(): boolean {
+    public EnteringUnitIsCreepAndHasNoCheckpoint(): boolean {
         if (!this.isEnteringUnitCreep()) {
             return false;
         }
@@ -72,7 +83,7 @@ export class PlayerSpawns {
         return true;
     }
 
-    isEnteringUnitCreep(): boolean {
+    public isEnteringUnitCreep(): boolean {
         const ownerID: COLOUR = GetPlayerId(GetOwningPlayer(GetEnteringUnit()));
         switch (ownerID) {
             case COLOUR.NAVY:
@@ -112,5 +123,35 @@ export class PlayerSpawns {
         for (const tower of this.areaTowers.values()) {
             tower.PassiveCreepDiesInAreaEffect(dyingCreep);
         }
+    }
+
+    private EnterRegions(): void {
+        if (this.isEnteringUnitCreep()) {
+            if (!this.isOpen) {
+                if (!(UnitHasBuffBJ(GetEnteringUnit(), FourCC('Bblo')))) {
+                    const dummy: unit = CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('u008'), 0.0, -5300.0, bj_UNIT_FACING);
+                    UnitAddAbilityBJ(FourCC('A068'), dummy);
+                    IssueTargetOrderBJ(dummy, 'bloodlust', GetEnteringUnit());
+                    UnitApplyTimedLifeBJ(1.00, FourCC('BTLF'), dummy);
+
+                }
+            } else {
+                UnitRemoveBuffBJ(FourCC('Bblo'), GetEnteringUnit());
+            }
+        } else if (IsUnitType(GetEnteringUnit(), UNIT_TYPE_SUMMONED)) {
+            if (GetUnitTypeId(GetTriggerUnit()) !== FourCC('u008')) {
+                if (GetOwningPlayer(GetEnteringUnit()) !== Player(this.colourId)) {
+                    SetUnitPosition(GetEnteringUnit(), this.area.GetCenterX(), this.area.GetCenterY());
+                }
+            }
+
+        } else if (this.worldMap.game.players.get(this.colourId) && !IsUnitType(GetEnteringUnit(), UNIT_TYPE_STRUCTURE)) {
+            const areaPlayer: Defender = <Defender>this.worldMap.game.players.get(this.colourId);
+            if (areaPlayer.HasDenied(GetPlayerId(GetOwningPlayer(GetEnteringUnit())))) {
+                SetUnitPosition(GetEnteringUnit(), this.area.GetCenterX(), this.area.GetCenterY());
+            }
+        }
+
+
     }
 }

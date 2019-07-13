@@ -227,7 +227,7 @@ export class WorldMap {
     }
 
     private setupCheckpoint(): void {
-        const RedSpawns: PlayerSpawns = new PlayerSpawns(this);
+        const RedSpawns: PlayerSpawns = new PlayerSpawns(this, COLOUR.RED);
         RedSpawns.spawnOne = new CheckPoint(Rect(-1792.0, 4736.0, -1472.0, 5056.0), this);
         RedSpawns.spawnTwo = new CheckPoint(Rect(-1792.0, 4416.0, -1472.0, 4736.0), this);
         let RedCheckpoint: CheckPoint = RedSpawns.spawnOne;
@@ -238,7 +238,7 @@ export class WorldMap {
         this.playerSpawns[COLOUR.RED] = RedSpawns;
 
 
-        const BlueSpawns: PlayerSpawns = new PlayerSpawns(this);
+        const BlueSpawns: PlayerSpawns = new PlayerSpawns(this, COLOUR.BLUE);
         BlueSpawns.spawnOne = new CheckPoint(Rect(-320.0, 4768.0, 0.0, 5088.0), this);
         BlueSpawns.spawnTwo = new CheckPoint(Rect(0.0, 4768.0, 320.0, 5088.0), this);
 
@@ -254,7 +254,7 @@ export class WorldMap {
         this.playerSpawns[COLOUR.BLUE] = BlueSpawns;
 
 
-        const TealSpawns: PlayerSpawns = new PlayerSpawns(this);
+        const TealSpawns: PlayerSpawns = new PlayerSpawns(this, COLOUR.TEAL);
         TealSpawns.spawnOne = new CheckPoint(Rect(1472.0, 4768.0, 1792.0, 5088.0), this);
         TealSpawns.spawnTwo = new CheckPoint(Rect(1472.0, 4448.0, 1792.0, 4768.0), this);
         let TealCheckpoint: CheckPoint = TealSpawns.spawnOne;
@@ -265,7 +265,7 @@ export class WorldMap {
         this.playerSpawns[COLOUR.TEAL] = TealSpawns;
 
 
-        const PurpleSpawns: PlayerSpawns = new PlayerSpawns(this);
+        const PurpleSpawns: PlayerSpawns = new PlayerSpawns(this, COLOUR.PURPLE);
         PurpleSpawns.spawnOne = new CheckPoint(Rect(4032.0, 128.0, 4352.0, 448.0), this);
         PurpleSpawns.spawnTwo = new CheckPoint(Rect(4352.0, 128.0, 4672.0, 448.0), this);
         let PurpleCheckpoint: CheckPoint = PurpleSpawns.spawnOne;
@@ -275,7 +275,7 @@ export class WorldMap {
         PurpleCheckpoint = PurpleCheckpoint.next = new CheckPoint(Rect(4672.00, -3488.00, 4736.00, -3424.00), this);
         this.playerSpawns[COLOUR.PURPLE] = PurpleSpawns;
 
-        const YellowSpawns: PlayerSpawns = new PlayerSpawns(this);
+        const YellowSpawns: PlayerSpawns = new PlayerSpawns(this, COLOUR.YELLOW);
         YellowSpawns.spawnOne = new CheckPoint(Rect(-320.0, 1664.0, 0.0, 1984.0), this);
         YellowSpawns.spawnTwo = new CheckPoint(Rect(0.0, 1664.0, 320.0, 1984.0), this);
 
@@ -294,7 +294,7 @@ export class WorldMap {
         this.playerSpawns[COLOUR.YELLOW] = YellowSpawns;
 
 
-        const OrangeSpawns: PlayerSpawns = new PlayerSpawns(this);
+        const OrangeSpawns: PlayerSpawns = new PlayerSpawns(this, COLOUR.ORANGE);
         OrangeSpawns.spawnOne = new CheckPoint(Rect(-4672.0, 128.0, -4352.0, 448.0), this);
         OrangeSpawns.spawnTwo = new CheckPoint(Rect(-4352.0, 128.0, -4032.0, 448.0), this);
         let OrangeCheckpoint: CheckPoint = OrangeSpawns.spawnOne;
@@ -305,7 +305,7 @@ export class WorldMap {
         this.playerSpawns[COLOUR.ORANGE] = OrangeSpawns;
 
 
-        const GreenSpawns: PlayerSpawns = new PlayerSpawns(this);
+        const GreenSpawns: PlayerSpawns = new PlayerSpawns(this, COLOUR.GREEN);
         GreenSpawns.spawnOne = new CheckPoint(Rect(-4800.0, -3456.0, -4480.0, -3136.0), this);
         GreenSpawns.spawnTwo = new CheckPoint(Rect(-4800.0, -3776.0, -4480.0, -3456.0), this);
         let GreenCheckpoint: CheckPoint = GreenSpawns.spawnOne;
@@ -315,7 +315,7 @@ export class WorldMap {
         this.playerSpawns[COLOUR.GREEN] = GreenSpawns;
 
 
-        const PinkSpawns: PlayerSpawns = new PlayerSpawns(this);
+        const PinkSpawns: PlayerSpawns = new PlayerSpawns(this, COLOUR.PINK);
         PinkSpawns.spawnOne = new CheckPoint(Rect(4480.0, -3456.0, 4800.0, -3136.0), this);
         PinkSpawns.spawnTwo = new CheckPoint(Rect(4480.0, -3776.0, 4800.0, -3456.0), this);
         let PinkCheckpoint: CheckPoint = PinkSpawns.spawnOne;
@@ -325,7 +325,7 @@ export class WorldMap {
         this.playerSpawns[COLOUR.PINK] = PinkSpawns;
 
 
-        const GreysSpawns: PlayerSpawns = new PlayerSpawns(this);
+        const GreysSpawns: PlayerSpawns = new PlayerSpawns(this, COLOUR.GRAY);
         GreysSpawns.spawnOne = new CheckPoint(Rect(-160.0, -2464.0, 160.0, -2144.0), this);
         let GreysCheckpoint: CheckPoint = GreysSpawns.spawnOne;
         GreysCheckpoint = GreysCheckpoint.next = new CheckPoint(Rect(-32.00, -3104.00, 32.00, -3040.00), this);
@@ -335,7 +335,7 @@ export class WorldMap {
 
 
         // brown
-        const BrownSpawns: PlayerSpawns = new PlayerSpawns(this);
+        const BrownSpawns: PlayerSpawns = new PlayerSpawns(this, COLOUR.BROWN);
         BrownSpawns.spawnOne = new CheckPoint(Rect(-4672.0, 3200.0, -4352.0, 3520.0), this);
         BrownSpawns.spawnTwo = new CheckPoint(Rect(-4352.0, 3200.0, -4032.0, 3520.0), this);
 
@@ -348,7 +348,7 @@ export class WorldMap {
         this.playerSpawns[COLOUR.BROWN] = BrownSpawns;
 
 
-        const MaroonsSpawns: PlayerSpawns = new PlayerSpawns(this);
+        const MaroonsSpawns: PlayerSpawns = new PlayerSpawns(this, COLOUR.MAROON);
         MaroonsSpawns.spawnOne = new CheckPoint(Rect(4032.0, 3200.0, 4352.0, 3520.0), this);
         MaroonsSpawns.spawnTwo = new CheckPoint(Rect(4352.0, 3200.0, 4672.0, 3520.0), this);
         let MaroonsCheckpoint: CheckPoint = MaroonsSpawns.spawnOne;
@@ -358,7 +358,7 @@ export class WorldMap {
         this.playerSpawns[COLOUR.MAROON] = MaroonsSpawns;
 
 
-        const LightBlueSpawns: PlayerSpawns = new PlayerSpawns(this);
+        const LightBlueSpawns: PlayerSpawns = new PlayerSpawns(this, COLOUR.LIGHT_BLUE);
         LightBlueSpawns.spawnOne = new CheckPoint(Rect(-2496.0, -2240.0, -2176.0, -1920.0), this);
         LightBlueSpawns.spawnTwo = new CheckPoint(Rect(-2176.0, -2240.0, -1856.0, -1920.0), this);
         let LightBlueCheckpoint: CheckPoint = LightBlueSpawns.spawnOne;
@@ -369,7 +369,7 @@ export class WorldMap {
         // LightBlueCheckpoint = LightBlueCheckpoint.next = OrangeSpawns.spawnOne;
         this.playerSpawns[COLOUR.LIGHT_BLUE] = LightBlueSpawns;
 
-        const DarkGreenSpawns: PlayerSpawns = new PlayerSpawns(this);
+        const DarkGreenSpawns: PlayerSpawns = new PlayerSpawns(this, COLOUR.DARK_GREEN);
         DarkGreenSpawns.spawnOne = new CheckPoint(Rect(1856.0, -2240.0, 2176.0, -1920.0), this);
         DarkGreenSpawns.spawnTwo = new CheckPoint(Rect(2176.0, -2240.0, 2496.0, -1920.0), this);
         let DarkGreenCheckpoint: CheckPoint = DarkGreenSpawns.spawnOne;

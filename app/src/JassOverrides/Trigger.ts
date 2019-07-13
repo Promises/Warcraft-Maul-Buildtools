@@ -1,12 +1,13 @@
 import { Log } from '../lib/Serilog/Serilog';
-import { Defender } from '../World/Entity/Players/Defender';
 import { AbstractPlayer } from '../World/Entity/Players/AbstractPlayer';
+import { Rectangle } from './Rectangle';
 
 export class Trigger {
 
     constructor() {
         this.nativeTrigger = CreateTrigger();
     }
+
     nativeTrigger: trigger;
 
 
@@ -15,7 +16,7 @@ export class Trigger {
 
         xpcall(() => {
             answer = func();
-        },     (err: any) => {
+        }, (err: any) => {
             this.printError(err);
         });
 
@@ -23,7 +24,7 @@ export class Trigger {
     }
 
 
-    public static  printError(err: any) {
+    public static printError(err: any) {
         Log.Fatal(err);
     }
 
@@ -62,6 +63,14 @@ export class Trigger {
         return TriggerRegisterEnterRectSimple(this.nativeTrigger, r);
     }
 
+    public RegisterEnterRectangle(area: Rectangle): event {
+        const rectangle: rect = Rect(area.minX, area.minY, area.maxX, area.maxY);
+        const trigEvent: event = this.RegisterEnterRectSimple(rectangle);
+        RemoveRect(rectangle);
+        return trigEvent;
+
+    }
+
     public AddCondition(func: () => boolean): triggercondition {
         return TriggerAddCondition(this.nativeTrigger, Condition(() => Trigger.EvaluateCondition(func)));
     }
@@ -86,4 +95,6 @@ export class Trigger {
         return TriggerRegisterPlayerEventLeave(this.nativeTrigger, whichPlayer.wcPlayer);
 
     }
+
+
 }
