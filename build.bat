@@ -52,6 +52,8 @@ move "src\app\src\main.lua" "src\"
 if %ERRORLEVEL% GEQ 1 EXIT /B 1
 @echo.
 
+"tools/sed.exe" -i "s/local function __module_/function __module_/g" "target/map/war3map.lua"
+
 @echo Importing processed map script ...
 "tools\MPQEditor\x64\MPQEditor.exe" add "%output%\%map%" "%output%\map\*" "/c" "/auto" "/r"
 if %ERRORLEVEL% GEQ 1 EXIT /B 1
