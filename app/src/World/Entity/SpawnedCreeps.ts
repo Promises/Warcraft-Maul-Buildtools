@@ -1,6 +1,5 @@
 import { Creep } from './Creep';
 import { Trigger } from '../../JassOverrides/Trigger';
-import { Log } from '../../lib/Serilog/Serilog';
 import * as settings from '../GlobalSettings';
 import { WorldMap } from '../WorldMap';
 import { Defender } from './Players/Defender';
@@ -9,6 +8,14 @@ export class SpawnedCreeps {
     public unitMap: Map<number, Creep> = new Map<number, Creep>();
     private unitDiesTrigger: Trigger;
     private worldMap: WorldMap;
+
+    private chimearaIds: number[] = [
+        FourCC('e004'),
+        FourCC('e009'),
+        FourCC('e00U'),
+        FourCC('e00V'),
+        FourCC('e000'),
+    ];
 
     constructor(worldMap: WorldMap) {
         this.worldMap = worldMap;
@@ -35,6 +42,13 @@ export class SpawnedCreeps {
         const creep: Creep | undefined = this.unitMap.get(GetHandleIdBJ(GetDyingUnit()));
         if (!creep) {
             // Handle spawns? spiders and alike?
+            if (this.chimearaIds.indexOf(GetUnitTypeId(GetDyingUnit())) >= 0) {
+                const owningplayer: Defender | undefined = this.worldMap.game.players.get(GetPlayerId(GetOwningPlayer(GetDyingUnit())));
+                if (owningplayer) {
+                    owningplayer.chimeraCount--;
+
+                }
+            }
             return;
         }
 

@@ -8,6 +8,7 @@ import { AbstractHologramMaze } from '../../Holograms/AbstractHologramMaze';
 import { Tower } from '../Tower/Specs/Tower';
 
 export class Defender extends AbstractPlayer {
+    chimeraCount: number = 0;
 
     get towerForces(): Map<number, number> {
         return this._towerForces;

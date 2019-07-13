@@ -19,7 +19,7 @@ export class VoidFissure extends Tower implements GenericAutoAttackTower, Attack
         this.owner.SetVoidFragmentTick(this.owner.GetVoidFragmentTick() - 50);
 
     }
-    public AttackAction(): void {h02S
+    public AttackAction(): void {
         const u: unit | undefined = this.game.gameDamageEngineGlobals.udg_DamageEventSource;
         const target: unit | undefined = this.game.gameDamageEngineGlobals.udg_DamageEventTarget;
 

@@ -13,7 +13,7 @@ export class MultiBoard {
 
         this.scoreboardColumnWidth[1] = 10.00;
         this.scoreboardColumnWidth[2] = 8.00;
-        this.board = CreateMultiboardBJ(2, this.game.players.size + 7, settings.GAME_NAME);
+        this.board = CreateMultiboardBJ(2, this.game.players.size + 6, settings.GAME_NAME);
         MultiboardSetItemValueBJ(this.board, 1, 1, 'Starting in');
         MultiboardSetItemValueBJ(this.board, 2, 1, this.game.waveTimer + '');
         MultiboardSetItemValueBJ(this.board, 1, 2, 'Level');
@@ -42,8 +42,8 @@ export class MultiBoard {
         MultiboardSetItemWidthBJ(this.board, 2, 5, this.scoreboardColumnWidth[2]);
         MultiboardSetItemWidthBJ(this.board, 1, 6, this.scoreboardColumnWidth[1]); // Level Type 2
         MultiboardSetItemWidthBJ(this.board, 2, 6, this.scoreboardColumnWidth[2]);
-        MultiboardSetItemWidthBJ(this.board, 1, 7, this.scoreboardColumnWidth[1]); // Kills
-        MultiboardSetItemWidthBJ(this.board, 2, 7, this.scoreboardColumnWidth[2]);
+            // MultiboardSetItemWidthBJ(this.board, 1, 7, this.scoreboardColumnWidth[1]); // Kills
+            // MultiboardSetItemWidthBJ(this.board, 2, 7, this.scoreboardColumnWidth[2]);
 
         MultiboardSetItemStyleBJ(this.board, 1, 1, true, false);
         MultiboardSetItemStyleBJ(this.board, 2, 1, true, false);
@@ -57,8 +57,8 @@ export class MultiBoard {
         MultiboardSetItemStyleBJ(this.board, 2, 5, true, false);
         MultiboardSetItemStyleBJ(this.board, 1, 6, true, false);
         MultiboardSetItemStyleBJ(this.board, 2, 6, true, false);
-        MultiboardSetItemStyleBJ(this.board, 1, 7, true, false);
-        MultiboardSetItemStyleBJ(this.board, 2, 7, true, false);
+        // MultiboardSetItemStyleBJ(this.board, 1, 7, true, false);
+        // MultiboardSetItemStyleBJ(this.board, 2, 7, true, false);
 
         this.InitializePlayerScores();
 
@@ -80,8 +80,8 @@ export class MultiBoard {
                 count++;
             }
         }
-        MultiboardSetItemStyleBJ(this.board, 1, 7 + count, true, false);
-        MultiboardSetItemStyleBJ(this.board, 2, 7 + count, true, false);
+        // MultiboardSetItemStyleBJ(this.board, 1, 7 + count, true, false);
+        // MultiboardSetItemStyleBJ(this.board, 2, 7 + count, true, false);
 
 
     }
