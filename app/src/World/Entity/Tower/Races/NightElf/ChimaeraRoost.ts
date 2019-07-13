@@ -16,7 +16,7 @@ export class ChimaeraRoost extends Tower implements TickingTower {
     }
 
     public GetTickModulo(): number {
-        return 15;
+        return 150;
     }
 
 
