@@ -164,6 +164,7 @@ export class TowerConstruction {
                 Log.Fatal(`${GetUnitName(tower)} built outside of requires area. Please screenshot and report`);
             }
         }
+        Log.Event(1, `{"tower":"${DecodeFourCC(ObjectExtendsTower.GetID())}", "owner": "${ObjectExtendsTower.owner.GetLogStr()}"}`);
         return ObjectExtendsTower;
     }
 

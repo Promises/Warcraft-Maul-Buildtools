@@ -8,6 +8,10 @@ function SendMessage(this: void, msg: any): void {
     DisplayTimedTextToForce(bj_FORCE_ALL_PLAYERS, 10, `${msg}`);
 }
 
+function SendMessageUnlogged(this: void, msg: any): void {
+    DisplayTimedTextToForce(bj_FORCE_ALL_PLAYERS, 10, `${msg}`);
+}
+
 interface ColourToIndex {
     [key: string]: number;
 }

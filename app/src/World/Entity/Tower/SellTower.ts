@@ -51,6 +51,7 @@ export class SellTower {
                 value = Math.floor(tower.GetSellValue());
                 Log.Debug(`SellValue: ${value}`);
                 tower.Sell();
+                Log.Event(2, `{"tower":"${DecodeFourCC(tower.GetID())}", "owner": "${tower.owner.GetLogStr()}"}`);
             }
             player.giveGold(value);
 
@@ -74,17 +75,18 @@ export class SellTower {
         // if (isWaveInProgress) {
         //     this._game.worldMap.towerConstruction.SetupTower(ReplaceUnitBJ(unit, FourCC('uC14'), bj_UNIT_STATE_METHOD_DEFAULTS), player);
         // } else {
-            const maze: Maze = this._game.worldMap.playerMazes[playerSpawnId];
-            const leftSide: number = ((x - 64) - maze.minX) / 64;
-            const rightSide: number = (x - maze.minX) / 64;
-            const topSide: number = (y - maze.minY) / 64;
-            const bottomSide: number = ((y - 64) - maze.minY) / 64;
-            maze.setWalkable(leftSide + bottomSide * maze.width, true);
-            maze.setWalkable(rightSide + bottomSide * maze.width, true);
-            maze.setWalkable(leftSide + topSide * maze.width, true);
-            maze.setWalkable(rightSide + topSide * maze.width, true);
-            RemoveUnit(unit);
+        const maze: Maze = this._game.worldMap.playerMazes[playerSpawnId];
+        const leftSide: number = ((x - 64) - maze.minX) / 64;
+        const rightSide: number = (x - maze.minX) / 64;
+        const topSide: number = (y - maze.minY) / 64;
+        const bottomSide: number = ((y - 64) - maze.minY) / 64;
+        maze.setWalkable(leftSide + bottomSide * maze.width, true);
+        maze.setWalkable(rightSide + bottomSide * maze.width, true);
+        maze.setWalkable(leftSide + topSide * maze.width, true);
+        maze.setWalkable(rightSide + topSide * maze.width, true);
+        RemoveUnit(unit);
         // }
+
 
     }
 

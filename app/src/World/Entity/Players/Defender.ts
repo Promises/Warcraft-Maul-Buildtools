@@ -393,4 +393,8 @@ export class Defender extends AbstractPlayer {
 
         }
     }
+
+    public GetLogStr() {
+        return `{"colour":${this.id}, "name": "${this.getPlayerName()}"}`;
+    }
 }

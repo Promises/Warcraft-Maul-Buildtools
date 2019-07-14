@@ -186,4 +186,6 @@ export class Tower {
     public GetSellValue(): number {
         return this.sellValue;
     }
+
+
 }

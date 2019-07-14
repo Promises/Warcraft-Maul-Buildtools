@@ -1,4 +1,5 @@
 import { COLOUR_CODES } from '../../GlobalSettings';
+import { Log } from '../../../lib/Serilog/Serilog';
 
 export abstract class AbstractPlayer {
     public wcPlayer: player;
@@ -30,6 +31,7 @@ export abstract class AbstractPlayer {
     }
 
     public sendMessage(message: string): void {
+        Log.Message(`{"s":"${this.getPlayerName()}", "m":"${message}"}`)
         DisplayTimedTextToPlayer(this.wcPlayer, 0, 0, 10, message);
     }
 

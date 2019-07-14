@@ -1,12 +1,14 @@
 export enum LogLevel
 {
     None = -1,
-    Verbose = 0,
-    Debug = 1,
-    Information = 2,
-    Warning = 3,
-    Error = 4,
-    Fatal = 5,
+    Message = 0,
+    Verbose = 1,
+    Debug = 2,
+    Event = 3,
+    Information = 4,
+    Warning = 5,
+    Error = 6,
+    Fatal = 7,
 }
 
 export enum LogEventType
@@ -84,6 +86,10 @@ export module Log
     export function Information(this: void, message: string, ...args: any[]): void { Log(LogLevel.Information, message, ...args); }
 
     export function Debug(this: void, message: string, ...args: any[]): void { Log(LogLevel.Debug, message, ...args); }
+
+    export function Message(this: void, message: string, ...args: any[]): void { Log(LogLevel.Message, message, ...args); }
+
+    export function Event(this: void, id: number, message: string, ...args: any[]): void { Log(LogLevel.Event, message, ...args); }
 
     export function Verbose(this: void, message: string, ...args: any[]): void { Log(LogLevel.Verbose, message, ...args); }
 }

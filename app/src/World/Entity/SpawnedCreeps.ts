@@ -21,9 +21,9 @@ export class SpawnedCreeps {
         this.worldMap = worldMap;
         // let creativeName = CreateUnit(Player(COLOUR.NAVY), FourCC('u000'), -64.00, 4032.00, 240.0);
         // this.unitMap.set(GetHandleIdBJ(creativeName), new Creep(creativeName));
-        const triggerTest: Trigger = new Trigger();
-        triggerTest.RegisterAnyUnitEventBJ(EVENT_PLAYER_UNIT_SELECTED);
-        triggerTest.AddAction(() => this.printUnit());
+        // const triggerTest: Trigger = new Trigger();
+        // triggerTest.RegisterAnyUnitEventBJ(EVENT_PLAYER_UNIT_SELECTED);
+        // triggerTest.AddAction(() => this.printUnit());
 
 
         this.unitDiesTrigger = new Trigger();
