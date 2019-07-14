@@ -10,13 +10,15 @@ export class StringSinkTest implements ILogSink
 {
     static Prefix: Record<LogLevel, string> =
         {
-            [LogLevel.None]: "NON",
-            [LogLevel.Verbose]: "VRB",
-            [LogLevel.Debug]: "DBG",
-            [LogLevel.Information]: "INF",
-            [LogLevel.Warning]: "WRN",
-            [LogLevel.Error]: "ERR",
-            [LogLevel.Fatal]: "FTL",
+            [LogLevel.None]: '|cffffffffNON|r',
+            [LogLevel.Verbose]: '|cff9d9d9dVRB|r',
+            [LogLevel.Debug]: '|cff9d9d9dDBG|r',
+            [LogLevel.Information]: '|cffe6cc80INF|r',
+            [LogLevel.Message]: '|cffe6cc80MSG|r',
+            [LogLevel.Event]: '|cffe6cc80EVT|r',
+            [LogLevel.Warning]: '|cffffcc00WRN|r',
+            [LogLevel.Error]: '|cffff8000ERR|r',
+            [LogLevel.Fatal]: '|cffff0000FTL|r',
         };
 
     static Colors: Record<string, string> =

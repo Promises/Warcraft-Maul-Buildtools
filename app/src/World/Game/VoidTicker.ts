@@ -1,5 +1,6 @@
 import { Trigger } from '../../JassOverrides/Trigger';
 import { WarcraftMaul } from '../WarcraftMaul';
+import { Log } from '../../lib/Serilog/Serilog';
 
 export class VoidTicker {
     private readonly trig: Trigger;

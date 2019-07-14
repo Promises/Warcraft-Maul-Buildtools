@@ -372,7 +372,7 @@ export class Defender extends AbstractPlayer {
     }
 
     public SetVoidFragmentTick(value: number): void {
-        this._voidFragments = value;
+        this._voidFragmentTick = value;
     }
 
     public HasDenied(num: number): boolean {
@@ -394,7 +394,7 @@ export class Defender extends AbstractPlayer {
         }
     }
 
-    public GetLogStr() {
+    public GetLogStr(): string {
         return `{"colour":${this.id}, "name": "${this.getPlayerName()}"}`;
     }
 }

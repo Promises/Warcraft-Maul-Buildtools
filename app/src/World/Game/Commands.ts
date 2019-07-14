@@ -24,7 +24,7 @@ export class Commands {
         this.game = game;
         this.commandTrigger = new Trigger();
         for (const player of this.game.players.values()) {
-            this.commandTrigger.RegisterPlayerChatEvent(player.wcPlayer, '-', false);
+            this.commandTrigger.RegisterPlayerChatEvent(player.wcPlayer, '', false);
         }
         this.commandTrigger.AddAction(() => this.handleCommand());
         for (let i: number = 0; i < 24; i++) {
@@ -175,8 +175,17 @@ export class Commands {
         if (!player) {
             return;
         }
+        if (GetEventPlayerChatString().substr(0, 1) !== '-') {
+            Log.Debug(GetEventPlayerChatString());
+            Log.Event(0, `{"message":"${GetEventPlayerChatString()}", "sender": "${player.GetLogStr()}"}`);
+
+            return;
+        }
         const playerCommand: string = GetEventPlayerChatString().substr(1).toLowerCase();
         const command: string[] = playerCommand.split(' ');
+
+        Log.Event(4, `{"command":"${Util.ArraysToString(command)}", "sender": "${player.GetLogStr()}"}`);
+
         if (command[0] === 'air') {
             player.sendMessage('|cFF999999Air:|r 5 / 15 / 20 / 25 / 30');
         } else if (command[0] === 'boss') {
@@ -580,6 +589,7 @@ export class Commands {
         }
         this.drawings = [];
     }
+
     //
     // private TestUi(): void {
     //     // const fh: framehandle = BlzCreateSimpleFrame('TestPanel', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), 0);

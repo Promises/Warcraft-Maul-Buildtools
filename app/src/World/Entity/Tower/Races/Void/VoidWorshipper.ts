@@ -16,7 +16,11 @@ export class VoidWorshipper extends Tower implements LimitedTower, TickingTower,
     }
 
     public Action(): void {
-        BlzSetUnitBaseDamage(GetEnumUnit(), 14 + IMinBJ(30, R2I(0.10 * this.owner.GetVoidFragments())), 0);
+        const fragments: number = this.owner.GetVoidFragments();
+
+        const newDmg: number = Math.floor(14 + IMinBJ(35, 0.10 * fragments));
+
+        BlzSetUnitBaseDamage(this.tower, newDmg, 0);
     }
 
     public GetTickModulo(): number {
