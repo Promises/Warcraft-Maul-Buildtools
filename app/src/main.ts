@@ -9,7 +9,7 @@ import { PreloadSink } from './lib/Serilog/Sinks/PreloadSink';
 ceres.addHook('main::after', () => {
     Log.Init([
         new StringSink(LogLevel.Error, SendMessageUnlogged),
-        new PreloadSink(LogLevel.Message, `WCMAUL\\${os.time()}.txt`),
+        // new PreloadSink(LogLevel.Message, `WCMAUL\\${os.time()}.txt`),
     ]);
 
 
