@@ -7,6 +7,7 @@ import * as settings from '../GlobalSettings';
 import { InitialDamageModificationTower } from '../Entity/Tower/Specs/InitialDamageModificationTower';
 import { FinalDamageModificationCreepAbility } from '../Entity/CreepAbilities/specs/FinalDamageModificationCreepAbility';
 import { AttackActionCreepAbility } from '../Entity/CreepAbilities/specs/AttackActionCreepAbility';
+import { Log } from '../../lib/Serilog/Serilog';
 
 /**
  * Damage Engine 5.3.0.1
@@ -171,6 +172,7 @@ export class DamageEngine {
     public AddFinalDamageModificationCreepAbility(ObjectExtendsAbility: FinalDamageModificationCreepAbility): void {
         this.finalDamageModificationCreepAbilities.push(ObjectExtendsAbility);
     }
+
     /**
      * Adds an event that triggers after damage has been applied
      * to the target
@@ -232,7 +234,8 @@ export class DamageEngine {
         s += 'Unit - Cause <Source> to damage <Target>, dealing <Amount> damage of attack type <Attack Type> and damage type Unknown';
 
         ClearTextMessages();
-        DisplayTimedTextToPlayer(GetLocalPlayer(), 0.00, 0.00, 999.00, s);
+        Log.Fatal(s);
+        // DisplayTimedTextToPlayer(GetLocalPlayer(), 0.00, 0.00, 999.00, s);
     }
 
     private OnAOEEnd(): void {
@@ -522,7 +525,6 @@ export class DamageEngine {
         }
         return false;
     }
-
 
 
 }

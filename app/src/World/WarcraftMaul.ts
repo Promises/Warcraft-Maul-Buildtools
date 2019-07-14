@@ -183,10 +183,6 @@ export class WarcraftMaul {
         this.worldMap.RemoveEveryUnit();
     }
 
-    private IsReplay(): boolean {
-        return BlzFrameIsVisible(BlzGetFrameByName('ReplayFogCheckBox', 0));
-    }
-
     get creepAbilityHandler(): CreepAbilityHandler {
         return this._creepAbilityHandler;
     }
