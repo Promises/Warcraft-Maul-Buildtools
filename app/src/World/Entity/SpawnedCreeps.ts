@@ -42,10 +42,17 @@ export class SpawnedCreeps {
         const creep: Creep | undefined = this.unitMap.get(GetHandleIdBJ(GetDyingUnit()));
         if (!creep) {
             // Handle spawns? spiders and alike?
+            const dyingId: number = GetUnitTypeId(GetDyingUnit());
+            const owningplayer: Defender | undefined = this.worldMap.game.players.get(GetPlayerId(GetOwningPlayer(GetDyingUnit())));
             if (this.chimearaIds.indexOf(GetUnitTypeId(GetDyingUnit())) >= 0) {
-                const owningplayer: Defender | undefined = this.worldMap.game.players.get(GetPlayerId(GetOwningPlayer(GetDyingUnit())));
                 if (owningplayer) {
                     owningplayer.chimeraCount--;
+
+                }
+            }
+            if (dyingId === FourCC('u042')) {
+                if (owningplayer) {
+                    owningplayer.zerglings--;
 
                 }
             }

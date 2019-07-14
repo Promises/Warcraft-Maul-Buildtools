@@ -9,6 +9,7 @@ import { Tower } from '../Tower/Specs/Tower';
 
 export class Defender extends AbstractPlayer {
     public chimeraCount: number = 0;
+    public zerglings: number = 0;
 
     get towerForces(): Map<number, number> {
         return this._towerForces;
