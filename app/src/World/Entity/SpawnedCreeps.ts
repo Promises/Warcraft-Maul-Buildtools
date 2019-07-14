@@ -49,6 +49,7 @@ export class SpawnedCreeps {
 
                 }
             }
+            RemoveUnit(GetDyingUnit());
             return;
         }
 
