@@ -13,7 +13,8 @@ bt_arguments="-windowmode windowed"
 
 sh ./clean.sh
 sh ./wcm_generate.sh
-
+mkdir src
+cp -r tools/extras/app src/app
 
 
 

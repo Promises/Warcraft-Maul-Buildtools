@@ -12,7 +12,8 @@ bt_arguments="-windowmode windowed"
 
 
 sh ./clean.sh
-
+mkdir src
+cp -r tools/extras/app src/app
 
 
 
