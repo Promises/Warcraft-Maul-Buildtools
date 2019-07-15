@@ -1,5 +1,4 @@
 import { Tower } from '../../Specs/Tower';
-import { AttackActionTower } from '../../Specs/AttackActionTower';
 import { KillingActionTower } from '../../Specs/KillingActionTower';
 
 export class Hydralisk extends Tower implements KillingActionTower {

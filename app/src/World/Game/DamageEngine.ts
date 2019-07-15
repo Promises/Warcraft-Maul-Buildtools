@@ -183,9 +183,17 @@ export class DamageEngine {
 
     private InitialDamageEvent(): void {
         this.initialDamageEvent.forEach(action => action());
+        if (this.damageEngineGlobals.udg_DamageEventSource) {
+            if (this.initialDamageEventTowers.has((GetHandleId(this.damageEngineGlobals.udg_DamageEventSource)))) {
+                (<AttackActionTower>this.initialDamageEventTowers.get((GetHandleId(this.damageEngineGlobals.udg_DamageEventSource)))).AttackAction();
+            }
+        }
         this.initialDamageEventTowers.forEach(tower => tower.AttackAction());
+
         this.initialDamageEventBuffs.forEach(buff => buff.AttackAction());
+
         this.initialDamageEventAbilities.forEach(ability => ability.AttackAction());
+
         this.initialDamageEventCreepAbilities.forEach(ability => ability.AttackAction());
     }
 
