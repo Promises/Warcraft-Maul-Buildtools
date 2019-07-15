@@ -188,7 +188,7 @@ export class DamageEngine {
                 (<AttackActionTower>this.initialDamageEventTowers.get((GetHandleId(this.damageEngineGlobals.udg_DamageEventSource)))).AttackAction();
             }
         }
-        this.initialDamageEventTowers.forEach(tower => tower.AttackAction());
+        // this.initialDamageEventTowers.forEach(tower => tower.AttackAction());
 
         this.initialDamageEventBuffs.forEach(buff => buff.AttackAction());
 
@@ -210,7 +210,12 @@ export class DamageEngine {
     }
 
     private InitialDamageModificationEvent(): void {
-        this.initialDamageModificationEventTowers.forEach(tower => tower.InitialDamageModification());
+        if (this.damageEngineGlobals.udg_DamageEventSource) {
+            if (this.initialDamageModificationEventTowers.has((GetHandleId(this.damageEngineGlobals.udg_DamageEventSource)))) {
+                (<InitialDamageModificationTower>this.initialDamageModificationEventTowers.get((GetHandleId(this.damageEngineGlobals.udg_DamageEventSource)))).InitialDamageModification();
+            }
+        }
+        // this.initialDamageModificationEventTowers.forEach(tower => tower.InitialDamageModification());
 
         this.initialDamageModificationEvent.forEach(action => action());
     }
