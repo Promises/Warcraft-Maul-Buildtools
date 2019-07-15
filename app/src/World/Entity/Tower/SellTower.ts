@@ -25,9 +25,6 @@ export class SellTower {
 
     public SellTower(unit: unit): void {
 
-        if (!(GetUnitAbilityLevel(unit, FourCC('A02D')) > 0)) {
-            return;
-        }
 
         let value: number = GetUnitPointValue(unit);
         let playerSpawnId: undefined | number;
@@ -52,6 +49,9 @@ export class SellTower {
                 Log.Debug(`SellValue: ${value}`);
                 tower.Sell();
                 Log.Event(2, `{"tower":"${DecodeFourCC(tower.GetID())}", "owner": "${tower.owner.GetLogStr()}"}`);
+            }
+            if (!(GetUnitAbilityLevel(unit, FourCC('A02D')) > 0)) {
+                value = 0;
             }
             player.giveGold(value);
 
