@@ -300,7 +300,7 @@ export class Defender extends AbstractPlayer {
 
     public ClaimTowers(): void {
         const rectangle: rect = this.getRectangle().toRect();
-        const grp: group = GetUnitsInRectAll(rectangle);
+        const grp: group = GetUnitsInRectMatching(rectangle, Condition(() => this.IsOwnerNotMe()));
         ForGroupBJ(grp, () => this.ClaimTower());
         RemoveRect(rectangle);
         DestroyGroup(grp);
@@ -397,5 +397,10 @@ export class Defender extends AbstractPlayer {
 
     public GetLogStr(): string {
         return `{"colour":${this.id}, "name": "${this.getPlayerName()}"}`;
+    }
+
+    private IsOwnerNotMe(): boolean {
+        return GetOwningPlayer(GetFilterUnit()) !== this.wcPlayer;
+
     }
 }
