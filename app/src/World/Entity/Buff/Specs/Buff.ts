@@ -21,6 +21,10 @@ export class Buff {
 
     }
 
+    get BuffID(): number{
+        return this.buffID;
+    }
+
     public Condition(target: unit): boolean {
         return (UnitHasBuffBJ(target, this.buffID));
     }

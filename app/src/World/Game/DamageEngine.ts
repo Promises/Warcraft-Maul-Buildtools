@@ -8,6 +8,7 @@ import { InitialDamageModificationTower } from '../Entity/Tower/Specs/InitialDam
 import { FinalDamageModificationCreepAbility } from '../Entity/CreepAbilities/specs/FinalDamageModificationCreepAbility';
 import { AttackActionCreepAbility } from '../Entity/CreepAbilities/specs/AttackActionCreepAbility';
 import { Log } from '../../lib/Serilog/Serilog';
+import { KillingActionTower } from '../Entity/Tower/Specs/KillingActionTower';
 
 /**
  * Damage Engine 5.3.0.1
@@ -182,11 +183,14 @@ export class DamageEngine {
     }
 
     private InitialDamageEvent(): void {
-        this.initialDamageEvent.forEach(action => action());
+        // this.initialDamageEvent.forEach(action => action());
         if (this.damageEngineGlobals.udg_DamageEventSource) {
-            if (this.initialDamageEventTowers.has((GetHandleId(this.damageEngineGlobals.udg_DamageEventSource)))) {
-                (<AttackActionTower>this.initialDamageEventTowers.get((GetHandleId(this.damageEngineGlobals.udg_DamageEventSource)))).AttackAction();
+            const handleId: number = GetHandleId(this.damageEngineGlobals.udg_DamageEventSource);
+            const damagingUnit: AttackActionTower | undefined = this.initialDamageEventTowers.get(handleId);
+            if (damagingUnit) {
+                damagingUnit.AttackAction();
             }
+
         }
         // this.initialDamageEventTowers.forEach(tower => tower.AttackAction());
 
@@ -210,14 +214,17 @@ export class DamageEngine {
     }
 
     private InitialDamageModificationEvent(): void {
-        if (this.damageEngineGlobals.udg_DamageEventSource) {
-            if (this.initialDamageModificationEventTowers.has((GetHandleId(this.damageEngineGlobals.udg_DamageEventSource)))) {
-                (<InitialDamageModificationTower>this.initialDamageModificationEventTowers.get((GetHandleId(this.damageEngineGlobals.udg_DamageEventSource)))).InitialDamageModification();
-            }
-        }
-        // this.initialDamageModificationEventTowers.forEach(tower => tower.InitialDamageModification());
 
-        this.initialDamageModificationEvent.forEach(action => action());
+        if (this.damageEngineGlobals.udg_DamageEventSource) {
+            const handleId: number = GetHandleId(this.damageEngineGlobals.udg_DamageEventSource);
+            const damagingUnit: InitialDamageModificationTower | undefined = this.initialDamageModificationEventTowers.get(handleId);
+            if (damagingUnit) {
+                damagingUnit.InitialDamageModification();
+            }
+
+        }
+
+        // this.initialDamageModificationEvent.forEach(action => action());
     }
 
     private MultiplicativeDamageModificationEvent(): void {

@@ -177,8 +177,9 @@ export class TowerConstruction {
     }
 
     private DoKillingTowerActions(): void {
-        for (const tower of this.killingActions.values()) {
-            tower.KillingAction();
+        const killing: KillingActionTower | undefined = this.killingActions.get(GetHandleId(GetKillingUnit()));
+        if (killing) {
+            killing.KillingAction();
         }
     }
 
