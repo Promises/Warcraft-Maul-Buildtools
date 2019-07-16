@@ -170,8 +170,9 @@ export class TowerConstruction {
 
 
     private DoGenericTowerAttacks(): void {
-        for (const tower of this.genericAttacks.values()) {
-            tower.GenericAttack();
+        const generic: GenericAutoAttackTower | undefined = this.genericAttacks.get(GetHandleId(GetAttacker()));
+        if (generic) {
+            generic.GenericAttack();
         }
     }
 
