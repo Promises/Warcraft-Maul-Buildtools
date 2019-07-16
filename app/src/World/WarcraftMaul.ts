@@ -21,6 +21,7 @@ import { GenericAbilityHandler } from './Entity/GenericAbilities/GenericAbilityH
 import { CreepAbilityHandler } from './Entity/CreepAbilities/CreepAbilityHandler';
 import { VoidTicker } from './Game/VoidTicker';
 import { PreloadSink } from '../lib/Serilog/Sinks/PreloadSink';
+import { EventQueue } from '../lib/WCEventQueue/EventQueue';
 
 export class WarcraftMaul {
 
@@ -50,6 +51,7 @@ export class WarcraftMaul {
     public enemies: Attacker[] = [];
     private readonly _creepAbilityHandler: CreepAbilityHandler;
     private voidTicker: VoidTicker;
+    private eventQueue: EventQueue;
 
     constructor() {
         // @ts-ignore to enable tests
@@ -95,6 +97,7 @@ export class WarcraftMaul {
 
         // Create the map
         this.worldMap = new WorldMap(this);
+        // this.eventQueue = new EventQueue();
         this.gameDamageEngineGlobals = new DamageEngineGlobals();
         this.towerTicker = new TowerTicker();
         this.voidTicker = new VoidTicker(this);
