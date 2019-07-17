@@ -12,7 +12,7 @@ export class VoidWorshipper extends Tower implements LimitedTower, TickingTower,
     }
 
     public MaxCount(): number {
-        return 30;
+        return 40;
     }
 
     public Action(): void {
