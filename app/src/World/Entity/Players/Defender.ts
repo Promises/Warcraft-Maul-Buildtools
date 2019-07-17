@@ -6,7 +6,6 @@ import { Trigger } from '../../../JassOverrides/Trigger';
 import { WarcraftMaul } from '../../WarcraftMaul';
 import { AbstractHologramMaze } from '../../Holograms/AbstractHologramMaze';
 import { Tower } from '../Tower/Specs/Tower';
-import { Log } from '../../../lib/Serilog/Serilog';
 
 export class Defender extends AbstractPlayer {
     public chimeraCount: number = 0;
@@ -298,9 +297,9 @@ export class Defender extends AbstractPlayer {
         //     nutower.SetLeaverSellValue();
         //
         // }
-        // // for (const builder of this.builders) {
-        // //     RemoveUnit(builder);
-        // // }
+        // for (const builder of this.builders) {
+        //     RemoveUnit(builder);
+        // }
         // const grp: group = GetUnitsInRectAll(GetPlayableMapRect());
         // ForGroupBJ(grp, () => this.DestroyLeftoverUnits());
         // DestroyGroup(grp);
@@ -319,6 +318,9 @@ export class Defender extends AbstractPlayer {
             }
 
         }
+        const grp: group = GetUnitsInRectAll(GetPlayableMapRect());
+        ForGroupBJ(grp, () => this.DestroyLeftoverUnits());
+        DestroyGroup(grp);
         return true;
 
     }
