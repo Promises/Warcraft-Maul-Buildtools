@@ -238,7 +238,6 @@ export class Commands {
         } else if (command[0] === 'y' || command[0] === 'yes') {
             this.VoteYes(player);
         } else if (command[0] === 'kick' || command[0] === 'votekick') {
-            Log.Error('Command not implemented yet');
             if (command[1]) {
                 const receiver: number = this.getPlayerIdFromColourName(command[1]);
                 const receivingPlayer: Defender | undefined = this.game.players.get(receiver);
@@ -261,18 +260,38 @@ export class Commands {
                 this.giveGoldToPlayer(receivingPlayer, player, amount);
             }
         } else if (command[0] === 'allow') {
-            Log.Error('Command not implemented yet');
             // AllowSpecificPlayer();
+            if (command[1]) {
+                const receiver: number = this.getPlayerIdFromColourName(command[1]);
+                const receivingPlayer: Defender | undefined = this.game.players.get(receiver);
+                if (receivingPlayer) {
+                    player.AllowPlayer(receivingPlayer.id);
+                } else {
+                    player.sendMessage(Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Invalid Colour'));
+                }
+            }
         } else if (command[0] === 'deny') {
-            Log.Error('Command not implemented yet');
             // DenySpecificPlayer();
+            if (command[1]) {
+                const receiver: number = this.getPlayerIdFromColourName(command[1]);
+                const receivingPlayer: Defender | undefined = this.game.players.get(receiver);
+                if (receivingPlayer) {
+                    player.DenyPlayer(receivingPlayer.id);
+                } else {
+                    player.sendMessage(Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Invalid Colour'));
+                }
+            }
         } else if (command[0] === 'allowall') {
-            Log.Error('Command not implemented yet');
             // AllowAllPlayers();
+            for (let i: number = 0; i < 13; i++) {
+                player.AllowPlayer(i);
+            }
             player.sendMessage('ALL players are now |cFF00FF00allowed|r to build in your spawn!');
         } else if (command[0] === 'denyall') {
-            Log.Error('Command not implemented yet');
             // DenyAllPlayers();
+            for (let i: number = 0; i < 13; i++) {
+                player.DenyPlayer(i);
+            }
             player.sendMessage('ALL players are now |cFFFF0000denied|r access to your spawn!');
         } else if (command[0] === 'claim') {
             player.ClaimTowers();
