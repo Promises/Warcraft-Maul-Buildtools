@@ -321,9 +321,9 @@ export class Defender extends AbstractPlayer {
         for (const builder of this.builders) {
             RemoveUnit(builder);
         }
-        const grp: group = GetUnitsInRectAll(GetPlayableMapRect());
-        ForGroupBJ(grp, () => this.DestroyLeftoverUnits());
-        DestroyGroup(grp);
+        // const grp: group = GetUnitsInRectAll(GetPlayableMapRect());
+        // ForGroupBJ(grp, () => this.DestroyLeftoverUnits());
+        // DestroyGroup(grp);
         return true;
 
     }
