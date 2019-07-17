@@ -154,6 +154,7 @@ export class Defender extends AbstractPlayer {
 
         this.DistributePlayerGold();
         this.DistributePlayerTowers();
+        this.setHoloMaze(undefined);
     }
 
     public AddTower(tower: Tower): void {
@@ -320,6 +321,9 @@ export class Defender extends AbstractPlayer {
         }
         for (const builder of this.builders) {
             RemoveUnit(builder);
+        }
+        if(this.hybridBuilder) {
+            RemoveUnit(this.hybridBuilder);
         }
         // const grp: group = GetUnitsInRectAll(GetPlayableMapRect());
         // ForGroupBJ(grp, () => this.DestroyLeftoverUnits());

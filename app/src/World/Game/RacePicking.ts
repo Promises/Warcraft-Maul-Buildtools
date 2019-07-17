@@ -1,4 +1,3 @@
-import * as settings from '../GlobalSettings';
 import { Trigger } from '../../JassOverrides/Trigger';
 import { WarcraftMaul } from '../WarcraftMaul';
 import { Defender } from '../Entity/Players/Defender';
@@ -14,7 +13,6 @@ import {
     HybridTierThree,
     HybridTierTwo,
 } from '../../Generated/hybridRandomGEN';
-import { InitialiseAllRaceTowers } from '../Entity/Tower/Races/RaceInitialiser';
 
 export class RacePicking {
     raceSelectTrigger: Trigger;
@@ -218,6 +216,8 @@ export class RacePicking {
 
         if (!player.hasHybridRandomed) {
             player.hybridBuilder = CreateUnit(player.wcPlayer, FourCC('e00I'), player.getCenterX(), player.getCenterY(), 0);
+            // player.races.push(player.hybridBuilder);
+
         }
 
         player.hasHybridRandomed = true;
