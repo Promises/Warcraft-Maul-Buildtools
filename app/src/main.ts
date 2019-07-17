@@ -5,11 +5,13 @@ import { Log, LogLevel } from './lib/Serilog/Serilog';
 import { StringSink } from './lib/Serilog/Sinks/StringSink';
 
 ceres.addHook('main::after', () => {
+    require('app/src/LuaModules/TimerUtils');
+    require('app/src/LuaModules/PolledWait');
     require('app/src/LuaModules/FastTriggers');
     Log.Init([
-                 new StringSink(LogLevel.Error, SendMessageUnlogged),
+        new StringSink(LogLevel.Error, SendMessageUnlogged),
                  // new PreloadSink(LogLevel.Message, `WCMAUL\\${os.time()}.txt`),
-             ]);
+    ]);
 
 
     function Main(this: void): void {
@@ -23,7 +25,7 @@ ceres.addHook('main::after', () => {
         const init: Trigger = new Trigger();
         init.RegisterTimerEvent(0.00, false);
         init.AddAction(() => Main());
-    }, (err) => {
+    },     (err) => {
         Log.Fatal(err);
     });
 

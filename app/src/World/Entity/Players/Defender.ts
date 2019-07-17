@@ -6,10 +6,12 @@ import { Trigger } from '../../../JassOverrides/Trigger';
 import { WarcraftMaul } from '../../WarcraftMaul';
 import { AbstractHologramMaze } from '../../Holograms/AbstractHologramMaze';
 import { Tower } from '../Tower/Specs/Tower';
+import { Log } from '../../../lib/Serilog/Serilog';
 
 export class Defender extends AbstractPlayer {
     public chimeraCount: number = 0;
     public zerglings: number = 0;
+    private towerKeys: IterableIterator<number> | undefined = undefined;
 
     get towerForces(): Map<number, number> {
         return this._towerForces;
@@ -136,6 +138,10 @@ export class Defender extends AbstractPlayer {
     }
 
     public PlayerLeftTheGame(game: WarcraftMaul): void {
+        // @ts-ignore
+        if (EnableWaits()) {
+            return;
+        }
         SendMessage(`${this.getNameWithColour()} has left the game!`);
 
         TriggerSleepAction(2.00);
@@ -282,20 +288,39 @@ export class Defender extends AbstractPlayer {
     }
 
     private DistributePlayerTowers(): void {
-        for (const tower of this.towers.values()) {
-            tower.Sell();
-            const newOwner: Defender = <Defender>this.game.players.get(Util.GetRandomKey(this.game.players));
+        this.towerKeys = this.towers.keys();
+        this.game.eventQueue.AddMed(() => this.DistributeAndDestoryTowers());
+        // for (const tower of this.towers.values()) {
+        //     tower.Sell();
+        //     const newOwner: Defender = <Defender>this.game.players.get(Util.GetRandomKey(this.game.players));
+        //
+        //     const nutower: Tower = tower.SetOwnership(newOwner);
+        //     nutower.SetLeaverSellValue();
+        //
+        // }
+        // // for (const builder of this.builders) {
+        // //     RemoveUnit(builder);
+        // // }
+        // const grp: group = GetUnitsInRectAll(GetPlayableMapRect());
+        // ForGroupBJ(grp, () => this.DestroyLeftoverUnits());
+        // DestroyGroup(grp);
+    }
 
-            const nutower: Tower = tower.SetOwnership(newOwner);
-            nutower.SetLeaverSellValue();
+    private DistributeAndDestoryTowers(): boolean {
+        if (this.towerKeys) {
+            const tower: Tower | undefined = this.towers.get(this.towerKeys.next().value);
+            if (tower) {
+                tower.Sell();
+                const newOwner: Defender = <Defender>this.game.players.get(Util.GetRandomKey(this.game.players));
+
+                const nutower: Tower = tower.SetOwnership(newOwner);
+                nutower.SetLeaverSellValue();
+                return false;
+            }
 
         }
-        // for (const builder of this.builders) {
-        //     RemoveUnit(builder);
-        // }
-        const grp: group = GetUnitsInRectAll(GetPlayableMapRect());
-        ForGroupBJ(grp, () => this.DestroyLeftoverUnits());
-        DestroyGroup(grp);
+        return true;
+
     }
 
     public ClaimTowers(): void {

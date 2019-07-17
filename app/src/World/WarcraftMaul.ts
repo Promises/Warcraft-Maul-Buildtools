@@ -51,7 +51,7 @@ export class WarcraftMaul {
     public enemies: Attacker[] = [];
     private readonly _creepAbilityHandler: CreepAbilityHandler;
     private voidTicker: VoidTicker;
-    private eventQueue: EventQueue;
+    public eventQueue: EventQueue;
 
     constructor() {
         // @ts-ignore to enable tests
@@ -65,7 +65,7 @@ export class WarcraftMaul {
             // this.waveTimer = 15;
             Log.Init([
                 new StringSink(LogLevel.Debug, SendMessageUnlogged),
-                new PreloadSink(LogLevel.Message, `WCMAUL\\${os.time()}.txt`),
+                // new PreloadSink(LogLevel.Message, `WCMAUL\\${os.time()}.txt`),
             ]);
             Log.Debug('Debug mode enabled');
         }
@@ -97,7 +97,7 @@ export class WarcraftMaul {
 
         // Create the map
         this.worldMap = new WorldMap(this);
-        // this.eventQueue = new EventQueue();
+        this.eventQueue = new EventQueue();
         this.gameDamageEngineGlobals = new DamageEngineGlobals();
         this.towerTicker = new TowerTicker();
         this.voidTicker = new VoidTicker(this);
