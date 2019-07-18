@@ -146,14 +146,14 @@ export class Defender extends AbstractPlayer {
         TriggerSleepAction(2.00);
 
         this.game.worldMap.playerSpawns[this.id].isOpen = false;
-        // if (this.game.scoreBoard && this._scoreSlot > -1) {
-        //
-        //     MultiboardSetItemValueBJ(
-        //         this.game.scoreBoard.board, 1, 7 + this._scoreSlot,
-        //         Util.ColourString(this.getColourCode(), '<Quit>'));
-        //     this._scoreSlot = -1;
-        // }
-        // this.game.players.delete(this.id);
+        if (this.game.scoreBoard && this._scoreSlot > -1) {
+
+            MultiboardSetItemValueBJ(
+                this.game.scoreBoard.board, 1, 7 + this._scoreSlot,
+                Util.ColourString(this.getColourCode(), '<Quit>'));
+            this._scoreSlot = -1;
+        }
+        this.game.players.delete(this.id);
         this.setHoloMaze(undefined);
         this.DistributePlayerGold();
         this.DistributePlayerTowers();
