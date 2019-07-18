@@ -4,7 +4,7 @@ import { Log } from '../Serilog/Serilog';
 
 export class EventQueue {
     private ticker: Trigger;
-    private readonly maxEventsPerTick: number = 20;
+    private readonly maxEventsPerTick: number = 2;
     private highPriority: Queue<() => boolean> = new Queue<() => boolean>();
     private medPriority: Queue<() => boolean> = new Queue<() => boolean>();
     private lowPriority: Queue<() => boolean> = new Queue<() => boolean>();
