@@ -155,7 +155,7 @@ export class Defender extends AbstractPlayer {
         }
         this.game.players.delete(this.id);
         this.setHoloMaze(undefined);
-        this.DistributePlayerGold();
+        // this.DistributePlayerGold();
         this.DistributePlayerTowers();
 
 
@@ -295,7 +295,7 @@ export class Defender extends AbstractPlayer {
 
     private DistributePlayerTowers(): void {
         this.towerKeys = this.towers.keys();
-        this.game.eventQueue.AddMed(() => this.DistributeAndDestoryTowers());
+        this.game.eventQueue.AddMed(() => this.DistributeAndDestroyTowers());
         // for (const tower of this.towers.values()) {
         //     tower.Sell();
         //     const newOwner: Defender = <Defender>this.game.players.get(Util.GetRandomKey(this.game.players));
@@ -312,15 +312,18 @@ export class Defender extends AbstractPlayer {
         // DestroyGroup(grp);
     }
 
-    private DistributeAndDestoryTowers(): boolean {
+    private DistributeAndDestroyTowers(): boolean {
         if (this.towerKeys) {
             const tower: Tower | undefined = this.towers.get(this.towerKeys.next().value);
             if (tower) {
                 tower.Sell();
-                const newOwner: Defender = <Defender>this.game.players.get(Util.GetRandomKey(this.game.players));
+                const newOwner: Defender | undefined = this.game.players.get(Util.GetRandomKey(this.game.players));
+                if (newOwner) {
+                    const nutower: Tower = tower.SetOwnership(newOwner);
+                    nutower.SetLeaverSellValue();
 
-                const nutower: Tower = tower.SetOwnership(newOwner);
-                nutower.SetLeaverSellValue();
+                }
+
                 return false;
             }
 
