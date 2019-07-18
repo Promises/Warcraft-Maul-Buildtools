@@ -141,6 +141,9 @@ export class Defender extends AbstractPlayer {
         if (EnableWaits()) {
             return;
         }
+
+
+        // TODO: FIGURE OUT WTF IS RUINING MY LIFE
         SendMessage(`${this.getNameWithColour()} has left the game!`);
 
         TriggerSleepAction(2.00);
@@ -155,7 +158,6 @@ export class Defender extends AbstractPlayer {
         }
         this.game.players.delete(this.id);
         this.setHoloMaze(undefined);
-        this.DistributePlayerGold();
         this.DistributePlayerTowers();
 
 
@@ -316,13 +318,18 @@ export class Defender extends AbstractPlayer {
         if (this.towerKeys) {
             const tower: Tower | undefined = this.towers.get(this.towerKeys.next().value);
             if (tower) {
-                tower.Sell();
-                const newOwner: Defender | undefined = this.game.players.get(Util.GetRandomKey(this.game.players));
-                if (newOwner) {
-                    const nutower: Tower = tower.SetOwnership(newOwner);
-                    nutower.SetLeaverSellValue();
+                // tower.Sell();
+                // tower.SetLeaverSellValue();
 
-                }
+                this.game.sellTower.SellTower(tower.tower);
+
+
+                // const newOwner: Defender | undefined = this.game.players.get(Util.GetRandomKey(this.game.players));
+                // if (newOwner) {
+                //     const nutower: Tower = tower.SetOwnership(newOwner);
+                //     nutower.SetLeaverSellValue();
+                //
+                // }
 
                 return false;
             }
@@ -337,6 +344,8 @@ export class Defender extends AbstractPlayer {
         // const grp: group = GetUnitsInRectAll(GetPlayableMapRect());
         // ForGroupBJ(grp, () => this.DestroyLeftoverUnits());
         // DestroyGroup(grp);
+        this.DistributePlayerGold();
+
         return true;
 
     }
