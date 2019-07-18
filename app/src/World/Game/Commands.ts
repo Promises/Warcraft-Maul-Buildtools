@@ -233,8 +233,10 @@ export class Commands {
                 DisplayTimedTextToPlayer(GetTriggerPlayer(), 0, 0, 5, 'You can only repick before wave 1!');
             }
         } else if (command[0] === 'sa' || command[0] === 'sellall') {
-            Log.Debug('[command] sellall');
-            player.SellAll();
+            player.sendMessage('SellAll Is Disabled');
+
+            // Log.Debug('[command] sellall');
+            // player.SellAll();
         } else if (command[0] === 'y' || command[0] === 'yes') {
             this.VoteYes(player);
         } else if (command[0] === 'kick' || command[0] === 'votekick') {

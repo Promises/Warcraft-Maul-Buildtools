@@ -41,7 +41,7 @@ export class SellTower {
         }
 
         const owningPlayer: player = GetOwningPlayer(unit);
-        const player: Defender = <Defender>this._game.players.get(GetPlayerId(owningPlayer));
+        const player: Defender | undefined = this._game.players.get(GetPlayerId(owningPlayer));
         if (player) {
             const tower: Tower | undefined = player.towers.get(GetHandleIdBJ(unit));
             if (tower) {

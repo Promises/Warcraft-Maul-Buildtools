@@ -144,18 +144,23 @@ export class Defender extends AbstractPlayer {
         SendMessage(`${this.getNameWithColour()} has left the game!`);
 
         TriggerSleepAction(2.00);
-        game.worldMap.playerSpawns[this.id].isOpen = false;
-        if (game.scoreBoard) {
-            MultiboardSetItemValueBJ(
-                game.scoreBoard.board, 1, 7 + this._scoreSlot,
-                Util.ColourString(this.getColourCode(), '<Quit>'));
-        }
-        game.players.delete(this.id);
 
+        this.game.worldMap.playerSpawns[this.id].isOpen = false;
+        if (this.game.scoreBoard && this._scoreSlot > -1) {
+
+            MultiboardSetItemValueBJ(
+                this.game.scoreBoard.board, 1, 7 + this._scoreSlot,
+                Util.ColourString(this.getColourCode(), '<Quit>'));
+            this._scoreSlot = -1;
+        }
+        this.game.players.delete(this.id);
+        this.setHoloMaze(undefined);
         this.DistributePlayerGold();
         this.DistributePlayerTowers();
-        this.setHoloMaze(undefined);
+
+
     }
+
 
     public AddTower(tower: Tower): void {
         this._towers.set(tower.handleId, tower);
@@ -277,13 +282,14 @@ export class Defender extends AbstractPlayer {
 
     private DistributePlayerGold(): void {
         const leavingPlayerGold: number = this.getGold();
+        this.setGold(0);
         let goldDistribution: number = leavingPlayerGold / this.game.players.size;
 
-        goldDistribution *= 0.3;
+        goldDistribution = Math.floor(goldDistribution * 0.3);
 
         for (const player of this.game.players.values()) {
-            player.sendMessage(`You have received |cffffcc00${Math.floor(goldDistribution)}|r gold from the leaving player!`);
-            player.giveGold(Math.floor(goldDistribution));
+            player.sendMessage(`You have received |cffffcc00${goldDistribution}|r gold from the leaving player!`);
+            player.giveGold(goldDistribution);
         }
     }
 
@@ -322,7 +328,7 @@ export class Defender extends AbstractPlayer {
         for (const builder of this.builders) {
             RemoveUnit(builder);
         }
-        if(this.hybridBuilder) {
+        if (this.hybridBuilder) {
             RemoveUnit(this.hybridBuilder);
         }
         // const grp: group = GetUnitsInRectAll(GetPlayableMapRect());
