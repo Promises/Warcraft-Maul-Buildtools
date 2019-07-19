@@ -315,26 +315,26 @@ export class Defender extends AbstractPlayer {
     }
 
     private DistributeAndDestroyTowers(): boolean {
-        if (this.towerKeys) {
-            const tower: Tower | undefined = this.towers.get(this.towerKeys.next().value);
-            if (tower) {
-                // tower.Sell();
-                // tower.SetLeaverSellValue();
-
-                this.game.sellTower.SellTower(tower.tower);
-
-
-                // const newOwner: Defender | undefined = this.game.players.get(Util.GetRandomKey(this.game.players));
-                // if (newOwner) {
-                //     const nutower: Tower = tower.SetOwnership(newOwner);
-                //     nutower.SetLeaverSellValue();
-                //
-                // }
-
-                return false;
-            }
-
-        }
+        // if (this.towerKeys) {
+        //     const tower: Tower | undefined = this.towers.get(this.towerKeys.next().value);
+        //     if (tower) {
+        //         // tower.Sell();
+        //         // tower.SetLeaverSellValue();
+        //
+        //         this.game.sellTower.SellTower(tower.tower);
+        //
+        //
+        //         // const newOwner: Defender | undefined = this.game.players.get(Util.GetRandomKey(this.game.players));
+        //         // if (newOwner) {
+        //         //     const nutower: Tower = tower.SetOwnership(newOwner);
+        //         //     nutower.SetLeaverSellValue();
+        //         //
+        //         // }
+        //
+        //         return false;
+        //     }
+        //
+        // }
         for (const builder of this.builders) {
             RemoveUnit(builder);
         }
