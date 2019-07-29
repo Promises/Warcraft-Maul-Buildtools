@@ -480,9 +480,11 @@ export class Commands {
                 this.voteKickInProgress = true;
                 this.voteAgainstPlayer = receivingPlayer;
                 this.hasVotedToKick[player.id] = true;
+                this.game.timedEventQueue.AddEvent(new TimedEvent(() => this.VotekickExpire(), 300, false));
+
             } else {
                 player.sendMessage('You idiot, you cannot stomp your own ass with the front of your own foot.');
-                this.game.timedEventQueue.AddEvent(new TimedEvent(() => this.VotekickExpire(), 300, false));
+                // this.game.timedEventQueue.AddEvent(new TimedEvent(() => this.VotekickExpire(), 30, false));
                 // TimerStart(this.voteKickTimer, 30.00, false, () => this.VotekickExpire());
             }
         } else {
@@ -538,7 +540,7 @@ export class Commands {
                 SendMessage(`Votekick for ${this.voteAgainstPlayer.getNameWithColour()} has succeeded!`);
                 CustomDefeatBJ(this.voteAgainstPlayer.wcPlayer, 'Kicked!');
 
-                DestroyTimer(this.voteKickTimer);
+                // DestroyTimer(this.voteKickTimer);
                 this.voteKickInProgress = false;
             }
         } else {

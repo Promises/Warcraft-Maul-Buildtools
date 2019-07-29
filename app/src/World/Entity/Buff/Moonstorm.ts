@@ -7,12 +7,12 @@ import { AttackActionBuff } from './Specs/AttackActionBuff';
  * [Galaxy] Moonstorm
  * 10% chance of dealing 800 extra damage
  */
-export class Moonstorm extends Buff implements AttackActionBuff {
+export class Moonstorm extends Buff implements DamageModificationBuff {
     constructor(game: WarcraftMaul) {
         super('B01E', game); // Buff ID
     }
 
-    public AttackAction(): void {
+    public ModifyDamage(): void {
         const target: unit | undefined = this.damageEngineGlobals.udg_DamageEventTarget;
         if (!target) {
             return;

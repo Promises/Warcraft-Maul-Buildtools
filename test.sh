@@ -15,9 +15,11 @@ fi
 
 
 if [ "$bt_alwaysgeneratedefinitions" = true ]; then
-    node node_modules/convertjasstots/dist/index.js 
+#    node node_modules/convertjasstots/dist/index.js
     echo "Converting standard libraries ..."
     node node_modules/convertjasstots/dist/index.js  "app/src/lib/core/blizzard.j" "app/src/lib/core/blizzard.d.ts"
+        node node_modules/convertjasstots/dist/index.js  "app/src/lib/core/common.ai" "app/src/lib/core/commonai.d.ts"
+
     node node_modules/convertjasstots/dist/index.js  "app/src/lib/core/common.j" "app/src/lib/core/common.d.ts"
 fi
 

@@ -1,6 +1,5 @@
 const fs = require('fs-extra');
 const jassToTs = require('./node_modules/convertjasstots/dist/jassParser');
-const CommandLineParser = require('./node_modules/typescript-to-lua/dist/CommandLineParser');
 const typescriptToLua = require('typescript-to-lua');
 const ts = require("typescript");
 const {execSync} = require('child_process');

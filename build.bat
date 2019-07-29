@@ -35,6 +35,8 @@ if %alwaysgeneratedefinitions%==true (
   @echo Converting standard libraries ...
   node "node_modules/convertjasstots/dist/index.js" "%lib%\core\blizzard.j" "%lib%\core\blizzard.d.ts"
   if %ERRORLEVEL% GEQ 1 EXIT /B 1
+  node "node_modules/convertjasstots/dist/index.js" "%lib%\core\common.ai" "%lib%\core\commonai.d.ts"
+  if %ERRORLEVEL% GEQ 1 EXIT /B 1
   node "node_modules/convertjasstots/dist/index.js" "%lib%\core\common.j" "%lib%\core\common.d.ts"
   if %ERRORLEVEL% GEQ 1 EXIT /B 1
   @echo.
