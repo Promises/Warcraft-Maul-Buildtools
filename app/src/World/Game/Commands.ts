@@ -9,6 +9,7 @@ import { SimpleHoloMaze } from '../Holograms/SimpleHoloMaze';
 import { CircleHoloMaze } from '../Holograms/CircleHoloMaze';
 import { Rectangle } from '../../JassOverrides/Rectangle';
 import { SpawnedCreeps } from '../Entity/SpawnedCreeps';
+import { TimedEvent } from '../../lib/WCEventQueue/TimedEvent';
 
 export class Commands {
 
@@ -478,7 +479,8 @@ export class Commands {
                 this.hasVotedToKick[player.id] = true;
             } else {
                 player.sendMessage('You idiot, you cannot stomp your own ass with the front of your own foot.');
-                TimerStart(this.voteKickTimer, 30.00, false, () => this.VotekickExpire());
+                this.game.timedEventQueue.AddEvent(new TimedEvent(() => this.VotekickExpire(), 30, false));
+                // TimerStart(this.voteKickTimer, 30.00, false, () => this.VotekickExpire());
             }
         } else {
             player.sendMessage('There is already a votekick in progress');
@@ -492,6 +494,7 @@ export class Commands {
             SendMessage(`Votekick for ${this.voteAgainstPlayer.getNameWithColour()} has ended with ${count} votes`);
         }
         this.voteKickInProgress = false;
+        return true;
     }
 
     private VoteYes(player: Defender): void {
@@ -543,7 +546,7 @@ export class Commands {
     private CountCurrentVotes(): number {
         let count: number = 0;
         for (let i: number = 0; i < this.hasVotedToKick.length; i++) {
-            if (this.hasVotedToKick) {
+            if (this.hasVotedToKick[i]) {
                 count++;
             }
         }
