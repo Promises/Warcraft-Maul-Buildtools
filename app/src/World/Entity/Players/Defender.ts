@@ -6,6 +6,7 @@ import { Trigger } from '../../../JassOverrides/Trigger';
 import { WarcraftMaul } from '../../WarcraftMaul';
 import { AbstractHologramMaze } from '../../Holograms/AbstractHologramMaze';
 import { Tower } from '../Tower/Specs/Tower';
+import { TimedEvent } from '../../../lib/WCEventQueue/TimedEvent';
 
 export class Defender extends AbstractPlayer {
     public chimeraCount: number = 0;
@@ -69,7 +70,7 @@ export class Defender extends AbstractPlayer {
         this.leaveTrigger = new Trigger();
         this.leaveTrigger.RegisterPlayerEventLeave(this);
         this.leaveTrigger.AddCondition(() => this.PlayerLeftTheGameConditions(game));
-        this.leaveTrigger.AddAction(() => this.PlayerLeftTheGame(game));
+        this.leaveTrigger.AddAction(() => this.PlayerLeftTheGame());
     }
 
     public setHoloMaze(holoMaze: AbstractHologramMaze | undefined): void {
@@ -136,17 +137,22 @@ export class Defender extends AbstractPlayer {
         return game.gameLives > 0;
     }
 
-    public PlayerLeftTheGame(game: WarcraftMaul): void {
-        // @ts-ignore
-        if (EnableWaits()) {
-            return;
-        }
+    public PlayerLeftTheGame(): void {
+        // if (EnableWaits()) {
+        //     return;
+        // }
 
 
         // TODO: FIGURE OUT WTF IS RUINING MY LIFE
         SendMessage(`${this.getNameWithColour()} has left the game!`);
 
         TriggerSleepAction(2.00);
+        const leaveFunction: TimedEvent = new TimedEvent(this.AfterPlayerLeft, 20);
+        this.game.timedEventQueue.AddEvent(leaveFunction);
+
+    }
+
+    private AfterPlayerLeft(): boolean {
 
         this.game.worldMap.playerSpawns[this.id].isOpen = false;
         if (this.game.scoreBoard && this._scoreSlot > -1) {
@@ -159,7 +165,7 @@ export class Defender extends AbstractPlayer {
         this.game.players.delete(this.id);
         this.setHoloMaze(undefined);
         this.DistributePlayerTowers();
-
+        return true;
 
     }
 
@@ -297,7 +303,7 @@ export class Defender extends AbstractPlayer {
 
     private DistributePlayerTowers(): void {
         this.towerKeys = this.towers.keys();
-        this.game.eventQueue.AddMed(() => this.DistributeAndDestroyTowers());
+        this.game.safeEventQueue.AddMed(() => this.DistributeAndDestroyTowers());
         // for (const tower of this.towers.values()) {
         //     tower.Sell();
         //     const newOwner: Defender = <Defender>this.game.players.get(Util.GetRandomKey(this.game.players));

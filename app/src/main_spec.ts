@@ -81,7 +81,7 @@ describe('Warcraft Maul', () => {
                 createTowersForPlayer(game, player);
                 assert.is_not_truthy(player.towers.size === 0);
 
-                player.PlayerLeftTheGame(game);
+                player.PlayerLeftTheGame();
                 // print(player.towers.size);
 
                 const playerb: Defender = <Defender>game.players.get(Util.GetRandomKey(game.players));

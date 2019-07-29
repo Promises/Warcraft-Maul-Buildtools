@@ -55,7 +55,7 @@ export class WarcraftMaul {
     private voidTicker: VoidTicker;
     public eventQueue: EventQueue;
     public safeEventQueue: SafeEventQueue;
-    private timedEventQueue: TimedEventQueue;
+    public timedEventQueue: TimedEventQueue;
 
     constructor() {
         // @ts-ignore to enable tests

@@ -119,6 +119,7 @@ export class Tower {
 
     public Sell(): void {
         this.owner.towers.delete(this.handleId);
+        Log.Debug(`Selling for: ${GetUnitGoldCost(this.GetID())}`);
         if (this.IsEndOfRoundTower()) {
             this.game.gameRoundHandler.endOfTurnTowers.delete(this.handleId);
         }
