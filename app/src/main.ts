@@ -6,7 +6,7 @@ import { StringSink } from './lib/Serilog/Sinks/StringSink';
 
 ceres.addHook('main::after', () => {
     require('app/src/LuaModules/TimerUtils'); // non leaking timers
-    require('app/src/LuaModules/PolledWait'); // proper wait
+    // require('app/src/LuaModules/PolledWait'); // proper wait
     require('app/src/LuaModules/FastTriggers'); // 16x faster triggers
     Log.Init([
         new StringSink(LogLevel.Error, SendMessageUnlogged),

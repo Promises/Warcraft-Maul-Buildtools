@@ -155,6 +155,9 @@ export class Commands {
 
                 }
                 break;
+            case 'timer':
+                this.TestTimeout();
+                break;
             case 'start':
             case 'startwave':
                 this.game.waveTimer = 1;
@@ -479,7 +482,7 @@ export class Commands {
                 this.hasVotedToKick[player.id] = true;
             } else {
                 player.sendMessage('You idiot, you cannot stomp your own ass with the front of your own foot.');
-                this.game.timedEventQueue.AddEvent(new TimedEvent(() => this.VotekickExpire(), 30, false));
+                this.game.timedEventQueue.AddEvent(new TimedEvent(() => this.VotekickExpire(), 300, false));
                 // TimerStart(this.voteKickTimer, 30.00, false, () => this.VotekickExpire());
             }
         } else {
@@ -488,7 +491,7 @@ export class Commands {
 
     }
 
-    private VotekickExpire(): void {
+    private VotekickExpire(): boolean {
         const count: number = this.CountCurrentVotes();
         if (this.voteAgainstPlayer) {
             SendMessage(`Votekick for ${this.voteAgainstPlayer.getNameWithColour()} has ended with ${count} votes`);
@@ -607,7 +610,7 @@ export class Commands {
 
     private DestroyDrawings(): void {
         for (const drawing of this.drawings) {
-            for (const sfx of  drawing) {
+            for (const sfx of drawing) {
                 DestroyEffect(sfx);
             }
         }
@@ -640,4 +643,12 @@ export class Commands {
     //     BlzFrameSetValue(fh, BlzFrameGetValue(fh) + GetRandomReal(-3, 3));
     //
     // }
+    private TestTimeout(): void {
+        this.game.timedEventQueue.AddEvent(new TimedEvent(() => this.Timeout(), 20, false));
+    }
+
+    private Timeout(): boolean {
+        Log.Debug('Hello world');
+        return true;
+    }
 }

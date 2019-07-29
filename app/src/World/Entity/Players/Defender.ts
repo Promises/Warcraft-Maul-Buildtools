@@ -7,6 +7,7 @@ import { WarcraftMaul } from '../../WarcraftMaul';
 import { AbstractHologramMaze } from '../../Holograms/AbstractHologramMaze';
 import { Tower } from '../Tower/Specs/Tower';
 import { TimedEvent } from '../../../lib/WCEventQueue/TimedEvent';
+import { Log } from '../../../lib/Serilog/Serilog';
 
 export class Defender extends AbstractPlayer {
     public chimeraCount: number = 0;
@@ -146,13 +147,14 @@ export class Defender extends AbstractPlayer {
         // TODO: FIGURE OUT WTF IS RUINING MY LIFE
         SendMessage(`${this.getNameWithColour()} has left the game!`);
 
-        TriggerSleepAction(2.00);
-        const leaveFunction: TimedEvent = new TimedEvent(this.AfterPlayerLeft, 20);
+        // TriggerSleepAction(2.00);
+        const leaveFunction: TimedEvent = new TimedEvent(() => this.AfterPlayerLeft(), 20);
         this.game.timedEventQueue.AddEvent(leaveFunction);
 
     }
 
     private AfterPlayerLeft(): boolean {
+        // Log.Debug("After player left");
 
         this.game.worldMap.playerSpawns[this.id].isOpen = false;
         if (this.game.scoreBoard && this._scoreSlot > -1) {
