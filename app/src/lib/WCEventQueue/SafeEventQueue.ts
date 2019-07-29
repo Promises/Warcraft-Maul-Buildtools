@@ -1,37 +1,42 @@
 import { Trigger } from '../../JassOverrides/Trigger';
 import { Queue } from './Queue';
+import { WarcraftMaul } from '../../World/WarcraftMaul';
 
-export class EventQueue {
+export class SafeEventQueue {
     private ticker: Trigger;
     private readonly maxEventsPerTick: number = 2;
     private highPriority: Queue<() => boolean> = new Queue<() => boolean>();
     private medPriority: Queue<() => boolean> = new Queue<() => boolean>();
     private lowPriority: Queue<() => boolean> = new Queue<() => boolean>();
     private currentTask: (() => boolean) | undefined = undefined;
+    private game: WarcraftMaul;
 
-
-    constructor() {
+    constructor(game: WarcraftMaul) {
         this.ticker = new Trigger();
         this.ticker.RegisterTimerEventPeriodic(0.10);
         this.ticker.AddAction(() => {
             this.HandleTick();
         });
+        this.game = game;
     }
 
     private HandleTick(): void {
-        if (this.currentTask) {
-            for (let i: number = 0; i < this.maxEventsPerTick; i++) {
-                if (this.currentTask) {
-                    if (this.currentTask()) {
-                        this.currentTask = undefined;
-                    }
-                } else {
-                    this.GetTask();
-                }
+        if (!this.game.gameRoundHandler.isWaveInProgress) {
 
+            if (this.currentTask) {
+                for (let i: number = 0; i < this.maxEventsPerTick; i++) {
+                    if (this.currentTask) {
+                        if (this.currentTask()) {
+                            this.currentTask = undefined;
+                        }
+                    } else {
+                        this.GetTask();
+                    }
+
+                }
+            } else {
+                this.GetTask();
             }
-        } else {
-            this.GetTask();
         }
 
     }

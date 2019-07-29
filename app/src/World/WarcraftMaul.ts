@@ -22,6 +22,8 @@ import { CreepAbilityHandler } from './Entity/CreepAbilities/CreepAbilityHandler
 import { VoidTicker } from './Game/VoidTicker';
 import { PreloadSink } from '../lib/Serilog/Sinks/PreloadSink';
 import { EventQueue } from '../lib/WCEventQueue/EventQueue';
+import { SafeEventQueue } from '../lib/WCEventQueue/SafeEventQueue';
+import { TimedEventQueue } from '../lib/WCEventQueue/TimedEventQueue';
 
 export class WarcraftMaul {
 
@@ -52,6 +54,8 @@ export class WarcraftMaul {
     private readonly _creepAbilityHandler: CreepAbilityHandler;
     private voidTicker: VoidTicker;
     public eventQueue: EventQueue;
+    public safeEventQueue: SafeEventQueue;
+    private timedEventQueue: TimedEventQueue;
 
     constructor() {
         // @ts-ignore to enable tests
@@ -98,6 +102,8 @@ export class WarcraftMaul {
         // Create the map
         this.worldMap = new WorldMap(this);
         this.eventQueue = new EventQueue();
+        this.safeEventQueue = new SafeEventQueue(this);
+        this.timedEventQueue = new TimedEventQueue(this);
         this.gameDamageEngineGlobals = new DamageEngineGlobals();
         this.towerTicker = new TowerTicker();
         this.voidTicker = new VoidTicker(this);
