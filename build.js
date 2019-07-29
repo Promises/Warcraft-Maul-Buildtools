@@ -15,7 +15,8 @@ class Build {
         this.doTasks(args)
 
     }
-    async doTasks(args){
+
+    async doTasks(args) {
         if (args.indexOf('build') >= 0) {
             await this.build()
         }
@@ -74,50 +75,81 @@ class Build {
         const parser = new jassToTs.JassParser();
         await parser.main(['', '', "app/src/lib/core/blizzard.j", "app/src/lib/core/blizzard.d.ts"]);
         await parser.main(['', '', "app/src/lib/core/common.j", "app/src/lib/core/common.d.ts"]);
+        await parser.main(['', '', "app/src/lib/core/common.ai", "app/src/lib/core/commonai.d.ts"]);
 
-        const commandLine = typescriptToLua.parseCommandLine(['-p', 'tsconfig.json']);
+        // const commandLine = typescriptToLua.parseCommandLine(['-p', 'tsconfig.json']);
 
-        const commandLineOptions = commandLine.options;
+        // const commandLineOptions = commandLine.options;
 
         // const configParseResult = CommandLineParser.parseConfigFileWithSystem('tsconfig.json', commandLineOptions);
         // this.performCompilation(configParseResult.fileNames, configParseResult.projectReferences, configParseResult.options, ts.getConfigFileParsingDiagnostics(configParseResult));
 
         const {emitResult, diagnostics} = typescriptToLua.transpileProject('tsconfig.json');
-        console.log(diagnostics);
+        for (let diag of diagnostics) {
+            console.log(diag.messageText);
+            if(diag.code != 2306){
+                console.error('FATAL ERROR IN TYPESCRIPT');
+                console.error(diag);
+                // console.log(diag);
+                throw diag;
 
-        // emitResult.forEach(({ name, text }) => ts.sys.writeFile(name, text));
-        // fs.copySync(`src/app/src/main.lua`, `src/main.lua`);
+            }
+
+        }
+
+        emitResult.forEach(({name, text}) => ts.sys.writeFile(name, text));
+        fs.copySync(`src/app/src/main.lua`, `src/main.lua`);
+        fs.copySync(`tools/extras/app`, `src/app`);
+
+        sharedArgs = `build "map"`;
+        let ceres = '';
+        switch (this.os) {
+            case "win32":
+                ceres = "tools/ceres/ceres.exe";
+                break;
+            case "darwin":
+                ceres = "tools/ceres/ceres";
+                break;
+            default:
+                ceres = "tools/ceres/ceres-linux";
+                break;
+        }
         //
-        // sharedArgs = `build "map"`;
-        // let ceres = '';
-        // switch (this.os) {
-        //     case "win32":
-        //         ceres = "tools/ceres/ceres.exe";
-        //         break;
-        //     case "darwin":
-        //         ceres = "tools/ceres/ceres";
-        //         break;
-        //     default:
-        //         ceres = "tools/ceres/ceres-linux";
-        //         break;
-        // }
+        execSync(`${ceres} ${sharedArgs}`, (err, stdout, stderr) => {
+            if (err) {
+                throw err;
+            }
+            console.log('Extracted map files')
+
+        });
+        let sed = '';
+
+        switch (this.os) {
+            case "win32":
+                sed = "tools/sed.exe";
+                break;
+            default:
+                sed = "LC_ALL=C sed";
+                break;
+        }
+        execSync(`${sed} -i "s/local function __module_/function __module_/g" "target/map/war3map.lua"`, (err, stdout, stderr) => {
+            if (err) {
+                throw err;
+            }
+            console.log('Extracted map files')
+
+        });
+
+
+        sharedArgs = `add "target/map.w3x" "target/map/*" "/c" "/auto" "/r"`;
         //
-        // execSync(`${ceres} ${sharedArgs}`, (err, stdout, stderr) => {
-        //     if (err) {
-        //         throw err;
-        //     }
-        //     console.log('Extracted map files')
-        //
-        // });
-        // sharedArgs = `add "target/map.w3x" "target/map/*" "/c" "/auto" "/r"`;
-        //
-        // execSync(`${mpqEditor} ${sharedArgs}`, (err, stdout, stderr) => {
-        //     if (err) {
-        //         throw err;
-        //     }
-        //     console.log('Extracted map files')
-        //
-        // });
+        execSync(`${mpqEditor} ${sharedArgs}`, (err, stdout, stderr) => {
+            if (err) {
+                throw err;
+            }
+            console.log('Extracted map files')
+
+        });
     }
 
     test() {
@@ -138,8 +170,9 @@ class Build {
         let sharedArgs = `-loadfile `;
         let currentDir = String(__dirname);
         currentDir = String(currentDir).replace('/', '\\');
-
-        sharedArgs += '"Z:' + currentDir + '\\target\\map.w3x"';
+        if(this.os === 'linux'){
+            sharedArgs += '"Z:' + currentDir + '\\target\\map.w3x"';
+        }
 
         execSync(`${suffix}"${this.settings.path}" ${sharedArgs}`, (err, stdout, stderr) => {
             if (err) {
