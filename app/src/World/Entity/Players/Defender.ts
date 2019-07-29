@@ -139,23 +139,10 @@ export class Defender extends AbstractPlayer {
     }
 
     public PlayerLeftTheGame(): void {
-        // if (EnableWaits()) {
-        //     return;
-        // }
 
-
-        // TODO: FIGURE OUT WTF IS RUINING MY LIFE
         SendMessage(`${this.getNameWithColour()} has left the game!`);
 
         // TriggerSleepAction(2.00);
-        const leaveFunction: TimedEvent = new TimedEvent(() => this.AfterPlayerLeft(), 20);
-        this.game.timedEventQueue.AddEvent(leaveFunction);
-
-    }
-
-    private AfterPlayerLeft(): boolean {
-        // Log.Debug("After player left");
-
         this.game.worldMap.playerSpawns[this.id].isOpen = false;
         if (this.game.scoreBoard && this._scoreSlot > -1) {
 
@@ -164,6 +151,15 @@ export class Defender extends AbstractPlayer {
                 Util.ColourString(this.getColourCode(), '<Quit>'));
             this._scoreSlot = -1;
         }
+        const leaveFunction: TimedEvent = new TimedEvent(() => this.AfterPlayerLeft(), 20);
+        this.game.timedEventQueue.AddEvent(leaveFunction);
+
+    }
+
+    private AfterPlayerLeft(): boolean {
+        // Log.Debug("After player left");
+
+
         this.game.players.delete(this.id);
         this.setHoloMaze(undefined);
         this.DistributePlayerTowers();
