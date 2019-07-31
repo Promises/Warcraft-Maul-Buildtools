@@ -151,6 +151,13 @@ export class Defender extends AbstractPlayer {
                 Util.ColourString(this.getColourCode(), '<Quit>'));
             this._scoreSlot = -1;
         }
+        for (const builder of this.builders) {
+            RemoveUnit(builder);
+        }
+
+        if (this.hybridBuilder) {
+            RemoveUnit(this.hybridBuilder);
+        }
         const leaveFunction: TimedEvent = new TimedEvent(() => this.AfterPlayerLeft(), 20);
         this.game.timedEventQueue.AddEvent(leaveFunction);
 
@@ -340,13 +347,7 @@ export class Defender extends AbstractPlayer {
 
         }
 
-        for (const builder of this.builders) {
-            RemoveUnit(builder);
-        }
 
-        if (this.hybridBuilder) {
-            RemoveUnit(this.hybridBuilder);
-        }
 
         // const grp: group = GetUnitsInRectAll(GetPlayableMapRect());
         // ForGroupBJ(grp, () => this.DestroyLeftoverUnits());
