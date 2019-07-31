@@ -313,7 +313,7 @@ export class Commands {
                 SetCameraField(CAMERA_FIELD_TARGET_DISTANCE, amount, 1);
             }
         } else if (command[0] === 'dt' || command[0] === 'disabletowers') {
-            player.DisableTowers();
+            // player.DisableTowers();
         } else if (command[0] === 'maze') {
             let invalidMaze: boolean = false;
             if (command.length === 2) {
