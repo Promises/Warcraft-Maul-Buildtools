@@ -2,6 +2,7 @@
 *.slk text eol=crlf
 
 *.j text eol=crlf
+*.j linguist-language=TypeScript
 ./mapfiles/* text eol=crlf
 ./scripts/* text eol=lf
 /app/src/lib/core/blizzard.d.ts text eol=crlf
