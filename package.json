@@ -13,7 +13,7 @@
   "author": "Nikolaj \"William\" Mariager",
   "license": "MIT",
   "dependencies": {
-    "@types/node": "^12.6.2",
+    "@types/node": "^12.6.9",
     "busted-tstl": "0.1.0",
     "codelyzer": "^5.1.0",
     "convertjasstots": "^1.0.10",
@@ -21,9 +21,9 @@
     "lua-types": "^2.5.2",
     "luamin": "^1.0.4",
     "rimraf": "^2.6.3",
-    "sync-rpc": "^1.3.4",
+    "sync-rpc": "^1.3.6",
     "typescript": "^3.5.3",
-    "typescript-to-lua": "^0.23.0"
+    "typescript-to-lua": "^0.26.0"
   },
   "devDependencies": {
     "tslint": "^5.18.0",

@@ -41,6 +41,7 @@ export class Commands {
                 // const bool: boolean = BlzLoadTOCFile('uiImport\\MyBar.toc');
                 // player.sendMessage(`ui! ${bool}`);
                 // this.TestUi();
+
                 break;
             case 'openall':
                 player.sendMessage('All spawns are now open!');
