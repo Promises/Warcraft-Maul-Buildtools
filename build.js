@@ -168,11 +168,11 @@ class Build {
         }
         let sharedArgs = `-windowmode windowed -nowfpause -loadfile `;
         let currentDir = String(__dirname);
-        currentDir = String(currentDir).replace('/', '\\');
         if(this.os === 'linux'){
+            currentDir = String(currentDir).replace('/', '\\');
             sharedArgs += '"Z:' + currentDir + '\\target\\map.w3x"';
         }
-
+        console.log(`${suffix}"${this.settings.path}" ${sharedArgs}`);
         execSync(`${suffix}"${this.settings.path}" ${sharedArgs}`, (err, stdout, stderr) => {
             if (err) {
                 throw err;
