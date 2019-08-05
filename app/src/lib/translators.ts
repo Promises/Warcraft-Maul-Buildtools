@@ -1,5 +1,6 @@
+// tslint:disable-next-line:class-name
 class console {
-    static log(input: string) {
+    public static log(input: string): void {
         SendMessage(input);
     }
 }
@@ -27,7 +28,39 @@ function DecodeFourCC(fourcc: number): string {
 
 class Util {
 
-    static isUnitCreep(u: unit): boolean {
+    public static COLOUR_IDS: ColourToIndex = {
+        RED: 0,
+        BLUE: 1,
+        TEAL: 2,
+        PURPLE: 3,
+        YELLOW: 4,
+        ORANGE: 5,
+        GREEN: 6,
+        PINK: 7,
+        GRAY: 8,
+        GREY: 8,
+        LIGHT_BLUE: 9,
+        LIGHTBLUE: 9,
+        LB: 9,
+        DARK_GREEN: 10,
+        DARKGREEN: 10,
+        DG: 10,
+        BROWN: 11,
+        MAROON: 12,
+        NAVY: 13,
+        TURQUOISE: 14,
+        VOILET: 15,
+        WHEAT: 16,
+        PEACH: 17,
+        MINT: 18,
+        LAVENDER: 19,
+        COAL: 20,
+        SNOW: 21,
+        EMERALD: 22,
+        PEANUT: 23,
+    };
+
+    public static isUnitCreep(u: unit): boolean {
         const ownerID: COLOUR = GetPlayerId(GetOwningPlayer(u));
         switch (ownerID) {
             case COLOUR.NAVY:
@@ -40,17 +73,17 @@ class Util {
         }
     }
 
-    static ColourString(colour: string, str: string): string {
+    public static ColourString(colour: string, str: string): string {
         return `|cFF${colour}${str}|r`;
     }
 
-    static RandomInt(min: number, max: number): number {
+    public static RandomInt(min: number, max: number): number {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    static ShuffleArray(arr: any[]): void {
+    public static ShuffleArray(arr: any[]): void {
         for (let i: number = arr.length - 1; i > 0; i--) {
-            let j: number = Math.floor(Math.random() * (i + 1)); // random index from 0 to i
+            const j: number = Math.floor(Math.random() * (i + 1)); // random index from 0 to i
             // [arr[i], arr[j]] = [arr[j], arr[i]]; // swap elements
 
             const temp: any = arr[i];
@@ -60,7 +93,7 @@ class Util {
     }
 
 
-    static RandomHash(length: number): string {
+    public static RandomHash(length: number): string {
         let result: string = '';
         const characters: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         const charactersLength: number = characters.length;
@@ -71,7 +104,7 @@ class Util {
     }
 
 
-    static GetRandomKey(collection: Map<any, any>): any {
+    public static GetRandomKey(collection: Map<any, any>): any {
         const index: number = Math.floor(Math.random() * collection.size);
         let cntr: number = 0;
         for (const key of collection.keys()) {
@@ -81,7 +114,7 @@ class Util {
         }
     }
 
-    static GetAllKeys(collection: Map<any, any>): any[] {
+    public static GetAllKeys(collection: Map<any, any>): any[] {
         const keys: any[] = [];
         for (const key of collection.keys()) {
             keys.push(key);
@@ -89,42 +122,10 @@ class Util {
         return keys;
     }
 
-    static COLOUR_IDS: ColourToIndex = {
-        'RED': 0,
-        'BLUE': 1,
-        'TEAL': 2,
-        'PURPLE': 3,
-        'YELLOW': 4,
-        'ORANGE': 5,
-        'GREEN': 6,
-        'PINK': 7,
-        'GRAY': 8,
-        'GREY': 8,
-        'LIGHT_BLUE': 9,
-        'LIGHTBLUE': 9,
-        'LB': 9,
-        'DARK_GREEN': 10,
-        'DARKGREEN': 10,
-        'DG': 10,
-        'BROWN': 11,
-        'MAROON': 12,
-        'NAVY': 13,
-        'TURQUOISE': 14,
-        'VOILET': 15,
-        'WHEAT': 16,
-        'PEACH': 17,
-        'MINT': 18,
-        'LAVENDER': 19,
-        'COAL': 20,
-        'SNOW': 21,
-        'EMERALD': 22,
-        'PEANUT': 23,
-    };
-
-    static ArraysToString(arr: any[]): string {
-        let output = '[';
-        for (let i = 0; i < arr.length; i++) {
-            if (i == arr.length - 1) {
+    public static ArraysToString(arr: any[]): string {
+        let output: string = '[';
+        for (let i: number = 0; i < arr.length; i++) {
+            if (i === arr.length - 1) {
                 output += `"${arr[i]}"`;
                 continue;
             }
@@ -134,16 +135,20 @@ class Util {
         return output;
     }
 
-    static ParseInt(str: string): number {
+    public static ParseInt(str: string): number {
         return +str;
     }
 
-    static ParsePositiveInt(str: string): number {
-        let int: number = Number(str);
+    public static ParsePositiveInt(str: string): number {
+        const int: number = Number(str);
         if (int < 0) {
             return 0;
         }
         return int;
+    }
+
+    public static Round(x: number): number {
+        return Math.floor(x + 0.5 - (x + 0.5) % 1);
     }
 }
 

@@ -71,10 +71,10 @@ class Build {
             console.log('Extracted map files')
 
         });
-        const parser = new jassToTs.JassParser();
-        await parser.main(['', '', "app/src/lib/core/blizzard.j", "app/src/lib/core/blizzard.d.ts"]);
-        await parser.main(['', '', "app/src/lib/core/common.j", "app/src/lib/core/common.d.ts"]);
-        await parser.main(['', '', "app/src/lib/core/common.ai", "app/src/lib/core/commonai.d.ts"]);
+        // const parser = new jassToTs.JassParser();
+        // await parser.main(['', '', "app/src/lib/core/blizzard.j", "app/src/lib/core/blizzard.d.ts"]);
+        // await parser.main(['', '', "app/src/lib/core/common.j", "app/src/lib/core/common.d.ts"]);
+        // await parser.main(['', '', "app/src/lib/core/common.ai", "app/src/lib/core/commonai.d.ts"]);
 
         // const commandLine = typescriptToLua.parseCommandLine(['-p', 'tsconfig.json']);
 
@@ -166,7 +166,7 @@ class Build {
                 suffix = "";
                 break;
         }
-        let sharedArgs = `-loadfile `;
+        let sharedArgs = `-windowmode windowed -nowfpause -loadfile `;
         let currentDir = String(__dirname);
         currentDir = String(currentDir).replace('/', '\\');
         if(this.os === 'linux'){
