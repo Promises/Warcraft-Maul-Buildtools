@@ -104,7 +104,7 @@ class Build {
         let ceres = '';
         switch (this.os) {
             case "win32":
-                ceres = "tools/ceres/ceres.exe";
+                ceres = '"tools/ceres/ceres.exe"';
                 break;
             case "darwin":
                 ceres = "tools/ceres/ceres";
@@ -125,7 +125,7 @@ class Build {
 
         switch (this.os) {
             case "win32":
-                sed = "tools/sed.exe";
+                sed = '"tools/sed.exe"';
                 break;
             default:
                 sed = "LC_ALL=C sed";
