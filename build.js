@@ -86,7 +86,7 @@ class Build {
         const {emitResult, diagnostics} = typescriptToLua.transpileProject('tsconfig.json');
         for (let diag of diagnostics) {
             console.log(diag.messageText);
-            if(diag.code != 2306){
+            if (diag.code != 2306) {
                 console.error('FATAL ERROR IN TYPESCRIPT');
                 console.error(diag);
                 // console.log(diag);
@@ -157,21 +157,24 @@ class Build {
 
     run() {
         this.env();
-        let suffix = '';
+        let suffix = ''
+        let sharedArgs = `-windowmode windowed -nowfpause -loadfile `;
+        let currentDir = String(__dirname);
         switch (this.os) {
             case "linux":
                 suffix = "WINEDEBUG=-all wine64 ";
+                currentDir = String(currentDir).replace('/', '\\');
+                sharedArgs += '"Z:' + currentDir + '\\target\\map.w3x"';
+                break;
+            case "win32":
+                sharedArgs += currentDir + '\\target\\map.w3x"';
                 break;
             default:
                 suffix = "";
                 break;
         }
-        let sharedArgs = `-windowmode windowed -nowfpause -loadfile `;
-        let currentDir = String(__dirname);
-        if(this.os === 'linux'){
-            currentDir = String(currentDir).replace('/', '\\');
-            sharedArgs += '"Z:' + currentDir + '\\target\\map.w3x"';
-        }
+
+
         console.log(`${suffix}"${this.settings.path}" ${sharedArgs}`);
         execSync(`${suffix}"${this.settings.path}" ${sharedArgs}`, (err, stdout, stderr) => {
             if (err) {
@@ -253,4 +256,10 @@ class Build {
     }
 }
 
-new Build(process.argv);
+new
+
+Build(process
+
+    .argv
+)
+;
