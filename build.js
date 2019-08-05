@@ -59,7 +59,7 @@ class Build {
         let sharedArgs = `extract "target/${map}" "war3map.lua" "maps/map"`;
         let mpqEditor = '';
         if (this.os === "win32") {
-            mpqEditor = "tools/MPQEditor/x64/MPQEditor.exe";
+            mpqEditor = '"tools/MPQEditor/x64/MPQEditor.exe"';
         } else {
             mpqEditor = "WINEDEBUG=-all wine64 tools/MPQEditor/x64/MPQEditor.exe";
         }
