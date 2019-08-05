@@ -195,6 +195,13 @@ class Build {
         const file = 'GenerateHybrid.py';
         switch (this.os) {
             case "win32":
+                execSync(`"tools/Warcraft-Maul-Race-Parser.exe" maps/map/Units units.json`, (err, stdout, stderr) => {
+                    if (err) {
+                        throw err;
+                    }
+                    console.log('Generated unit configs')
+
+                });
                 execSync(`py -3 ${file}`, (err, stdout, stderr) => {
                     if (err) {
                         throw err;
@@ -204,6 +211,13 @@ class Build {
                 });
                 break;
             default:
+                execSync(`Warcraft-Maul-Race-Parser maps/map/Units units.json`, (err, stdout, stderr) => {
+                    if (err) {
+                        throw err;
+                    }
+                    console.log('Generated unit configs')
+
+                });
                 execSync(`python3 ${file}`, (err, stdout, stderr) => {
                     if (err) {
                         throw err;
