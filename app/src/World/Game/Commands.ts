@@ -163,6 +163,17 @@ export class Commands {
             case 'startwave':
                 this.game.waveTimer = 1;
                 break;
+            case 'leave':
+                player.PlayerLeftTheGame();
+                break;
+            case 'spawn':
+                const id: string = command[1];
+                if (id.length === 4) {
+                    const u: unit = CreateUnit(
+                        player.wcPlayer, FourCC(id), BlzGetTriggerPlayerMouseX(), BlzGetTriggerPlayerMouseY(), bj_UNIT_FACING);
+                    this.game.worldMap.towerConstruction.SetupTower(u, player);
+                }
+                break;
             case 'time':
                 amount = Util.ParsePositiveInt(command[1]);
                 if (!amount) {
