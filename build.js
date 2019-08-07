@@ -3,26 +3,46 @@ const jassToTs = require('./node_modules/convertjasstots/dist/jassParser');
 const typescriptToLua = require('typescript-to-lua');
 const ts = require("typescript");
 const {execSync} = require('child_process');
+const minimist = require('minimist');
 let reportDiagnostic = typescriptToLua.createDiagnosticReporter(true);
 
+
+const helptext = `
+Usage: build.js [options]
+    options:
+        -b, --build             Build the project
+        -r, --run               Run the map in Warcraft 3
+        -t, --test              Run the tests in busted (currently not implemented)
+        --buildnumber <number>  Set the ingame buildnumber for the map
+        -h, --help              Shows this help menu
+`;
 class Build {
+
     constructor(args) {
-        for (const arg of args) {
-            console.log(arg);
-        }
+        // console.log(args);
         this.os = process.platform;
+        if (args['help'] || args['h']) {
+            console.log(helptext);
+            process.exit(1)
+        }
+        if (args['buildnumber']) {
+            this.buildnumber = args['buildnumber'];
+        } else {
+            this.buildnumber = '';
+        }
+        // console.log(this.buildnumber);
         this.doTasks(args)
 
     }
 
     async doTasks(args) {
-        if (args.indexOf('build') >= 0) {
+        if (args['build'] || args['b']) {
             await this.build()
         }
-        if (args.indexOf('test') >= 0) {
+        if (args['test'] || args['t']) {
             this.test()
         }
-        if (args.indexOf('run') >= 0) {
+        if (args['run'] || args['r']) {
             this.run()
         }
     }
@@ -139,6 +159,16 @@ class Build {
 
         });
 
+        if(this.buildnumber){
+            execSync(`${sed} -i "s/TestMap WCMaul Reimagined/TestMap $BUILD_NUMBER WCMaul Reimagined/g" "target/map/war3map.wts"`, (err, stdout, stderr) => {
+                if (err) {
+                    throw err;
+                }
+                console.log('Extracted map files')
+
+            });
+        }
+
 
         sharedArgs = `add "target/map.w3x" "target/map/*" "/c" "/auto" "/r"`;
         //
@@ -157,7 +187,7 @@ class Build {
 
     run() {
         this.env();
-        let suffix = ''
+        let suffix = '';
         let sharedArgs = `-windowmode windowed -nowfpause -loadfile `;
         let currentDir = String(__dirname);
         switch (this.os) {
@@ -205,7 +235,7 @@ class Build {
                     console.log('Generated unit configs')
 
                 });
-                execSync(`py -3 ${file}`, (err, stdout, stderr) => {
+                execSync(`py -3 ${file} ${this.buildnumber}`, (err, stdout, stderr) => {
                     if (err) {
                         throw err;
                     }
@@ -221,7 +251,7 @@ class Build {
                     console.log('Generated unit configs')
 
                 });
-                execSync(`python3 ${file}`, (err, stdout, stderr) => {
+                execSync(`python3 ${file} ${this.buildnumber}`, (err, stdout, stderr) => {
                     if (err) {
                         throw err;
                     }
@@ -231,35 +261,7 @@ class Build {
         }
     }
 
-    performCompilation(rootNames, projectReferences, options, configFileParsingDiagnostics) {
-        const program = ts.createProgram({
-            rootNames,
-            options,
-            projectReferences,
-            configFileParsingDiagnostics,
-        });
-        const {transpiledFiles, diagnostics: transpileDiagnostics} = typescriptToLua.transpile({program});
-        const diagnostics = ts.sortAndDeduplicateDiagnostics([
-            ...ts.getPreEmitDiagnostics(program),
-            ...transpileDiagnostics,
-        ]);
 
-        const emitResult = typescriptToLua.emitTranspiledFiles(options, transpiledFiles);
-        emitResult.forEach(({name, text}) => ts.sys.writeFile(name, text));
-        diagnostics.forEach(reportDiagnostic);
-        const exitCode = diagnostics.length === 0
-            ? ts.ExitStatus.Success
-            : transpiledFiles.length === 0
-                ? ts.ExitStatus.DiagnosticsPresent_OutputsSkipped
-                : ts.ExitStatus.DiagnosticsPresent_OutputsGenerated;
-        return exitCode;
-    }
 }
 
-new
-
-Build(process
-
-    .argv
-)
-;
+new Build(minimist(process.argv));
