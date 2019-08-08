@@ -28,7 +28,7 @@ export class Commands {
             this.commandTrigger.RegisterPlayerChatEvent(player.wcPlayer, '', false);
         }
         this.commandTrigger.AddAction(() => this.handleCommand());
-        for (let i: number = 0; i < 24; i++) {
+        for (let i: number = 0; i < bj_MAX_PLAYER_SLOTS; i++) {
             this.hasVotedToKick[i] = false;
         }
     }

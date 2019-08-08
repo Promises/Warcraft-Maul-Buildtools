@@ -67,7 +67,7 @@ export class MultiBoard {
 
     private InitializePlayerScores(): void {
         let count: number = 0;
-        for (let i: number = 0; i < 24; i++) {
+        for (let i: number = 0; i < bj_MAX_PLAYER_SLOTS; i++) {
             const player: Defender | undefined = this.game.players.get(i);
             if (player) {
                 player.scoreSlot = count;
