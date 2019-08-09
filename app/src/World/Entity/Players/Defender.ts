@@ -166,12 +166,11 @@ export class Defender extends AbstractPlayer {
     private AfterPlayerLeft(): boolean {
         // Log.Debug("After player left");
 
-
-        this.game.players.delete(this.id);
+        //this.DistributePlayerTowers();
+        this.towerKeys = this.towers.keys();
+        this.game.safeEventQueue.AddMed(() => this.DistributeAndDestroyTowers());
         this.setHoloMaze(undefined);
-        this.DistributePlayerTowers();
         return true;
-
     }
 
 
@@ -295,9 +294,9 @@ export class Defender extends AbstractPlayer {
 
     private DistributePlayerGold(): void {
         const leavingPlayerGold: number = this.getGold();
-        this.setGold(0);
-        let goldDistribution: number = leavingPlayerGold / this.game.players.size;
-
+        //this.setGold(0);
+        let goldDistribution: number = leavingPlayerGold / (this.game.players.size - 1);
+        
         goldDistribution = Math.floor(goldDistribution * 0.3);
 
         for (const player of this.game.players.values()) {
@@ -353,6 +352,8 @@ export class Defender extends AbstractPlayer {
         // ForGroupBJ(grp, () => this.DestroyLeftoverUnits());
         // DestroyGroup(grp);
         this.DistributePlayerGold();
+        this.setGold(0);
+        this.game.players.delete(this.id);
 
         return true;
 
