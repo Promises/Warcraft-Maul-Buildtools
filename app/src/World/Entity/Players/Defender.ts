@@ -294,7 +294,7 @@ export class Defender extends AbstractPlayer {
 
     private DistributePlayerGold(): void {
         const leavingPlayerGold: number = this.getGold();
-        this.setGold(0);
+        //this.setGold(0);
         let goldDistribution: number = leavingPlayerGold / (this.game.players.size - 1);
         
         goldDistribution = Math.floor(goldDistribution * 0.3);
@@ -352,6 +352,7 @@ export class Defender extends AbstractPlayer {
         // ForGroupBJ(grp, () => this.DestroyLeftoverUnits());
         // DestroyGroup(grp);
         this.DistributePlayerGold();
+        this.setGold(0);
         this.game.players.delete(this.id);
 
         return true;
