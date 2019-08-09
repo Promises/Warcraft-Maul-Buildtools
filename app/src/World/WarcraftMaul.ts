@@ -75,7 +75,7 @@ export class WarcraftMaul {
         }
 
         // Set up all players
-        for (let i: number = 0; i < 24; i++) {
+        for (let i: number = 0; i < bj_MAX_PLAYER_SLOTS; i++) {
             if (GetPlayerSlotState(Player(i)) === PLAYER_SLOT_STATE_PLAYING) {
                 if (GetPlayerController(Player(i)) === MAP_CONTROL_USER) {
                     this.players.set(i, new Defender(i, this));

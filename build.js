@@ -67,6 +67,17 @@ class Build {
 
     }
 
+    nativeExecute(cmdline) {
+        execSync(cmdline, (err, stdout, stderr) => {
+            if (err) {
+                throw err;
+            }
+            return false;
+
+        });
+        return true;
+    }
+
     async build() {
         this.cleanup();
         this.generateWCM();
@@ -84,13 +95,7 @@ class Build {
             mpqEditor = "WINEDEBUG=-all wine64 tools/MPQEditor/x64/MPQEditor.exe";
         }
 
-        execSync(`${mpqEditor} ${sharedArgs}`, (err, stdout, stderr) => {
-            if (err) {
-                throw err;
-            }
-            console.log('Extracted map files')
 
-        });
         // const parser = new jassToTs.JassParser();
         // await parser.main(['', '', "app/src/lib/core/blizzard.j", "app/src/lib/core/blizzard.d.ts"]);
         // await parser.main(['', '', "app/src/lib/core/common.j", "app/src/lib/core/common.d.ts"]);
@@ -134,13 +139,7 @@ class Build {
                 break;
         }
         //
-        execSync(`${ceres} ${sharedArgs}`, (err, stdout, stderr) => {
-            if (err) {
-                throw err;
-            }
-            console.log('Extracted map files')
-
-        });
+        this.nativeExecute(`${ceres} ${sharedArgs}`);
         let sed = '';
 
         switch (this.os) {
@@ -151,34 +150,16 @@ class Build {
                 sed = "LC_ALL=C sed";
                 break;
         }
-        execSync(`${sed} -i "s/local function __module_/function __module_/g" "target/map/war3map.lua"`, (err, stdout, stderr) => {
-            if (err) {
-                throw err;
-            }
-            console.log('Extracted map files')
-
-        });
+        this.nativeExecute(`${sed} -i "s/local function __module_/function __module_/g" "target/map/war3map.lua"`);
 
         if(this.buildnumber){
-            execSync(`${sed} -i "s/TestMap WCMaul Reimagined/TestMap $BUILD_NUMBER WCMaul Reimagined/g" "target/map/war3map.wts"`, (err, stdout, stderr) => {
-                if (err) {
-                    throw err;
-                }
-                console.log('Extracted map files')
-
-            });
+            this.nativeExecute(`${sed} -i "s/TestMap WCMaul Reimagined/TestMap $BUILD_NUMBER WCMaul Reimagined/g" "target/map/war3map.wts"`);
         }
 
 
         sharedArgs = `add "target/map.w3x" "target/map/*" "/c" "/auto" "/r"`;
         //
-        execSync(`${mpqEditor} ${sharedArgs}`, (err, stdout, stderr) => {
-            if (err) {
-                throw err;
-            }
-            console.log('Extracted map files')
-
-        });
+        this.nativeExecute(`${mpqEditor} ${sharedArgs}`);
     }
 
     test() {
@@ -206,13 +187,7 @@ class Build {
 
 
         console.log(`${suffix}"${this.settings.path}" ${sharedArgs}`);
-        execSync(`${suffix}"${this.settings.path}" ${sharedArgs}`, (err, stdout, stderr) => {
-            if (err) {
-                throw err;
-            }
-            console.log('Extracted map files')
-
-        });
+        this.nativeExecute(`${suffix}"${this.settings.path}" ${sharedArgs}`);
     }
 
     cleanup() {
@@ -228,35 +203,12 @@ class Build {
         const file = 'GenerateHybrid.py';
         switch (this.os) {
             case "win32":
-                execSync(`"tools/Warcraft-Maul-Race-Parser.exe" maps/map/Units units.json`, (err, stdout, stderr) => {
-                    if (err) {
-                        throw err;
-                    }
-                    console.log('Generated unit configs')
-
-                });
-                execSync(`py -3 ${file} ${this.buildnumber}`, (err, stdout, stderr) => {
-                    if (err) {
-                        throw err;
-                    }
-                    console.log('Generated warcraftmaul configs')
-
-                });
+                this.nativeExecute(`"tools/Warcraft-Maul-Race-Parser.exe" maps/map/Units units.json`);
+                this.nativeExecute(`py -3 ${file} ${this.buildnumber}`);
                 break;
             default:
-                execSync(`Warcraft-Maul-Race-Parser maps/map/Units units.json`, (err, stdout, stderr) => {
-                    if (err) {
-                        throw err;
-                    }
-                    console.log('Generated unit configs')
-
-                });
-                execSync(`python3 ${file} ${this.buildnumber}`, (err, stdout, stderr) => {
-                    if (err) {
-                        throw err;
-                    }
-                    console.log('Generated warcraftmaul configs')
-                });
+                this.nativeExecute(`Warcraft-Maul-Race-Parser maps/map/Units units.json`);
+                this.nativeExecute(`python3 ${file} ${this.buildnumber}`);
                 break;
         }
     }
