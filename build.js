@@ -95,7 +95,7 @@ class Build {
             mpqEditor = "WINEDEBUG=-all wine64 tools/MPQEditor/x64/MPQEditor.exe";
         }
 
-
+        this.nativeExecute(`${mpqEditor} ${sharedArgs}`);
         // const parser = new jassToTs.JassParser();
         // await parser.main(['', '', "app/src/lib/core/blizzard.j", "app/src/lib/core/blizzard.d.ts"]);
         // await parser.main(['', '', "app/src/lib/core/common.j", "app/src/lib/core/common.d.ts"]);
