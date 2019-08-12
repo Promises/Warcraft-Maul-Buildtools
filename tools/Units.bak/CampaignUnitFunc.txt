@@ -3053,7 +3053,7 @@ Attachmentanimprops=medium
 [n017]
 Art=ReplaceableTextures\CommandButtons\BTNMassTeleport.blp
 Name=Teleport
-Description=A large pedestal that glows with energy.
+Ubertip=A large pedestal that glows with energy.
 Tip=Build Circle of Power
 EditorSuffix=(large)
 

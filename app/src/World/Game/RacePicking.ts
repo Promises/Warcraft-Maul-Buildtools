@@ -64,22 +64,14 @@ export class RacePicking {
 
     }
 
-
-    private RaceSelectionActions() {
-        const player = this.game.players.get(GetPlayerId(GetOwningPlayer(GetBuyingUnit())));
-        if (!player) {
-            return;
-        }
-        this.game.worldMap.playerSpawns[player.id].isOpen = true;
-        const soldItem = GetItemTypeId(GetSoldItem());
-
-        if (soldItem == FourCC('I00W')) { // Hardcore random
+    public PickRaceForPlayerByItem(player: Defender, raceItem: number): void {
+        if (raceItem === FourCC('I00W')) { // Hardcore random
             if (player.hasHybridRandomed) {
                 player.giveLumber(1);
                 player.sendMessage('You can only use Hybrid Random!');
             } else {
                 if (!player.hasHardcoreRandomed) {
-                    if (player.repickCounter == 0) {
+                    if (player.repickCounter === 0) {
                         player.hasHardcoreRandomed = true;
                         this.HardCoreRandomRace(player);
                         player.giveGold(50);
@@ -91,7 +83,7 @@ export class RacePicking {
                     player.giveLumber(1);
                 }
             }
-        } else if (soldItem == FourCC('I00V')) { // Normal Random
+        } else if (raceItem === FourCC('I00V')) { // Normal Random
             if (player.hasHybridRandomed) {
                 player.giveLumber(1);
                 player.sendMessage('You can only use Hybrid Random!');
@@ -102,8 +94,8 @@ export class RacePicking {
                 player.giveGold(40 - 10 * player.repickCounter);
                 this.NormalRandomRace(player);
             }
-        } else if (soldItem == FourCC('I00X')) { // Hybrid Random
-            if (player.repickCounter == 0 && !player.hasHardcoreRandomed && !player.hasNormalPicked) {
+        } else if (raceItem === FourCC('I00X')) { // Hybrid Random
+            if (player.repickCounter === 0 && !player.hasHardcoreRandomed && !player.hasNormalPicked) {
                 this.HybridRandomRace(player);
                 player.giveGold(50);
             } else {
@@ -116,9 +108,19 @@ export class RacePicking {
                 player.sendMessage('You can only use Hybrid Random!');
             } else {
                 player.hasNormalPicked = true;
-                this.GetSelectedRace(player, soldItem);
+                this.GetSelectedRace(player, raceItem);
             }
         }
+    }
+    private RaceSelectionActions(): void {
+        const player: Defender | undefined = this.game.players.get(GetPlayerId(GetOwningPlayer(GetBuyingUnit())));
+        if (!player) {
+            return;
+        }
+        this.game.worldMap.playerSpawns[player.id].isOpen = true;
+        const soldItem: number = GetItemTypeId(GetSoldItem());
+        this.PickRaceForPlayerByItem(player, soldItem);
+
 
     }
 

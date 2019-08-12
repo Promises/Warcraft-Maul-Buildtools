@@ -119,51 +119,54 @@ export class Tower {
 
     public Sell(): void {
         this.owner.towers.delete(this.handleId);
-        // Log.Debug(`Selling for: ${Util.Round(0.75 * GetUnitGoldCost(this.GetID()))}`);
-        if (this.IsEndOfRoundTower()) {
-            this.game.gameRoundHandler.endOfTurnTowers.delete(this.handleId);
-        }
-        if (this.IsAttackActionTower()) {
-            this.game.gameDamageEngine.initialDamageEventTowers.delete(this.handleId);
-        }
-        if (this.IsTickingTower()) {
-            this.game.towerTicker.RemoveTickingTower(this.handleId);
-        }
-        if (this.IsInitialDamageModificationTower()) {
-            this.game.gameDamageEngine.initialDamageModificationEventTowers.delete(this.handleId);
-        }
-        if (this.IsGenericAutoAttackTower()) {
-            this.game.worldMap.towerConstruction.genericAttacks.delete(this.handleId);
-        }
-        if (this.IsKillingActionTower()) {
-            this.game.worldMap.towerConstruction.killingActions.delete(this.handleId);
-        }
-        if (this.IsSellActionTower()) {
-            this.SellAction();
-        }
-        if (this.IsTowerForceTower()) {
-            if (this.owner.towerForces.has(this.GetID())) {
-                this.owner.towerForces.set(this.GetID(), <number>this.owner.towerForces.get(this.GetID()) - 1);
-                for (const towerx of this.owner.towers.values()) {
-                    if (towerx.IsTowerForceTower() && towerx.GetID === this.GetID) {
-                        towerx.UpdateSize();
+        if (false) { //disables code
+
+            Log.Debug(`Selling for: ${Util.Round(0.75 * GetUnitGoldCost(this.GetID()))}`);
+            if (this.IsEndOfRoundTower()) {
+                this.game.gameRoundHandler.endOfTurnTowers.delete(this.handleId);
+            }
+            if (this.IsAttackActionTower()) {
+                this.game.gameDamageEngine.initialDamageEventTowers.delete(this.handleId);
+            }
+            if (this.IsTickingTower()) {
+                this.game.towerTicker.RemoveTickingTower(this.handleId);
+            }
+            if (this.IsInitialDamageModificationTower()) {
+                this.game.gameDamageEngine.initialDamageModificationEventTowers.delete(this.handleId);
+            }
+            if (this.IsGenericAutoAttackTower()) {
+                this.game.worldMap.towerConstruction.genericAttacks.delete(this.handleId);
+            }
+            if (this.IsKillingActionTower()) {
+                this.game.worldMap.towerConstruction.killingActions.delete(this.handleId);
+            }
+            if (this.IsSellActionTower()) {
+                this.SellAction();
+            }
+            if (this.IsTowerForceTower()) {
+                if (this.owner.towerForces.has(this.GetID())) {
+                    this.owner.towerForces.set(this.GetID(), <number>this.owner.towerForces.get(this.GetID()) - 1);
+                    for (const towerx of this.owner.towers.values()) {
+                        if (towerx.IsTowerForceTower() && towerx.GetID === this.GetID) {
+                            towerx.UpdateSize();
+                        }
                     }
                 }
             }
-        }
-        if (this.IsAreaEffectTower()) {
-            let area: number | undefined;
+            if (this.IsAreaEffectTower()) {
+                let area: number | undefined;
 
-            for (let i: number = 0; i < settings.PLAYER_AREAS.length; i++) {
-                if (settings.PLAYER_AREAS[i].ContainsUnit(this.tower)) {
-                    area = i;
-                    break;
+                for (let i: number = 0; i < settings.PLAYER_AREAS.length; i++) {
+                    if (settings.PLAYER_AREAS[i].ContainsUnit(this.tower)) {
+                        area = i;
+                        break;
+                    }
                 }
-            }
-            if (area) {
-                this.game.worldMap.playerSpawns[area].areaTowers.delete(this.handleId);
-            } else {
-                Log.Fatal(`${GetUnitName(this.tower)} built outside of requires area, unable to remove. Please screenshot and report`);
+                if (area) {
+                    this.game.worldMap.playerSpawns[area].areaTowers.delete(this.handleId);
+                } else {
+                    Log.Fatal(`${GetUnitName(this.tower)} built outside of requires area, unable to remove. Please screenshot and report`);
+                }
             }
         }
     }

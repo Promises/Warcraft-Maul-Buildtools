@@ -26,14 +26,17 @@ export class WorldMap {
     public readonly playerMazes: Maze[] = [];
     public disabledRaces: number = 0;
     public towerConstruction: TowerConstruction;
-    public antiBlock: AntiBlock;
+    public antiBlock: AntiBlock | undefined;
 
     constructor(game: WarcraftMaul) {
         this.game = game;
         this.setupWorldCreatures();
         this._spawnedCreeps = new SpawnedCreeps(this);
         this.towerConstruction = new TowerConstruction(game);
-        this.antiBlock = new AntiBlock(this);
+        if (false) { //disables code
+
+            this.antiBlock = new AntiBlock(this);
+        }
     }
 
     private setupWorldCreatures(): void {
@@ -43,7 +46,7 @@ export class WorldMap {
         this.createDummyCreeps();
         this.setupRaces();
         this.setupCheckpoint();
-        this.setupMazes();
+        // this.setupMazes();
         this.setupArrows();
     }
 

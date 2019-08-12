@@ -10,6 +10,7 @@ import { CircleHoloMaze } from '../Holograms/CircleHoloMaze';
 import { Rectangle } from '../../JassOverrides/Rectangle';
 import { SpawnedCreeps } from '../Entity/SpawnedCreeps';
 import { TimedEvent } from '../../lib/WCEventQueue/TimedEvent';
+import { DummyPlayer } from '../Entity/EmulatedPlayer/DummyPlayer';
 
 export class Commands {
 
@@ -24,9 +25,7 @@ export class Commands {
     constructor(game: WarcraftMaul) {
         this.game = game;
         this.commandTrigger = new Trigger();
-        for (const player of this.game.players.values()) {
-            this.commandTrigger.RegisterPlayerChatEvent(player.wcPlayer, '', false);
-        }
+
         this.commandTrigger.AddAction(() => this.handleCommand());
         for (let i: number = 0; i < bj_MAX_PLAYER_SLOTS; i++) {
             this.hasVotedToKick[i] = false;
@@ -37,6 +36,10 @@ export class Commands {
         Log.Debug(Util.ArraysToString(command));
         let amount: number = 0;
         switch (command[0]) {
+            case 'dummy':
+                const dummy1: DummyPlayer = new DummyPlayer(this.game, 11);
+                const dummy2: DummyPlayer = new DummyPlayer(this.game, 12);
+                break;
             case 'ui':
                 // const bool: boolean = BlzLoadTOCFile('uiImport\\MyBar.toc');
                 // player.sendMessage(`ui! ${bool}`);
@@ -73,6 +76,7 @@ export class Commands {
                     return;
 
                 }
+                amount = Math.floor(Number(amount));
                 this.game.gameLives = amount;
                 this.game.startLives = amount;
                 player.sendMessage(`Lives were set to |cFFFFCC00${amount}|r`);

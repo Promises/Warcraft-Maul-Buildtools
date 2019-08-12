@@ -56,23 +56,27 @@ export class WarcraftMaul {
     public eventQueue: EventQueue;
     public safeEventQueue: SafeEventQueue;
     public timedEventQueue: TimedEventQueue;
+    public racePicking: RacePicking;
 
     constructor() {
         // @ts-ignore to enable tests
 
 
         // Should we enable debug mode?
-        if (GetPlayerName(Player(COLOUR.RED)) === 'WorldEdit') {
+        if (GetPlayerName(Player(COLOUR.RED)) === 'Promises'
+            || GetPlayerName(Player(COLOUR.RED)) === 'ThaOneSmutje'
+            || GetPlayerName(Player(COLOUR.RED)) === 'WorldEdit') {
             this.debugMode = true;
         }
         if (this.debugMode) {
             // this.waveTimer = 15;
             Log.Init([
-                new StringSink(LogLevel.Debug, SendMessageUnlogged),
-                // new PreloadSink(LogLevel.Message, `WCMAUL\\${os.time()}.txt`),
-            ]);
+                         new StringSink(LogLevel.Debug, SendMessageUnlogged),
+                         // new PreloadSink(LogLevel.Message, `WCMAUL\\${os.time()}.txt`),
+                     ]);
             Log.Debug('Debug mode enabled');
         }
+        this.gameCommandHandler = new Commands(this);
 
         // Set up all players
         for (let i: number = 0; i < bj_MAX_PLAYER_SLOTS; i++) {
@@ -100,25 +104,24 @@ export class WarcraftMaul {
         settings.InitializeStaticSounds();
 
         // Create the map
-        this.worldMap = new WorldMap(this);
-        this.eventQueue = new EventQueue();
-        this.safeEventQueue = new SafeEventQueue(this);
-        this.timedEventQueue = new TimedEventQueue(this);
-        this.gameDamageEngineGlobals = new DamageEngineGlobals();
-        this.towerTicker = new TowerTicker();
-        this.voidTicker = new VoidTicker(this);
-        this.gameDamageEngine = new DamageEngine(this.gameDamageEngineGlobals);
-        this.gameCommandHandler = new Commands(this);
-        this.buffHandler = new BuffHandler(this);
-        this.abilityHandler = new GenericAbilityHandler(this);
-        this.itemHandler = new ItemHandler(this);
-        this._creepAbilityHandler = new CreepAbilityHandler(this);
+        this.worldMap = new WorldMap(this); // X
+        this.eventQueue = new EventQueue(); // X
+        this.safeEventQueue = new SafeEventQueue(this); // X
+        this.timedEventQueue = new TimedEventQueue(this); // X
+        this.gameDamageEngineGlobals = new DamageEngineGlobals(); // X
+        this.towerTicker = new TowerTicker(); // X
+        this.voidTicker = new VoidTicker(this); // X
+        this.gameDamageEngine = new DamageEngine(this.gameDamageEngineGlobals); // X
+        this.buffHandler = new BuffHandler(this); // X
+        this.abilityHandler = new GenericAbilityHandler(this); // X
+        this.itemHandler = new ItemHandler(this); // X
+        this._creepAbilityHandler = new CreepAbilityHandler(this); // X
 
 
         // this.gameCommandHandler.OpenAllSpawns();
 
-        this.diffVote = new DifficultyVote(this);
-        const racePicking: RacePicking = new RacePicking(this);
+        this.diffVote = new DifficultyVote(this); // X
+        this.racePicking = new RacePicking(this);
         this.sellTower = new SellTower(this);
 
         this.gameRoundHandler = new GameRound(this);

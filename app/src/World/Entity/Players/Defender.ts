@@ -73,6 +73,8 @@ export class Defender extends AbstractPlayer {
         this.leaveTrigger.RegisterPlayerEventLeave(this);
         this.leaveTrigger.AddCondition(() => this.PlayerLeftTheGameConditions(game));
         this.leaveTrigger.AddAction(() => this.PlayerLeftTheGame());
+
+        this.game.gameCommandHandler.commandTrigger.RegisterPlayerChatEvent(this.wcPlayer, '', false);
     }
 
     public setHoloMaze(holoMaze: AbstractHologramMaze | undefined): void {
