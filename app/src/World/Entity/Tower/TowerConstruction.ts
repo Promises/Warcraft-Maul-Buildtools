@@ -41,7 +41,6 @@ export class TowerConstruction {
     ];
 
     constructor(game: WarcraftMaul) {
-        Log.Debug('Starting towercons');
         this.game = game;
         this._towerTypes = InitialiseAllRaceTowers();
         this.lootBoxerHander = new LootBoxerHandler(this, game);
@@ -164,7 +163,7 @@ export class TowerConstruction {
                 Log.Fatal(`${GetUnitName(tower)} built outside of requires area. Please screenshot and report`);
             }
         }
-        Log.Event(1, `{"tower":"${DecodeFourCC(ObjectExtendsTower.GetID())}", "owner": "${ObjectExtendsTower.owner.GetLogStr()}"}`);
+        // Log.Event(1, `{"tower":"${DecodeFourCC(ObjectExtendsTower.GetID())}", "owner": "${ObjectExtendsTower.owner.GetLogStr()}"}`);
         return ObjectExtendsTower;
     }
 

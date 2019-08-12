@@ -313,9 +313,6 @@ export class GameRound {
             TriggerSleepAction(0.50);
 
         }
-        for (const ability of abilities) {
-            Log.Debug(GetAbilityName(ability.GetID()));
-        }
 
 
     }

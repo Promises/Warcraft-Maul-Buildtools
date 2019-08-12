@@ -36,13 +36,13 @@ export class IceTrollPriest extends Tower implements TickingTower {
     private InitializeFrostNovaGroupConditions(): boolean {
 
         if (!(Util.isUnitCreep(GetFilterUnit()))) {
-            Log.Debug('NOt Creep');
+            // Log.Debug('Not Creep');
             return false;
         }
 
 
         if (!IsUnitAliveBJ(GetFilterUnit())) {
-            Log.Debug('Dead');
+            // Log.Debug('Dead');
             return false;
         }
 

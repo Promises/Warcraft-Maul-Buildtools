@@ -11,7 +11,7 @@ ceres.addHook('main::after', () => {
     require('app/src/LuaModules/FastTriggers'); // 16x faster triggers
     PatchNatives();
     Log.Init([
-        new StringSink(LogLevel.Error, SendMessageUnlogged),
+        new StringSink(LogLevel.Debug, SendMessageUnlogged),
                  // new PreloadSink(LogLevel.Message, `WCMAUL\\${os.time()}.txt`),
     ]);
 

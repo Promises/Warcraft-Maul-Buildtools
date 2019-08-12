@@ -192,7 +192,7 @@ export class Commands {
             return;
         }
         if (GetEventPlayerChatString().substr(0, 1) !== '-') {
-            Log.Debug(GetEventPlayerChatString());
+            // Log.Debug(GetEventPlayerChatString());
             Log.Event(0, `{"message":"${GetEventPlayerChatString()}", "sender": "${player.GetLogStr()}"}`);
 
             return;
@@ -251,8 +251,8 @@ export class Commands {
         } else if (command[0] === 'sa' || command[0] === 'sellall') {
             // player.sendMessage('SellAll Is Disabled');
             //
-            Log.Debug('[command] sellall');
-            player.SellAll();
+            // Log.Debug('[command] sellall');
+            // player.SellAll();
         } else if (command[0] === 'y' || command[0] === 'yes') {
             this.VoteYes(player);
         } else if (command[0] === 'kick' || command[0] === 'votekick') {

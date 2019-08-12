@@ -13,6 +13,7 @@ export class Defender extends AbstractPlayer {
     public chimeraCount: number = 0;
     public zerglings: number = 0;
     private towerKeys: IterableIterator<number> | undefined = undefined;
+    private loggedDebug: boolean = false;
 
     get towerForces(): Map<number, number> {
         return this._towerForces;
@@ -165,6 +166,7 @@ export class Defender extends AbstractPlayer {
 
     private AfterPlayerLeft(): boolean {
         // Log.Debug("After player left");
+        Log.Debug('Creating cleanup event after leaving player');
 
         //this.DistributePlayerTowers();
         this.towerKeys = this.towers.keys();
@@ -296,7 +298,7 @@ export class Defender extends AbstractPlayer {
         const leavingPlayerGold: number = this.getGold();
         //this.setGold(0);
         let goldDistribution: number = leavingPlayerGold / (this.game.players.size - 1);
-        
+
         goldDistribution = Math.floor(goldDistribution * 0.3);
 
         for (const player of this.game.players.values()) {
@@ -325,6 +327,10 @@ export class Defender extends AbstractPlayer {
     }
 
     private DistributeAndDestroyTowers(): boolean {
+        if (!this.loggedDebug) {
+            Log.Debug('Starting towercleanup after leaving player');
+            this.loggedDebug = true;
+        }
         if (this.towerKeys) {
             const tower: Tower | undefined = this.towers.get(this.towerKeys.next().value);
             if (tower) {
@@ -346,7 +352,7 @@ export class Defender extends AbstractPlayer {
 
         }
 
-
+        Log.Debug('Distributing gold and removing leaving player');
 
         // const grp: group = GetUnitsInRectAll(GetPlayableMapRect());
         // ForGroupBJ(grp, () => this.DestroyLeftoverUnits());

@@ -57,7 +57,7 @@ export class ItemHandler {
     private UseItem(): void {
 
         // UnitAddItemByIdSwapped(FourCC('I02B'), GetTriggerUnit());
-        Log.Debug(`[${DecodeFourCC(GetItemTypeId(GetManipulatedItem()))}]: ${GetItemName(GetManipulatedItem())}`);
+        // Log.Debug(`[${DecodeFourCC(GetItemTypeId(GetManipulatedItem()))}]: ${GetItemName(GetManipulatedItem())}`);
 
         for (const item of this.activeItems) {
             if (item.ManipulateCondition()) {

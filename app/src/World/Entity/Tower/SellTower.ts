@@ -46,9 +46,9 @@ export class SellTower {
             const tower: Tower | undefined = player.towers.get(GetHandleIdBJ(unit));
             if (tower) {
                 value = Math.floor(tower.GetSellValue());
-                Log.Debug(`SellValue: ${value}`);
+                // Log.Debug(`SellValue: ${value}`);
                 tower.Sell();
-                Log.Event(2, `{"tower":"${DecodeFourCC(tower.GetID())}", "owner": "${tower.owner.GetLogStr()}"}`);
+                // Log.Event(2, `{"tower":"${DecodeFourCC(tower.GetID())}", "owner": "${tower.owner.GetLogStr()}"}`);
             }
             if (!(GetUnitAbilityLevel(unit, FourCC('A02D')) > 0)) {
                 value = 0;

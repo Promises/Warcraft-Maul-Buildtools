@@ -28,7 +28,7 @@ export class Creep {
     }
 
     public printId(): void {
-        Log.Debug(this.getName());
+        // Log.Debug(this.getName());
     }
 
     public getName(): string {
