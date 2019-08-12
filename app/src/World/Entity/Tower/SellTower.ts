@@ -50,7 +50,7 @@ export class SellTower {
             if (tower) {
                 if (false) {
 
-                    value = Math.floor(tower.GetSellValue());
+                    value = Math.floor((<Tower>tower).GetSellValue());
                     // Log.Debug(`SellValue: ${value}`);
                 }
                 tower.Sell();
