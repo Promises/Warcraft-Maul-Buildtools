@@ -39,6 +39,15 @@ export class Commands {
             case 'dummy':
                 const dummy1: DummyPlayer = new DummyPlayer(this.game, 11);
                 const dummy2: DummyPlayer = new DummyPlayer(this.game, 12);
+                const dummy3: DummyPlayer = new DummyPlayer(this.game, 10);
+                const dummy4: DummyPlayer = new DummyPlayer(this.game, 9);
+                const dummy5: DummyPlayer = new DummyPlayer(this.game, 8);
+                const dummy6: DummyPlayer = new DummyPlayer(this.game, 7);
+                const dummy7: DummyPlayer = new DummyPlayer(this.game, 6);
+                const dummy8: DummyPlayer = new DummyPlayer(this.game, 5);
+                const dummy9: DummyPlayer = new DummyPlayer(this.game, 4);
+                const dummy10: DummyPlayer = new DummyPlayer(this.game, 3);
+                const dummy11: DummyPlayer = new DummyPlayer(this.game, 2);
                 break;
             case 'ui':
                 // const bool: boolean = BlzLoadTOCFile('uiImport\\MyBar.toc');
@@ -145,13 +154,13 @@ export class Commands {
                 this.DestroyDrawings();
                 break;
             case 'towers':
-                this.DrawRect(player.getRectangle());
-
-                for (const tower of player.towers.values()) {
-                    player.sendMessage(tower.GetName());
-                    this.DrawRect(tower.GetRectangle());
-                    player.sendMessage(tower.GetRectangle().toString());
-                }
+                // this.DrawRect(player.getRectangle());
+                //
+                // for (const tower of player.towers.values()) {
+                //     player.sendMessage(tower.GetName());
+                //     this.DrawRect(tower.GetRectangle());
+                //     player.sendMessage(tower.GetRectangle().toString());
+                // }
                 break;
             case 'killall':
                 const spawnedCreeps: SpawnedCreeps | undefined = this.game.worldMap.spawnedCreeps;
@@ -329,7 +338,7 @@ export class Commands {
                 SetCameraField(CAMERA_FIELD_TARGET_DISTANCE, amount, 1);
             }
         } else if (command[0] === 'dt' || command[0] === 'disabletowers') {
-            // player.DisableTowers();
+            player.DisableTowers();
         } else if (command[0] === 'maze') {
             let invalidMaze: boolean = false;
             if (command.length === 2) {

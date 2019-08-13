@@ -29,7 +29,7 @@ export class ChannelItem extends GenericAbility implements AbilityOnEffectTarget
         const owner: Defender | undefined = this.game.players.get(GetPlayerId(GetOwningPlayer(u)));
         if (owner) {
 
-            const tower: Tower | undefined = owner.towers.get(GetHandleId(u));
+            const tower: Tower | undefined = owner.GetTower(GetHandleId(u));
             if (tower) {
                 if (this.allianceTowers.indexOf(GetUnitTypeId(GetSpellTargetUnit())) >= 0) {
                     UnitAddItemSwapped(UnitItemInSlotBJ(tower.tower, 1), GetSpellTargetUnit());

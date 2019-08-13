@@ -17,8 +17,8 @@ export class PayTheToll extends GenericAbility implements AbilityOnCastTargetsUn
     public TargetOnCastAction(): void {
         const owner: Defender | undefined = this.game.players.get(GetPlayerId(GetOwningPlayer(GetSpellAbilityUnit())));
         if (owner) {
-            const tower: Tower | undefined = owner.towers.get(GetHandleId(GetSpellAbilityUnit()));
-            const target: Tower | undefined = owner.towers.get(GetHandleId(GetSpellTargetUnit()));
+            const tower: Tower | undefined = owner.GetTower(GetHandleId(GetSpellAbilityUnit()));
+            const target: Tower | undefined = owner.GetTower(GetHandleId(GetSpellTargetUnit()));
             if (tower && target) {
                 CreateTextTagUnitBJ('TRIGSTR_7924', target.tower, 0, 10, 100, 100, 100, 0);
                 SetTextTagVelocityBJ(GetLastCreatedTextTag(), 40.00, 90);

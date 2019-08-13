@@ -75,7 +75,7 @@ export class TowerConstruction {
         if (!owner) {
             return;
         }
-        const instance: Tower | undefined = owner.towers.get(GetHandleIdBJ(tower));
+        const instance: Tower | undefined = owner.GetTower(GetHandleIdBJ(tower));
         if (instance) {
             instance.Sell();
         }
@@ -108,63 +108,61 @@ export class TowerConstruction {
         } else {
             ObjectExtendsTower = new Tower(tower, owner, this.game);
         }
-        if (false) { //disables code
-            //
-            // if (ObjectExtendsTower.IsEndOfRoundTower()) {
-            //     this.game.gameRoundHandler.endOfTurnTowers.set(ObjectExtendsTower.handleId, ObjectExtendsTower);
-            // }
-            // if (ObjectExtendsTower.IsAttackActionTower()) {
-            //     this.game.gameDamageEngine.AddInitialDamageEventTower(ObjectExtendsTower.handleId, ObjectExtendsTower);
-            // }
-            //
-            // if (ObjectExtendsTower.IsInitialDamageModificationTower()) {
-            //     this.game.gameDamageEngine.AddInitialDamageModificationEventTower(ObjectExtendsTower.handleId, ObjectExtendsTower);
-            // }
-            //
-            // if (ObjectExtendsTower.IsGenericAutoAttackTower()) {
-            //     this.genericAttacks.set(ObjectExtendsTower.handleId, ObjectExtendsTower);
-            // }
-            // if (ObjectExtendsTower.IsKillingActionTower()) {
-            //     this.killingActions.set(ObjectExtendsTower.handleId, ObjectExtendsTower);
-            // }
-            // if (ObjectExtendsTower.IsLimitedTower()) {
-            //     SetPlayerTechMaxAllowedSwap(GetUnitTypeId(ObjectExtendsTower.tower), ObjectExtendsTower.MaxCount(), owner.wcPlayer);
-            // }
-            // if (ObjectExtendsTower.IsConstructActionTower()) {
-            //     ObjectExtendsTower.ConstructionFinished();
-            // }
-            // if (ObjectExtendsTower.IsTickingTower()) {
-            //     this.game.towerTicker.AddTickingTower(ObjectExtendsTower.handleId, ObjectExtendsTower);
-            // }
-            // if (ObjectExtendsTower.IsTowerForceTower()) {
-            //     if (owner.towerForces.has(ObjectExtendsTower.GetID())) {
-            //         owner.towerForces.set(ObjectExtendsTower.GetID(), <number>owner.towerForces.get(ObjectExtendsTower.GetID()) + 1);
-            //         for (const towerx of owner.towers.values()) {
-            //             if (towerx.IsTowerForceTower() && towerx.GetID === ObjectExtendsTower.GetID) {
-            //                 towerx.UpdateSize();
-            //             }
-            //         }
-            //     } else {
-            //         owner.towerForces.set(ObjectExtendsTower.GetID(), 1);
-            //     }
-            // }
-            //
-            //
-            // if (ObjectExtendsTower.IsAreaEffectTower()) {
-            //     let area: number | undefined;
-            //
-            //     for (let i: number = 0; i < settings.PLAYER_AREAS.length; i++) {
-            //         if (settings.PLAYER_AREAS[i].ContainsUnit(tower)) {
-            //             area = i;
-            //             break;
-            //         }
-            //     }
-            //     if (area) {
-            //         this.game.worldMap.playerSpawns[area].areaTowers.set(ObjectExtendsTower.handleId, ObjectExtendsTower);
-            //     } else {
-            //         Log.Fatal(`${GetUnitName(tower)} built outside of requires area. Please screenshot and report`);
-            //     }
-            // }
+
+        if (ObjectExtendsTower.IsEndOfRoundTower()) {
+            this.game.gameRoundHandler.endOfTurnTowers.set(ObjectExtendsTower.handleId, ObjectExtendsTower);
+        }
+        if (ObjectExtendsTower.IsAttackActionTower()) {
+            this.game.gameDamageEngine.AddInitialDamageEventTower(ObjectExtendsTower.handleId, ObjectExtendsTower);
+        }
+
+        if (ObjectExtendsTower.IsInitialDamageModificationTower()) {
+            this.game.gameDamageEngine.AddInitialDamageModificationEventTower(ObjectExtendsTower.handleId, ObjectExtendsTower);
+        }
+
+        if (ObjectExtendsTower.IsGenericAutoAttackTower()) {
+            this.genericAttacks.set(ObjectExtendsTower.handleId, ObjectExtendsTower);
+        }
+        if (ObjectExtendsTower.IsKillingActionTower()) {
+            this.killingActions.set(ObjectExtendsTower.handleId, ObjectExtendsTower);
+        }
+        if (ObjectExtendsTower.IsLimitedTower()) {
+            SetPlayerTechMaxAllowedSwap(GetUnitTypeId(ObjectExtendsTower.tower), ObjectExtendsTower.MaxCount(), owner.wcPlayer);
+        }
+        if (ObjectExtendsTower.IsConstructActionTower()) {
+            ObjectExtendsTower.ConstructionFinished();
+        }
+        if (ObjectExtendsTower.IsTickingTower()) {
+            this.game.towerTicker.AddTickingTower(ObjectExtendsTower.handleId, ObjectExtendsTower);
+        }
+        if (ObjectExtendsTower.IsTowerForceTower()) {
+            if (owner.towerForces.has(ObjectExtendsTower.GetID())) {
+                owner.towerForces.set(ObjectExtendsTower.GetID(), <number>owner.towerForces.get(ObjectExtendsTower.GetID()) + 1);
+                for (const towerx of owner.towersArray) {
+                    if (towerx.IsTowerForceTower() && towerx.GetID === ObjectExtendsTower.GetID) {
+                        towerx.UpdateSize();
+                    }
+                }
+            } else {
+                owner.towerForces.set(ObjectExtendsTower.GetID(), 1);
+            }
+        }
+
+
+        if (ObjectExtendsTower.IsAreaEffectTower()) {
+            let area: number | undefined;
+
+            for (let i: number = 0; i < settings.PLAYER_AREAS.length; i++) {
+                if (settings.PLAYER_AREAS[i].ContainsUnit(tower)) {
+                    area = i;
+                    break;
+                }
+            }
+            if (area) {
+                this.game.worldMap.playerSpawns[area].areaTowers.set(ObjectExtendsTower.handleId, ObjectExtendsTower);
+            } else {
+                Log.Fatal(`${GetUnitName(tower)} built outside of requires area. Please screenshot and report`);
+            }
         }
         // Log.Event(1, `{"tower":"${DecodeFourCC(ObjectExtendsTower.GetID())}", "owner": "${ObjectExtendsTower.owner.GetLogStr()}"}`);
         return ObjectExtendsTower;

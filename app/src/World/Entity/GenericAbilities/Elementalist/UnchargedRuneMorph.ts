@@ -40,7 +40,7 @@ export class UnchargedRuneMorph extends GenericAbility implements AbilityOnEffec
         const owner: Defender | undefined = this.game.players.get(GetPlayerId(GetOwningPlayer(u)));
         if (owner) {
 
-            const tower: Tower | undefined = owner.towers.get(GetHandleId(u));
+            const tower: Tower | undefined = owner.GetTower(GetHandleId(u));
             if (tower) {
                 tower.Sell();
                 const t: unit = ReplaceUnitBJ(

@@ -63,9 +63,7 @@ export class WarcraftMaul {
 
 
         // Should we enable debug mode?
-        if (GetPlayerName(Player(COLOUR.RED)) === 'Promises'
-            || GetPlayerName(Player(COLOUR.RED)) === 'ThaOneSmutje'
-            || GetPlayerName(Player(COLOUR.RED)) === 'WorldEdit') {
+        if (GetPlayerName(Player(COLOUR.RED)) === 'WorldEdit') {
             this.debugMode = true;
         }
         if (this.debugMode) {

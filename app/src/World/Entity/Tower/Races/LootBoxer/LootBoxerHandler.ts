@@ -188,7 +188,7 @@ export class LootBoxerHandler {
             return;
         }
 
-        const instance: Tower | undefined = owner.towers.get(GetHandleIdBJ(tower));
+        const instance: Tower | undefined = owner.GetTower(GetHandleIdBJ(tower));
         if (instance) {
             instance.Sell();
         }

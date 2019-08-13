@@ -19,8 +19,8 @@ export class SiphonEnergy extends GenericAbility implements AbilityOnEffectTarge
         const owner: Defender | undefined = this.game.players.get(GetPlayerId(GetOwningPlayer(u)));
         if (owner) {
 
-            const source: Tower | undefined = owner.towers.get(GetHandleId(u));
-            const target: Tower | undefined = owner.towers.get(GetHandleId(t));
+            const source: Tower | undefined = owner.GetTower(GetHandleId(u));
+            const target: Tower | undefined = owner.GetTower(GetHandleId(t));
             if (source && target) {
                 if (this.game.abilityHandler.elementalistSettings.HasCombination(
                     DecodeFourCC(source.GetID()), DecodeFourCC(target.GetID()))) {
