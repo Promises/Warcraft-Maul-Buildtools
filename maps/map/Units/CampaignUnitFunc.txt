@@ -325,7 +325,7 @@ LoopingSoundFadeOut=512
 [e00S]
 Art=ReplaceableTextures\CommandButtons\BTNTrueShot.blp
 Name=[Galaxy] - Moonlight
-Hotkey=
+Hotkey=F
 Tip=Build Moonlight [|cffffcc00F|r]
 Ubertip="When the moonlight shines through you're safe, unless you have awoken the wrath of the moon goddess!|n|n|cffffcc00Attack:|r Chaos|n|cffffcc00Cooldown:|r 0.35|n|cffffcc00Damage:|r 400 - 400|n|cffffcc00Range:|r 1000|n|cffffcc00Ability:|r Moonstorm; Enemy units within an area of 1000 has a 10% chance to take 800 additional damage upon being attacked"
 Buttonpos=3,1
