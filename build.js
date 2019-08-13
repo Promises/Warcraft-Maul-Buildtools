@@ -203,17 +203,17 @@ class Build {
     }
 
     generateWCM() {
-        // const file = 'GenerateHybrid.py';
-        // switch (this.os) {
-        //     case "win32":
-        //         this.nativeExecute(`"tools/Warcraft-Maul-Race-Parser.exe" maps/map/Units units.json`);
-        //         this.nativeExecute(`py -3 ${file} ${this.buildnumber}`);
-        //         break;
-        //     default:
-        //         this.nativeExecute(`Warcraft-Maul-Race-Parser maps/map/Units units.json`);
-        //         this.nativeExecute(`python3 ${file} ${this.buildnumber}`);
-        //         break;
-        // }
+        const file = 'GenerateHybrid.py';
+        switch (this.os) {
+            case "win32":
+                this.nativeExecute(`"tools/Warcraft-Maul-Race-Parser.exe" maps/map/Units units.json`);
+                this.nativeExecute(`py -3 ${file} ${this.buildnumber}`);
+                break;
+            default:
+                this.nativeExecute(`Warcraft-Maul-Race-Parser maps/map/Units units.json`);
+                this.nativeExecute(`python3 ${file} ${this.buildnumber}`);
+                break;
+        }
     }
 
 
