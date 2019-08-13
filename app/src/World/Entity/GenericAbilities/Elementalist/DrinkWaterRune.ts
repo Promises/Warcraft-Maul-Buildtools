@@ -1,5 +1,5 @@
 /**
- *  Awaken a dormant pheonix egg
+ *  Moss consumes water rune
  */
 import { GenericAbility } from '../GenericAbility';
 import { Defender } from '../../Players/Defender';

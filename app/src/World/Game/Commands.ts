@@ -32,7 +32,7 @@ export class Commands {
         }
     }
 
-    private handleDebugCommand(player: Defender, command: string[]): void {
+    private handleDebugCommand(player: Defender, command: string[], command2: string[]): void {
         Log.Debug(Util.ArraysToString(command));
         let amount: number = 0;
         switch (command[0]) {
@@ -180,7 +180,7 @@ export class Commands {
                 player.PlayerLeftTheGame();
                 break;
             case 'spawn':
-                const id: string = command[1];
+                const id: string = command2[1];
                 if (id.length === 4) {
                     const u: unit = CreateUnit(
                         player.wcPlayer, FourCC(id), BlzGetTriggerPlayerMouseX(), BlzGetTriggerPlayerMouseY(), bj_UNIT_FACING);
@@ -211,7 +211,10 @@ export class Commands {
             return;
         }
         const playerCommand: string = GetEventPlayerChatString().substr(1).toLowerCase();
+        const playerCommand2: string = GetEventPlayerChatString().substr(1);
         const command: string[] = playerCommand.split(' ');
+        const command2: string[] = playerCommand2.split(' ');
+
 
         Log.Event(4, `{"command":"${Util.ArraysToString(command)}", "sender": "${player.GetLogStr()}"}`);
 
@@ -412,7 +415,7 @@ export class Commands {
             }
         }
         if (this.game.debugMode) {
-            this.handleDebugCommand(player, command);
+            this.handleDebugCommand(player, command, command2);
         }
     }
 
@@ -558,7 +561,7 @@ export class Commands {
                 this.RemoveAllKickedPlayerTowers();
                 if (this.game.scoreBoard) {
                     MultiboardSetItemValueBJ(this.game.scoreBoard.board, 1, 7 + this.voteAgainstPlayer.scoreSlot,
-                                             Util.ColourString(this.voteAgainstPlayer.getColourCode(), '<Kicked>'));
+                        Util.ColourString(this.voteAgainstPlayer.getColourCode(), '<Kicked>'));
                 }
                 this.game.players.delete(this.voteAgainstPlayer.id);
 

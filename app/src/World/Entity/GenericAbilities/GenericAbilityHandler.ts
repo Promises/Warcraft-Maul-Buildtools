@@ -23,6 +23,7 @@ import { PurchaseVoidBeast } from './Void/PurchaseVoidBeast';
 import { PurchaseVoidBeing } from './Void/PurchaseVoidBeing';
 import { PurchaseVoidLord } from './Void/PurchaseVoidLord';
 import { PurchaseVoidMonstrosity } from './Void/PurchaseVoidMonstrosity';
+import { DrinkWaterRune } from './Elementalist/DrinkWaterRune';
 
 export class GenericAbilityHandler {
     private readonly game: WarcraftMaul;
@@ -54,6 +55,7 @@ export class GenericAbilityHandler {
         this.abilities.push(WolvenFury);
         this.abilities.push(UnchargedRuneMorph);
         this.abilities.push(SiphonEnergy);
+        this.abilities.push(DrinkWaterRune);
         this.abilities.push(Enchantment);
         this.abilities.push(Transfuse);
         this.abilities.push(Infuse);

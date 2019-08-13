@@ -51,8 +51,8 @@ export class DummyPlayer {
     }
 
     private GetTower(): number {
-        // return Util.GetRandomKey(this.game.worldMap.towerConstruction.towerTypes);
-        return FourCC('h043');
+        return Util.GetRandomKey(this.game.worldMap.towerConstruction.towerTypes);
+        // return FourCC('h043');
     }
 
     private CreateTowersForPlayer(): boolean {
