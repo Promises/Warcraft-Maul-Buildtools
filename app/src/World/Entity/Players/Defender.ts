@@ -218,11 +218,11 @@ export class Defender extends AbstractPlayer {
     //     this._towers = value;
     // }
 
-    get hybridTowers(): any[] {
+    get hybridTowers(): string[] {
         return this._hybridTowers;
     }
 
-    set hybridTowers(value: any[]) {
+    set hybridTowers(value: string[]) {
         this._hybridTowers = value;
     }
 
