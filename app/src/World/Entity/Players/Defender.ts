@@ -207,7 +207,7 @@ export class Defender extends AbstractPlayer {
     // }
 
     public GetTower(id: number): Tower | undefined {
-        const indx: number = this._towersArray.findIndex((element) => element.GetID() === id);
+        const indx: number = this._towersArray.findIndex((element) => element.handleId === id);
         if (indx >= 0) {
             return this._towersArray[indx];
         }
@@ -475,6 +475,6 @@ export class Defender extends AbstractPlayer {
     }
 
     public RemoveTower(handleId: number): void {
-        this._towersArray = this._towersArray.filter((elem) => elem.GetID() !== handleId);
+        this._towersArray = this._towersArray.filter((elem) => elem.handleId !== handleId);
     }
 }
