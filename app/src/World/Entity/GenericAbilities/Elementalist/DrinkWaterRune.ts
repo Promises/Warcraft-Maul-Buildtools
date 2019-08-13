@@ -18,8 +18,8 @@ export class DrinkWaterRune extends GenericAbility implements AbilityOnEffectTar
         const owner: Defender | undefined = this.game.players.get(GetPlayerId(GetOwningPlayer(u)));
         if (owner) {
 
-            const tower: Tower | undefined = owner.towers.get(GetHandleId(u));
-            const target: Tower | undefined = owner.towers.get(GetHandleId(GetSpellTargetUnit()));
+            const tower: Tower | undefined = owner.GetTower(GetHandleId(u));
+            const target: Tower | undefined = owner.GetTower(GetHandleId(GetSpellTargetUnit()));
             if (tower && target) {
                 const mana: number = GetUnitStateSwap(UNIT_STATE_MANA, tower.tower);
 

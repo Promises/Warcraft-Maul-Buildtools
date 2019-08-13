@@ -17,8 +17,8 @@ export class VoidLordAbility extends GenericAbility implements AbilityOnCastTarg
     public TargetOnCastAction(): void {
         const owner: Defender | undefined = this.game.players.get(GetPlayerId(GetOwningPlayer(GetSpellAbilityUnit())));
         if (owner) {
-            const tower: Tower | undefined = owner.towers.get(GetHandleId(GetSpellAbilityUnit()));
-            const target: Tower | undefined = owner.towers.get(GetHandleId(GetSpellTargetUnit()));
+            const tower: Tower | undefined = owner.GetTower(GetHandleId(GetSpellAbilityUnit()));
+            const target: Tower | undefined = owner.GetTower(GetHandleId(GetSpellTargetUnit()));
             if (tower && target) {
                 if (tower.GetID() === FourCC('h01O') && target.GetID() === FourCC('h02G')) {
                     BlzSetUnitBaseDamage(tower.tower, (BlzGetUnitBaseDamage(tower.tower, 0) + 250), 0);

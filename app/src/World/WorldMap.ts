@@ -26,17 +26,15 @@ export class WorldMap {
     public readonly playerMazes: Maze[] = [];
     public disabledRaces: number = 0;
     public towerConstruction: TowerConstruction;
-    public antiBlock: AntiBlock | undefined;
+    public antiBlock: AntiBlock;
 
     constructor(game: WarcraftMaul) {
         this.game = game;
         this.setupWorldCreatures();
         this._spawnedCreeps = new SpawnedCreeps(this);
         this.towerConstruction = new TowerConstruction(game);
-        if (false) { //disables code
 
-            this.antiBlock = new AntiBlock(this);
-        }
+        this.antiBlock = new AntiBlock(this);
     }
 
     private setupWorldCreatures(): void {
@@ -46,7 +44,7 @@ export class WorldMap {
         this.createDummyCreeps();
         this.setupRaces();
         this.setupCheckpoint();
-        // this.setupMazes();
+        this.setupMazes();
         this.setupArrows();
     }
 
@@ -76,10 +74,10 @@ export class WorldMap {
             // }
             //
             directionalArrows.push(new DirectionalArrow(modelPath,
-                                                        GetRectCenterX(firstCheckpoint.rectangle),
-                                                        GetRectCenterY(firstCheckpoint.rectangle),
-                                                        GetRectCenterX(secondCheckpoint.rectangle),
-                                                        GetRectCenterY(secondCheckpoint.rectangle)));
+                GetRectCenterX(firstCheckpoint.rectangle),
+                GetRectCenterY(firstCheckpoint.rectangle),
+                GetRectCenterX(secondCheckpoint.rectangle),
+                GetRectCenterY(secondCheckpoint.rectangle)));
         }
 
         // TODO: This needs to be replaced with a timer library!

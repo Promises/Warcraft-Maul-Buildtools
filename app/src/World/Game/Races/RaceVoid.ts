@@ -11,5 +11,7 @@ export class RaceVoid extends Race {
             UnitAddItemByIdSwapped(FourCC('I020'), voidBuilder);
             UnitAddItemByIdSwapped(FourCC('I01X'), voidBuilder);
         }
+        player.builders.push(player.voidBuilder);
+
     }
 }

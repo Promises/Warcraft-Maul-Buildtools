@@ -12,7 +12,7 @@ import { Log } from '../../../lib/Serilog/Serilog';
 export class Defender extends AbstractPlayer {
     public chimeraCount: number = 0;
     public zerglings: number = 0;
-    private towerKeys: IterableIterator<number> | undefined = undefined;
+    // private towerKeys: IterableIterator<number> | undefined = undefined;
     private loggedDebug: boolean = false;
 
     get towerForces(): Map<number, number> {
@@ -48,7 +48,8 @@ export class Defender extends AbstractPlayer {
     private _hybridTowers: any[] = [];
     private leaveTrigger: Trigger;
     private deniedPlayers: Map<number, boolean> = new Map<number, boolean>();
-    private _towers: Map<number, Tower> = new Map<number, Tower>();
+    // private _towers: Map<number, Tower> = new Map<number, Tower>();
+    private _towersArray: Tower[] = [];
     private holoMaze: AbstractHologramMaze | undefined = undefined;
     private game: WarcraftMaul;
     private _builders: unit[] = [];
@@ -170,8 +171,8 @@ export class Defender extends AbstractPlayer {
         // Log.Debug("After player left");
         Log.Debug('Creating cleanup event after leaving player');
 
-        //this.DistributePlayerTowers();
-        this.towerKeys = this.towers.keys();
+        // this.DistributePlayerTowers();
+        // this.towerKeys = this.towers.keys();
         this.game.safeEventQueue.AddMed(() => this.DistributeAndDestroyTowers());
         this.setHoloMaze(undefined);
         return true;
@@ -179,7 +180,8 @@ export class Defender extends AbstractPlayer {
 
 
     public AddTower(tower: Tower): void {
-        this._towers.set(tower.handleId, tower);
+        // this._towers.set(tower.handleId, tower);
+        this._towersArray.push(tower);
     }
 
     public GiveKillCount(): void {
@@ -200,13 +202,21 @@ export class Defender extends AbstractPlayer {
         this._totalMazeLength = value;
     }
 
-    get towers(): Map<number, Tower> {
-        return this._towers;
+    // get towers(): Map<number, Tower> {
+    //     return this._towers;
+    // }
+
+    public GetTower(id: number): Tower | undefined {
+        const indx: number = this._towersArray.findIndex((element) => element.GetID() === id);
+        if (indx >= 0) {
+            return this._towersArray[indx];
+        }
+        return undefined;
     }
 
-    set towers(value: Map<number, Tower>) {
-        this._towers = value;
-    }
+    // set towers(value: Map<number, Tower>) {
+    //     this._towers = value;
+    // }
 
     get hybridTowers(): any[] {
         return this._hybridTowers;
@@ -234,6 +244,10 @@ export class Defender extends AbstractPlayer {
 
     get races(): Race[] {
         return this._races;
+    }
+
+    get towersArray(): Tower[] {
+        return this._towersArray;
     }
 
     set races(value: Race[]) {
@@ -298,7 +312,7 @@ export class Defender extends AbstractPlayer {
 
     private DistributePlayerGold(): void {
         const leavingPlayerGold: number = this.getGold();
-        //this.setGold(0);
+        // this.setGold(0);
         let goldDistribution: number = leavingPlayerGold / (this.game.players.size - 1);
 
         goldDistribution = Math.floor(goldDistribution * 0.3);
@@ -310,7 +324,7 @@ export class Defender extends AbstractPlayer {
     }
 
     private DistributePlayerTowers(): void {
-        this.towerKeys = this.towers.keys();
+        // this.towerKeys = this.towers.keys();
         this.game.safeEventQueue.AddMed(() => this.DistributeAndDestroyTowers());
         // for (const tower of this.towers.values()) {
         //     tower.Sell();
@@ -333,8 +347,8 @@ export class Defender extends AbstractPlayer {
             Log.Debug('Starting towercleanup after leaving player');
             this.loggedDebug = true;
         }
-        if (this.towerKeys) {
-            const tower: Tower | undefined = this.towers.get(this.towerKeys.next().value);
+        if (this._towersArray.length > 0) {
+            const tower: Tower | undefined = this._towersArray.pop();
             if (tower) {
                 // tower.Sell();
                 // tower.SetLeaverSellValue();
@@ -354,7 +368,7 @@ export class Defender extends AbstractPlayer {
 
         }
 
-        Log.Debug('Distributing gold and removing leaving player');
+        // Log.Debug('Distributing gold and removing leaving player');
 
         // const grp: group = GetUnitsInRectAll(GetPlayableMapRect());
         // ForGroupBJ(grp, () => this.DestroyLeftoverUnits());
@@ -380,7 +394,7 @@ export class Defender extends AbstractPlayer {
         if (IsUnitType(GetEnumUnit(), UNIT_TYPE_STRUCTURE)) {
             const owner: Defender | undefined = this.game.players.get(GetPlayerId(GetOwningPlayer(GetEnumUnit())));
             if (owner) {
-                const tower: Tower | undefined = owner.towers.get(GetHandleIdBJ(GetEnumUnit()));
+                const tower: Tower | undefined = owner.GetTower(GetHandleIdBJ(GetEnumUnit()));
                 if (tower) {
                     tower.Sell();
                     tower.SetOwnership(this);
@@ -394,24 +408,11 @@ export class Defender extends AbstractPlayer {
         }
     }
 
-    public SellAll(): void {
-
-        const keys: number[] = Util.GetAllKeys(this.towers);
-
-        for (const key of keys) {
-            const tower: Tower = <Tower>this.towers.get(key);
-            if (tower.leaverOwned) {
-
-                this.game.sellTower.SellTower(tower.tower);
-            }
-        }
-    }
-
 
     public DisableTowers(): void {
         this.towersEnabled = !this.towersEnabled;
 
-        this.towers.forEach((tower) => {
+        this.towersArray.forEach((tower) => {
             if (tower.GetSellValue() <= 8 && !(this.protectedTowers.indexOf(tower.GetID()) >= 0)) {
                 if (this.towersEnabled) {
                     PauseUnitBJ(false, tower.tower);
@@ -471,5 +472,9 @@ export class Defender extends AbstractPlayer {
     private IsOwnerNotMe(): boolean {
         return GetOwningPlayer(GetFilterUnit()) !== this.wcPlayer;
 
+    }
+
+    public RemoveTower(handleId: number): void {
+        this._towersArray = this._towersArray.filter((elem) => elem.GetID() !== handleId);
     }
 }

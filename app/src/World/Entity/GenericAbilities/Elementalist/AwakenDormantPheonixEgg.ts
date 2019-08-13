@@ -18,7 +18,7 @@ export class AwakenDormantPheonixEgg extends GenericAbility implements AbilityOn
         const owner: Defender | undefined = this.game.players.get(GetPlayerId(GetOwningPlayer(u)));
         if (owner) {
 
-            const tower: Tower | undefined = owner.towers.get(GetHandleId(u));
+            const tower: Tower | undefined = owner.GetTower(GetHandleId(u));
             if (tower) {
                 if (GetUnitStateSwap(UNIT_STATE_MANA, tower.tower) >= 5) {
                     tower.Sell();

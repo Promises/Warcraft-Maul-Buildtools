@@ -20,7 +20,10 @@ export class DummyPlayer {
         const dummyPlayer: Defender = new Defender(this.slot, this.game);
         this.player = dummyPlayer;
         this.game.players.set(this.slot, dummyPlayer);
-        this.game.racePicking.PickRaceForPlayerByItem(dummyPlayer, FourCC('I00W'));
+        // this.game.racePicking.PickRaceForPlayerByItem(dummyPlayer, FourCC('I00V'));
+        // this.game.racePicking.PickRaceForPlayerByItem(dummyPlayer, FourCC('I00V'));
+        // this.game.racePicking.PickRaceForPlayerByItem(dummyPlayer, FourCC('I00V'));
+        // this.game.racePicking.PickRaceForPlayerByItem(dummyPlayer, FourCC('I00V'));
         this.game.timedEventQueue.AddEvent(new TimedEvent(() => this.ConstructTowers(), 10, false));
         this.step = 0;
 
@@ -41,14 +44,15 @@ export class DummyPlayer {
             return false;
         }
         this.player.PlayerLeftTheGame();
-        this.game.timedEventQueue.AddEvent(new TimedEvent(() => this.Setup(), 50, true));
+        this.game.timedEventQueue.AddEvent(new TimedEvent(() => this.Setup(), 150, true));
 
         return true;
 
     }
 
     private GetTower(): number {
-        return Util.GetRandomKey(this.game.worldMap.towerConstruction.towerTypes);
+        // return Util.GetRandomKey(this.game.worldMap.towerConstruction.towerTypes);
+        return FourCC('h043');
     }
 
     private CreateTowersForPlayer(): boolean {

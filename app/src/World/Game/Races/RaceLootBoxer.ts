@@ -10,5 +10,7 @@ export class RaceLootBoxer extends Race {
         }
 
         player.lootBoxer = CreateUnit(player.wcPlayer, FourCC(this.id), player.getCenterX(), player.getCenterY(), bj_UNIT_FACING);
+        player.builders.push(player.lootBoxer);
+
     }
 }

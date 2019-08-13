@@ -180,6 +180,9 @@ class Build {
             case "win32":
                 sharedArgs += currentDir + '\\target\\map.w3x"';
                 break;
+            case "darwin":
+                sharedArgs += currentDir + '/target/map.w3x';
+                break;
             default:
                 suffix = "";
                 break;

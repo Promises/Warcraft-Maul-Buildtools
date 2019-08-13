@@ -20,7 +20,7 @@ export class Transfuse extends GenericAbility implements AbilityOnEffectTargetsU
         const owner: Defender | undefined = this.game.players.get(GetPlayerId(GetOwningPlayer(u)));
         if (owner) {
 
-            const tower: Tower | undefined = owner.towers.get(GetHandleId(u));
+            const tower: Tower | undefined = owner.GetTower(GetHandleId(u));
             if (tower) {
                 if (GetItemLevel(UnitItemInSlotBJ(tower.tower, 1)) === 2) {
                     RemoveItem(UnitItemInSlotBJ(tower.tower, 1));
