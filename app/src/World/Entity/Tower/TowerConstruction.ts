@@ -127,7 +127,14 @@ export class TowerConstruction {
             this.killingActions.set(ObjectExtendsTower.handleId, ObjectExtendsTower);
         }
         if (ObjectExtendsTower.IsLimitedTower()) {
-            SetPlayerTechMaxAllowedSwap(GetUnitTypeId(ObjectExtendsTower.tower), ObjectExtendsTower.MaxCount(), owner.wcPlayer);
+            if (owner.hasHybridRandomed) {
+                if (owner.hybridTowers.findIndex(ObjectExtendsTower.GetID)) {
+                    SetPlayerTechMaxAllowedSwap(GetUnitTypeId(ObjectExtendsTower.tower), ObjectExtendsTower.MaxCount(), owner.wcPlayer);
+                }
+            } else {
+
+                SetPlayerTechMaxAllowedSwap(GetUnitTypeId(ObjectExtendsTower.tower), ObjectExtendsTower.MaxCount(), owner.wcPlayer);
+            }
         }
         if (ObjectExtendsTower.IsConstructActionTower()) {
             ObjectExtendsTower.ConstructionFinished();
