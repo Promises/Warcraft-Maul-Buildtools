@@ -10,6 +10,7 @@ import { DormantPheonixEgg } from './DormantPheonixEgg';
 import { Blaze } from './Blaze';
 import { Tornado } from './Tornado';
 import { HighTide } from './HighTide';
+import { Plague } from './Plague';
 
 
 export class ElementalistTowers extends RaceTowers {
@@ -26,6 +27,7 @@ export class ElementalistTowers extends RaceTowers {
         list.add(FourCC('u022'), Tornado);
         list.add(FourCC('u026'), Bubbles);
         list.add(FourCC('u027'), Blaze);
+        list.add(FourCC('u020'), Plague);
     }
 
 }

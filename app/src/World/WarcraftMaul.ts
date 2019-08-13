@@ -20,7 +20,6 @@ import { ItemHandler } from './Entity/Item/ItemHandler';
 import { GenericAbilityHandler } from './Entity/GenericAbilities/GenericAbilityHandler';
 import { CreepAbilityHandler } from './Entity/CreepAbilities/CreepAbilityHandler';
 import { VoidTicker } from './Game/VoidTicker';
-import { PreloadSink } from '../lib/Serilog/Sinks/PreloadSink';
 import { EventQueue } from '../lib/WCEventQueue/EventQueue';
 import { SafeEventQueue } from '../lib/WCEventQueue/SafeEventQueue';
 import { TimedEventQueue } from '../lib/WCEventQueue/TimedEventQueue';
