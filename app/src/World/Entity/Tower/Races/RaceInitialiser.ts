@@ -20,6 +20,7 @@ import { NightElfTowers } from './NightElf/NightElfTowers';
 import { OrcStrongholdTowers } from './OrcStronghold/OrcStrongholdTowers';
 import { OutlandTowers } from './Outland/OutlandTowers';
 import { ShrineOfBuffsTowers } from './ShrineOfBuffs/ShrineOfBuffsTowers';
+import { SummonsTowers } from './Summons/SummonsTowers';
 import { TavernTowers } from './Tavern/TavernTowers';
 import { UndeadTowers } from './Undead/UndeadTowers';
 import { UniqueTowers } from './Unique/UniqueTowers';
@@ -53,6 +54,7 @@ export function InitialiseAllRaceTowers(): TowerMap<number, object> {
     races.push(new OrcStrongholdTowers());
     races.push(new OutlandTowers());
     races.push(new ShrineOfBuffsTowers());
+    races.push(new SummonsTowers());
     races.push(new TavernTowers());
     races.push(new UndeadTowers());
     races.push(new UniqueTowers());
