@@ -13,6 +13,7 @@ export class UnchargedRune extends Tower {
         const nums: number[] = [];
         for (let i = 0; i < ELEMENTALIST_ABILITIES.length - 1; i++) {
             nums.push(i);
+            UnitRemoveAbilityBJ(ELEMENTALIST_ABILITIES[nums[i]], this.tower); 
         }
         Util.ShuffleArray(nums);
         UnitAddAbilityBJ(ELEMENTALIST_ABILITIES[nums[0]], this.tower);
