@@ -311,6 +311,7 @@ export class Commands {
                 const receivingPlayer: Defender | undefined = this.game.players.get(receiver);
                 if (receivingPlayer) {
                     player.DenyPlayer(receivingPlayer.id);
+                    player.ClaimTowers();
                 } else {
                     player.sendMessage(Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Invalid Colour'));
                 }
@@ -326,6 +327,7 @@ export class Commands {
             for (let i: number = 0; i < 13; i++) {
                 player.DenyPlayer(i);
             }
+            //player.ClaimTowers();
             player.sendMessage('ALL players are now |cFFFF0000denied|r access to your spawn!');
         } else if (command[0] === 'claim') {
             player.ClaimTowers();
