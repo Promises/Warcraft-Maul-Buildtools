@@ -8,7 +8,7 @@ export class Trigger {
         this.nativeTrigger = CreateTrigger();
     }
 
-    nativeTrigger: trigger;
+    private nativeTrigger: trigger;
 
 
     public static EvaluateCondition(func: () => boolean): boolean {
@@ -16,7 +16,7 @@ export class Trigger {
 
         xpcall(() => {
             answer = func();
-        }, (err: any) => {
+        },     (err: any) => {
             this.printError(err);
         });
 
@@ -24,7 +24,7 @@ export class Trigger {
     }
 
 
-    public static printError(err: any) {
+    public static printError(err: any): void {
         Log.Fatal(err);
     }
 
@@ -97,4 +97,8 @@ export class Trigger {
     }
 
 
+    public RegisterPlayerUnitEvent(whichPlayer: player, whichPlayerUnitEvent: playerunitevent, filter?: boolexpr): event {
+        return TriggerRegisterPlayerUnitEvent(this.nativeTrigger, whichPlayer, whichPlayerUnitEvent, filter === undefined ? null : filter);
+
+    }
 }

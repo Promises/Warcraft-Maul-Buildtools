@@ -47,6 +47,7 @@ export class Defender extends AbstractPlayer {
     private _hybridBuilder: unit | undefined;
     private _hybridTowers: any[] = [];
     private leaveTrigger: Trigger;
+    private selectUnitTrigger: Trigger;
     private deniedPlayers: Map<number, boolean> = new Map<number, boolean>();
     // private _towers: Map<number, Tower> = new Map<number, Tower>();
     private _towersArray: Tower[] = [];
@@ -74,6 +75,11 @@ export class Defender extends AbstractPlayer {
         this.leaveTrigger.RegisterPlayerEventLeave(this);
         this.leaveTrigger.AddCondition(() => this.PlayerLeftTheGameConditions(game));
         this.leaveTrigger.AddAction(() => this.PlayerLeftTheGame());
+
+        this.selectUnitTrigger = new Trigger();
+        this.selectUnitTrigger.RegisterPlayerUnitEvent(this.wcPlayer, EVENT_PLAYER_UNIT_SELECTED);
+        this.selectUnitTrigger.AddAction(this.SelectUnit);
+
 
         this.game.gameCommandHandler.commandTrigger.RegisterPlayerChatEvent(this.wcPlayer, '', false);
     }
@@ -522,5 +528,11 @@ export class Defender extends AbstractPlayer {
 
     public RemoveTower(handleId: number): void {
         this._towersArray = this._towersArray.filter((elem) => elem.handleId !== handleId);
+    }
+
+    private SelectUnit(): void {
+        if (GetOwningPlayer(GetTriggerUnit()) === this.wcPlayer) {
+            PauseUnit(GetTriggerUnit(), false);
+        }
     }
 }
