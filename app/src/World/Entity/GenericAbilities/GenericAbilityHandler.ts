@@ -24,6 +24,7 @@ import { PurchaseVoidBeing } from './Void/PurchaseVoidBeing';
 import { PurchaseVoidLord } from './Void/PurchaseVoidLord';
 import { PurchaseVoidMonstrosity } from './Void/PurchaseVoidMonstrosity';
 import { DrinkWaterRune } from './Elementalist/DrinkWaterRune';
+import { UndeadUpgrade } from './Elementalist/UndeadUpgrade';
 
 export class GenericAbilityHandler {
     private readonly game: WarcraftMaul;
@@ -64,6 +65,7 @@ export class GenericAbilityHandler {
         this.abilities.push(ChannelItem);
         this.abilities.push(Trade);
         this.abilities.push(AwakenDormantPheonixEgg);
+        this.abilities.push(UndeadUpgrade);
         this.abilities.push(PayTheToll);
         this.abilities.push(VoidLordAbility);
         this.abilities.push(PurchaseVoidBeing);
