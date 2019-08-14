@@ -148,7 +148,7 @@ export class PlayerSpawns {
         } else if (this.worldMap.game.players.get(this.colourId) && !IsUnitType(GetEnteringUnit(), UNIT_TYPE_STRUCTURE)) {
             const areaPlayer: Defender = <Defender>this.worldMap.game.players.get(this.colourId);
             if (areaPlayer.HasDenied(GetPlayerId(GetOwningPlayer(GetEnteringUnit())))) {
-                SetUnitPosition(GetEnteringUnit(), this.area.GetCenterX(), this.area.GetCenterY());
+                SetUnitPosition(GetEnteringUnit(), PLAYER_AREAS[GetPlayerId(GetOwningPlayer(GetEnteringUnit()))].GetCenterX(), PLAYER_AREAS[GetPlayerId(GetOwningPlayer(GetEnteringUnit()))].GetCenterY());
             }
         }
 
