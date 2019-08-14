@@ -327,7 +327,7 @@ export class Commands {
             for (let i: number = 0; i < 13; i++) {
                 player.DenyPlayer(i);
             }
-            //player.ClaimTowers();
+            player.ClaimTowers();
             player.sendMessage('ALL players are now |cFFFF0000denied|r access to your spawn!');
         } else if (command[0] === 'claim') {
             player.ClaimTowers();
