@@ -20,12 +20,10 @@ export class AwakenDormantPheonixEgg extends GenericAbility implements AbilityOn
 
             const tower: Tower | undefined = owner.GetTower(GetHandleId(u));
             if (tower) {
-                if (GetUnitStateSwap(UNIT_STATE_MANA, tower.tower) >= 5) {
-                    tower.Sell();
-                    this.game.worldMap.towerConstruction.SetupTower(
-                        ReplaceUnitBJ(tower.tower, FourCC('h006'), bj_UNIT_STATE_METHOD_DEFAULTS),
-                        tower.owner);
-                }
+                tower.Sell();
+                this.game.worldMap.towerConstruction.SetupTower(
+                    ReplaceUnitBJ(tower.tower, FourCC('h006'), bj_UNIT_STATE_METHOD_DEFAULTS),
+                    tower.owner);
             }
         }
 
