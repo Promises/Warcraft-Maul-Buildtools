@@ -78,7 +78,7 @@ export class Defender extends AbstractPlayer {
 
         this.selectUnitTrigger = new Trigger();
         this.selectUnitTrigger.RegisterPlayerUnitEvent(this.wcPlayer, EVENT_PLAYER_UNIT_SELECTED);
-        this.selectUnitTrigger.AddAction(this.SelectUnit);
+        this.selectUnitTrigger.AddAction(() => this.SelectUnit());
 
 
         this.game.gameCommandHandler.commandTrigger.RegisterPlayerChatEvent(this.wcPlayer, '', false);
