@@ -33,7 +33,7 @@ export class Defender extends AbstractPlayer {
 
     private _scoreSlot: number = 0;
     private _kills: number = 0;
-    private allowPlayerTower: unit | undefined;
+    public allowPlayerTower: unit | undefined;
     private _hasHybridRandomed: boolean = false;
     private _hasHardcoreRandomed: boolean = false;
     private _hasNormalPicked: boolean = false;
@@ -100,6 +100,8 @@ export class Defender extends AbstractPlayer {
         const allowTowerLoc: Point = ALLOW_PLAYER_TOWER_LOCATIONS[this.id];
         //
         this.allowPlayerTower = CreateUnit(this.wcPlayer, FourCC('h03S'), allowTowerLoc.x, allowTowerLoc.y, 0.000);
+        SetUnitVertexColor(this.allowPlayerTower, 0, 255, 0, 255);
+
     }
 
     public hasRace(race: Race): boolean {
@@ -450,12 +452,56 @@ export class Defender extends AbstractPlayer {
         return !!this.deniedPlayers.get(num);
     }
 
+    private ReRenderAllowPlayersTower(): void {
+
+
+        let red: number = 0;
+        let green: number = 255;
+        const allowTower: unit | undefined = this.allowPlayerTower;
+        if (allowTower) {
+            this.deniedPlayers.forEach((value: boolean, key: number) => {
+                if (value) {
+                    if (GetLocalPlayer() === Player(key)) { // ASK BEFORE EVER USING GetLocalPlayer()
+                        red = 255;
+                        green = 0;
+                    }
+                }
+            });
+            SetUnitVertexColor(allowTower, red, green, 0, 255);
+
+        }
+    }
+
+    public DenyAllPlayers(): void {
+        this.game.players.forEach((player) => {
+            if (this.id !== player.id) {
+                this.deniedPlayers.set(player.id, true);
+            }
+        });
+        this.ReRenderAllowPlayersTower();
+    }
+
     public DenyPlayer(num: number): void {
         this.deniedPlayers.set(num, true);
+        this.ReRenderAllowPlayersTower();
+
+    }
+
+    public AllowAllPlayers(): void {
+        this.game.players.forEach((player) => {
+            if (this.id !== player.id) {
+                this.deniedPlayers.set(player.id, false);
+            }
+        });
+        this.ReRenderAllowPlayersTower();
+
+        // this.deniedPlayers.set(num, false);
     }
 
     public AllowPlayer(num: number): void {
         this.deniedPlayers.set(num, false);
+        this.ReRenderAllowPlayersTower();
+
     }
 
     private DestroyLeftoverUnits(): void {

@@ -318,15 +318,17 @@ export class Commands {
             }
         } else if (command[0] === 'allowall') {
             // AllowAllPlayers();
-            for (let i: number = 0; i < 13; i++) {
-                player.AllowPlayer(i);
-            }
+            // for (let i: number = 0; i < 13; i++) {
+            //     player.AllowPlayer(i);
+            // }.
+            player.AllowAllPlayers();
             player.sendMessage('ALL players are now |cFF00FF00allowed|r to build in your spawn!');
         } else if (command[0] === 'denyall') {
             // DenyAllPlayers();
-            for (let i: number = 0; i < 13; i++) {
-                player.DenyPlayer(i);
-            }
+            // for (let i: number = 0; i < 13; i++) {
+            //     player.DenyPlayer(i);
+            // }
+            player.DenyAllPlayers();
             player.ClaimTowers();
             player.sendMessage('ALL players are now |cFFFF0000denied|r access to your spawn!');
         } else if (command[0] === 'claim') {
