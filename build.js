@@ -14,6 +14,7 @@ Usage: build.js [options]
         -r, --run               Run the map in Warcraft 3
         -t, --test              Run the tests in busted (currently not implemented)
         --buildnumber <number>  Set the ingame buildnumber for the map
+        --release <num.num.num> Set The full release version
         -h, --help              Shows this help menu
 `;
 class Build {
@@ -29,6 +30,13 @@ class Build {
             this.buildnumber = args['buildnumber'];
         } else {
             this.buildnumber = '';
+        }
+
+        if (args['buildnumber']) {
+            this.isFull = true;
+            this.release = args['release'];
+        } else {
+            this.isFull = false;
         }
         // console.log(this.buildnumber);
         this.doTasks(args)
@@ -152,8 +160,11 @@ class Build {
         }
         this.nativeExecute(`${sed} -i "s/local function __module_/function __module_/g" "target/map/war3map.lua"`);
 
-        if(this.buildnumber){
-            this.nativeExecute(`${sed} -i "s/TestMap WCMaul Reimagined/TestMap $BUILD_NUMBER WCMaul Reimagined/g" "target/map/war3map.wts"`);
+        if(this.buildnumber && !this.isFull){
+            this.nativeExecute(`${sed} -i "s/TestMap WCMaul Reimagined/TestMap ${this.buildnumber} WCMaul Reimagined/g" "target/map/war3map.wts"`);
+        } else if (this.isFull) {
+            this.nativeExecute(`${sed} -i "s/TestMap WCMaul Reimagined/Warcraft Maul: Reimagined v${this.release}/g" "target/map/war3map.wts"`);
+
         }
 
 

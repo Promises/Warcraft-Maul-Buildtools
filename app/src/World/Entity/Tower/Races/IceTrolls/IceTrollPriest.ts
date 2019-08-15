@@ -16,8 +16,6 @@ export class IceTrollPriest extends Tower implements TickingTower {
             UnitApplyTimedLifeBJ(1.00, FourCC('BTLF'), dummy);
             UnitAddAbilityBJ(FourCC('A08J'), dummy);
             IssueTargetOrderBJ(dummy, 'frostnova', this.targets[indx]);
-        } else {
-            Log.Debug('No Target');
         }
         RemoveLocation(loc);
         DestroyGroup(grp);

@@ -204,7 +204,7 @@ export class Tower {
             this.SetTargetTick(currentTick, modulo);
             return false;
         }
-        if (currentTick === this.targetTick) {
+        if (currentTick >= this.targetTick) {
             this.SetTargetTick(currentTick, modulo);
             return true;
         }

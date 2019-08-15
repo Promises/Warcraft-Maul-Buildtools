@@ -9,6 +9,19 @@ export class DummyPlayer {
     private player: Defender | undefined;
     private step: number = 0;
     private slot: number;
+    private towers: number[] = [
+        // FourCC('o00X'),
+        FourCC('hC86'),
+        // FourCC('n00L'),
+        // FourCC('n01C'),
+        // FourCC('n018'),
+
+        // FourCC('n01B'),
+        // FourCC('oC26'),
+        // FourCC('hC97'),
+        // FourCC('n02X'),
+        // FourCC('h02G'),
+    ];
 
     constructor(game: WarcraftMaul, slot: number) {
         this.game = game;
@@ -32,7 +45,7 @@ export class DummyPlayer {
 
     private ConstructTowers(): boolean {
         if (this.CreateTowersForPlayer()) {
-            this.game.timedEventQueue.AddEvent(new TimedEvent(() => this.Leave(), 600, false));
+            this.game.timedEventQueue.AddEvent(new TimedEvent(() => this.Leave(), 1200, false));
             return true;
         }
         return false;
@@ -52,7 +65,8 @@ export class DummyPlayer {
 
     private GetTower(): number {
         // return Util.GetRandomKey(this.game.worldMap.towerConstruction.towerTypes);
-        return FourCC('n02X');
+        return this.towers[Util.RandomInt(0, this.towers.length - 1)];
+        // return FourCC('n02X');
     }
 
     private CreateTowersForPlayer(): boolean {
@@ -84,122 +98,122 @@ export class DummyPlayer {
         this.step++;
         if (this.step === 1) {
             this.game.worldMap.towerConstruction.SetupTower(CreateUnit(this.player.wcPlayer, this.GetTower(),
-                                                                       firstCheckpointX + dist.yDividedBy9,
-                                                                       firstCheckpointY + dist.xDividedBy9, bj_UNIT_FACING), this.player);
+                firstCheckpointX + dist.yDividedBy9,
+                firstCheckpointY + dist.xDividedBy9, bj_UNIT_FACING), this.player);
             return false;
         }
         if (this.step === 2) {
             this.game.worldMap.towerConstruction.SetupTower(CreateUnit(this.player.wcPlayer, this.GetTower(),
-                                                                       firstCheckpointX + dist.xDividedBy9,
-                                                                       firstCheckpointY + dist.yDividedBy9, bj_UNIT_FACING), this.player);
+                firstCheckpointX + dist.xDividedBy9,
+                firstCheckpointY + dist.yDividedBy9, bj_UNIT_FACING), this.player);
             return false;
         }
         if (this.step === 3) {
             this.game.worldMap.towerConstruction.SetupTower(CreateUnit(this.player.wcPlayer, this.GetTower(),
-                                                                       firstCheckpointX - dist.yDividedBy9,
-                                                                       firstCheckpointY - dist.xDividedBy9, bj_UNIT_FACING), this.player);
+                firstCheckpointX - dist.yDividedBy9,
+                firstCheckpointY - dist.xDividedBy9, bj_UNIT_FACING), this.player);
             return false;
         }
         if (this.step === 4) {
             this.game.worldMap.towerConstruction.SetupTower(CreateUnit(this.player.wcPlayer, this.GetTower(),
-                                                                       firstCheckpointX - dist.xDividedBy9 - dist.yDividedBy18,
-                                                                       firstCheckpointY - dist.yDividedBy9 - dist.xDividedBy18, bj_UNIT_FACING), this.player);
+                firstCheckpointX - dist.xDividedBy9 - dist.yDividedBy18,
+                firstCheckpointY - dist.yDividedBy9 - dist.xDividedBy18, bj_UNIT_FACING), this.player);
             return false;
         }
         if (this.step === 5) {
             this.game.worldMap.towerConstruction.SetupTower(CreateUnit(this.player.wcPlayer, this.GetTower(),
-                                                                       firstCheckpointX - dist.xDividedBy9 - dist.xDividedBy18 + dist.yDividedBy9 - dist.yDividedBy18,
-                                                                       firstCheckpointY - dist.yDividedBy9 - dist.yDividedBy18 + dist.xDividedBy9 - dist.xDividedBy18, bj_UNIT_FACING), this.player);
+                firstCheckpointX - dist.xDividedBy9 - dist.xDividedBy18 + dist.yDividedBy9 - dist.yDividedBy18,
+                firstCheckpointY - dist.yDividedBy9 - dist.yDividedBy18 + dist.xDividedBy9 - dist.xDividedBy18, bj_UNIT_FACING), this.player);
             return false;
         }
         if (this.step === 6) {
             this.game.worldMap.towerConstruction.SetupTower(CreateUnit(this.player.wcPlayer, this.GetTower(),
-                                                                       firstCheckpointX - dist.xDividedBy9 - dist.xDividedBy18 + 2 * dist.yDividedBy9 - dist.yDividedBy18,
-                                                                       firstCheckpointY - dist.yDividedBy9 - dist.yDividedBy18 + 2 * dist.xDividedBy9 - dist.xDividedBy18, bj_UNIT_FACING), this.player);
+                firstCheckpointX - dist.xDividedBy9 - dist.xDividedBy18 + 2 * dist.yDividedBy9 - dist.yDividedBy18,
+                firstCheckpointY - dist.yDividedBy9 - dist.yDividedBy18 + 2 * dist.xDividedBy9 - dist.xDividedBy18, bj_UNIT_FACING), this.player);
             return false;
         }
         if (this.step === 7) {
             this.game.worldMap.towerConstruction.SetupTower(CreateUnit(this.player.wcPlayer, this.GetTower(),
-                                                                       firstCheckpointX - dist.xDividedBy18 + 3 * dist.yDividedBy9 - dist.yDividedBy18,
-                                                                       firstCheckpointY - dist.yDividedBy18 + 3 * dist.xDividedBy9 - dist.xDividedBy18, bj_UNIT_FACING), this.player);
+                firstCheckpointX - dist.xDividedBy18 + 3 * dist.yDividedBy9 - dist.yDividedBy18,
+                firstCheckpointY - dist.yDividedBy18 + 3 * dist.xDividedBy9 - dist.xDividedBy18, bj_UNIT_FACING), this.player);
             return false;
         }
         if (this.step === 8) {
             this.game.worldMap.towerConstruction.SetupTower(CreateUnit(this.player.wcPlayer, this.GetTower(),
-                                                                       firstCheckpointX + dist.xDividedBy18 + 3 * dist.yDividedBy9 - dist.yDividedBy18,
-                                                                       firstCheckpointY + dist.yDividedBy18 + 3 * dist.xDividedBy9 - dist.xDividedBy18, bj_UNIT_FACING), this.player);
+                firstCheckpointX + dist.xDividedBy18 + 3 * dist.yDividedBy9 - dist.yDividedBy18,
+                firstCheckpointY + dist.yDividedBy18 + 3 * dist.xDividedBy9 - dist.xDividedBy18, bj_UNIT_FACING), this.player);
             return false;
         }
         if (this.step === 9) {
             this.game.worldMap.towerConstruction.SetupTower(CreateUnit(this.player.wcPlayer, this.GetTower(),
-                                                                       firstCheckpointX + dist.xDividedBy9 + dist.xDividedBy18 + 2 * dist.yDividedBy9 - dist.yDividedBy18,
-                                                                       firstCheckpointY + dist.yDividedBy9 + dist.yDividedBy18 + 2 * dist.xDividedBy9 - dist.xDividedBy18, bj_UNIT_FACING), this.player);
+                firstCheckpointX + dist.xDividedBy9 + dist.xDividedBy18 + 2 * dist.yDividedBy9 - dist.yDividedBy18,
+                firstCheckpointY + dist.yDividedBy9 + dist.yDividedBy18 + 2 * dist.xDividedBy9 - dist.xDividedBy18, bj_UNIT_FACING), this.player);
             return false;
         }
         if (this.step === 10) {
             this.game.worldMap.towerConstruction.SetupTower(CreateUnit(this.player.wcPlayer, this.GetTower(),
-                                                                       firstCheckpointX + 2 * dist.xDividedBy9 + dist.xDividedBy18 + dist.yDividedBy9 - dist.yDividedBy18,
-                                                                       firstCheckpointY + 2 * dist.yDividedBy9 + dist.yDividedBy18 + dist.xDividedBy9 - dist.xDividedBy18, bj_UNIT_FACING), this.player);
+                firstCheckpointX + 2 * dist.xDividedBy9 + dist.xDividedBy18 + dist.yDividedBy9 - dist.yDividedBy18,
+                firstCheckpointY + 2 * dist.yDividedBy9 + dist.yDividedBy18 + dist.xDividedBy9 - dist.xDividedBy18, bj_UNIT_FACING), this.player);
             return false;
         }
         if (this.step === 11) {
             this.game.worldMap.towerConstruction.SetupTower(CreateUnit(this.player.wcPlayer, this.GetTower(),
-                                                                       firstCheckpointX + 2 * dist.xDividedBy9 + dist.xDividedBy18 - dist.yDividedBy18,
-                                                                       firstCheckpointY + 2 * dist.yDividedBy9 + dist.yDividedBy18 - dist.xDividedBy18, bj_UNIT_FACING), this.player);
+                firstCheckpointX + 2 * dist.xDividedBy9 + dist.xDividedBy18 - dist.yDividedBy18,
+                firstCheckpointY + 2 * dist.yDividedBy9 + dist.yDividedBy18 - dist.xDividedBy18, bj_UNIT_FACING), this.player);
             return false;
         }
         if (this.step === 12) {
             this.game.worldMap.towerConstruction.SetupTower(CreateUnit(this.player.wcPlayer, this.GetTower(),
-                                                                       firstCheckpointX + dist.xDividedBy9 + dist.xDividedBy18 - dist.yDividedBy9 - dist.yDividedBy18,
-                                                                       firstCheckpointY + dist.yDividedBy9 + dist.yDividedBy18 - dist.xDividedBy9 - dist.xDividedBy18, bj_UNIT_FACING), this.player);
+                firstCheckpointX + dist.xDividedBy9 + dist.xDividedBy18 - dist.yDividedBy9 - dist.yDividedBy18,
+                firstCheckpointY + dist.yDividedBy9 + dist.yDividedBy18 - dist.xDividedBy9 - dist.xDividedBy18, bj_UNIT_FACING), this.player);
             return false;
         }
         if (this.step === 13) {
             this.game.worldMap.towerConstruction.SetupTower(CreateUnit(this.player.wcPlayer, this.GetTower(),
-                                                                       firstCheckpointX + dist.xDividedBy18 - 2 * dist.yDividedBy9 - dist.yDividedBy18,
-                                                                       firstCheckpointY + dist.yDividedBy18 - 2 * dist.xDividedBy9 - dist.xDividedBy18, bj_UNIT_FACING), this.player);
+                firstCheckpointX + dist.xDividedBy18 - 2 * dist.yDividedBy9 - dist.yDividedBy18,
+                firstCheckpointY + dist.yDividedBy18 - 2 * dist.xDividedBy9 - dist.xDividedBy18, bj_UNIT_FACING), this.player);
             return false;
         }
         if (this.step === 14) {
             this.game.worldMap.towerConstruction.SetupTower(CreateUnit(this.player.wcPlayer, this.GetTower(),
-                                                                       firstCheckpointX - dist.xDividedBy9 + dist.xDividedBy18 - 2 * dist.yDividedBy9 - dist.yDividedBy18,
-                                                                       firstCheckpointY - dist.yDividedBy9 + dist.yDividedBy18 - 2 * dist.xDividedBy9 - dist.xDividedBy18, bj_UNIT_FACING), this.player);
+                firstCheckpointX - dist.xDividedBy9 + dist.xDividedBy18 - 2 * dist.yDividedBy9 - dist.yDividedBy18,
+                firstCheckpointY - dist.yDividedBy9 + dist.yDividedBy18 - 2 * dist.xDividedBy9 - dist.xDividedBy18, bj_UNIT_FACING), this.player);
             return false;
         }
         if (this.step === 15) {
             this.game.worldMap.towerConstruction.SetupTower(CreateUnit(this.player.wcPlayer, this.GetTower(),
-                                                                       firstCheckpointX - 2 * dist.xDividedBy9 + dist.xDividedBy18 - 2 * dist.yDividedBy9,
-                                                                       firstCheckpointY - 2 * dist.yDividedBy9 + dist.yDividedBy18 - 2 * dist.xDividedBy9, bj_UNIT_FACING), this.player);
+                firstCheckpointX - 2 * dist.xDividedBy9 + dist.xDividedBy18 - 2 * dist.yDividedBy9,
+                firstCheckpointY - 2 * dist.yDividedBy9 + dist.yDividedBy18 - 2 * dist.xDividedBy9, bj_UNIT_FACING), this.player);
             return false;
         }
         if (this.step === 16) {
             this.game.worldMap.towerConstruction.SetupTower(CreateUnit(this.player.wcPlayer, this.GetTower(),
-                                                                       firstCheckpointX - 3 * dist.xDividedBy9 + dist.xDividedBy18 - dist.yDividedBy9,
-                                                                       firstCheckpointY - 3 * dist.yDividedBy9 + dist.yDividedBy18 - dist.xDividedBy9, bj_UNIT_FACING), this.player);
+                firstCheckpointX - 3 * dist.xDividedBy9 + dist.xDividedBy18 - dist.yDividedBy9,
+                firstCheckpointY - 3 * dist.yDividedBy9 + dist.yDividedBy18 - dist.xDividedBy9, bj_UNIT_FACING), this.player);
             return false;
         }
         if (this.step === 17) {
             this.game.worldMap.towerConstruction.SetupTower(CreateUnit(this.player.wcPlayer, this.GetTower(),
-                                                                       firstCheckpointX - 3 * dist.xDividedBy9,
-                                                                       firstCheckpointY - 3 * dist.yDividedBy9, bj_UNIT_FACING), this.player);
+                firstCheckpointX - 3 * dist.xDividedBy9,
+                firstCheckpointY - 3 * dist.yDividedBy9, bj_UNIT_FACING), this.player);
             return false;
         }
         if (this.step === 18) {
             this.game.worldMap.towerConstruction.SetupTower(CreateUnit(this.player.wcPlayer, this.GetTower(),
-                                                                       firstCheckpointX - 3 * dist.xDividedBy9 + dist.yDividedBy9,
-                                                                       firstCheckpointY - 3 * dist.yDividedBy9 + dist.xDividedBy9, bj_UNIT_FACING), this.player);
+                firstCheckpointX - 3 * dist.xDividedBy9 + dist.yDividedBy9,
+                firstCheckpointY - 3 * dist.yDividedBy9 + dist.xDividedBy9, bj_UNIT_FACING), this.player);
             return false;
         }
         if (this.step === 19) {
             this.game.worldMap.towerConstruction.SetupTower(CreateUnit(this.player.wcPlayer, this.GetTower(),
-                                                                       firstCheckpointX - 3 * dist.xDividedBy9 + 2 * dist.yDividedBy9,
-                                                                       firstCheckpointY - 3 * dist.yDividedBy9 + 2 * dist.xDividedBy9, bj_UNIT_FACING), this.player);
+                firstCheckpointX - 3 * dist.xDividedBy9 + 2 * dist.yDividedBy9,
+                firstCheckpointY - 3 * dist.yDividedBy9 + 2 * dist.xDividedBy9, bj_UNIT_FACING), this.player);
             return false;
         }
         if (this.step === 20) {
             this.game.worldMap.towerConstruction.SetupTower(CreateUnit(this.player.wcPlayer, this.GetTower(),
-                                                                       firstCheckpointX - 2 * dist.xDividedBy9 + 3 * dist.yDividedBy9,
-                                                                       firstCheckpointY - 2 * dist.yDividedBy9 + 3 * dist.xDividedBy9, 0.00), this.player);
+                firstCheckpointX - 2 * dist.xDividedBy9 + 3 * dist.yDividedBy9,
+                firstCheckpointY - 2 * dist.yDividedBy9 + 3 * dist.xDividedBy9, 0.00), this.player);
             return false;
         }
 

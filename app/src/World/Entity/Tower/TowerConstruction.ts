@@ -128,14 +128,10 @@ export class TowerConstruction {
         }
         if (ObjectExtendsTower.IsLimitedTower()) {
             if (owner.hasHybridRandomed) {
-                Log.Debug('Found hybrid');
                 if (owner.hybridTowers.findIndex(elem => elem === DecodeFourCC(ObjectExtendsTower.GetID())) >= 0) {
-                    Log.Debug('Found type');
                     SetPlayerTechMaxAllowedSwap(GetUnitTypeId(ObjectExtendsTower.tower), ObjectExtendsTower.MaxCount(), owner.wcPlayer);
                 }
             } else {
-                Log.Debug('not hybrid');
-
                 SetPlayerTechMaxAllowedSwap(GetUnitTypeId(ObjectExtendsTower.tower), ObjectExtendsTower.MaxCount(), owner.wcPlayer);
             }
         }
