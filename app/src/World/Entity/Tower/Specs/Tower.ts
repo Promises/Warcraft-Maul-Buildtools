@@ -23,6 +23,7 @@ export class Tower {
     private readonly _game: WarcraftMaul;
     private sellValue: number;
     private _leaverOwned: boolean = false;
+    private targetTick: number | undefined;
 
     constructor(tower: unit, owner: Defender, game: WarcraftMaul) {
         this._game = game;
@@ -190,5 +191,35 @@ export class Tower {
         return this.sellValue;
     }
 
+
+    /**
+     * Helper Functions for TickingTower
+     */
+    public IsTargetTick(currentTick: number, modulo: number): boolean {
+        if (!this.IsTickingTower()) {
+            Log.Debug(`${this.GetName()} is not a ticking tower`);
+            return false;
+        }
+        if (this.targetTick === undefined) {
+            this.SetTargetTick(currentTick, modulo);
+            return false;
+        }
+        if (currentTick === this.targetTick) {
+            this.SetTargetTick(currentTick, modulo);
+            return true;
+        }
+        return false;
+    }
+
+    private SetTargetTick(currentTick: number, modulo: number): void {
+        if (!this.IsTickingTower()) {
+            Log.Debug(`${this.GetName()} is not a ticking tower`);
+            return;
+        }
+        this.targetTick = (currentTick + this.GetTickModulo()) % modulo;
+    }
+    /**
+     * End Helper Functions for TickingTower
+     */
 
 }

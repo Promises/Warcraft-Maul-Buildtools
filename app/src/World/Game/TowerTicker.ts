@@ -17,7 +17,7 @@ export class TowerTicker {
             this.tick = (this.tick + 1) % this.maxTick;
             this.tickingTowers.forEach((tickingTower) => {
 
-                if (this.tick % tickingTower.GetTickModulo() === 0) {
+                if (tickingTower.IsTargetTick(this.tick, this.maxTick)) {
                     tickingTower.Action();
                 }
             });
