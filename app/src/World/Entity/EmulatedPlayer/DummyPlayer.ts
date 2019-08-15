@@ -32,7 +32,7 @@ export class DummyPlayer {
 
     private ConstructTowers(): boolean {
         if (this.CreateTowersForPlayer()) {
-            this.game.timedEventQueue.AddEvent(new TimedEvent(() => this.Leave(), 30, false));
+            this.game.timedEventQueue.AddEvent(new TimedEvent(() => this.Leave(), 600, false));
             return true;
         }
         return false;
@@ -51,8 +51,8 @@ export class DummyPlayer {
     }
 
     private GetTower(): number {
-        return Util.GetRandomKey(this.game.worldMap.towerConstruction.towerTypes);
-        // return FourCC('h043');
+        // return Util.GetRandomKey(this.game.worldMap.towerConstruction.towerTypes);
+        return FourCC('n02X');
     }
 
     private CreateTowersForPlayer(): boolean {

@@ -92,7 +92,7 @@ export class SellTower {
         maze.setWalkable(rightSide + bottomSide * maze.width, true);
         maze.setWalkable(leftSide + topSide * maze.width, true);
         maze.setWalkable(rightSide + topSide * maze.width, true);
-        KillUnit(unit);
+        RemoveUnit(unit);
         // }
 
 

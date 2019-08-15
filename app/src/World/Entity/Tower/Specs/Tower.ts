@@ -118,7 +118,6 @@ export class Tower {
     }
 
     public Sell(): void {
-        this.owner.RemoveTower(this.handleId);
 
         Log.Debug(`Selling for: ${Util.Round(0.75 * GetUnitGoldCost(this.GetID()))}`);
         if (this.IsEndOfRoundTower()) {
@@ -167,6 +166,8 @@ export class Tower {
                 Log.Fatal(`${GetUnitName(this.tower)} built outside of requires area, unable to remove. Please screenshot and report`);
             }
         }
+        this.owner.RemoveTower(this.handleId);
+
     }
 
     public CastSpellOnAttackedUnitLocation(spell: string): void {
