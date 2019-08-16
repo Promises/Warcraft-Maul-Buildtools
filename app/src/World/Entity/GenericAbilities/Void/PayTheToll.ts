@@ -21,6 +21,7 @@ export class PayTheToll extends GenericAbility implements AbilityOnCastTargetsUn
             if (tower) {
                 if (owner.getGold() >= 50) {
                     tower.Sell();
+                    this.game.worldMap.antiBlock.CleanUpRemovedConstruction(tower.tower);
                     RemoveUnit(tower.tower);
                     owner.giveGold(-50);
                     if (tower.GetTypeID() === FourCC('h02S')) {

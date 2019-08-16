@@ -11,6 +11,7 @@ import { CheckPoint } from '../Entity/CheckPoint';
 export class AntiBlock {
 
     private _eventTrigger: Trigger;
+    private _cancelBuildingTrigger: Trigger;
     private _worldMap: WorldMap;
 
     constructor(worldMap: WorldMap) {
@@ -18,6 +19,13 @@ export class AntiBlock {
         this._eventTrigger = new Trigger();
         this._eventTrigger.RegisterAnyUnitEventBJ(EVENT_PLAYER_UNIT_CONSTRUCT_START);
         this._eventTrigger.AddAction(() => this.Action());
+
+
+        this._cancelBuildingTrigger = new Trigger();
+        this._cancelBuildingTrigger.RegisterAnyUnitEventBJ(EVENT_PLAYER_UNIT_CONSTRUCT_CANCEL);
+        this._cancelBuildingTrigger.AddAction(() => this.CanceledBuilding());
+
+
     }
 
     private Action(): void {
@@ -104,6 +112,7 @@ export class AntiBlock {
         maze.setWalkable(rightSide + bottomSide * maze.width, false);
         maze.setWalkable(leftSide + topSide * maze.width, false);
         maze.setWalkable(rightSide + topSide * maze.width, false);
+
         const playerSpawn: PlayerSpawns = this._worldMap.playerSpawns[playerSpawnId];
         const spawnOne: CheckPoint = <CheckPoint>playerSpawn.spawnOne;
         const firstCheckpoint: CheckPoint = <CheckPoint>spawnOne.next;
@@ -187,13 +196,13 @@ export class AntiBlock {
 
     private blocking(consUnit: unit, player: Defender): void {
         player.sendMessage('|CFFFF0303[Anti-Block]|r |CFFFFFF01Detected a possible blocking attempt.' +
-                               ' Your building has been cancelled and you have been refunded the full cost.|r');
+            ' Your building has been cancelled and you have been refunded the full cost.|r');
         this.cancelBuilding(consUnit);
     }
 
     private juggling(consUnit: unit, player: Defender, antiJuggleCreeps: Creep[]): void {
         player.sendMessage('|CFFFF0303[Anti-Juggle]|r |CFFFFFF01Detected a possible juggling attempt.' +
-                               ' Your building has been cancelled and you have been refunded the full cost.|r');
+            ' Your building has been cancelled and you have been refunded the full cost.|r');
         this.cancelBuilding(consUnit);
         antiJuggleCreeps.forEach(creep => creep.ReapplyMovement());
     }
@@ -207,5 +216,38 @@ export class AntiBlock {
         TriggerSleepAction(0.01);
         IssueImmediateOrderById(consUnit, settings.UNIT_ORDER_CANCEL_UPGRADE);
         RemoveUnit(consUnit);
+    }
+
+    private CanceledBuilding(): void {
+        const u: unit = GetCancelledStructure();
+        this.CleanUpRemovedConstruction(u);
+
+    }
+
+    public CleanUpRemovedConstruction(u: unit): void {
+        let playerSpawnId: undefined | number;
+        for (let i: number = 0; i < settings.PLAYER_AREAS.length; i++) {
+            if (settings.PLAYER_AREAS[i].ContainsUnit(u)) {
+                playerSpawnId = i;
+                break;
+            }
+        }
+
+        if (playerSpawnId === undefined) {
+            Log.Fatal('Unable to locate the correct player spawn');
+            return;
+        }
+
+        const x: number = GetUnitX(u);
+        const y: number = GetUnitY(u);
+        const maze: Maze = this._worldMap.playerMazes[<number>playerSpawnId];
+        const leftSide: number = ((x - 64) - maze.minX) / 64;
+        const rightSide: number = (x - maze.minX) / 64;
+        const topSide: number = (y - maze.minY) / 64;
+        const bottomSide: number = ((y - 64) - maze.minY) / 64;
+        maze.setWalkable(leftSide + bottomSide * maze.width, true);
+        maze.setWalkable(rightSide + bottomSide * maze.width, true);
+        maze.setWalkable(leftSide + topSide * maze.width, true);
+        maze.setWalkable(rightSide + topSide * maze.width, true);
     }
 }
