@@ -20,7 +20,7 @@ export class TowerConstruction {
     }
 
     private towerConstructTrigger: Trigger;
-    private towerRemoveUpgradeTrigger: Trigger;
+    private towerUpgradeTrigger: Trigger;
     private readonly _towerTypes: TowerMap<number, object>;
     public genericAttacks: Map<number, GenericAutoAttackTower> = new Map<number, GenericAutoAttackTower>();
     public killingActions: Map<number, KillingActionTower> = new Map<number, KillingActionTower>();
@@ -49,9 +49,9 @@ export class TowerConstruction {
         this.towerConstructTrigger.RegisterAnyUnitEventBJ(EVENT_PLAYER_UNIT_UPGRADE_FINISH);
         this.towerConstructTrigger.AddAction(() => this.ConstructionFinished());
 
-        this.towerRemoveUpgradeTrigger = new Trigger();
-        this.towerRemoveUpgradeTrigger.RegisterAnyUnitEventBJ(EVENT_PLAYER_UNIT_UPGRADE_START);
-        this.towerRemoveUpgradeTrigger.AddAction(() => this.RemoveUpgradingTower());
+        this.towerUpgradeTrigger = new Trigger();
+        this.towerUpgradeTrigger.RegisterAnyUnitEventBJ(EVENT_PLAYER_UNIT_UPGRADE_FINISH);
+        this.towerUpgradeTrigger.AddAction(() => this.UpgradeTower());
 
 
         this.genericAttackTrigger = new Trigger();
@@ -69,7 +69,8 @@ export class TowerConstruction {
         this.killingActionsTrigger.AddAction(() => this.DoKillingTowerActions());
     }
 
-    private RemoveUpgradingTower(): void {
+
+    private UpgradeTower(): void {
         const tower: unit = GetTriggerUnit();
         const owner: Defender | undefined = this.game.players.get(GetPlayerId(GetOwningPlayer(tower)));
         if (!owner) {
@@ -78,6 +79,8 @@ export class TowerConstruction {
         const instance: Tower | undefined = owner.GetTower(GetHandleIdBJ(tower));
         if (instance) {
             instance.Sell();
+            const newTower: Tower = this.game.worldMap.towerConstruction.SetupTower(tower, owner);
+            newTower.towerValue += instance.towerValue;
         }
     }
 
@@ -110,25 +113,25 @@ export class TowerConstruction {
         }
 
         if (ObjectExtendsTower.IsEndOfRoundTower()) {
-            this.game.gameRoundHandler.endOfTurnTowers.set(ObjectExtendsTower.handleId, ObjectExtendsTower);
+            this.game.gameRoundHandler.endOfTurnTowers.set(ObjectExtendsTower.UniqueID, ObjectExtendsTower);
         }
         if (ObjectExtendsTower.IsAttackActionTower()) {
-            this.game.gameDamageEngine.AddInitialDamageEventTower(ObjectExtendsTower.handleId, ObjectExtendsTower);
+            this.game.gameDamageEngine.AddInitialDamageEventTower(ObjectExtendsTower.UniqueID, ObjectExtendsTower);
         }
 
         if (ObjectExtendsTower.IsInitialDamageModificationTower()) {
-            this.game.gameDamageEngine.AddInitialDamageModificationEventTower(ObjectExtendsTower.handleId, ObjectExtendsTower);
+            this.game.gameDamageEngine.AddInitialDamageModificationEventTower(ObjectExtendsTower.UniqueID, ObjectExtendsTower);
         }
 
         if (ObjectExtendsTower.IsGenericAutoAttackTower()) {
-            this.genericAttacks.set(ObjectExtendsTower.handleId, ObjectExtendsTower);
+            this.genericAttacks.set(ObjectExtendsTower.UniqueID, ObjectExtendsTower);
         }
         if (ObjectExtendsTower.IsKillingActionTower()) {
-            this.killingActions.set(ObjectExtendsTower.handleId, ObjectExtendsTower);
+            this.killingActions.set(ObjectExtendsTower.UniqueID, ObjectExtendsTower);
         }
         if (ObjectExtendsTower.IsLimitedTower()) {
             if (owner.hasHybridRandomed) {
-                if (owner.hybridTowers.findIndex(elem => elem === DecodeFourCC(ObjectExtendsTower.GetID())) >= 0) {
+                if (owner.hybridTowers.findIndex(elem => elem === DecodeFourCC(ObjectExtendsTower.GetTypeID())) >= 0) {
                     SetPlayerTechMaxAllowedSwap(GetUnitTypeId(ObjectExtendsTower.tower), ObjectExtendsTower.MaxCount(), owner.wcPlayer);
                 }
             } else {
@@ -139,18 +142,18 @@ export class TowerConstruction {
             ObjectExtendsTower.ConstructionFinished();
         }
         if (ObjectExtendsTower.IsTickingTower()) {
-            this.game.towerTicker.AddTickingTower(ObjectExtendsTower.handleId, ObjectExtendsTower);
+            this.game.towerTicker.AddTickingTower(ObjectExtendsTower.UniqueID, ObjectExtendsTower);
         }
         if (ObjectExtendsTower.IsTowerForceTower()) {
-            if (owner.towerForces.has(ObjectExtendsTower.GetID())) {
-                owner.towerForces.set(ObjectExtendsTower.GetID(), <number>owner.towerForces.get(ObjectExtendsTower.GetID()) + 1);
+            if (owner.towerForces.has(ObjectExtendsTower.GetTypeID())) {
+                owner.towerForces.set(ObjectExtendsTower.GetTypeID(), <number>owner.towerForces.get(ObjectExtendsTower.GetTypeID()) + 1);
                 for (const towerx of owner.towersArray) {
-                    if (towerx.IsTowerForceTower() && towerx.GetID === ObjectExtendsTower.GetID) {
+                    if (towerx.IsTowerForceTower() && towerx.GetTypeID === ObjectExtendsTower.GetTypeID) {
                         towerx.UpdateSize();
                     }
                 }
             } else {
-                owner.towerForces.set(ObjectExtendsTower.GetID(), 1);
+                owner.towerForces.set(ObjectExtendsTower.GetTypeID(), 1);
             }
         }
 
@@ -165,7 +168,7 @@ export class TowerConstruction {
                 }
             }
             if (area) {
-                this.game.worldMap.playerSpawns[area].areaTowers.set(ObjectExtendsTower.handleId, ObjectExtendsTower);
+                this.game.worldMap.playerSpawns[area].areaTowers.set(ObjectExtendsTower.UniqueID, ObjectExtendsTower);
             } else {
                 Log.Fatal(`${GetUnitName(tower)} built outside of requires area. Please screenshot and report`);
             }
@@ -192,4 +195,6 @@ export class TowerConstruction {
     private isLootBoxer(tower: unit): boolean {
         return this.lootBoxerTowers.indexOf(GetUnitTypeId(tower)) > -1;
     }
+
+
 }

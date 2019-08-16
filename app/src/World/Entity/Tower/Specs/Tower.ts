@@ -17,20 +17,21 @@ import { TickingTower } from './TickingTower';
 
 export class Tower {
 
+
     private readonly _tower: unit;
-    private readonly _handleId: number;
+    private readonly _UniqueID: number;
     private readonly _owner: Defender;
     private readonly _game: WarcraftMaul;
-    private sellValue: number;
+    private _towerValue: number;
     private _leaverOwned: boolean = false;
     private targetTick: number | undefined;
 
     constructor(tower: unit, owner: Defender, game: WarcraftMaul) {
         this._game = game;
         this._tower = tower;
-        this._handleId = GetHandleIdBJ(tower);
+        this._UniqueID = GetHandleIdBJ(tower);
         this._owner = owner;
-        this.sellValue = GetUnitPointValue(tower);
+        this._towerValue = GetUnitGoldCost(this.GetTypeID());
         owner.AddTower(this);
     }
 
@@ -38,7 +39,7 @@ export class Tower {
         return GetUnitName(this.tower);
     }
 
-    public GetID(): number {
+    public GetTypeID(): number {
         return GetUnitTypeId(this.tower);
     }
 
@@ -48,12 +49,20 @@ export class Tower {
         return new Rectangle([x - 64, y - 64, x + 64, y + 64]);
     }
 
+    public get towerValue(): number {
+        return this._towerValue;
+    }
+
+    public set towerValue(value: number) {
+        this._towerValue = value;
+    }
+
     public get game(): WarcraftMaul {
         return this._game;
     }
 
-    public get handleId(): number {
-        return this._handleId;
+    public get UniqueID(): number {
+        return this._UniqueID;
     }
 
     public get owner(): Defender {
@@ -70,6 +79,14 @@ export class Tower {
 
     public set leaverOwned(value: boolean) {
         this._leaverOwned = value;
+    }
+
+    public Upgrade(newTypeId: number): Tower {
+        this.Sell();
+        const u: unit = ReplaceUnitBJ(this.tower, newTypeId, bj_UNIT_STATE_METHOD_DEFAULTS);
+        const newTower: Tower = this.game.worldMap.towerConstruction.SetupTower(u, this.owner);
+        newTower._towerValue += this._towerValue;
+        return newTower;
     }
 
     public IsEndOfRoundTower(): this is EndOfRoundTower {
@@ -120,33 +137,32 @@ export class Tower {
 
     public Sell(): void {
 
-        Log.Debug(`Selling for: ${Util.Round(0.75 * GetUnitGoldCost(this.GetID()))}`);
         if (this.IsEndOfRoundTower()) {
-            this.game.gameRoundHandler.endOfTurnTowers.delete(this.handleId);
+            this.game.gameRoundHandler.endOfTurnTowers.delete(this.UniqueID);
         }
         if (this.IsAttackActionTower()) {
-            this.game.gameDamageEngine.initialDamageEventTowers.delete(this.handleId);
+            this.game.gameDamageEngine.initialDamageEventTowers.delete(this.UniqueID);
         }
         if (this.IsTickingTower()) {
-            this.game.towerTicker.RemoveTickingTower(this.handleId);
+            this.game.towerTicker.RemoveTickingTower(this.UniqueID);
         }
         if (this.IsInitialDamageModificationTower()) {
-            this.game.gameDamageEngine.initialDamageModificationEventTowers.delete(this.handleId);
+            this.game.gameDamageEngine.initialDamageModificationEventTowers.delete(this.UniqueID);
         }
         if (this.IsGenericAutoAttackTower()) {
-            this.game.worldMap.towerConstruction.genericAttacks.delete(this.handleId);
+            this.game.worldMap.towerConstruction.genericAttacks.delete(this.UniqueID);
         }
         if (this.IsKillingActionTower()) {
-            this.game.worldMap.towerConstruction.killingActions.delete(this.handleId);
+            this.game.worldMap.towerConstruction.killingActions.delete(this.UniqueID);
         }
         if (this.IsSellActionTower()) {
             this.SellAction();
         }
         if (this.IsTowerForceTower()) {
-            if (this.owner.towerForces.has(this.GetID())) {
-                this.owner.towerForces.set(this.GetID(), <number>this.owner.towerForces.get(this.GetID()) - 1);
+            if (this.owner.towerForces.has(this.GetTypeID())) {
+                this.owner.towerForces.set(this.GetTypeID(), <number>this.owner.towerForces.get(this.GetTypeID()) - 1);
                 for (const towerx of this.owner.towersArray) {
-                    if (towerx.IsTowerForceTower() && towerx.GetID === this.GetID) {
+                    if (towerx.IsTowerForceTower() && towerx.GetTypeID === this.GetTypeID) {
                         towerx.UpdateSize();
                     }
                 }
@@ -162,12 +178,12 @@ export class Tower {
                 }
             }
             if (area) {
-                this.game.worldMap.playerSpawns[area].areaTowers.delete(this.handleId);
+                this.game.worldMap.playerSpawns[area].areaTowers.delete(this.UniqueID);
             } else {
                 Log.Fatal(`${GetUnitName(this.tower)} built outside of requires area, unable to remove. Please screenshot and report`);
             }
         }
-        this.owner.RemoveTower(this.handleId);
+        this.owner.RemoveTower(this.UniqueID);
 
     }
 
@@ -179,16 +195,14 @@ export class Tower {
 
     public SetOwnership(newOwner: Defender): Tower {
         SetUnitOwner(this.tower, newOwner.wcPlayer, true);
-        return this.game.worldMap.towerConstruction.SetupTower(this.tower, newOwner);
-    }
-
-    public SetLeaverSellValue(): void {
-        this.sellValue *= 0.3;
-        this._leaverOwned = true;
+        this.Sell();
+        const newTower: Tower = this.game.worldMap.towerConstruction.SetupTower(this.tower, newOwner);
+        newTower._towerValue = this._towerValue;
+        return newTower;
     }
 
     public GetSellValue(): number {
-        return this.sellValue;
+        return this.towerValue;
     }
 
 
@@ -218,6 +232,7 @@ export class Tower {
         }
         this.targetTick = (currentTick + this.GetTickModulo()) % modulo;
     }
+
     /**
      * End Helper Functions for TickingTower
      */

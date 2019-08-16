@@ -30,6 +30,6 @@ export class TowerTicker {
 
     public RemoveTickingTower(id: number): void {
         // tslint:disable-next-line:ter-arrow-parens
-        this.tickingTowers = this.tickingTowers.filter((tower) => tower.handleId !== id);
+        this.tickingTowers = this.tickingTowers.filter((tower) => tower.UniqueID !== id);
     }
 }

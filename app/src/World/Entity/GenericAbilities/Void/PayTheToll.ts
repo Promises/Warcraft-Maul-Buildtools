@@ -23,7 +23,7 @@ export class PayTheToll extends GenericAbility implements AbilityOnCastTargetsUn
                     tower.Sell();
                     RemoveUnit(tower.tower);
                     owner.giveGold(-50);
-                    if (tower.GetID() === FourCC('h02S')) {
+                    if (tower.GetTypeID() === FourCC('h02S')) {
                         owner.SetVoidFragmentTick(owner.GetVoidFragmentTick() - 1);
                     }
                 }

@@ -24,11 +24,10 @@ export class SellTower {
 
 
     public SellTower(unit: unit): void {
-        let value: number = 0;
         let playerSpawnId: undefined | number;
 
 
-        value = GetUnitPointValue(unit);
+        let value: number = GetUnitPointValue(unit);
         for (let i: number = 0; i < settings.PLAYER_AREAS.length; i++) {
             if (settings.PLAYER_AREAS[i].ContainsUnit(unit)) {
                 playerSpawnId = i;
@@ -76,12 +75,12 @@ export class SellTower {
         const isWaveInProgress: boolean = this._game.gameRoundHandler.isWaveInProgress;
         const x: number = GetUnitX(unit);
         const y: number = GetUnitY(unit);
-        // // TODO: FIX ANTI-JUGGLE
-        // // if (isWaveInProgress) {
-        // //     this._game.worldMap.towerConstruction.SetupTower(ReplaceUnitBJ(unit, FourCC('uC14'), bj_UNIT_STATE_METHOD_DEFAULTS), player);
-        // // } else {
-        // // Log.Debug('Setting maze');
-        //
+        // TODO: FIX ANTI-JUGGLE
+        // if (isWaveInProgress) {
+        //     this._game.worldMap.towerConstruction.SetupTower(ReplaceUnitBJ(unit, FourCC('uC14'), bj_UNIT_STATE_METHOD_DEFAULTS), player);
+        // } else {
+        // Log.Debug('Setting maze');
+
 
         const maze: Maze = this._game.worldMap.playerMazes[<number>playerSpawnId];
         const leftSide: number = ((x - 64) - maze.minX) / 64;

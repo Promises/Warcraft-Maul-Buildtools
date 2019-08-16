@@ -20,10 +20,8 @@ export class UndeadUpgrade extends GenericAbility implements AbilityOnEffectTarg
 
             const tower: Tower | undefined = owner.GetTower(GetHandleId(u));
             if (tower) {
-                tower.Sell();
-                this.game.worldMap.towerConstruction.SetupTower(
-                    ReplaceUnitBJ(tower.tower, FourCC('u038'), bj_UNIT_STATE_METHOD_DEFAULTS),
-                    tower.owner);
+
+                tower.Upgrade(FourCC('u038'));
             }
         }
 

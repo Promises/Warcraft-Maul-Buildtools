@@ -20,11 +20,9 @@ export class VoidLordAbility extends GenericAbility implements AbilityOnCastTarg
             const tower: Tower | undefined = owner.GetTower(GetHandleId(GetSpellAbilityUnit()));
             const target: Tower | undefined = owner.GetTower(GetHandleId(GetSpellTargetUnit()));
             if (tower && target) {
-                if (tower.GetID() === FourCC('h01O') && target.GetID() === FourCC('h02G')) {
+                if (tower.GetTypeID() === FourCC('h01O') && target.GetTypeID() === FourCC('h02G')) {
                     BlzSetUnitBaseDamage(tower.tower, (BlzGetUnitBaseDamage(tower.tower, 0) + 250), 0);
-                    target.Sell();
-                    const newTarget: unit = ReplaceUnitBJ(target.tower, FourCC('h02S'), bj_UNIT_STATE_METHOD_DEFAULTS);
-                    this.game.worldMap.towerConstruction.SetupTower(newTarget, owner);
+                    target.Upgrade(FourCC('h02S'));
                 }
             }
         }

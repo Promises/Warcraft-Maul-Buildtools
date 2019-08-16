@@ -8,7 +8,7 @@ export class Scavenger extends Tower implements TickingTower {
     public Scavenge(): void {
 
         if (UnitItemInSlot(this.tower, 0) === null) {
-            // Log.Debug(`${this.handleId}`);
+            // Log.Debug(`${this.UniqueID}`);
             const lootindx: number = Util.RandomInt(0, AOB_ITEM_LOOT_LEVEL_ONE.length - 1);
             const i: item = CreateItem(AOB_ITEM_LOOT_LEVEL_ONE[lootindx], GetUnitX(this.tower), GetUnitY(this.tower));
             if (!UnitAddItem(this.tower, i)) {

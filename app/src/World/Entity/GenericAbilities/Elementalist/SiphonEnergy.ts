@@ -23,20 +23,10 @@ export class SiphonEnergy extends GenericAbility implements AbilityOnEffectTarge
             const target: Tower | undefined = owner.GetTower(GetHandleId(t));
             if (source && target) {
                 if (this.game.abilityHandler.elementalistSettings.HasCombination(
-                    DecodeFourCC(source.GetID()), DecodeFourCC(target.GetID()))) {
-                    source.Sell();
-                    target.Sell();
-                    const newSource: unit = ReplaceUnitBJ(
-                        source.tower,
-                        FourCC(this.game.abilityHandler.elementalistSettings.GetCombination(
-                            DecodeFourCC(source.GetID()), DecodeFourCC(target.GetID()))),
-                        bj_UNIT_STATE_METHOD_DEFAULTS);
-                    const newTarget: unit = ReplaceUnitBJ(
-                        target.tower,
-                        FourCC('n027'),
-                        bj_UNIT_STATE_METHOD_DEFAULTS);
-                    this.game.worldMap.towerConstruction.SetupTower(newSource, owner);
-                    this.game.worldMap.towerConstruction.SetupTower(newTarget, owner);
+                    DecodeFourCC(source.GetTypeID()), DecodeFourCC(target.GetTypeID()))) {
+                    source.Upgrade(FourCC(this.game.abilityHandler.elementalistSettings.GetCombination(
+                        DecodeFourCC(source.GetTypeID()), DecodeFourCC(target.GetTypeID()))));
+                    target.Upgrade(FourCC('n027'));
                 }
 
             }

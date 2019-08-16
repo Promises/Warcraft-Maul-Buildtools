@@ -42,12 +42,7 @@ export class UnchargedRuneMorph extends GenericAbility implements AbilityOnEffec
 
             const tower: Tower | undefined = owner.GetTower(GetHandleId(u));
             if (tower) {
-                tower.Sell();
-                const t: unit = ReplaceUnitBJ(
-                    tower.tower,
-                    this.towers[this.abilities.indexOf(GetSpellAbilityId())],
-                    bj_UNIT_STATE_METHOD_DEFAULTS);
-                this.game.worldMap.towerConstruction.SetupTower(t, owner);
+                tower.Upgrade(this.towers[this.abilities.indexOf(GetSpellAbilityId())]);
             }
         }
 

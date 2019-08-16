@@ -14,9 +14,7 @@ export class RockGiant extends Tower implements KillingActionTower {
             SetUnitManaBJ(this.tower, mana);
             if (mana > 39) {
                 SetUnitManaBJ(this.tower, 0.00);
-                this.Sell();
-                const nu: unit = ReplaceUnitBJ(this.tower, FourCC('h00A'), 0);
-                this.game.worldMap.towerConstruction.SetupTower(nu, this.owner);
+                this.Upgrade(FourCC('h00A'));
             }
         }
 

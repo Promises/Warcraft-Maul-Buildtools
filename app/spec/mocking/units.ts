@@ -83,7 +83,6 @@ _G.RemoveUnit = function (whichUnit: unit): void {
 };
 
 
-// declare function ReplaceUnitBJ(whichUnit: unit, newUnitId: number, unitStateMethod: number): unit
 _G.ReplaceUnitBJ = function (whichUnit: unit, newUnitId: number, unitStateMethod: number): unit {
     whichUnit.unitid = newUnitId;
     return whichUnit;

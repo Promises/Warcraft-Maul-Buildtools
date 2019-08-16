@@ -188,7 +188,7 @@ export class Defender extends AbstractPlayer {
 
 
     public AddTower(tower: Tower): void {
-        // this._towers.set(tower.handleId, tower);
+        // this._towers.set(tower.UniqueID, tower);
         this._towersArray.push(tower);
     }
 
@@ -215,7 +215,7 @@ export class Defender extends AbstractPlayer {
     // }
 
     public GetTower(id: number): Tower | undefined {
-        const indx: number = this._towersArray.findIndex((element) => element.handleId === id);
+        const indx: number = this._towersArray.findIndex((element) => element.UniqueID === id);
         if (indx >= 0) {
             return this._towersArray[indx];
         }
@@ -421,7 +421,7 @@ export class Defender extends AbstractPlayer {
         this.towersEnabled = !this.towersEnabled;
 
         this.towersArray.forEach((tower) => {
-            if (tower.GetSellValue() <= 8 && !(this.protectedTowers.indexOf(tower.GetID()) >= 0)) {
+            if (tower.GetSellValue() <= 8 && !(this.protectedTowers.indexOf(tower.GetTypeID()) >= 0)) {
                 if (this.towersEnabled) {
                     PauseUnitBJ(false, tower.tower);
                 } else {
@@ -527,7 +527,7 @@ export class Defender extends AbstractPlayer {
     }
 
     public RemoveTower(handleId: number): void {
-        this._towersArray = this._towersArray.filter((elem) => elem.handleId !== handleId);
+        this._towersArray = this._towersArray.filter((elem) => elem.UniqueID !== handleId);
     }
 
     private SelectUnit(): void {
