@@ -14,6 +14,7 @@ export class Defender extends AbstractPlayer {
     public zerglings: number = 0;
     // private towerKeys: IterableIterator<number> | undefined = undefined;
     private loggedDebug: boolean = false;
+    public seaElemetals: number = 0;
 
     get towerForces(): Map<number, number> {
         return this._towerForces;

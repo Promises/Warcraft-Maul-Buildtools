@@ -15,11 +15,15 @@ export class ProudMoore extends Tower implements LimitedTower, ConstructActionTo
     }
 
     private SpawnSeaElemental(i: number): void {
-        const towerLoc: location = GetUnitLoc(this.tower);
-        const targetLoc: location = PolarProjectionBJ(towerLoc, 400.00, (i * (360.00 / 8.00)));
-        CreateUnitAtLoc(this.owner.wcPlayer, FourCC('u041'), targetLoc, bj_UNIT_FACING);
-        RemoveLocation(targetLoc);
-        RemoveLocation(towerLoc);
+        if (this.owner.seaElemetals < 8) {
+            const towerLoc: location = GetUnitLoc(this.tower);
+            const targetLoc: location = PolarProjectionBJ(towerLoc, 400.00, (i * (360.00 / 8.00)));
+            CreateUnitAtLoc(this.owner.wcPlayer, FourCC('u041'), targetLoc, bj_UNIT_FACING);
+            this.owner.seaElemetals++;
+            RemoveLocation(targetLoc);
+            RemoveLocation(towerLoc);
+        }
+
     }
 
     public SellAction(): void {
@@ -34,6 +38,7 @@ export class ProudMoore extends Tower implements LimitedTower, ConstructActionTo
     private RemoveElemental(): void {
         if (GetUnitTypeId(GetEnumUnit()) === FourCC('u041')) {
             RemoveUnit(GetEnumUnit());
+            this.owner.seaElemetals--;
         }
     }
 }
