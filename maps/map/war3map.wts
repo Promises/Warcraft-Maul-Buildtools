@@ -12588,7 +12588,7 @@ STRING 9033
 {
 Infuses the rune with the magical properties of death.
 
-Death  + Nature = Decay
+Death + Nature = Decay
 Death + Air = Plague
 Death + Death = Death Rune [Level 2]
 Death + Life = Undead
