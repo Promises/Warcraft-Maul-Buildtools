@@ -12511,6 +12511,13 @@ STRING 9025
 // Abilities: A0BO (Water Charge), Ubertip (Tooltip - Normal - Extended)
 {
 Infuses the rune with the magical properties of water.
+
+Water + Nature = Moss
+Water + Air = Bubbles
+Water + Death = Corrupted Tree
+Water + Life = Low Tide
+Water + Fire = Mist
+Water + Water = Water Rune [Level 2]
 }
 
 STRING 9026
@@ -12523,6 +12530,13 @@ STRING 9027
 // Abilities: A0BS (Fire Charge), Ubertip (Tooltip - Normal - Extended)
 {
 Infuses the rune with the magical properties of fire.
+
+Fire + Nature = Wildfire
+Fire + Air = Blaze
+Fire + Death = Purgatory
+Fire + Life = Dormant Phoenix Egg
+Fire + Fire = Fire Rune [Level 2]
+Fire + Water = Mist
 }
 
 STRING 9028
@@ -12535,6 +12549,13 @@ STRING 9029
 // Abilities: A0C0 (Nature Charge), Ubertip (Tooltip - Normal - Extended)
 {
 Infuses the rune with the magical properties of nature.
+
+Nature + Nature = Nature Rune [Level 2]
+Nature + Air = Sandstorm
+Nature + Death = Decay
+Nature + Life = Sapling
+Nature + Fire = Wildfire
+Nature + Water = Moss
 }
 
 STRING 9030
@@ -12547,6 +12568,13 @@ STRING 9031
 // Abilities: A0C1 (Air Charge), Ubertip (Tooltip - Normal - Extended)
 {
 Infuses the rune with the magical properties of air.
+
+Air + Nature = Sandstorm
+Air + Air = Air Rune [Level 2]
+Air + Death = Plague
+Air + Life = Tornado
+Air + Fire = Blaze
+Air + Water = Bubbles
 }
 
 STRING 9032
@@ -12559,6 +12587,13 @@ STRING 9033
 // Abilities: A0C2 (Death Charge), Ubertip (Tooltip - Normal - Extended)
 {
 Infuses the rune with the magical properties of death.
+
+Death + Nature = Decay
+Death + Air = Plague
+Death + Death = Death Rune [Level 2]
+Death + Life = Undead
+Death + Fire = Purgatory
+Death + Water = Corrupted Tree
 }
 
 STRING 9034
@@ -12571,6 +12606,13 @@ STRING 9035
 // Abilities: A0C3 (Life Charge), Ubertip (Tooltip - Normal - Extended)
 {
 Infuses the rune with the magical properties of life.
+
+Life + Nature = Sapling
+Life + Air = Tornado
+Life + Death = Undead
+Life + Life = Life Rune [Level 2]
+Life + Fire = Dormant Phoenix Egg
+Life + Water = Low Tide
 }
 
 STRING 9038
