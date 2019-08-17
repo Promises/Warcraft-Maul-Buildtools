@@ -50,13 +50,14 @@ export class SellTower {
 
                 value = Math.floor((<Tower>tower).GetSellValue());
 
-                if (tower.GetTypeID() !== FourCC('n01Y')) {
+                if (tower.GetTypeID() !== FourCC('n01Y') ||
+                    tower.GetTypeID() !== FourCC('n00M') ||
+                    tower.GetTypeID() !== FourCC('e00L')) {
                     value = Util.Round(value * 0.75);
                 }
                 // Log.Debug(`SellValue: ${value}`);
 
                 tower.Sell();
-                // Log.Event(2, `{"tower":"${DecodeFourCC(tower.GetID())}", "owner": "${tower.owner.GetLogStr()}"}`);
             }
             if (!(GetUnitAbilityLevel(unit, FourCC('A02D')) > 0)) {
                 value = 0;
