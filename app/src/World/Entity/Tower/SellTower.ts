@@ -29,6 +29,7 @@ export class SellTower {
 
 
         let value: number = GetUnitPointValue(unit);
+
         for (let i: number = 0; i < settings.PLAYER_AREAS.length; i++) {
             if (settings.PLAYER_AREAS[i].ContainsUnit(unit)) {
                 playerSpawnId = i;
@@ -48,9 +49,15 @@ export class SellTower {
             if (tower) {
 
                 value = Math.floor((<Tower>tower).GetSellValue());
+
+                if (tower.GetTypeID() !== FourCC('n01Y') ||
+                    tower.GetTypeID() !== FourCC('n00M') ||
+                    tower.GetTypeID() !== FourCC('e00L')) {
+                    value = Util.Round(value * 0.75);
+                }
                 // Log.Debug(`SellValue: ${value}`);
+
                 tower.Sell();
-                // Log.Event(2, `{"tower":"${DecodeFourCC(tower.GetID())}", "owner": "${tower.owner.GetLogStr()}"}`);
             }
             if (!(GetUnitAbilityLevel(unit, FourCC('A02D')) > 0)) {
                 value = 0;
