@@ -11,6 +11,8 @@ import { ArchimondeGate } from './ArchimondeGate';
 import { ArchimondeTeleport } from './ArchimondeTeleport';
 import { EndOfRoundTower } from '../Entity/Tower/Specs/EndOfRoundTower';
 import { CreepAbility } from '../Entity/CreepAbilities/specs/CreepAbility';
+import { Tower } from '../Entity/Tower/Specs/Tower';
+import { TickingTower } from '../Entity/Tower/Specs/TickingTower';
 
 export class GameRound {
 
@@ -22,7 +24,8 @@ export class GameRound {
     private _isWaveInProgress: boolean = false;
     private _currentWave: number = 1;
     private roundOverGoldReward: number = settings.GAME_GOLD_REWARD_BASE;
-    private _endOfTurnTowers: Map<number, EndOfRoundTower> = new Map<number, EndOfRoundTower>();
+    // private _endOfTurnTowers: Map<number, EndOfRoundTower> = new Map<number, EndOfRoundTower>();
+    private _endOfTurnTowerArray: (Tower & EndOfRoundTower)[] = [];
     private waitBetweenWaveTime: number = settings.GAME_TIME_BEFORE_WAVE;
     private archimondeGate: ArchimondeGate;
     private archimondeTeleport: ArchimondeTeleport;
@@ -44,8 +47,15 @@ export class GameRound {
         this.roundEndTrigger.AddAction(() => this.RoundEnd());
     }
 
-    get endOfTurnTowers(): Map<number, EndOfRoundTower> {
-        return this._endOfTurnTowers;
+
+    public AddEndOfRoundTower(id: number, endOfRoundTower: EndOfRoundTower & Tower): void {
+        this._endOfTurnTowerArray.push(endOfRoundTower);
+    }
+
+    public RemoveEndOfRoundTower(id: number): void {
+        // tslint:disable-next-line:ter-arrow-parens
+        this._endOfTurnTowerArray = this._endOfTurnTowerArray.filter((tower) => tower.UniqueID !== id);
+
     }
 
 
@@ -205,7 +215,7 @@ export class GameRound {
             }
         }
 
-        for (const tower of this._endOfTurnTowers.values()) {
+        for (const tower of this._endOfTurnTowerArray) {
             tower.EndOfRoundAction();
         }
 

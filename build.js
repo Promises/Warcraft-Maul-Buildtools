@@ -32,7 +32,7 @@ class Build {
             this.buildnumber = '';
         }
 
-        if (args['buildnumber']) {
+        if (args['release']) {
             this.isFull = true;
             this.release = args['release'];
         } else {

@@ -138,7 +138,7 @@ export class Tower {
     public Sell(): void {
 
         if (this.IsEndOfRoundTower()) {
-            this.game.gameRoundHandler.endOfTurnTowers.delete(this.UniqueID);
+            this.game.gameRoundHandler.RemoveEndOfRoundTower(this.UniqueID);
         }
         if (this.IsAttackActionTower()) {
             this.game.gameDamageEngine.initialDamageEventTowers.delete(this.UniqueID);
