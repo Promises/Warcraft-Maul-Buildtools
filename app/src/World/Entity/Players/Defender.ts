@@ -177,11 +177,6 @@ export class Defender extends AbstractPlayer {
     }
 
     private AfterPlayerLeft(): boolean {
-        // Log.Debug("After player left");
-        Log.Debug('Creating cleanup event after leaving player');
-
-        // this.DistributePlayerTowers();
-        // this.towerKeys = this.towers.keys();
         this.game.safeEventQueue.AddMed(() => this.DistributeAndDestroyTowers());
         this.setHoloMaze(undefined);
         return true;
@@ -189,7 +184,6 @@ export class Defender extends AbstractPlayer {
 
 
     public AddTower(tower: Tower): void {
-        // this._towers.set(tower.UniqueID, tower);
         this._towersArray.push(tower);
     }
 
@@ -211,21 +205,14 @@ export class Defender extends AbstractPlayer {
         this._totalMazeLength = value;
     }
 
-    // get towers(): Map<number, Tower> {
-    //     return this._towers;
-    // }
-
     public GetTower(id: number): Tower | undefined {
         const indx: number = this._towersArray.findIndex((element) => element.UniqueID === id);
+        Log.Debug(`Found indx ${indx}`);
         if (indx >= 0) {
             return this._towersArray[indx];
         }
         return undefined;
     }
-
-    // set towers(value: Map<number, Tower>) {
-    //     this._towers = value;
-    // }
 
     get hybridTowers(): string[] {
         return this._hybridTowers;
@@ -321,7 +308,6 @@ export class Defender extends AbstractPlayer {
 
     private DistributePlayerGold(): void {
         const leavingPlayerGold: number = this.getGold();
-        // this.setGold(0);
         let goldDistribution: number = leavingPlayerGold / (this.game.players.size - 1);
 
         goldDistribution = Math.floor(goldDistribution * 0.3);
@@ -332,24 +318,6 @@ export class Defender extends AbstractPlayer {
         }
     }
 
-    private DistributePlayerTowers(): void {
-        // this.towerKeys = this.towers.keys();
-        this.game.safeEventQueue.AddMed(() => this.DistributeAndDestroyTowers());
-        // for (const tower of this.towers.values()) {
-        //     tower.Sell();
-        //     const newOwner: Defender = <Defender>this.game.players.get(Util.GetRandomKey(this.game.players));
-        //
-        //     const nutower: Tower = tower.SetOwnership(newOwner);
-        //     nutower.SetLeaverSellValue();
-        //
-        // }
-        // for (const builder of this.builders) {
-        //     RemoveUnit(builder);
-        // }
-        // const grp: group = GetUnitsInRectAll(GetPlayableMapRect());
-        // ForGroupBJ(grp, () => this.DestroyLeftoverUnits());
-        // DestroyGroup(grp);
-    }
 
     private DistributeAndDestroyTowers(): boolean {
         if (!this.loggedDebug) {
@@ -357,31 +325,14 @@ export class Defender extends AbstractPlayer {
             this.loggedDebug = true;
         }
         if (this._towersArray.length > 0) {
-            const tower: Tower | undefined = this._towersArray.pop();
+            const tower: Tower | undefined = this._towersArray[0];
             if (tower) {
-                // tower.Sell();
-                // tower.SetLeaverSellValue();
-
                 this.game.sellTower.SellTower(tower.tower);
-
-
-                // const newOwner: Defender | undefined = this.game.players.get(Util.GetRandomKey(this.game.players));
-                // if (newOwner) {
-                //     const nutower: Tower = tower.SetOwnership(newOwner);
-                //     nutower.SetLeaverSellValue();
-                //
-                // }
-
                 return false;
             }
 
         }
 
-        // Log.Debug('Distributing gold and removing leaving player');
-
-        // const grp: group = GetUnitsInRectAll(GetPlayableMapRect());
-        // ForGroupBJ(grp, () => this.DestroyLeftoverUnits());
-        // DestroyGroup(grp);
         this.DistributePlayerGold();
         this.setGold(0);
         this.game.players.delete(this.id);
@@ -422,7 +373,7 @@ export class Defender extends AbstractPlayer {
         this.towersEnabled = !this.towersEnabled;
 
         this.towersArray.forEach((tower) => {
-            if (tower.GetSellValue() <= 8 && !(this.protectedTowers.indexOf(tower.GetTypeID()) >= 0)) {
+            if (tower.GetSellValue() <= 10 && !(this.protectedTowers.indexOf(tower.GetTypeID()) >= 0)) {
                 if (this.towersEnabled) {
                     PauseUnitBJ(false, tower.tower);
                 } else {

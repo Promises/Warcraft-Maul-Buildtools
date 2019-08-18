@@ -29,11 +29,11 @@ export class TowerTicker {
     }
 
     public RemoveTickingTower(id: number): void {
-        Log.Debug(`${this.tickingTowers.length}`);
-
         // tslint:disable-next-line:ter-arrow-parens
         this.tickingTowers = this.tickingTowers.filter((tower) => tower.UniqueID !== id);
-        Log.Debug(`${this.tickingTowers.length}`);
+    }
 
+    public GetTickingTowerCount(): number {
+        return this.tickingTowers.length;
     }
 }

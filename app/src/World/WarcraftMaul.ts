@@ -23,6 +23,7 @@ import { VoidTicker } from './Game/VoidTicker';
 import { EventQueue } from '../lib/WCEventQueue/EventQueue';
 import { SafeEventQueue } from '../lib/WCEventQueue/SafeEventQueue';
 import { TimedEventQueue } from '../lib/WCEventQueue/TimedEventQueue';
+import { HostDetection } from '../lib/HostDetection';
 
 export class WarcraftMaul {
 
@@ -68,13 +69,12 @@ export class WarcraftMaul {
         if (this.debugMode) {
             // this.waveTimer = 15;
             Log.Init([
-                         new StringSink(LogLevel.Debug, SendMessageUnlogged),
-                         // new PreloadSink(LogLevel.Message, `WCMAUL\\${os.time()}.txt`),
-                     ]);
+                new StringSink(LogLevel.Debug, SendMessageUnlogged),
+                // new PreloadSink(LogLevel.Message, `WCMAUL\\${os.time()}.txt`),
+            ]);
             Log.Debug('Debug mode enabled');
         }
         this.gameCommandHandler = new Commands(this);
-
         // Set up all players
         for (let i: number = 0; i < bj_MAX_PLAYER_SLOTS; i++) {
             if (GetPlayerSlotState(Player(i)) === PLAYER_SLOT_STATE_PLAYING) {
