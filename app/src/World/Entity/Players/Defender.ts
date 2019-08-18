@@ -373,7 +373,7 @@ export class Defender extends AbstractPlayer {
         this.towersEnabled = !this.towersEnabled;
 
         this.towersArray.forEach((tower) => {
-            if (tower.GetSellValue() <= 8 && !(this.protectedTowers.indexOf(tower.GetTypeID()) >= 0)) {
+            if (tower.GetSellValue() <= 10 && !(this.protectedTowers.indexOf(tower.GetTypeID()) >= 0)) {
                 if (this.towersEnabled) {
                     PauseUnitBJ(false, tower.tower);
                 } else {
