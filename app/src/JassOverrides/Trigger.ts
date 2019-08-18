@@ -16,7 +16,7 @@ export class Trigger {
 
         xpcall(() => {
             answer = func();
-        },     (err: any) => {
+        }, (err: any) => {
             this.printError(err);
         });
 
@@ -100,5 +100,13 @@ export class Trigger {
     public RegisterPlayerUnitEvent(whichPlayer: player, whichPlayerUnitEvent: playerunitevent, filter?: boolexpr): event {
         return TriggerRegisterPlayerUnitEvent(this.nativeTrigger, whichPlayer, whichPlayerUnitEvent, filter === undefined ? null : filter);
 
+    }
+
+    public RegisterPlayerSyncEvent(whichPlayer: player, prefix: string, fromServer: boolean): event {
+        return BlzTriggerRegisterPlayerSyncEvent(this.nativeTrigger, whichPlayer, prefix, fromServer);
+    }
+
+    public Execute(): void {
+        TriggerExecute(this.nativeTrigger);
     }
 }

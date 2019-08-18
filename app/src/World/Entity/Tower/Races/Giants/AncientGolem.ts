@@ -11,7 +11,7 @@ export class AncientGolem extends Tower implements TickingTower {
         SetUnitScalePercent(this.tower, 30.0 + (mana * 10), 30.0 + (mana * 10), 30.0 + (mana * 10));
 
         if (mana > 6) {
-            this.game.towerTicker.RemoveTickingTower(GetHandleId(this.tower));
+            this.game.towerTicker.RemoveTickingTower(this.UniqueID);
         }
 
     }

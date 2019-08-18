@@ -45,7 +45,7 @@ export class SellTower {
         const owningPlayer: player = GetOwningPlayer(unit);
         const player: Defender | undefined = this._game.players.get(GetPlayerId(owningPlayer));
         if (player) {
-            const tower: Tower | undefined = player.GetTower(GetHandleIdBJ(unit));
+            const tower: Tower | undefined = player.GetTower(GetHandleId(unit));
             if (tower) {
 
                 value = Math.floor((<Tower>tower).GetSellValue());
@@ -55,7 +55,6 @@ export class SellTower {
                     tower.GetTypeID() !== FourCC('e00L')) {
                     value = Util.Round(value * 0.75);
                 }
-                // Log.Debug(`SellValue: ${value}`);
 
                 tower.Sell();
             }
@@ -75,8 +74,13 @@ export class SellTower {
         SetTextTagPermanentBJ(txt, false);
         SetTextTagLifespanBJ(txt, 2.00);
         SetTextTagVelocityBJ(txt, 64, 90);
-        DestroyEffect(AddSpecialEffect('Abilities\\Spells\\Items\\ResourceItems\\ResourceEffectTarget.mdl',
-            GetUnitX(unit), GetUnitY(unit)));
+        DestroyEffect(
+            AddSpecialEffect(
+                'Abilities\\Spells\\Items\\ResourceItems\\ResourceEffectTarget.mdl',
+                GetUnitX(unit),
+                GetUnitY(unit),
+            ),
+        );
         PlaySoundOnUnitBJ(settings.Sounds.goldSound, 100, unit);
         // }
         //
