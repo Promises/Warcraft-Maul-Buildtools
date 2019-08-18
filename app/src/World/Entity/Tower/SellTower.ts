@@ -50,8 +50,8 @@ export class SellTower {
 
                 value = Math.floor((<Tower>tower).GetSellValue());
 
-                if (tower.GetTypeID() !== FourCC('n01Y') ||
-                    tower.GetTypeID() !== FourCC('n00M') ||
+                if (tower.GetTypeID() !== FourCC('n01Y') &&
+                    tower.GetTypeID() !== FourCC('n00M') &&
                     tower.GetTypeID() !== FourCC('e00L')) {
                     value = Util.Round(value * 0.75);
                 }

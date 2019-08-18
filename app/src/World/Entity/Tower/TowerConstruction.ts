@@ -131,7 +131,8 @@ export class TowerConstruction {
         }
         if (ObjectExtendsTower.IsLimitedTower()) {
             if (owner.hasHybridRandomed) {
-                if (owner.hybridTowers.findIndex(elem => elem === DecodeFourCC(ObjectExtendsTower.GetTypeID())) >= 0) {
+                if (owner.hybridTowers.findIndex(elem => elem === DecodeFourCC(ObjectExtendsTower.GetTypeID())) >= 0 ||
+                    owner.hybridTowers.findIndex(() => 'h03T' === DecodeFourCC(ObjectExtendsTower.GetTypeID())) >= 0) {
                     SetPlayerTechMaxAllowedSwap(GetUnitTypeId(ObjectExtendsTower.tower), ObjectExtendsTower.MaxCount(), owner.wcPlayer);
                 }
             } else {
