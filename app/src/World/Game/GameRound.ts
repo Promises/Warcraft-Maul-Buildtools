@@ -305,7 +305,7 @@ export class GameRound {
                         GetRectCenterX(spawn.spawnOne.rectangle),
                         GetRectCenterY(spawn.spawnOne.rectangle),
                         this.getSpawnFace(i));
-                    spawned.set(GetHandleId(creep), new Creep(creep, this, abilities));
+                    spawned.set(GetHandleId(creep), new Creep(creep, this, abilities, this.game));
 
                     if (spawn.spawnTwo) {
 
@@ -315,7 +315,7 @@ export class GameRound {
                             GetRectCenterX(spawn.spawnTwo.rectangle),
                             GetRectCenterY(spawn.spawnTwo.rectangle),
                             this.getSpawnFace(i));
-                        spawned.set(GetHandleId(creep), new Creep(creep, this, abilities));
+                        spawned.set(GetHandleId(creep), new Creep(creep, this, abilities, this.game));
                     }
                 }
             }
