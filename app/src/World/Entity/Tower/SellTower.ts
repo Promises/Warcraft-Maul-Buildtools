@@ -5,7 +5,6 @@ import { Log } from '../../../lib/Serilog/Serilog';
 import { Defender } from '../Players/Defender';
 import { Maze } from '../../Antiblock/Maze';
 import { Tower } from './Specs/Tower';
-import Debug = Log.Debug;
 
 export class SellTower {
     private _sellTrigger: Trigger;

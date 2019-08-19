@@ -13,16 +13,16 @@ import { TornadoAura } from './TornadoAura';
 import { MorningPerson } from './MorningPerson';
 
 export class CreepAbilityHandler {
-    private readonly game: WarcraftMaul;
+    private game: WarcraftMaul | undefined;
     private abilities: object[] = [];
     private activeAbilities: CreepAbility[] = [];
 
 
-    constructor(game: WarcraftMaul) {
-        this.game = game;
+    constructor(abilityUnit: unit) {
         this.AddAbilitiesToList();
-        this.SetupAbilities();
+        this.PreSetupAbilities(abilityUnit);
     }
+
 
     private AddAbilitiesToList(): void {
         this.abilities.push(HardnedSkin);
@@ -38,28 +38,46 @@ export class CreepAbilityHandler {
     }
 
 
-    private SetupAbilities(): void {
+    private PreSetupAbilities(abilityUnit: unit): void {
 
         for (const ability of this.abilities) {
             // @ts-ignore
-            const ObjectExtendsAbility: CreepAbility = new ability(this.game);
-
-
-            if (ObjectExtendsAbility.IsFinalDamageModificationCreepAbility()) {
-                this.game.gameDamageEngine.AddFinalDamageModificationCreepAbility(ObjectExtendsAbility);
-            }
-
-            if (ObjectExtendsAbility.IsAttackActionCreepAbility()) {
-                this.game.gameDamageEngine.AddInitialDamageEventCreepAbility(ObjectExtendsAbility);
-            }
-
+            const ObjectExtendsAbility: CreepAbility = new ability(abilityUnit);
 
             this.activeAbilities.push(ObjectExtendsAbility);
         }
 
     }
 
+    public SetupGame(game: WarcraftMaul): void {
+        this.game = game;
+        this.SetupAbilities();
+    }
+
+    private SetupAbilities(): void {
+        if (!this.game) {
+            return;
+        }
+        for (const ability of this.activeAbilities) {
+            ability.SetupGame(this.game);
+
+            if (ability.IsFinalDamageModificationCreepAbility()) {
+                this.game.gameDamageEngine.AddFinalDamageModificationCreepAbility(ability);
+            }
+
+            if (ability.IsAttackActionCreepAbility()) {
+                this.game.gameDamageEngine.AddInitialDamageEventCreepAbility(ability);
+            }
+
+
+        }
+
+    }
+
     public GetAbilitiesForWave(wave: WaveCreep): CreepAbility[] {
+        if (!this.game) {
+            return this.activeAbilities;
+        }
         let currentDiff: number = this.game.diffVote.difficulty;
         if (currentDiff === 100) {
             return [];
