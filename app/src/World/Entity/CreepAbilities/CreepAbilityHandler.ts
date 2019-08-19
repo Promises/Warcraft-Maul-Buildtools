@@ -85,6 +85,9 @@ export class CreepAbilityHandler {
         currentDiff -= 100;
         const allAbilities: CreepAbility[] = this.activeAbilities.slice(0, this.activeAbilities.length - 1);
         // allAbilities.sort(() => 0.5 - Math.random());
+        if (wave.getCreepType() === CREEP_TYPE.BOSS) {
+            return allAbilities;
+        }
         this.ShuffleArray(allAbilities);
         let picks: number = Math.floor(currentDiff / 100);
         const rest: number = currentDiff % 100;

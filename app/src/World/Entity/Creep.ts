@@ -2,17 +2,20 @@ import { CheckPoint } from './CheckPoint';
 import { Log } from '../../lib/Serilog/Serilog';
 import { GameRound } from '../Game/GameRound';
 import { CreepAbility } from './CreepAbilities/specs/CreepAbility';
+import { WarcraftMaul } from '../WarcraftMaul';
 
 export class Creep {
     public creep: unit;
     public targetCheckpoint: CheckPoint | undefined;
     public gameRound: GameRound;
     public abilities: CreepAbility[];
+    private readonly game: WarcraftMaul;
 
-    constructor(creep: unit, gameRound: GameRound, abilities: CreepAbility[]) {
+    constructor(creep: unit, gameRound: GameRound, abilities: CreepAbility[], game: WarcraftMaul) {
         this.creep = creep;
         this.gameRound = gameRound;
-
+        this.game = game;
+        this.AddArmorBonusByDifficulty();
         this.abilities = abilities;
 
     }
@@ -57,6 +60,12 @@ export class Creep {
     public AddCreepAbilities(): void {
         for (const ability of this.abilities) {
             ability.AddAbilityToCreep(this);
+        }
+    }
+
+    public AddArmorBonusByDifficulty(): void {
+        if(this.gameRound.currentWave > 20) {
+            BlzSetUnitArmor(this.creep, BlzGetUnitArmor(this.creep) * Math.floor(this.game.diffVote.difficulty / 100));
         }
     }
 }
