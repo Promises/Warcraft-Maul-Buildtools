@@ -1,13 +1,15 @@
 import { CreepAbility } from './specs/CreepAbility';
-import { WarcraftMaul } from '../../WarcraftMaul';
 import { AttackActionCreepAbility } from './specs/AttackActionCreepAbility';
 
 export class VampiricAura extends CreepAbility implements AttackActionCreepAbility {
-    constructor(game: WarcraftMaul) {
-        super('A0B3', game);
+    constructor(abilityUnit: unit) {
+        super('A0B3', abilityUnit);
     }
 
     public AttackAction(): void {
+        if (!this.game) {
+            return;
+        }
         const target: unit | undefined = this.game.gameDamageEngineGlobals.udg_DamageEventTarget;
 
         if (target) {

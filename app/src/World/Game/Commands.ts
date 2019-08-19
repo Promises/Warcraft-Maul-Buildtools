@@ -37,16 +37,16 @@ export class Commands {
         let amount: number = 0;
         switch (command[0]) {
             case 'dummy':
-                const dummy1: DummyPlayer = new DummyPlayer(this.game, 11);
-                const dummy2: DummyPlayer = new DummyPlayer(this.game, 12);
-                const dummy3: DummyPlayer = new DummyPlayer(this.game, 10);
-                const dummy4: DummyPlayer = new DummyPlayer(this.game, 9);
-                const dummy5: DummyPlayer = new DummyPlayer(this.game, 8);
-                const dummy6: DummyPlayer = new DummyPlayer(this.game, 7);
-                const dummy7: DummyPlayer = new DummyPlayer(this.game, 6);
-                const dummy8: DummyPlayer = new DummyPlayer(this.game, 5);
-                const dummy9: DummyPlayer = new DummyPlayer(this.game, 4);
-                const dummy10: DummyPlayer = new DummyPlayer(this.game, 3);
+                // const dummy1: DummyPlayer = new DummyPlayer(this.game, 11);
+                // const dummy2: DummyPlayer = new DummyPlayer(this.game, 12);
+                // const dummy3: DummyPlayer = new DummyPlayer(this.game, 10);
+                // const dummy4: DummyPlayer = new DummyPlayer(this.game, 9);
+                // const dummy5: DummyPlayer = new DummyPlayer(this.game, 8);
+                // const dummy6: DummyPlayer = new DummyPlayer(this.game, 7);
+                // const dummy7: DummyPlayer = new DummyPlayer(this.game, 6);
+                // const dummy8: DummyPlayer = new DummyPlayer(this.game, 5);
+                // const dummy9: DummyPlayer = new DummyPlayer(this.game, 4);
+                // const dummy10: DummyPlayer = new DummyPlayer(this.game, 3);
                 const dummy11: DummyPlayer = new DummyPlayer(this.game, 2);
                 break;
             case 'ui':
@@ -168,6 +168,9 @@ export class Commands {
                     spawnedCreeps.unitMap.forEach(u => KillUnit(u.creep));
 
                 }
+                break;
+            case 'events':
+                Log.Debug(`TickEvents: ${this.game.towerTicker.GetTickingTowerCount()}`);
                 break;
             case 'timer':
                 this.TestTimeout();

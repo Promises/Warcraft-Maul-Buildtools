@@ -8,23 +8,22 @@ import { DivineShield } from '../DivineShield';
 export class CreepAbility {
 
     private readonly abilityId: number;
-    private _game: WarcraftMaul;
+    private _game: WarcraftMaul | undefined;
 
-    constructor(abiID: string, game: WarcraftMaul) {
+    constructor(abiID: string, abilityUnit: unit) {
         this.abilityId = FourCC(abiID);
-        this._game = game;
-        const u: unit = CreateUnit(Player(bj_PLAYER_NEUTRAL_EXTRA), FourCC('uloc'), 0, 0, 0);
-        UnitAddAbilityBJ(FourCC(abiID), u);
-        UnitAddAbilityBJ(FourCC('A06B'), u);
-        RemoveUnit(u);
-
+        UnitAddAbility(abilityUnit, this.abilityId);
     }
 
-    get game(): WarcraftMaul {
+    public SetupGame(game: WarcraftMaul): void {
+        this._game = game;
+    }
+
+    get game(): WarcraftMaul | undefined {
         return this._game;
     }
 
-    set game(value: WarcraftMaul) {
+    set game(value: WarcraftMaul | undefined) {
         this._game = value;
     }
 
@@ -42,6 +41,9 @@ export class CreepAbility {
     }
 
     public AddAbilityToCreep(creep: Creep): void {
+        if (!this.game) {
+            return;
+        }
         const currentWave: WaveCreep = this.game.worldMap.waveCreeps[this.game.gameRoundHandler.currentWave - 1];
         if (this.GetID() === FourCC('A01E') && currentWave.getCreepType() === CREEP_TYPE.AIR) {
             return;

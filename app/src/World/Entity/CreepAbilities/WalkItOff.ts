@@ -1,13 +1,15 @@
 import { CreepAbility } from './specs/CreepAbility';
-import { WarcraftMaul } from '../../WarcraftMaul';
 import { AttackActionCreepAbility } from './specs/AttackActionCreepAbility';
 
 export class WalkItOff extends CreepAbility implements AttackActionCreepAbility {
-    constructor(game: WarcraftMaul) {
-        super('A01T', game);
+    constructor(abilityUnit: unit) {
+        super('A01T', abilityUnit);
     }
 
     public AttackAction(): void {
+        if (!this.game) {
+            return;
+        }
         const target: unit | undefined = this.game.gameDamageEngineGlobals.udg_DamageEventTarget;
 
         if (target) {

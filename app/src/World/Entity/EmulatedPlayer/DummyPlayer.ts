@@ -3,6 +3,7 @@ import { Defender } from '../Players/Defender';
 import { TimedEvent } from '../../../lib/WCEventQueue/TimedEvent';
 import { CheckPoint } from '../CheckPoint';
 import { HologramCheckpointDistance } from '../../Holograms/HologramCheckpointDistance';
+import { Log } from '../../../lib/Serilog/Serilog';
 
 export class DummyPlayer {
     private game: WarcraftMaul;
@@ -11,7 +12,7 @@ export class DummyPlayer {
     private slot: number;
     private towers: number[] = [
         // FourCC('o00X'),
-        FourCC('hC86'),
+        // FourCC('hC86'),
         // FourCC('n00L'),
         // FourCC('n01C'),
         // FourCC('n018'),
@@ -21,7 +22,21 @@ export class DummyPlayer {
         // FourCC('hC97'),
         // FourCC('n02X'),
         // FourCC('h02G'),
+        // FourCC('u029'),
+        // FourCC('u027'),
+        // FourCC('u026'),
+        // FourCC('u022'),
+        FourCC('h00L'),
+        FourCC('h02V'),
+        FourCC('o012'),
+        FourCC('o006'),
+        FourCC('o013'),
+        FourCC('o008'),
+
+
     ];
+
+    private currentIndx: number = 0;
 
     constructor(game: WarcraftMaul, slot: number) {
         this.game = game;
@@ -37,6 +52,7 @@ export class DummyPlayer {
         // this.game.racePicking.PickRaceForPlayerByItem(dummyPlayer, FourCC('I00V'));
         // this.game.racePicking.PickRaceForPlayerByItem(dummyPlayer, FourCC('I00V'));
         // this.game.racePicking.PickRaceForPlayerByItem(dummyPlayer, FourCC('I00V'));
+        this.game.worldMap.playerSpawns[this.slot].isOpen = true;
         this.game.timedEventQueue.AddEvent(new TimedEvent(() => this.ConstructTowers(), 10, false));
         this.step = 0;
 
@@ -45,7 +61,7 @@ export class DummyPlayer {
 
     private ConstructTowers(): boolean {
         if (this.CreateTowersForPlayer()) {
-            this.game.timedEventQueue.AddEvent(new TimedEvent(() => this.Leave(), 1200, false));
+            this.game.timedEventQueue.AddEvent(new TimedEvent(() => this.Leave(), 150, false));
             return true;
         }
         return false;
@@ -64,9 +80,13 @@ export class DummyPlayer {
     }
 
     private GetTower(): number {
-        // return Util.GetRandomKey(this.game.worldMap.towerConstruction.towerTypes);
-        return this.towers[Util.RandomInt(0, this.towers.length - 1)];
-        // return FourCC('n02X');
+        this.currentIndx++;
+        if (this.currentIndx === this.game.worldMap.towerConstruction.towerTypes.GetArray().length) {
+            this.currentIndx = 0;
+        }
+        return this.game.worldMap.towerConstruction.towerTypes.GetArray()[this.currentIndx];
+        // return this.towers[this.currentIndx];
+        // return FourCC('h00L');
     }
 
     private CreateTowersForPlayer(): boolean {

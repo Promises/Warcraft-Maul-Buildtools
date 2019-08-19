@@ -1,13 +1,15 @@
 import { CreepAbility } from './specs/CreepAbility';
 import { FinalDamageModificationCreepAbility } from './specs/FinalDamageModificationCreepAbility';
-import { WarcraftMaul } from '../../WarcraftMaul';
 
 export class DivineShield extends CreepAbility implements FinalDamageModificationCreepAbility {
-    constructor(game: WarcraftMaul) {
-        super('A01E', game);
+    constructor(abilityUnit: unit) {
+        super('A01E', abilityUnit);
     }
 
     public ModifyFinalDamage(): void {
+        if (!this.game) {
+            return;
+        }
         const target: unit | undefined = this.game.gameDamageEngineGlobals.udg_DamageEventTarget;
         if (target) {
             if (GetUnitAbilityLevel(target, this.GetID()) > 0) {

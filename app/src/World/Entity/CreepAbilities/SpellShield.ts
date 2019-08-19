@@ -3,7 +3,7 @@ import { WarcraftMaul } from '../../WarcraftMaul';
 import { AttackActionCreepAbility } from './specs/AttackActionCreepAbility';
 
 export class SpellShield extends CreepAbility {
-    constructor(game: WarcraftMaul) {
-        super('A00D', game);
+    constructor(abilityUnit: unit) {
+        super('A00D', abilityUnit);
     }
 }

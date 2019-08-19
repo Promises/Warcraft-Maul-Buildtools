@@ -58,7 +58,7 @@ export class WarcraftMaul {
     public timedEventQueue: TimedEventQueue;
     public racePicking: RacePicking;
 
-    constructor() {
+    constructor(creepAbilityHandler: CreepAbilityHandler) {
         // @ts-ignore to enable tests
 
 
@@ -90,6 +90,8 @@ export class WarcraftMaul {
         this.enemies.push(new Attacker(COLOUR.VOILET, this));
         this.enemies.push(new Attacker(COLOUR.WHEAT, this));
 
+
+
         // All enemies should be allied with each other
         for (const enemy of this.enemies) {
             for (const enemyAlly of this.enemies) {
@@ -112,7 +114,8 @@ export class WarcraftMaul {
         this.buffHandler = new BuffHandler(this); // X
         this.abilityHandler = new GenericAbilityHandler(this); // X
         this.itemHandler = new ItemHandler(this); // X
-        this._creepAbilityHandler = new CreepAbilityHandler(this); // X
+        this._creepAbilityHandler = creepAbilityHandler;
+        creepAbilityHandler.SetupGame(this);
 
 
         // this.gameCommandHandler.OpenAllSpawns();

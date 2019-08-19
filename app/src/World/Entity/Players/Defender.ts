@@ -207,7 +207,6 @@ export class Defender extends AbstractPlayer {
 
     public GetTower(id: number): Tower | undefined {
         const indx: number = this._towersArray.findIndex((element) => element.UniqueID === id);
-        Log.Debug(`Found indx ${indx}`);
         if (indx >= 0) {
             return this._towersArray[indx];
         }
@@ -320,10 +319,6 @@ export class Defender extends AbstractPlayer {
 
 
     private DistributeAndDestroyTowers(): boolean {
-        if (!this.loggedDebug) {
-            Log.Debug('Starting towercleanup after leaving player');
-            this.loggedDebug = true;
-        }
         if (this._towersArray.length > 0) {
             const tower: Tower | undefined = this._towersArray[0];
             if (tower) {
