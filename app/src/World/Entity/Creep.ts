@@ -64,14 +64,6 @@ export class Creep {
     }
 
     public AddArmorBonusByDifficulty(): void {
-        if (this.gameRound.currentWave < 35) {
-            BlzSetUnitArmor(this.creep, BlzGetUnitArmor(this.creep) * Math.floor(this.game.diffVote.difficulty / 100));
-        } else if (this.gameRound.currentWave >= 35) {
-            if (this.game.diffVote.difficulty < 251) {
-                BlzSetUnitArmor(this.creep, BlzGetUnitArmor(this.creep) * Math.floor(this.game.diffVote.difficulty / 100) + 1);
-            } else {
-                BlzSetUnitArmor(this.creep, BlzGetUnitArmor(this.creep) * (Math.floor(this.game.diffVote.difficulty / 100) + 2));
-            }
-        }
+        BlzSetUnitArmor(this.creep, BlzGetUnitArmor(this.creep) * Math.floor(this.game.diffVote.difficulty / 100));
     }
 }
