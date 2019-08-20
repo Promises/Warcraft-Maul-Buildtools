@@ -148,7 +148,11 @@ export class Defender extends AbstractPlayer {
     }
 
     private PlayerLeftTheGameConditions(game: WarcraftMaul): boolean {
-        return game.gameLives > 0;
+        if (game.gameLives > 0) {
+            return true;
+        }
+        SendMessage(`${this.getNameWithColour()} has left the game!`);
+        return false;
     }
 
     public PlayerLeftTheGame(): void {
