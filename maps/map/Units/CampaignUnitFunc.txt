@@ -949,10 +949,10 @@ LoopingSoundFadeOut=512
 
 [h01C]
 Art=ReplaceableTextures\CommandButtons\BTNcentaur.blp
-Name=[Tavern] - Centaur Outrunner
+Name=[Tavern] - Drunk Centaur
 Hotkey=Q
-Tip=Hire Centaur Outrunner [|cffffcc00Q|r]
-Ubertip="These centaurs are often hired as mercenaries to take out simple targets|n|n|cffffcc00Attack:|r Pierce|n|cffffcc00Cooldown:|r 1.25|n|cffffcc00Damage:|r 19 - 24|n|cffffcc00Range:|r 900"
+Tip=Hire Drunk Centaur [|cffffcc00Q|r]
+Ubertip="These centaurs are often hired as mercenaries to take out simple targets, but the often fail because theyre always drunk.|n|n|cffffcc00Attack:|r Pierce|n|cffffcc00Cooldown:|r 1.25|n|cffffcc00Damage:|r 1 - 75|n|cffffcc00Range:|r 900"
 Buttonpos=0,0
 Missileart=Abilities\Weapons\Arrow\ArrowMissile.mdl
 Missilearc=0.15
@@ -963,7 +963,7 @@ LoopingSoundFadeOut=512
 
 [h01D]
 Art=ReplaceableTextures\CommandButtons\BTNForestTrollShadowPriest.blp
-Name=[Forest Trolls] - Forest Troll Shadow Priest
+Name=[Tavern] - Forest Troll Shadow Priest
 Hotkey=R
 Tip=Hire Forest Troll Shadow Priest [|cffffcc00R|r]
 Ubertip="This creature may be chaotic, but his special ability can often come in handy when in battle|n|n|cffffcc00Attack:|r None|n|cffffcc00Range:|r 300|n|cffffcc00Ability:|r Battle Roar; enemies within range take 50% more damage, but has a 25% increased movement speed"
@@ -977,10 +977,10 @@ LoopingSoundFadeOut=512
 
 [h01E]
 Art=ReplaceableTextures\CommandButtons\BTNGnollWarden.blp
-Name=[Gnolls] - Gnoll Warden
+Name=[Tavern] - Gnoll Patron
 Hotkey=W
-Tip=Hire Gnoll Warden [|cffffcc00W|r]
-Ubertip="This Gnoll Warden was found passed out drunk in your tavern and he's only working for you so you won't report him for drinking on the job|n|n|cffffcc00Attack:|r Chaos|n|cffffcc00Cooldown:|r 1.00|n|cffffcc00Damage:|r 34 - 50|n|cffffcc00Range:|r 900|n|cffffcc00Ability:|r Splash; the area of effect is 125"
+Tip=Hire Gnoll Patron [|cffffcc00W|r]
+Ubertip="This Gnoll Patron was found passed out drunk in your tavern and he's only working for you so you won't report him for drinking on the job|n|n|cffffcc00Attack:|r Chaos|n|cffffcc00Cooldown:|r 0.75|n|cffffcc00Damage:|r 25 - 125|n|cffffcc00Range:|r 900|n|cffffcc00Ability:|r Splash; the area of effect is 125"
 Buttonpos=1,0
 Missileart=Abilities\Weapons\FarseerMissile\FarseerMissile.mdl
 Missilearc=0.15
@@ -1097,7 +1097,7 @@ Art=ReplaceableTextures\CommandButtons\BTNHeroAvatarOfFlame.blp
 Name=[Tavern] - Fire Lord
 Hotkey=X
 Tip=Hire Fire Lord [|cffffcc00X|r]
-Ubertip="The recent betrayal by the Goblin Tinker had left an open spot in the Tavern Union, the Fire Lord hopes to fill that spot|n|n|cffffcc00Attack:|r Chaos|n|cffffcc00Cooldown:|r 1.00|n|cffffcc00Damage:|r 902 - 934|n|cffffcc00Range:|r 1000|n|cffffcc00Ability:|r Splash; the area of effect is 150|n|cffffcc00Ability(2):|r After Burn; deals 350 damage per second in an area of 200 after the Fire Lord attacks"
+Ubertip="The recent betrayal by the Goblin Tinker had left an open spot in the Tavern Union, the Fire Lord hopes to fill that spot|n|n|cffffcc00Attack:|r Chaos|n|cffffcc00Cooldown:|r 0.50|n|cffffcc00Damage:|r 902 - 934|n|cffffcc00Range:|r 1000|n|cffffcc00Ability:|r Splash; the area of effect is 150|n|cffffcc00Ability(2):|r After Burn; deals 350 damage per second in an area of 200 after the Fire Lord attacks"
 Buttonpos=1,2
 Missileart=Abilities\Weapons\LordofFlameMissile\LordofFlameMissile.mdl
 Missilearc=0.15
@@ -2331,10 +2331,10 @@ Animprops=upgrade,first
 
 [hC34]
 Art=ReplaceableTextures\CommandButtons\BTNHarpyQueen.blp
-Name=[Tavern] - Harpy Scout
+Name=[Tavern] - Lost Harpy Scout
 Hotkey=A
-Tip=Hire Harpy Scout [|cffffcc00A|r]
-Ubertip="Harpies are known to have sharp claws that can shred through the armor of almost any enemy unit|n|n|cffffcc00Attack:|r Magic|n|cffffcc00Cooldown:|r 1.00|n|cffffcc00Damage:|r 216 - 259|n|cffffcc00Range:|r 900|n|cffffcc00Ability:|r Splash; the area of effect is 180"
+Tip=Hire Lost Harpy Scout [|cffffcc00A|r]
+Ubertip="This harpie seems to be lost and somehow found its way into your tavern and getting drunk in the process.|n|n|cffffcc00Attack:|r Magic|n|cffffcc00Cooldown:|r 1.00|n|cffffcc00Damage:|r 100 - 400|n|cffffcc00Range:|r 900|n|cffffcc00Ability:|r Splash; the area of effect is 180"
 Buttonpos=0,1
 Missileart=Abilities\Weapons\GargoyleMissile\GargoyleMissile.mdl
 Missilearc=0.15
@@ -3053,8 +3053,8 @@ Attachmentanimprops=medium
 [n017]
 Art=ReplaceableTextures\CommandButtons\BTNMassTeleport.blp
 Name=Teleport
-Ubertip=A large pedestal that glows with energy.
 Tip=Build Circle of Power
+Ubertip=A large pedestal that glows with energy.
 EditorSuffix=(large)
 
 [n018]
@@ -6570,12 +6570,6 @@ Tip=
 Ubertip=
 Buttonpos=0,0
 
-[uC14]
-Art=ReplaceableTextures\CommandButtons\BTNDemolish.blp
-Name=|CFFFF0303[Anti-Juggle]|r
-Ubertip="This tower prevents juggling creeps while waves are in progress"
-Buttonpos=0,0
-
 [uC13]
 Art=ReplaceableTextures\CommandButtons\BTNMilitia.blp
 Name=[Builder] - Giant Worker
@@ -6585,6 +6579,12 @@ Ubertip="Giant Worker, builds giant buildings."
 EditorSuffix=Giants
 Buttonpos=0,0
 Builds=oC14,oC35,hC53,oC26,o00X,hC97,oC67,o00G,o00Y,o015,o001
+
+[uC14]
+Art=ReplaceableTextures\CommandButtons\BTNDemolish.blp
+Name=|CFFFF0303[Anti-Juggle]|r
+Ubertip="This tower prevents juggling creeps while waves are in progress"
+Buttonpos=0,0
 
 [uC43]
 Art=ReplaceableTextures\CommandButtons\BTNGhost.blp

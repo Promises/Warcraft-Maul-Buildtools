@@ -1,5 +1,5 @@
 ID;PWXL;N;E
-B;X7;Y494;D0
+B;X7;Y493;D0
 C;X1;Y1;K"unitAbilID"
 C;X2;K"sortAbil"
 C;X3;K"comment(s)"
@@ -1947,12 +1947,13 @@ C;X1;Y486;K"u04D"
 C;X4;K"_"
 C;X5;K"A02D,Avul"
 C;X6;K
-C;X1;Y487;K"uC14"
-C;X4;K"_"
-C;X5;K"Avul"
-C;X1;Y488;K"uC13"
+C;X1;Y487;K"uC13"
 C;X4;K"_"
 C;X5;K"A00E,Avul,A02X,A0EB"
+C;X6;K
+C;X1;Y488;K"uC14"
+C;X4;K"_"
+C;X5;K"Avul"
 C;X6;K
 C;X1;Y489;K"uC43"
 C;X4;K"Acrs"
@@ -1972,10 +1973,6 @@ C;X5;K"Aeth,A02Z,Amim"
 C;X6;K
 C;X1;Y493;K"uC98"
 C;X4;K"_"
-C;X5;K"A00E,Avul,A02X,A0EB"
-C;X6;K
-C;X1;Y494;Ku04E
-C;X4;K_
 C;X5;K"Avul,Agho,Aloc"
 C;X6;K
 E
