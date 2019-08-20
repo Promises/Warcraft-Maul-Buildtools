@@ -90,7 +90,7 @@ export class DifficultyVote {
 
         const diffIndex: number = R2I((this.difficulty - 100.00) / 100.00 + ModuloReal((this.difficulty - 100.00) / 100.00, 1.00));
         this.difficulty = Math.floor(this.difficulty);
-        this.SetDifficulty(this.difficulty);
+        // this.SetDifficulty(this.difficulty);
         SetPlayerHandicapBJ(Player(PLAYER_NEUTRAL_PASSIVE), this.difficulty);
         SendMessage(`Difficulty was set to ${this.difficulty}% (${Util.ColourString(settings.DIFFICULTY_COLOURS[diffIndex],
                                                                                     settings.DIFFICULTY_STRINGS[diffIndex])})`);

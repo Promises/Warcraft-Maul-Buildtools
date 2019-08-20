@@ -16,6 +16,7 @@ export class Creep {
         this.gameRound = gameRound;
         this.game = game;
         this.AddArmorBonusByDifficulty();
+        this.AddHPBonusByDifficulty();
         this.abilities = abilities;
 
     }
@@ -64,6 +65,13 @@ export class Creep {
     }
 
     public AddArmorBonusByDifficulty(): void {
-        BlzSetUnitArmor(this.creep, BlzGetUnitArmor(this.creep) * Math.floor(this.game.diffVote.difficulty / 100));
+        const unitArmorScaling: number = Math.round(BlzGetUnitArmor(this.creep) * (this.game.diffVote.difficulty / 100));
+        BlzSetUnitArmor(this.creep, unitArmorScaling);
+    }
+
+    public AddHPBonusByDifficulty(): void {
+        const unitHPScaling: number = Math.round(BlzGetUnitMaxHP(this.creep) * (this.game.diffVote.difficulty / 100));
+        BlzSetUnitMaxHP(this.creep, unitHPScaling);
+        SetUnitLifeBJ(this.creep, unitHPScaling);
     }
 }
