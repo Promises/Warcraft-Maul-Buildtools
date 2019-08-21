@@ -14,9 +14,7 @@ export class NagaSlave extends Tower implements EndOfRoundTower, AttackActionTow
             }
 
             BlzSetUnitBaseDamage(this.tower, BlzGetUnitBaseDamage(this.tower, 0) + 20, 0);
-            if (this.game.worldMap.waveCreeps[this.game.gameRoundHandler.currentWave - 1].getCreepType() !== CREEP_TYPE.BOSS) {
-                this.DoSpell(this.game);
-            }
+            this.DoSpell(this.game);
         }
 
     }
