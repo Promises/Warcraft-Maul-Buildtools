@@ -1818,7 +1818,7 @@ C;X50;K0
 C;X1;Y38;K"eC83"
 C;X3;K"units\nightelf\EvilIllidan\IllidanEvil.mdl"
 C;X4;K0
-C;X5;K"Furion"
+C;X5;K"Illidan"
 C;X6;K0
 C;X7;K"TRIGSTR_8910"
 C;X8;K"EBuilding05"
@@ -2945,7 +2945,7 @@ C;X50;K0
 C;X1;Y61;K"h00S"
 C;X3;K"units\nightelf\HeroDemonHunter\HeroDemonHunter.mdl"
 C;X4;K0
-C;X5;K"Tyrande"
+C;X5;K"EvilIllidan"
 C;X6;K0
 C;X7;K"TRIGSTR_8755"
 C;X8;K"HBuilding04"
@@ -23280,7 +23280,7 @@ C;X50;K0
 C;X1;Y476;K"u043"
 C;X3;K"units\critters\villagerkid\villagerkid.mdx"
 C;X4;K0
-C;X5;K"Acolyte"
+C;X5;K"VillagerKid"
 C;X6;K0
 C;X7;K
 C;X8;K
