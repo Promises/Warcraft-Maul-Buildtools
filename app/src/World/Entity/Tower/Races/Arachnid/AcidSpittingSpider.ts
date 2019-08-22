@@ -11,7 +11,7 @@ export class AcidSpittingSpider extends Tower implements AttackActionTower {
         const target: unit | undefined = this.game.gameDamageEngineGlobals.udg_DamageEventTarget;
         if (u === this.tower && target) {
             const tempUnit: unit = CreateUnit(this.owner.wcPlayer, FourCC('u008'), GetUnitX(u), GetUnitY(u), bj_UNIT_FACING);
-            UnitApplyTimedLifeBJ(3.00, FourCC('BTLF'), tempUnit);
+            UnitApplyTimedLifeBJ(20.00, FourCC('BTLF'), tempUnit);
             UnitAddAbilityBJ(FourCC('A073'), tempUnit);
             IssueTargetOrderBJ(tempUnit, 'acidbomb', target);
         }
