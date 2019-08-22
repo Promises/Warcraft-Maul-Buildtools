@@ -18,7 +18,7 @@ export class AncientMonstrosity extends Tower implements AttackActionTower {
                 GetUnitX(this.tower),
                 GetUnitY(this.tower),
                 bj_UNIT_FACING);
-            UnitApplyTimedLifeBJ(2.00, FourCC('BTLF'), tempUnit);
+            UnitApplyTimedLifeBJ(20.00, FourCC('BTLF'), tempUnit);
             UnitAddAbilityBJ(FourCC('A0EE'), tempUnit);
             IssueTargetOrderBJ(tempUnit, 'acidbomb', target);
 
