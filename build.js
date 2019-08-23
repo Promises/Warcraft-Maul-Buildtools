@@ -1,3 +1,5 @@
+const WCJsonToTs = require("wc3-json-to-slk/dist/WCJsonToTs");
+
 const fs = require('fs-extra');
 const jassToTs = require('./node_modules/convertjasstots/dist/jassParser');
 const typescriptToLua = require('typescript-to-lua');
@@ -88,12 +90,13 @@ class Build {
 
     async build() {
         this.cleanup();
-        this.generateWCM();
 
         var map = 'map.w3x';
         fs.mkdirSync('target');
 
         fs.copySync(`maps/${map}`, `target/${map}`);
+
+        this.generateWCM();
 
         let sharedArgs = `extract "target/${map}" "war3map.lua" "maps/map"`;
         let mpqEditor = '';
@@ -158,6 +161,7 @@ class Build {
                 sed = "LC_ALL=C sed";
                 break;
         }
+
         this.nativeExecute(`${sed} -i "s/local function __module_/function __module_/g" "target/map/war3map.lua"`);
 
         if(this.buildnumber && !this.isFull){
@@ -215,13 +219,14 @@ class Build {
 
     generateWCM() {
         const file = 'GenerateHybrid.py';
+        new WCJsonToTs.WCJsonToTs('Data/Units/Units.json', 'maps/map/Units');
         switch (this.os) {
             case "win32":
-                this.nativeExecute(`"tools/Warcraft-Maul-Race-Parser.exe" maps/map/Units units.json`);
+                // this.nativeExecute(`"tools/Warcraft-Maul-Race-Parser.exe" maps/map/Units units.json`);
                 this.nativeExecute(`py -3 ${file} ${this.buildnumber}`);
                 break;
             default:
-                this.nativeExecute(`Warcraft-Maul-Race-Parser maps/map/Units units.json`);
+                // this.nativeExecute(`Warcraft-Maul-Race-Parser maps/map/Units units.json`);
                 this.nativeExecute(`python3 ${file} ${this.buildnumber}`);
                 break;
         }
