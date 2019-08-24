@@ -227,63 +227,63 @@ export class RacePicking {
         player.hasHybridRandomed = true;
 
         for (const tower of HybridTierOne) {
-            if (tower !== t1) {
+            if (tower.id !== t1) {
                 SetPlayerUnitAvailableBJ(FourCC(tower.id), false, player.wcPlayer);
             } else {
                 SetPlayerUnitAvailableBJ(FourCC(tower.id), true, player.wcPlayer);
             }
         }
         for (const tower of HybridTierTwo) {
-            if (tower !== t2) {
+            if (tower.id !== t2) {
                 SetPlayerUnitAvailableBJ(FourCC(tower.id), false, player.wcPlayer);
             } else {
                 SetPlayerUnitAvailableBJ(FourCC(tower.id), true, player.wcPlayer);
             }
         }
         for (const tower of HybridTierThree) {
-            if (tower !== t3) {
+            if (tower.id !== t3) {
                 SetPlayerUnitAvailableBJ(FourCC(tower.id), false, player.wcPlayer);
             } else {
                 SetPlayerUnitAvailableBJ(FourCC(tower.id), true, player.wcPlayer);
             }
         }
         for (const tower of HybridTierFour) {
-            if (tower !== t4) {
+            if (tower.id !== t4) {
                 SetPlayerUnitAvailableBJ(FourCC(tower.id), false, player.wcPlayer);
             } else {
                 SetPlayerUnitAvailableBJ(FourCC(tower.id), true, player.wcPlayer);
             }
         }
         for (const tower of HybridTierFive) {
-            if (tower !== t5) {
+            if (tower.id !== t5) {
                 SetPlayerUnitAvailableBJ(FourCC(tower.id), false, player.wcPlayer);
             } else {
                 SetPlayerUnitAvailableBJ(FourCC(tower.id), true, player.wcPlayer);
             }
         }
         for (const tower of HybridTierSix) {
-            if (tower !== t6) {
+            if (tower.id !== t6) {
                 SetPlayerUnitAvailableBJ(FourCC(tower.id), false, player.wcPlayer);
             } else {
                 SetPlayerUnitAvailableBJ(FourCC(tower.id), true, player.wcPlayer);
             }
         }
         for (const tower of HybridTierSeven) {
-            if (tower !== t7) {
+            if (tower.id !== t7) {
                 SetPlayerUnitAvailableBJ(FourCC(tower.id), false, player.wcPlayer);
             } else {
                 SetPlayerUnitAvailableBJ(FourCC(tower.id), true, player.wcPlayer);
             }
         }
         for (const tower of HybridTierEight) {
-            if (tower !== t8) {
+            if (tower.id !== t8) {
                 SetPlayerUnitAvailableBJ(FourCC(tower.id), false, player.wcPlayer);
             } else {
                 SetPlayerUnitAvailableBJ(FourCC(tower.id), true, player.wcPlayer);
             }
         }
         for (const tower of HybridTierNine) {
-            if (tower !== t9) {
+            if (tower.id !== t9) {
                 SetPlayerUnitAvailableBJ(FourCC(tower.id), false, player.wcPlayer);
             } else {
                 SetPlayerUnitAvailableBJ(FourCC(tower.id), true, player.wcPlayer);
