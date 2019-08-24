@@ -11,6 +11,7 @@ import { Rectangle } from '../../JassOverrides/Rectangle';
 import { SpawnedCreeps } from '../Entity/SpawnedCreeps';
 import { TimedEvent } from '../../lib/WCEventQueue/TimedEvent';
 import { DummyPlayer } from '../Entity/EmulatedPlayer/DummyPlayer';
+import { HybridTower } from '../../Generated/hybridRandomGEN';
 
 export class Commands {
 
@@ -349,6 +350,25 @@ export class Commands {
             }
         } else if (command[0] === 'dt' || command[0] === 'disabletowers') {
             player.DisableTowers();
+        } else if (command[0] === 'buildings') {
+            if (command[1]) {
+                const receiver: number = this.getPlayerIdFromColourName(command[1]);
+                const receivingPlayer: Defender | undefined = this.game.players.get(receiver);
+                if (receivingPlayer) {
+                    if (receivingPlayer.hasHybridRandomed) {
+                        for (const towerstr of receivingPlayer.hybridTowers) {
+                            player.sendMessage((<HybridTower>this.game.racePicking.HybridPool.get(towerstr)).name);
+                        }
+                    } else {
+                        player.sendMessage(`${receivingPlayer.getNameWithColour()} has not hybrid randomed.`);
+
+                    }
+                } else {
+                    player.sendMessage(Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Invalid Colour'));
+                }
+            } else {
+                player.sendMessage('Wrong Usage: -buildings <colour>');
+            }
         } else if (command[0] === 'maze') {
             let invalidMaze: boolean = false;
             if (command.length === 2) {

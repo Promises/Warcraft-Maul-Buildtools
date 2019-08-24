@@ -278,13 +278,13 @@ def main():
         # set udg_TierOneTowers[0] = 'h00Z' // Dragonkin
         tier_string = numbers[tier]
         generated_hybrid_list.append(
-            spacer + "export const HybridTier" + tier_string + " = [")
+            spacer + "export const HybridTier" + tier_string + ": HybridTower[] = [")
 
         for tower in tier_towers[tier]:
             number_in_tier = tier_towers[tier].index(tower)
             unit_id = tower["UnitFunc"]["UnitId"]
-            unit_name = tower["UnitFunc"]["Name"]
-            sttest = f"    '%s', //%s" % (unit_id, unit_name)
+            unit_name = tower["UnitFunc"]["Name"][1:len(tower["UnitFunc"]["Name"])-1]
+            sttest = "    { id: '"+unit_id+"', name: `"+unit_name+"` }, // " + unit_name
             generated_hybrid_list.append(spacer + sttest)
 
         generated_hybrid_list.append(spacer + "];")

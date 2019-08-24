@@ -11,12 +11,13 @@ import {
     HybridTierSeven,
     HybridTierSix,
     HybridTierThree,
-    HybridTierTwo,
+    HybridTierTwo, HybridTower,
 } from '../../Generated/hybridRandomGEN';
 
 export class RacePicking {
     raceSelectTrigger: Trigger;
     private game: WarcraftMaul;
+    public HybridPool: Map<string, HybridTower> = new Map<string, HybridTower>();
 
     constructor(game: WarcraftMaul) {
         this.game = game;
@@ -24,7 +25,7 @@ export class RacePicking {
         this.raceSelectTrigger.RegisterAnyUnitEventBJ(EVENT_PLAYER_UNIT_SELL_ITEM);
         this.raceSelectTrigger.AddCondition(() => this.RaceSelectionConditions());
         this.raceSelectTrigger.AddAction(() => this.RaceSelectionActions());
-
+        this.CreateHybridPool();
         CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('h03Q'), -1920.00, 3000.00, 0.00);
         CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('h00H'), -1920.00, 2624.00, 0.00);
         CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('h00O'), -1920.00, 2240.00, 0.00);
@@ -112,6 +113,7 @@ export class RacePicking {
             }
         }
     }
+
     private RaceSelectionActions(): void {
         const player: Defender | undefined = this.game.players.get(GetPlayerId(GetOwningPlayer(GetBuyingUnit())));
         if (!player) {
@@ -196,15 +198,15 @@ export class RacePicking {
     }
 
     private HybridRandomRace(player: Defender) {
-        const t1 = this.randomChoice(HybridTierOne, player.hybridTowers);
-        const t2 = this.randomChoice(HybridTierTwo, player.hybridTowers);
-        const t3 = this.randomChoice(HybridTierThree, player.hybridTowers);
-        const t4 = this.randomChoice(HybridTierFour, player.hybridTowers);
-        const t5 = this.randomChoice(HybridTierFive, player.hybridTowers);
-        const t6 = this.randomChoice(HybridTierSix, player.hybridTowers);
-        const t7 = this.randomChoice(HybridTierSeven, player.hybridTowers);
-        const t8 = this.randomChoice(HybridTierEight, player.hybridTowers);
-        const t9 = this.randomChoice(HybridTierNine, player.hybridTowers);
+        const t1 = this.randomChoice(HybridTierOne, player.hybridTowers).id;
+        const t2 = this.randomChoice(HybridTierTwo, player.hybridTowers).id;
+        const t3 = this.randomChoice(HybridTierThree, player.hybridTowers).id;
+        const t4 = this.randomChoice(HybridTierFour, player.hybridTowers).id;
+        const t5 = this.randomChoice(HybridTierFive, player.hybridTowers).id;
+        const t6 = this.randomChoice(HybridTierSix, player.hybridTowers).id;
+        const t7 = this.randomChoice(HybridTierSeven, player.hybridTowers).id;
+        const t8 = this.randomChoice(HybridTierEight, player.hybridTowers).id;
+        const t9 = this.randomChoice(HybridTierNine, player.hybridTowers).id;
         player.hybridTowers = [];
         player.hybridTowers.push(t1);
         player.hybridTowers.push(t2);
@@ -225,71 +227,83 @@ export class RacePicking {
         player.hasHybridRandomed = true;
 
         for (const tower of HybridTierOne) {
-            if (tower != t1) {
-                SetPlayerUnitAvailableBJ(FourCC(tower), false, player.wcPlayer);
+            if (tower !== t1) {
+                SetPlayerUnitAvailableBJ(FourCC(tower.id), false, player.wcPlayer);
             } else {
-                SetPlayerUnitAvailableBJ(FourCC(tower), true, player.wcPlayer);
+                SetPlayerUnitAvailableBJ(FourCC(tower.id), true, player.wcPlayer);
             }
         }
         for (const tower of HybridTierTwo) {
-            if (tower != t2) {
-                SetPlayerUnitAvailableBJ(FourCC(tower), false, player.wcPlayer);
+            if (tower !== t2) {
+                SetPlayerUnitAvailableBJ(FourCC(tower.id), false, player.wcPlayer);
             } else {
-                SetPlayerUnitAvailableBJ(FourCC(tower), true, player.wcPlayer);
+                SetPlayerUnitAvailableBJ(FourCC(tower.id), true, player.wcPlayer);
             }
         }
         for (const tower of HybridTierThree) {
-            if (tower != t3) {
-                SetPlayerUnitAvailableBJ(FourCC(tower), false, player.wcPlayer);
+            if (tower !== t3) {
+                SetPlayerUnitAvailableBJ(FourCC(tower.id), false, player.wcPlayer);
             } else {
-                SetPlayerUnitAvailableBJ(FourCC(tower), true, player.wcPlayer);
+                SetPlayerUnitAvailableBJ(FourCC(tower.id), true, player.wcPlayer);
             }
         }
         for (const tower of HybridTierFour) {
-            if (tower != t4) {
-                SetPlayerUnitAvailableBJ(FourCC(tower), false, player.wcPlayer);
+            if (tower !== t4) {
+                SetPlayerUnitAvailableBJ(FourCC(tower.id), false, player.wcPlayer);
             } else {
-                SetPlayerUnitAvailableBJ(FourCC(tower), true, player.wcPlayer);
+                SetPlayerUnitAvailableBJ(FourCC(tower.id), true, player.wcPlayer);
             }
         }
         for (const tower of HybridTierFive) {
-            if (tower != t5) {
-                SetPlayerUnitAvailableBJ(FourCC(tower), false, player.wcPlayer);
+            if (tower !== t5) {
+                SetPlayerUnitAvailableBJ(FourCC(tower.id), false, player.wcPlayer);
             } else {
-                SetPlayerUnitAvailableBJ(FourCC(tower), true, player.wcPlayer);
+                SetPlayerUnitAvailableBJ(FourCC(tower.id), true, player.wcPlayer);
             }
         }
         for (const tower of HybridTierSix) {
-            if (tower != t6) {
-                SetPlayerUnitAvailableBJ(FourCC(tower), false, player.wcPlayer);
+            if (tower !== t6) {
+                SetPlayerUnitAvailableBJ(FourCC(tower.id), false, player.wcPlayer);
             } else {
-                SetPlayerUnitAvailableBJ(FourCC(tower), true, player.wcPlayer);
+                SetPlayerUnitAvailableBJ(FourCC(tower.id), true, player.wcPlayer);
             }
         }
         for (const tower of HybridTierSeven) {
-            if (tower != t7) {
-                SetPlayerUnitAvailableBJ(FourCC(tower), false, player.wcPlayer);
+            if (tower !== t7) {
+                SetPlayerUnitAvailableBJ(FourCC(tower.id), false, player.wcPlayer);
             } else {
-                SetPlayerUnitAvailableBJ(FourCC(tower), true, player.wcPlayer);
+                SetPlayerUnitAvailableBJ(FourCC(tower.id), true, player.wcPlayer);
             }
         }
         for (const tower of HybridTierEight) {
-            if (tower != t8) {
-                SetPlayerUnitAvailableBJ(FourCC(tower), false, player.wcPlayer);
+            if (tower !== t8) {
+                SetPlayerUnitAvailableBJ(FourCC(tower.id), false, player.wcPlayer);
             } else {
-                SetPlayerUnitAvailableBJ(FourCC(tower), true, player.wcPlayer);
+                SetPlayerUnitAvailableBJ(FourCC(tower.id), true, player.wcPlayer);
             }
         }
         for (const tower of HybridTierNine) {
-            if (tower != t9) {
-                SetPlayerUnitAvailableBJ(FourCC(tower), false, player.wcPlayer);
+            if (tower !== t9) {
+                SetPlayerUnitAvailableBJ(FourCC(tower.id), false, player.wcPlayer);
             } else {
-                SetPlayerUnitAvailableBJ(FourCC(tower), true, player.wcPlayer);
+                SetPlayerUnitAvailableBJ(FourCC(tower.id), true, player.wcPlayer);
             }
         }
 
         SendMessage(player.getNameWithColour() + ' has |cFFB0F442hy|r|cFF8CF442b|r|cFF42F4C5r|r|cFF42F4F1id|r randomed!');
 
 
+    }
+
+    private CreateHybridPool(): void {
+        HybridTierEight.forEach(d => this.HybridPool.set(d.id, d));
+        HybridTierFive.forEach(d => this.HybridPool.set(d.id, d));
+        HybridTierFour.forEach(d => this.HybridPool.set(d.id, d));
+        HybridTierNine.forEach(d => this.HybridPool.set(d.id, d));
+        HybridTierOne.forEach(d => this.HybridPool.set(d.id, d));
+        HybridTierSeven.forEach(d => this.HybridPool.set(d.id, d));
+        HybridTierSix.forEach(d => this.HybridPool.set(d.id, d));
+        HybridTierThree.forEach(d => this.HybridPool.set(d.id, d));
+        HybridTierTwo.forEach(d => this.HybridPool.set(d.id, d));
     }
 }
