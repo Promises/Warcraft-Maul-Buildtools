@@ -116443,7 +116443,7 @@
       {
         "id": "ua1g",
         "type": "string",
-        "value": "enemies,ground"
+        "value": "enemies,ground,air"
       },
       {
         "id": "ua1r",
@@ -116564,6 +116564,96 @@
         "id": "uaap",
         "type": "string",
         "value": "Alternate"
+      },
+      {
+        "id": "unsf",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "ucun",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "uani",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "utra",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "umki",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "usei",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "ucut",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "ua2m",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "ures",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "ubui",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "ureq",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "uupt",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "umh1",
+        "type": "int",
+        "value": null
+      },
+      {
+        "id": "urev",
+        "type": "int",
+        "value": null
+      },
+      {
+        "id": "ua2z",
+        "type": "int",
+        "value": null
+      },
+      {
+        "id": "umh2",
+        "type": "int",
+        "value": null
+      },
+      {
+        "id": "uma2",
+        "type": "unreal",
+        "value": null
+      },
+      {
+        "id": "ubpr",
+        "type": "string",
+        "value": ""
       }
     ],
     "o01Q:nntg": [
