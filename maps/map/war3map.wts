@@ -13766,7 +13766,7 @@ Frozen Destruction
 STRING 9485
 // Buffs/Effects: B02M (), Buffubertip (Tooltip - Extended)
 {
-This unit is under the effects of Frozen Destruction; it will take additional damage.
+This unit is under the effects of Frozen Destruction; it will take additional damage if slowed.
 }
 
 STRING 9489
