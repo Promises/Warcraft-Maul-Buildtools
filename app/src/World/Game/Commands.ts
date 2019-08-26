@@ -195,7 +195,8 @@ export class Commands {
             case 'tm':
                 player.sendMessage(Util.ArraysToString(this.game.worldMap.playerMazes[player.id].maze));
                 PreloadGenStart();
-                Preload(`{"logevent":${this.MazeToString(this.game.worldMap.playerMazes[player.id].maze)}}`);
+                this.MazeToString(this.game.worldMap.playerMazes[player.id].maze);
+
                 PreloadGenEnd('testmap.txt');
                 break;
             case 'time':
@@ -715,16 +716,15 @@ export class Commands {
         Log.Debug('Hello world');
         return true;
     }
-    private MazeToString(maze: Walkable[][]): string {
+    private MazeToString(maze: Walkable[][]): void {
         let output: string = '[';
+        Preload(`{"logevent":}`);
         for (let i: number = 0; i < maze.length; i++) {
             if (i === maze.length - 1) {
-                output += `"${Util.ArraysToString(maze[i])}"`;
+                Preload(`"${Util.ArraysToString(maze[i])}"`);
                 continue;
             }
-            output += `"${Util.ArraysToString(maze[i])}", `;
+            Preload(`"${Util.ArraysToString(maze[i])}"`);
         }
-        output += ']';
-        return output;
     }
 }

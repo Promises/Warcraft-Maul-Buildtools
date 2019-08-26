@@ -10,6 +10,10 @@ export class AntiJuggleTower extends Tower implements EndOfRoundTower {
 
     private readonly x: number;
     private readonly y: number;
+    private readonly leftSide: number = 0;
+    private readonly rightSide: number = 0;
+    private readonly topSide: number = 0;
+    private readonly bottomSide: number = 0;
 
     constructor(tower: unit, owner: Defender, game: WarcraftMaul) {
         super(tower, owner, game);
@@ -29,21 +33,19 @@ export class AntiJuggleTower extends Tower implements EndOfRoundTower {
             return;
         }
         const maze: Maze = this.game.worldMap.playerMazes[playerSpawnId];
-        const leftSide: number = ((this.x - 64) - maze.minX) / 64;
-        const rightSide: number = (this.x - maze.minX) / 64;
-        const topSide: number = (this.y - maze.minY) / 64;
-        const bottomSide: number = ((this.y - 64) - maze.minY) / 64;
-        maze.setWalkable(leftSide, bottomSide, Walkable.Protected);
-        maze.setWalkable(rightSide, bottomSide, Walkable.Protected);
-        maze.setWalkable(leftSide, topSide, Walkable.Protected);
-        maze.setWalkable(rightSide, topSide, Walkable.Protected);
+        this.leftSide = ((this.x - 64) - maze.minX) / 64;
+        this.rightSide = (this.x - maze.minX) / 64;
+        this.topSide = (this.y - maze.minY) / 64;
+        this.bottomSide = ((this.y - 64) - maze.minY) / 64;
+        maze.setWalkable(this.leftSide, this.bottomSide, Walkable.Protected);
+        maze.setWalkable(this.rightSide, this.bottomSide, Walkable.Protected);
+        maze.setWalkable(this.leftSide, this.topSide, Walkable.Protected);
+        maze.setWalkable(this.rightSide, this.topSide, Walkable.Protected);
 
     }
 
     public EndOfRoundAction(): void {
         this.Sell();
-        SendMessage('end of round');
-
         let playerSpawnId: undefined | number;
         for (let i: number = 0; i < settings.PLAYER_AREAS.length; i++) {
             if (settings.PLAYER_AREAS[i].ContainsUnit(this.tower)) {
@@ -57,20 +59,12 @@ export class AntiJuggleTower extends Tower implements EndOfRoundTower {
             return;
         }
 
-        const x: number = GetUnitX(this.tower);
-        const y: number = GetUnitY(this.tower);
         const maze: Maze = this.game.worldMap.playerMazes[playerSpawnId];
-        const leftSide: number = ((x - 64) - maze.minX) / 64;
-        const rightSide: number = (x - maze.minX) / 64;
-        const topSide: number = (y - maze.minY) / 64;
-        const bottomSide: number = ((y - 64) - maze.minY) / 64;
-        maze.Cleanup(leftSide, bottomSide);
-        maze.Cleanup(rightSide, bottomSide);
-        maze.Cleanup(leftSide, topSide);
-        maze.Cleanup(rightSide, topSide);
+        maze.Cleanup(this.leftSide, this.bottomSide);
+        maze.Cleanup(this.rightSide, this.bottomSide);
+        maze.Cleanup(this.leftSide, this.topSide);
+        maze.Cleanup(this.rightSide, this.topSide);
 
-
-        SendMessage('removing anti-juggle');
         RemoveUnit(this.tower);
     }
 }
