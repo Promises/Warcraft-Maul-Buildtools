@@ -5,6 +5,7 @@ import { Log } from '../../../lib/Serilog/Serilog';
 import { Defender } from '../Players/Defender';
 import { Maze, Walkable } from '../../Antiblock/Maze';
 import { Tower } from './Specs/Tower';
+import { AntiJuggleTower } from '../AntiJuggle/AntiJuggleTower';
 
 export class SellTower {
     private _sellTrigger: Trigger;
@@ -64,45 +65,45 @@ export class SellTower {
                 (<Defender>player).giveGold(value);
             }
 
-        }
 
-        // if (GetOwningPlayer(unit) === GetLocalPlayer()) {
-        // }
-        const txt: texttag = CreateTextTagUnitBJ(ToString(value), unit, 1, 10, 100, 80.00, 0.00, 0);
+            // if (GetOwningPlayer(unit) === GetLocalPlayer()) {
+            // }
+            const txt: texttag = CreateTextTagUnitBJ(ToString(value), unit, 1, 10, 100, 80.00, 0.00, 0);
 
-        SetTextTagPermanentBJ(txt, false);
-        SetTextTagLifespanBJ(txt, 2.00);
-        SetTextTagVelocityBJ(txt, 64, 90);
-        DestroyEffect(
-            AddSpecialEffect(
-                'Abilities\\Spells\\Items\\ResourceItems\\ResourceEffectTarget.mdl',
-                GetUnitX(unit),
-                GetUnitY(unit),
-            ),
-        );
-        PlaySoundOnUnitBJ(settings.Sounds.goldSound, 100, unit);
-        // }
-        //
-        const isWaveInProgress: boolean = this._game.gameRoundHandler.isWaveInProgress;
-        const x: number = GetUnitX(unit);
-        const y: number = GetUnitY(unit);
-        // TODO: FIX ANTI-JUGGLE
-        if (isWaveInProgress && player) {
-            this._game.worldMap.towerConstruction.SetupTower(ReplaceUnitBJ(unit, FourCC('uC14'), bj_UNIT_STATE_METHOD_DEFAULTS), player);
-        } else {
-            Log.Debug('Setting maze');
+            SetTextTagPermanentBJ(txt, false);
+            SetTextTagLifespanBJ(txt, 2.00);
+            SetTextTagVelocityBJ(txt, 64, 90);
+            DestroyEffect(
+                AddSpecialEffect(
+                    'Abilities\\Spells\\Items\\ResourceItems\\ResourceEffectTarget.mdl',
+                    GetUnitX(unit),
+                    GetUnitY(unit),
+                ),
+            );
+            PlaySoundOnUnitBJ(settings.Sounds.goldSound, 100, unit);
+            // }
+            //
+            const isWaveInProgress: boolean = this._game.gameRoundHandler.isWaveInProgress;
+            const x: number = GetUnitX(unit);
+            const y: number = GetUnitY(unit);
+            // TODO: FIX ANTI-JUGGLE
+            if (isWaveInProgress && tower) {
+                const antijuggle: AntiJuggleTower = new AntiJuggleTower(this._game, tower);
+            } else {
+                Log.Debug('Setting maze');
 
 
-            const maze: Maze = this._game.worldMap.playerMazes[<number>playerSpawnId];
-            const leftSide: number = ((x - 64) - maze.minX) / 64;
-            const rightSide: number = (x - maze.minX) / 64;
-            const topSide: number = (y - maze.minY) / 64;
-            const bottomSide: number = ((y - 64) - maze.minY) / 64;
-            maze.setWalkable(leftSide, bottomSide, Walkable.Walkable);
-            maze.setWalkable(rightSide, bottomSide, Walkable.Walkable);
-            maze.setWalkable(leftSide, topSide, Walkable.Walkable);
-            maze.setWalkable(rightSide, topSide, Walkable.Walkable);
-            RemoveUnit(unit);
+                const maze: Maze = this._game.worldMap.playerMazes[<number>playerSpawnId];
+                const leftSide: number = ((x - 64) - maze.minX) / 64;
+                const rightSide: number = (x - maze.minX) / 64;
+                const topSide: number = (y - maze.minY) / 64;
+                const bottomSide: number = ((y - 64) - maze.minY) / 64;
+                maze.setWalkable(leftSide, bottomSide, Walkable.Walkable);
+                maze.setWalkable(rightSide, bottomSide, Walkable.Walkable);
+                maze.setWalkable(leftSide, topSide, Walkable.Walkable);
+                maze.setWalkable(rightSide, topSide, Walkable.Walkable);
+                RemoveUnit(unit);
+            }
         }
 
 

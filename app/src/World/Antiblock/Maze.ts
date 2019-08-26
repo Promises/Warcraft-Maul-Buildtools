@@ -1,6 +1,7 @@
 import { Node } from './Node';
 import { NodeQueue } from './NodeQueue';
 import { Log } from '../../lib/Serilog/Serilog';
+import { AntiJuggleTower } from '../Entity/AntiJuggle/AntiJuggleTower';
 
 export enum Walkable {
     Walkable,
@@ -9,6 +10,7 @@ export enum Walkable {
 }
 
 export class Maze {
+    private antiJugglers: AntiJuggleTower[] = [];
 
     constructor(minX: number, minY: number, maxX: number, maxY: number, width: number, height: number, maze: Walkable[][]) {
         this.minX = minX;
@@ -32,32 +34,6 @@ export class Maze {
 
     public setWalkable(x: number, y: number, isWalkable: Walkable): void {
         this.maze[x][y] = isWalkable;
-
-
-        const cornerX: number = (x * 64) + this.minX;
-        const cornerY: number = y * 64 + this.minY;
-        Log.Debug(`${cornerX}, ${cornerY}`);
-        Log.Debug(`${x}, ${y}`);
-        Log.Debug(`${isWalkable === Walkable.Walkable}`);
-        SetTerrainPathable(cornerX, cornerY, PATHING_TYPE_WALKABILITY, isWalkable === Walkable.Walkable);
-        SetTerrainPathable(cornerX, cornerY + 32, PATHING_TYPE_WALKABILITY, isWalkable === Walkable.Walkable);
-        SetTerrainPathable(cornerX + 32, cornerY, PATHING_TYPE_WALKABILITY, isWalkable === Walkable.Walkable);
-        SetTerrainPathable(cornerX + 32, cornerY + 32, PATHING_TYPE_WALKABILITY, isWalkable === Walkable.Walkable);
-
-    }
-
-    public setUnbuildable(x: number, y: number, isWalkable: Walkable): void {
-        this.maze[x][y] = isWalkable;
-
-
-        const cornerX: number = (x * 64) + this.minX;
-        const cornerY: number = y * 64 + this.minY;
-
-        SetTerrainPathable(cornerX, cornerY, PATHING_TYPE_BUILDABILITY, isWalkable === Walkable.Walkable);
-        SetTerrainPathable(cornerX, cornerY + 48, PATHING_TYPE_BUILDABILITY, isWalkable === Walkable.Walkable);
-        SetTerrainPathable(cornerX + 48, cornerY, PATHING_TYPE_BUILDABILITY, isWalkable === Walkable.Walkable);
-        SetTerrainPathable(cornerX + 48, cornerY + 48, PATHING_TYPE_BUILDABILITY, isWalkable === Walkable.Walkable);
-
 
     }
 
@@ -115,6 +91,10 @@ export class Maze {
     }
 
     public CleanAll(): void {
+        for (const antijuggle of this.antiJugglers) {
+            antijuggle.EndOfRoundAction();
+        }
+        this.antiJugglers = [];
         for (let x: number = 0; x < this.width; x++) {
             for (let y: number = 0; y < this.height; y++) {
                 this.Cleanup(x, y);
@@ -138,6 +118,7 @@ export class Maze {
     }
 
     public CheckAll(): void {
+
         for (let x: number = 0; x < this.width; x++) {
             for (let y: number = 0; y < this.height; y++) {
                 const cornerX: number = (x * 64) + this.minX;
@@ -152,4 +133,7 @@ export class Maze {
         }
     }
 
+    public AddAntiJuggler(antijuggle: AntiJuggleTower): void {
+        this.antiJugglers.push(antijuggle);
+    }
 }
