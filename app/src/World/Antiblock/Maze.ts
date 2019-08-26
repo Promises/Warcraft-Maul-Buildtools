@@ -31,17 +31,12 @@ export class Maze {
     public readonly maze: Walkable[][];
 
     public setWalkable(x: number, y: number, isWalkable: Walkable): void {
-        if (x > this.width) {
-            return;
-        }
-        if (y > this.height) {
-            return;
-        }
         this.maze[x][y] = isWalkable;
 
 
         const cornerX: number = (x * 64) + this.minX;
         const cornerY: number = y * 64 + this.minY;
+
         SetTerrainPathable(cornerX, cornerY, PATHING_TYPE_WALKABILITY, isWalkable === Walkable.Walkable);
         SetTerrainPathable(cornerX, cornerY + 48, PATHING_TYPE_WALKABILITY, isWalkable === Walkable.Walkable);
         SetTerrainPathable(cornerX + 48, cornerY, PATHING_TYPE_WALKABILITY, isWalkable === Walkable.Walkable);
@@ -97,6 +92,7 @@ export class Maze {
     }
 
     public Cleanup(x: number, y: number): void {
+
         if (this.maze[x][y] === Walkable.Protected) {
             this.setWalkable(x, y, Walkable.Walkable);
         }
