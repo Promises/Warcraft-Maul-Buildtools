@@ -16,7 +16,19 @@ export class AntiJuggleTower extends Tower implements EndOfRoundTower {
 
         this.x = GetUnitX(this.tower);
         this.y = GetUnitY(this.tower);
-        const maze: Maze = this.game.worldMap.playerMazes[owner.id];
+        let playerSpawnId: undefined | number;
+        for (let i: number = 0; i < settings.PLAYER_AREAS.length; i++) {
+            if (settings.PLAYER_AREAS[i].ContainsUnit(this.tower)) {
+                playerSpawnId = i;
+                break;
+            }
+        }
+
+        if (playerSpawnId === undefined) {
+            Log.Error('Unable to locate the correct player spawn');
+            return;
+        }
+        const maze: Maze = this.game.worldMap.playerMazes[playerSpawnId];
         const leftSide: number = ((this.x - 64) - maze.minX) / 64;
         const rightSide: number = (this.x - maze.minX) / 64;
         const topSide: number = (this.y - maze.minY) / 64;
