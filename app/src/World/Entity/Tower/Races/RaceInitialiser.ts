@@ -64,6 +64,6 @@ export function InitialiseAllRaceTowers(): TowerMap<number, object> {
     races.forEach(race => race.AddTowersToList(_towerTypes));
 
 
-    // _towerTypes.add(FourCC('uC14'), AntiJuggleTower);
+    _towerTypes.add(FourCC('uC14'), AntiJuggleTower);
     return _towerTypes;
 }
