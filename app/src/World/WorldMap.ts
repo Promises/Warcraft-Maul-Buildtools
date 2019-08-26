@@ -9,7 +9,7 @@ import { Teleporter } from './Entity/Teleporter';
 import { RaceVoid } from './Game/Races/RaceVoid';
 import { RaceLootBoxer } from './Game/Races/RaceLootBoxer';
 import { AntiBlock } from './Antiblock/AntiBlock';
-import { Maze } from './Antiblock/Maze';
+import { Maze, Walkable } from './Antiblock/Maze';
 import * as settings from './GlobalSettings';
 import { TowerConstruction } from './Entity/Tower/TowerConstruction';
 import { DirectionalArrow } from './Game/DirectionalArrow';
@@ -413,10 +413,11 @@ export class WorldMap {
             const maxY: number = settings.PLAYER_AREAS[i].maxY;
             const width: number = Math.abs((maxX - minX) / 64);
             const height: number = Math.abs((maxY - minY) / 64);
-            const g: boolean[] = [];
+            const g: Walkable[][] = [];
             for (let j: number = 0; j < width; j++) {
+                g[j] = [];
                 for (let k: number = 0; k < height; k++) {
-                    g[j + k * width] = true;
+                    g[j][k] = Walkable.Walkable;
                 }
             }
 

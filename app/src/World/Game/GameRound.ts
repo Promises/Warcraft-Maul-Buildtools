@@ -219,6 +219,10 @@ export class GameRound {
             tower.EndOfRoundAction();
         }
 
+        for (const maze of this.game.worldMap.playerMazes) {
+            maze.CleanAll();
+        }
+
         /*
 
 
