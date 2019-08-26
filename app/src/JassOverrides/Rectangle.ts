@@ -1,4 +1,5 @@
 import { Creep } from '../World/Entity/Creep';
+import { Destructable } from '../lib/common/destructable';
 
 export class Rectangle {
     private readonly area: number[];
@@ -31,6 +32,25 @@ export class Rectangle {
         return true;
     }
 
+    public ContainsDestructable(destr: Destructable): boolean {
+        if (destr.x() < this.area[0]) {
+            return false;
+        }
+
+        if (destr.x() > this.area[2]) {
+            return false;
+        }
+
+        if (destr.y() < this.area[1]) {
+            return false;
+        }
+
+        if (destr.y() > this.area[3]) {
+            return false;
+        }
+
+        return true;
+    }
     public toString(): string {
         return `{ x: ${this.minX}}, y: ${this.minY} }, { x: ${this.maxX}, y: ${this.maxY} }`;
     };

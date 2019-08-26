@@ -26,7 +26,7 @@ import { UndeadTowers } from './Undead/UndeadTowers';
 import { UniqueTowers } from './Unique/UniqueTowers';
 import { VoidTowers } from './Void/VoidTowers';
 import { WorkersUnionTowers } from './WorkersUnion/WorkersUnionTowers';
-import { AntiJuggleTower } from '../AntiJuggle/AntiJuggleTower';
+import { AntiJuggleTower } from '../../AntiJuggle/AntiJuggleTower';
 import { RaceTowers } from './RaceTowers';
 
 export function InitialiseAllRaceTowers(): TowerMap<number, object> {

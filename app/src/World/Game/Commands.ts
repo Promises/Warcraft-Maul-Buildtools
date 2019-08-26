@@ -1,5 +1,5 @@
 import { WarcraftMaul } from '../WarcraftMaul';
-import { COLOUR_CODES } from '../GlobalSettings';
+import { COLOUR_CODES } from '../GlobalSettings' ;
 import { Trigger } from '../../JassOverrides/Trigger';
 import { Defender } from '../Entity/Players/Defender';
 import { Log } from '../../lib/Serilog/Serilog';
@@ -12,7 +12,7 @@ import { SpawnedCreeps } from '../Entity/SpawnedCreeps';
 import { TimedEvent } from '../../lib/WCEventQueue/TimedEvent';
 import { DummyPlayer } from '../Entity/EmulatedPlayer/DummyPlayer';
 import { HybridTower } from '../../Generated/hybridRandomGEN';
-import { Walkable } from '../Antiblock/Maze';
+import { Maze, Walkable } from '../Antiblock/Maze';
 
 export class Commands {
 
@@ -55,6 +55,9 @@ export class Commands {
                 // const bool: boolean = BlzLoadTOCFile('uiImport\\MyBar.toc');
                 // player.sendMessage(`ui! ${bool}`);
                 // this.TestUi();
+                CreateDestructable(FourCC('YTpc'), 0.0, 0.0, bj_UNIT_FACING, 1.0, 0);
+                CreateDestructable(FourCC('YTpc'), 0.0 + 128, 0.0, bj_UNIT_FACING, 1.0, 0);
+                CreateDestructable(FourCC('YTpc'), 0.0 - 128, 0.0, bj_UNIT_FACING, 1.0, 0);
 
                 break;
             case 'openall':
@@ -198,6 +201,10 @@ export class Commands {
                 this.MazeToString(this.game.worldMap.playerMazes[player.id].maze);
 
                 PreloadGenEnd('testmap.txt');
+                break;
+            case 'sanity':
+                this.game.worldMap.playerMazes[player.id].SanityCheck();
+                this.game.worldMap.playerMazes[player.id].CheckAll();
                 break;
             case 'time':
                 amount = Util.ParsePositiveInt(command[1]);
@@ -716,6 +723,7 @@ export class Commands {
         Log.Debug('Hello world');
         return true;
     }
+
     private MazeToString(maze: Walkable[][]): void {
         let output: string = '[';
         Preload(`{"logevent":}`);
