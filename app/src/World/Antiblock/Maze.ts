@@ -46,7 +46,7 @@ export class Maze {
     }
 
     public breathFirstSearch(sourceX: number, sourceY: number, destinationX: number, destinationY: number): number {
-        if (this.maze[sourceX][sourceY] === Walkable.Blocked || this.maze[destinationX][destinationY] === Walkable.Blocked) {
+        if (this.maze[sourceX][sourceY] !== Walkable.Walkable || this.maze[destinationX][destinationY] !== Walkable.Walkable) {
             return -1;
         }
 
