@@ -43,9 +43,16 @@ export class Ship extends CheckPoint {
                     SendMessage('Archimonde has boarded the ship! |cFFFF0000YOU LOSE!|r');
                     this.game.gameLives = 0;
                 } else {
-                    this.game.gameLives--;
+                    //  this.game.gameLives--;
+                    this.game.gameLives = this.game.gameLives - Math.ceil(GetUnitLifePercent(creep.creep) / 20) * 100;
+                    // SendMessage(
+                    //     `|c00ff0000A unit has boarded the ship!|r ${Math.floor(this.game.gameLives)} |c00ff0000chances left|r`);
+                    if (this.game.gameLives <= 0) {
+                        this.game.gameLives = 0;
+                    }
+
                     SendMessage(
-                        `|c00ff0000A unit has boarded the ship!|r ${Math.floor(this.game.gameLives)} |c00ff0000chances left|r`);
+                        `|c00ff0000A unit has boarded the ship!|r ${Util.Round(this.game.gameLives / 100)}|c00ff0000% of your lives left|r`);
                 }
 
 
@@ -55,7 +62,8 @@ export class Ship extends CheckPoint {
 
                 PlaySoundBJ(Sounds.loseALifeSound);
                 if (this.game.scoreBoard) {
-                    MultiboardSetItemValueBJ(this.game.scoreBoard.board, 2, 4, `${this.game.gameLives}`);
+                    MultiboardSetItemValueBJ(this.game.scoreBoard.board, 2, 4, `${Util.Round(this.game.gameLives / 100)}%`);
+                    // MultiboardSetItemValueBJ(this.game.scoreBoard.board, 2, 4, `${this.game.gameLives}`);
                 }
 
                 if (this.game.gameLives <= 0) {

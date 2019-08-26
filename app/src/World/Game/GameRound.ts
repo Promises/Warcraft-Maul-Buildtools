@@ -195,7 +195,7 @@ export class GameRound {
             } else {
                 const livesRemaining: number = this.game.startLives - this.game.gameLives;
                 SendMessage(
-                    `${livesRemaining} ${Util.ColourString(settings.COLOUR_CODES[COLOUR.RED], 'Chances have been lost')}`,
+                    `${Util.Round(livesRemaining / 100)}${Util.ColourString(settings.COLOUR_CODES[COLOUR.RED], '% of your lives have been lost')}`,
                 );
             }
             this.GiveWaveGoldReward();

@@ -20,7 +20,8 @@ export class MultiBoard {
         MultiboardSetItemValueBJ(this.board, 2, 2, this.game.gameRoundHandler.currentWave + '');
         MultiboardSetItemValueBJ(this.board, 1, 3, 'Difficulty');
         MultiboardSetItemValueBJ(this.board, 1, 4, 'Lives');
-        MultiboardSetItemValueBJ(this.board, 2, 4, this.game.gameLives + '');
+        MultiboardSetItemValueBJ(this.board, 2, 4, `${Util.Round(this.game.gameLives / 100)}%`);
+        // MultiboardSetItemValueBJ(this.board, 2, 4, this.game.gameLives + '');
         MultiboardSetItemValueBJ(this.board, 1, 5, 'Armour Type');
         let armourType: string = ARMOUR_TYPE_NAMES[this.game.worldMap.waveCreeps[0].getArmourType()].toLowerCase();
         armourType = armourType.charAt(0).toUpperCase() + armourType.slice(1);

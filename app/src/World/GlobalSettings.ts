@@ -24,7 +24,8 @@ export const ALLOW_PLAYER_TOWER_LOCATIONS: Point[] = [
 
 
 // GAME SETTINGS:
-export const INITIAL_LIVES: number = 20;
+// export const INITIAL_LIVES: number = 20;
+export const INITIAL_LIVES: number = 10000;
 export const GAME_END_TIME: number = 600;
 export const GAME_TIME_BEFORE_START: number = 90;
 export const GAME_TIME_BEFORE_WAVE: number = 20;
