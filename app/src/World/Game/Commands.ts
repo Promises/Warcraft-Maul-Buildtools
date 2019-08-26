@@ -199,6 +199,10 @@ export class Commands {
 
                 PreloadGenEnd('testmap.txt');
                 break;
+            case 'sanity':
+                this.game.worldMap.playerMazes[player.id].SanityCheck();
+                this.game.worldMap.playerMazes[player.id].CheckAll();
+                break;
             case 'time':
                 amount = Util.ParsePositiveInt(command[1]);
                 if (!amount) {
@@ -716,6 +720,7 @@ export class Commands {
         Log.Debug('Hello world');
         return true;
     }
+
     private MazeToString(maze: Walkable[][]): void {
         let output: string = '[';
         Preload(`{"logevent":}`);

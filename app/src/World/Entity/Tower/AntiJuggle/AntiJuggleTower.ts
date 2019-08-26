@@ -37,6 +37,11 @@ export class AntiJuggleTower extends Tower implements EndOfRoundTower {
         this.rightSide = (this.x - maze.minX) / 64;
         this.topSide = (this.y - maze.minY) / 64;
         this.bottomSide = ((this.y - 64) - maze.minY) / 64;
+
+
+
+
+
         maze.setWalkable(this.leftSide, this.bottomSide, Walkable.Protected);
         maze.setWalkable(this.rightSide, this.bottomSide, Walkable.Protected);
         maze.setWalkable(this.leftSide, this.topSide, Walkable.Protected);
