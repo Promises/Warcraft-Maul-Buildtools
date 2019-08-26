@@ -44,7 +44,11 @@ export class Ship extends CheckPoint {
                     this.game.gameLives = 0;
                 } else {
                     //  this.game.gameLives--;
-                    this.game.gameLives = this.game.gameLives - Math.ceil(GetUnitLifePercent(creep.creep) / 20);
+                    if(this.game.worldMap.waveCreeps[this.game.gameRoundHandler.currentWave - 1].getCreepType() === CREEP_TYPE.CHAMPION) {
+                        this.game.gameLives = this.game.gameLives - Math.ceil(GetUnitLifePercent(creep.creep) / 10);
+                    } else {
+                        this.game.gameLives = this.game.gameLives - Math.ceil(GetUnitLifePercent(creep.creep) / 20);
+                    }
                     // SendMessage(
                     //     `|c00ff0000A unit has boarded the ship!|r ${Math.floor(this.game.gameLives)} |c00ff0000chances left|r`);
                     if (this.game.gameLives <= 0) {
