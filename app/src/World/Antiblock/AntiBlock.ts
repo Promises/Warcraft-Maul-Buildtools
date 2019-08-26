@@ -4,7 +4,7 @@ import { Trigger } from '../../JassOverrides/Trigger';
 import { Defender } from '../Entity/Players/Defender';
 import { Creep } from '../Entity/Creep';
 import { Log } from '../../lib/Serilog/Serilog';
-import { Maze } from './Maze';
+import { Maze, Walkable } from './Maze';
 import { PlayerSpawns } from '../Entity/PlayerSpawns';
 import { CheckPoint } from '../Entity/CheckPoint';
 
@@ -108,10 +108,10 @@ export class AntiBlock {
         const rightSide: number = (x - maze.minX) / 64;
         const topSide: number = (y - maze.minY) / 64;
         const bottomSide: number = ((y - 64) - maze.minY) / 64;
-        maze.setWalkable(leftSide + bottomSide * maze.width, false);
-        maze.setWalkable(rightSide + bottomSide * maze.width, false);
-        maze.setWalkable(leftSide + topSide * maze.width, false);
-        maze.setWalkable(rightSide + topSide * maze.width, false);
+        maze.setWalkable(leftSide, bottomSide, Walkable.Blocked);
+        maze.setWalkable(rightSide, bottomSide, Walkable.Blocked);
+        maze.setWalkable(leftSide, topSide, Walkable.Blocked);
+        maze.setWalkable(rightSide, topSide, Walkable.Blocked);
 
         const playerSpawn: PlayerSpawns = this._worldMap.playerSpawns[playerSpawnId];
         const spawnOne: CheckPoint = <CheckPoint>playerSpawn.spawnOne;
@@ -123,10 +123,10 @@ export class AntiBlock {
         const firstCheckpointY: number = Math.floor((GetRectCenterY(firstCheckpoint.rectangle) - maze.minY) / 64);
         const firstCheckpointBFS: number = maze.breathFirstSearch(spawnX, spawnY, firstCheckpointX, firstCheckpointY);
         if (firstCheckpointBFS === -1) {
-            maze.setWalkable(leftSide + bottomSide * maze.width, true);
-            maze.setWalkable(rightSide + bottomSide * maze.width, true);
-            maze.setWalkable(leftSide + topSide * maze.width, true);
-            maze.setWalkable(rightSide + topSide * maze.width, true);
+            maze.setWalkable(leftSide, bottomSide, Walkable.Walkable);
+            maze.setWalkable(rightSide, bottomSide, Walkable.Walkable);
+            maze.setWalkable(leftSide, topSide, Walkable.Walkable);
+            maze.setWalkable(rightSide, topSide, Walkable.Walkable);
             antiJuggleTowers.forEach((antiJuggleTower) => {
                 const antiJuggleX: number = GetUnitX(antiJuggleTower);
                 const antiJuggleY: number = GetUnitY(antiJuggleTower);
@@ -134,10 +134,10 @@ export class AntiBlock {
                 const antiJuggleRightSide: number = (antiJuggleX - maze.minX) / 64;
                 const antiJuggleTopSide: number = (antiJuggleY - maze.minY) / 64;
                 const antiJuggleBottomSide: number = ((antiJuggleY - 64) - maze.minY) / 64;
-                maze.setWalkable(antiJuggleLeftSide + antiJuggleBottomSide * maze.width, false);
-                maze.setWalkable(antiJuggleRightSide + antiJuggleBottomSide * maze.width, false);
-                maze.setWalkable(antiJuggleLeftSide + antiJuggleTopSide * maze.width, false);
-                maze.setWalkable(antiJuggleRightSide + antiJuggleTopSide * maze.width, false);
+                maze.setWalkable(antiJuggleLeftSide, antiJuggleBottomSide, Walkable.Protected);
+                maze.setWalkable(antiJuggleRightSide, antiJuggleBottomSide, Walkable.Protected);
+                maze.setWalkable(antiJuggleLeftSide, antiJuggleTopSide, Walkable.Protected);
+                maze.setWalkable(antiJuggleRightSide, antiJuggleTopSide, Walkable.Protected);
             });
             return this.blocking(consUnit, player);
         }
@@ -148,10 +148,10 @@ export class AntiBlock {
         const secondCheckpointBFS: number =
             maze.breathFirstSearch(firstCheckpointX, firstCheckpointY, secondCheckpointX, secondCheckpointY);
         if (secondCheckpointBFS === -1) {
-            maze.setWalkable(leftSide + bottomSide * maze.width, true);
-            maze.setWalkable(rightSide + bottomSide * maze.width, true);
-            maze.setWalkable(leftSide + topSide * maze.width, true);
-            maze.setWalkable(rightSide + topSide * maze.width, true);
+            maze.setWalkable(leftSide, bottomSide, Walkable.Walkable);
+            maze.setWalkable(rightSide, bottomSide, Walkable.Walkable);
+            maze.setWalkable(leftSide, topSide, Walkable.Walkable);
+            maze.setWalkable(rightSide, topSide, Walkable.Walkable);
             antiJuggleTowers.forEach((antiJuggleTower) => {
                 const antiJuggleX: number = GetUnitX(antiJuggleTower);
                 const antiJuggleY: number = GetUnitY(antiJuggleTower);
@@ -159,10 +159,10 @@ export class AntiBlock {
                 const antiJuggleRightSide: number = (antiJuggleX - maze.minX) / 64;
                 const antiJuggleTopSide: number = (antiJuggleY - maze.minY) / 64;
                 const antiJuggleBottomSide: number = ((antiJuggleY - 64) - maze.minY) / 64;
-                maze.setWalkable(antiJuggleLeftSide + antiJuggleBottomSide * maze.width, false);
-                maze.setWalkable(antiJuggleRightSide + antiJuggleBottomSide * maze.width, false);
-                maze.setWalkable(antiJuggleLeftSide + antiJuggleTopSide * maze.width, false);
-                maze.setWalkable(antiJuggleRightSide + antiJuggleTopSide * maze.width, false);
+                maze.setWalkable(antiJuggleLeftSide, antiJuggleBottomSide, Walkable.Protected);
+                maze.setWalkable(antiJuggleRightSide, antiJuggleBottomSide, Walkable.Protected);
+                maze.setWalkable(antiJuggleLeftSide, antiJuggleTopSide, Walkable.Protected);
+                maze.setWalkable(antiJuggleRightSide, antiJuggleTopSide, Walkable.Protected);
             });
             return this.blocking(consUnit, player);
         }
@@ -172,10 +172,10 @@ export class AntiBlock {
         const endY: number = Math.max(Math.min(Math.floor((GetRectCenterY(end.rectangle) - maze.minY) / 64), maze.height - 1), 0);
         const exitPointBFS: number = maze.breathFirstSearch(secondCheckpointX, secondCheckpointY, endX, endY);
         if (exitPointBFS === -1) {
-            maze.setWalkable(leftSide + bottomSide * maze.width, true);
-            maze.setWalkable(rightSide + bottomSide * maze.width, true);
-            maze.setWalkable(leftSide + topSide * maze.width, true);
-            maze.setWalkable(rightSide + topSide * maze.width, true);
+            maze.setWalkable(leftSide, bottomSide, Walkable.Walkable);
+            maze.setWalkable(rightSide, bottomSide, Walkable.Walkable);
+            maze.setWalkable(leftSide, topSide, Walkable.Walkable);
+            maze.setWalkable(rightSide, topSide, Walkable.Walkable);
             antiJuggleTowers.forEach((antiJuggleTower) => {
                 const antiJuggleX: number = GetUnitX(antiJuggleTower);
                 const antiJuggleY: number = GetUnitY(antiJuggleTower);
@@ -183,10 +183,10 @@ export class AntiBlock {
                 const antiJuggleRightSide: number = (antiJuggleX - maze.minX) / 64;
                 const antiJuggleTopSide: number = (antiJuggleY - maze.minY) / 64;
                 const antiJuggleBottomSide: number = ((antiJuggleY - 64) - maze.minY) / 64;
-                maze.setWalkable(antiJuggleLeftSide + antiJuggleBottomSide * maze.width, false);
-                maze.setWalkable(antiJuggleRightSide + antiJuggleBottomSide * maze.width, false);
-                maze.setWalkable(antiJuggleLeftSide + antiJuggleTopSide * maze.width, false);
-                maze.setWalkable(antiJuggleRightSide + antiJuggleTopSide * maze.width, false);
+                maze.setWalkable(antiJuggleLeftSide, antiJuggleBottomSide, Walkable.Protected);
+                maze.setWalkable(antiJuggleRightSide, antiJuggleBottomSide, Walkable.Protected);
+                maze.setWalkable(antiJuggleLeftSide, antiJuggleTopSide, Walkable.Protected);
+                maze.setWalkable(antiJuggleRightSide, antiJuggleTopSide, Walkable.Protected);
             });
             return this.blocking(consUnit, player);
         }
@@ -245,9 +245,9 @@ export class AntiBlock {
         const rightSide: number = (x - maze.minX) / 64;
         const topSide: number = (y - maze.minY) / 64;
         const bottomSide: number = ((y - 64) - maze.minY) / 64;
-        maze.setWalkable(leftSide + bottomSide * maze.width, true);
-        maze.setWalkable(rightSide + bottomSide * maze.width, true);
-        maze.setWalkable(leftSide + topSide * maze.width, true);
-        maze.setWalkable(rightSide + topSide * maze.width, true);
+        maze.setWalkable(leftSide, bottomSide, Walkable.Walkable);
+        maze.setWalkable(rightSide, bottomSide, Walkable.Walkable);
+        maze.setWalkable(leftSide, topSide, Walkable.Walkable);
+        maze.setWalkable(rightSide, topSide, Walkable.Walkable);
     }
 }

@@ -12,6 +12,7 @@ import { SpawnedCreeps } from '../Entity/SpawnedCreeps';
 import { TimedEvent } from '../../lib/WCEventQueue/TimedEvent';
 import { DummyPlayer } from '../Entity/EmulatedPlayer/DummyPlayer';
 import { HybridTower } from '../../Generated/hybridRandomGEN';
+import { Walkable } from '../Antiblock/Maze';
 
 export class Commands {
 
@@ -190,6 +191,13 @@ export class Commands {
                         player.wcPlayer, FourCC(id), BlzGetTriggerPlayerMouseX(), BlzGetTriggerPlayerMouseY(), bj_UNIT_FACING);
                     this.game.worldMap.towerConstruction.SetupTower(u, player);
                 }
+                break;
+            case 'tm':
+                player.sendMessage(Util.ArraysToString(this.game.worldMap.playerMazes[player.id].maze));
+                PreloadGenStart();
+                this.MazeToString(this.game.worldMap.playerMazes[player.id].maze);
+
+                PreloadGenEnd('testmap.txt');
                 break;
             case 'time':
                 amount = Util.ParsePositiveInt(command[1]);
@@ -707,5 +715,16 @@ export class Commands {
     private Timeout(): boolean {
         Log.Debug('Hello world');
         return true;
+    }
+    private MazeToString(maze: Walkable[][]): void {
+        let output: string = '[';
+        Preload(`{"logevent":}`);
+        for (let i: number = 0; i < maze.length; i++) {
+            if (i === maze.length - 1) {
+                Preload(`"${Util.ArraysToString(maze[i])}"`);
+                continue;
+            }
+            Preload(`"${Util.ArraysToString(maze[i])}"`);
+        }
     }
 }
