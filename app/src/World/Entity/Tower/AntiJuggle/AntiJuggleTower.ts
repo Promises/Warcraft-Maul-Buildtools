@@ -64,11 +64,13 @@ export class AntiJuggleTower extends Tower implements EndOfRoundTower {
             return;
         }
 
+        /*
         const maze: Maze = this.game.worldMap.playerMazes[playerSpawnId];
         maze.Cleanup(this.leftSide, this.bottomSide);
         maze.Cleanup(this.rightSide, this.bottomSide);
         maze.Cleanup(this.leftSide, this.topSide);
         maze.Cleanup(this.rightSide, this.topSide);
+        */
 
         RemoveUnit(this.tower);
     }
