@@ -107,6 +107,7 @@ export class DifficultyVote {
             SendMessage('|cFF565656Everyone voted for Extreme, you will only have |r1|cFF565656 life!|r');
             this.game.gameLives = 1;
             this.game.startLives = 1;
+            MultiboardSetItemValueBJ(this.game.scoreBoard.board, 2, 4, `${this.game.gameLives}%`);
             // MultiboardSetItemValueBJ(udg_Scoreboard, 2, 4, I2S(udg_TotalLives))
             SetWaterBaseColorBJ(100, 20.00, 20.00, 0);
             this.game.worldMap.ReplaceRunedBricksWithLava();

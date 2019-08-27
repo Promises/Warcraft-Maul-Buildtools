@@ -2142,7 +2142,7 @@ Increases attack damage by 6%.
 STRING 355
 // Abilities: A0C4 ([Night Elf] Wolven Fury), Ubertip (Tooltip - Normal - Extended)
 {
-Increases attack damage by 9'%.
+Increases attack damage by 9%.
 }
 
 STRING 356
@@ -13754,7 +13754,7 @@ Frozen Destruction
 STRING 9483
 // Abilities: A0CK (Frozen Destruction), Ubertip (Tooltip - Normal - Extended)
 {
-Enemy units within an area of 300 will take 3x damage.
+Slowed enemy units within an area of 300 will take 3x damage.
 }
 
 STRING 9484
@@ -13766,7 +13766,7 @@ Frozen Destruction
 STRING 9485
 // Buffs/Effects: B02M (), Buffubertip (Tooltip - Extended)
 {
-This unit is under the effects of Frozen Destruction; it will take additional damage.
+This unit is under the effects of Frozen Destruction; it will take additional damage if slowed.
 }
 
 STRING 9489
