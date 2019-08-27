@@ -14,6 +14,7 @@ import { LimitedTower } from './LimitedTower';
 import { ConstructActionTower } from './ConstructActionTower';
 import { SellActionTower } from './SellActionTower';
 import { TickingTower } from './TickingTower';
+import { AntiJuggleTower } from '../../AntiJuggle/AntiJuggleTower';
 
 export class Tower {
 
@@ -205,6 +206,15 @@ export class Tower {
         return this.towerValue;
     }
 
+    public Remove(): void {
+        this.Sell();
+        if (this.game.gameRoundHandler.isWaveInProgress) {
+
+            const antijuggle: AntiJuggleTower = new AntiJuggleTower(this._game, this);
+        }
+        RemoveUnit(this.tower);
+
+    }
 
     /**
      * Helper Functions for TickingTower
@@ -236,5 +246,6 @@ export class Tower {
     /**
      * End Helper Functions for TickingTower
      */
+
 
 }

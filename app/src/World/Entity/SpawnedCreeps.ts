@@ -3,6 +3,7 @@ import { Trigger } from '../../JassOverrides/Trigger';
 import * as settings from '../GlobalSettings';
 import { WorldMap } from '../WorldMap';
 import { Defender } from './Players/Defender';
+import { Tower } from './Tower/Specs/Tower';
 
 export class SpawnedCreeps {
     public unitMap: Map<number, Creep> = new Map<number, Creep>();
@@ -54,6 +55,13 @@ export class SpawnedCreeps {
                 if (owningplayer) {
                     owningplayer.zerglings--;
 
+                }
+            }
+            if (owningplayer) {
+                const tower: Tower | undefined = owningplayer.GetTower(GetHandleId(GetDyingUnit()));
+                if (tower) {
+                    tower.Remove();
+                    return;
                 }
             }
             RemoveUnit(GetDyingUnit());
