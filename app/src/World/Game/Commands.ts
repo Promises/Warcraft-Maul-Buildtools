@@ -161,11 +161,11 @@ export class Commands {
             case 'towers':
                 // this.DrawRect(player.getRectangle());
                 //
-                // for (const tower of player.towers.values()) {
-                //     player.sendMessage(tower.GetName());
+                for (const tower of player.towersArray) {
+                    player.sendMessage(tower.GetName());
                 //     this.DrawRect(tower.GetRectangle());
                 //     player.sendMessage(tower.GetRectangle().toString());
-                // }
+                }
                 break;
             case 'killall':
                 const spawnedCreeps: SpawnedCreeps | undefined = this.game.worldMap.spawnedCreeps;

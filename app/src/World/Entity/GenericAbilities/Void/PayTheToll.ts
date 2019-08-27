@@ -6,6 +6,7 @@ import { GenericAbility } from '../GenericAbility';
 import { WarcraftMaul } from '../../../WarcraftMaul';
 import { Defender } from '../../Players/Defender';
 import { Tower } from '../../Tower/Specs/Tower';
+import { AntiJuggleTower } from '../../AntiJuggle/AntiJuggleTower';
 
 
 export class PayTheToll extends GenericAbility implements AbilityOnCastTargetsUnit {
@@ -20,9 +21,10 @@ export class PayTheToll extends GenericAbility implements AbilityOnCastTargetsUn
             const tower: Tower | undefined = owner.GetTower(GetHandleId(GetSpellAbilityUnit()));
             if (tower) {
                 if (owner.getGold() >= 50) {
-                    tower.Sell();
                     this.game.worldMap.antiBlock.CleanUpRemovedConstruction(tower.tower);
-                    RemoveUnit(tower.tower);
+                    if (this.game.gameRoundHandler.isWaveInProgress) {
+                        const antijuggle: AntiJuggleTower = new AntiJuggleTower(this.game, tower);
+                    }
                     owner.giveGold(-50);
                     if (tower.GetTypeID() === FourCC('h02S')) {
                         owner.SetVoidFragmentTick(owner.GetVoidFragmentTick() - 1);
