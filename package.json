@@ -23,7 +23,7 @@
     "minimist": "latest",
     "rimraf": "^2.6.3",
     "sync-rpc": "^1.3.6",
-    "typescript": "latest",
+    "typescript": "3.5.3",
     "typescript-to-lua": "latest",
     "wc3-json-to-slk": "^1.0.11"
   },
