@@ -4,14 +4,14 @@ import { SpawnedCreeps } from './SpawnedCreeps';
 import { Creep } from './Creep';
 
 export class Teleporter extends CheckPoint {
-    facing: number;
+    private readonly facing: number;
 
     constructor(rectangle: rect, worldMap: WorldMap, facing: number) {
         super(rectangle, worldMap);
         this.facing = facing;
     }
 
-    checkPointAction(): void {
+    public checkPointAction(): void {
         if (!this.next) {
             return;
         }
