@@ -1,6 +1,6 @@
 const WCJsonToTs = require("wc3-json-to-slk/dist/WCJsonToTs");
 
-const fs = require('fs-extra');
+const fse = require('fs-extra');
 const jassToTs = require('./node_modules/convertjasstots/dist/jassParser');
 const typescriptToLua = require('typescript-to-lua');
 const ts = require("typescript");
@@ -60,16 +60,16 @@ class Build {
     env() {
         const dir = './config';
 
-        if (!fs.existsSync(dir)) {
-            fs.mkdirSync(dir);
+        if (!fse.existsSync(dir)) {
+            fse.mkdirSync(dir);
         }
-        if (!fs.existsSync(`${dir}/warcraft.json`)) {
+        if (!fse.existsSync(`${dir}/warcraft.json`)) {
             console.log('missing file');
-            fs.writeFileSync(`${dir}/warcraft.json`, JSON.stringify({
+            fse.writeFileSync(`${dir}/warcraft.json`, JSON.stringify({
                 path: '',
             }))
         }
-        this.settings = JSON.parse(fs.readFileSync(`${dir}/warcraft.json`));
+        this.settings = JSON.parse(fse.readFileSync(`${dir}/warcraft.json`));
         if (!this.settings.path.length > 0) {
             console.error('Path to wc3 is not setup, please set it in ./config/warcraft.json');
             process.exit(1)
@@ -92,9 +92,9 @@ class Build {
         this.cleanup();
 
         var map = 'map.w3x';
-        fs.mkdirSync('target');
+        fse.mkdirSync('target');
 
-        fs.copySync(`maps/${map}`, `target/${map}`);
+        fse.copySync(`maps/${map}`, `target/${map}`);
 
         this.generateWCM();
 
@@ -133,8 +133,8 @@ class Build {
         }
 
         emitResult.forEach(({name, text}) => ts.sys.writeFile(name, text));
-        fs.copySync(`src/app/src/main.lua`, `src/main.lua`);
-        fs.copySync(`tools/extras/app`, `src/app`);
+        fse.copySync(`src/app/src/main.lua`, `src/main.lua`);
+        fse.copySync(`tools/extras/app`, `src/app`);
 
         sharedArgs = `build "map"`;
         let ceres = '';
@@ -209,11 +209,11 @@ class Build {
     }
 
     cleanup() {
-        if (fs.existsSync(`./src`)) {
-            fs.removeSync('./src');
+        if (fse.existsSync(`./src`)) {
+            fse.removeSync('./src');
         }
-        if (fs.existsSync(`./target`)) {
-            fs.removeSync('./target');
+        if (fse.existsSync(`./target`)) {
+            fse.removeSync('./target');
         }
     }
 
