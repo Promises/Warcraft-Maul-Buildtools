@@ -101931,7 +101931,7 @@
       {
         "id": "ua1c",
         "type": "unreal",
-        "value": 1
+        "value": "0.4"
       },
       {
         "id": "ua1d",
@@ -102001,7 +102001,7 @@
       {
         "id": "utub",
         "type": "string",
-        "value": "|cffffcc00Attack:|r Magic|n|cffffcc00Cooldown:|r 1.00|n|cffffcc00Damage:|r 150 - 200|n|cffffcc00Range:|r 1000|n|cffffcc00Ability:|r Splash; the area of effect is 150 (air only)"
+        "value": "|cffffcc00Attack:|r Magic|n|cffffcc00Cooldown:|r 0.40|n|cffffcc00Damage:|r 150 - 200|n|cffffcc00Range:|r 1000|n|cffffcc00Ability:|r Splash; the area of effect is 150 (air only)"
       },
       {
         "id": "unsf",
@@ -102052,6 +102052,96 @@
         "id": "uaap",
         "type": "string",
         "value": "Alternate"
+      },
+      {
+        "id": "ucun",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "uspa",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "uani",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "utra",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "umki",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "usei",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "ucut",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "ua2m",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "ures",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "ubui",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "ureq",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "uupt",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "umh1",
+        "type": "int",
+        "value": 0
+      },
+      {
+        "id": "urev",
+        "type": "int",
+        "value": 0
+      },
+      {
+        "id": "ua2z",
+        "type": "int",
+        "value": 0
+      },
+      {
+        "id": "umh2",
+        "type": "int",
+        "value": 0
+      },
+      {
+        "id": "uma2",
+        "type": "unreal",
+        "value": 0
+      },
+      {
+        "id": "ubpr",
+        "type": "string",
+        "value": ""
       }
     ],
     "o00B:nntg": [
@@ -102877,12 +102967,12 @@
       {
         "id": "udp1",
         "type": "unreal",
-        "value": 0.3
+        "value": "0.1"
       },
       {
         "id": "ubs1",
         "type": "unreal",
-        "value": 0.3
+        "value": "0.1"
       },
       {
         "id": "uico",
@@ -102958,6 +103048,96 @@
         "id": "uaap",
         "type": "string",
         "value": "Alternate"
+      },
+      {
+        "id": "ucun",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "uspa",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "uani",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "utra",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "umki",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "usei",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "ucut",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "ua2m",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "ures",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "ubui",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "ureq",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "uupt",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "umh1",
+        "type": "int",
+        "value": 0
+      },
+      {
+        "id": "urev",
+        "type": "int",
+        "value": 0
+      },
+      {
+        "id": "ua2z",
+        "type": "int",
+        "value": 0
+      },
+      {
+        "id": "umh2",
+        "type": "int",
+        "value": 0
+      },
+      {
+        "id": "uma2",
+        "type": "unreal",
+        "value": 0
+      },
+      {
+        "id": "ubpr",
+        "type": "string",
+        "value": ""
       }
     ],
     "o00E:nntg": [
@@ -106846,7 +107026,7 @@
       {
         "id": "ua1c",
         "type": "unreal",
-        "value": 0.4
+        "value": "0.2"
       },
       {
         "id": "ua1d",
@@ -106967,6 +107147,96 @@
         "id": "uaap",
         "type": "string",
         "value": "Alternate"
+      },
+      {
+        "id": "ucun",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "uspa",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "uani",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "utra",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "umki",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "usei",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "ucut",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "ua2m",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "ures",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "ubui",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "ureq",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "uupt",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": "umh1",
+        "type": "int",
+        "value": 0
+      },
+      {
+        "id": "urev",
+        "type": "int",
+        "value": 0
+      },
+      {
+        "id": "ua2z",
+        "type": "int",
+        "value": 0
+      },
+      {
+        "id": "umh2",
+        "type": "int",
+        "value": 0
+      },
+      {
+        "id": "uma2",
+        "type": "unreal",
+        "value": 0
+      },
+      {
+        "id": "ubpr",
+        "type": "string",
+        "value": ""
       }
     ],
     "o00R:nntg": [
