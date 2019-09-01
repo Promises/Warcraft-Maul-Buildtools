@@ -158,15 +158,6 @@ export class Commands {
 
                 this.DestroyDrawings();
                 break;
-            case 'towers':
-                // this.DrawRect(player.getRectangle());
-                //
-                for (const tower of player.towersArray) {
-                    player.sendMessage(tower.GetName());
-                //     this.DrawRect(tower.GetRectangle());
-                //     player.sendMessage(tower.GetRectangle().toString());
-                }
-                break;
             case 'killall':
                 const spawnedCreeps: SpawnedCreeps | undefined = this.game.worldMap.spawnedCreeps;
                 if (spawnedCreeps) {
@@ -365,7 +356,7 @@ export class Commands {
             }
         } else if (command[0] === 'dt' || command[0] === 'disabletowers') {
             player.DisableTowers();
-        } else if (command[0] === 'buildings') {
+        } else if (command[0] === 'buildings' || command[0] === 'towers') {
             if (command[1]) {
                 const receiver: number = this.getPlayerIdFromColourName(command[1]);
                 const receivingPlayer: Defender | undefined = this.game.players.get(receiver);
