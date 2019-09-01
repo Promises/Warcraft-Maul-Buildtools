@@ -1,4 +1,4 @@
-const WCJsonToTs = require("wc3-json-to-slk/dist/WCJsonToTs");
+const WCJsonToSLK = require("wc3-json-to-slk/dist/WCJsonToSLK");
 
 const fse = require('fs-extra');
 const jassToTs = require('./node_modules/convertjasstots/dist/jassParser');
@@ -219,7 +219,7 @@ class Build {
 
     generateWCM() {
         const file = 'GenerateHybrid.py';
-        new WCJsonToTs.WCJsonToTs('Data/Units/Units.json', 'maps/map/Units');
+        new WCJsonToSLK.WCJsonToSLK('Data/Units/Units.json', 'maps/map/Units');
         switch (this.os) {
             case "win32":
                 this.nativeExecute(`"tools/Warcraft-Maul-Race-Parser.exe" maps/map/Units units.json`);
