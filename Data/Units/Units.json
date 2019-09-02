@@ -32215,13 +32215,13 @@
       "ufoo": 7,
       "ubdi": 1000,
       "usrg": 30,
-      "uhpm": 392700,
+      "uhpm": 1000000,
       "uhpr": 2,
       "uhrt": "",
-      "udef": 9,
+      "udef": 18,
       "udup": 2,
       "udty": "hero",
-      "umvs": 300,
+      "umvs": 350,
       "ubld": 80,
       "urtm": 80,
       "usid": 1600,
@@ -32309,7 +32309,7 @@
       "ua1z": 800,
       "umh1": 1,
       "uaap": "large",
-      "uani": "alternate,1"
+      "uani": "alternate"
     },
     {
       "isCustom": true,
