@@ -190,6 +190,7 @@ export class WorldMap {
         this.waveCreeps.push(new WaveCreep(34, 'h040', 'Zergling'));
         this.waveCreeps.push(new WaveCreep(35, 'uC72', 'Archimonde'));
         this.waveCreeps.push(new WaveCreep(36, 'hC79', 'CRAB OF DEATH'));
+        this.waveCreeps.push(new WaveCreep(37, 'uC73', 'Deathwing'));
     }
 
     public setupRaces(): void {
