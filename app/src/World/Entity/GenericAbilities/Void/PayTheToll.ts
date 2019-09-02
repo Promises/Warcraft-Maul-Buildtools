@@ -21,14 +21,13 @@ export class PayTheToll extends GenericAbility implements AbilityOnCastTargetsUn
             const tower: Tower | undefined = owner.GetTower(GetHandleId(GetSpellAbilityUnit()));
             if (tower) {
                 if (owner.getGold() >= 50) {
-                    this.game.worldMap.antiBlock.CleanUpRemovedConstruction(tower.tower);
-                    if (this.game.gameRoundHandler.isWaveInProgress) {
-                        const antijuggle: AntiJuggleTower = new AntiJuggleTower(this.game, tower);
-                    }
+
                     owner.giveGold(-50);
                     if (tower.GetTypeID() === FourCC('h02S')) {
                         owner.SetVoidFragmentTick(owner.GetVoidFragmentTick() - 1);
                     }
+                    this.game.worldMap.antiBlock.CleanUpRemovedConstruction(tower.tower);
+                    tower.Remove();
                 }
             }
         }
