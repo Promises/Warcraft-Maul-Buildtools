@@ -120,7 +120,7 @@ export class Commands {
                     return;
 
                 }
-                if (amount >= this.game.worldMap.waveCreeps.length) {
+                if (amount > this.game.worldMap.waveCreeps.length) {
                     player.sendMessage(Util.ColourString(COLOUR_CODES[COLOUR.RED], 'Invalid Amount'));
                     return;
                 }
