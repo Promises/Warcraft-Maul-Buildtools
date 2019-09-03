@@ -210,7 +210,7 @@ export class GameRound {
                 PauseUnitBJ(false, this.game.worldMap.archimondeDummy);
                 IssueTargetDestructableOrder(this.game.worldMap.archimondeDummy, 'attack', this.archimondeGate.gate);
             }
-            if (this._currentWave === 36) {
+            if (this._currentWave === 37) {
                 this.game.GameWin();
             }
         }
@@ -311,15 +311,17 @@ export class GameRound {
                         this.getSpawnFace(i));
                     spawned.set(GetHandleId(creep), new Creep(creep, this, abilities, this.game));
 
-                    if (spawn.spawnTwo) {
+                    if (this.currentWave !== 37) {
+                        if (spawn.spawnTwo) {
 
-                        creep = CreateUnit(
-                            Player(COLOUR.NAVY + creepOwner % 4),
-                            FourCC(wave.id),
-                            GetRectCenterX(spawn.spawnTwo.rectangle),
-                            GetRectCenterY(spawn.spawnTwo.rectangle),
-                            this.getSpawnFace(i));
-                        spawned.set(GetHandleId(creep), new Creep(creep, this, abilities, this.game));
+                            creep = CreateUnit(
+                                Player(COLOUR.NAVY + creepOwner % 4),
+                                FourCC(wave.id),
+                                GetRectCenterX(spawn.spawnTwo.rectangle),
+                                GetRectCenterY(spawn.spawnTwo.rectangle),
+                                this.getSpawnFace(i));
+                            spawned.set(GetHandleId(creep), new Creep(creep, this, abilities, this.game));
+                        }
                     }
                 }
             }

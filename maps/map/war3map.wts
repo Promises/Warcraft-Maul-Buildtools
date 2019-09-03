@@ -1064,6 +1064,12 @@ STRING 177
 C
 }
 
+STRING 178
+// Fähigkeiten: A0EY (Fel Barrage), Name (Name)
+{
+Fel Barrage
+}
+
 STRING 179
 // Abilities: A03R (Berserk), Hotkey (Hotkey - Normal)
 {
@@ -1381,6 +1387,12 @@ STRING 226
 // Abilities: A0EB (Move), Hotkey (Hotkey - Normal)
 {
 X
+}
+
+STRING 227
+// Fähigkeiten: A0EY (Fel Barrage), EditorSuffix (Editor-Suffix)
+{
+(Felhound aa)
 }
 
 STRING 228
@@ -2508,6 +2520,18 @@ STRING 412
 // Items: I02F (Rocks), Ubertip (Tooltip - Extended)
 {
 Rocks can be used to generate a Free Loot Bag, which will randomly give you 1 of 4 items.
+}
+
+STRING 417
+// Fähigkeiten: A0EY (Fel Barrage), Tip (Tooltipp - Normal)
+{
+Fel Barrage
+}
+
+STRING 418
+// Fähigkeiten: A0EY (Fel Barrage), Ubertip (Tooltipp - Normal - Erweitert)
+{
+Spits Fel on up to 4 flying enemies.
 }
 
 STRING 427

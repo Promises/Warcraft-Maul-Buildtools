@@ -30,6 +30,8 @@ export class WaveCreep {
             case 31:
                 return CREEP_TYPE.CHAMPION;
             case 35:
+            case 36:
+            case 37:
                 return CREEP_TYPE.BOSS;
             default:
                 return CREEP_TYPE.NORMAL;
@@ -71,7 +73,6 @@ export class WaveCreep {
             case 20:
             case 25:
             case 30:
-            case 35:
                 return ARMOUR_TYPE.HEAVY;
             case 10:
             case 18:
@@ -79,7 +80,9 @@ export class WaveCreep {
             case 26:
             case 31:
                 return ARMOUR_TYPE.FORTIFIED;
+            case 35:
             case 36:
+            case 37:
                 return ARMOUR_TYPE.HERO;
             default:
                 Log.Error(`COULD NOT FIND ARMOUR TYPE FOR ${this.wave}:${this.id}:${this.name}`);
