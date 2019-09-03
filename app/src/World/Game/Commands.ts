@@ -521,9 +521,9 @@ export class Commands {
                 player.setGold(player.getGold() - amount);
                 receivingPlayer.setGold(receivingPlayer.getGold() + amount);
                 player.sendMessage(
-                    `You've sent ${Util.ColourString('FFCC00', `${amount}`)} gold to ${receivingPlayer.getNameWithColour()}`);
+                    `You've sent ${Util.ColourString('#FFCC00', `${amount}`)} gold to ${receivingPlayer.getNameWithColour()}`);
                 receivingPlayer.sendMessage(
-                    `You've received ${Util.ColourString('FFCC00', `${amount}`)} gold from ${player.getNameWithColour()}`);
+                    `You've received ${Util.ColourString('#FFCC00', `${amount}`)} gold from ${player.getNameWithColour()}`);
 
             } else {
                 player.sendMessage('You do not have this much gold');
