@@ -329,3 +329,18 @@ export const WEAPON_TYPE_RH_BASH: number = 23;
 export const udg_AttackTypeDebugStr = ['SPELLS', 'NORMAL', 'PIERCE', 'SIEGE', 'MAGIC', 'CHAOS', 'HERO'];
 export const udg_DamageTypeDebugStr = ['UNKNOWN', undefined, undefined, undefined, 'NORMAL', 'ENHANCED', undefined, undefined, 'FIRE', 'COLD', 'LIGHTNING', 'POISON', 'DISEASE', 'DIVINE', 'MAGIC', 'SONIC', 'ACID', 'FORCE', 'DEATH', 'MIND', 'PLANT', 'DEFENSIVE', 'DEMOLITION', 'SLOW_POISON', 'SPIRIT_LINK', 'SHADOW_STRIKE', 'UNIVERSAL'];
 export const udg_WeaponTypeDebugStr = ['NONE', 'METAL_LIGHT_CHOP', 'METAL_MEDIUM_CHOP', 'METAL_HEAVY_CHOP', 'METAL_LIGHT_SLICE', 'METAL_MEDIUM_SLICE', 'METAL_HEAVY_SLICE', 'METAL_MEDIUM_BASH', 'METAL_HEAVY_BASH', 'METAL_MEDIUM_STAB', 'METAL_HEAVY_STAB', 'WOOD_LIGHT_SLICE', 'WOOD_MEDIUM_SLICE', 'WOOD_HEAVY_SLICE', 'WOOD_LIGHT_BASH', 'WOOD_MEDIUM_BASH', 'WOOD_HEAVY_BASH', 'WOOD_LIGHT_STAB', 'WOOD_MEDIUM_STAB', 'CLAW_LIGHT_SLICE', 'CLAW_MEDIUM_SLICE', 'CLAW_HEAVY_SLICE', 'AXE_MEDIUM_CHOP', 'ROCK_HEAVY_BASH'];
+
+
+export const NO_LIVES_LOST: string = '|cFFF44242Co|r' +
+    '|cFFF47442ng|r' +
+    '|cFFF4A742ra|r' +
+    '|cFFEBF442tu|r' +
+    '|cFFC5F442la|r' +
+    '|cFF8FF442ti|r' +
+    '|cFF62F442on|r' +
+    '|cFF42F477s n|r' +
+    '|cFF42F4E5o l|r' +
+    '|cFF42A7F4iv|r' +
+    '|cFF425FF4es|r' +
+    '|cFF7A42F4 lo|r' +
+    '|cFFC542F4st!|r';

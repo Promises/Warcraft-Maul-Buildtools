@@ -200,16 +200,4 @@ enum ARMOUR_TYPE {
 
 }
 
-const NO_LIVES_LOST: string = '|cFFF44242Co|r' +
-    '|cFFF47442ng|r' +
-    '|cFFF4A742ra|r' +
-    '|cFFEBF442tu|r' +
-    '|cFFC5F442la|r' +
-    '|cFF8FF442ti|r' +
-    '|cFF62F442on|r' +
-    '|cFF42F477s n|r' +
-    '|cFF42F4E5o l|r' +
-    '|cFF42A7F4iv|r' +
-    '|cFF425FF4es|r' +
-    '|cFF7A42F4 lo|r' +
-    '|cFFC542F4st!|r';
+

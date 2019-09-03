@@ -294,7 +294,7 @@ export class GameRound {
 
     private DisplayLivesLost(): void {
         if (this.game.gameLives === this.game.startLives) {
-            SendMessage(NO_LIVES_LOST);
+            SendMessage(settings.NO_LIVES_LOST);
         } else {
             const livesRemaining: number = this.game.startLives - this.game.gameLives;
             SendMessage(
