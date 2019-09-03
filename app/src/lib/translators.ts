@@ -74,7 +74,7 @@ class Util {
     }
 
     public static ColourString(colour: string, str: string): string {
-        return `|cFF${colour}${str}|r`;
+        return `|cFF${colour.substr(1)}${str}|r`;
     }
 
     public static RandomInt(min: number, max: number): number {
@@ -199,4 +199,5 @@ enum ARMOUR_TYPE {
     HERO,
 
 }
+
 

@@ -8,7 +8,10 @@
   "main": "app/src/main.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "build-test.bat"
+    "build": "node build.js --build",
+    "run": "node build.js --run",
+    "start": "node build.js --build --run"
+
   },
   "author": "Nikolaj \"William\" Mariager",
   "license": "MIT",

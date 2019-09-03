@@ -7,6 +7,10 @@ import { PassiveCreepDiesInAreaEffectTower } from './Tower/Specs/PassiveCreepDie
 import { PLAYER_AREAS } from '../GlobalSettings';
 import { Rectangle } from '../../JassOverrides/Rectangle';
 import { Defender } from './Players/Defender';
+import { CreepAbility } from './CreepAbilities/specs/CreepAbility';
+import { Log } from '../../lib/Serilog/Serilog';
+import { WaveCreep } from './WaveCreep';
+import { GameRound } from '../Game/GameRound';
 
 export class PlayerSpawns {
     private _spawnOne: CheckPoint | undefined;
@@ -64,6 +68,64 @@ export class PlayerSpawns {
         }
     }
 
+    public SpawnCreep(gameRound: GameRound,
+                      spawned: Map<number, Creep>,
+                      abilities: CreepAbility[],
+                      wave: WaveCreep,
+                      creepOwner: number): void {
+        if (!this.isOpen) {
+            return;
+        }
+        if (this.spawnOne) {
+
+            let creep: unit = CreateUnit(
+                Player(COLOUR.NAVY + creepOwner % 4),
+                FourCC(wave.id),
+                GetRectCenterX(this.spawnOne.rectangle),
+                GetRectCenterY(this.spawnOne.rectangle),
+                this.getSpawnFace(this.colourId));
+            spawned.set(GetHandleId(creep), new Creep(creep, gameRound, abilities, this.worldMap.game));
+
+            if (wave.wave !== 37) {
+                if (this.spawnTwo) {
+
+                    creep = CreateUnit(
+                        Player(COLOUR.NAVY + creepOwner % 4),
+                        FourCC(wave.id),
+                        GetRectCenterX(this.spawnTwo.rectangle),
+                        GetRectCenterY(this.spawnTwo.rectangle),
+                        this.getSpawnFace(this.colourId));
+                    spawned.set(GetHandleId(creep), new Creep(creep, gameRound, abilities, this.worldMap.game));
+                }
+            }
+        }
+    }
+
+    private getSpawnFace(id: COLOUR): number {
+        switch (id) {
+            case COLOUR.RED:
+            case COLOUR.PINK:
+                return 180;
+            case COLOUR.BLUE:
+            case COLOUR.PURPLE:
+            case COLOUR.YELLOW:
+            case COLOUR.ORANGE:
+            case COLOUR.GRAY:
+            case COLOUR.BROWN:
+            case COLOUR.MAROON:
+                return 270;
+            case COLOUR.TEAL:
+            case COLOUR.GREEN:
+                return 0;
+            case COLOUR.LIGHT_BLUE:
+            case COLOUR.DARK_GREEN:
+                return 90;
+            default:
+                Log.Error(`getSpawnFace, could not find player: ${id}`);
+                return 0;
+
+        }
+    }
 
     public EnteringUnitIsCreepAndHasNoCheckpoint(): boolean {
         if (!this.isEnteringUnitCreep()) {

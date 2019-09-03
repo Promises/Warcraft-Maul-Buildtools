@@ -4,7 +4,6 @@ import { WarcraftMaul } from '../WarcraftMaul';
 import { WaveCreep } from '../Entity/WaveCreep';
 import { Creep } from '../Entity/Creep';
 import { Trigger } from '../../JassOverrides/Trigger';
-import { Log } from '../../lib/Serilog/Serilog';
 import { PlayerSpawns } from '../Entity/PlayerSpawns';
 import { Ship } from '../Entity/Ship';
 import { ArchimondeGate } from './ArchimondeGate';
@@ -12,7 +11,6 @@ import { ArchimondeTeleport } from './ArchimondeTeleport';
 import { EndOfRoundTower } from '../Entity/Tower/Specs/EndOfRoundTower';
 import { CreepAbility } from '../Entity/CreepAbilities/specs/CreepAbility';
 import { Tower } from '../Entity/Tower/Specs/Tower';
-import { TickingTower } from '../Entity/Tower/Specs/TickingTower';
 
 export class GameRound {
 
@@ -24,7 +22,6 @@ export class GameRound {
     private _isWaveInProgress: boolean = false;
     private _currentWave: number = 1;
     private roundOverGoldReward: number = settings.GAME_GOLD_REWARD_BASE;
-    // private _endOfTurnTowers: Map<number, EndOfRoundTower> = new Map<number, EndOfRoundTower>();
     private _endOfTurnTowerArray: (Tower & EndOfRoundTower)[] = [];
     private waitBetweenWaveTime: number = settings.GAME_TIME_BEFORE_WAVE;
     private archimondeGate: ArchimondeGate;
@@ -53,8 +50,9 @@ export class GameRound {
     }
 
     public RemoveEndOfRoundTower(id: number): void {
-        // tslint:disable-next-line:ter-arrow-parens
-        this._endOfTurnTowerArray = this._endOfTurnTowerArray.filter((tower) => tower.UniqueID !== id);
+        this._endOfTurnTowerArray = this._endOfTurnTowerArray.filter((tower) => {
+            return tower.UniqueID !== id;
+        });
 
     }
 
@@ -100,7 +98,7 @@ export class GameRound {
             } else {
                 this.game.waveTimer = this.game.waveTimer - 1;
                 if (this.game.scoreBoard) {
-                    MultiboardSetItemValueBJ(this.game.scoreBoard.board, 2, 1, Util.ColourString('999999', ToString(this.game.waveTimer)));
+                    MultiboardSetItemValueBJ(this.game.scoreBoard.board, 2, 1, Util.ColourString('#999999', ToString(this.game.waveTimer)));
                 }
             }
 
@@ -144,28 +142,16 @@ export class GameRound {
                     2, 6,
                     '');
             }
-            //
-            //
-            //
-            //
         }
     }
 
 
     private RoundEnd(): void {
 
-
-        // Disable buffs
-        // call DisableTrigger(gg_trg_WalkItOff)
-        // call DisableTrigger(gg_trg_DivineShield)
-        // call DisableTrigger(gg_trg_CrippleAura)
-        // call DisableTrigger(gg_trg_VampiricAura)
-
         if (this._currentWave === this.game.worldMap.waveCreeps.length) {
             this.BonusRoundsOver();
         } else {
-            // call SetCreepAbilities()
-            this._currentWave += 1;
+            this._currentWave++;
             this.roundOverGoldReward += 2;
 
 
@@ -175,29 +161,9 @@ export class GameRound {
             }
 
             // Display lives lost
+            this.DisplayLivesLost();
 
-            if (this.game.gameLives === this.game.startLives) {
-                SendMessage(
-                    '|cFFF44242Co|r' +
-                    '|cFFF47442ng|r' +
-                    '|cFFF4A742ra|r' +
-                    '|cFFEBF442tu|r' +
-                    '|cFFC5F442la|r' +
-                    '|cFF8FF442ti|r' +
-                    '|cFF62F442on|r' +
-                    '|cFF42F477s n|r' +
-                    '|cFF42F4E5o l|r' +
-                    '|cFF42A7F4iv|r' +
-                    '|cFF425FF4es|r' +
-                    '|cFF7A42F4 lo|r' +
-                    '|cFFC542F4st!|r',
-                );
-            } else {
-                const livesRemaining: number = this.game.startLives - this.game.gameLives;
-                SendMessage(
-                    `${livesRemaining}${Util.ColourString(settings.COLOUR_CODES[COLOUR.RED], '% of your lives have been lost')}`,
-                );
-            }
+
             this.GiveWaveGoldReward();
 
             // Start new timers
@@ -210,7 +176,7 @@ export class GameRound {
                 PauseUnitBJ(false, this.game.worldMap.archimondeDummy);
                 IssueTargetDestructableOrder(this.game.worldMap.archimondeDummy, 'attack', this.archimondeGate.gate);
             }
-            if (this._currentWave === 37) {
+            if (this._currentWave === 36) { // as 35 is the last normal wave :P
                 this.game.GameWin();
             }
         }
@@ -223,35 +189,6 @@ export class GameRound {
             maze.CleanAll();
         }
 
-        /*
-
-
-    private function RoundEnd takes nothing returns nothing
-
-
-
-            // Reward players for finishing the wave
-            call GiveWaveGoldReward()
-
-            // Start new timers
-            set udg_IsWaveInProgress = false
-            set udg_StartWaveTimer = true
-
-            // Heal every unit on the map (mostly for towers)
-            call HealEverythingOnMap()
-
-            if(udg_CreepLevel == 35) then
-                call PauseUnitBJ( false, udg_ArchimondeDummy )
-                call IssueTargetDestructableOrder(udg_ArchimondeDummy, "attack", gg_dest_B000_0160)
-            endif
-
-            if(udg_CreepLevel == 36) then
-                call GameWin()
-            endif
-        endif
-
-        call ForGroupBJ(udg_TowerEndOfTurnGroup, function EndOfTurnTower)
-         */
     }
 
     private CreepFoodConditions(): boolean {
@@ -298,66 +235,13 @@ export class GameRound {
         for (let y: number = 0; y < amount; y += 1) {
             for (let i: number = 0; i < this.game.worldMap.playerSpawns.length; i += 1) {
                 const spawn: PlayerSpawns = this.game.worldMap.playerSpawns[i];
-                if (!spawn.isOpen) {
-                    continue;
-                }
-                if (spawn.spawnOne) {
-
-                    let creep: unit = CreateUnit(
-                        Player(COLOUR.NAVY + creepOwner % 4),
-                        FourCC(wave.id),
-                        GetRectCenterX(spawn.spawnOne.rectangle),
-                        GetRectCenterY(spawn.spawnOne.rectangle),
-                        this.getSpawnFace(i));
-                    spawned.set(GetHandleId(creep), new Creep(creep, this, abilities, this.game));
-
-                    if (this.currentWave !== 37) {
-                        if (spawn.spawnTwo) {
-
-                            creep = CreateUnit(
-                                Player(COLOUR.NAVY + creepOwner % 4),
-                                FourCC(wave.id),
-                                GetRectCenterX(spawn.spawnTwo.rectangle),
-                                GetRectCenterY(spawn.spawnTwo.rectangle),
-                                this.getSpawnFace(i));
-                            spawned.set(GetHandleId(creep), new Creep(creep, this, abilities, this.game));
-                        }
-                    }
-                }
+                spawn.SpawnCreep(this, spawned, abilities, wave, creepOwner);
             }
             creepOwner += 1;
             TriggerSleepAction(0.50);
-
-        }
-
-
-    }
-
-    private getSpawnFace(id: COLOUR): number {
-        switch (id) {
-            case COLOUR.RED:
-            case COLOUR.PINK:
-                return 180;
-            case COLOUR.BLUE:
-            case COLOUR.PURPLE:
-            case COLOUR.YELLOW:
-            case COLOUR.ORANGE:
-            case COLOUR.GRAY:
-            case COLOUR.BROWN:
-            case COLOUR.MAROON:
-                return 270;
-            case COLOUR.TEAL:
-            case COLOUR.GREEN:
-                return 0;
-            case COLOUR.LIGHT_BLUE:
-            case COLOUR.DARK_GREEN:
-                return 90;
-            default:
-                Log.Error(`getSpawnFace, could not find player: ${id}`);
-                return 0;
-
         }
     }
+
 
     private GiveWaveGoldReward(): void {
         for (const player of this.game.players.values()) {
@@ -408,9 +292,21 @@ export class GameRound {
 
     }
 
+    private DisplayLivesLost(): void {
+        if (this.game.gameLives === this.game.startLives) {
+            SendMessage(settings.NO_LIVES_LOST);
+        } else {
+            const livesRemaining: number = this.game.startLives - this.game.gameLives;
+            SendMessage(
+                `${livesRemaining}${Util.ColourString(settings.COLOUR_CODES[COLOUR.RED], '% of your lives have been lost')}`,
+            );
+        }
+    }
+
     // FOR TESTING ONLY
     set isWaveInProgress(value: boolean) {
         this._isWaveInProgress = value;
     }
+
 
 }

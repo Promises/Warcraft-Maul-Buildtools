@@ -23,7 +23,6 @@ import { VoidTicker } from './Game/VoidTicker';
 import { EventQueue } from '../lib/WCEventQueue/EventQueue';
 import { SafeEventQueue } from '../lib/WCEventQueue/SafeEventQueue';
 import { TimedEventQueue } from '../lib/WCEventQueue/TimedEventQueue';
-import { HostDetection } from '../lib/HostDetection';
 
 export class WarcraftMaul {
 
@@ -59,22 +58,20 @@ export class WarcraftMaul {
     public racePicking: RacePicking;
 
     constructor(creepAbilityHandler: CreepAbilityHandler) {
-        // @ts-ignore to enable tests
-
 
         // Should we enable debug mode?
         if (GetPlayerName(Player(COLOUR.RED)) === 'WorldEdit') {
             this.debugMode = true;
         }
         if (this.debugMode) {
-            // this.waveTimer = 15;
             Log.Init([
                 new StringSink(LogLevel.Debug, SendMessageUnlogged),
-                // new PreloadSink(LogLevel.Message, `WCMAUL\\${os.time()}.txt`),
+                         // new PreloadSink(LogLevel.Message, `WCMAUL\\${os.time()}.txt`),
             ]);
             Log.Debug('Debug mode enabled');
         }
         this.gameCommandHandler = new Commands(this);
+
         // Set up all players
         for (let i: number = 0; i < bj_MAX_PLAYER_SLOTS; i++) {
             if (GetPlayerSlotState(Player(i)) === PLAYER_SLOT_STATE_PLAYING) {
@@ -91,7 +88,6 @@ export class WarcraftMaul {
         this.enemies.push(new Attacker(COLOUR.WHEAT, this));
 
 
-
         // All enemies should be allied with each other
         for (const enemy of this.enemies) {
             for (const enemyAlly of this.enemies) {
@@ -103,34 +99,27 @@ export class WarcraftMaul {
         settings.InitializeStaticSounds();
 
         // Create the map
-        this.worldMap = new WorldMap(this); // X
-        this.eventQueue = new EventQueue(); // X
-        this.safeEventQueue = new SafeEventQueue(this); // X
-        this.timedEventQueue = new TimedEventQueue(this); // X
-        this.gameDamageEngineGlobals = new DamageEngineGlobals(); // X
-        this.towerTicker = new TowerTicker(); // X
-        this.voidTicker = new VoidTicker(this); // X
-        this.gameDamageEngine = new DamageEngine(this.gameDamageEngineGlobals); // X
-        this.buffHandler = new BuffHandler(this); // X
-        this.abilityHandler = new GenericAbilityHandler(this); // X
-        this.itemHandler = new ItemHandler(this); // X
+        this.worldMap = new WorldMap(this);
+        this.eventQueue = new EventQueue();
+        this.safeEventQueue = new SafeEventQueue(this);
+        this.timedEventQueue = new TimedEventQueue(this);
+        this.gameDamageEngineGlobals = new DamageEngineGlobals();
+        this.towerTicker = new TowerTicker();
+        this.voidTicker = new VoidTicker(this);
+        this.gameDamageEngine = new DamageEngine(this.gameDamageEngineGlobals);
+        this.buffHandler = new BuffHandler(this);
+        this.abilityHandler = new GenericAbilityHandler(this);
+        this.itemHandler = new ItemHandler(this);
         this._creepAbilityHandler = creepAbilityHandler;
         creepAbilityHandler.SetupGame(this);
 
 
-        // this.gameCommandHandler.OpenAllSpawns();
-
-        this.diffVote = new DifficultyVote(this); // X
+        this.diffVote = new DifficultyVote(this);
         this.racePicking = new RacePicking(this);
         this.sellTower = new SellTower(this);
 
         this.gameRoundHandler = new GameRound(this);
 
-        // Spawn testing units when in debug mode
-        if (this.debugMode) {
-            // CreateUnit(Player(COLOUR.RED), FourCC('e00B'), 0.00, 0.00, bj_UNIT_FACING);
-            // CreateUnit(Player(COLOUR.RED), FourCC('uC98'), 0.00, 0.00, bj_UNIT_FACING);
-        }
 
         for (const quest of Quests) {
             CreateQuestBJ(quest.stype, quest.title, quest.body, quest.icon);
@@ -155,16 +144,15 @@ export class WarcraftMaul {
         }
     }
 
-    // FIXME: This function leaks!
     public GameWinEffects(): void {
-        const timer: timer = CreateTimer();
-        TimerStart(timer, 0.10, true, () => this.SpamEffects());
+        this.eventQueue.AddLow(() => this.SpamEffects());
     }
 
-    private SpamEffects(): void {
+    private SpamEffects(): boolean {
         const x: number = GetRandomInt(0, 10000) - 5000;
         const y: number = GetRandomInt(0, 10000) - 5000;
         DestroyEffect(AddSpecialEffect('Abilities\\Spells\\Human\\DispelMagic\\DispelMagicTarget.mdl', x, y));
+        return false;
     }
 
     public PrettifyGameTime(sec: number): string {
@@ -178,7 +166,7 @@ export class WarcraftMaul {
         let result: string = (hrs < 10 ? `0${hrs}` : `${hrs}`);
         result += `:${prettyMinutes}`;
         result += `:${prettySeconds}`;
-        return Util.ColourString('999999', `${result}`);
+        return Util.ColourString('#999999', `${result}`);
     }
 
     public GameOver(): void {
