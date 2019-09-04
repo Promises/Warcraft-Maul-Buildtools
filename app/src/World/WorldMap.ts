@@ -138,8 +138,6 @@ export class WorldMap {
 
         this.archimondeDummy = CreateUnit(Player(COLOUR.NAVY), FourCC('u000'), 4868.0, -4964.0, 240.0);
         PauseUnitBJ(true, this.archimondeDummy);
-        this.eastereggDummy = CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('uC73'), 5100.0, 5300.0, 240.0);
-        PauseUnitBJ(true, this.eastereggDummy);
 
         CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('n017'), 0.00, -970.00, bj_UNIT_FACING);
         CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('n017'), -4400.00, 4737.00, bj_UNIT_FACING);
