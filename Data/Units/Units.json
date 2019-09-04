@@ -24205,7 +24205,7 @@
       "unam": "[Arachnid] - Acid Spitting Spider",
       "uhot": "S",
       "utip": "This barrel seems to be melting....? [|cffffcc00S|r]",
-      "utub": "...because inside this barrel, there's an Acid Spitting Spider!|n|n|cffffcc00Attack:|r Piercing|n|cffffcc00Cooldown:|r 0.15|n|cffffcc00Damage:|r 75|n|cffffcc00Range:|r Melee (ground only)|n|cffffcc00Ability:|r Acid Globule; has a 25% chance to spit a globule of acid onto the target decreasing armour by 5 and dealing damage over time|n|cffffcc00Attack (2):|r Chaos|n|cffffcc00Cooldown (2):|r 0.40|n|cffffcc00Damage (2):|r 125|n|cffffcc00Range (2):|r 800 (air only)|n|cffffcc00Ability (2):|r Multishot; Shoots 3 enemies at the same time. (air only)",
+      "utub": "...because inside this barrel, there's an Acid Spitting Spider!|n|n|cffffcc00Attack:|r Piercing|n|cffffcc00Cooldown:|r 0.15|n|cffffcc00Damage:|r 75 - 75|n|cffffcc00Range:|r Melee (ground only)|n|cffffcc00Ability:|r Acid Globule; has a 25% chance to spit a globule of acid onto the target decreasing armour by 5 and dealing damage over time|n|cffffcc00Attack (2):|r Chaos|n|cffffcc00Cooldown (2):|r 0.40|n|cffffcc00Damage (2):|r 125 - 125|n|cffffcc00Range (2):|r 800 (air only)|n|cffffcc00Ability (2):|r Multishot; Shoots 3 enemies at the same time. (air only)",
       "unsf": "[T2]",
       "ubpx": 1,
       "ubpy": 1,
