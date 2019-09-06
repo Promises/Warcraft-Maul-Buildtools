@@ -7128,11 +7128,9 @@
       "uma1": 0.15,
       "ua1z": 1400,
       "umh1": 1,
-      "umh1": 1,
       "ubsl": "BuildingConstructionLoop",
       "ulfi": 512,
       "ulfo": 512,
-      "uani": "upgrade"
     },
     {
       "isCustom": true,
@@ -32465,7 +32463,7 @@
       "ufoo": 7,
       "ubdi": 1000,
       "usrg": 30,
-      "uhpm": 90000,
+      "uhpm": 80000,
       "uhpr": 2,
       "uhrt": "",
       "udef": 18,
