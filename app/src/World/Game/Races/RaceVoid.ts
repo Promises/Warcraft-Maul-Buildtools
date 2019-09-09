@@ -10,6 +10,7 @@ export class RaceVoid extends Race {
             UnitAddItemByIdSwapped(FourCC('I01Z'), voidBuilder);
             UnitAddItemByIdSwapped(FourCC('I020'), voidBuilder);
             UnitAddItemByIdSwapped(FourCC('I01X'), voidBuilder);
+            UnitAddItemByIdSwapped(FourCC('I02E'), voidBuilder);
         }
         player.builders.push(player.voidBuilder);
 

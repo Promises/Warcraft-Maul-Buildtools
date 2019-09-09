@@ -1653,6 +1653,12 @@ STRING 270
 Increases damage by 1 for each Marine tower owned.
 }
 
+STRING 271
+// Gegenstände: I02E (Mortal Coil), Tip (Tooltipp - Einfach)
+{
+Mortal Coil
+}
+
 STRING 272
 // Abilities: A0EJ ([Uniques] Marine Force), Ubertip (Tooltip - Normal - Extended)
 {
@@ -2079,6 +2085,12 @@ STRING 341
 Is it a pet?; Can be turned into random loot.
 }
 
+STRING 342
+// Fähigkeiten: A0EY (Fel Barrage), Tip (Tooltipp - Normal)
+{
+Fel Barrage
+}
+
 STRING 343
 // Abilities: A0EO (Loot Boxers Mana +1), Name (Name)
 {
@@ -2251,6 +2263,12 @@ STRING 371
 // Abilities: A0EW (Rain of Arrows), EditorSuffix (Editor Suffix)
 {
  (H E Sylvanus)
+}
+
+STRING 374
+// Fähigkeiten: A0EZ ([Void Cult] Mortal Coil), Name (Name)
+{
+[Void Cult] Mortal Coil
 }
 
 STRING 375
@@ -2522,16 +2540,40 @@ STRING 412
 Rocks can be used to generate a Free Loot Bag, which will randomly give you 1 of 4 items.
 }
 
+STRING 413
+// Fähigkeiten: A0EZ ([Void Cult] Mortal Coil), Tip (Tooltipp - Normal)
+{
+Mortal Coil
+}
+
+STRING 414
+// Gegenstände: I02E (Mortal Coil), Ubertip (Tooltipp - Erweitert)
+{
+Utterly destroy a cultists soul, transforming it into a random Void Minion, this tower no longer generates void fragments and doesnt count towards the cultist limit.
+}
+
+STRING 415
+// Fähigkeiten: A0EZ ([Void Cult] Mortal Coil), Tip (Tooltipp - Normal)
+{
+Mortal Coil
+}
+
+STRING 416
+// Fähigkeiten: A0EZ ([Void Cult] Mortal Coil), Ubertip (Tooltipp - Normal - Erweitert)
+{
+Utterly destroy a cultists soul, transforming it into a random Void Minion, this tower no longer generates void fragments and doesnt count towards the cultist limit.
+}
+
 STRING 417
 // Fähigkeiten: A0EY (Fel Barrage), Tip (Tooltipp - Normal)
 {
 Fel Barrage
 }
 
-STRING 418
+STRING 419
 // Fähigkeiten: A0EY (Fel Barrage), Ubertip (Tooltipp - Normal - Erweitert)
 {
-Spits Fel on up to 4 flying enemies.
+Spits fel on up to 4 flying enemies.
 }
 
 STRING 427
@@ -9923,7 +9965,7 @@ Void Conversion
 STRING 7931
 // Abilities: A09G ([Void Cult] Void Corruption), Ubertip (Tooltip - Normal - Extended)
 {
-This tower is engulfed in void energy, dealing 1200 damage to enemy units within an 600 area of effect.
+This tower is engulfed in void energy, dealing 800 damage to enemy units within an 600 area of effect.
 }
 
 STRING 7932
