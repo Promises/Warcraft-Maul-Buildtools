@@ -37,7 +37,7 @@ export class SoulCollector extends Buff implements AttackActionBuff {
                         SetUnitManaBJ(tower.tower, GetUnitStateSwap(UNIT_STATE_MANA, tower.tower) + 1.00);
                     }
                     if (GetUnitStateSwap(UNIT_STATE_MANA, tower.tower) % 10 === 0) {
-                        SetUnitAbilityLevel(tower.tower, FourCC('S00D'), GetUnitStateSwap(UNIT_STATE_MANA, tower.tower) / 10);
+                        SetUnitAbilityLevel(tower.tower, FourCC('A0F6'), GetUnitStateSwap(UNIT_STATE_MANA, tower.tower) / 10);
                     }
                 });
             }
