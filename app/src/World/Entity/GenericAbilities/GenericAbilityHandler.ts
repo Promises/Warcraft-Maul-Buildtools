@@ -26,7 +26,6 @@ import { PurchaseVoidMonstrosity } from './Void/PurchaseVoidMonstrosity';
 import { DrinkWaterRune } from './Elementalist/DrinkWaterRune';
 import { UndeadUpgrade } from './Elementalist/UndeadUpgrade';
 import { PurchaseVoidMinion } from './Void/PurchaseVoidMinion';
-import { StalaggFeugen } from '../Tower/Races/Naxxramas/StalaggFeugen';
 import { ConstructThaddius } from './Naxxramas/StalaggFeugen';
 
 export class GenericAbilityHandler {
