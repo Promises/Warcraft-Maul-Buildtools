@@ -225,6 +225,7 @@ export class WorldMap {
         this.races.push(new Race('n04I', 'The Forsaken', 'I00T', this));
         this.races.push(new Race('e00H', 'Dwarven Mine', 'I00U', this));
         this.races.push(new Race('e00G', 'Galaxy', 'I00Z', this));
+        this.races.push(new Race('oC75', 'Naxxramas', 'I02G', this));
         this.races.push(new RaceLootBoxer('u043', 'Loot Boxer', 'I02D', this));
         this.races.push(new Race('u01B', 'Shrine of Buffs', 'I026', this, false));
     }

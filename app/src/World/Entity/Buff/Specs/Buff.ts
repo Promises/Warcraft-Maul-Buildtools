@@ -9,7 +9,7 @@ export class Buff {
 
 
     private readonly buffID: number;
-    private game: WarcraftMaul;
+    public game: WarcraftMaul;
     private readonly _damageEngine: DamageEngine;
     private readonly _damageEngineGlobals: DamageEngineGlobals;
 
