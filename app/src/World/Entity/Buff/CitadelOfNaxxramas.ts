@@ -2,8 +2,6 @@ import { Buff } from './Specs/Buff';
 import { WarcraftMaul } from '../../WarcraftMaul';
 import { AttackActionBuff } from './Specs/AttackActionBuff';
 import { Defender } from '../Players/Defender';
-import { Tower } from '../Tower/Specs/Tower';
-import { Log } from '../../../lib/Serilog/Serilog';
 
 /**
  * [Naxxramas] Citadel of Naxxramas

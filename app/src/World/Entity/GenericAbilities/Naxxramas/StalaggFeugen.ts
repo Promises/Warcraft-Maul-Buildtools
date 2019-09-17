@@ -1,6 +1,6 @@
 /**
- *  Siphon Energy (Elementalist)
- *  Combines two runes to one tower
+ *  Construct Thaddius (Naxxramas)
+ *  Combines Stalagg and Feugen to Thaddius
  */
 import { GenericAbility } from '../GenericAbility';
 import { WarcraftMaul } from '../../../WarcraftMaul';
