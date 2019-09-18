@@ -5,6 +5,7 @@ import { StalaggFeugen } from './StalaggFeugen';
 import { KelThuzad } from './KelThuzad';
 import { Sapphiron } from './Sapphiron';
 import { Maexxna } from './Maexxna';
+import { Thaddius } from './Thaddius';
 
 
 export class NaxxramasTowers extends RaceTowers {
@@ -17,5 +18,7 @@ export class NaxxramasTowers extends RaceTowers {
         list.add(FourCC('oC7K'), KelThuzad);
         list.add(FourCC('oC7J'), Sapphiron);
         list.add(FourCC('oC7G'), Maexxna);
+        list.add(FourCC('oC7F'), Thaddius);
+
     }
 }
