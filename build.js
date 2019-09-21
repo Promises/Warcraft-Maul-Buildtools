@@ -7,6 +7,7 @@ const ts = require("typescript");
 const {execSync} = require('child_process');
 const minimist = require('minimist');
 let reportDiagnostic = typescriptToLua.createDiagnosticReporter(true);
+const objectHandler = require("wc3-objectified-handler");
 
 
 const helptext = `
@@ -218,8 +219,9 @@ class Build {
     }
 
     generateWCM() {
+        const objHandler = new objectHandler.WC3ObjectHandler();
         const file = 'GenerateHybrid.py';
-        new WCJsonToSLK.WCJsonToSLK('Data/Units/Units.json', 'maps/map/Units');
+        new WCJsonToSLK.WCJsonToSLK('Data/Units/Units.json', 'maps/map/Units', objHandler);
         switch (this.os) {
             case "win32":
                 this.nativeExecute(`"tools/Warcraft-Maul-Race-Parser.exe" maps/map/Units units.json`);

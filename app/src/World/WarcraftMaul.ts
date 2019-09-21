@@ -23,6 +23,7 @@ import { VoidTicker } from './Game/VoidTicker';
 import { EventQueue } from '../lib/WCEventQueue/EventQueue';
 import { SafeEventQueue } from '../lib/WCEventQueue/SafeEventQueue';
 import { TimedEventQueue } from '../lib/WCEventQueue/TimedEventQueue';
+import { MMD, MMDGoal, MMDSuggest, MMDType } from '../lib/MMD';
 
 export class WarcraftMaul {
 
@@ -56,22 +57,23 @@ export class WarcraftMaul {
     public safeEventQueue: SafeEventQueue;
     public timedEventQueue: TimedEventQueue;
     public racePicking: RacePicking;
+    public mmd: MMD;
 
-    constructor(creepAbilityHandler: CreepAbilityHandler) {
-
+    constructor(creepAbilityHandler: CreepAbilityHandler, mmd: MMD) {
+        this.mmd = mmd;
         // Should we enable debug mode?
         if (GetPlayerName(Player(COLOUR.RED)) === 'WorldEdit') {
             this.debugMode = true;
         }
         if (this.debugMode) {
             Log.Init([
-                new StringSink(LogLevel.Debug, SendMessageUnlogged),
+                         new StringSink(LogLevel.Debug, SendMessageUnlogged),
                          // new PreloadSink(LogLevel.Message, `WCMAUL\\${os.time()}.txt`),
-            ]);
+                     ]);
             Log.Debug('Debug mode enabled');
         }
+        this.mmd.DefineSettingBoolean('debug_mode', this.debugMode);
         this.gameCommandHandler = new Commands(this);
-
         // Set up all players
         for (let i: number = 0; i < bj_MAX_PLAYER_SLOTS; i++) {
             if (GetPlayerSlotState(Player(i)) === PLAYER_SLOT_STATE_PLAYING) {

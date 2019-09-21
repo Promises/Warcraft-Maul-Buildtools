@@ -1,5 +1,5 @@
 import { WarcraftMaul } from '../WarcraftMaul';
-import { COLOUR_CODES } from '../GlobalSettings' ;
+import { COLOUR_CODES } from '../GlobalSettings';
 import { Trigger } from '../../JassOverrides/Trigger';
 import { Defender } from '../Entity/Players/Defender';
 import { Log } from '../../lib/Serilog/Serilog';
@@ -12,7 +12,8 @@ import { SpawnedCreeps } from '../Entity/SpawnedCreeps';
 import { TimedEvent } from '../../lib/WCEventQueue/TimedEvent';
 import { DummyPlayer } from '../Entity/EmulatedPlayer/DummyPlayer';
 import { HybridTower } from '../../Generated/hybridRandomGEN';
-import { Maze, Walkable } from '../Antiblock/Maze';
+import { Walkable } from '../Antiblock/Maze';
+import { MMDGoal, MMDOperator, MMDSuggest, MMDType } from '../../lib/MMD';
 
 export class Commands {
 
@@ -174,6 +175,36 @@ export class Commands {
             case 'start':
             case 'startwave':
                 this.game.waveTimer = 1;
+                break;
+            case 'mmd':
+                switch (command2[1]) {
+                    case 'define':
+                        switch (command2[2]) {
+                            case 'string':
+                                this.game.mmd.DefineValue(command2[3], MMDType.String, MMDGoal.None, MMDSuggest.Track);
+                                break;
+                            case 'number':
+                                this.game.mmd.DefineValue(command2[3], MMDType.Number, MMDGoal.Low, MMDSuggest.Track);
+                                break;
+                            case 'event':
+                                this.game.mmd.DefineEvent(command2[3], ...command2.slice(4));
+                                break;
+                        }
+                        break;
+                    case 'update':
+                        switch (command2[2]) {
+                            case 'string':
+                                this.game.mmd.UpdateValueString(command2[3], player.wcPlayer, command2.slice(4).join(' '));
+                                break;
+                            case 'number':
+                                this.game.mmd.UpdateValueNumber(command2[3], player.wcPlayer, MMDOperator.Set, +command2[4]);
+                                break;
+                            case 'event':
+                                this.game.mmd.LogEvent(command2[3], ...command2.slice(4));
+                                break;
+                        }
+                        break;
+                }
                 break;
             case 'leave':
                 player.PlayerLeftTheGame();
@@ -594,7 +625,7 @@ export class Commands {
                 this.RemoveAllKickedPlayerTowers();
                 if (this.game.scoreBoard) {
                     MultiboardSetItemValueBJ(this.game.scoreBoard.board, 1, 7 + this.voteAgainstPlayer.scoreSlot,
-                        Util.ColourString(this.voteAgainstPlayer.getColourCode(), '<Kicked>'));
+                                             Util.ColourString(this.voteAgainstPlayer.getColourCode(), '<Kicked>'));
                 }
                 this.game.players.delete(this.voteAgainstPlayer.id);
 
