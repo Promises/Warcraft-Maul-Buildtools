@@ -92,6 +92,7 @@ export class DifficultyVote {
         this.difficulty = Math.floor(this.difficulty);
         // this.SetDifficulty(this.difficulty);
         SetPlayerHandicapBJ(Player(PLAYER_NEUTRAL_PASSIVE), this.difficulty);
+        this.game.mmd.DefineSettingNumber('difficulty', this.difficulty);
         SendMessage(`Difficulty was set to ${this.difficulty}% (${Util.ColourString(settings.DIFFICULTY_COLOURS[diffIndex],
                                                                                     settings.DIFFICULTY_STRINGS[diffIndex])})`);
 
@@ -131,8 +132,8 @@ export class DifficultyVote {
                 this.votedDiff[GetPlayerId(GetTriggerPlayer())] = settings.DIFFICULTIES[i];
                 SendMessage(`${Util.ColourString(settings.COLOUR_CODES[GetPlayerId(GetTriggerPlayer())],
                                                  GetPlayerName(GetTriggerPlayer()))
-                                } voted for: ${Util.ColourString(settings.DIFFICULTY_COLOURS[i],
-                                                                 settings.DIFFICULTY_STRINGS[i])}`);
+                } voted for: ${Util.ColourString(settings.DIFFICULTY_COLOURS[i],
+                                                 settings.DIFFICULTY_STRINGS[i])}`);
             }
         }
         DialogDisplayBJ(false, this.difficultyDialog, GetTriggerPlayer());

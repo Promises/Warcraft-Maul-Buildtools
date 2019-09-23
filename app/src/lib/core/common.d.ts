@@ -307,7 +307,7 @@ declare function IsPlayerRacePrefSet(whichPlayer: player, pref: racepreference):
 declare function GetPlayerName(whichPlayer: player): string;
 declare function CreateTimer(): timer;
 declare function DestroyTimer(whichTimer: timer): void;
-declare function TimerStart(whichTimer: timer, timeout: number, periodic: boolean, handlerFunc: () => void): void;
+declare function TimerStart(whichTimer: timer, timeout: number, periodic: boolean, handlerFunc: (() => void) | null): void;
 declare function TimerGetElapsed(whichTimer: timer): number;
 declare function TimerGetRemaining(whichTimer: timer): number;
 declare function TimerGetTimeout(whichTimer: timer): number;

@@ -5,12 +5,13 @@ import { WarcraftMaul } from './World/WarcraftMaul';
 import { Trigger } from './JassOverrides/Trigger';
 import './lib/translators';
 import { CreepAbilityHandler } from './World/Entity/CreepAbilities/CreepAbilityHandler';
+import { MMD } from './lib/MMD';
 
 export class InitGame {
 
 
-    private static Main(this: void, creepAbilityHandler: CreepAbilityHandler): void {
-        const maul: WarcraftMaul = new WarcraftMaul(creepAbilityHandler);
+    private static Main(this: void, creepAbilityHandler: CreepAbilityHandler, mmd: MMD): void {
+        const maul: WarcraftMaul = new WarcraftMaul(creepAbilityHandler, mmd);
         if (maul.debugMode) {
             Log.Information('Initialisation finished');
         }
@@ -26,10 +27,12 @@ export class InitGame {
             // new PreloadSink(LogLevel.Message, `WCMAUL\\${os.time()}.txt`),
         ]);
         const creepAbilityHandler: CreepAbilityHandler = this.SetupAbilities();
+        const mmd: MMD = new MMD();
+
         xpcall(() => {
             const init: Trigger = new Trigger();
             init.RegisterTimerEvent(0.00, false);
-            init.AddAction(() => InitGame.Main(creepAbilityHandler));
+            init.AddAction(() => InitGame.Main(creepAbilityHandler, mmd));
         }, (err) => {
             Log.Fatal(err);
         });
