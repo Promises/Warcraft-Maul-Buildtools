@@ -28,6 +28,7 @@ import { VoidTowers } from './Void/VoidTowers';
 import { WorkersUnionTowers } from './WorkersUnion/WorkersUnionTowers';
 import { AntiJuggleTower } from '../../AntiJuggle/AntiJuggleTower';
 import { RaceTowers } from './RaceTowers';
+import { NaxxramasTowers } from './Naxxramas/NaxxramasTowers';
 
 export function InitialiseAllRaceTowers(): TowerMap<number, object> {
     const _towerTypes: TowerMap<number, object> = new TowerMap<number, object>();
@@ -58,6 +59,7 @@ export function InitialiseAllRaceTowers(): TowerMap<number, object> {
     races.push(new TavernTowers());
     races.push(new UndeadTowers());
     races.push(new UniqueTowers());
+    races.push(new NaxxramasTowers());
     races.push(new VoidTowers());
     races.push(new WorkersUnionTowers());
 
