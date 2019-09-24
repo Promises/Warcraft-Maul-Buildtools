@@ -7,15 +7,18 @@ import { Log } from '../../lib/Serilog/Serilog';
 import { Maze, Walkable } from './Maze';
 import { PlayerSpawns } from '../Entity/PlayerSpawns';
 import { CheckPoint } from '../Entity/CheckPoint';
+import { AbstractGameRound } from '../Game/BaseMaul/AbstractGameRound';
 
 export class AntiBlock {
 
     private _eventTrigger: Trigger;
     private _cancelBuildingTrigger: Trigger;
     private _worldMap: WorldMap;
+    private _gameRoundHandler: AbstractGameRound;
 
-    constructor(worldMap: WorldMap) {
+    constructor(worldMap: WorldMap, gameRoundHandler: AbstractGameRound) {
         this._worldMap = worldMap;
+        this._gameRoundHandler = gameRoundHandler;
         this._eventTrigger = new Trigger();
         this._eventTrigger.RegisterAnyUnitEventBJ(EVENT_PLAYER_UNIT_CONSTRUCT_START);
         this._eventTrigger.AddAction(() => this.Action());
@@ -51,7 +54,7 @@ export class AntiBlock {
             return;
         }
 
-        const isWaveInProgress: boolean = this._worldMap.game.gameRoundHandler.isWaveInProgress;
+        const isWaveInProgress: boolean = this._gameRoundHandler.isWaveInProgress;
         const antiJuggleCreeps: Creep[] = [];
         if (isWaveInProgress && hasBuiltOnAntiJuggle === false) {
             let isJuggling: boolean = false;

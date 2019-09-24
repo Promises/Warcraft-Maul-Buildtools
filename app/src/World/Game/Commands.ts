@@ -127,7 +127,9 @@ export class Commands {
                 }
                 player.sendMessage(`Current wave was set to ${amount}`);
 
-                this.game.gameRoundHandler.currentWave = amount;
+                if (this.game.worldMap.gameRoundHandler) {
+                    this.game.worldMap.gameRoundHandler.currentWave = amount;
+                }
                 break;
             case 'draw':
                 const arr: Rectangle[] = [];
@@ -499,10 +501,10 @@ export class Commands {
     }
 
     public RepickConditions(player: Defender): boolean {
-        if (!(this.game.gameRoundHandler.currentWave === 1)) {
+        if (!(this.game.worldMap.gameRoundHandler && this.game.worldMap.gameRoundHandler.currentWave === 1)) {
             return false;
         }
-        if (this.game.gameRoundHandler.isWaveInProgress) {
+        if (this.game.worldMap.gameRoundHandler && this.game.worldMap.gameRoundHandler.isWaveInProgress) {
             return false;
         }
         if (player.hasHardcoreRandomed) {

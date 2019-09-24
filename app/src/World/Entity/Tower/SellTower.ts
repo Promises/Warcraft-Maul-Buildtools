@@ -83,7 +83,8 @@ export class SellTower {
             PlaySoundOnUnitBJ(settings.Sounds.goldSound, 100, unit);
             // }
             //
-            const isWaveInProgress: boolean = this._game.gameRoundHandler.isWaveInProgress;
+            const isWaveInProgress: boolean =
+                this._game.worldMap.gameRoundHandler ? this._game.worldMap.gameRoundHandler.isWaveInProgress : false;
             const x: number = GetUnitX(unit);
             const y: number = GetUnitY(unit);
             // TODO: FIX ANTI-JUGGLE

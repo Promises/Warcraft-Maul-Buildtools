@@ -138,8 +138,8 @@ export class Tower {
 
     public Sell(): void {
 
-        if (this.IsEndOfRoundTower()) {
-            this.game.gameRoundHandler.RemoveEndOfRoundTower(this.UniqueID);
+        if (this.IsEndOfRoundTower() && this.game.worldMap.gameRoundHandler) {
+            this.game.worldMap.gameRoundHandler.RemoveEndOfRoundTower(this.UniqueID);
         }
         if (this.IsAttackActionTower()) {
             this.game.gameDamageEngine.initialDamageEventTowers.delete(this.UniqueID);
@@ -208,7 +208,7 @@ export class Tower {
 
     public Remove(): void {
         this.Sell();
-        if (this.game.gameRoundHandler.isWaveInProgress) {
+        if (this.game.worldMap.gameRoundHandler && this.game.worldMap.gameRoundHandler.isWaveInProgress) {
 
             const antijuggle: AntiJuggleTower = new AntiJuggleTower(this._game, this);
         }

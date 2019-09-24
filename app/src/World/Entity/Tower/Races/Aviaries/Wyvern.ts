@@ -3,11 +3,11 @@ import { AttackActionTower } from '../../Specs/AttackActionTower';
 
 export class Wyvern extends Tower implements AttackActionTower {
     public AttackAction(): void {
-        if (this.game.gameRoundHandler.currentWave + 1 === 35) {
+        if (this.game.worldMap.gameRoundHandler && this.game.worldMap.gameRoundHandler.currentWave + 1 === 35) {
             return;
         }
 
-        if (this.game.gameRoundHandler.currentWave + 1 === 36) {
+        if (this.game.worldMap.gameRoundHandler && this.game.worldMap.gameRoundHandler.currentWave + 1 === 36) {
             return;
         }
 

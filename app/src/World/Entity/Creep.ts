@@ -1,17 +1,17 @@
 import { CheckPoint } from './CheckPoint';
 import { Log } from '../../lib/Serilog/Serilog';
-import { GameRound } from '../Game/GameRound';
+import { AbstractGameRound } from '../Game/BaseMaul/AbstractGameRound';
 import { CreepAbility } from './CreepAbilities/specs/CreepAbility';
 import { WarcraftMaul } from '../WarcraftMaul';
 
 export class Creep {
     public creep: unit;
     public targetCheckpoint: CheckPoint | undefined;
-    public gameRound: GameRound;
+    public gameRound: AbstractGameRound;
     public abilities: CreepAbility[];
     private readonly game: WarcraftMaul;
 
-    constructor(creep: unit, gameRound: GameRound, abilities: CreepAbility[], game: WarcraftMaul) {
+    constructor(creep: unit, gameRound: AbstractGameRound, abilities: CreepAbility[], game: WarcraftMaul) {
         this.creep = creep;
         this.gameRound = gameRound;
         this.game = game;

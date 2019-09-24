@@ -41,14 +41,14 @@ export class CreepAbility {
     }
 
     public AddAbilityToCreep(creep: Creep): void {
-        if (!this.game) {
+        if (!this.game || !this.game.worldMap.gameRoundHandler) {
             return;
         }
-        const currentWave: WaveCreep = this.game.worldMap.waveCreeps[this.game.gameRoundHandler.currentWave - 1];
+        const currentWave: WaveCreep = this.game.worldMap.waveCreeps[this.game.worldMap.gameRoundHandler.currentWave - 1];
         if (this.GetID() === FourCC('A01E') && currentWave.getCreepType() === CREEP_TYPE.AIR) {
             return;
         }
         UnitAddAbilityBJ(this.GetID(), creep.creep);
-        SetUnitAbilityLevelSwapped(this.GetID(), creep.creep, this.game.gameRoundHandler.currentWave + 1);
+        SetUnitAbilityLevelSwapped(this.GetID(), creep.creep, this.game.worldMap.gameRoundHandler.currentWave + 1);
     }
 }

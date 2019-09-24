@@ -13,6 +13,11 @@ import { Maze, Walkable } from './Antiblock/Maze';
 import * as settings from './GlobalSettings';
 import { TowerConstruction } from './Entity/Tower/TowerConstruction';
 import { DirectionalArrow } from './Game/DirectionalArrow';
+import { ArchimondeGate } from './Game/ArchimondeGate';
+import { ArchimondeTeleport } from './Game/ArchimondeTeleport';
+import { Trigger } from '../JassOverrides/Trigger';
+import { AbstractGameRound } from './Game/BaseMaul/AbstractGameRound';
+import { ClassicGameRound } from './Game/ClassicMaul/ClassicGameRound';
 
 export class WorldMap {
     public game: WarcraftMaul;
@@ -23,19 +28,27 @@ export class WorldMap {
     public ship: Ship | undefined;
     public archimondeDummy!: unit;
     public eastereggDummy!: unit;
+    public archimondeGate!: ArchimondeGate;
+    public archimondeTeleport!: ArchimondeTeleport;
     public playerSpawns: PlayerSpawns[] = [];
     public readonly playerMazes: Maze[] = [];
     public disabledRaces: number = 0;
     public towerConstruction: TowerConstruction;
     public antiBlock: AntiBlock;
+    private gameTimeTrigger: Trigger;
+    public gameRoundHandler?: AbstractGameRound;
 
     constructor(game: WarcraftMaul) {
         this.game = game;
         this.setupWorldCreatures();
         this._spawnedCreeps = new SpawnedCreeps(this);
         this.towerConstruction = new TowerConstruction(game);
+        this.gameTimeTrigger = new Trigger();
+        this.gameTimeTrigger.RegisterTimerEventPeriodic(1.00);
+        this.gameTimeTrigger.AddAction(() => this.UpdateGameTime());
 
-        this.antiBlock = new AntiBlock(this);
+        this.gameRoundHandler = new ClassicGameRound(this.game);
+        this.antiBlock = new AntiBlock(this, this.gameRoundHandler);
     }
 
     private setupWorldCreatures(): void {
@@ -75,10 +88,10 @@ export class WorldMap {
             // }
             //
             directionalArrows.push(new DirectionalArrow(modelPath,
-                GetRectCenterX(firstCheckpoint.rectangle),
-                GetRectCenterY(firstCheckpoint.rectangle),
-                GetRectCenterX(secondCheckpoint.rectangle),
-                GetRectCenterY(secondCheckpoint.rectangle)));
+                                                        GetRectCenterX(firstCheckpoint.rectangle),
+                                                        GetRectCenterY(firstCheckpoint.rectangle),
+                                                        GetRectCenterX(secondCheckpoint.rectangle),
+                                                        GetRectCenterY(secondCheckpoint.rectangle)));
         }
 
         // TODO: This needs to be replaced with a timer library!
@@ -139,6 +152,8 @@ export class WorldMap {
         this.archimondeDummy = CreateUnit(Player(COLOUR.NAVY), FourCC('u000'), 4868.0, -4964.0, 240.0);
         PauseUnitBJ(true, this.archimondeDummy);
 
+        this.archimondeGate = new ArchimondeGate(this.archimondeDummy);
+        this.archimondeTeleport = new ArchimondeTeleport(this.archimondeDummy);
         CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('n017'), 0.00, -970.00, bj_UNIT_FACING);
         CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('n017'), -4400.00, 4737.00, bj_UNIT_FACING);
         CreateUnit(Player(PLAYER_NEUTRAL_PASSIVE), FourCC('n017'), 4400.00, 4737.00, bj_UNIT_FACING);
@@ -483,4 +498,27 @@ export class WorldMap {
     set spawnedCreeps(value: SpawnedCreeps) {
         this._spawnedCreeps = value;
     }
+
+
+    private UpdateGameTime(): void {
+        if (this.game.gameEnded) {
+            this.game.gameEndTimer -= 1;
+            if (this.game.scoreBoard) {
+                MultiboardSetItemValueBJ(this.game.scoreBoard.board, 1, 1, 'End Time');
+                MultiboardSetItemValueBJ(this.game.scoreBoard.board, 2, 1, this.game.PrettifyGameTime(this.game.gameEndTimer));
+            }
+            if (this.game.gameEndTimer <= 0) {
+                this.game.DefeatAllPlayers();
+            }
+        } else {
+            this.game.gameTime += 1;
+            if (this.gameRoundHandler) {
+                this.gameRoundHandler.GameTimeUpdateEvent();
+            }
+
+
+        }
+
+    }
+
 }

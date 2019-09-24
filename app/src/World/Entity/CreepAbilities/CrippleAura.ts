@@ -7,7 +7,7 @@ export class CrippleAura extends CreepAbility implements AttackActionCreepAbilit
     }
 
     public AttackAction(): void {
-        if (!this.game) {
+        if (!this.game || !this.game.worldMap.gameRoundHandler) {
             return;
         }
         const target: unit | undefined = this.game.gameDamageEngineGlobals.udg_DamageEventTarget;
@@ -31,7 +31,7 @@ export class CrippleAura extends CreepAbility implements AttackActionCreepAbilit
                 -5300.0,
                 bj_UNIT_FACING);
             UnitAddAbilityBJ(FourCC('A06B'), tempUnit);
-            SetUnitAbilityLevel(tempUnit, FourCC('A06B'), this.game.gameRoundHandler.currentWave + 1);
+            SetUnitAbilityLevel(tempUnit, FourCC('A06B'), this.game.worldMap.gameRoundHandler.currentWave + 1);
             UnitApplyTimedLifeBJ(1.00, FourCC('BTLF'), tempUnit);
             IssueTargetOrderBJ(tempUnit, 'cripple', source);
 
