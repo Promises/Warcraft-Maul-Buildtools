@@ -35,14 +35,14 @@ export class BlitzGameRound extends AbstractGameRound {
 
 
     private SpawnNextWave(): boolean {
-
-        Log.Debug(`${(this.currentWave + 1) % 5}`);
-        if ((this.currentWave + 1 % 5) === 0) {
+        const nextWave: number = this.currentWave + 1;
+        Log.Debug(`${nextWave % 5}`);
+        if (nextWave % 5 === 0) {
             this.roundEndTrigger.Enable();
             Log.Debug('next wave is safe');
         } else {
             this.shouldStartSpawning = true;
-            this.currentWave++;
+            this.currentWave = nextWave;
             Log.Debug('spawning next');
 
         }
@@ -75,6 +75,8 @@ export class BlitzGameRound extends AbstractGameRound {
             if (this.game.scoreBoard) {
                 MultiboardSetItemValueBJ(this.game.scoreBoard.board, 1, 1, 'Game Time');
             }
+            this.roundEndTrigger.Disable();
+
             this.SpawnCreeps();
 
 
