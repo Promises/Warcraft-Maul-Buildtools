@@ -7,7 +7,7 @@ export class WalkItOff extends CreepAbility implements AttackActionCreepAbility 
     }
 
     public AttackAction(): void {
-        if (!this.game) {
+        if (!this.game || !this.game.worldMap.gameRoundHandler) {
             return;
         }
         const target: unit | undefined = this.game.gameDamageEngineGlobals.udg_DamageEventTarget;
@@ -19,7 +19,7 @@ export class WalkItOff extends CreepAbility implements AttackActionCreepAbility 
             if (!(GetUnitMoveSpeed(target) < GetUnitDefaultMoveSpeed(target))) {
                 return;
             }
-            this.game.gameDamageEngineGlobals.udg_DamageEventAmount *= (1.00 - 0.50 * (this.game.gameRoundHandler.currentWave + 1) * 0.01);
+            this.game.gameDamageEngineGlobals.udg_DamageEventAmount *= (1.00 - 0.50 * (this.game.worldMap.gameRoundHandler.currentWave + 1) * 0.01);
         }
     }
 

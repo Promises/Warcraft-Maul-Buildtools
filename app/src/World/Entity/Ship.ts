@@ -29,10 +29,10 @@ export class Ship extends CheckPoint {
     checkPointAction(): void {
         const u: unit = GetEnteringUnit();
 
-        if (this.game.gameEnded) {
+        if (this.game.gameEnded || !this.game.worldMap.gameRoundHandler) {
             return;
         }
-        if (this.game.gameRoundHandler.currentWave >= 36) {
+        if (this.game.worldMap.gameRoundHandler.currentWave >= 36) {
             RemoveUnit(u);
         }
         const spawnedCreeps: SpawnedCreeps | undefined = this.worldMap.spawnedCreeps;
@@ -44,7 +44,7 @@ export class Ship extends CheckPoint {
                     this.game.gameLives = 0;
                 } else {
                     //  this.game.gameLives--;
-                    if(this.game.worldMap.waveCreeps[this.game.gameRoundHandler.currentWave - 1].getCreepType() === CREEP_TYPE.CHAMPION) {
+                    if (this.game.worldMap.waveCreeps[this.game.worldMap.gameRoundHandler.currentWave - 1].getCreepType() === CREEP_TYPE.CHAMPION) {
                         this.game.gameLives = this.game.gameLives - Math.ceil(GetUnitLifePercent(creep.creep) / 10);
                     } else {
                         this.game.gameLives = this.game.gameLives - Math.ceil(GetUnitLifePercent(creep.creep) / 20);

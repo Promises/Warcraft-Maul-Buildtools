@@ -7,7 +7,7 @@ export class VampiricAura extends CreepAbility implements AttackActionCreepAbili
     }
 
     public AttackAction(): void {
-        if (!this.game) {
+        if (!this.game  || !this.game.worldMap.gameRoundHandler) {
             return;
         }
         const target: unit | undefined = this.game.gameDamageEngineGlobals.udg_DamageEventTarget;
@@ -21,7 +21,7 @@ export class VampiricAura extends CreepAbility implements AttackActionCreepAbili
             }
             const effectModel: string = 'Abilities\\Spells\\Undead\\VampiricAura\\VampiricAuraTarget.mdl';
             DestroyEffectBJ(AddSpecialEffect(effectModel, GetUnitX(target), GetUnitY(target)));
-            SetUnitLifeBJ(target, GetUnitStateSwap(UNIT_STATE_LIFE, target) + 4 * (this.game.gameRoundHandler.currentWave + 1));
+            SetUnitLifeBJ(target, GetUnitStateSwap(UNIT_STATE_LIFE, target) + 4 * (this.game.worldMap.gameRoundHandler.currentWave + 1));
         }
     }
 

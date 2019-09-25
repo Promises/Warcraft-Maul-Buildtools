@@ -10,7 +10,7 @@ import { Defender } from './Players/Defender';
 import { CreepAbility } from './CreepAbilities/specs/CreepAbility';
 import { Log } from '../../lib/Serilog/Serilog';
 import { WaveCreep } from './WaveCreep';
-import { GameRound } from '../Game/GameRound';
+import { AbstractGameRound } from '../Game/BaseMaul/AbstractGameRound';
 
 export class PlayerSpawns {
     private _spawnOne: CheckPoint | undefined;
@@ -68,7 +68,7 @@ export class PlayerSpawns {
         }
     }
 
-    public SpawnCreep(gameRound: GameRound,
+    public SpawnCreep(gameRound: AbstractGameRound,
                       spawned: Map<number, Creep>,
                       abilities: CreepAbility[],
                       wave: WaveCreep,

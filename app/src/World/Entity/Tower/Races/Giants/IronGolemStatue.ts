@@ -3,7 +3,7 @@ import { TickingTower } from '../../Specs/TickingTower';
 
 export class IronGolemStatue extends Tower implements TickingTower {
     public Action(): void {
-        if (this.game.gameRoundHandler.isWaveInProgress) {
+        if (this.game.worldMap.gameRoundHandler && this.game.worldMap.gameRoundHandler.isWaveInProgress) {
 
             const y: number = GetUnitY(this.tower);
             const x: number = GetUnitX(this.tower);

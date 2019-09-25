@@ -21,7 +21,7 @@ export class SafeEventQueue {
     }
 
     private HandleTick(): void {
-        if (!this.game.gameRoundHandler.isWaveInProgress) {
+        if (this.game.worldMap.gameRoundHandler && !this.game.worldMap.gameRoundHandler.isWaveInProgress) {
 
             if (this.currentTask) {
                 for (let i: number = 0; i < this.maxEventsPerTick; i++) {

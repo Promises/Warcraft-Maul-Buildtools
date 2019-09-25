@@ -3,7 +3,7 @@ import * as settings from './GlobalSettings';
 import { Attacker } from './Entity/Players/Attacker';
 import { WorldMap } from './WorldMap';
 import { Commands } from './Game/Commands';
-import { GameRound } from './Game/GameRound';
+import { AbstractGameRound } from './Game/BaseMaul/AbstractGameRound';
 import { DifficultyVote } from './Game/DifficultyVote';
 import { RacePicking } from './Game/RacePicking';
 import { MultiBoard } from './Game/MultiBoard';
@@ -35,7 +35,7 @@ export class WarcraftMaul {
     public gameLives: number = settings.INITIAL_LIVES;
     public startLives: number = settings.INITIAL_LIVES;
     public worldMap: WorldMap;
-    public gameRoundHandler: GameRound;
+    // public gameRoundHandler: AbstractGameRound;
     public gameCommandHandler: Commands;
     public gameDamageEngineGlobals: DamageEngineGlobals;
     public gameDamageEngine: DamageEngine;
@@ -120,7 +120,7 @@ export class WarcraftMaul {
         this.racePicking = new RacePicking(this);
         this.sellTower = new SellTower(this);
 
-        this.gameRoundHandler = new GameRound(this);
+        // this.gameRoundHandler = new AbstractGameRound(this);
 
 
         for (const quest of Quests) {

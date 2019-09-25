@@ -3,7 +3,7 @@ import { TickingTower } from '../../Specs/TickingTower';
 
 export class IceTrollEmperor extends Tower implements TickingTower {
     public Action(): void {
-        if (this.game.gameRoundHandler.isWaveInProgress) {
+        if (this.game.worldMap.gameRoundHandler && this.game.worldMap.gameRoundHandler.isWaveInProgress) {
 
             this.CastBlizzard();
         }
