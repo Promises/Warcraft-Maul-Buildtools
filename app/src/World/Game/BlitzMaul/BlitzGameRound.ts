@@ -14,7 +14,6 @@ export class BlitzGameRound extends AbstractGameRound {
     private roundOverGoldReward: number = settings.GAME_GOLD_REWARD_BASE + 5;
     private shouldStartSpawning: boolean = false;
 
-    private killStreakPrefix: string = Util.ColourString(settings.COLOUR_CODES[COLOUR.GREEN], 'Kill Streak');
 
     constructor(game: WarcraftMaul) {
         super(game);
@@ -235,15 +234,16 @@ export class BlitzGameRound extends AbstractGameRound {
     }
 
     private KillHook(player: Defender): void {
+        const killStreakPrefix: string = Util.ColourString(settings.COLOUR_CODES[COLOUR.GREEN], 'Kill Streak');
 
         if (player.kills % 20 === 0 && player.kills !== 0) {
-            player.sendMessage(`${this.killStreakPrefix}: You have killed ${player.kills} creeps, Reward ${player.goldReward} gold.`);
+            player.sendMessage(`${killStreakPrefix}: You have killed ${player.kills} creeps, Reward ${player.goldReward} gold.`);
             player.giveGold(player.goldReward);
             player.goldReward += 5;
         }
 
         if (player.kills % 200 === 0 && player.kills !== 0) {
-            player.sendMessage(`${this.killStreakPrefix}: You have killed ${player.kills} creeps, Reward 1 lumber.`);
+            player.sendMessage(`${killStreakPrefix}: You have killed ${player.kills} creeps, Reward 1 lumber.`);
             player.giveLumber(1);
         }
     }
