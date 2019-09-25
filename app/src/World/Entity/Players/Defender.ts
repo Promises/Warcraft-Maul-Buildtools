@@ -15,6 +15,8 @@ export class Defender extends AbstractPlayer {
     // private towerKeys: IterableIterator<number> | undefined = undefined;
     private loggedDebug: boolean = false;
     public seaElemetals: number = 0;
+    public killHook?: (player: Defender) => void;
+    public goldReward: number = 0;
 
     get towerForces(): Map<number, number> {
         return this._towerForces;
@@ -195,6 +197,9 @@ export class Defender extends AbstractPlayer {
         this._kills++;
         if (this.game.scoreBoard) {
             MultiboardSetItemValueBJ(this.game.scoreBoard.board, 2, 7 + this._scoreSlot, `${this._kills}`);
+        }
+        if (this.killHook) {
+            this.killHook(this);
         }
     }
 

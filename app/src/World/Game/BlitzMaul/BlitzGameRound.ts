@@ -4,13 +4,17 @@ import { WarcraftMaul } from '../../WarcraftMaul';
 import { Trigger } from '../../../JassOverrides/Trigger';
 import { Ship } from '../../Entity/Ship';
 import { TimedEvent } from '../../../lib/WCEventQueue/TimedEvent';
+import { Defender } from '../../Entity/Players/Defender';
+import { Log } from '../../../lib/Serilog/Serilog';
 
 export class BlitzGameRound extends AbstractGameRound {
     private shouldStartWaveTimer: boolean = false;
     private waitBetweenWaveTime: number = settings.GAME_TIME_BEFORE_WAVE;
     private roundEndTrigger: Trigger;
-    private roundOverGoldReward: number = settings.GAME_GOLD_REWARD_BASE;
+    private roundOverGoldReward: number = settings.GAME_GOLD_REWARD_BASE + 5;
     private shouldStartSpawning: boolean = false;
+
+    private killStreakPrefix: string = Util.ColourString(settings.COLOUR_CODES[COLOUR.GREEN], 'Kill Streak');
 
     constructor(game: WarcraftMaul) {
         super(game);
@@ -19,19 +23,29 @@ export class BlitzGameRound extends AbstractGameRound {
         for (const enemy of this.game.enemies) {
             this.roundEndTrigger.RegisterPlayerStateEvent(enemy.wcPlayer, PLAYER_STATE_RESOURCE_FOOD_USED, EQUAL, 0.00);
         }
-
         this.roundEndTrigger.AddCondition(() => this.CreepFoodConditions());
         this.roundEndTrigger.AddAction(() => this.AllIsDead());
         this.roundEndTrigger.Disable();
-        this.roundOverGoldReward += 5;
 
+        for (const player of this.game.players.values()) {
+            player.killHook = this.KillHook;
+            player.goldReward = this.roundOverGoldReward;
+        }
     }
 
 
     private SpawnNextWave(): boolean {
-        this.shouldStartSpawning = true;
-        this.currentWave++;
-        this.roundOverGoldReward += 5;
+
+        Log.Debug(`${(this.currentWave + 1) % 5}`);
+        if ((this.currentWave + 1 % 5) === 0) {
+            this.roundEndTrigger.Enable();
+            Log.Debug('next wave is safe');
+        } else {
+            this.shouldStartSpawning = true;
+            this.currentWave++;
+            Log.Debug('spawning next');
+
+        }
         return true;
     }
 
@@ -215,7 +229,20 @@ export class BlitzGameRound extends AbstractGameRound {
     }
 
     public FinishedSpawning(): void {
-        this.game.timedEventQueue.AddEvent(new TimedEvent(() => this.SpawnNextWave(), 50, false));
+        this.game.timedEventQueue.AddEvent(new TimedEvent(() => this.SpawnNextWave(), 80, false));
     }
 
+    private KillHook(player: Defender): void {
+
+        if (player.kills % 20 === 0 && player.kills !== 0) {
+            player.sendMessage(`${this.killStreakPrefix}: You have killed ${player.kills} creeps, Reward ${player.goldReward} gold.`);
+            player.giveGold(player.goldReward);
+            player.goldReward += 5;
+        }
+
+        if (player.kills % 200 === 0 && player.kills !== 0) {
+            player.sendMessage(`${this.killStreakPrefix}: You have killed ${player.kills} creeps, Reward 1 lumber.`);
+            player.giveLumber(1);
+        }
+    }
 }
