@@ -4,7 +4,6 @@ import { WarcraftMaul } from '../../WarcraftMaul';
 import { Trigger } from '../../../JassOverrides/Trigger';
 import { Ship } from '../../Entity/Ship';
 import { TimedEvent } from '../../../lib/WCEventQueue/TimedEvent';
-import { Defender } from '../../Entity/Players/Defender';
 import { Log } from '../../../lib/Serilog/Serilog';
 
 export class BlitzGameRound extends AbstractGameRound {
@@ -13,6 +12,8 @@ export class BlitzGameRound extends AbstractGameRound {
     private roundEndTrigger: Trigger;
     private roundOverGoldReward: number = settings.GAME_GOLD_REWARD_BASE + 5;
     private shouldStartSpawning: boolean = false;
+    private kills: number = 0;
+    private goldReward: any = settings.GAME_GOLD_REWARD_BASE + 5;
 
 
     constructor(game: WarcraftMaul) {
@@ -27,7 +28,7 @@ export class BlitzGameRound extends AbstractGameRound {
         this.roundEndTrigger.Disable();
 
         for (const player of this.game.players.values()) {
-            player.killHook = this.KillHook;
+            player.killHook = () => this.KillHook();
             player.goldReward = this.roundOverGoldReward;
         }
     }
@@ -233,18 +234,25 @@ export class BlitzGameRound extends AbstractGameRound {
         this.game.timedEventQueue.AddEvent(new TimedEvent(() => this.SpawnNextWave(), 80, false));
     }
 
-    private KillHook(player: Defender): void {
+    private KillHook(): void {
         const killStreakPrefix: string = Util.ColourString(settings.COLOUR_CODES[COLOUR.GREEN], 'Kill Streak');
+        this.kills++;
+        Log.Debug(`${this.kills}`);
 
-        if (player.kills % 20 === 0 && player.kills !== 0) {
-            player.sendMessage(`${killStreakPrefix}: You have killed ${player.kills} creeps, Reward ${player.goldReward} gold.`);
-            player.giveGold(player.goldReward);
-            player.goldReward += 5;
+        if (this.kills % (20 * this.game.players.size) === 0) {
+            for (const player of this.game.players.values()) {
+                player.sendMessage(`${killStreakPrefix}: Your team has killed ${this.kills} creeps, Reward ${this.goldReward} gold.`);
+                player.giveGold(this.goldReward);
+            }
+
+            this.goldReward += 5;
         }
 
-        if (player.kills % 200 === 0 && player.kills !== 0) {
-            player.sendMessage(`${killStreakPrefix}: You have killed ${player.kills} creeps, Reward 1 lumber.`);
-            player.giveLumber(1);
+        if (this.kills % (200 * this.game.players.size) === 0) {
+            for (const player of this.game.players.values()) {
+                player.sendMessage(`${killStreakPrefix}: Your team has killed ${this.kills} creeps, Reward 1 lumber.`);
+                player.giveLumber(1);
+            }
         }
     }
 }
