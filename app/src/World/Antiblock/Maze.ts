@@ -10,17 +10,7 @@ export enum Walkable {
 }
 
 export class Maze {
-    private antiJugglers: AntiJuggleTower[] = [];
 
-    constructor(minX: number, minY: number, maxX: number, maxY: number, width: number, height: number, maze: Walkable[][]) {
-        this.minX = minX;
-        this.minY = minY;
-        this.maxX = maxX;
-        this.maxY = maxY;
-        this.width = width;
-        this.height = height;
-        this.maze = maze;
-    }
 
     public static readonly ROW_NUM: number[] = [-1, 0, 0, 1];
     public static readonly COL_NUM: number[] = [0, -1, 1, 0];
@@ -31,6 +21,18 @@ export class Maze {
     public readonly width: number;
     public readonly height: number;
     public readonly maze: Walkable[][];
+    private antiJugglers: AntiJuggleTower[] = [];
+
+
+    constructor(minX: number, minY: number, maxX: number, maxY: number, width: number, height: number, maze: Walkable[][]) {
+        this.minX = minX;
+        this.minY = minY;
+        this.maxX = maxX;
+        this.maxY = maxY;
+        this.width = width;
+        this.height = height;
+        this.maze = maze;
+    }
 
     public setWalkable(x: number, y: number, isWalkable: Walkable): void {
         this.maze[x][y] = isWalkable;

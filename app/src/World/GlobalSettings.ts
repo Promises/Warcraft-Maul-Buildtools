@@ -33,6 +33,21 @@ export const GAME_GOLD_REWARD_BASE: number = 10;
 
 export const GAME_NAME: string = 'Warcraft Maul Reimagined';
 
+export enum GAME_MODES {
+    CLASSIC,
+    BLITZ,
+}
+
+export const GAME_MODE_STRINGS: string[] = [
+    'Classic Maul',
+    'Blitz',
+];
+
+export const GAME_MODE_COLOURS: string[] = [
+    '#00A651',
+    '#FF0000',
+];
+
 
 export const DIFFICULTIES: number[] = [
     100,

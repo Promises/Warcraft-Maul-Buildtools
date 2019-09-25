@@ -4,7 +4,7 @@ import { Attacker } from './Entity/Players/Attacker';
 import { WorldMap } from './WorldMap';
 import { Commands } from './Game/Commands';
 import { AbstractGameRound } from './Game/BaseMaul/AbstractGameRound';
-import { DifficultyVote } from './Game/DifficultyVote';
+import { Vote } from './Game/Vote';
 import { RacePicking } from './Game/RacePicking';
 import { MultiBoard } from './Game/MultiBoard';
 import { Quests } from '../Generated/questsGEN';
@@ -39,7 +39,7 @@ export class WarcraftMaul {
     public gameCommandHandler: Commands;
     public gameDamageEngineGlobals: DamageEngineGlobals;
     public gameDamageEngine: DamageEngine;
-    public diffVote: DifficultyVote;
+    public diffVote: Vote;
     public readonly towerTicker: TowerTicker;
     public buffHandler: BuffHandler;
     public scoreBoard: MultiBoard | undefined;
@@ -116,7 +116,7 @@ export class WarcraftMaul {
         creepAbilityHandler.SetupGame(this);
 
 
-        this.diffVote = new DifficultyVote(this);
+        this.diffVote = new Vote(this);
         this.racePicking = new RacePicking(this);
         this.sellTower = new SellTower(this);
 

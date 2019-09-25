@@ -4,7 +4,7 @@ import { WarcraftMaul } from '../../WarcraftMaul';
 import { Trigger } from '../../../JassOverrides/Trigger';
 import { Ship } from '../../Entity/Ship';
 
-export class ClassicGameRound extends AbstractGameRound {
+export class BlitzGameRound extends AbstractGameRound {
     private shouldStartWaveTimer: boolean = false;
     private waitBetweenWaveTime: number = settings.GAME_TIME_BEFORE_WAVE;
     private roundEndTrigger: Trigger;
@@ -19,7 +19,8 @@ export class ClassicGameRound extends AbstractGameRound {
         }
 
         this.roundEndTrigger.AddCondition(() => this.CreepFoodConditions());
-        this.roundEndTrigger.AddAction(() => this.RoundEnd());
+        this.roundEndTrigger.AddAction(() => this.AllIsDead());
+        this.roundEndTrigger.Disable();
 
     }
 
@@ -54,7 +55,7 @@ export class ClassicGameRound extends AbstractGameRound {
 
     }
 
-    private RoundEnd(): void {
+    private AllIsDead(): void {
 
         if (this.currentWave === this.game.worldMap.waveCreeps.length) {
             this.BonusRoundsOver();
