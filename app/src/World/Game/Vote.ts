@@ -166,7 +166,7 @@ export class Vote {
         this.difficulty = Math.floor(this.difficulty);
         // this.SetDifficulty(this.difficulty);
         SetPlayerHandicapBJ(Player(PLAYER_NEUTRAL_PASSIVE), this.difficulty);
-        this.game.mmd.DefineSettingNumber('difficulty', this.difficulty);
+        // this.game.mmd.DefineSettingNumber('difficulty', this.difficulty);
         SendMessage(`Difficulty was set to ${this.difficulty}% (${Util.ColourString(settings.DIFFICULTY_COLOURS[diffIndex],
                                                                                     settings.DIFFICULTY_STRINGS[diffIndex])})`);
 
