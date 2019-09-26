@@ -27,7 +27,7 @@ export class InitGame {
             // new PreloadSink(LogLevel.Message, `WCMAUL\\${os.time()}.txt`),
         ]);
         const creepAbilityHandler: CreepAbilityHandler = this.SetupAbilities();
-        const mmd: MMD = new MMD();
+        // const mmd: MMD = new MMD();
 
         xpcall(() => {
             const init: Trigger = new Trigger();
