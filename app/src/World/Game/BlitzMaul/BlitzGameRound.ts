@@ -239,7 +239,7 @@ export class BlitzGameRound extends AbstractGameRound {
         this.kills++;
         Log.Debug(`${this.kills}`);
 
-        if (this.kills % (20 * this.game.players.size) === 0) {
+        if (this.kills % ((20 * this.game.players.size) - 10) === 0) {
             for (const player of this.game.players.values()) {
                 player.sendMessage(`${killStreakPrefix}: Your team has killed ${this.kills} creeps, Reward ${this.goldReward} gold.`);
                 player.giveGold(this.goldReward);
@@ -248,7 +248,7 @@ export class BlitzGameRound extends AbstractGameRound {
             this.goldReward += 5;
         }
 
-        if (this.kills % (200 * this.game.players.size) === 0) {
+        if (this.kills % ((200 * this.game.players.size) - 10) === 0) {
             for (const player of this.game.players.values()) {
                 player.sendMessage(`${killStreakPrefix}: Your team has killed ${this.kills} creeps, Reward 1 lumber.`);
                 player.giveLumber(1);
