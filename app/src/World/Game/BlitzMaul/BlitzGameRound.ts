@@ -26,6 +26,7 @@ export class BlitzGameRound extends AbstractGameRound {
         this.roundEndTrigger.AddCondition(() => this.CreepFoodConditions());
         this.roundEndTrigger.AddAction(() => this.AllIsDead());
         this.roundEndTrigger.Disable();
+        this.antiJuggleEnabled = false;
 
         for (const player of this.game.players.values()) {
             player.killHook = () => this.KillHook();

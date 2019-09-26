@@ -17,6 +17,7 @@ export abstract class AbstractGameRound {
     public readonly game: WarcraftMaul;
     private _isWaveInProgress: boolean = false;
     private _currentWave: number = 1;
+    public antiJuggleEnabled: boolean = true;
 
     constructor(game: WarcraftMaul) {
         this.game = game;
