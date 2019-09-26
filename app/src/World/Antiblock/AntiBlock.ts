@@ -56,7 +56,7 @@ export class AntiBlock {
 
         const isWaveInProgress: boolean = this._gameRoundHandler.isWaveInProgress;
         const antiJuggleCreeps: Creep[] = [];
-        if (isWaveInProgress && hasBuiltOnAntiJuggle === false) {
+        if (isWaveInProgress && hasBuiltOnAntiJuggle === false && this._gameRoundHandler.antiJuggleEnabled) {
             let isJuggling: boolean = false;
             ForGroup(GetUnitsInRangeOfLocAll(128.00, loc), () => {
                 const ownerID: COLOUR = GetPlayerId(GetOwningPlayer(GetEnumUnit()));

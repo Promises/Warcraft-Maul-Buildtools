@@ -26,6 +26,7 @@ export class BlitzGameRound extends AbstractGameRound {
         this.roundEndTrigger.AddCondition(() => this.CreepFoodConditions());
         this.roundEndTrigger.AddAction(() => this.AllIsDead());
         this.roundEndTrigger.Disable();
+        this.antiJuggleEnabled = false;
 
         for (const player of this.game.players.values()) {
             player.killHook = () => this.KillHook();
@@ -76,7 +77,9 @@ export class BlitzGameRound extends AbstractGameRound {
                 MultiboardSetItemValueBJ(this.game.scoreBoard.board, 1, 1, 'Game Time');
             }
             this.roundEndTrigger.Disable();
-
+            if (this.game.scoreBoard) {
+                this.UpdateWaveScoreboard();
+            }
             this.SpawnCreeps();
 
 
@@ -157,6 +160,38 @@ export class BlitzGameRound extends AbstractGameRound {
                     2, 6,
                     '');
             }
+        }
+    }
+
+    private UpdateWaveScoreboard(): void {
+        if (this.game.scoreBoard) {
+            let armourType: string = settings.ARMOUR_TYPE_NAMES[this.game.worldMap.waveCreeps[this.currentWave - 1].getArmourType()];
+            armourType = armourType.charAt(0).toUpperCase() + armourType.toLowerCase().slice(1);
+            MultiboardSetItemValueBJ(
+                this.game.scoreBoard.board,
+                2, 5,
+                Util.ColourString(
+                    settings.ARMOUR_TYPE_COLOURS[this.game.worldMap.waveCreeps[this.currentWave - 1].getArmourType()], armourType,
+                ),
+            );
+            const creepType: CREEP_TYPE = this.game.worldMap.waveCreeps[this.currentWave - 1].getCreepType();
+            if (creepType !== CREEP_TYPE.NORMAL) {
+                let creepTypeName: string = settings.CREEP_TYPE_NAMES[this.game.worldMap.waveCreeps[this.currentWave - 1].getCreepType()];
+                creepTypeName = creepTypeName.charAt(0).toUpperCase() + creepTypeName.toLowerCase().slice(1);
+                MultiboardSetItemValueBJ(
+                    this.game.scoreBoard.board,
+                    2, 6,
+                    Util.ColourString(
+                        settings.CREEP_TYPE_COLOURS[this.game.worldMap.waveCreeps[this.currentWave - 1].getCreepType()],
+                        `(${creepTypeName})`));
+            } else {
+                MultiboardSetItemValueBJ(
+                    this.game.scoreBoard.board,
+                    2, 6,
+                    '');
+            }
+            MultiboardSetItemValueBJ(this.game.scoreBoard.board, 2, 2, `${this.currentWave}`);
+
         }
     }
 

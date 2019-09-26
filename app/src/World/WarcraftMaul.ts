@@ -57,10 +57,11 @@ export class WarcraftMaul {
     public safeEventQueue: SafeEventQueue;
     public timedEventQueue: TimedEventQueue;
     public racePicking: RacePicking;
-    public mmd: MMD;
 
-    constructor(creepAbilityHandler: CreepAbilityHandler, mmd: MMD) {
-        this.mmd = mmd;
+    // public mmd: MMD;
+
+    constructor(creepAbilityHandler: CreepAbilityHandler/*, mmd: MMD*/) {
+        // this.mmd = mmd;
         // Should we enable debug mode?
         if (GetPlayerName(Player(COLOUR.RED)) === 'WorldEdit') {
             this.debugMode = true;
@@ -72,7 +73,7 @@ export class WarcraftMaul {
                      ]);
             Log.Debug('Debug mode enabled');
         }
-        this.mmd.DefineSettingBoolean('debug_mode', this.debugMode);
+        // this.mmd.DefineSettingBoolean('debug_mode', this.debugMode);
         this.gameCommandHandler = new Commands(this);
         // Set up all players
         for (let i: number = 0; i < bj_MAX_PLAYER_SLOTS; i++) {

@@ -178,36 +178,36 @@ export class Commands {
             case 'startwave':
                 this.game.waveTimer = 1;
                 break;
-            case 'mmd':
-                switch (command2[1]) {
-                    case 'define':
-                        switch (command2[2]) {
-                            case 'string':
-                                this.game.mmd.DefineValue(command2[3], MMDType.String, MMDGoal.None, MMDSuggest.Track);
-                                break;
-                            case 'number':
-                                this.game.mmd.DefineValue(command2[3], MMDType.Number, MMDGoal.Low, MMDSuggest.Track);
-                                break;
-                            case 'event':
-                                this.game.mmd.DefineEvent(command2[3], ...command2.slice(4));
-                                break;
-                        }
-                        break;
-                    case 'update':
-                        switch (command2[2]) {
-                            case 'string':
-                                this.game.mmd.UpdateValueString(command2[3], player.wcPlayer, command2.slice(4).join(' '));
-                                break;
-                            case 'number':
-                                this.game.mmd.UpdateValueNumber(command2[3], player.wcPlayer, MMDOperator.Set, +command2[4]);
-                                break;
-                            case 'event':
-                                this.game.mmd.LogEvent(command2[3], ...command2.slice(4));
-                                break;
-                        }
-                        break;
-                }
-                break;
+            // case 'mmd':
+            //     switch (command2[1]) {
+            //         case 'define':
+            //             switch (command2[2]) {
+            //                 case 'string':
+            //                     this.game.mmd.DefineValue(command2[3], MMDType.String, MMDGoal.None, MMDSuggest.Track);
+            //                     break;
+            //                 case 'number':
+            //                     this.game.mmd.DefineValue(command2[3], MMDType.Number, MMDGoal.Low, MMDSuggest.Track);
+            //                     break;
+            //                 case 'event':
+            //                     this.game.mmd.DefineEvent(command2[3], ...command2.slice(4));
+            //                     break;
+            //             }
+            //             break;
+            //         case 'update':
+            //             switch (command2[2]) {
+            //                 case 'string':
+            //                     this.game.mmd.UpdateValueString(command2[3], player.wcPlayer, command2.slice(4).join(' '));
+            //                     break;
+            //                 case 'number':
+            //                     this.game.mmd.UpdateValueNumber(command2[3], player.wcPlayer, MMDOperator.Set, +command2[4]);
+            //                     break;
+            //                 case 'event':
+            //                     this.game.mmd.LogEvent(command2[3], ...command2.slice(4));
+            //                     break;
+            //             }
+            //             break;
+            //     }
+            //     break;
             case 'leave':
                 player.PlayerLeftTheGame();
                 break;
