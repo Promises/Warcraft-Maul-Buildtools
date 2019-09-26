@@ -113,7 +113,7 @@ export class TowerConstruction {
         }
 
         if (ObjectExtendsTower.IsEndOfRoundTower() && this.game.worldMap.gameRoundHandler) {
-            this.game.worldMap.gameRoundHandler.AddEndOfRoundTower(ObjectExtendsTower.UniqueID, ObjectExtendsTower);
+            this.game.worldMap.gameTurn.AddEndOfRoundTower(ObjectExtendsTower.UniqueID, ObjectExtendsTower);
         }
         if (ObjectExtendsTower.IsAttackActionTower()) {
             this.game.gameDamageEngine.AddInitialDamageEventTower(ObjectExtendsTower.UniqueID, ObjectExtendsTower);

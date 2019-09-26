@@ -109,4 +109,12 @@ export class Trigger {
     public Execute(): void {
         TriggerExecute(this.nativeTrigger);
     }
+
+    public Disable(): void {
+        DisableTrigger(this.nativeTrigger);
+    }
+
+    public Enable(): void {
+        EnableTrigger(this.nativeTrigger);
+    }
 }

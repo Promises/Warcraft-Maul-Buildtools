@@ -17,7 +17,7 @@ import { ArchimondeGate } from './Game/ArchimondeGate';
 import { ArchimondeTeleport } from './Game/ArchimondeTeleport';
 import { Trigger } from '../JassOverrides/Trigger';
 import { AbstractGameRound } from './Game/BaseMaul/AbstractGameRound';
-import { ClassicGameRound } from './Game/ClassicMaul/ClassicGameRound';
+import { GameTurn } from './Game/BaseMaul/GameTurn';
 
 export class WorldMap {
     public game: WarcraftMaul;
@@ -34,10 +34,10 @@ export class WorldMap {
     public readonly playerMazes: Maze[] = [];
     public disabledRaces: number = 0;
     public towerConstruction: TowerConstruction;
-    public antiBlock: AntiBlock;
+    public antiBlock?: AntiBlock;
     private gameTimeTrigger: Trigger;
     public gameRoundHandler?: AbstractGameRound;
-
+    public gameTurn: GameTurn;
     constructor(game: WarcraftMaul) {
         this.game = game;
         this.setupWorldCreatures();
@@ -46,9 +46,9 @@ export class WorldMap {
         this.gameTimeTrigger = new Trigger();
         this.gameTimeTrigger.RegisterTimerEventPeriodic(1.00);
         this.gameTimeTrigger.AddAction(() => this.UpdateGameTime());
+        this.gameTurn = new GameTurn();
 
-        this.gameRoundHandler = new ClassicGameRound(this.game);
-        this.antiBlock = new AntiBlock(this, this.gameRoundHandler);
+        // this.gameRoundHandler = new ClassicGameRound(this.game);
     }
 
     private setupWorldCreatures(): void {

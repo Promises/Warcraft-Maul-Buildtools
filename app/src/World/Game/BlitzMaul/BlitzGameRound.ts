@@ -3,12 +3,18 @@ import * as settings from '../../GlobalSettings';
 import { WarcraftMaul } from '../../WarcraftMaul';
 import { Trigger } from '../../../JassOverrides/Trigger';
 import { Ship } from '../../Entity/Ship';
+import { TimedEvent } from '../../../lib/WCEventQueue/TimedEvent';
+import { Log } from '../../../lib/Serilog/Serilog';
 
-export class ClassicGameRound extends AbstractGameRound {
+export class BlitzGameRound extends AbstractGameRound {
     private shouldStartWaveTimer: boolean = false;
     private waitBetweenWaveTime: number = settings.GAME_TIME_BEFORE_WAVE;
     private roundEndTrigger: Trigger;
-    private roundOverGoldReward: number = settings.GAME_GOLD_REWARD_BASE;
+    private roundOverGoldReward: number = settings.GAME_GOLD_REWARD_BASE + 5;
+    private shouldStartSpawning: boolean = false;
+    private kills: number = 0;
+    private goldReward: any = settings.GAME_GOLD_REWARD_BASE + 5;
+
 
     constructor(game: WarcraftMaul) {
         super(game);
@@ -17,10 +23,30 @@ export class ClassicGameRound extends AbstractGameRound {
         for (const enemy of this.game.enemies) {
             this.roundEndTrigger.RegisterPlayerStateEvent(enemy.wcPlayer, PLAYER_STATE_RESOURCE_FOOD_USED, EQUAL, 0.00);
         }
-
         this.roundEndTrigger.AddCondition(() => this.CreepFoodConditions());
-        this.roundEndTrigger.AddAction(() => this.RoundEnd());
+        this.roundEndTrigger.AddAction(() => this.AllIsDead());
+        this.roundEndTrigger.Disable();
 
+        for (const player of this.game.players.values()) {
+            player.killHook = () => this.KillHook();
+            player.goldReward = this.roundOverGoldReward;
+        }
+    }
+
+
+    private SpawnNextWave(): boolean {
+        const nextWave: number = this.currentWave + 1;
+        Log.Debug(`${nextWave % 5}`);
+        if (nextWave % 5 === 0) {
+            this.roundEndTrigger.Enable();
+            Log.Debug('next wave is safe');
+        } else {
+            this.shouldStartSpawning = true;
+            this.currentWave = nextWave;
+            Log.Debug('spawning next');
+
+        }
+        return true;
     }
 
     public GameTimeUpdateEvent(): void {
@@ -42,11 +68,15 @@ export class ClassicGameRound extends AbstractGameRound {
             }
         }
 
-        if (this.game.waveTimer === 0 && !this.isWaveInProgress) {
+        if (this.game.waveTimer === 0 && !this.isWaveInProgress || this.shouldStartSpawning) {
+            this.shouldStartSpawning = false;
+
             this.isWaveInProgress = true;
             if (this.game.scoreBoard) {
                 MultiboardSetItemValueBJ(this.game.scoreBoard.board, 1, 1, 'Game Time');
             }
+            this.roundEndTrigger.Disable();
+
             this.SpawnCreeps();
 
 
@@ -54,7 +84,7 @@ export class ClassicGameRound extends AbstractGameRound {
 
     }
 
-    private RoundEnd(): void {
+    private AllIsDead(): void {
 
         if (this.currentWave === this.game.worldMap.waveCreeps.length) {
             this.BonusRoundsOver();
@@ -103,7 +133,7 @@ export class ClassicGameRound extends AbstractGameRound {
         if (this.game.scoreBoard) {
             MultiboardSetItemValueBJ(this.game.scoreBoard.board, 1, 1, 'Starting in');
             let armourType: string = settings.ARMOUR_TYPE_NAMES[this.game.worldMap.waveCreeps[this.currentWave - 1].getArmourType()];
-            armourType = armourType.toLowerCase().charAt(0).toUpperCase() + armourType.slice(1);
+            armourType = armourType.charAt(0).toUpperCase() + armourType.toLowerCase().slice(1);
             MultiboardSetItemValueBJ(
                 this.game.scoreBoard.board,
                 2, 5,
@@ -201,6 +231,28 @@ export class ClassicGameRound extends AbstractGameRound {
     }
 
     public FinishedSpawning(): void {
+        this.game.timedEventQueue.AddEvent(new TimedEvent(() => this.SpawnNextWave(), 80, false));
     }
 
+    private KillHook(): void {
+        const killStreakPrefix: string = Util.ColourString(settings.COLOUR_CODES[COLOUR.GREEN], 'Kill Streak');
+        this.kills++;
+        Log.Debug(`${this.kills}`);
+
+        if (this.kills % ((20 * this.game.players.size) - 10) === 0) {
+            for (const player of this.game.players.values()) {
+                player.sendMessage(`${killStreakPrefix}: Your team has killed ${this.kills} creeps, Reward ${this.goldReward} gold.`);
+                player.giveGold(this.goldReward);
+            }
+
+            this.goldReward += 5;
+        }
+
+        if (this.kills % ((200 * this.game.players.size) - 100) === 0) {
+            for (const player of this.game.players.values()) {
+                player.sendMessage(`${killStreakPrefix}: Your team has killed ${this.kills} creeps, Reward 1 lumber.`);
+                player.giveLumber(1);
+            }
+        }
+    }
 }

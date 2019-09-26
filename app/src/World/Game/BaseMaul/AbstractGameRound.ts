@@ -9,6 +9,7 @@ import { ArchimondeGate } from '../ArchimondeGate';
 import { EndOfRoundTower } from '../../Entity/Tower/Specs/EndOfRoundTower';
 import { CreepAbility } from '../../Entity/CreepAbilities/specs/CreepAbility';
 import { Tower } from '../../Entity/Tower/Specs/Tower';
+import { AntiBlock } from '../../Antiblock/AntiBlock';
 
 export abstract class AbstractGameRound {
 
@@ -16,27 +17,13 @@ export abstract class AbstractGameRound {
     public readonly game: WarcraftMaul;
     private _isWaveInProgress: boolean = false;
     private _currentWave: number = 1;
-    private _endOfTurnTowerArray: (Tower & EndOfRoundTower)[] = [];
 
     constructor(game: WarcraftMaul) {
         this.game = game;
-    }
-
-    public EndOfRoundTowers(): (Tower & EndOfRoundTower)[] {
-        return this._endOfTurnTowerArray;
-    }
-
-
-    public AddEndOfRoundTower(id: number, endOfRoundTower: EndOfRoundTower & Tower): void {
-        this._endOfTurnTowerArray.push(endOfRoundTower);
-    }
-
-    public RemoveEndOfRoundTower(id: number): void {
-        this._endOfTurnTowerArray = this._endOfTurnTowerArray.filter((tower) => {
-            return tower.UniqueID !== id;
-        });
+        this.game.worldMap.antiBlock = new AntiBlock(this.game.worldMap, this);
 
     }
+
 
 
     get currentWave(): number {
@@ -52,10 +39,9 @@ export abstract class AbstractGameRound {
         return this._isWaveInProgress;
     }
 
-
-
-
-
+    set isWaveInProgress(value: boolean) {
+        this._isWaveInProgress = value;
+    }
 
 
 
@@ -99,14 +85,14 @@ export abstract class AbstractGameRound {
             creepOwner += 1;
             TriggerSleepAction(0.50);
         }
+        this.FinishedSpawning();
     }
 
 
-
-    set isWaveInProgress(value: boolean) {
-        this._isWaveInProgress = value;
-    }
 
 
     public abstract GameTimeUpdateEvent(): void;
+
+    public abstract FinishedSpawning(): void;
+
 }

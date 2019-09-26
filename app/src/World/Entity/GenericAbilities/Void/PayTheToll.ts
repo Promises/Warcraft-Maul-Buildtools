@@ -26,7 +26,9 @@ export class PayTheToll extends GenericAbility implements AbilityOnCastTargetsUn
                     if (tower.GetTypeID() === FourCC('h02S')) {
                         owner.SetVoidFragmentTick(owner.GetVoidFragmentTick() - 1);
                     }
-                    this.game.worldMap.antiBlock.CleanUpRemovedConstruction(tower.tower);
+                    if (this.game.worldMap.antiBlock) {
+                        this.game.worldMap.antiBlock.CleanUpRemovedConstruction(tower.tower);
+                    }
                     tower.Remove();
                 }
             }
