@@ -10,8 +10,8 @@ import { MMD } from './lib/MMD';
 export class InitGame {
 
 
-    private static Main(this: void, creepAbilityHandler: CreepAbilityHandler, mmd: MMD): void {
-        const maul: WarcraftMaul = new WarcraftMaul(creepAbilityHandler, mmd);
+    private static Main(this: void, creepAbilityHandler: CreepAbilityHandler/*, mmd: MMD*/): void {
+        const maul: WarcraftMaul = new WarcraftMaul(creepAbilityHandler/*, mmd*/);
         if (maul.debugMode) {
             Log.Information('Initialisation finished');
         }
@@ -32,7 +32,7 @@ export class InitGame {
         xpcall(() => {
             const init: Trigger = new Trigger();
             init.RegisterTimerEvent(0.00, false);
-            init.AddAction(() => InitGame.Main(creepAbilityHandler, mmd));
+            init.AddAction(() => InitGame.Main(creepAbilityHandler/*, mmd*/));
         }, (err) => {
             Log.Fatal(err);
         });
