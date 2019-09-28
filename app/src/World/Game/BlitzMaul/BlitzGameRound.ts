@@ -51,7 +51,7 @@ export class BlitzGameRound extends AbstractGameRound {
         if (nextWave % 5 === 0) {
             this.roundEndTrigger.Enable();
             Log.Debug('next wave is safe');
-        } else if (nextWave >= 35) {
+        } else if (nextWave === 36) {
             this.roundEndTrigger.Enable();
             Log.Debug('next wave is safe');
         } else {
