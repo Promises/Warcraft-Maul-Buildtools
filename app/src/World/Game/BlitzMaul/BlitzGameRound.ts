@@ -8,7 +8,7 @@ import { Log } from '../../../lib/Serilog/Serilog';
 
 enum KillStreaks {
     gold,
-    lumber
+    lumber,
 }
 
 export class BlitzGameRound extends AbstractGameRound {
@@ -51,11 +51,13 @@ export class BlitzGameRound extends AbstractGameRound {
         if (nextWave % 5 === 0) {
             this.roundEndTrigger.Enable();
             Log.Debug('next wave is safe');
+        } else if (nextWave >= 35) {
+            this.roundEndTrigger.Enable();
+            Log.Debug('next wave is safe');
         } else {
             this.shouldStartSpawning = true;
             this.currentWave = nextWave;
             Log.Debug('spawning next');
-
         }
         return true;
     }
