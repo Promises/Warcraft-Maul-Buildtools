@@ -289,7 +289,7 @@ export class BlitzGameRound extends AbstractGameRound {
         this.kills++;
 
         if (this.kills >= this.targetKillCount[KillStreaks.gold]) {
-            let avgkills = 0;
+            let avgkills: number = 0;
             for (const player of this.game.players.values()) {
                 avgkills += player.kills;
             }
