@@ -6,6 +6,11 @@ import { Ship } from '../../Entity/Ship';
 import { TimedEvent } from '../../../lib/WCEventQueue/TimedEvent';
 import { Log } from '../../../lib/Serilog/Serilog';
 
+enum KillStreaks {
+    gold,
+    lumber,
+}
+
 export class BlitzGameRound extends AbstractGameRound {
     private shouldStartWaveTimer: boolean = false;
     private waitBetweenWaveTime: number = settings.GAME_TIME_BEFORE_WAVE;
@@ -14,6 +19,9 @@ export class BlitzGameRound extends AbstractGameRound {
     private shouldStartSpawning: boolean = false;
     private kills: number = 0;
     private goldReward: any = settings.GAME_GOLD_REWARD_BASE + 5;
+
+    private targetKillCount: number[] = [];
+    private lastKillCount: number[] = [0, 0];
 
 
     constructor(game: WarcraftMaul) {
@@ -32,6 +40,8 @@ export class BlitzGameRound extends AbstractGameRound {
             player.killHook = () => this.KillHook();
             player.goldReward = this.roundOverGoldReward;
         }
+        this.targetKillCount[KillStreaks.gold] = ((20 * this.game.players.size) - 10) + this.lastKillCount[KillStreaks.gold];
+        this.targetKillCount[KillStreaks.lumber] = ((200 * this.game.players.size) - 100) + this.lastKillCount[KillStreaks.lumber];
     }
 
 
@@ -41,11 +51,13 @@ export class BlitzGameRound extends AbstractGameRound {
         if (nextWave % 5 === 0) {
             this.roundEndTrigger.Enable();
             Log.Debug('next wave is safe');
+        } else if (nextWave === 36) {
+            this.roundEndTrigger.Enable();
+            Log.Debug('next wave is safe');
         } else {
             this.shouldStartSpawning = true;
             this.currentWave = nextWave;
             Log.Debug('spawning next');
-
         }
         return true;
     }
@@ -271,19 +283,29 @@ export class BlitzGameRound extends AbstractGameRound {
 
     private KillHook(): void {
         const killStreakPrefix: string = Util.ColourString(settings.COLOUR_CODES[COLOUR.GREEN], 'Kill Streak');
-        this.kills++;
-        Log.Debug(`${this.kills}`);
 
-        if (this.kills % ((20 * this.game.players.size) - 10) === 0) {
+        this.targetKillCount[KillStreaks.gold] = ((20 * this.game.players.size) - 10) + this.lastKillCount[KillStreaks.gold];
+        this.targetKillCount[KillStreaks.lumber] = ((200 * this.game.players.size) - 100) + this.lastKillCount[KillStreaks.lumber];
+        this.kills++;
+
+        if (this.kills >= this.targetKillCount[KillStreaks.gold]) {
+            let avgkills: number = 0;
+            for (const player of this.game.players.values()) {
+                avgkills += player.kills;
+            }
+            avgkills /= this.game.players.size;
+            this.lastKillCount[KillStreaks.gold] = this.kills;
             for (const player of this.game.players.values()) {
                 player.sendMessage(`${killStreakPrefix}: Your team has killed ${this.kills} creeps, Reward ${this.goldReward} gold.`);
-                player.giveGold(this.goldReward);
+                player.giveGold(Math.floor((avgkills / player.kills) * this.goldReward));
             }
 
             this.goldReward += 5;
         }
 
-        if (this.kills % ((200 * this.game.players.size) - 100) === 0) {
+        if (this.kills >= this.targetKillCount[KillStreaks.lumber]) {
+            this.lastKillCount[KillStreaks.lumber] = this.kills;
+
             for (const player of this.game.players.values()) {
                 player.sendMessage(`${killStreakPrefix}: Your team has killed ${this.kills} creeps, Reward 1 lumber.`);
                 player.giveLumber(1);
