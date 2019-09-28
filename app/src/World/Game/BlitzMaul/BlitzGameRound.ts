@@ -297,7 +297,7 @@ export class BlitzGameRound extends AbstractGameRound {
             this.lastKillCount[KillStreaks.gold] = this.kills;
             for (const player of this.game.players.values()) {
                 player.sendMessage(`${killStreakPrefix}: Your team has killed ${this.kills} creeps, Reward ${this.goldReward} gold.`);
-                player.giveGold((avgkills / player.kills) * this.goldReward);
+                player.giveGold(Math.floor((avgkills / player.kills) * this.goldReward));
             }
 
             this.goldReward += 5;
