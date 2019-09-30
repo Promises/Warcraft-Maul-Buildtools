@@ -86,7 +86,7 @@ export class SpawnedCreeps {
         }
 
 
-        this.unitMap.delete(creep.getId());
+        this.unitMap.delete(creep.getHandleId());
         RemoveUnit(creep.creep);
 
 

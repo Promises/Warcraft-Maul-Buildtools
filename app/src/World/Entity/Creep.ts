@@ -39,7 +39,7 @@ export class Creep {
         return GetUnitName(this.creep);
     }
 
-    public getId(): number {
+    public getTypeId(): number {
         return GetUnitTypeId(this.creep);
     }
 

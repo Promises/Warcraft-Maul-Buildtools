@@ -47,12 +47,12 @@ export class BlitzGameRound extends AbstractGameRound {
 
     private SpawnNextWave(): boolean {
         const nextWave: number = this.currentWave + 1;
-        Log.Debug(`${nextWave % 5}`);
-        if (nextWave % 5 === 0) {
-            this.roundEndTrigger.Enable();
-            Log.Debug('next wave is safe');
-        } else if (nextWave === 36) {
-            this.roundEndTrigger.Enable();
+        if (nextWave % 5 === 0 || nextWave === 36) {
+            if (this.game.worldMap.spawnedCreeps.unitMap.size === 0) {
+                this.AllIsDead();
+            } else {
+                this.roundEndTrigger.Enable();
+            }
             Log.Debug('next wave is safe');
         } else {
             this.shouldStartSpawning = true;
