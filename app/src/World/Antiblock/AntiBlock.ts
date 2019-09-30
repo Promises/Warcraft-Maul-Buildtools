@@ -14,11 +14,10 @@ export class AntiBlock {
     private _eventTrigger: Trigger;
     private _cancelBuildingTrigger: Trigger;
     private _worldMap: WorldMap;
-    private _gameRoundHandler: AbstractGameRound;
+    private _gameRoundHandler?: AbstractGameRound;
 
-    constructor(worldMap: WorldMap, gameRoundHandler: AbstractGameRound) {
+    constructor(worldMap: WorldMap) {
         this._worldMap = worldMap;
-        this._gameRoundHandler = gameRoundHandler;
         this._eventTrigger = new Trigger();
         this._eventTrigger.RegisterAnyUnitEventBJ(EVENT_PLAYER_UNIT_CONSTRUCT_START);
         this._eventTrigger.AddAction(() => this.Action());
@@ -54,9 +53,10 @@ export class AntiBlock {
             return;
         }
 
-        const isWaveInProgress: boolean = this._gameRoundHandler.isWaveInProgress;
+        const isWaveInProgress: boolean = !!this._worldMap.gameRoundHandler && this._worldMap.gameRoundHandler.isWaveInProgress;
+        const antiJuggleEnabled: boolean = !!this._worldMap.gameRoundHandler && this._worldMap.gameRoundHandler.antiJuggleEnabled;
         const antiJuggleCreeps: Creep[] = [];
-        if (isWaveInProgress && hasBuiltOnAntiJuggle === false && this._gameRoundHandler.antiJuggleEnabled) {
+        if (isWaveInProgress && hasBuiltOnAntiJuggle === false && antiJuggleEnabled) {
             let isJuggling: boolean = false;
             ForGroup(GetUnitsInRangeOfLocAll(128.00, loc), () => {
                 const ownerID: COLOUR = GetPlayerId(GetOwningPlayer(GetEnumUnit()));

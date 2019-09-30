@@ -47,6 +47,8 @@ export class WorldMap {
         this.gameTimeTrigger.RegisterTimerEventPeriodic(1.00);
         this.gameTimeTrigger.AddAction(() => this.UpdateGameTime());
         this.gameTurn = new GameTurn();
+        this.antiBlock = new AntiBlock(this.game.worldMap);
+
 
         // this.gameRoundHandler = new ClassicGameRound(this.game);
     }

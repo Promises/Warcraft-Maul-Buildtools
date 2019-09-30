@@ -21,8 +21,6 @@ export abstract class AbstractGameRound {
 
     constructor(game: WarcraftMaul) {
         this.game = game;
-        this.game.worldMap.antiBlock = new AntiBlock(this.game.worldMap, this);
-
     }
 
 
