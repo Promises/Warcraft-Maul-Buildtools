@@ -47,6 +47,11 @@ export class BlitzGameRound extends AbstractGameRound {
 
     private SpawnNextWave(): boolean {
         const nextWave: number = this.currentWave + 1;
+        if (this.currentWave === this.game.worldMap.waveCreeps.length) {
+            this.BonusRoundsOver();
+            return true;
+        }
+        Log.Debug('Starting');
         if (nextWave % 5 === 0 || nextWave === 36) {
             if (this.game.worldMap.spawnedCreeps.unitMap.size === 0) {
                 this.AllIsDead();

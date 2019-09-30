@@ -1,5 +1,6 @@
 import { Trigger } from '../../JassOverrides/Trigger';
 import { Queue } from './Queue';
+import { Log } from '../Serilog/Serilog';
 
 export class EventQueue {
     private ticker: Trigger;

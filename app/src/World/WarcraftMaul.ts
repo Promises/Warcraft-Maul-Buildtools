@@ -157,7 +157,8 @@ export class WarcraftMaul {
         const x: number = GetRandomInt(0, 10000) - 5000;
         const y: number = GetRandomInt(0, 10000) - 5000;
         DestroyEffect(AddSpecialEffect('Abilities\\Spells\\Human\\DispelMagic\\DispelMagicTarget.mdl', x, y));
-        return false;
+        this.eventQueue.AddLow(() => this.SpamEffects());
+        return true;
     }
 
     public PrettifyGameTime(sec: number): string {
