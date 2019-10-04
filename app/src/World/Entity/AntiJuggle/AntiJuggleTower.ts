@@ -21,7 +21,6 @@ export class AntiJuggleTower {
         // super(tower, owner, game);
         this.x = GetUnitX(tower.tower);
         this.y = GetUnitY(tower.tower);
-        RemoveUnit(tower.tower);
         this.destructable = Destructable.Create(FourCC('YTpc'), this.x, this.y, bj_UNIT_FACING, 1, 1);
 
         let playerSpawnId: undefined | number;
@@ -48,10 +47,19 @@ export class AntiJuggleTower {
         maze.setWalkable(this.rightSide, this.bottomSide, Walkable.Protected);
         maze.setWalkable(this.leftSide, this.topSide, Walkable.Protected);
         maze.setWalkable(this.rightSide, this.topSide, Walkable.Protected);
+        RemoveUnit(tower.tower);
 
     }
 
     public EndOfRoundAction(): void {
         this.destructable.Destroy();
+    }
+
+    public GetX(): number {
+        return this.x;
+    }
+
+    public GetY(): number {
+        return this.y;
     }
 }

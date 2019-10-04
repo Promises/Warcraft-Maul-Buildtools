@@ -55,7 +55,7 @@ export class Destructable {
         return this.ByDestr(GetTriggerDestructable());
     }
 
-    public static EnumInRect(r: rect, filter: boolexpr, actionFunc: () => void): void {
+    public static EnumInRect(r: rect, actionFunc: () => void, filter: boolexpr | null = null): void {
         EnumDestructablesInRect(r, filter, () => actionFunc);
     }
 
