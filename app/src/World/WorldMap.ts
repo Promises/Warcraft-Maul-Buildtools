@@ -192,7 +192,7 @@ export class WorldMap {
         this.waveCreeps.push(new WaveCreep(21, 'hC48', 'Bear'));
         this.waveCreeps.push(new WaveCreep(22, 'oC47', 'Heavy Tank'));
         this.waveCreeps.push(new WaveCreep(23, 'nC49', 'Big Game Hunter'));
-        this.waveCreeps.push(new WaveCreep(24, 'nC50', 'Water Spirit'));
+        this.waveCreeps.push(new WaveCreep(24, 'uC46', 'Assassin'));
         this.waveCreeps.push(new WaveCreep(25, 'nC51', 'Ancient Dragon'));
         this.waveCreeps.push(new WaveCreep(26, 'nC69', 'Steel Golem'));
         this.waveCreeps.push(new WaveCreep(27, 'eC52', 'Demonic Minion'));
