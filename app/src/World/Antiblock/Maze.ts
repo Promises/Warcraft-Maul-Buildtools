@@ -36,7 +36,10 @@ export class Maze {
 
     public setWalkable(x: number, y: number, isWalkable: Walkable): void {
         this.maze[x][y] = isWalkable;
+    }
 
+    public getWalkable(x: number, y: number): Walkable {
+        return this.maze[x][y];
     }
 
     public breathFirstSearch(sourceX: number, sourceY: number, destinationX: number, destinationY: number): number {
@@ -113,7 +116,7 @@ export class Maze {
                     IsTerrainPathable(cornerX, cornerY + 32, PATHING_TYPE_WALKABILITY) === (this.maze[x][y] === Walkable.Walkable) ||
                     IsTerrainPathable(cornerX + 32, cornerY, PATHING_TYPE_WALKABILITY) === (this.maze[x][y] === Walkable.Walkable) ||
                     IsTerrainPathable(cornerX + 32, cornerY + 32, PATHING_TYPE_WALKABILITY) === (this.maze[x][y] === Walkable.Walkable)) {
-                    Log.Error(`${x}, ${y} is a missmatch`);
+                    Log.Error(`${x}, ${y} is a missmatch, ${Walkable[this.maze[x][y]]}`);
                 }
             }
         }
@@ -137,5 +140,9 @@ export class Maze {
 
     public AddAntiJuggler(antijuggle: AntiJuggleTower): void {
         this.antiJugglers.push(antijuggle);
+    }
+
+    public GetAntiJugglers(): AntiJuggleTower[] {
+        return this.antiJugglers;
     }
 }

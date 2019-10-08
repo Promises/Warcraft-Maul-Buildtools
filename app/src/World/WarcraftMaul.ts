@@ -24,6 +24,7 @@ import { EventQueue } from '../lib/WCEventQueue/EventQueue';
 import { SafeEventQueue } from '../lib/WCEventQueue/SafeEventQueue';
 import { TimedEventQueue } from '../lib/WCEventQueue/TimedEventQueue';
 import { MMD, MMDGoal, MMDSuggest, MMDType } from '../lib/MMD';
+import { AntiBlock } from './Antiblock/AntiBlock';
 
 export class WarcraftMaul {
 
@@ -113,6 +114,7 @@ export class WarcraftMaul {
         this.buffHandler = new BuffHandler(this);
         this.abilityHandler = new GenericAbilityHandler(this);
         this.itemHandler = new ItemHandler(this);
+
         this._creepAbilityHandler = creepAbilityHandler;
         creepAbilityHandler.SetupGame(this);
 
@@ -155,7 +157,8 @@ export class WarcraftMaul {
         const x: number = GetRandomInt(0, 10000) - 5000;
         const y: number = GetRandomInt(0, 10000) - 5000;
         DestroyEffect(AddSpecialEffect('Abilities\\Spells\\Human\\DispelMagic\\DispelMagicTarget.mdl', x, y));
-        return false;
+        this.eventQueue.AddLow(() => this.SpamEffects());
+        return true;
     }
 
     public PrettifyGameTime(sec: number): string {

@@ -14,11 +14,10 @@ export class AntiBlock {
     private _eventTrigger: Trigger;
     private _cancelBuildingTrigger: Trigger;
     private _worldMap: WorldMap;
-    private _gameRoundHandler: AbstractGameRound;
+    private _gameRoundHandler?: AbstractGameRound;
 
-    constructor(worldMap: WorldMap, gameRoundHandler: AbstractGameRound) {
+    constructor(worldMap: WorldMap) {
         this._worldMap = worldMap;
-        this._gameRoundHandler = gameRoundHandler;
         this._eventTrigger = new Trigger();
         this._eventTrigger.RegisterAnyUnitEventBJ(EVENT_PLAYER_UNIT_CONSTRUCT_START);
         this._eventTrigger.AddAction(() => this.Action());
@@ -54,9 +53,10 @@ export class AntiBlock {
             return;
         }
 
-        const isWaveInProgress: boolean = this._gameRoundHandler.isWaveInProgress;
+        const isWaveInProgress: boolean = !!this._worldMap.gameRoundHandler && this._worldMap.gameRoundHandler.isWaveInProgress;
+        const antiJuggleEnabled: boolean = !!this._worldMap.gameRoundHandler && this._worldMap.gameRoundHandler.antiJuggleEnabled;
         const antiJuggleCreeps: Creep[] = [];
-        if (isWaveInProgress && hasBuiltOnAntiJuggle === false && this._gameRoundHandler.antiJuggleEnabled) {
+        if (isWaveInProgress && hasBuiltOnAntiJuggle === false && antiJuggleEnabled) {
             let isJuggling: boolean = false;
             ForGroup(GetUnitsInRangeOfLocAll(128.00, loc), () => {
                 const ownerID: COLOUR = GetPlayerId(GetOwningPlayer(GetEnumUnit()));
@@ -199,13 +199,13 @@ export class AntiBlock {
 
     private blocking(consUnit: unit, player: Defender): void {
         player.sendMessage('|CFFFF0303[Anti-Block]|r |CFFFFFF01Detected a possible blocking attempt.' +
-            ' Your building has been cancelled and you have been refunded the full cost.|r');
+                               ' Your building has been cancelled and you have been refunded the full cost.|r');
         this.cancelBuilding(consUnit);
     }
 
     private juggling(consUnit: unit, player: Defender, antiJuggleCreeps: Creep[]): void {
         player.sendMessage('|CFFFF0303[Anti-Juggle]|r |CFFFFFF01Detected a possible juggling attempt.' +
-            ' Your building has been cancelled and you have been refunded the full cost.|r');
+                               ' Your building has been cancelled and you have been refunded the full cost.|r');
         this.cancelBuilding(consUnit);
         antiJuggleCreeps.forEach(creep => creep.ReapplyMovement());
     }
@@ -243,14 +243,37 @@ export class AntiBlock {
 
         const x: number = GetUnitX(u);
         const y: number = GetUnitY(u);
+
         const maze: Maze = this._worldMap.playerMazes[<number>playerSpawnId];
         const leftSide: number = ((x - 64) - maze.minX) / 64;
         const rightSide: number = (x - maze.minX) / 64;
         const topSide: number = (y - maze.minY) / 64;
         const bottomSide: number = ((y - 64) - maze.minY) / 64;
-        maze.setWalkable(leftSide, bottomSide, Walkable.Walkable);
-        maze.setWalkable(rightSide, bottomSide, Walkable.Walkable);
-        maze.setWalkable(leftSide, topSide, Walkable.Walkable);
-        maze.setWalkable(rightSide, topSide, Walkable.Walkable);
+
+        maze.GetAntiJugglers().forEach((antiJuggleTower) => {
+            const antiJuggleX: number = antiJuggleTower.GetX();
+            const antiJuggleY: number = antiJuggleTower.GetY();
+            const antiJuggleLeftSide: number = ((antiJuggleX - 64) - maze.minX) / 64;
+            const antiJuggleRightSide: number = (antiJuggleX - maze.minX) / 64;
+            const antiJuggleTopSide: number = (antiJuggleY - maze.minY) / 64;
+            const antiJuggleBottomSide: number = ((antiJuggleY - 64) - maze.minY) / 64;
+            maze.setWalkable(antiJuggleLeftSide, antiJuggleBottomSide, Walkable.Protected);
+            maze.setWalkable(antiJuggleRightSide, antiJuggleBottomSide, Walkable.Protected);
+            maze.setWalkable(antiJuggleLeftSide, antiJuggleTopSide, Walkable.Protected);
+            maze.setWalkable(antiJuggleRightSide, antiJuggleTopSide, Walkable.Protected);
+        });
+        if (maze.getWalkable(leftSide, bottomSide) !== Walkable.Protected) {
+            maze.setWalkable(leftSide, bottomSide, Walkable.Walkable);
+        }
+        if (maze.getWalkable(rightSide, bottomSide) !== Walkable.Protected) {
+            maze.setWalkable(rightSide, bottomSide, Walkable.Walkable);
+        }
+        if (maze.getWalkable(leftSide, topSide) !== Walkable.Protected) {
+            maze.setWalkable(leftSide, topSide, Walkable.Walkable);
+        }
+        if (maze.getWalkable(rightSide, topSide) !== Walkable.Protected) {
+            maze.setWalkable(rightSide, topSide, Walkable.Walkable);
+        }
+
     }
 }
