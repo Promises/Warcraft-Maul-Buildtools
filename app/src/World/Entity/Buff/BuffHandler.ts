@@ -7,6 +7,7 @@ import { IceTrollJoker } from './IceTrollJoker';
 import { Moonstorm } from './Moonstorm';
 import { BattleRoar } from './BattleRoar';
 import { SoulCollector } from './CitadelOfNaxxramas';
+import { TheDarknessBuff } from './TheDarknessBuff';
 
 export class BuffHandler {
     private readonly game: WarcraftMaul;
@@ -27,6 +28,7 @@ export class BuffHandler {
         this.buffs.push(IceTrollJoker);
         this.buffs.push(Moonstorm);
         this.buffs.push(BattleRoar);
+        this.buffs.push(TheDarknessBuff);
         this.buffs.push(SoulCollector);
     }
 
