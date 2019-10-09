@@ -75,7 +75,6 @@ export class Maze {
 
                 if (this.isValid(row, col) && this.maze[row][col] === Walkable.Walkable && visited[row + col * this.width] === false) {
                     visited[row + col * this.width] = true;
-                    // AddSpecialEffect('Doodads\\\\Cinematic\\\\DemonFootPrint\\\\DemonFootPrint0.mdl', this.minX + 64 * row, this.minY + 64 * col);
                     q.push(new Node(row, col, curr.distance + 1));
                 }
             }
