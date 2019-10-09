@@ -1,20 +1,18 @@
 import { Log } from '../../lib/Serilog/Serilog';
 
 export class WaveCreep {
-    id: string;
-    name: string;
-    type: CREEP_TYPE;
-    wave: number;
+    private readonly id: string;
+    private readonly name: string;
+    private readonly wave: number;
 
     constructor(wave: number, id: string, name: string) {
         this.wave = wave;
         this.id = id;
         this.name = name;
-        this.type = this.getCreepType();
         this.getArmourType();
     }
 
-    getCreepType(): CREEP_TYPE {
+    public getCreepType(): CREEP_TYPE {
         switch (this.wave) {
             case 5:
             case 15:
@@ -39,7 +37,7 @@ export class WaveCreep {
 
     }
 
-    getArmourType(): ARMOUR_TYPE {
+    public getArmourType(): ARMOUR_TYPE {
         switch (this.wave) {
             case 1:
             case 6:
