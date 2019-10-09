@@ -19,7 +19,7 @@ export class CheckPoint {
         this.eventTrig.RegisterEnterRectSimple(rectangle);
 
         this.eventTrig.AddCondition(() => this.verifyTargetCheckpoint());
-        this.eventTrig.AddAction(() => this.checkPointAction());
+        this.eventTrig.AddAction(() => this.CheckPointAction());
 
 
     }
@@ -42,7 +42,7 @@ export class CheckPoint {
         return true;
     }
 
-    public checkPointAction(): void {
+    public CheckPointAction(): void {
         if (!this.next) {
             return;
         }
@@ -51,9 +51,9 @@ export class CheckPoint {
             const creep: Creep | undefined = spawnedCreeps.unitMap.get(GetHandleIdBJ(GetEnteringUnit()));
             if (creep !== undefined) {
                 creep.targetCheckpoint = this.next;
-                IssuePointOrder(GetEnteringUnit(), 'move', GetRectCenterX(this.next.rectangle), GetRectCenterY(this.next.rectangle));
+                creep.OrderMove(GetRectCenterX(this.next.rectangle), GetRectCenterY(this.next.rectangle));
                 if (UnitHasBuffBJ(GetEnteringUnit(), FourCC('B028'))) {
-                    creep.morningPerson();
+                    creep.MorningPerson();
                 }
 
             }

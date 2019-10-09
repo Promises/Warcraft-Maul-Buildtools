@@ -88,4 +88,16 @@ export class WaveCreep {
         }
 
     }
+
+    public GetTypeID(): number {
+        return FourCC(this.id);
+    }
+
+    public GetWaveNumber(): number {
+        return this.wave;
+    }
+
+    public GetName(): string {
+        return this.name;
+    }
 }
