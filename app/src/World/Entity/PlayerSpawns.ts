@@ -59,7 +59,6 @@ export class PlayerSpawns {
     set spawnTwo(value: CheckPoint | undefined) {
         this._spawnTwo = value;
         if (this.spawnTwo) {
-
             this.twoTrig = new Trigger();
             this.twoTrig.RegisterEnterRectSimple(this.spawnTwo.rectangle);
             this.twoTrig.AddCondition(() => this.EnteringUnitIsCreepAndHasNoCheckpoint());
@@ -80,18 +79,18 @@ export class PlayerSpawns {
 
             let creep: unit = CreateUnit(
                 Player(COLOUR.NAVY + creepOwner % 4),
-                FourCC(wave.id),
+                wave.GetTypeID(),
                 GetRectCenterX(this.spawnOne.rectangle),
                 GetRectCenterY(this.spawnOne.rectangle),
                 this.getSpawnFace(this.colourId));
             spawned.set(GetHandleId(creep), new Creep(creep, gameRound, abilities, this.worldMap.game));
 
-            if (wave.wave !== 37) {
+            if (wave.GetWaveNumber() !== 37) {
                 if (this.spawnTwo) {
 
                     creep = CreateUnit(
                         Player(COLOUR.NAVY + creepOwner % 4),
-                        FourCC(wave.id),
+                        wave.GetTypeID(),
                         GetRectCenterX(this.spawnTwo.rectangle),
                         GetRectCenterY(this.spawnTwo.rectangle),
                         this.getSpawnFace(this.colourId));
@@ -171,7 +170,7 @@ export class PlayerSpawns {
             if (spawnedCreep) {
                 if (spawn.next) {
                     spawnedCreep.targetCheckpoint = spawn.next;
-                    IssuePointOrder(GetEnteringUnit(), 'move', GetRectCenterX(spawn.next.rectangle), GetRectCenterY(spawn.next.rectangle));
+                    spawnedCreep.OrderMove(GetRectCenterX(spawn.next.rectangle), GetRectCenterY(spawn.next.rectangle));
                     spawnedCreep.AddCreepAbilities();
                 }
 
@@ -195,7 +194,6 @@ export class PlayerSpawns {
                     UnitAddAbilityBJ(FourCC('A068'), dummy);
                     IssueTargetOrderBJ(dummy, 'bloodlust', GetEnteringUnit());
                     UnitApplyTimedLifeBJ(1.00, FourCC('BTLF'), dummy);
-
                 }
             } else {
                 UnitRemoveBuffBJ(FourCC('Bblo'), GetEnteringUnit());
@@ -210,7 +208,10 @@ export class PlayerSpawns {
         } else if (this.worldMap.game.players.get(this.colourId) && !IsUnitType(GetEnteringUnit(), UNIT_TYPE_STRUCTURE)) {
             const areaPlayer: Defender = <Defender>this.worldMap.game.players.get(this.colourId);
             if (areaPlayer.HasDenied(GetPlayerId(GetOwningPlayer(GetEnteringUnit())))) {
-                SetUnitPosition(GetEnteringUnit(), PLAYER_AREAS[GetPlayerId(GetOwningPlayer(GetEnteringUnit()))].GetCenterX(), PLAYER_AREAS[GetPlayerId(GetOwningPlayer(GetEnteringUnit()))].GetCenterY());
+                SetUnitPosition(
+                    GetEnteringUnit(),
+                    PLAYER_AREAS[GetPlayerId(GetOwningPlayer(GetEnteringUnit()))].GetCenterX(),
+                    PLAYER_AREAS[GetPlayerId(GetOwningPlayer(GetEnteringUnit()))].GetCenterY());
             }
         }
 

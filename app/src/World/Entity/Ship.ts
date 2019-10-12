@@ -6,11 +6,11 @@ import { SpawnedCreeps } from './SpawnedCreeps';
 import { Creep } from './Creep';
 
 export class Ship extends CheckPoint {
-    ship: unit;
-    private game: WarcraftMaul;
-    worldMap: WorldMap;
+    private readonly ship: unit;
+    private readonly game: WarcraftMaul;
+    public worldMap: WorldMap;
 
-    destination: rect = Rect(-5440.0, -5664.0, -5184.0, -4864.0); // Ship moves to here when game ends
+    private readonly destination: rect = Rect(-5440.0, -5664.0, -5184.0, -4864.0); // Ship moves to here when game ends
 
     // killzone: CheckPoint;
 
@@ -22,17 +22,17 @@ export class Ship extends CheckPoint {
 
     }
 
-    MoveShip(): void {
+    public MoveShip(): void {
         IssuePointOrder(this.ship, 'move', GetRectCenterX(this.destination), GetRectCenterY(this.destination));
     }
 
-    checkPointAction(): void {
+    public CheckPointAction(): void {
         const u: unit = GetEnteringUnit();
 
-        if (this.game.gameEnded || !this.game.worldMap.gameRoundHandler) {
+        if (this.game.gameEnded || !this.worldMap.gameRoundHandler) {
             return;
         }
-        if (this.game.worldMap.gameRoundHandler.currentWave >= 36) {
+        if (this.worldMap.gameRoundHandler.currentWave >= 36) {
             RemoveUnit(u);
         }
         const spawnedCreeps: SpawnedCreeps | undefined = this.worldMap.spawnedCreeps;
@@ -44,7 +44,7 @@ export class Ship extends CheckPoint {
                     this.game.gameLives = 0;
                 } else {
                     //  this.game.gameLives--;
-                    if (this.game.worldMap.waveCreeps[this.game.worldMap.gameRoundHandler.currentWave - 1].getCreepType() === CREEP_TYPE.CHAMPION) {
+                    if (this.worldMap.waveCreeps[this.worldMap.gameRoundHandler.currentWave - 1].getCreepType() === CREEP_TYPE.CHAMPION) {
                         this.game.gameLives = this.game.gameLives - Math.ceil(GetUnitLifePercent(creep.creep) / 10);
                     } else {
                         this.game.gameLives = this.game.gameLives - Math.ceil(GetUnitLifePercent(creep.creep) / 20);

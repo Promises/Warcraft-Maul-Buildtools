@@ -1,15 +1,8 @@
-import * as settings from '../../GlobalSettings';
 import { WarcraftMaul } from '../../WarcraftMaul';
 import { WaveCreep } from '../../Entity/WaveCreep';
 import { Creep } from '../../Entity/Creep';
-import { Trigger } from '../../../JassOverrides/Trigger';
 import { PlayerSpawns } from '../../Entity/PlayerSpawns';
-import { Ship } from '../../Entity/Ship';
-import { ArchimondeGate } from '../ArchimondeGate';
-import { EndOfRoundTower } from '../../Entity/Tower/Specs/EndOfRoundTower';
 import { CreepAbility } from '../../Entity/CreepAbilities/specs/CreepAbility';
-import { Tower } from '../../Entity/Tower/Specs/Tower';
-import { AntiBlock } from '../../Antiblock/AntiBlock';
 
 export abstract class AbstractGameRound {
 
@@ -22,8 +15,6 @@ export abstract class AbstractGameRound {
     constructor(game: WarcraftMaul) {
         this.game = game;
     }
-
-
 
     get currentWave(): number {
         return this._currentWave;
@@ -46,7 +37,7 @@ export abstract class AbstractGameRound {
 
     public SpawnCreeps(): void {
         const wave: WaveCreep = this.game.worldMap.waveCreeps[this._currentWave - 1];
-        SendMessage(`Level ${this._currentWave} - ${wave.name}`);
+        SendMessage(`Level ${this._currentWave} - ${wave.GetName()}`);
 
         let spawnAmount: number = 10;
         switch (wave.getCreepType()) {
@@ -58,7 +49,7 @@ export abstract class AbstractGameRound {
                 break;
 
         }
-        if (wave.wave > 35) {
+        if (wave.GetWaveNumber() > 35) {
             spawnAmount = 1;
         }
         if (this._currentWave === 35) {
