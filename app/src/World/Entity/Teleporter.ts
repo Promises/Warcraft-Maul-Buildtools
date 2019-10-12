@@ -11,7 +11,7 @@ export class Teleporter extends CheckPoint {
         this.facing = facing;
     }
 
-    public checkPointAction(): void {
+    public CheckPointAction(): void {
         if (!this.next) {
             return;
         }
@@ -22,12 +22,10 @@ export class Teleporter extends CheckPoint {
             const spawnedCreep: Creep | undefined = spawnedCreeps.unitMap.get(GetHandleIdBJ(GetEnteringUnit()));
             if (spawnedCreep !== undefined) {
                 spawnedCreep.targetCheckpoint = this.next;
-                SetUnitPosition(GetEnteringUnit(), x, y);
-                SetUnitFacing(GetEnteringUnit(), this.facing);
+                spawnedCreep.SetPostition(x, y);
+                spawnedCreep.SetFacingDirection(this.facing);
                 DestroyEffect(AddSpecialEffect('Abilities/Spells/Human/MassTeleport/MassTeleportCaster.mdl', x, y));
-                IssuePointOrder(GetEnteringUnit(), 'move', GetRectCenterX(this.next.rectangle), GetRectCenterY(this.next.rectangle));
-
-
+                spawnedCreep.OrderMove(GetRectCenterX(this.next.rectangle), GetRectCenterY(this.next.rectangle));
             }
         }
     }

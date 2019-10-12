@@ -52,7 +52,7 @@ export class Creep {
         return GetUnitLoc(this.creep);
     }
 
-    public morningPerson(): void {
+    public MorningPerson(): void {
         const mdlFile: string = 'Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpecialArt.mdl';
         DestroyEffect(AddSpecialEffect(mdlFile, GetUnitX(this.creep), GetUnitY(this.creep)));
         SetUnitLifePercentBJ(GetEnteringUnit(), GetUnitLifePercent(this.creep) + 0.50 * this.gameRound.currentWave);
@@ -73,5 +73,17 @@ export class Creep {
         const unitHPScaling: number = Math.round(BlzGetUnitMaxHP(this.creep) * (this.game.diffVote.difficulty / 100));
         BlzSetUnitMaxHP(this.creep, unitHPScaling);
         SetUnitLifeBJ(this.creep, unitHPScaling);
+    }
+
+    public SetPostition(x: number, y: number): void {
+        SetUnitPosition(this.creep, x, y);
+    }
+
+    public SetFacingDirection(facing: number): void {
+        SetUnitFacing(this.creep, facing);
+    }
+
+    public OrderMove(x: number, y: number): void {
+        IssuePointOrder(this.creep, 'move', x, y);
     }
 }
