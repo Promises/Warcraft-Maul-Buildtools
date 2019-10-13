@@ -322,6 +322,6 @@ export class BlitzGameRound extends AbstractGameRound {
         if (modifier < 1) {
             modifier = 1;
         }
-        return modifier * this.goldReward;
+        return Math.floor(modifier * this.goldReward);
     }
 }
