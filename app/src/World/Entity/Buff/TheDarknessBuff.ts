@@ -3,10 +3,10 @@ import { DamageModificationBuff } from './Specs/DamageModificationBuff';
 import { WarcraftMaul } from '../../WarcraftMaul';
 
 /**
- * [Tavern] Earth Pandaren
+ * [Unique] The Darkness
  * +25% damage
  */
-export class DrunkenHaze extends Buff implements DamageModificationBuff {
+export class TheDarknessBuff extends Buff implements DamageModificationBuff {
     constructor(game: WarcraftMaul) {
         super('B02O', game); // Buff ID
     }
