@@ -5442,7 +5442,7 @@
       "udp1": 0.3,
       "ubs1": 0.3,
       "uico": "ReplaceableTextures\\CommandButtons\\BTNForestTrollShadowPriest.blp",
-      "unam": "[Forest Trolls] - Forest Troll Shadow Priest",
+      "unam": "[Tavern] - Forest Troll Shadow Priest",
       "uhot": "R",
       "utip": "Hire Forest Troll Shadow Priest [|cffffcc00R|r]",
       "utub": "This creature may be chaotic, but his special ability can often come in handy when in battle|n|n|cffffcc00Attack:|r None|n|cffffcc00Range:|r 300|n|cffffcc00Ability:|r Battle Roar; enemies within range take 50% more damage, but has a 25% increased movement speed",
