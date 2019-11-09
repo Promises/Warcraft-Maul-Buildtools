@@ -2612,6 +2612,18 @@ STRING 422
 Critical Strike (Loatheb)
 }
 
+STRING 423
+// Fähigkeiten: A0FF ([Naxxramas] Maexxna Poison (Dummy - Icon)), Name (Name)
+{
+[Naxxramas] Maexxna Poison (Dummy - Icon)
+}
+
+STRING 424
+// Fähigkeiten: A0FD ([Naxxramas] Lightning Attack (Thaddius)), Tip (Tooltipp - Normal)
+{
+Lightning Strike
+}
+
 STRING 425
 // Fähigkeiten: A0F3 (Soul Collector), Name (Name)
 {
@@ -2658,6 +2670,12 @@ STRING 432
 // Fähigkeiten: A0F4 (Soul Collector), Tip (Tooltipp - Normal)
 {
 Soul Collector
+}
+
+STRING 433
+// Fähigkeiten: A0FD ([Naxxramas] Lightning Attack (Thaddius)), Ubertip (Tooltipp - Normal - Erweitert)
+{
+On attack, Thaddius casts a chain lightning dealing 1000 damage. Bounces up to 10 times.
 }
 
 STRING 434
@@ -2793,7 +2811,7 @@ This unit is caught within Sapphirons creeping frost; its movement speed has bee
 }
 
 STRING 456
-// Zauberverstärker/Effekte: B02R (Sapphiron Slow), Bufftip (Tooltipp)
+// Fähigkeiten: A0FH ([Naxxramas] Sapphirons Grasp (Sapphiron (Dummy - Icon))), Tip (Tooltipp - Normal)
 {
 Sapphirons Grasp
 }
@@ -3998,6 +4016,66 @@ STRING 656
 Soul Collector
 }
 
+STRING 657
+// Fähigkeiten: A0FE ([Naxxramas] Citadel of Naxxramas (Dummy - Icon))), Tip (Tooltipp - Normal)
+{
+Soul Collector Speed & Damage
+}
+
+STRING 658
+// Fähigkeiten: A0FE ([Naxxramas] Citadel of Naxxramas (Dummy - Icon))), Ubertip (Tooltipp - Normal - Erweitert)
+{
+For each 10 souls the Citadel of Naxxramas collects, it buffs every towers attack speed and damage in 800 range by 1%.
+}
+
+STRING 659
+// Fähigkeiten: A0FE ([Naxxramas] Citadel of Naxxramas (Dummy - Icon))), Name (Name)
+{
+[Naxxramas] Citadel of Naxxramas (Dummy - Icon))
+}
+
+STRING 660
+// Fähigkeiten: A0FD ([Naxxramas] Lightning Attack (Thaddius)), Name (Name)
+{
+[Naxxramas] Lightning Attack (Thaddius)
+}
+
+STRING 661
+// Fähigkeiten: A0FF ([Naxxramas] Maexxna Poison (Dummy - Icon)), Tip (Tooltipp - Normal)
+{
+Poisonous Spit
+}
+
+STRING 662
+// Fähigkeiten: A0FF ([Naxxramas] Maexxna Poison (Dummy - Icon)), Ubertip (Tooltipp - Normal - Erweitert)
+{
+Maexxna covers enemies hit by her attacks with an aggressive poison dealing damage over time and slowing units affected by it.
+}
+
+STRING 663
+// Fähigkeiten: A0FG ([Naxxramas] Armor Reduction (Kel'Thuzad (Dummy - Icon))), Name (Name)
+{
+[Naxxramas] Armor Reduction (Kel'Thuzad (Dummy - Icon))
+}
+
+STRING 664
+// Fähigkeiten: A0FG ([Naxxramas] Armor Reduction (Kel'Thuzad (Dummy - Icon))), Ubertip (Tooltipp - Normal - Erweitert)
+{
+The freezing cold of Kel'Thuzads attacks shatters the armor of enemies hit, reducing their armor based on how much they were slowed.
+}
+
+STRING 665
+// Fähigkeiten: A0FG ([Naxxramas] Armor Reduction (Kel'Thuzad (Dummy - Icon))), Tip (Tooltipp - Normal)
+{
+Sunder Armor
+}
+
+STRING 666
+// Fähigkeiten: A0FH ([Naxxramas] Sapphirons Grasp (Sapphiron (Dummy - Icon))), Name (Name)
+{
+[Naxxramas] Sapphirons Grasp (Sapphiron (Dummy - Icon))
+}
+
 STRING 667
 // Fähigkeiten: A0F9 ([Naxxramas] Sapphiron Slow), Ubertip (Tooltipp - Normal - Erweitert)
 {
@@ -4197,9 +4275,15 @@ This towers attacks hit up to 3 targets.
 }
 
 STRING 700
-// Fähigkeiten: A0FB (Critical Strike (Loatheb)), Tip (Tooltipp - Normal)
+// Fähigkeiten: A023 (Critical), Tip (Tooltipp - Normal)
 {
 Critical Strike
+}
+
+STRING 701
+// Fähigkeiten: A0FH ([Naxxramas] Sapphirons Grasp (Sapphiron (Dummy - Icon))), Ubertip (Tooltipp - Normal - Erweitert)
+{
+Each attack drains energy of enemies hit, converting it into Sapphirons mana. Upon reaching 100 mana, Sapphiron strengthens his slow aura. Resets on round end. 
 }
 
 STRING 702
@@ -4233,6 +4317,12 @@ STRING 706
 // Fähigkeiten: A0CK (Frozen Destruction), Ubertip (Tooltipp - Normal - Erweitert)
 {
 Enemy units within an area of 300 will take 3x damage if they are slowed.
+}
+
+STRING 707
+// Zauberverstärker/Effekte: B02R (Sapphiron Slow), Bufftip (Tooltipp)
+{
+Sapphirons Grasp
 }
 
 STRING 1085
@@ -5298,7 +5388,7 @@ Fuck My Couch
 }
 
 STRING 3193
-// Fähigkeiten: A023 (Critical), Tip (Tooltipp - Normal)
+// Fähigkeiten: A02F (Holy Power), Tip (Tooltipp - Normal)
 {
 Critical Strike
 }
@@ -5364,7 +5454,7 @@ Holy Power
 }
 
 STRING 3225
-// Fähigkeiten: A02F (Holy Power), Tip (Tooltipp - Normal)
+// Fähigkeiten: A039 (Critical!!), Tip (Tooltipp - Normal)
 {
 Critical Strike
 }
@@ -5598,7 +5688,7 @@ Critical!!
 }
 
 STRING 3641
-// Fähigkeiten: A039 (Critical!!), Tip (Tooltipp - Normal)
+// Fähigkeiten: A0FB (Critical Strike (Loatheb)), Tip (Tooltipp - Normal)
 {
 Critical Strike
 }
