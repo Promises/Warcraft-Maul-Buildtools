@@ -25,7 +25,8 @@ export class ConstructThaddius extends GenericAbility implements AbilityOnEffect
                 if ((source.GetTypeID() === FourCC('oC7D') && target.GetTypeID() === FourCC('oC7E')) ||
                     (source.GetTypeID() === FourCC('oC7E') && target.GetTypeID() === FourCC('oC7D'))) {
                     source.Upgrade(FourCC('oC7F'));
-                    target.Upgrade(FourCC('oC76'));
+                    const newTower: Tower | undefined = target.Upgrade(FourCC('oC76'));
+                    newTower.towerValue = 8;
                 }
             }
         }
