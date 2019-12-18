@@ -23,9 +23,9 @@ export class InitGame {
         require('app/src/LuaModules/FastTriggers'); // 16x faster triggers
         PatchNatives();
         Log.Init([
-            new StringSink(LogLevel.Warning, SendMessageUnlogged),
-            // new PreloadSink(LogLevel.Message, `WCMAUL\\${os.time()}.txt`),
-        ]);
+                     new StringSink(LogLevel.Warning, SendMessageUnlogged),
+                     // new PreloadSink(LogLevel.Message, `WCMAUL\\${os.time()}.txt`),
+                 ]);
         const creepAbilityHandler: CreepAbilityHandler = this.SetupAbilities();
         // const mmd: MMD = new MMD();
 
