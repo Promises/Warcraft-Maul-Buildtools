@@ -25,6 +25,7 @@ import { SafeEventQueue } from '../lib/WCEventQueue/SafeEventQueue';
 import { TimedEventQueue } from '../lib/WCEventQueue/TimedEventQueue';
 import { MMD, MMDGoal, MMDSuggest, MMDType } from '../lib/MMD';
 import { AntiBlock } from './Antiblock/AntiBlock';
+import { Item } from '../lib/common/item';
 
 export class WarcraftMaul {
 
@@ -84,7 +85,6 @@ export class WarcraftMaul {
                 }
             }
         }
-
         // Set up enemies
         this.enemies.push(new Attacker(COLOUR.NAVY, this));
         this.enemies.push(new Attacker(COLOUR.TURQUOISE, this));

@@ -22,7 +22,7 @@ export class ItemId {
     }
 }
 
-class ItemPool {
+export class ItemPool {
     constructor() {
         this.pool = CreateItemPool();
     }
@@ -54,7 +54,7 @@ class ItemPool {
     }
 }
 
-class Item {
+export class Item {
 
     constructor(item: item) {
         this._item = item;
@@ -94,10 +94,6 @@ class Item {
 
     public static spellTargetItem(): Item {
         return this.byItem(GetSpellTargetItem());
-    }
-
-    public static enumInRect(r: rect, filter: boolexpr, actionFunc: () => void): void {
-        EnumItemsInRect(r, filter, actionFunc);
     }
 
     public destroy(): void {

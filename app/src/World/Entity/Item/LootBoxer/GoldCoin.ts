@@ -1,8 +1,8 @@
 import { StackingItem } from '../Specs/StackingItem';
 import { WarcraftMaul } from '../../../WarcraftMaul';
-import { Item } from '../Specs/Item';
+import { WCItem } from '../Specs/WCItem';
 
-export class GoldCoin extends Item {
+export class GoldCoin extends WCItem {
     constructor(game: WarcraftMaul) {
         super('I02A', game);
     }

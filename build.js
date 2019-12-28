@@ -137,7 +137,7 @@ class Build {
         fse.copySync(`src/app/src/main.lua`, `src/main.lua`);
         fse.copySync(`tools/extras/app`, `src/app`);
 
-        sharedArgs = `build "map"`;
+        sharedArgs = `build -- --map map --output dir`;
         let ceres = '';
         switch (this.os) {
             case "win32":
@@ -163,17 +163,17 @@ class Build {
                 break;
         }
 
-        this.nativeExecute(`${sed} -i "s/local function __module_/function __module_/g" "target/map/war3map.lua"`);
+        this.nativeExecute(`${sed} -i "s/local function __module_/function __module_/g" "target/map.dir/war3map.lua"`);
 
         if(this.buildnumber && !this.isFull){
-            this.nativeExecute(`${sed} -i "s/TestMap WCMaul Reimagined/TestMap ${this.buildnumber} WCMaul Reimagined/g" "target/map/war3map.wts"`);
+            this.nativeExecute(`${sed} -i "s/TestMap WCMaul Reimagined/TestMap ${this.buildnumber} WCMaul Reimagined/g" "target/map.dir/war3map.wts"`);
         } else if (this.isFull) {
-            this.nativeExecute(`${sed} -i "s/TestMap WCMaul Reimagined/Warcraft Maul: Reimagined v${this.release}/g" "target/map/war3map.wts"`);
+            this.nativeExecute(`${sed} -i "s/TestMap WCMaul Reimagined/Warcraft Maul: Reimagined v${this.release}/g" "target/map.dir/war3map.wts"`);
 
         }
 
 
-        sharedArgs = `add "target/map.w3x" "target/map/*" "/c" "/auto" "/r"`;
+        sharedArgs = `add "target/map.w3x" "target/map.dir/*" "/c" "/auto" "/r"`;
         //
         this.nativeExecute(`${mpqEditor} ${sharedArgs}`);
     }

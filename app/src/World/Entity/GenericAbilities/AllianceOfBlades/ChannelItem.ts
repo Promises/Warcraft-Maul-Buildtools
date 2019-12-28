@@ -1,5 +1,5 @@
 /**
- *  Channel Item (Alliance Of Blades)
+ *  Channel WCItem (Alliance Of Blades)
  *  Give item to another alliance tower
  */
 import { GenericAbility } from '../GenericAbility';

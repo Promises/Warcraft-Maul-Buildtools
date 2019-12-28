@@ -160,7 +160,7 @@ export class AbilId {
     }
 }
 
-class Abil {
+export class Abil {
     constructor(abil: ability) {
         this.abil = abil;
     }

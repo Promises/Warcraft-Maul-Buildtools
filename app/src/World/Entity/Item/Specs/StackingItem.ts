@@ -1,6 +1,6 @@
-import { Item } from './Item';
+import { WCItem } from './WCItem';
 
-export class StackingItem extends Item {
+export class StackingItem extends WCItem {
 
     public StackingCondition(): boolean {
         if (this.itemID !== GetItemTypeId(GetManipulatedItem())) {

@@ -1,5 +1,5 @@
 import { WarcraftMaul } from '../../WarcraftMaul';
-import { Item } from './Specs/Item';
+import { WCItem } from './Specs/WCItem';
 import { Log } from '../../../lib/Serilog/Serilog';
 import { Trigger } from '../../../JassOverrides/Trigger';
 import { LootBagItem } from './LootBoxer/LootBagItem';
@@ -14,7 +14,7 @@ import { PremiumLootTower } from './LootBoxer/PremiumLootTower';
 export class ItemHandler {
     private readonly game: WarcraftMaul;
     private items: object[] = [];
-    private activeItems: Item[] = [];
+    private activeItems: WCItem[] = [];
     private useItemTrigger: Trigger;
     private pickupItemTrigger: Trigger;
     private stackingItems: StackingItem[] = [];
@@ -47,7 +47,7 @@ export class ItemHandler {
 
         for (const item of this.items) {
             // @ts-ignore
-            const ObjectExtendsItem: Item = new item(this.game);
+            const ObjectExtendsItem: WCItem = new item(this.game);
             if (ObjectExtendsItem instanceof StackingItem) {
                 this.stackingItems.push(ObjectExtendsItem);
             }

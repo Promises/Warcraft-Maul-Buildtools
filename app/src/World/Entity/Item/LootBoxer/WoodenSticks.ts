@@ -1,7 +1,7 @@
 import { WarcraftMaul } from '../../../WarcraftMaul';
-import { Item } from '../Specs/Item';
+import { WCItem } from '../Specs/WCItem';
 
-export class WoodenSticks extends Item {
+export class WoodenSticks extends WCItem {
     constructor(game: WarcraftMaul) {
         super('I028', game);
     }
