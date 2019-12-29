@@ -21,10 +21,10 @@ class Quest:
         q = list()
         q.append('{')
 
-        q.append(f'   title: "%s",' % self.title)
-        q.append(f'   icon: "%s",' % self.icon)
-        q.append(f'   stype: %s,' % self.stype)
-        q.append(f'   body: "%s",' % self.body)
+        q.append(f'    title: `%s`,' % self.title)
+        q.append(f'    icon: `%s`,' % self.icon)
+        q.append(f'    stype: %s,' % self.stype)
+        q.append(f'    body: `%s`,' % self.body)
 
         q.append('},')
         q.reverse()
@@ -116,7 +116,7 @@ def get_all_quests():
             shouldread = False
             readbody = False
             for line in lines:
-                if line.find('---') is not -1:
+                if line.find('---') != -1:
                     if(shouldread):
                         readbody = True
                     shouldread = True
@@ -125,13 +125,13 @@ def get_all_quests():
                         if len(body) > 0 or len(line) > 0:
                             body.append(line)
                     else:
-                        if line.find('title:') is not -1:
+                        if line.find('title:') != -1:
                             title = re.findall("^.*'(.*)'.*$", line)[0]
-                        if line.find('icon:') is not -1:
+                        if line.find('icon:') != -1:
                             icon = re.findall("^.*'(.*)'.*$", line)[0]
-                        if line.find('type:') is not -1:
+                        if line.find('type:') != -1:
                             intype = re.findall("^.*'(.*)'.*$", line)[0]
-                            if intype is 'required':
+                            if intype == 'required':
                                 type = "bj_QUESTTYPE_REQ_DISCOVERED"
 
                         header.append(line)
@@ -173,7 +173,7 @@ def create_quest(title, icon, type, body, number, quest_list):
         number[0] += 1
         create_quest(title, icon, type, q_b, number, quest_list)
     else:
-        if number[0] is not 0:
+        if number[0] != 0:
             title = title + ' - ' + str(number[0])
         quest_list.append(Quest(title, icon, type, s.join(body)))
 
