@@ -159,7 +159,7 @@ def get_all_quests():
     generated_library += generated_quest_list
     generated_library += template[pivot + 1:]
 
-    with open('app/src/Generated/questsGEN.ts', 'w') as f:
+    with open('src/Generated/questsGEN.ts', 'w') as f:
         for item in generated_library:
             f.write("%s\n" % item)
 
@@ -214,14 +214,14 @@ def get_buildnum_with_date():
 
 
 
-    with open('app/src/Generated/Version.ts', 'w') as f:
+    with open('src/Generated/Version.ts', 'w') as f:
         for item in generated_list:
             f.write("%s\n" % item)
 
 
 def main():
-    if not os.path.exists('app/src/Generated/'):
-        os.makedirs('app/src/Generated/')
+    if not os.path.exists('src/Generated/'):
+        os.makedirs('src/Generated/')
     data = {}
 
     builders = dict()
@@ -293,7 +293,7 @@ def main():
     generated_library += generated_hybrid_list
     generated_library += template[pivot + 1:]
 
-    with open('app/src/Generated/hybridRandomGEN.ts', 'w') as f:
+    with open('src/Generated/hybridRandomGEN.ts', 'w') as f:
         for item in generated_library:
             f.write("%s\n" % item)
 

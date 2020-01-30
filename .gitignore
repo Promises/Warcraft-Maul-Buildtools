@@ -1,12 +1,12 @@
 .DS_Store
 .idea
 /units.json
-/src
+/lua
 /target
 /node_modules
 /package-lock.json
 /settings.bat
-/app/src/Generated/*
+/src/Generated/*
 /maps/map/war3map.lua
 /config/warcraft.json
 /maps/map/Units

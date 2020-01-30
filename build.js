@@ -134,8 +134,8 @@ class Build {
         }
 
         emitResult.forEach(({name, text}) => ts.sys.writeFile(name, text));
-        fse.copySync(`src/app/src/main.lua`, `src/main.lua`);
-        fse.copySync(`tools/extras/app`, `src/app`);
+        // fse.copySync(`src/app/src/main.lua`, `src/main.lua`);
+        fse.copySync(`tools/extras/`, `lua/`);
 
         sharedArgs = `build -- --map map --output dir`;
         let ceres = '';
@@ -185,7 +185,7 @@ class Build {
     run() {
         this.env();
         let suffix = '';
-        let sharedArgs = `-windowmode windowed -nowfpause -loadfile `;
+        let sharedArgs = `-launch -windowmode windowed -nowfpause -loadfile `;
         let currentDir = String(__dirname);
         switch (this.os) {
             case "linux":
@@ -210,8 +210,8 @@ class Build {
     }
 
     cleanup() {
-        if (fse.existsSync(`./src`)) {
-            fse.removeSync('./src');
+        if (fse.existsSync(`./lua`)) {
+            fse.removeSync('./lua');
         }
         if (fse.existsSync(`./target`)) {
             fse.removeSync('./target');

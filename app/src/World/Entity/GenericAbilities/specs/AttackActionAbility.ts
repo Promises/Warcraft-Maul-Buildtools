@@ -1,3 +1,0 @@
-interface AttackActionAbility {
-    AttackAction(): void;
-}

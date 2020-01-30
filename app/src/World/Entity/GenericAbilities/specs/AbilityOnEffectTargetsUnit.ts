@@ -1,3 +1,0 @@
-interface AbilityOnEffectTargetsUnit {
-    TargetOnEffectAction(): void;
-}
