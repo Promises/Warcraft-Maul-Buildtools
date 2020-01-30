@@ -4,11 +4,28 @@ import { Log } from '../../../lib/Serilog/Serilog';
 export abstract class AbstractPlayer {
     public wcPlayer: player;
     public id: number;
+    private name: string;
+    private battleTag: string;
 
     protected constructor(id: number) {
         this.id = id;
         this.wcPlayer = Player(id);
-        BJDebugMsg("CrEATED");
+        this.battleTag = GetPlayerName(this.wcPlayer);
+
+        if (this.battleTag.indexOf('#') > 0) {
+            Log.Error(`${this.battleTag} ${this.battleTag.indexOf('#')}`);
+            this.name = this.battleTag.slice(0, this.battleTag.indexOf('#'));
+            if (this.battleTag === 'Runi95#2202' ||
+                this.battleTag === 'Promises#2725' ||
+                this.battleTag === 'Arcano#1610' ||
+                this.battleTag === 'GenoHacker#2987' ||
+                this.battleTag === 'ThaOneSmutje#2560') {
+                this.name = `${Util.ColourString('#7ab1df', '[DEV]')} ${this.getNameWithColour()}`;
+            }
+        } else {
+            this.name = this.battleTag;
+        }
+
     }
 
     public makeAlliance(otherPlayer: AbstractPlayer): void {
@@ -28,11 +45,11 @@ export abstract class AbstractPlayer {
     }
 
     public getPlayerName(): string {
-        return GetPlayerName(this.wcPlayer);
+        return this.name;
     }
 
     public sendMessage(message: string): void {
-        Log.Message(`{"s":"${this.getPlayerName()}", "m":"${message}"}`)
+        Log.Message(`{"s":"${this.getPlayerName()}", "m":"${message}"}`);
         DisplayTimedTextToPlayer(this.wcPlayer, 0, 0, 10, message);
     }
 

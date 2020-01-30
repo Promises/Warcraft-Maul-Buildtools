@@ -3,9 +3,9 @@ import { WarcraftMaul } from '../WarcraftMaul';
 import { MultiBoard } from './MultiBoard';
 import { Trigger } from '../../JassOverrides/Trigger';
 import { Log } from '../../lib/Serilog/Serilog';
-import { GAME_MODES } from '../GlobalSettings';
 import { ClassicGameRound } from './ClassicMaul/ClassicGameRound';
 import { BlitzGameRound } from './BlitzMaul/BlitzGameRound';
+import { AbstractPlayer } from '../Entity/Players/AbstractPlayer';
 
 export class Vote {
     public initializeVotesTrigger: Trigger;
@@ -51,7 +51,7 @@ export class Vote {
                 DialogAddButtonBJ(
                     this.difficultyDialog,
                     `${Util.ColourString(settings.DIFFICULTY_COLOURS[i],
-                                         `${settings.DIFFICULTIES[i]}% ${settings.DIFFICULTY_STRINGS[i]}`)}`,
+                        `${settings.DIFFICULTIES[i]}% ${settings.DIFFICULTY_STRINGS[i]}`)}`,
                 ),
             );
         }
@@ -62,7 +62,7 @@ export class Vote {
                 DialogAddButtonBJ(
                     this.modeDialog,
                     `${Util.ColourString(settings.GAME_MODE_COLOURS[i],
-                                         `${settings.GAME_MODE_STRINGS[i]}`)}`,
+                        `${settings.GAME_MODE_STRINGS[i]}`)}`,
                 ),
             );
         }
@@ -114,10 +114,10 @@ export class Vote {
 
         SendMessage(`${colouredMode} won with ${this.votedMode[winningMode]} votes.`);
         switch (winningMode) {
-            case GAME_MODES.CLASSIC:
+            case settings.GAME_MODES.CLASSIC:
                 this.game.worldMap.gameRoundHandler = new ClassicGameRound(this.game);
                 break;
-            case GAME_MODES.BLITZ:
+            case settings.GAME_MODES.BLITZ:
                 this.game.worldMap.gameRoundHandler = new BlitzGameRound(this.game);
                 break;
             default:
@@ -168,7 +168,7 @@ export class Vote {
         SetPlayerHandicapBJ(Player(PLAYER_NEUTRAL_PASSIVE), this.difficulty);
         // this.game.mmd.DefineSettingNumber('difficulty', this.difficulty);
         SendMessage(`Difficulty was set to ${this.difficulty}% (${Util.ColourString(settings.DIFFICULTY_COLOURS[diffIndex],
-                                                                                    settings.DIFFICULTY_STRINGS[diffIndex])})`);
+            settings.DIFFICULTY_STRINGS[diffIndex])})`);
 
         for (const player of this.game.players.values()) {
             for (const ally of this.game.players.values()) {
@@ -192,7 +192,7 @@ export class Vote {
             this.game.scoreBoard.board,
             2, 3,
             `${I2S(R2I(this.difficulty))}% (${Util.ColourString(settings.DIFFICULTY_COLOURS[diffIndex],
-                                                                settings.DIFFICULTY_STRINGS[diffIndex])})`,
+                settings.DIFFICULTY_STRINGS[diffIndex])})`,
         );
 
 
@@ -203,11 +203,12 @@ export class Vote {
             const button: button = this.difficultyButtons[i];
 
             if (GetClickedButtonBJ() === button) {
-                this.votedDiff[GetPlayerId(GetTriggerPlayer())] = settings.DIFFICULTIES[i];
-                SendMessage(`${Util.ColourString(settings.COLOUR_CODES[GetPlayerId(GetTriggerPlayer())],
-                                                 GetPlayerName(GetTriggerPlayer()))
-                } voted for: ${Util.ColourString(settings.DIFFICULTY_COLOURS[i],
-                                                 settings.DIFFICULTY_STRINGS[i])}`);
+                const player: AbstractPlayer | undefined = this.game.players.get(GetPlayerId(GetTriggerPlayer()));
+                if (!player) {
+                    return;
+                }
+                this.votedDiff[player.id] = settings.DIFFICULTIES[i];
+                SendMessage(`${player.getNameWithColour()} voted for: ${Util.ColourString(settings.DIFFICULTY_COLOURS[i], settings.DIFFICULTY_STRINGS[i])}`);
             }
         }
         DialogDisplayBJ(false, this.difficultyDialog, GetTriggerPlayer());
@@ -219,11 +220,12 @@ export class Vote {
             const button: button = this.modeButtons[i];
 
             if (GetClickedButtonBJ() === button) {
+                const player: AbstractPlayer | undefined = this.game.players.get(GetPlayerId(GetTriggerPlayer()));
+                if (!player) {
+                    return;
+                }
                 this.votedMode[i]++;
-                SendMessage(`${Util.ColourString(settings.COLOUR_CODES[GetPlayerId(GetTriggerPlayer())],
-                                                 GetPlayerName(GetTriggerPlayer()))
-                } voted for: ${Util.ColourString(settings.GAME_MODE_COLOURS[i],
-                                                 settings.GAME_MODE_STRINGS[i])}`);
+                SendMessage(`${player.getNameWithColour()} voted for: ${Util.ColourString(settings.GAME_MODE_COLOURS[i], settings.GAME_MODE_STRINGS[i])}`);
             }
         }
         DialogDisplayBJ(false, this.modeDialog, GetTriggerPlayer());
