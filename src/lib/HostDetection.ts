@@ -10,9 +10,9 @@ export class HostDetection {
 
     constructor() {
         for (let i: number = 0; i < bj_MAX_PLAYERS; i++) {
-            this.SyncTrig.RegisterPlayerSyncEvent(Player(i), 'hostdetect', false);
+            this.SyncTrig.registerPlayerSyncEvent(Player(i), 'hostdetect', false);
         }
-        this.SyncTrig.AddAction(() => this.OnHostSync());
+        this.SyncTrig.addAction(() => this.OnHostSync());
         if (this.IsLocalPlayerHost()) {
             BlzSendSyncData('hostdetect', '1');
         }

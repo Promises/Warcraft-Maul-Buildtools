@@ -11,8 +11,8 @@ export class TimedEventQueue {
 
     constructor(game: WarcraftMaul) {
         this.ticker = new Trigger();
-        this.ticker.RegisterTimerEventPeriodic(0.10);
-        this.ticker.AddAction(() => {
+        this.ticker.registerTimerEventPeriodic(0.10);
+        this.ticker.addAction(() => {
             this.tick = (this.tick + 1) % this.maxTick;
             this.HandleTick();
         });

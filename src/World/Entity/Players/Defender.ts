@@ -10,6 +10,7 @@ import { TimedEvent } from '../../../lib/WCEventQueue/TimedEvent';
 import { Log } from '../../../lib/Serilog/Serilog';
 
 export class Defender extends AbstractPlayer {
+
     public chimeraCount: number = 0;
     public zerglings: number = 0;
     // private towerKeys: IterableIterator<number> | undefined = undefined;
@@ -54,7 +55,7 @@ export class Defender extends AbstractPlayer {
     private deniedPlayers: Map<number, boolean> = new Map<number, boolean>();
     // private _towers: Map<number, Tower> = new Map<number, Tower>();
     private _towersArray: Tower[] = [];
-    private holoMaze: AbstractHologramMaze | undefined = undefined;
+    private _holoMaze: AbstractHologramMaze | undefined = undefined;
     private game: WarcraftMaul;
     private _builders: unit[] = [];
 
@@ -75,24 +76,27 @@ export class Defender extends AbstractPlayer {
         this.game = game;
         this.setUpPlayerVariables();
         this.leaveTrigger = new Trigger();
-        this.leaveTrigger.RegisterPlayerEventLeave(this);
-        this.leaveTrigger.AddCondition(() => this.PlayerLeftTheGameConditions(game));
-        this.leaveTrigger.AddAction(() => this.PlayerLeftTheGame());
+        this.leaveTrigger.registerPlayerEventLeave(this);
+        this.leaveTrigger.addCondition(() => this.PlayerLeftTheGameConditions(game));
+        this.leaveTrigger.addAction(() => this.PlayerLeftTheGame());
 
         this.selectUnitTrigger = new Trigger();
-        this.selectUnitTrigger.RegisterPlayerUnitEvent(this.wcPlayer, EVENT_PLAYER_UNIT_SELECTED);
-        this.selectUnitTrigger.AddAction(() => this.SelectUnit());
+        this.selectUnitTrigger.registerPlayerUnitEvent(this.wcPlayer, EVENT_PLAYER_UNIT_SELECTED);
+        this.selectUnitTrigger.addAction(() => this.SelectUnit());
 
 
-        this.game.gameCommandHandler.commandTrigger.RegisterPlayerChatEvent(this.wcPlayer, '', false);
+        this.game.gameCommandHandler.commandTrigger.registerPlayerChatEvent(this.wcPlayer, '', false);
     }
 
     public setHoloMaze(holoMaze: AbstractHologramMaze | undefined): void {
-        if (this.holoMaze !== undefined) {
-            this.holoMaze.Destroy();
+        if (this._holoMaze !== undefined) {
+            this._holoMaze.Destroy();
         }
 
-        this.holoMaze = holoMaze;
+        this._holoMaze = holoMaze;
+    }
+    get holoMaze(): AbstractHologramMaze | undefined {
+        return this._holoMaze;
     }
 
     private setUpPlayerVariables(): void {

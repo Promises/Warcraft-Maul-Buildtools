@@ -22,6 +22,7 @@ export class InitGame {
         // require('app/src/LuaModules/PolledWait'); // proper wait
         require('LuaModules.FastTriggers'); // 16x faster triggers
         PatchNatives();
+        BlzLoadTOCFile('uiImport\\Templates.toc');
         Log.Init([
                      new StringSink(LogLevel.Warning, SendMessageUnlogged),
                      // new PreloadSink(LogLevel.Message, `WCMAUL\\${os.time()}.txt`),
@@ -31,8 +32,8 @@ export class InitGame {
 
         xpcall(() => {
             const init: Trigger = new Trigger();
-            init.RegisterTimerEvent(0.00, false);
-            init.AddAction(() => InitGame.Main(creepAbilityHandler/*, mmd*/));
+            init.registerTimerEvent(0.00, false);
+            init.addAction(() => InitGame.Main(creepAbilityHandler/*, mmd*/));
         }, (err) => {
             Log.Fatal(err);
         });

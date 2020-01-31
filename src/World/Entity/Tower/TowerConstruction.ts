@@ -45,28 +45,28 @@ export class TowerConstruction {
         this._towerTypes = InitialiseAllRaceTowers();
         this.lootBoxerHander = new LootBoxerHandler(this, game);
         this.towerConstructTrigger = new Trigger();
-        this.towerConstructTrigger.RegisterAnyUnitEventBJ(EVENT_PLAYER_UNIT_CONSTRUCT_FINISH);
-        this.towerConstructTrigger.RegisterAnyUnitEventBJ(EVENT_PLAYER_UNIT_UPGRADE_FINISH);
-        this.towerConstructTrigger.AddAction(() => this.ConstructionFinished());
+        this.towerConstructTrigger.registerAnyUnitEventBJ(EVENT_PLAYER_UNIT_CONSTRUCT_FINISH);
+        this.towerConstructTrigger.registerAnyUnitEventBJ(EVENT_PLAYER_UNIT_UPGRADE_FINISH);
+        this.towerConstructTrigger.addAction(() => this.ConstructionFinished());
 
         this.towerUpgradeTrigger = new Trigger();
-        this.towerUpgradeTrigger.RegisterAnyUnitEventBJ(EVENT_PLAYER_UNIT_UPGRADE_FINISH);
-        this.towerUpgradeTrigger.AddAction(() => this.UpgradeTower());
+        this.towerUpgradeTrigger.registerAnyUnitEventBJ(EVENT_PLAYER_UNIT_UPGRADE_FINISH);
+        this.towerUpgradeTrigger.addAction(() => this.UpgradeTower());
 
 
         this.genericAttackTrigger = new Trigger();
-        this.genericAttackTrigger.RegisterPlayerUnitEventSimple(Player(COLOUR.NAVY), EVENT_PLAYER_UNIT_ATTACKED);
-        this.genericAttackTrigger.RegisterPlayerUnitEventSimple(Player(COLOUR.TURQUOISE), EVENT_PLAYER_UNIT_ATTACKED);
-        this.genericAttackTrigger.RegisterPlayerUnitEventSimple(Player(COLOUR.VOILET), EVENT_PLAYER_UNIT_ATTACKED);
-        this.genericAttackTrigger.RegisterPlayerUnitEventSimple(Player(COLOUR.WHEAT), EVENT_PLAYER_UNIT_ATTACKED);
-        this.genericAttackTrigger.AddAction(() => this.DoGenericTowerAttacks());
+        this.genericAttackTrigger.registerPlayerUnitEventSimple(Player(COLOUR.NAVY), EVENT_PLAYER_UNIT_ATTACKED);
+        this.genericAttackTrigger.registerPlayerUnitEventSimple(Player(COLOUR.TURQUOISE), EVENT_PLAYER_UNIT_ATTACKED);
+        this.genericAttackTrigger.registerPlayerUnitEventSimple(Player(COLOUR.VOILET), EVENT_PLAYER_UNIT_ATTACKED);
+        this.genericAttackTrigger.registerPlayerUnitEventSimple(Player(COLOUR.WHEAT), EVENT_PLAYER_UNIT_ATTACKED);
+        this.genericAttackTrigger.addAction(() => this.DoGenericTowerAttacks());
 
         this.killingActionsTrigger = new Trigger();
-        this.killingActionsTrigger.RegisterPlayerUnitEventSimple(Player(COLOUR.NAVY), EVENT_PLAYER_UNIT_DEATH);
-        this.killingActionsTrigger.RegisterPlayerUnitEventSimple(Player(COLOUR.TURQUOISE), EVENT_PLAYER_UNIT_DEATH);
-        this.killingActionsTrigger.RegisterPlayerUnitEventSimple(Player(COLOUR.VOILET), EVENT_PLAYER_UNIT_DEATH);
-        this.killingActionsTrigger.RegisterPlayerUnitEventSimple(Player(COLOUR.WHEAT), EVENT_PLAYER_UNIT_DEATH);
-        this.killingActionsTrigger.AddAction(() => this.DoKillingTowerActions());
+        this.killingActionsTrigger.registerPlayerUnitEventSimple(Player(COLOUR.NAVY), EVENT_PLAYER_UNIT_DEATH);
+        this.killingActionsTrigger.registerPlayerUnitEventSimple(Player(COLOUR.TURQUOISE), EVENT_PLAYER_UNIT_DEATH);
+        this.killingActionsTrigger.registerPlayerUnitEventSimple(Player(COLOUR.VOILET), EVENT_PLAYER_UNIT_DEATH);
+        this.killingActionsTrigger.registerPlayerUnitEventSimple(Player(COLOUR.WHEAT), EVENT_PLAYER_UNIT_DEATH);
+        this.killingActionsTrigger.addAction(() => this.DoKillingTowerActions());
     }
 
 

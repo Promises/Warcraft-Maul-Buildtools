@@ -32,8 +32,8 @@ export class PlayerSpawns {
         this.colourId = colourId;
         this.area = PLAYER_AREAS[this.colourId];
         this.enterTrig = new Trigger();
-        this.enterTrig.RegisterEnterRectangle(this.area);
-        this.enterTrig.AddAction(() => this.EnterRegions());
+        this.enterTrig.registerEnterRectangle(this.area);
+        this.enterTrig.addAction(() => this.EnterRegions());
     }
 
 
@@ -45,9 +45,9 @@ export class PlayerSpawns {
         this._spawnOne = value;
         if (this.spawnOne) {
             this.oneTrig = new Trigger();
-            this.oneTrig.RegisterEnterRectSimple(this.spawnOne.rectangle);
-            this.oneTrig.AddCondition(() => this.EnteringUnitIsCreepAndHasNoCheckpoint());
-            this.oneTrig.AddAction(() => this.SpawnAction(<CheckPoint>this.spawnOne));
+            this.oneTrig.registerEnterRectSimple(this.spawnOne.rectangle);
+            this.oneTrig.addCondition(() => this.EnteringUnitIsCreepAndHasNoCheckpoint());
+            this.oneTrig.addAction(() => this.SpawnAction(<CheckPoint>this.spawnOne));
         }
 
     }
@@ -60,9 +60,9 @@ export class PlayerSpawns {
         this._spawnTwo = value;
         if (this.spawnTwo) {
             this.twoTrig = new Trigger();
-            this.twoTrig.RegisterEnterRectSimple(this.spawnTwo.rectangle);
-            this.twoTrig.AddCondition(() => this.EnteringUnitIsCreepAndHasNoCheckpoint());
-            this.twoTrig.AddAction(() => this.SpawnAction(<CheckPoint>this.spawnTwo));
+            this.twoTrig.registerEnterRectSimple(this.spawnTwo.rectangle);
+            this.twoTrig.addCondition(() => this.EnteringUnitIsCreepAndHasNoCheckpoint());
+            this.twoTrig.addAction(() => this.SpawnAction(<CheckPoint>this.spawnTwo));
 
         }
     }

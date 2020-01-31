@@ -43,11 +43,11 @@ export class GenericAbilityHandler {
         this.AddAbilitiesToList();
         this.SetupAbilities();
         this.targetUnitOnEffectAbilitiesTrigger = new Trigger();
-        this.targetUnitOnEffectAbilitiesTrigger.RegisterAnyUnitEventBJ(EVENT_PLAYER_UNIT_SPELL_EFFECT);
-        this.targetUnitOnEffectAbilitiesTrigger.AddAction(() => this.DoTargetUnitOnEffectAbilities());
+        this.targetUnitOnEffectAbilitiesTrigger.registerAnyUnitEventBJ(EVENT_PLAYER_UNIT_SPELL_EFFECT);
+        this.targetUnitOnEffectAbilitiesTrigger.addAction(() => this.DoTargetUnitOnEffectAbilities());
         this.targetUnitOnCastAbilitiesTrigger = new Trigger();
-        this.targetUnitOnCastAbilitiesTrigger.RegisterAnyUnitEventBJ(EVENT_PLAYER_UNIT_SPELL_CAST);
-        this.targetUnitOnCastAbilitiesTrigger.AddAction(() => this.DoTargetUnitOnCastAbilities());
+        this.targetUnitOnCastAbilitiesTrigger.registerAnyUnitEventBJ(EVENT_PLAYER_UNIT_SPELL_CAST);
+        this.targetUnitOnCastAbilitiesTrigger.addAction(() => this.DoTargetUnitOnCastAbilities());
     }
 
     private AddAbilitiesToList(): void {

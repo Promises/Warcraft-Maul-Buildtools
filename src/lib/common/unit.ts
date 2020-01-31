@@ -1233,8 +1233,12 @@ export class Unit extends Widget {
 }
 
 export class Group {
-    constructor() {
-        this.group = CreateGroup();
+    constructor(grp?: group) {
+        if (!grp) {
+            this.group = CreateGroup();
+        } else {
+            this.group = grp;
+        }
     }
 
     public group: group;
@@ -1296,11 +1300,11 @@ export class Group {
             GroupEnumUnitsInRange(this.group, midX, midY, radius, filter === undefined ? null : filter);
         } else {
             GroupEnumUnitsInRangeCounted(this.group,
-                                         midX,
-                                         midY,
-                                         radius,
-                                         filter === undefined ? null : filter,
-                                         countLimit);
+                midX,
+                midY,
+                radius,
+                filter === undefined ? null : filter,
+                countLimit);
         }
     }
 
@@ -1320,8 +1324,13 @@ export class Group {
         return GroupTargetOrderById(this.group, order.id, targetWidget);
     }
 
-    public for(callback: () => void): void {
-
+    public for(exp: (u: unit) => void): void {
+        let u: unit = FirstOfGroup(this.group);
+        while (u) {
+            exp(u);
+            GroupRemoveUnit(this.group, u);
+            u = FirstOfGroup(this.group);
+        }
     }
 }
 

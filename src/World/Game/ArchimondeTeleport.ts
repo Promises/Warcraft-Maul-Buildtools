@@ -5,8 +5,8 @@ export class ArchimondeTeleport {
 
     constructor(archimonde: unit) {
         this.trig = new Trigger();
-        this.trig.RegisterEnterRectSimple(Rect(992.0, -5216.0, 1056.0, -4992.0));
-        this.trig.AddCondition(() => GetEnteringUnit() === archimonde);
-        this.trig.AddAction(() => RemoveUnit(archimonde));
+        this.trig.registerEnterRectSimple(Rect(992.0, -5216.0, 1056.0, -4992.0));
+        this.trig.addCondition(() => GetEnteringUnit() === archimonde);
+        this.trig.addAction(() => RemoveUnit(archimonde));
     }
 }

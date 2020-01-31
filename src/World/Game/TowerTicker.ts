@@ -12,8 +12,8 @@ export class TowerTicker {
 
     constructor() {
         this.trig = new Trigger();
-        this.trig.RegisterTimerEventPeriodic(0.10);
-        this.trig.AddAction(() => {
+        this.trig.registerTimerEventPeriodic(0.10);
+        this.trig.addAction(() => {
             this.tick = (this.tick + 1) % this.maxTick;
             this.tickingTowers.forEach((tickingTower) => {
 

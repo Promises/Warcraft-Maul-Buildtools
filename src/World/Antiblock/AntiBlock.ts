@@ -19,13 +19,13 @@ export class AntiBlock {
     constructor(worldMap: WorldMap) {
         this._worldMap = worldMap;
         this._eventTrigger = new Trigger();
-        this._eventTrigger.RegisterAnyUnitEventBJ(EVENT_PLAYER_UNIT_CONSTRUCT_START);
-        this._eventTrigger.AddAction(() => this.Action());
+        this._eventTrigger.registerAnyUnitEventBJ(EVENT_PLAYER_UNIT_CONSTRUCT_START);
+        this._eventTrigger.addAction(() => this.Action());
 
 
         this._cancelBuildingTrigger = new Trigger();
-        this._cancelBuildingTrigger.RegisterAnyUnitEventBJ(EVENT_PLAYER_UNIT_CONSTRUCT_CANCEL);
-        this._cancelBuildingTrigger.AddAction(() => this.CanceledBuilding());
+        this._cancelBuildingTrigger.registerAnyUnitEventBJ(EVENT_PLAYER_UNIT_CONSTRUCT_CANCEL);
+        this._cancelBuildingTrigger.addAction(() => this.CanceledBuilding());
 
 
     }

@@ -9,8 +9,8 @@ export class VoidTicker {
     constructor(game: WarcraftMaul) {
         this.game = game;
         this.trig = new Trigger();
-        this.trig.RegisterTimerEventPeriodic(30);
-        this.trig.AddAction(() => this.TickVoid());
+        this.trig.registerTimerEventPeriodic(30);
+        this.trig.addAction(() => this.TickVoid());
     }
 
     private TickVoid(): void {

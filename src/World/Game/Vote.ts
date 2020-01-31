@@ -31,16 +31,16 @@ export class Vote {
     constructor(game: WarcraftMaul) {
         this.game = game;
         this.initializeVotesTrigger = new Trigger();
-        this.initializeVotesTrigger.RegisterTimerEventSingle(1.00);
-        this.initializeVotesTrigger.AddAction(() => this.InitializeVotes());
+        this.initializeVotesTrigger.registerTimerEventSingle(1.00);
+        this.initializeVotesTrigger.addAction(() => this.InitializeVotes());
 
         this.difficultyVoteTrigger = new Trigger();
-        this.difficultyVoteTrigger.RegisterDialogEventBJ(this.difficultyDialog);
-        this.difficultyVoteTrigger.AddAction(() => this.DifficultyVote());
+        this.difficultyVoteTrigger.registerDialogEventBJ(this.difficultyDialog);
+        this.difficultyVoteTrigger.addAction(() => this.DifficultyVote());
 
         this.modeVoteTrigger = new Trigger();
-        this.modeVoteTrigger.RegisterDialogEventBJ(this.modeDialog);
-        this.modeVoteTrigger.AddAction(() => this.ModeVote());
+        this.modeVoteTrigger.registerDialogEventBJ(this.modeDialog);
+        this.modeVoteTrigger.addAction(() => this.ModeVote());
     }
 
 

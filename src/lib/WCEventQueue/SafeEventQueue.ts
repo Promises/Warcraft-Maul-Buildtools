@@ -13,8 +13,8 @@ export class SafeEventQueue {
 
     constructor(game: WarcraftMaul) {
         this.ticker = new Trigger();
-        this.ticker.RegisterTimerEventPeriodic(0.1);
-        this.ticker.AddAction(() => {
+        this.ticker.registerTimerEventPeriodic(0.1);
+        this.ticker.addAction(() => {
             this.HandleTick();
         });
         this.game = game;

@@ -25,9 +25,9 @@ export class LootBoxerHandler {
         this.constuction = constuction;
         this.game = game;
         this.abilityUpgradeTrigger = new Trigger();
-        this.abilityUpgradeTrigger.RegisterAnyUnitEventBJ(EVENT_PLAYER_UNIT_SPELL_CAST);
-        this.abilityUpgradeTrigger.AddCondition(() => this.IsUpgradeAbility());
-        this.abilityUpgradeTrigger.AddAction(() => this.UpgradeToTower());
+        this.abilityUpgradeTrigger.registerAnyUnitEventBJ(EVENT_PLAYER_UNIT_SPELL_CAST);
+        this.abilityUpgradeTrigger.addCondition(() => this.IsUpgradeAbility());
+        this.abilityUpgradeTrigger.addAction(() => this.UpgradeToTower());
 
     }
 

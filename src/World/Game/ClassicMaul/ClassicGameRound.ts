@@ -15,11 +15,11 @@ export class ClassicGameRound extends AbstractGameRound {
         this.roundEndTrigger = new Trigger();
 
         for (const enemy of this.game.enemies) {
-            this.roundEndTrigger.RegisterPlayerStateEvent(enemy.wcPlayer, PLAYER_STATE_RESOURCE_FOOD_USED, EQUAL, 0.00);
+            this.roundEndTrigger.registerPlayerStateEvent(enemy.wcPlayer, PLAYER_STATE_RESOURCE_FOOD_USED, EQUAL, 0.00);
         }
 
-        this.roundEndTrigger.AddCondition(() => this.CreepFoodConditions());
-        this.roundEndTrigger.AddAction(() => this.RoundEnd());
+        this.roundEndTrigger.addCondition(() => this.CreepFoodConditions());
+        this.roundEndTrigger.addAction(() => this.RoundEnd());
 
     }
 

@@ -16,10 +16,10 @@ export class CheckPoint {
         this.worldMap = worldMap;
         this.eventTrig = new Trigger();
 
-        this.eventTrig.RegisterEnterRectSimple(rectangle);
+        this.eventTrig.registerEnterRectSimple(rectangle);
 
-        this.eventTrig.AddCondition(() => this.verifyTargetCheckpoint());
-        this.eventTrig.AddAction(() => this.CheckPointAction());
+        this.eventTrig.addCondition(() => this.verifyTargetCheckpoint());
+        this.eventTrig.addAction(() => this.CheckPointAction());
 
 
     }

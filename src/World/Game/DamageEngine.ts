@@ -75,11 +75,11 @@ export class DamageEngine {
 
     constructor(damageEngineGlobals: DamageEngineGlobals) {
         this.damageEngineGlobals = damageEngineGlobals;
-        this.otrg.RegisterAnyUnitEventBJ(EVENT_PLAYER_UNIT_DAMAGED);
-        this.otrg.AddFilterFuncCondition(Filter(() => this.OnDamage()));
+        this.otrg.registerAnyUnitEventBJ(EVENT_PLAYER_UNIT_DAMAGED);
+        this.otrg.addFilterFuncCondition(Filter(() => this.OnDamage()));
 
-        this.trig.RegisterAnyUnitEventBJ(EVENT_PLAYER_UNIT_DAMAGING);
-        this.trig.AddFilterFuncCondition(Filter(() => this.OnPreDamage()));
+        this.trig.registerAnyUnitEventBJ(EVENT_PLAYER_UNIT_DAMAGING);
+        this.trig.addFilterFuncCondition(Filter(() => this.OnPreDamage()));
     }
 
     /**

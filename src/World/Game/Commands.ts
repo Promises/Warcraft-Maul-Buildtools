@@ -29,7 +29,7 @@ export class Commands {
         this.game = game;
         this.commandTrigger = new Trigger();
 
-        this.commandTrigger.AddAction(() => this.handleCommand());
+        this.commandTrigger.addAction(() => this.handleCommand());
         for (let i: number = 0; i < bj_MAX_PLAYER_SLOTS; i++) {
             this.hasVotedToKick[i] = false;
         }

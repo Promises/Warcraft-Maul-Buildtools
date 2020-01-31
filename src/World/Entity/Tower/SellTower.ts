@@ -14,9 +14,9 @@ export class SellTower {
     constructor(game: WarcraftMaul) {
         this._game = game;
         this._sellTrigger = new Trigger();
-        this._sellTrigger.RegisterAnyUnitEventBJ(EVENT_PLAYER_UNIT_SPELL_EFFECT);
-        this._sellTrigger.AddCondition(() => this.AreWeSellingTheTower());
-        this._sellTrigger.AddAction(() => this.FindAndSellTower());
+        this._sellTrigger.registerAnyUnitEventBJ(EVENT_PLAYER_UNIT_SPELL_EFFECT);
+        this._sellTrigger.addCondition(() => this.AreWeSellingTheTower());
+        this._sellTrigger.addAction(() => this.FindAndSellTower());
     }
 
     private AreWeSellingTheTower(): boolean {

@@ -29,92 +29,104 @@ export class Trigger {
     }
 
 
-    public AddAction(actionFunc: () => void): triggeraction {
+    public addAction(actionFunc: () => void): triggeraction {
         return TriggerAddAction(this.nativeTrigger, () => xpcall(() => actionFunc(), err => Trigger.printError(err)));
 
     }
 
-    public RegisterTimerEvent(timeout: number, periodic: boolean): event {
+    public registerTimerEvent(timeout: number, periodic: boolean): event {
         return TriggerRegisterTimerEvent(this.nativeTrigger, timeout, periodic);
     }
 
-    public RegisterTimerEventSingle(timeout: number): event {
+    public registerTimerEventSingle(timeout: number): event {
         return TriggerRegisterTimerEventSingle(this.nativeTrigger, timeout);
     }
 
-    public RegisterTimerEventPeriodic(timeout: number): event {
+    public registerTimerEventPeriodic(timeout: number): event {
         return TriggerRegisterTimerEventPeriodic(this.nativeTrigger, timeout);
     }
 
-    public RegisterPlayerStateEvent(whichPlayer: player, whichState: playerstate, opcode: limitop, limitval: number): event {
+    public registerPlayerStateEvent(whichPlayer: player, whichState: playerstate, opcode: limitop, limitval: number): event {
         return TriggerRegisterPlayerStateEvent(this.nativeTrigger, whichPlayer, whichState, opcode, limitval);
     }
 
-    public RegisterDeathEvent(whichWidget: widget): event {
+    public registerDeathEvent(whichWidget: widget): event {
         return TriggerRegisterDeathEvent(this.nativeTrigger, whichWidget);
     }
 
-    public RegisterDialogEventBJ(whichDialog: dialog): event {
+    public registerDialogEventBJ(whichDialog: dialog): event {
         return TriggerRegisterDialogEventBJ(this.nativeTrigger, whichDialog);
     }
 
 
-    public RegisterEnterRectSimple(r: rect): event {
+    public registerEnterRectSimple(r: rect): event {
         return TriggerRegisterEnterRectSimple(this.nativeTrigger, r);
     }
 
-    public RegisterEnterRectangle(area: Rectangle): event {
+    public registerEnterRectangle(area: Rectangle): event {
         const rectangle: rect = Rect(area.minX, area.minY, area.maxX, area.maxY);
-        const trigEvent: event = this.RegisterEnterRectSimple(rectangle);
+        const trigEvent: event = this.registerEnterRectSimple(rectangle);
         RemoveRect(rectangle);
         return trigEvent;
 
     }
 
-    public AddCondition(func: () => boolean): triggercondition {
+    public addCondition(func: () => boolean): triggercondition {
         return TriggerAddCondition(this.nativeTrigger, Condition(() => Trigger.EvaluateCondition(func)));
     }
 
-    public AddFilterFuncCondition(filter: filterfunc): triggercondition {
+    public addFilterFuncCondition(filter: filterfunc): triggercondition {
         return TriggerAddCondition(this.nativeTrigger, filter);
     }
 
-    public RegisterAnyUnitEventBJ(whichEvent: playerunitevent): void {
+    public registerAnyUnitEventBJ(whichEvent: playerunitevent): void {
         TriggerRegisterAnyUnitEventBJ(this.nativeTrigger, whichEvent);
     }
 
-    public RegisterPlayerChatEvent(whichPlayer: player, chatMessageToDetect: string, exactMatchOnly: boolean): event {
+    public registerPlayerChatEvent(whichPlayer: player, chatMessageToDetect: string, exactMatchOnly: boolean): event {
         return TriggerRegisterPlayerChatEvent(this.nativeTrigger, whichPlayer, chatMessageToDetect, exactMatchOnly);
     }
 
-    public RegisterPlayerUnitEventSimple(whichPlayer: player, whichEvent: playerunitevent): event {
+    public registerPlayerUnitEventSimple(whichPlayer: player, whichEvent: playerunitevent): event {
         return TriggerRegisterPlayerUnitEventSimple(this.nativeTrigger, whichPlayer, whichEvent);
     }
 
-    public RegisterPlayerEventLeave(whichPlayer: AbstractPlayer): event {
+    public registerPlayerEventLeave(whichPlayer: AbstractPlayer): event {
         return TriggerRegisterPlayerEventLeave(this.nativeTrigger, whichPlayer.wcPlayer);
 
     }
 
-
-    public RegisterPlayerUnitEvent(whichPlayer: player, whichPlayerUnitEvent: playerunitevent, filter?: boolexpr): event {
+    public registerPlayerUnitEvent(whichPlayer: player, whichPlayerUnitEvent: playerunitevent, filter?: boolexpr): event {
         return TriggerRegisterPlayerUnitEvent(this.nativeTrigger, whichPlayer, whichPlayerUnitEvent, filter === undefined ? null : filter);
 
     }
 
-    public RegisterPlayerSyncEvent(whichPlayer: player, prefix: string, fromServer: boolean): event {
+    public registerPlayerSyncEvent(whichPlayer: player, prefix: string, fromServer: boolean): event {
         return BlzTriggerRegisterPlayerSyncEvent(this.nativeTrigger, whichPlayer, prefix, fromServer);
     }
 
-    public Execute(): void {
+    public registerDialogButtonEvent(whichButton: button): event {
+        return TriggerRegisterDialogButtonEvent(this.nativeTrigger, whichButton);
+    }
+
+    public registerFrameEvent(whichFrameHandle: framehandle, whichEvent: frameeventtype): event {
+        return BlzTriggerRegisterFrameEvent(this.nativeTrigger, whichFrameHandle, whichEvent);
+    }
+
+    public registerLeaveRectSimple(r: rect): event {
+        return TriggerRegisterLeaveRectSimple(this.nativeTrigger, r);
+    }
+
+    public execute(): void {
         TriggerExecute(this.nativeTrigger);
     }
 
-    public Disable(): void {
+    public disable(): void {
         DisableTrigger(this.nativeTrigger);
     }
 
-    public Enable(): void {
+    public enable(): void {
         EnableTrigger(this.nativeTrigger);
     }
+
 }

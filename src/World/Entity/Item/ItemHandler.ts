@@ -24,12 +24,12 @@ export class ItemHandler {
         this.AddItemsToList();
         this.SetupItems();
         this.useItemTrigger = new Trigger();
-        this.useItemTrigger.RegisterAnyUnitEventBJ(EVENT_PLAYER_UNIT_USE_ITEM);
-        this.useItemTrigger.AddAction(() => this.UseItem());
+        this.useItemTrigger.registerAnyUnitEventBJ(EVENT_PLAYER_UNIT_USE_ITEM);
+        this.useItemTrigger.addAction(() => this.UseItem());
 
         this.pickupItemTrigger = new Trigger();
-        this.pickupItemTrigger.RegisterAnyUnitEventBJ(EVENT_PLAYER_UNIT_PICKUP_ITEM);
-        this.pickupItemTrigger.AddAction(() => this.PickupItem());
+        this.pickupItemTrigger.registerAnyUnitEventBJ(EVENT_PLAYER_UNIT_PICKUP_ITEM);
+        this.pickupItemTrigger.addAction(() => this.PickupItem());
 
 
     }

@@ -23,13 +23,13 @@ export class SpawnedCreeps {
         // let creativeName = CreateUnit(Player(COLOUR.NAVY), FourCC('u000'), -64.00, 4032.00, 240.0);
         // this.unitMap.set(GetHandleIdBJ(creativeName), new Creep(creativeName));
         // const triggerTest: Trigger = new Trigger();
-        // triggerTest.RegisterAnyUnitEventBJ(EVENT_PLAYER_UNIT_SELECTED);
-        // triggerTest.AddAction(() => this.printUnit());
+        // triggerTest.registerAnyUnitEventBJ(EVENT_PLAYER_UNIT_SELECTED);
+        // triggerTest.addAction(() => this.printUnit());
 
 
         this.unitDiesTrigger = new Trigger();
-        this.unitDiesTrigger.RegisterAnyUnitEventBJ(EVENT_PLAYER_UNIT_DEATH);
-        this.unitDiesTrigger.AddAction(() => this.RemoveDeadCreeps());
+        this.unitDiesTrigger.registerAnyUnitEventBJ(EVENT_PLAYER_UNIT_DEATH);
+        this.unitDiesTrigger.addAction(() => this.RemoveDeadCreeps());
     }
 
     private printUnit(): void {

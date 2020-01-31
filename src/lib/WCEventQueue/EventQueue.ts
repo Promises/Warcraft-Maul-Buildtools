@@ -13,8 +13,8 @@ export class EventQueue {
 
     constructor() {
         this.ticker = new Trigger();
-        this.ticker.RegisterTimerEventPeriodic(0.10);
-        this.ticker.AddAction(() => {
+        this.ticker.registerTimerEventPeriodic(0.10);
+        this.ticker.addAction(() => {
             this.HandleTick();
         });
     }
