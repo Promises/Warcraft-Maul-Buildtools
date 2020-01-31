@@ -7,9 +7,20 @@ import { CheckPoint } from '../../../Entity/CheckPoint';
 export class ExampleMaze extends AbstractActionButton {
     private static disabledIcon: string = 'uiImport\\CommandButtonsDisabled\\DISBTNMaze.dds';
     private static enabledIcon: string = 'uiImport\\CommandButtons\\BTNMAZE.dds';
+    private readonly toolTip: framehandle;
 
     constructor(game: WarcraftMaul, x: number, y: number, size: number, idx: number = 0) {
         super(game, `mazeButton${idx}`, ExampleMaze.disabledIcon, x, y, size);
+        this.toolTip = BlzCreateFrameByType(
+            'TEXT',
+            'FaceFrameTooltip',
+            this.backdropHandle,
+            '',
+            0);
+        BlzFrameSetTooltip(this.buttonHandle, this.toolTip);
+
+        BlzFrameSetAbsPoint(this.toolTip, FRAMEPOINT_CENTER, x, y + 0.025);
+        BlzFrameSetText(this.toolTip, 'Show/Hide Sample Maze');
     }
 
     public clickAction(): void {

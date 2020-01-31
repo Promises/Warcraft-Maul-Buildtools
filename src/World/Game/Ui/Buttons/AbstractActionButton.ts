@@ -5,14 +5,14 @@ import { WarcraftMaul } from '../../../WarcraftMaul';
 export abstract class AbstractActionButton {
 
 
-    private buttonHandle: framehandle;
+    private _buttonHandle: framehandle;
     private _backdropHandle: framehandle;
     private trig: Trigger;
     private _game: WarcraftMaul;
 
     constructor(game: WarcraftMaul, name: string, icon: string, x: number, y: number, size: number) {
         this._game = game;
-        this.buttonHandle = BlzCreateFrameByType(
+        this._buttonHandle = BlzCreateFrameByType(
             'BUTTON',
             name,
             BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0),
@@ -22,27 +22,27 @@ export abstract class AbstractActionButton {
         this._backdropHandle = BlzCreateFrameByType(
             'BACKDROP',
             `${name}BackDrop`,
-            this.buttonHandle,
+            this._buttonHandle,
             'ButtonBackdropTemplate',
             0);
 
-        BlzFrameSetSize(this.buttonHandle, size, size);
+        BlzFrameSetSize(this._buttonHandle, size, size);
         BlzFrameSetSize(this._backdropHandle, size, size);
         BlzFrameSetTexture(this._backdropHandle, icon, 0, true);
-        BlzFrameSetAbsPoint(this.buttonHandle, FRAMEPOINT_CENTER, x, y);
-        BlzFrameSetPoint(this._backdropHandle, FRAMEPOINT_CENTER, this.buttonHandle, FRAMEPOINT_CENTER, 0.0, 0.0);
+        BlzFrameSetAbsPoint(this._buttonHandle, FRAMEPOINT_CENTER, x, y);
+        BlzFrameSetPoint(this._backdropHandle, FRAMEPOINT_CENTER, this._buttonHandle, FRAMEPOINT_CENTER, 0.0, 0.0);
 
         this.trig = new Trigger();
         this.trig.addAction(() => this.clickAction());
-        this.trig.registerFrameEvent(this.buttonHandle, FRAMEEVENT_CONTROL_CLICK);
+        this.trig.registerFrameEvent(this._buttonHandle, FRAMEEVENT_CONTROL_CLICK);
     }
 
     public disable(): void {
-        BlzFrameSetEnable(this.buttonHandle, false);
+        BlzFrameSetEnable(this._buttonHandle, false);
     }
 
     public enable(): void {
-        BlzFrameSetEnable(this.buttonHandle, true);
+        BlzFrameSetEnable(this._buttonHandle, true);
     }
 
     get game(): WarcraftMaul {
@@ -51,6 +51,10 @@ export abstract class AbstractActionButton {
     get backdropHandle(): framehandle {
         return this._backdropHandle;
     }
+    get buttonHandle(): framehandle {
+        return this._buttonHandle;
+    }
+
 
 
     public abstract clickAction(): void;
