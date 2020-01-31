@@ -1,0 +1,5 @@
+ui\framedef\ui\escmenutemplates.fdf
+ui\framedef\glue\standardtemplates.fdf
+ui\framedef\ui\simpleinfopanel.fdf
+ui\framedef\glue\battlenettemplates.fdf
+ui\framedef\ui\infopaneltemplates.fdf

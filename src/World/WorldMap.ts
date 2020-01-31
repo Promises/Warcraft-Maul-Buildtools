@@ -18,6 +18,7 @@ import { ArchimondeTeleport } from './Game/ArchimondeTeleport';
 import { Trigger } from '../JassOverrides/Trigger';
 import { AbstractGameRound } from './Game/BaseMaul/AbstractGameRound';
 import { GameTurn } from './Game/BaseMaul/GameTurn';
+import { TimedEvent } from '../lib/WCEventQueue/TimedEvent';
 
 export class WorldMap {
     public game: WarcraftMaul;
@@ -38,14 +39,15 @@ export class WorldMap {
     private gameTimeTrigger: Trigger;
     public gameRoundHandler?: AbstractGameRound;
     public gameTurn: GameTurn;
+
     constructor(game: WarcraftMaul) {
         this.game = game;
         this.setupWorldCreatures();
         this._spawnedCreeps = new SpawnedCreeps(this);
         this.towerConstruction = new TowerConstruction(game);
         this.gameTimeTrigger = new Trigger();
-        this.gameTimeTrigger.RegisterTimerEventPeriodic(1.00);
-        this.gameTimeTrigger.AddAction(() => this.UpdateGameTime());
+        this.gameTimeTrigger.registerTimerEventPeriodic(1.00);
+        this.gameTimeTrigger.addAction(() => this.UpdateGameTime());
         this.gameTurn = new GameTurn();
         this.antiBlock = new AntiBlock(this);
 
@@ -66,7 +68,7 @@ export class WorldMap {
 
     private setupArrows(): void {
         const directionalArrows: DirectionalArrow[] = [];
-        for (let playerId: number = 0; playerId < 13; playerId++) {
+        for (let playerId: number = 0; playerId < this.playerSpawns.length; playerId++) {
             const firstSpawn: CheckPoint | undefined = this.playerSpawns[playerId].spawnOne;
             if (firstSpawn === undefined) {
                 return;
@@ -84,27 +86,27 @@ export class WorldMap {
 
             let modelPath: string = '';
             // if (Player(playerId) === GetLocalPlayer()) {
-            // modelPath = 'Doodads\\Cinematic\\DemonFootPrint\\DemonFootPrint0.mdl';
+            modelPath = 'Doodads\\Cinematic\\DemonFootPrint\\DemonFootPrint0.mdl';
             // modelPath = 'Abilities\\Spells\\Items\\OrbCorruption\\OrbCorruptionMissile.mdl';
-            modelPath = 'Abilities\\Spells\\NightElf\\FaerieDragonInvis\\FaerieDragon_Invis.mdl';
+            // modelPath = 'Abilities\\Spells\\NightElf\\FaerieDragonInvis\\FaerieDragon_Invis.mdl';
             // }
             //
             directionalArrows.push(new DirectionalArrow(modelPath,
-                                                        GetRectCenterX(firstCheckpoint.rectangle),
-                                                        GetRectCenterY(firstCheckpoint.rectangle),
-                                                        GetRectCenterX(secondCheckpoint.rectangle),
-                                                        GetRectCenterY(secondCheckpoint.rectangle)));
+                GetRectCenterX(firstCheckpoint.rectangle),
+                GetRectCenterY(firstCheckpoint.rectangle),
+                GetRectCenterX(secondCheckpoint.rectangle),
+                GetRectCenterY(secondCheckpoint.rectangle)));
         }
 
         // TODO: This needs to be replaced with a timer library!
-        const t: timer = CreateTimer();
-        TimerStart(t, 10.00, false, () => {
+        this.game.timedEventQueue.AddEvent(new TimedEvent(() => {
             let directionalArrow: DirectionalArrow | undefined = directionalArrows.pop();
             while (directionalArrow !== undefined) {
                 directionalArrow.Destroy();
                 directionalArrow = directionalArrows.pop();
             }
-        });
+            return true;
+        }, 300));
     }
 
     public createDummyCreeps(): void {
