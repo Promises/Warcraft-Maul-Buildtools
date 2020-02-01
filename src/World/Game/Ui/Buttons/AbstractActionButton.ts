@@ -22,13 +22,15 @@ export abstract class AbstractActionButton {
         this._backdropHandle = BlzCreateFrameByType(
             'BACKDROP',
             `${name}BackDrop`,
-            this._buttonHandle,
+            BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0),
             'ButtonBackdropTemplate',
             0);
 
         BlzFrameSetSize(this._buttonHandle, size, size);
         BlzFrameSetSize(this._backdropHandle, size, size);
         BlzFrameSetTexture(this._backdropHandle, icon, 0, true);
+        // BlzFrameSetTexture(this._buttonHandle, 'uiImport\\CommandButtons\\BTNNone.dds', 0, true);
+        BlzFrameSetAlpha(this._buttonHandle, 0);
         BlzFrameSetAbsPoint(this._buttonHandle, FRAMEPOINT_CENTER, x, y);
         BlzFrameSetPoint(this._backdropHandle, FRAMEPOINT_CENTER, this._buttonHandle, FRAMEPOINT_CENTER, 0.0, 0.0);
 

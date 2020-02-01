@@ -3,11 +3,16 @@ import { WarcraftMaul } from '../../../WarcraftMaul';
 import { Defender } from '../../../Entity/Players/Defender';
 import { AdvancedHoloMaze } from '../../../Holograms/AdvancedHoloMaze';
 import { CheckPoint } from '../../../Entity/CheckPoint';
+import { AbstractPlayer } from '../../../Entity/Players/AbstractPlayer';
+import { Log } from '../../../../lib/Serilog/Serilog';
 
 export class ExampleMaze extends AbstractActionButton {
-    private static disabledIcon: string = 'uiImport\\CommandButtonsDisabled\\DISBTNMaze.dds';
-    private static enabledIcon: string = 'uiImport\\CommandButtons\\BTNMAZE.dds';
+    private static enabledIcon: string = 'uiImport/CommandButtonsDisabled/DISBTNMAZEAlpha.dds';
+    private static disabledIcon: string = 'uiImport/CommandButtons/BTNMAZEAlpha.dds';
     private readonly toolTip: framehandle;
+    private currentFade: number = 255;
+    private increaseFade: boolean = false;
+    private players: Map<number, AbstractPlayer> = new Map<number, AbstractPlayer>();
 
     constructor(game: WarcraftMaul, x: number, y: number, size: number, idx: number = 0) {
         super(game, `mazeButton${idx}`, ExampleMaze.disabledIcon, x, y, size);
@@ -21,6 +26,13 @@ export class ExampleMaze extends AbstractActionButton {
 
         BlzFrameSetAbsPoint(this.toolTip, FRAMEPOINT_CENTER, x, y + 0.025);
         BlzFrameSetText(this.toolTip, 'Show/Hide Sample Maze');
+
+        for (const player of this.game.players.values()) {
+            this.players.set(player.id, player);
+        }
+
+        this.game.eventQueue.AddLow(() => this.fadeInAndOut());
+
     }
 
     public clickAction(): void {
@@ -29,7 +41,8 @@ export class ExampleMaze extends AbstractActionButton {
             return;
         }
         this.disable();
-
+        this.players.delete(player.id);
+        BlzFrameSetAlpha(this.backdropHandle, 255);
         const firstSpawn: CheckPoint | undefined = this.game.worldMap.playerSpawns[player.id].spawnOne;
         if (firstSpawn === undefined) {
             this.enable();
@@ -78,6 +91,28 @@ export class ExampleMaze extends AbstractActionButton {
             }
         }
 
+    }
+
+    public fadeInAndOut(): boolean {
+        if (this.currentFade === 255 || this.currentFade === 5) {
+            this.increaseFade = !this.increaseFade;
+        }
+        if (this.players.size === 0) {
+            return true;
+        }
+        if (this.increaseFade) {
+            this.currentFade += 10;
+        } else {
+            this.currentFade -= 10;
+
+        }
+        for (const player of this.players.values()) {
+            if (player.wcPlayer === GetLocalPlayer()) {
+                BlzFrameSetAlpha(this.backdropHandle, this.currentFade);
+            }
+        }
+
+        return false;
     }
 
 }

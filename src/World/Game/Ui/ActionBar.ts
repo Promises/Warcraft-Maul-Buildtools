@@ -4,26 +4,33 @@
 
 import { AbstractActionButton } from './Buttons/AbstractActionButton';
 import { WarcraftMaul } from '../../WarcraftMaul';
-import { DebugGoldButton } from './Buttons/DebugGoldButton';
 import { ExampleMaze } from './Buttons/ExampleMaze';
 
 export class ActionBar {
     private readonly game: WarcraftMaul;
-    private readonly actionBarX: number = 0.222;
-    private readonly actionBarY: number = 0.15;
+    private readonly actionBarY: number = 0.143;
     private readonly actionBarHeight: number = 0.02;
-    private readonly actionBarButtonsSpaceBetween: number = 0.025;
+    private readonly actionBarButtonsSpaceBetween: number = 0.0247;
+    private readonly actionBarX: number = 0.4 - this.actionBarButtonsSpaceBetween * 2;
     private readonly buttons: AbstractActionButton[] = [];
 
     constructor(game: WarcraftMaul) {
         this.game = game;
+        const baseFrame: framehandle = BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0);
+        const actionbar: framehandle = BlzCreateFrameByType('BACKDROP', 'actiobarBackdrop', baseFrame, '', 0);
+        const barHeightOffset: number = 6.5;
+        const barHeight: number = 0.03;
+        BlzFrameSetSize(actionbar, barHeightOffset * barHeight, barHeight);
+        BlzFrameSetAbsPoint(actionbar, FRAMEPOINT_CENTER, 0.4, this.actionBarY);
+        BlzFrameSetTexture(actionbar, 'uiImport/CommandButtons/actionbar.dds', 0, true);
+
         this.initializeButtons();
     }
 
     private initializeButtons(): void {
-        if (this.game.debugMode) {
-            this.buttons.push(new DebugGoldButton(this.game, this.getNextX(), this.getNextY(), this.actionBarHeight, this.buttons.length));
-        }
+        // if (this.game.debugMode) {
+        //     this.buttons.push(new DebugGoldButton(this.game, this.getNextX(), this.getNextY(), this.actionBarHeight, this.buttons.length));
+        // }
         this.buttons.push(new ExampleMaze(this.game, this.getNextX(), this.getNextY(), this.actionBarHeight, this.buttons.length));
 
     }
