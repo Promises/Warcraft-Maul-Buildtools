@@ -13,7 +13,6 @@ export abstract class AbstractPlayer {
         this.battleTag = GetPlayerName(this.wcPlayer);
 
         if (this.battleTag.indexOf('#') > 0) {
-            Log.Error(`${this.battleTag} ${this.battleTag.indexOf('#')}`);
             this.name = this.battleTag.slice(0, this.battleTag.indexOf('#'));
             if (this.battleTag === 'Runi95#2202' ||
                 this.battleTag === 'Promises#2725' ||

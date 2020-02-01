@@ -80,7 +80,6 @@ export class WarcraftMaul {
                 new StringSink(LogLevel.Debug, SendMessageUnlogged),
                 // new PreloadSink(LogLevel.Message, `WCMAUL\\${os.time()}.txt`),
             ]);
-            Log.Debug('Debug mode enabled');
         }
         // this.mmd.DefineSettingBoolean('debug_mode', this.debugMode);
         this.gameCommandHandler = new Commands(this);
@@ -97,7 +96,6 @@ export class WarcraftMaul {
         this.enemies.push(new Attacker(COLOUR.TURQUOISE, this));
         this.enemies.push(new Attacker(COLOUR.VOILET, this));
         this.enemies.push(new Attacker(COLOUR.WHEAT, this));
-        Log.Debug('Debug mode enabled');
 
 
         // All enemies should be allied with each other
