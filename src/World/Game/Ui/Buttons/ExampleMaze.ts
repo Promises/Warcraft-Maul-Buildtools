@@ -35,7 +35,7 @@ export class ExampleMaze extends AbstractActionButton {
             this.players.set(player.id, player);
         }
 
-        this.game.eventQueue.AddLow(() => this.fadeInAndOut());
+        // this.game.eventQueue.AddLow(() => this.fadeInAndOut());
 
     }
 
