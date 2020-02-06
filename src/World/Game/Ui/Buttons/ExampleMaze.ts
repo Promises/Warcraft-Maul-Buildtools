@@ -11,6 +11,8 @@ export class ExampleMaze extends AbstractActionButton {
     private static disabledIcon: string = 'uiImport/CommandButtons/BTNMAZEAlpha.dds';
     private readonly toolTip: framehandle;
     private currentFade: number = 255;
+    private defaultSize: number;
+    private currentSize: number;
     private increaseFade: boolean = false;
     private players: Map<number, AbstractPlayer> = new Map<number, AbstractPlayer>();
 
@@ -22,6 +24,8 @@ export class ExampleMaze extends AbstractActionButton {
             this.backdropHandle,
             '',
             0);
+        this.defaultSize = size;
+        this.currentSize = (size * 2);
         BlzFrameSetTooltip(this.buttonHandle, this.toolTip);
 
         BlzFrameSetAbsPoint(this.toolTip, FRAMEPOINT_CENTER, x, y + 0.025);
@@ -43,6 +47,8 @@ export class ExampleMaze extends AbstractActionButton {
         this.disable();
         this.players.delete(player.id);
         BlzFrameSetAlpha(this.backdropHandle, 255);
+        BlzFrameSetSize(this.backdropHandle, this.defaultSize, this.defaultSize);
+        BlzFrameSetSize(this.buttonHandle, this.defaultSize, this.defaultSize);
         const firstSpawn: CheckPoint | undefined = this.game.worldMap.playerSpawns[player.id].spawnOne;
         if (firstSpawn === undefined) {
             this.enable();
@@ -94,7 +100,7 @@ export class ExampleMaze extends AbstractActionButton {
     }
 
     public fadeInAndOut(): boolean {
-        if (this.currentFade === 255 || this.currentFade === 5) {
+        if (this.currentFade >= 250 || this.currentFade <= 10) {
             this.increaseFade = !this.increaseFade;
         }
         if (this.players.size === 0) {
@@ -102,13 +108,17 @@ export class ExampleMaze extends AbstractActionButton {
         }
         if (this.increaseFade) {
             this.currentFade += 10;
+            this.currentSize += (this.defaultSize / 25.0);
         } else {
             this.currentFade -= 10;
+            this.currentSize = this.defaultSize;
 
         }
         for (const player of this.players.values()) {
             if (player.wcPlayer === GetLocalPlayer()) {
                 BlzFrameSetAlpha(this.backdropHandle, this.currentFade);
+                BlzFrameSetSize(this.backdropHandle, this.currentSize, this.currentSize);
+                BlzFrameSetSize(this.buttonHandle, this.currentSize, this.currentSize);
             }
         }
 
