@@ -14,6 +14,7 @@ import { DummyPlayer } from '../Entity/EmulatedPlayer/DummyPlayer';
 import { HybridTower } from '../../Generated/hybridRandomGEN';
 import { Walkable } from '../Antiblock/Maze';
 import { MMDGoal, MMDOperator, MMDSuggest, MMDType } from '../../lib/MMD';
+import { Creep } from '../Entity/Creep';
 
 export class Commands {
 
@@ -627,7 +628,7 @@ export class Commands {
                 this.RemoveAllKickedPlayerTowers();
                 if (this.game.scoreBoard) {
                     MultiboardSetItemValueBJ(this.game.scoreBoard.board, 1, 7 + this.voteAgainstPlayer.scoreSlot,
-                                             Util.ColourString(this.voteAgainstPlayer.getColourCode(), '<Kicked>'));
+                        Util.ColourString(this.voteAgainstPlayer.getColourCode(), '<Kicked>'));
                 }
                 this.game.players.delete(this.voteAgainstPlayer.id);
 

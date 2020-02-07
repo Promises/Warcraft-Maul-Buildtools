@@ -3,6 +3,8 @@ import { WaveCreep } from '../../Entity/WaveCreep';
 import { Creep } from '../../Entity/Creep';
 import { PlayerSpawns } from '../../Entity/PlayerSpawns';
 import { CreepAbility } from '../../Entity/CreepAbilities/specs/CreepAbility';
+import { SpawnedCreeps } from '../../Entity/SpawnedCreeps';
+import { Trigger } from '../../../JassOverrides/Trigger';
 
 export abstract class AbstractGameRound {
 
@@ -11,9 +13,15 @@ export abstract class AbstractGameRound {
     private _isWaveInProgress: boolean = false;
     private _currentWave: number = 1;
     public antiJuggleEnabled: boolean = true;
+    private creepMovementTimeout: Trigger;
 
     constructor(game: WarcraftMaul) {
         this.game = game;
+        this.creepMovementTimeout = new Trigger();
+        this.creepMovementTimeout.registerTimerEventPeriodic(5);
+        this.creepMovementTimeout.addAction(() => {
+            this.VerifyCreepMovement();
+        });
     }
 
     get currentWave(): number {
@@ -33,6 +41,17 @@ export abstract class AbstractGameRound {
         this._isWaveInProgress = value;
     }
 
+    public VerifyCreepMovement(): void {
+        const spawnedCreeps: SpawnedCreeps | undefined = this.game.worldMap.spawnedCreeps;
+        if (spawnedCreeps) {
+            spawnedCreeps.unitMap.forEach((u: Creep) => {
+                if (u.GetCurrentOrder() === 0 && u.targetCheckpoint) {
+                    u.ReapplyMovement();
+                }
+            });
+
+        }
+    }
 
 
     public SpawnCreeps(): void {
@@ -77,8 +96,6 @@ export abstract class AbstractGameRound {
         }
         this.FinishedSpawning();
     }
-
-
 
 
     public abstract GameTimeUpdateEvent(): void;

@@ -27,8 +27,8 @@ export class Creep {
             return;
         }
         IssuePointOrder(this.creep, 'move',
-                        GetRectCenterX(this.targetCheckpoint.rectangle),
-                        GetRectCenterY(this.targetCheckpoint.rectangle));
+            GetRectCenterX(this.targetCheckpoint.rectangle),
+            GetRectCenterY(this.targetCheckpoint.rectangle));
     }
 
     public printId(): void {
@@ -85,5 +85,9 @@ export class Creep {
 
     public OrderMove(x: number, y: number): void {
         IssuePointOrder(this.creep, 'move', x, y);
+    }
+
+    public GetCurrentOrder(): number {
+        return GetUnitCurrentOrder(this.creep);
     }
 }
