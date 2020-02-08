@@ -127,7 +127,7 @@ Drink
 STRING 21
 // Fähigkeiten: A0E3 (Drink), Tip (Tooltipp - Normal)
 {
-Drink [|cffffcc00Z|r]
+Drink
 }
 
 STRING 22
@@ -205,7 +205,7 @@ Z
 STRING 34
 // Fähigkeiten: A0E6 (Upgrade to Undead - Level 2), Tip (Tooltipp - Normal)
 {
-Upgrade to Undead - Level 2 [|cffffcc00Z|r]
+Upgrade to Undead - Level 2
 }
 
 STRING 35
@@ -325,7 +325,7 @@ STRING 53
 STRING 54
 // Gegenstände: I00T (The Forsaken), Tip (Tooltipp - Einfach)
 {
-Choose The Forsaken [|cffffcc00W|r]
+Choose The Forsaken
 }
 
 STRING 55
@@ -337,7 +337,7 @@ The Elementalists
 STRING 56
 // Gegenstände: I024 (The Elementalists), Tip (Tooltipp - Einfach)
 {
-Choose The Elementalists [|cffffcc00E|r]
+Choose The Elementalists
 }
 
 STRING 57
@@ -367,7 +367,7 @@ Move
 STRING 61
 // Fähigkeiten: A0EB (Move), Tip (Tooltipp - Normal)
 {
-Move - [|cffffcc00X|r]
+Move -
 }
 
 STRING 62
@@ -1926,7 +1926,7 @@ Uniques [Geno]
 STRING 316
 // Gegenstände: I027 (Uniques [Geno]), Tip (Tooltipp - Einfach)
 {
-Choose Uniques [|cffffcc00A|r]
+Choose Uniques
 }
 
 STRING 317
@@ -2300,55 +2300,55 @@ STRING 376
 STRING 377
 // Fähigkeiten: A0EX ([Loot Boxers] Open Lootbox), Tip (Tooltipp - Normal)
 {
-Open Lootbox [|cffffcc00Z|r]
+Open Lootbox
 }
 
 STRING 378
 // Fähigkeiten: A0EX ([Loot Boxers] Open Lootbox), Tip (Tooltipp - Normal)
 {
-Open Lootbox [|cffffcc00Z|r]
+Open Lootbox
 }
 
 STRING 379
 // Fähigkeiten: A0EX ([Loot Boxers] Open Lootbox), Tip (Tooltipp - Normal)
 {
-Open Lootbox [|cffffcc00Z|r]
+Open Lootbox
 }
 
 STRING 380
 // Fähigkeiten: A0EX ([Loot Boxers] Open Lootbox), Tip (Tooltipp - Normal)
 {
-Open Lootbox [|cffffcc00Z|r]
+Open Lootbox
 }
 
 STRING 381
 // Fähigkeiten: A0EX ([Loot Boxers] Open Lootbox), Tip (Tooltipp - Normal)
 {
-Open Lootbox [|cffffcc00Z|r]
+Open Lootbox
 }
 
 STRING 382
 // Fähigkeiten: A0EX ([Loot Boxers] Open Lootbox), Tip (Tooltipp - Normal)
 {
-Open Lootbox [|cffffcc00Z|r]
+Open Lootbox
 }
 
 STRING 383
 // Fähigkeiten: A0EX ([Loot Boxers] Open Lootbox), Tip (Tooltipp - Normal)
 {
-Open Lootbox [|cffffcc00Z|r]
+Open Lootbox
 }
 
 STRING 384
 // Fähigkeiten: A0EX ([Loot Boxers] Open Lootbox), Tip (Tooltipp - Normal)
 {
-Open Lootbox [|cffffcc00Z|r]
+Open Lootbox
 }
 
 STRING 385
 // Fähigkeiten: A0EX ([Loot Boxers] Open Lootbox), Tip (Tooltipp - Normal)
 {
-Open Lootbox [|cffffcc00Z|r]
+Open Lootbox
 }
 
 STRING 386
@@ -2381,7 +2381,7 @@ STRING 388
 STRING 389
 // Fähigkeiten: A0BF ([Void Cult] Pay the Toll), Tip (Tooltipp - Normal)
 {
-Pay the Toll [|cffffcc00Z|r]
+Pay the Toll
 }
 
 STRING 390
@@ -2492,7 +2492,7 @@ Loot Boxers [Geno]
 STRING 403
 // Gegenstände: I02D (Loot Boxers [Geno]), Tip (Tooltipp - Einfach)
 {
-Choose Loot Boxers [|cffffcc00Q|r]
+Choose Loot Boxers
 }
 
 STRING 404
@@ -2765,7 +2765,7 @@ Construct Thaddius
 STRING 448
 // Fähigkeiten: A0F5 (Construct Thaddius), Tip (Tooltipp - Normal)
 {
-Construct Thaddius [|cffffcc00Z|r]
+Construct Thaddius
 }
 
 STRING 449
@@ -4157,7 +4157,7 @@ This tower is engulfed in void energy, dealing 800 damage to enemy units within 
 STRING 680
 // Gegenstände: I02G (Naxxramas [Smutje]), Tip (Tooltipp - Einfach)
 {
-Choose Naxxramas [|cffffcc00R|r]
+Choose Naxxramas
 }
 
 STRING 681
@@ -6950,7 +6950,7 @@ Z
 STRING 4682
 // Gegenstände: I00N (Angel's Gateway), Tip (Tooltipp - Einfach)
 {
-Choose Angel's Gateway [|cffffcc00R|r]
+Choose Angel's Gateway
 }
 
 STRING 4694
@@ -7892,7 +7892,7 @@ Dazzle
 STRING 5416
 // Fähigkeiten: A078 (Dazzle), Tip (Tooltipp - Normal)
 {
-Dazzle [|cffffcc00Q|r]
+Dazzle
 }
 
 STRING 5417
@@ -7954,7 +7954,7 @@ Hardcore Random
 STRING 5455
 // Gegenstände: I00W (Hardcore Random), Tip (Tooltipp - Einfach)
 {
-Hardcore Random Race [|cffffcc00X|r]
+Hardcore Random Race
 }
 
 STRING 5456
@@ -7975,7 +7975,7 @@ Random
 STRING 5459
 // Gegenstände: I00V (Random), Tip (Tooltipp - Einfach)
 {
-Random Race [|cffffcc00Z|r]
+Random Race
 }
 
 STRING 5460
@@ -8063,7 +8063,7 @@ Destiny Bond
 STRING 5558
 // Fähigkeiten: A08L (Destiny Bond), Tip (Tooltipp - Normal)
 {
-Destiny Bond [|cffffcc00Z|r]
+Destiny Bond
 }
 
 STRING 5559
@@ -8279,7 +8279,7 @@ STRING 5665
 STRING 5675
 // Fähigkeiten: A04D (Feuer-Atem), Tip (Tooltipp - Normal)
 {
-Breath of Fire [|cffffcc00Z|r]
+Breath of Fire
 }
 
 STRING 5677
@@ -8321,7 +8321,7 @@ STRING 5691
 STRING 5693
 // Fähigkeiten: A04C (Trunkenheit), Tip (Tooltipp - Normal)
 {
-Drunken Haze [|cffffcc00Z|r]
+Drunken Haze
 }
 
 STRING 5710
@@ -8489,7 +8489,7 @@ STRING 5884
 STRING 5885
 // Fähigkeiten: A026 (Kettenblitz), Tip (Tooltipp - Normal)
 {
-Chain Lightning [|cffffcc00Z|r]
+Chain Lightning
 }
 
 STRING 5887
@@ -8567,7 +8567,7 @@ Breathes a cone of fire at enemy units, dealing 100 initial damage. Units that h
 STRING 6116
 // Gegenstände: I00X (Hybrid Random), Tip (Tooltipp - Einfach)
 {
-Hybrid Random Race [|cffffcc00V|r]
+Hybrid Random Race
 }
 
 STRING 6143
@@ -8817,7 +8817,7 @@ Assertiveness Training
 STRING 6303
 // Fähigkeiten: A03V (Assertiveness Training), Tip (Tooltipp - Normal)
 {
-Assertiveness Training [|cffffcc00Q|r]
+Assertiveness Training
 }
 
 STRING 6305
@@ -8915,13 +8915,13 @@ This unit has been hit by Entangling Roots; it cannot move and takes damage over
 STRING 6341
 // Fähigkeiten: A00F (Entangle), Tip (Tooltipp - Normal)
 {
-Entangling Roots - [|cffffcc00Z|r]
+Entangling Roots -
 }
 
 STRING 6343
 // Fähigkeiten: A006 (Cold Fury), Tip (Tooltipp - Normal)
 {
-Cold Fury [|cffffcc00Z|r]
+Cold Fury
 }
 
 STRING 6344
@@ -9320,7 +9320,7 @@ Divine Shield
 STRING 6571
 // Fähigkeiten: A03P (Monsun), Tip (Tooltipp - Normal)
 {
-Monsoon [|cffffcc00Z|r]
+Monsoon
 }
 
 STRING 6573
@@ -9380,7 +9380,7 @@ This unit is under the effects of Divine Shield; it will negate incoming damage 
 STRING 6595
 // Fähigkeiten: A025 (Sternenregen), Tip (Tooltipp - Normal)
 {
-Starfall [|cffffcc00X|r]
+Starfall
 }
 
 STRING 6596
@@ -10022,7 +10022,7 @@ STRING 6827
 STRING 6829
 // Fähigkeiten: A03R (Berserk), Tip (Tooltipp - Normal)
 {
-Berserk [|cffffcc00Z|r]
+Berserk
 }
 
 STRING 6831
@@ -10182,7 +10182,7 @@ Trade
 STRING 6957
 // Fähigkeiten: A016 (Trade), Tip (Tooltipp - Normal)
 {
-Trade [|cffffcc00Z|r]
+Trade
 }
 
 STRING 6958
@@ -10950,7 +10950,7 @@ Thorns
 STRING 7500
 // Ausbaustufen: R000 (Wolke), Tip (Tooltipp)
 {
-Research Thorns [|cffffcc00Z|r]
+Research Thorns
 }
 
 STRING 7501
@@ -11064,7 +11064,7 @@ Chain Lightning
 STRING 7535
 // Fähigkeiten: A015 (Poison Arrows), Tip (Tooltipp - Normal)
 {
-Poison Arrows [|cffffcc00Z|r]
+Poison Arrows
 }
 
 STRING 7540
@@ -11076,7 +11076,7 @@ Chain Lightning
 STRING 7541
 // Ausbaustufen: R001 (Wolke), Tip (Tooltipp)
 {
-Research Chain Lightning [|cffffcc00X|r]
+Research Chain Lightning
 }
 
 STRING 7542
@@ -11094,7 +11094,7 @@ Poison Arrows
 STRING 7544
 // Ausbaustufen: R002 (Wolke), Tip (Tooltipp)
 {
-Research Poison Arrows [|cffffcc00V|r]
+Research Poison Arrows
 }
 
 STRING 7545
@@ -11112,7 +11112,7 @@ Corrupted Blades
 STRING 7548
 // Ausbaustufen: R003 (Wolke), Tip (Tooltipp)
 {
-Research Corrupted Blades [|cffffcc00C|r]
+Research Corrupted Blades
 }
 
 STRING 7549
@@ -11124,7 +11124,7 @@ Provides Corrupted Warden with the Corrupted Blades ability, which deals area of
 STRING 7559
 // Fähigkeiten: A03L (Sternenregen), Tip (Tooltipp - Normal)
 {
-Starfall [|cffffcc00Z|r]
+Starfall
 }
 
 STRING 7560
@@ -11136,115 +11136,115 @@ Calls down waves of falling stars that damage nearby enemy units. Each wave deal
 STRING 7561
 // Gegenstände: I000 (Caerbannog), Tip (Tooltipp - Einfach)
 {
-Choose Caerbannog [|cffffcc00F|r]
+Choose Caerbannog
 }
 
 STRING 7563
 // Gegenstände: I001 (Demon Portal [Geno]), Tip (Tooltipp - Einfach)
 {
-Choose Demon Portal [|cffffcc00R|r]
+Choose Demon Portal
 }
 
 STRING 7565
 // Gegenstände: I002 (Undead Necropolis), Tip (Tooltipp - Einfach)
 {
-Choose Undead Necropolis [|cffffcc00Q|r]
+Choose Undead Necropolis
 }
 
 STRING 7571
 // Gegenstände: I006 (Human Town Hall), Tip (Tooltipp - Einfach)
 {
-Choose Human Town Hall [|cffffcc00Q|r]
+Choose Human Town Hall
 }
 
 STRING 7576
 // Gegenstände: I009 (Giants), Tip (Tooltipp - Einfach)
 {
-Choose Giants [|cffffcc00R|r]
+Choose Giants
 }
 
 STRING 7578
 // Gegenstände: I00B (The Summons [Geno]), Tip (Tooltipp - Einfach)
 {
-Choose The Summons [|cffffcc00S|r]
+Choose The Summons
 }
 
 STRING 7581
 // Gegenstände: I00D (Draenei Haven [Geno]), Tip (Tooltipp - Einfach)
 {
-Choose Draenei Haven [|cffffcc00S|r]
+Choose Draenei Haven
 }
 
 STRING 7585
 // Gegenstände: I00G (Shrine of Ultron [DISABLED]), Tip (Tooltipp - Einfach)
 {
-Choose Shrine Of Ultron [|cffffcc00D|r]
+Choose Shrine Of Ultron
 }
 
 STRING 7587
 // Gegenstände: I00H (Tavern), Tip (Tooltipp - Einfach)
 {
-Choose Tavern [|cffffcc00A|r]
+Choose Tavern
 }
 
 STRING 7589
 // Gegenstände: I00I (Corrupted Night Elves), Tip (Tooltipp - Einfach)
 {
-Choose Corrupted Night Elves [|cffffcc00Z|r]
+Choose Corrupted Night Elves
 }
 
 STRING 7591
 // Gegenstände: I00K (Hero's Altar [DISABLED]), Tip (Tooltipp - Einfach)
 {
-Choose Hero's Altar [|cffffcc00E|r]
+Choose Hero's Altar
 }
 
 STRING 7595
 // Gegenstände: I00M (Gnoll Republic), Tip (Tooltipp - Einfach)
 {
-Choose Gnoll Republic [|cffffcc00Z|r]
+Choose Gnoll Republic
 }
 
 STRING 7598
 // Gegenstände: I00O (Forest Troll Hut), Tip (Tooltipp - Einfach)
 {
-Choose Forest Troll Hut [|cffffcc00E|r]
+Choose Forest Troll Hut
 }
 
 STRING 7600
 // Gegenstände: I00P (Alliance of Blades), Tip (Tooltipp - Einfach)
 {
-Choose Alliance Of Blades [|cffffcc00Q|r]
+Choose Alliance Of Blades
 }
 
 STRING 7606
 // Gegenstände: I00U (Dwarven Mine), Tip (Tooltipp - Einfach)
 {
-Choose Dwarven Mine [|cffffcc00S|r]
+Choose Dwarven Mine
 }
 
 STRING 7608
 // Gegenstände: I00Z (Galaxy), Tip (Tooltipp - Einfach)
 {
-Choose Galaxy [|cffffcc00W|r]
+Choose Galaxy
 }
 
 STRING 7615
 // Gegenstände: I008 (Naga Temple [DISABLED]), Tip (Tooltipp - Einfach)
 {
-Choose Naga Temple [|cffffcc00Z|r]
+Choose Naga Temple
 }
 
 STRING 7616
 // Gegenstände: I00F (Night Elf Ancient [Geno]), Tip (Tooltipp - Einfach)
 {
-Choose Night Elf Ancient [|cffffcc00X|r]
+Choose Night Elf Ancient
 }
 
 STRING 7623
 // Gegenstände: I00R (Ice Troll Hut), Tip (Tooltipp - Einfach)
 {
-Choose Ice Troll Hut [|cffffcc00C|r]
+Choose Ice Troll Hut
 }
 
 STRING 7678
@@ -11292,19 +11292,19 @@ Critters [Geno]
 STRING 7739
 // Gegenstände: I00L (Critters [Geno]), Tip (Tooltipp - Einfach)
 {
-Choose Critters [|cffffcc00D|r]
+Choose Critters
 }
 
 STRING 7758
 // Gegenstände: I004 (High Elf Barracks [Geno]), Tip (Tooltipp - Einfach)
 {
-Choose High Elf Barracks [|cffffcc00W|r]
+Choose High Elf Barracks
 }
 
 STRING 7759
 // Gegenstände: I00C (Arachnid Hive [Geno]), Tip (Tooltipp - Einfach)
 {
-Choose Arachnid Hive [|cffffcc00D|r]
+Choose Arachnid Hive
 }
 
 STRING 7761
@@ -11328,7 +11328,7 @@ Weak Enchantment
 STRING 7769
 // Fähigkeiten: A03F (Weak Enchantment), Tip (Tooltipp - Normal)
 {
-Weak Enchantment [|cffffcc00Z|r]
+Weak Enchantment
 }
 
 STRING 7772
@@ -11732,7 +11732,7 @@ This tower will cast one of these spells, Rain of Fire, Monsoon, Flame Strike or
 STRING 7946
 // Gegenstände: I019 (Void Altar [Geno]), Tip (Tooltipp - Einfach)
 {
-Choose Void Altar [|cffffcc00V|r]
+Choose Void Altar
 }
 
 STRING 7948
@@ -12031,7 +12031,7 @@ STRING 8067
 STRING 8070
 // Gegenstände: I01A (Workers Union [Geno]), Tip (Tooltipp - Einfach)
 {
-Choose Workers Union [|cffffcc00A|r]
+Choose Workers Union
 }
 
 STRING 8079
@@ -12103,7 +12103,7 @@ Transfuse
 STRING 8106
 // Fähigkeiten: A03A (Transfuse), Tip (Tooltipp - Normal)
 {
-Transfuse [|cffffcc00Z|r]
+Transfuse
 }
 
 STRING 8108
@@ -12115,7 +12115,7 @@ Infuse
 STRING 8109
 // Fähigkeiten: A0A7 (Infuse), Tip (Tooltipp - Normal)
 {
-Infuse [|cffffcc00X|r]
+Infuse
 }
 
 STRING 8110
@@ -12235,7 +12235,7 @@ Scavenge
 STRING 8163
 // Fähigkeiten: A0AJ (Sacrifice), Tip (Tooltipp - Normal)
 {
-Sacrifice [|cffffcc00Z|r]
+Sacrifice
 }
 
 STRING 8164
@@ -12883,7 +12883,7 @@ STRING 8384
 STRING 8403
 // Fähigkeiten: A0AZ ([Orc Stronghold] Summon Hawk), Tip (Tooltipp - Normal)
 {
-Summon Hawk [|cffffcc00C|r]
+Summon Hawk
 }
 
 STRING 8410
@@ -12895,7 +12895,7 @@ STRING 8410
 STRING 8411
 // Fähigkeiten: A0AX ([Orc Stronghold] Summon Huffer), Tip (Tooltipp - Normal)
 {
-Summon Huffer [|cffffcc00X|r]
+Summon Huffer
 }
 
 STRING 8413
@@ -12907,7 +12907,7 @@ STRING 8413
 STRING 8414
 // Fähigkeiten: A0AW ([Orc Stronghold] Summon Misha), Tip (Tooltipp - Normal)
 {
-Summon Misha [|cffffcc00Z|r]
+Summon Misha
 }
 
 STRING 8446
@@ -13177,7 +13177,7 @@ Alchemical Transmutation
 STRING 8501
 // Fähigkeiten: A0B0 (Alchemical Transmutation), Tip (Tooltipp - Normal)
 {
-Alchemical Transmutation [|cffffcc00V|r]
+Alchemical Transmutation
 }
 
 STRING 8502
@@ -13286,25 +13286,25 @@ STRING 8555
 STRING 8560
 // Fähigkeiten: A0BJ ([Void Cult] Summon Void Beast), Tip (Tooltipp - Normal)
 {
-Summon Void Beast [|cffffcc00X|r]
+Summon Void Beast
 }
 
 STRING 8562
 // Fähigkeiten: A0BB ([Void Cult] Summon Void Being), Tip (Tooltipp - Normal)
 {
-Summon Void Being [|cffffcc00Z|r]
+Summon Void Being
 }
 
 STRING 8564
 // Fähigkeiten: A0BK ([Void Cult] Summon Void Monstrosity), Tip (Tooltipp - Normal)
 {
-Summon Void Monstrosity [|cffffcc00C|r]
+Summon Void Monstrosity
 }
 
 STRING 8566
 // Fähigkeiten: A0BL ([Void Cult] Summon Void Lord), Tip (Tooltipp - Normal)
 {
-Summon Void Lord [|cffffcc00V|r]
+Summon Void Lord
 }
 
 STRING 8573
@@ -13924,25 +13924,25 @@ Increases life regeneration of nearby chimaeras
 STRING 8921
 // Fähigkeiten: A0BT ([Night Elf] Chimaera Transform), Tip (Tooltipp - Normal)
 {
-Age [|cffffcc00Z|r]
+Age
 }
 
 STRING 8922
 // Fähigkeiten: A0BD ([Night Elf] Chimaera Transform), Tip (Tooltipp - Normal)
 {
-Grow Up [|cffffcc00Z|r]
+Grow Up
 }
 
 STRING 8923
 // Fähigkeiten: A0BU ([Night Elf] Chimaera Transform), Tip (Tooltipp - Normal)
 {
-Age [|cffffcc00Z|r]
+Age
 }
 
 STRING 8924
 // Fähigkeiten: A0BV ([Night Elf] Chimaera Transform), Tip (Tooltipp - Normal)
 {
-Grow Up [|cffffcc00Z|r]
+Grow Up
 }
 
 STRING 8925
@@ -14775,7 +14775,7 @@ STRING 9134
 STRING 9137
 // Gegenstände: I003 (Aviaries), Tip (Tooltipp - Einfach)
 {
-Choose Aviaries [|cffffcc00E|r]
+Choose Aviaries
 }
 
 STRING 9139
@@ -14871,7 +14871,7 @@ STRING 9241
 STRING 9245
 // Fähigkeiten: A0CE ([Cavernous Creatures] Exponential Growth), Tip (Tooltipp - Normal)
 {
-Exponential Growth [|cffffcc00Z|r]
+Exponential Growth
 }
 
 STRING 9252
@@ -14895,7 +14895,7 @@ STRING 9257
 STRING 9259
 // Fähigkeiten: A0CA ([Cavernous Creatures] Resurrect), Tip (Tooltipp - Normal)
 {
-Resurrect [|cffffcc00Z|r]
+Resurrect
 }
 
 STRING 9260
@@ -14991,19 +14991,19 @@ Rock Shards
 STRING 9301
 // Fähigkeiten: A0C7 ([Cavernous Creatures] Transfer Mana), Tip (Tooltipp - Normal)
 {
-Transfer Mana [|cffffcc00X|r]
+Transfer Mana
 }
 
 STRING 9302
 // Fähigkeiten: A0C8 ([Cavernous Creatures] Transfer Mana), Tip (Tooltipp - Normal)
 {
-Transfer Mana [|cffffcc00X|r]
+Transfer Mana
 }
 
 STRING 9304
 // Fähigkeiten: A0C9 ([Cavernous Creatures] Transfer Mana), Tip (Tooltipp - Normal)
 {
-Transfer Mana [|cffffcc00X|r]
+Transfer Mana
 }
 
 STRING 9306
@@ -15153,7 +15153,7 @@ Cavernous Creatures [Geno]
 STRING 9357
 // Gegenstände: I00Q (Cavernous Creatures [Geno]), Tip (Tooltipp - Einfach)
 {
-Choose Cavernous Creatures [|cffffcc00F|r]
+Choose Cavernous Creatures
 }
 
 STRING 9359
@@ -15165,7 +15165,7 @@ Orc Stronghold [Geno]
 STRING 9360
 // Gegenstände: I007 (Orc Stronghold [Geno]), Tip (Tooltipp - Einfach)
 {
-Choose Orc Stronghold [|cffffcc00Z|r]
+Choose Orc Stronghold
 }
 
 STRING 9361
@@ -15554,7 +15554,7 @@ STRING 9514
 STRING 9549
 // Gegenstände: I00S (High Elves [DISABLED]), Tip (Tooltipp - Einfach)
 {
-Choose High Elves [|cffffcc00W|r]
+Choose High Elves
 }
 
 STRING 9634
@@ -15578,7 +15578,7 @@ High Elf Farm
 STRING 9637
 // Gegenstände: I025 (High Elf Farm), Tip (Tooltipp - Einfach)
 {
-Choose High Elf Farm [|cffffcc00X|r]
+Choose High Elf Farm
 }
 
 STRING 9640
@@ -15604,7 +15604,7 @@ Siphon Energy
 STRING 9657
 // Fähigkeiten: A0CT (Siphon Energy), Tip (Tooltipp - Normal)
 {
-Siphon Energy [|cffffcc00Z|r]
+Siphon Energy
 }
 
 STRING 9658
@@ -15766,7 +15766,7 @@ Goblins
 STRING 9688
 // Gegenstände: I00J (Goblins), Tip (Tooltipp - Einfach)
 {
-Choose Goblins [|cffffcc00X|r]
+Choose Goblins
 }
 
 STRING 9690
@@ -15778,7 +15778,7 @@ Dragons
 STRING 9691
 // Gegenstände: I00E (Dragons), Tip (Tooltipp - Einfach)
 {
-Choose Dragons [|cffffcc00F|r]
+Choose Dragons
 }
 
 STRING 9692
@@ -16232,7 +16232,7 @@ Shrine of Buffs
 STRING 9965
 // Gegenstände: I026 (Shrine of Buffs), Tip (Tooltipp - Einfach)
 {
-Choose Shrine of Buffs [|cffffcc00Q|r]
+Choose Shrine of Buffs
 }
 
 STRING 9975
@@ -16244,7 +16244,7 @@ Outland
 STRING 9976
 // Gegenstände: I005 (Outland), Tip (Tooltipp - Einfach)
 {
-Choose Outland [|cffffcc00A|r]
+Choose Outland
 }
 
 STRING 9979
@@ -16342,7 +16342,7 @@ A large egg that burns as bright at the sun, nobody dears approach it as it is r
 STRING 9998
 // Fähigkeiten: A0DV (Awaken), Tip (Tooltipp - Normal)
 {
-Awaken Phoenix Egg [|cffffcc00Z|r]
+Awaken Phoenix Egg
 }
 
 STRING 9999

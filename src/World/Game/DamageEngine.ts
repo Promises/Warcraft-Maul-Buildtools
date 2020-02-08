@@ -8,7 +8,6 @@ import { InitialDamageModificationTower } from '../Entity/Tower/Specs/InitialDam
 import { FinalDamageModificationCreepAbility } from '../Entity/CreepAbilities/specs/FinalDamageModificationCreepAbility';
 import { AttackActionCreepAbility } from '../Entity/CreepAbilities/specs/AttackActionCreepAbility';
 import { Log } from '../../lib/Serilog/Serilog';
-import { KillingActionTower } from '../Entity/Tower/Specs/KillingActionTower';
 
 /**
  * Damage Engine 5.3.0.1
