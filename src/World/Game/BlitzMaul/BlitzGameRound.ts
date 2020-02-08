@@ -46,6 +46,7 @@ export class BlitzGameRound extends AbstractGameRound {
 
 
     private SpawnNextWave(): boolean {
+
         const nextWave: number = this.currentWave + 1;
         if (nextWave % 5 === 0 || nextWave === 36 || this.currentWave === this.game.worldMap.waveCreeps.length) {
             if (this.game.worldMap.spawnedCreeps.unitMap.size === 0) {
@@ -316,8 +317,8 @@ export class BlitzGameRound extends AbstractGameRound {
 
     private GetGoldRewardAmount(avgkills: number, kills: number): number {
         let modifier: number = (avgkills / kills);
-        if (modifier > 3.0) {
-            modifier = 3;
+        if (modifier > 5.0) {
+            modifier = 5;
         }
         if (modifier < 1) {
             modifier = 1;
