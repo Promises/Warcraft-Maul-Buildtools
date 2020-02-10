@@ -392,7 +392,8 @@ export class Commands {
                 SetCameraField(CAMERA_FIELD_TARGET_DISTANCE, amount, 1);
             }
         } else if (command[0] === 'dt' || command[0] === 'disabletowers') {
-            player.DisableTowers();
+            // player.DisableTowers();
+            player.sendMessage('This command has been removed.');
         } else if (command[0] === 'buildings' || command[0] === 'towers') {
             if (command[1]) {
                 const receiver: number = this.getPlayerIdFromColourName(command[1]);
