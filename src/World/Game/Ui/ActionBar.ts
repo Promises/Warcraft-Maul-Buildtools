@@ -5,6 +5,7 @@
 import { AbstractActionButton } from './Buttons/AbstractActionButton';
 import { WarcraftMaul } from '../../WarcraftMaul';
 import { ExampleMaze } from './Buttons/ExampleMaze';
+import { ClaimButton } from './Buttons/ClaimButton';
 
 export class ActionBar {
     private readonly game: WarcraftMaul;
@@ -32,6 +33,7 @@ export class ActionBar {
         //     this.buttons.push(new DebugGoldButton(this.game, this.getNextX(), this.getNextY(), this.actionBarHeight, this.buttons.length));
         // }
         this.buttons.push(new ExampleMaze(this.game, this.getNextX(), this.getNextY(), this.actionBarHeight, this.buttons.length));
+        this.buttons.push(new ClaimButton(this.game, this.getNextX(), this.getNextY(), this.actionBarHeight, this.buttons.length));
 
     }
 

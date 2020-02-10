@@ -377,7 +377,6 @@ export class Commands {
             player.sendMessage('ALL players are now |cFFFF0000denied|r access to your spawn!');
         } else if (command[0] === 'claim') {
             player.ClaimTowers();
-            player.sendMessage('All towers in your spawn has now been claimed.');
         } else if (command[0] === 'zoom' || command[0] === 'cam') {
             if (GetLocalPlayer() === player.wcPlayer) {
                 const amount: number = Util.ParsePositiveInt(command[1]);

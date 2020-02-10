@@ -358,6 +358,8 @@ export class Defender extends AbstractPlayer {
         ForGroupBJ(grp, () => this.ClaimTower());
         RemoveRect(rectangle);
         DestroyGroup(grp);
+        this.sendMessage('All towers in your spawn has now been claimed.');
+
     }
 
 
