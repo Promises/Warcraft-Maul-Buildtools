@@ -6,6 +6,7 @@ export abstract class AbstractPlayer {
     public id: number;
     private name: string;
     private battleTag: string;
+    public isDeveloper: boolean = false;
 
     protected constructor(id: number) {
         this.id = id;
@@ -20,6 +21,7 @@ export abstract class AbstractPlayer {
                 this.battleTag === 'GenoHacker#2987' ||
                 this.battleTag === 'ThaOneSmutje#2560') {
                 this.name = `${Util.ColourString('#7ab1df', '[DEV]')} ${this.getNameWithColour()}`;
+                this.isDeveloper = true;
             }
         } else {
             this.name = this.battleTag;

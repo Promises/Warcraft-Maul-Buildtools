@@ -377,6 +377,10 @@ export class Commands {
             player.sendMessage('ALL players are now |cFFFF0000denied|r access to your spawn!');
         } else if (command[0] === 'claim') {
             player.ClaimTowers();
+        } else if (command[0] === 'forceblitz') {
+            if (player.isDeveloper) {
+                this.game.diffVote.forceBlitz = true;
+            }
         } else if (command[0] === 'zoom' || command[0] === 'cam') {
             if (GetLocalPlayer() === player.wcPlayer) {
                 const amount: number = Util.ParsePositiveInt(command[1]);

@@ -26,6 +26,7 @@ export class Vote {
     private votedDiff: number[] = [];
     private totalVotedDiff: number = 0;
     public difficulty: number = 0;
+    public forceBlitz: boolean = false;
 
 
     constructor(game: WarcraftMaul) {
@@ -109,10 +110,17 @@ export class Vote {
             Log.Fatal('Could not parse game mode');
             return;
         }
+        if (this.forceBlitz) {
+            winningMode = 1;
+        }
 
         const colouredMode: string = Util.ColourString(settings.GAME_MODE_COLOURS[winningMode], settings.GAME_MODE_STRINGS[winningMode]);
+        if (this.forceBlitz) {
+            SendMessage(`Developer forced gamemode to be: ${colouredMode}.`);
+        } else {
+            SendMessage(`${colouredMode} won with ${this.votedMode[winningMode]} votes.`);
 
-        SendMessage(`${colouredMode} won with ${this.votedMode[winningMode]} votes.`);
+        }
         switch (winningMode) {
             case settings.GAME_MODES.CLASSIC:
                 this.game.worldMap.gameRoundHandler = new ClassicGameRound(this.game);
