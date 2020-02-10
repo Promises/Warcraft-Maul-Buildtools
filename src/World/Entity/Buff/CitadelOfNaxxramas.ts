@@ -2,6 +2,7 @@ import { Buff } from './Specs/Buff';
 import { WarcraftMaul } from '../../WarcraftMaul';
 import { AttackActionBuff } from './Specs/AttackActionBuff';
 import { Defender } from '../Players/Defender';
+import { Tower } from '../Tower/Specs/Tower';
 
 /**
  * [Naxxramas] Citadel of Naxxramas
@@ -29,15 +30,15 @@ export class SoulCollector extends Buff implements AttackActionBuff {
         }
         if (source) {
             const owner: Defender | undefined = this.game.players.get(GetPlayerId(GetOwningPlayer(source)));
-            if (owner) {
-                owner.towersArray.forEach((tower) => {
-                    if (tower.GetTypeID() === FourCC('oC7C')) {
-                        SetUnitManaBJ(tower.tower, GetUnitStateSwap(UNIT_STATE_MANA, tower.tower) + 1.00);
-                    }
-                    if (GetUnitStateSwap(UNIT_STATE_MANA, tower.tower) % 10 === 0) {
-                        SetUnitAbilityLevel(tower.tower, FourCC('A0F6'), GetUnitStateSwap(UNIT_STATE_MANA, tower.tower) / 10);
-                    }
-                });
+            if (owner && owner.citadelOfNaxxramas) {
+                const tower: Tower = owner.citadelOfNaxxramas;
+
+                if (tower.GetTypeID() === FourCC('oC7C')) {
+                    SetUnitManaBJ(tower.tower, GetUnitStateSwap(UNIT_STATE_MANA, tower.tower) + 1.00);
+                }
+                if (GetUnitStateSwap(UNIT_STATE_MANA, tower.tower) % 10 === 0) {
+                    SetUnitAbilityLevel(tower.tower, FourCC('A0F6'), GetUnitStateSwap(UNIT_STATE_MANA, tower.tower) / 10);
+                }
             }
         }
     }

@@ -8,6 +8,7 @@ import { AbstractHologramMaze } from '../../Holograms/AbstractHologramMaze';
 import { Tower } from '../Tower/Specs/Tower';
 import { TimedEvent } from '../../../lib/WCEventQueue/TimedEvent';
 import { Log } from '../../../lib/Serilog/Serilog';
+import { CitadelOfNaxxramas } from '../Tower/Races/Naxxramas/CitadelOfNaxxramas';
 
 export class Defender extends AbstractPlayer {
 
@@ -18,6 +19,7 @@ export class Defender extends AbstractPlayer {
     public seaElemetals: number = 0;
     public killHook?: () => void;
     public goldReward: number = 0;
+    public citadelOfNaxxramas: CitadelOfNaxxramas | undefined;
 
     get towerForces(): Map<number, number> {
         return this._towerForces;
@@ -53,7 +55,7 @@ export class Defender extends AbstractPlayer {
     private leaveTrigger: Trigger;
     private selectUnitTrigger: Trigger;
     private deniedPlayers: Map<number, boolean> = new Map<number, boolean>();
-    // private _towers: Map<number, Tower> = new Map<number, Tower>();
+    private _towers: Map<number, Tower> = new Map<number, Tower>();
     private _towersArray: Tower[] = [];
     private _holoMaze: AbstractHologramMaze | undefined = undefined;
     private game: WarcraftMaul;
@@ -95,6 +97,7 @@ export class Defender extends AbstractPlayer {
 
         this._holoMaze = holoMaze;
     }
+
     get holoMaze(): AbstractHologramMaze | undefined {
         return this._holoMaze;
     }
@@ -397,6 +400,11 @@ export class Defender extends AbstractPlayer {
         }
 
     }
+
+    public isTowerDisableable(tower: Tower): boolean {
+        return tower.GetSellValue() <= 10 && !(this.protectedTowers.indexOf(tower.GetTypeID()) >= 0);
+    }
+
 
     public GetVoidFragments(): number {
         return this._voidFragments;

@@ -248,4 +248,7 @@ export class Tower {
      */
 
 
+    public isPaused(): boolean {
+        return IsUnitPausedBJ(this.tower);
+    }
 }
