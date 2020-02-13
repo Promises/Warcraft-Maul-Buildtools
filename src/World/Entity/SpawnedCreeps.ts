@@ -70,8 +70,8 @@ export class SpawnedCreeps {
 
         let area: number | undefined;
 
-        for (let i: number = 0; i < settings.PLAYER_AREAS.length; i++) {
-            if (settings.PLAYER_AREAS[i].ContainsCreep(creep)) {
+        for (let i: number = 0; i < this.worldMap.game.mapSettings.PLAYER_AREAS.length; i++) {
+            if (this.worldMap.game.mapSettings.PLAYER_AREAS[i].ContainsCreep(creep)) {
                 area = i;
                 break;
             }

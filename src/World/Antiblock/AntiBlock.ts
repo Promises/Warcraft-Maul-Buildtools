@@ -83,8 +83,8 @@ export class AntiBlock {
         }
 
         let playerSpawnId: number | undefined;
-        for (let i: number = 0; i < settings.PLAYER_AREAS.length; i++) {
-            if (settings.PLAYER_AREAS[i].ContainsUnit(consUnit)) {
+        for (let i: number = 0; i < this._worldMap.game.mapSettings.PLAYER_AREAS.length; i++) {
+            if (this._worldMap.game.mapSettings.PLAYER_AREAS[i].ContainsUnit(consUnit)) {
                 playerSpawnId = i;
                 break;
             }
@@ -169,8 +169,8 @@ export class AntiBlock {
 
     public CleanUpRemovedConstruction(u: unit): void {
         let playerSpawnId: undefined | number;
-        for (let i: number = 0; i < settings.PLAYER_AREAS.length; i++) {
-            if (settings.PLAYER_AREAS[i].ContainsUnit(u)) {
+        for (let i: number = 0; i < this._worldMap.game.mapSettings.PLAYER_AREAS.length; i++) {
+            if (this._worldMap.game.mapSettings.PLAYER_AREAS[i].ContainsUnit(u)) {
                 playerSpawnId = i;
                 break;
             }

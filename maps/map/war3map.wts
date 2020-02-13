@@ -16351,3 +16351,8 @@ STRING 9999
 Can attack 5 enemies at once, attacks increase damage taken by the target by 25%.
 }
 
+STRING 990001
+// MAPMODE
+{
+WCM
+}

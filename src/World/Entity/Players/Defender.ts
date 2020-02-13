@@ -1,5 +1,5 @@
 import { AbstractPlayer } from './AbstractPlayer';
-import { ALLOW_PLAYER_TOWER_LOCATIONS, PLAYER_AREAS, Point } from '../../GlobalSettings';
+import { Point } from '../../GlobalSettings';
 import { Race } from '../../Game/Races/Race';
 import { Rectangle } from '../../../JassOverrides/Rectangle';
 import { Trigger } from '../../../JassOverrides/Trigger';
@@ -113,7 +113,7 @@ export class Defender extends AbstractPlayer {
 
 
         // Creat the allow player indicator tower
-        const allowTowerLoc: Point = ALLOW_PLAYER_TOWER_LOCATIONS[this.id];
+        const allowTowerLoc: Point = this.game.mapSettings.ALLOW_PLAYER_TOWER_LOCATIONS[this.id];
         //
         this.allowPlayerTower = CreateUnit(this.wcPlayer, FourCC('h03S'), allowTowerLoc.x, allowTowerLoc.y, 0.000);
         SetUnitVertexColor(this.allowPlayerTower, 0, 255, 0, 255);
@@ -126,7 +126,7 @@ export class Defender extends AbstractPlayer {
 
 
     public getArea(): Rectangle {
-        return PLAYER_AREAS[this.id];
+        return this.game.mapSettings.PLAYER_AREAS[this.id];
     }
 
     public getCenterX(): number {

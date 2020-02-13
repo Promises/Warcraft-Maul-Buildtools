@@ -24,8 +24,8 @@ export class AntiJuggleTower {
         this.destructable = Destructable.Create(FourCC('YTpc'), this.x, this.y, bj_UNIT_FACING, 1, 1);
 
         let playerSpawnId: undefined | number;
-        for (let i: number = 0; i < settings.PLAYER_AREAS.length; i++) {
-            if (settings.PLAYER_AREAS[i].ContainsDestructable(this.destructable)) {
+        for (let i: number = 0; i < this.game.mapSettings.PLAYER_AREAS.length; i++) {
+            if (this.game.mapSettings.PLAYER_AREAS[i].ContainsDestructable(this.destructable)) {
                 playerSpawnId = i;
                 break;
             }

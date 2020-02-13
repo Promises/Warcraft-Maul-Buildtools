@@ -1,4 +1,5 @@
 import { Rectangle } from '../JassOverrides/Rectangle';
+import { IMapSettings } from './IMapSettings';
 
 
 export interface Point {
@@ -6,32 +7,12 @@ export interface Point {
     y: number;
 }
 
-export const ALLOW_PLAYER_TOWER_LOCATIONS: Point[] = [
-    {x: -1536.0, y: 5376.0}, // Red
-    {x: 640.0, y: 4992.0}, // Blue
-    {x: 1536.0, y: 5376.0}, // Teal
-    {x: 5120.0, y: 448.0}, // Purple
-    {x: 768.0, y: 1984.0}, // Yellow
-    {x: -3616.0, y: 448.0}, // Orange
-    {x: -4736.0, y: -2816.0}, // Green
-    {x: 4736.0, y: -2816.0}, // Pink
-    {x: 512.0, y: -2176.0}, // Grey
-    {x: -1536.0, y: -2176.0}, // Lightblue
-    {x: 2816.0, y: -2176.0}, // Darkgreen
-    {x: -3712.0, y: 3456.0}, // Brown
-    {x: 4992.0, y: 3456.0}, // Maroon
-];
 
 
 // GAME SETTINGS:
 // export const INITIAL_LIVES: number = 20;
-export const INITIAL_LIVES: number = 100;
-export const GAME_END_TIME: number = 600;
-export const GAME_TIME_BEFORE_START: number = 90;
-export const GAME_TIME_BEFORE_WAVE: number = 20;
-export const GAME_GOLD_REWARD_BASE: number = 10;
 
-export const GAME_NAME: string = 'Warcraft Maul Reimagined';
+// @ts-ignore
 
 export enum GAME_MODES {
     CLASSIC,
@@ -178,21 +159,6 @@ export const AOB_ITEM_LOOT_LEVEL_FOUR: number[] = [
     FourCC('I01S'),
 ];
 
-export const PLAYER_AREAS: Rectangle[] = [
-    new Rectangle([-4224.0, 3968.0, -1792.0, 5504.0]), // Red area
-    new Rectangle([-768.0, 2304.0, 768.0, 4736.0]), // Blue area
-    new Rectangle([1792.0, 3968.0, 4224.0, 5504.0]), // Teal area
-    new Rectangle([3584.0, -2304.0, 5120.0, 128.0]), // Purple area
-    new Rectangle([-768.0, -768.0, 768.0, 1664.0]), // Yellow area
-    new Rectangle([-5120.0, -2304.0, -3584.0, 128.0]), // Orange area
-    new Rectangle([-4480.0, -4224.0, -2048.0, -2688.0]), // Green area
-    new Rectangle([2048.0, -4224.0, 4480.0, -2688.0]), // Pink area
-    new Rectangle([-768.0, -4864.0, 768.0, -2432.0]), // Grey area
-    new Rectangle([-2944.0, -1920.0, -1408.0, 512.0]), // Lightblue area
-    new Rectangle([1408.0, -1920.0, 2944.0, 512.0]), // Darkgreen area
-    new Rectangle([-5120.0, 768.0, -3584.0, 3200.0]), // Brown area
-    new Rectangle([3584.0, 768.0, 5120.0, 3200.0]), // Maroon area
-];
 
 export class Sounds {
     public static loseALifeSound: sound = CreateSound(

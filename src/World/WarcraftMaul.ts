@@ -29,16 +29,18 @@ import { Item } from '../lib/common/item';
 import { Trigger } from '../JassOverrides/Trigger';
 import { Group } from '../lib/common/unit';
 import { ActionBar } from './Game/Ui/ActionBar';
+import { WarcraftMaulSettings } from './WarcraftMaulSettings';
+import { IMapSettings } from './IMapSettings';
 
 export class WarcraftMaul {
 
     public debugMode: boolean = false;
     public gameEnded: boolean = false;
-    public waveTimer: number = settings.GAME_TIME_BEFORE_START;
+    public waveTimer: number;
     public gameTime: number = 0;
-    public gameEndTimer: number = settings.GAME_END_TIME;
-    public gameLives: number = settings.INITIAL_LIVES;
-    public startLives: number = settings.INITIAL_LIVES;
+    public gameEndTimer: number;
+    public gameLives: number;
+    public startLives: number;
     public worldMap: WorldMap;
     // public gameRoundHandler: AbstractGameRound;
     public gameCommandHandler: Commands;
@@ -63,11 +65,22 @@ export class WarcraftMaul {
     public timedEventQueue: TimedEventQueue;
     public racePicking: RacePicking;
     private TeleportMovement: boolean = false;
+    public readonly mapSettings: IMapSettings;
 
     // public mmd: MMD;
 
     constructor(creepAbilityHandler: CreepAbilityHandler/*, mmd: MMD*/) {
         // this.mmd = mmd;
+        const mapType: string = GetLocalizedString('TRIGSTR_990001');
+        switch (mapType) {
+            default:
+                this.mapSettings = new WarcraftMaulSettings();
+                break;
+        }
+        this.waveTimer = this.mapSettings.GAME_TIME_BEFORE_START;
+        this.gameEndTimer = this.mapSettings.GAME_END_TIME;
+        this.gameLives = this.mapSettings.INITIAL_LIVES;
+        this.startLives = this.mapSettings.INITIAL_LIVES;
         this.eventQueue = new EventQueue();
         this.safeEventQueue = new SafeEventQueue(this);
         this.timedEventQueue = new TimedEventQueue(this);
@@ -181,7 +194,7 @@ export class WarcraftMaul {
     }
 
     public GameOver(): void {
-        this.gameEndTimer = settings.GAME_END_TIME;
+        this.gameEndTimer = this.mapSettings.GAME_END_TIME;
         this.gameEnded = true;
         PlaySoundBJ(settings.Sounds.defeatSound);
         SendMessage('|cFFFF0000GAME OVER|r');

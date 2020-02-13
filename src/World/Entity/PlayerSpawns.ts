@@ -4,7 +4,6 @@ import { Trigger } from '../../JassOverrides/Trigger';
 import { SpawnedCreeps } from './SpawnedCreeps';
 import { Creep } from './Creep';
 import { PassiveCreepDiesInAreaEffectTower } from './Tower/Specs/PassiveCreepDiesInAreaEffectTower';
-import { PLAYER_AREAS } from '../GlobalSettings';
 import { Rectangle } from '../../JassOverrides/Rectangle';
 import { Defender } from './Players/Defender';
 import { CreepAbility } from './CreepAbilities/specs/CreepAbility';
@@ -30,7 +29,7 @@ export class PlayerSpawns {
         this.worldMap = worldMap;
         this.isOpen = false;
         this.colourId = colourId;
-        this.area = PLAYER_AREAS[this.colourId];
+        this.area = this.worldMap.game.mapSettings.PLAYER_AREAS[this.colourId];
         this.enterTrig = new Trigger();
         this.enterTrig.registerEnterRectangle(this.area);
         this.enterTrig.addAction(() => this.EnterRegions());
@@ -210,8 +209,8 @@ export class PlayerSpawns {
             if (areaPlayer.HasDenied(GetPlayerId(GetOwningPlayer(GetEnteringUnit())))) {
                 SetUnitPosition(
                     GetEnteringUnit(),
-                    PLAYER_AREAS[GetPlayerId(GetOwningPlayer(GetEnteringUnit()))].GetCenterX(),
-                    PLAYER_AREAS[GetPlayerId(GetOwningPlayer(GetEnteringUnit()))].GetCenterY());
+                    this.worldMap.game.mapSettings.PLAYER_AREAS[GetPlayerId(GetOwningPlayer(GetEnteringUnit()))].GetCenterX(),
+                    this.worldMap.game.mapSettings.PLAYER_AREAS[GetPlayerId(GetOwningPlayer(GetEnteringUnit()))].GetCenterY());
             }
         }
 

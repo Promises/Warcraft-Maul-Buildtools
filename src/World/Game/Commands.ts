@@ -12,9 +12,10 @@ import { SpawnedCreeps } from '../Entity/SpawnedCreeps';
 import { TimedEvent } from '../../lib/WCEventQueue/TimedEvent';
 import { DummyPlayer } from '../Entity/EmulatedPlayer/DummyPlayer';
 import { HybridTower } from '../../Generated/hybridRandomGEN';
-import { Walkable } from '../Antiblock/Maze';
+import { Maze, Walkable } from '../Antiblock/Maze';
 import { MMDGoal, MMDOperator, MMDSuggest, MMDType } from '../../lib/MMD';
 import { Creep } from '../Entity/Creep';
+import { Image } from '../../JassOverrides/Image';
 
 export class Commands {
 
@@ -24,7 +25,8 @@ export class Commands {
     private voteAgainstPlayer: Defender | undefined;
     private hasVotedToKick: boolean[] = [];
     private voteKickTimer: timer = CreateTimer();
-    private drawings: any[] = [];
+    private drawings: Image[][] = [];
+    private points: Image[] = [];
 
     constructor(game: WarcraftMaul) {
         this.game = game;
@@ -133,7 +135,7 @@ export class Commands {
                 }
                 break;
             case 'draw':
-                const arr: Rectangle[] = [];
+                const arr: Maze[] = this.game.worldMap.playerMazes;
                 switch (command[1]) {
                     case 'ab':
                     case 'antiblock':
@@ -153,7 +155,7 @@ export class Commands {
                         Log.Error('invalid index');
                         return;
                     }
-                    this.DrawRect(arr[+command[2 + i]]);
+                    this.DrawMaze(arr[+command[2 + i]]);
 
                 }
 
@@ -161,6 +163,12 @@ export class Commands {
             case 'undraw':
 
                 this.DestroyDrawings();
+                break;
+            case 'point':
+                this.drawPoint(player.builders[0]);
+                break;
+            case 'bird':
+                SetCameraField(CAMERA_FIELD_ANGLE_OF_ATTACK, 270, 1);
                 break;
             case 'killall':
                 const spawnedCreeps: SpawnedCreeps | undefined = this.game.worldMap.spawnedCreeps;
@@ -690,32 +698,89 @@ export class Commands {
         const x2: number = rectangle.maxX;
         const y2: number = rectangle.maxY;
 
-        const model: string = 'Doodads\\Cinematic\\DemonFootPrint\\DemonFootPrint0.mdl';
-        const sfx: effect[] = [];
+        const imagePath: string = 'ReplaceableTextures\\Splats\\SuggestedPlacementSplat.blp';
+
+
+        const sfx: Image[] = [];
         for (let x: number = x1; x < x2; x = x + 16) {
-            sfx.push(AddSpecialEffect(model, x, y1));
+            sfx.push(new Image(imagePath, 96, x, y1, 0.00));
         }
 
         for (let y: number = y1; y < y2; y = y + 16) {
-            sfx.push(AddSpecialEffect(model, x2, y));
+            sfx.push(new Image(imagePath, 96, x2, y, 0.00));
         }
 
         for (let x: number = x1; x < x2; x = x + 16) {
-            sfx.push(AddSpecialEffect(model, x, y2));
+            sfx.push(new Image(imagePath, 96, x, y2, 0.00));
         }
         for (let y: number = y1; y < y2; y = y + 16) {
-            sfx.push(AddSpecialEffect(model, x1, y));
+            sfx.push(new Image(imagePath, 96, x1, y, 0.00));
         }
         this.drawings.push(sfx);
+        sfx.forEach((img: Image) => {
+            img.SetImageRenderAlways(true);
+            img.ShowImage(true);
+        });
     }
+
+    private DrawMaze(maze: Maze): void {
+        const x1: number = maze.minX;
+        const y1: number = maze.minY;
+        const x2: number = maze.maxX;
+        const y2: number = maze.maxY;
+
+        const imagePath: string = 'ReplaceableTextures\\Splats\\SuggestedPlacementSplat.blp';
+
+
+        const sfx: Image[] = [];
+        for (let x: number = x1; x < x2; x = x + 72) {
+            sfx.push(new Image(imagePath, 96, x, y1, 0.00));
+        }
+
+        for (let y: number = y1; y < y2; y = y + 72) {
+            sfx.push(new Image(imagePath, 96, x2, y, 0.00));
+        }
+
+        for (let x: number = x1; x < x2; x = x + 72) {
+            sfx.push(new Image(imagePath, 96, x, y2, 0.00));
+        }
+        for (let y: number = y1; y < y2; y = y + 72) {
+            sfx.push(new Image(imagePath, 96, x1, y, 0.00));
+        }
+        this.drawings.push(sfx);
+        sfx.forEach((img: Image) => {
+            img.SetImageRenderAlways(true);
+            img.ShowImage(true);
+        });
+    }
+
+    private drawPoint(builder: unit): void {
+        const x: number = Math.round(GetUnitX(builder) / 64) * 64;
+        const y: number = Math.round(GetUnitY(builder) / 64) * 64;
+        Log.Debug(`(${x}, ${y})`);
+
+        const imagePath: string = 'ReplaceableTextures\\Splats\\SuggestedPlacementSplat.blp';
+
+
+        const img: Image = new Image(imagePath, 96, x, y, 0.00);
+        img.SetImageRenderAlways(true);
+        img.ShowImage(true);
+
+        this.points.push(img);
+    }
+
 
     private DestroyDrawings(): void {
         for (const drawing of this.drawings) {
             for (const sfx of drawing) {
-                DestroyEffect(sfx);
+                sfx.Destroy();
             }
         }
+        for (const sfx of this.points) {
+            sfx.Destroy();
+        }
         this.drawings = [];
+        this.points = [];
     }
 
     //

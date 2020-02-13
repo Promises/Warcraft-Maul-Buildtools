@@ -30,8 +30,8 @@ export class SellTower {
 
         let value: number = GetUnitPointValue(unit);
 
-        for (let i: number = 0; i < settings.PLAYER_AREAS.length; i++) {
-            if (settings.PLAYER_AREAS[i].ContainsUnit(unit)) {
+        for (let i: number = 0; i < this._game.mapSettings.PLAYER_AREAS.length; i++) {
+            if (this._game.mapSettings.PLAYER_AREAS[i].ContainsUnit(unit)) {
                 playerSpawnId = i;
                 break;
             }

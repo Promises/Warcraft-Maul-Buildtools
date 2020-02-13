@@ -4,8 +4,10 @@ import { StringSink } from './lib/Serilog/Sinks/StringSink';
 import { WarcraftMaul } from './World/WarcraftMaul';
 import { Trigger } from './JassOverrides/Trigger';
 import './lib/translators';
+import * as settings from './World/GlobalSettings';
 import { CreepAbilityHandler } from './World/Entity/CreepAbilities/CreepAbilityHandler';
 import { MMD } from './lib/MMD';
+import { WarcraftMaulSettings } from './World/WarcraftMaulSettings';
 
 export class InitGame {
 
@@ -23,10 +25,12 @@ export class InitGame {
         require('LuaModules.FastTriggers'); // 16x faster triggers
         PatchNatives();
         BlzLoadTOCFile('uiImport\\Templates.toc');
+
+
         Log.Init([
-                     new StringSink(LogLevel.Warning, SendMessageUnlogged),
-                     // new PreloadSink(LogLevel.Message, `WCMAUL\\${os.time()}.txt`),
-                 ]);
+            new StringSink(LogLevel.Warning, SendMessageUnlogged),
+            // new PreloadSink(LogLevel.Message, `WCMAUL\\${os.time()}.txt`),
+        ]);
         const creepAbilityHandler: CreepAbilityHandler = this.SetupAbilities();
         // const mmd: MMD = new MMD();
 
@@ -50,4 +54,5 @@ export class InitGame {
         return creepAbilityHandler;
     }
 }
+
 InitGame.run();

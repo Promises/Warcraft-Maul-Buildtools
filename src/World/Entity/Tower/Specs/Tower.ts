@@ -172,8 +172,8 @@ export class Tower {
         if (this.IsAreaEffectTower()) {
             let area: number | undefined;
 
-            for (let i: number = 0; i < settings.PLAYER_AREAS.length; i++) {
-                if (settings.PLAYER_AREAS[i].ContainsUnit(this.tower)) {
+            for (let i: number = 0; i < this.game.mapSettings.PLAYER_AREAS.length; i++) {
+                if (this.game.mapSettings.PLAYER_AREAS[i].ContainsUnit(this.tower)) {
                     area = i;
                     break;
                 }

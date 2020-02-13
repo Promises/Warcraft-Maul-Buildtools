@@ -1,5 +1,4 @@
 import { WarcraftMaul } from '../WarcraftMaul';
-import * as settings from '../GlobalSettings';
 import { ARMOUR_TYPE_COLOURS, ARMOUR_TYPE_NAMES } from '../GlobalSettings';
 import { Defender } from '../Entity/Players/Defender';
 
@@ -13,7 +12,7 @@ export class MultiBoard {
 
         this.scoreboardColumnWidth[1] = 10.00;
         this.scoreboardColumnWidth[2] = 8.00;
-        this.board = CreateMultiboardBJ(2, this.game.players.size + 6, settings.GAME_NAME);
+        this.board = CreateMultiboardBJ(2, this.game.players.size + 6, this.game.mapSettings.GAME_NAME);
         MultiboardSetItemValueBJ(this.board, 1, 1, 'Starting in');
         MultiboardSetItemValueBJ(this.board, 2, 1, `${this.game.waveTimer}`);
         MultiboardSetItemValueBJ(this.board, 1, 2, 'Level');

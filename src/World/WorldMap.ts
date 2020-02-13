@@ -61,7 +61,7 @@ export class WorldMap {
         this.createCreepWaves();
         this.createDummyCreeps();
         this.setupRaces();
-        this.setupCheckpoint();
+        this.game.mapSettings.setupCheckpoint(this);
         this.setupMazes();
         this.setupArrows();
     }
@@ -249,190 +249,14 @@ export class WorldMap {
         this.races.push(new Race('u01B', 'Shrine of Buffs', 'I026', this, false));
     }
 
-    private setupCheckpoint(): void {
-        const RedSpawns: PlayerSpawns = new PlayerSpawns(this, COLOUR.RED);
-        RedSpawns.spawnOne = new CheckPoint(Rect(-1792.0, 4736.0, -1472.0, 5056.0), this);
-        RedSpawns.spawnTwo = new CheckPoint(Rect(-1792.0, 4416.0, -1472.0, 4736.0), this);
-        let RedCheckpoint: CheckPoint = RedSpawns.spawnOne;
-        RedCheckpoint = RedCheckpoint.next = new CheckPoint(Rect(-2464.00, 4704.00, -2400.00, 4768.00), this);
-        RedCheckpoint = RedCheckpoint.next = new CheckPoint(Rect(-3616.00, 4704.00, -3552.00, 4768.00), this);
-        RedCheckpoint = RedCheckpoint.next = new Teleporter(Rect(-4384.00, 4704.00, -4320.00, 4768.00), this, 270.00);
-        RedCheckpoint = RedCheckpoint.next = new CheckPoint(Rect(-4384.00, 3392.00, -4320.00, 3456.00), this);
-        this.playerSpawns[COLOUR.RED] = RedSpawns;
 
-
-        const BlueSpawns: PlayerSpawns = new PlayerSpawns(this, COLOUR.BLUE);
-        BlueSpawns.spawnOne = new CheckPoint(Rect(-320.0, 4768.0, 0.0, 5088.0), this);
-        BlueSpawns.spawnTwo = new CheckPoint(Rect(0.0, 4768.0, 320.0, 5088.0), this);
-
-        let BluePrimaryCheckpoint: CheckPoint = BlueSpawns.spawnOne;
-        BluePrimaryCheckpoint = BluePrimaryCheckpoint.next = new CheckPoint(Rect(-64.00, 4032.00, 64.00, 4160.00), this);
-        BluePrimaryCheckpoint = BluePrimaryCheckpoint.next = new CheckPoint(Rect(-64.00, 2880.00, 64.00, 3008.00), this);
-        BluePrimaryCheckpoint = BluePrimaryCheckpoint.next = new CheckPoint(Rect(-64, 1920, 64, 2016), this);
-
-        let BlueSecondaryCheckpoint: CheckPoint = BlueSpawns.spawnTwo;
-        BlueSecondaryCheckpoint = BlueSecondaryCheckpoint.next = new CheckPoint(Rect(-64.00, 4032.00, 64.00, 4160.00), this);
-        BlueSecondaryCheckpoint = BlueSecondaryCheckpoint.next = new CheckPoint(Rect(-64.00, 2880.00, 64.00, 3008.00), this);
-        BlueSecondaryCheckpoint = BlueSecondaryCheckpoint.next = new CheckPoint(Rect(-64, 1920, 64, 2016), this);
-        this.playerSpawns[COLOUR.BLUE] = BlueSpawns;
-
-
-        const TealSpawns: PlayerSpawns = new PlayerSpawns(this, COLOUR.TEAL);
-        TealSpawns.spawnOne = new CheckPoint(Rect(1472.0, 4768.0, 1792.0, 5088.0), this);
-        TealSpawns.spawnTwo = new CheckPoint(Rect(1472.0, 4448.0, 1792.0, 4768.0), this);
-        let TealCheckpoint: CheckPoint = TealSpawns.spawnOne;
-        TealCheckpoint = TealCheckpoint.next = new CheckPoint(Rect(2400.00, 4704.00, 2464.00, 4768.00), this);
-        TealCheckpoint = TealCheckpoint.next = new CheckPoint(Rect(3552.00, 4704.00, 3616.00, 4768.00), this);
-        TealCheckpoint = TealCheckpoint.next = new Teleporter(Rect(4320.00, 4704.00, 4384.00, 4768.00), this, 270.00);
-        TealCheckpoint = TealCheckpoint.next = new CheckPoint(Rect(4320.00, 3392.00, 4384.00, 3456.00), this);
-        this.playerSpawns[COLOUR.TEAL] = TealSpawns;
-
-
-        const PurpleSpawns: PlayerSpawns = new PlayerSpawns(this, COLOUR.PURPLE);
-        PurpleSpawns.spawnOne = new CheckPoint(Rect(4032.0, 128.0, 4352.0, 448.0), this);
-        PurpleSpawns.spawnTwo = new CheckPoint(Rect(4352.0, 128.0, 4672.0, 448.0), this);
-        let PurpleCheckpoint: CheckPoint = PurpleSpawns.spawnOne;
-        PurpleCheckpoint = PurpleCheckpoint.next = new CheckPoint(Rect(4320.00, -544.00, 4384.00, -480.00), this);
-        PurpleCheckpoint = PurpleCheckpoint.next = new CheckPoint(Rect(4320.00, -1696.00, 4384.00, -1632.00), this);
-        PurpleCheckpoint = PurpleCheckpoint.next = new Teleporter(Rect(4320.00, -2464.00, 4384.00, -2400.00), this, 180.0);
-        PurpleCheckpoint = PurpleCheckpoint.next = new CheckPoint(Rect(4672.00, -3488.00, 4736.00, -3424.00), this);
-        this.playerSpawns[COLOUR.PURPLE] = PurpleSpawns;
-
-        const YellowSpawns: PlayerSpawns = new PlayerSpawns(this, COLOUR.YELLOW);
-        YellowSpawns.spawnOne = new CheckPoint(Rect(-320.0, 1664.0, 0.0, 1984.0), this);
-        YellowSpawns.spawnTwo = new CheckPoint(Rect(0.0, 1664.0, 320.0, 1984.0), this);
-
-        let YellowPrimaryCheckpoint: CheckPoint = YellowSpawns.spawnOne;
-        YellowPrimaryCheckpoint = YellowPrimaryCheckpoint.next = new CheckPoint(Rect(-32.00, 992.00, 32.00, 1056.00), this);
-        YellowPrimaryCheckpoint = YellowPrimaryCheckpoint.next = new CheckPoint(Rect(-32.00, -160.00, 32.00, -96.00), this);
-        YellowPrimaryCheckpoint = YellowPrimaryCheckpoint.next = new Teleporter(Rect(-32.00, -928.00, 32.00, -864.00), this, 180.0);
-        YellowPrimaryCheckpoint = YellowPrimaryCheckpoint.next = new CheckPoint(Rect(-2208.00, -2144.00, -2144.00, -2080.00), this);
-
-        let YellowSecondaryCheckpoint: CheckPoint = YellowSpawns.spawnTwo;
-        YellowSecondaryCheckpoint = YellowSecondaryCheckpoint.next = new CheckPoint(Rect(-32.00, 992.00, 32.00, 1056.00), this);
-        YellowSecondaryCheckpoint = YellowSecondaryCheckpoint.next = new CheckPoint(Rect(-32.00, -160.00, 32.00, -96.00), this);
-        YellowSecondaryCheckpoint = YellowSecondaryCheckpoint.next = new Teleporter(Rect(-32.00, -928.00, 32.00, -864.00), this, 180.0);
-        YellowSecondaryCheckpoint = YellowSecondaryCheckpoint.next = new CheckPoint(Rect(2144.00, -2144.00, 2208.00, -2080.00), this);
-
-        this.playerSpawns[COLOUR.YELLOW] = YellowSpawns;
-
-
-        const OrangeSpawns: PlayerSpawns = new PlayerSpawns(this, COLOUR.ORANGE);
-        OrangeSpawns.spawnOne = new CheckPoint(Rect(-4672.0, 128.0, -4352.0, 448.0), this);
-        OrangeSpawns.spawnTwo = new CheckPoint(Rect(-4352.0, 128.0, -4032.0, 448.0), this);
-        let OrangeCheckpoint: CheckPoint = OrangeSpawns.spawnOne;
-        OrangeCheckpoint = OrangeCheckpoint.next = new CheckPoint(Rect(-4384.00, -544.00, -4320.00, -480.00), this);
-        OrangeCheckpoint = OrangeCheckpoint.next = new CheckPoint(Rect(-4384.00, -1696.00, -4320.00, -1632.00), this);
-        OrangeCheckpoint = OrangeCheckpoint.next = new Teleporter(Rect(-4384.00, -2464.00, -4320.00, -2400.00), this, 0.0);
-        OrangeCheckpoint = OrangeCheckpoint.next = new CheckPoint(Rect(-4768.00, -3488.00, -4704.00, -3424.00), this);
-        this.playerSpawns[COLOUR.ORANGE] = OrangeSpawns;
-
-
-        const GreenSpawns: PlayerSpawns = new PlayerSpawns(this, COLOUR.GREEN);
-        GreenSpawns.spawnOne = new CheckPoint(Rect(-4800.0, -3456.0, -4480.0, -3136.0), this);
-        GreenSpawns.spawnTwo = new CheckPoint(Rect(-4800.0, -3776.0, -4480.0, -3456.0), this);
-        let GreenCheckpoint: CheckPoint = GreenSpawns.spawnOne;
-        GreenCheckpoint = GreenCheckpoint.next = new CheckPoint(Rect(-3872.00, -3488.00, -3808.00, -3424.00), this);
-        GreenCheckpoint = GreenCheckpoint.next = new CheckPoint(Rect(-2720.00, -3488.00, -2656.00, -3424.00), this);
-        GreenCheckpoint = GreenCheckpoint.next = new Teleporter(Rect(-1952.00, -3488.00, -1888.00, -3424.00), this, 270);
-        this.playerSpawns[COLOUR.GREEN] = GreenSpawns;
-
-
-        const PinkSpawns: PlayerSpawns = new PlayerSpawns(this, COLOUR.PINK);
-        PinkSpawns.spawnOne = new CheckPoint(Rect(4480.0, -3456.0, 4800.0, -3136.0), this);
-        PinkSpawns.spawnTwo = new CheckPoint(Rect(4480.0, -3776.0, 4800.0, -3456.0), this);
-        let PinkCheckpoint: CheckPoint = PinkSpawns.spawnOne;
-        PinkCheckpoint = PinkCheckpoint.next = new CheckPoint(Rect(3808.00, -3488.00, 3872.00, -3424.00), this);
-        PinkCheckpoint = PinkCheckpoint.next = new CheckPoint(Rect(2656.00, -3488.00, 2720.00, -3424.00), this);
-        PinkCheckpoint = PinkCheckpoint.next = new Teleporter(Rect(1888.00, -3488.00, 1952.00, -3424.00), this, 270);
-        this.playerSpawns[COLOUR.PINK] = PinkSpawns;
-
-
-        const GreysSpawns: PlayerSpawns = new PlayerSpawns(this, COLOUR.GRAY);
-        GreysSpawns.spawnOne = new CheckPoint(Rect(-160.0, -2464.0, 160.0, -2144.0), this);
-        let GreysCheckpoint: CheckPoint = GreysSpawns.spawnOne;
-        GreysCheckpoint = GreysCheckpoint.next = new CheckPoint(Rect(-32.00, -3104.00, 32.00, -3040.00), this);
-        GreysCheckpoint = GreysCheckpoint.next = new CheckPoint(Rect(-32.00, -4256.00, 32.00, -4192.00), this);
-        GreysCheckpoint.next = this.ship !== undefined ? this.ship : undefined;
-        this.playerSpawns[COLOUR.GRAY] = GreysSpawns;
-
-
-        // brown
-        const BrownSpawns: PlayerSpawns = new PlayerSpawns(this, COLOUR.BROWN);
-        BrownSpawns.spawnOne = new CheckPoint(Rect(-4672.0, 3200.0, -4352.0, 3520.0), this);
-        BrownSpawns.spawnTwo = new CheckPoint(Rect(-4352.0, 3200.0, -4032.0, 3520.0), this);
-
-        let BrownCheckpoint: CheckPoint = BrownSpawns.spawnOne;
-        BrownCheckpoint = BrownCheckpoint.next = new CheckPoint(Rect(-4384.00, 2528.00, -4320.00, 2592.00), this);
-        BrownCheckpoint = BrownCheckpoint.next = new CheckPoint(Rect(-4384.00, 1376.00, -4320.00, 1440.00), this);
-        BrownCheckpoint = BrownCheckpoint.next = new CheckPoint(Rect(-4416.00, 384.00, -4288.00, 480.00), this);
-
-
-        this.playerSpawns[COLOUR.BROWN] = BrownSpawns;
-
-
-        const MaroonsSpawns: PlayerSpawns = new PlayerSpawns(this, COLOUR.MAROON);
-        MaroonsSpawns.spawnOne = new CheckPoint(Rect(4032.0, 3200.0, 4352.0, 3520.0), this);
-        MaroonsSpawns.spawnTwo = new CheckPoint(Rect(4352.0, 3200.0, 4672.0, 3520.0), this);
-        let MaroonsCheckpoint: CheckPoint = MaroonsSpawns.spawnOne;
-        MaroonsCheckpoint = MaroonsCheckpoint.next = new CheckPoint(Rect(4320.00, 2528.00, 4384.00, 2592.00), this);
-        MaroonsCheckpoint = MaroonsCheckpoint.next = new CheckPoint(Rect(4320.00, 1376.00, 4384.00, 1440.00), this);
-        MaroonsCheckpoint = MaroonsCheckpoint.next = new CheckPoint(Rect(4288.00, 384.00, 4416.00, 480.00), this);
-        this.playerSpawns[COLOUR.MAROON] = MaroonsSpawns;
-
-
-        const LightBlueSpawns: PlayerSpawns = new PlayerSpawns(this, COLOUR.LIGHT_BLUE);
-        LightBlueSpawns.spawnOne = new CheckPoint(Rect(-2496.0, -2240.0, -2176.0, -1920.0), this);
-        LightBlueSpawns.spawnTwo = new CheckPoint(Rect(-2176.0, -2240.0, -1856.0, -1920.0), this);
-        let LightBlueCheckpoint: CheckPoint = LightBlueSpawns.spawnOne;
-        LightBlueCheckpoint = LightBlueCheckpoint.next = new CheckPoint(Rect(-2208.00, -1312.00, -2144.00, -1248.00), this);
-        LightBlueCheckpoint = LightBlueCheckpoint.next = new CheckPoint(Rect(-2208.00, -160.00, -2144.00, -96.00), this);
-        LightBlueCheckpoint = LightBlueCheckpoint.next = new Teleporter(Rect(-2208.00, 608.00, -2144.00, 672.00), this, 270);
-        // @ts-ignore
-        // LightBlueCheckpoint = LightBlueCheckpoint.next = OrangeSpawns.spawnOne;
-        this.playerSpawns[COLOUR.LIGHT_BLUE] = LightBlueSpawns;
-
-        const DarkGreenSpawns: PlayerSpawns = new PlayerSpawns(this, COLOUR.DARK_GREEN);
-        DarkGreenSpawns.spawnOne = new CheckPoint(Rect(1856.0, -2240.0, 2176.0, -1920.0), this);
-        DarkGreenSpawns.spawnTwo = new CheckPoint(Rect(2176.0, -2240.0, 2496.0, -1920.0), this);
-        let DarkGreenCheckpoint: CheckPoint = DarkGreenSpawns.spawnOne;
-        DarkGreenCheckpoint = DarkGreenCheckpoint.next = new CheckPoint(Rect(2144.00, -1312.00, 2208.00, -1248.00), this);
-        DarkGreenCheckpoint = DarkGreenCheckpoint.next = new CheckPoint(Rect(2144.00, -160.00, 2208.00, -96.00), this);
-        DarkGreenCheckpoint = DarkGreenCheckpoint.next = new Teleporter(Rect(2144.00, 608.00, 2208.00, 672.00), this, 270);
-        // @ts-ignore
-        // DarkGreenCheckpoint = DarkGreenCheckpoint.next = MaroonsCheckpoint;
-        this.playerSpawns[COLOUR.DARK_GREEN] = DarkGreenSpawns;
-
-
-        RedCheckpoint.next = BrownSpawns.spawnOne.next;
-        BrownCheckpoint.next = OrangeSpawns.spawnOne.next;
-        OrangeCheckpoint.next = GreenSpawns.spawnOne.next;
-        GreenCheckpoint.next = GreysSpawns.spawnOne;
-
-
-        TealCheckpoint.next = MaroonsSpawns.spawnOne.next;
-        MaroonsCheckpoint.next = PurpleSpawns.spawnOne.next;
-        PurpleCheckpoint.next = PinkSpawns.spawnOne.next;
-        PinkCheckpoint.next = GreysSpawns.spawnOne;
-
-
-        BluePrimaryCheckpoint.next = YellowSpawns.spawnOne.next;
-        BlueSecondaryCheckpoint.next = YellowSpawns.spawnTwo.next;
-
-        YellowPrimaryCheckpoint.next = LightBlueSpawns.spawnOne.next;
-        YellowSecondaryCheckpoint.next = DarkGreenSpawns.spawnOne.next;
-        DarkGreenCheckpoint.next = MaroonsCheckpoint;
-        LightBlueCheckpoint.next = BrownCheckpoint;
-
-
-    }
 
     public setupMazes(): void {
-        for (let i: number = 0; i < settings.PLAYER_AREAS.length; i++) {
-            const minX: number = settings.PLAYER_AREAS[i].minX;
-            const minY: number = settings.PLAYER_AREAS[i].minY;
-            const maxX: number = settings.PLAYER_AREAS[i].maxX;
-            const maxY: number = settings.PLAYER_AREAS[i].maxY;
+        for (let i: number = 0; i < this.game.mapSettings.PLAYER_AREAS.length; i++) {
+            const minX: number = this.game.mapSettings.PLAYER_AREAS[i].minX;
+            const minY: number = this.game.mapSettings.PLAYER_AREAS[i].minY;
+            const maxX: number = this.game.mapSettings.PLAYER_AREAS[i].maxX;
+            const maxY: number = this.game.mapSettings.PLAYER_AREAS[i].maxY;
             const width: number = Math.abs((maxX - minX) / 64);
             const height: number = Math.abs((maxY - minY) / 64);
             const g: Walkable[][] = [];

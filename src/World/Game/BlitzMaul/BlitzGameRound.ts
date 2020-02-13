@@ -13,12 +13,12 @@ enum KillStreaks {
 
 export class BlitzGameRound extends AbstractGameRound {
     private shouldStartWaveTimer: boolean = false;
-    private waitBetweenWaveTime: number = settings.GAME_TIME_BEFORE_WAVE;
+    private waitBetweenWaveTime: number;
     private roundEndTrigger: Trigger;
-    private roundOverGoldReward: number = settings.GAME_GOLD_REWARD_BASE + 5;
+    private roundOverGoldReward: number;
     private shouldStartSpawning: boolean = false;
     private kills: number = 0;
-    private goldReward: any = settings.GAME_GOLD_REWARD_BASE + 5;
+    private goldReward: number;
 
     private targetKillCount: number[] = [];
     private lastKillCount: number[] = [0, 0];
@@ -26,6 +26,9 @@ export class BlitzGameRound extends AbstractGameRound {
 
     constructor(game: WarcraftMaul) {
         super(game);
+        this.waitBetweenWaveTime = this.game.mapSettings.GAME_TIME_BEFORE_WAVE;
+        this.roundOverGoldReward = this.game.mapSettings.GAME_GOLD_REWARD_BASE + 5;
+        this.goldReward = this.game.mapSettings.GAME_GOLD_REWARD_BASE + 5;
         this.roundEndTrigger = new Trigger();
 
         for (const enemy of this.game.enemies) {
@@ -221,7 +224,7 @@ export class BlitzGameRound extends AbstractGameRound {
     private BonusRoundsOver(): void {
         SendMessage('|cFFF48C42That\'s all the bonus levels, see you next time!|r');
         this.isWaveInProgress = false;
-        this.game.gameEndTimer = settings.GAME_END_TIME;
+        this.game.gameEndTimer = this.game.mapSettings.GAME_END_TIME;
         this.game.gameEnded = true;
         const ship: Ship | undefined = this.game.worldMap.ship;
         if (ship) {
